@@ -1,0 +1,48 @@
+variables:
+  CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_BUILD_REF_NAME}_${CI_BUILD_REF}
+  CONTAINER_IMAGE_LATEST: ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest
+
+image: docker:latest
+before_script:
+  - mkdir -p ~/.ssh
+stages:
+  - build
+  - dockerize
+  - deploy
+
+# npm install + ng build (+ ng test)
+build:
+  cache:
+    paths:
+      - node_modules/
+  stage: build
+  image: trion/ng-cli-karma
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+  script:
+    - rm ./package-lock.json
+    #- npx npm-force-resolutions
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng build --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer --prod  --configuration=test
+
+# build docker image
+dockerize:
+  stage: dockerize
+  dependencies:
+    - build
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+  script:
+    - echo $BUILD_CODE_IMAGE
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE_LATEST}
+    - docker push ${CONTAINER_IMAGE}
+    - docker push ${CONTAINER_IMAGE_LATEST}
+  only:
+    - master
+
