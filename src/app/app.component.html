@@ -114,7 +114,7 @@
       <h2><span
         class="badge badge-pill badge-success left">
         <span
-          *ngIf="fiat === 'USD'">{{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}} </span>
+          *ngIf="fiat === 'USD'"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}} </span>
         <span
           *ngIf="fiat === 'EUR'">  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
         <span

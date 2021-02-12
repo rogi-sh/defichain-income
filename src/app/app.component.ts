@@ -204,7 +204,7 @@ export class AppComponent implements OnInit {
       series: [+(dataBtc.value / allValue * 100).toFixed(1),
         +(dataEth.value / allValue * 100).toFixed(2),
         +(dataDfi.value / allValue * 100).toFixed(2)],
-      labels: ['BTC', 'ETH ', 'DFI '],
+      labels: ['BTC %', 'ETH %', 'DFI %'],
       chart: {
         width: 320,
         type: 'donut'
