@@ -261,7 +261,7 @@
         , {{stakingOut.dfiPerMonth * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
     </div>
 
-    <div class="col-auto bg-light margin-col">
+    <div *ngIf="btc > 0 || eth > 0 " class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
       <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC, {{eth}}
         ETH, {{dfiInEthPool + dfiInBtcPool}} DFI </span></p>
@@ -297,7 +297,7 @@
 </div>
 <div class="container left">
   <div class="row">
-    <div class="col-auto bg-light margin-col">
+    <div *ngIf="btc > 0 || dfiInBtcPool > 0" class="col-auto bg-light margin-col">
       <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
       <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></p>
 
@@ -328,7 +328,7 @@
         , {{poolBtcOut.dfiPerMonthBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }} </span></p>
 
     </div>
-    <div class="col-auto bg-light margin-col">
+    <div *ngIf=" eth > 0 || dfiInEthPool" class="col-auto bg-light margin-col">
       <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
       <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></p>
 
