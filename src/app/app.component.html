@@ -6,6 +6,46 @@
     <div class="col-auto margin-col">
       <h3><span class="badge badge-secondary left">DeFiChain Income Dashboard</span></h3>
     </div>
+    <div class="col-auto margin-col">
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <div class="row">
+            <div class="col-auto margin-col">
+              TVL <span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
+              /  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              Pool price BTC <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
+              /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              Pool price ETH <span class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
+              /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
+              /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              APY BTC Pool <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              APY ETH Pool <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -58,83 +98,40 @@
 
 </div>
 
-
 <div class="container left">
   <h2><span class="badge badge-secondary left">Your value</span></h2>
   <div class="row">
     <div class="col-auto bg-light margin-col">
-      <div class="row">
-        <div class="col-auto margin-col">
-          BTC value
-          <h3><span class="badge badge-pill badge-primary left"> {{btc * poolBtc?.priceA | currency:'USD'}}
-            /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          ETH value
-          <h3><span class="badge badge-pill badge-primary left"> {{eth * poolEth?.priceA | currency:'USD'}}
-            /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          DFI value
-          <h3><span
-            class="badge badge-pill badge-primary left">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
-            / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
-          </h3>
-        </div>
-      </div>
+      <h2><span
+        class="badge badge-pill badge-success left"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
+        /  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
+      </h2>
 
-      <div class="row">
-        <div class="col-auto margin-col">
-          Total value
-          <h2><span
-            class="badge badge-pill badge-success left"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
-            /  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
-          </h2>
-        </div>
-      </div>
-    </div>
-    <div class="col-auto bg-light margin-col">
-      <div class="row">
-        <div class="col-auto margin-col">
-          TVL <span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
-          /  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          Pool price BTC <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
-          /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          Pool price ETH <span class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
-          /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
-          /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          APY BTC Pool <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto margin-col">
-          APY ETH Pool <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
-        </div>
-      </div>
+      <apx-chart *ngIf="chartOptions"
+        [series]="chartOptions?.series"
+        [chart]="chartOptions?.chart"
+        [labels]="chartOptions?.labels"
+        [fill]="chartOptions?.fill"
+        [dataLabels]="chartOptions?.dataLabels"
+        [responsive]="chartOptions?.responsive"
+      ></apx-chart>
+
+
+      BTC value
+      <h3><span class="badge badge-pill badge-primary left"> {{btc * poolBtc?.priceA | currency:'USD'}}
+        /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span></h3>
+      ETH value
+      <h3><span class="badge badge-pill badge-primary left"> {{eth * poolEth?.priceA | currency:'USD'}}
+        /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span></h3>
+      DFI value
+      <h3><span
+        class="badge badge-pill badge-primary left">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
+        / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
+      </h3>
     </div>
   </div>
 </div>
+
 
 <div class="container left">
   <h2><span class="badge badge-secondary left">Your income</span></h2>

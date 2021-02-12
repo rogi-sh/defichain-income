@@ -1,6 +1,8 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
 import {DexInfo, Pool, PoolBtcOut, PoolEthOut, PoolOut, StakingOut} from '../interface/Dex';
+import {ChartOptions, Data} from '../interface/Data';
+import {ChartComponent} from 'ng-apexcharts';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,10 @@ import {DexInfo, Pool, PoolBtcOut, PoolEthOut, PoolOut, StakingOut} from '../int
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  @ViewChild('chart') chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+
   title = 'defichain-income';
 
   // fixed variables
@@ -70,6 +76,7 @@ export class AppComponent implements OnInit {
           this.berechnePoolOutEth();
           this.berechnePoolOut();
           this.berechneStakingOut();
+          this.buildDataForChart();
         },
         err => {
           console.error(err);
@@ -142,22 +149,88 @@ export class AppComponent implements OnInit {
 
   onChangeDfiStaking(newValue): void {
     localStorage.setItem(this.dfiInStakingKey, newValue);
+    this.buildDataForChart();
   }
 
   onChangeBtcBtcPool(newValue): void {
     localStorage.setItem(this.btcInBtcPoolKey, newValue);
+    this.buildDataForChart();
   }
 
   onChangeDfiBtcPool(newValue): void {
     localStorage.setItem(this.dfiInBtcPoolKey, newValue);
+    this.buildDataForChart();
   }
 
   onChangeEthEthPool(newValue): void {
     localStorage.setItem(this.ethInEthPoolKey, newValue);
+    this.buildDataForChart();
   }
 
   onChangeDfiEthPool(newValue): void {
     localStorage.setItem(this.dfiInEthPoolKey, newValue);
+    this.buildDataForChart();
+  }
+
+  buildDataForChart(): void {
+
+    const allValue = this.btc * this.poolBtc?.priceA + this.eth
+      * this.poolEth?.priceA + (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInStaking) * this.poolBtc?.priceB;
+
+    const dataBtc = new Data();
+    dataBtc.value = this.btc * this.poolBtc?.priceA;
+    dataBtc.name = 'BTC';
+
+    const dataEth = new Data();
+    dataEth.name = 'ETH';
+    dataEth.value = this.eth * this.poolEth?.priceA;
+
+    const dataDfi = new Data();
+    dataDfi.name = 'DFI';
+    dataDfi.value = (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInStaking) * this.poolBtc?.priceB;
+
+    this.chartOptions = {
+      series: [+dataBtc.value.toFixed(2), +dataEth.value.toFixed(2), +dataDfi.value.toFixed(2)],
+      labels: ['BTC - ' + (dataBtc.value / allValue * 100).toFixed(1) + '%',
+        'ETH - ' + (dataEth.value / allValue * 100).toFixed(1) + '%',
+        'DFI - ' + (dataDfi.value / allValue * 100).toFixed(1) + '%'],
+      chart: {
+        width: 320,
+        type: 'donut'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      fill: {
+        type: 'gradient'
+      },
+      legend: {
+        formatter: function(val, opts) {
+          if (opts.seriesIndex === 1) {
+            return 'BTC ' ;
+          }
+          if (opts.seriesIndex === 2) {
+            return 'ETH ' + (dataEth.value / allValue * 100).toFixed(1) + '%';
+          }
+          if (opts.seriesIndex === 2) {
+            return 'DFI ' + (dataDfi.value / allValue * 100).toFixed(1) + '%';
+          }
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
   }
 
 }

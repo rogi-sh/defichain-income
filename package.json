@@ -24,6 +24,8 @@
     "@angular/router": "~11.2.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
     "bootstrap": "^4.5.0",
+    "apexcharts": "3.24.0",
+    "ng-apexcharts": "^1.5.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
