@@ -44,7 +44,6 @@ dockerize:
     - docker push ${CONTAINER_IMAGE}
     - docker push ${CONTAINER_IMAGE_LATEST}
   only:
-    - master
     - tags
 
 # deploy to server
