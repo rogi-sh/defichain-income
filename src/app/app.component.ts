@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;
+  fiat = 'USD';
+  fiatKey = "fiatKey";
 
   // User Infos
   btcInBtcPoolKey = 'btcInBtcPoolKey';
@@ -56,6 +58,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem(this.fiatKey) !== null) {
+      this.fiat = localStorage.getItem(this.fiatKey);
+    }
     this.loadLocalStorage();
     this.loadDex();
     setInterval( () => {
@@ -191,10 +196,10 @@ export class AppComponent implements OnInit {
     dataDfi.value = (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInStaking) * this.poolBtc?.priceB;
 
     this.chartOptions = {
-      series: [+dataBtc.value.toFixed(2), +dataEth.value.toFixed(2), +dataDfi.value.toFixed(2)],
-      labels: ['BTC - ' + (dataBtc.value / allValue * 100).toFixed(1) + '%',
-        'ETH - ' + (dataEth.value / allValue * 100).toFixed(1) + '%',
-        'DFI - ' + (dataDfi.value / allValue * 100).toFixed(1) + '%'],
+      series: [+(dataBtc.value / allValue * 100).toFixed(1),
+        +(dataEth.value / allValue * 100).toFixed(2),
+        +(dataDfi.value / allValue * 100).toFixed(2)],
+      labels: ['BTC', 'ETH ', 'DFI '],
       chart: {
         width: 320,
         type: 'donut'
@@ -234,4 +239,8 @@ export class AppComponent implements OnInit {
     };
   }
 
+  onChangeFiat(newValue: string): void {
+    this.fiat = newValue;
+    localStorage.setItem(this.fiatKey, newValue);
+  }
 }
