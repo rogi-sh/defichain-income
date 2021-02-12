@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   dfiProBlockEth = 15;
   blocktimeInS = 37;
 
+  usdToEur = 0.82;
+
   btc = 2.17;
   dfiInBtcPool = 28282.49;
   eth = 14.34;
