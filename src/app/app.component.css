@@ -2,6 +2,10 @@
   margin: 5px;
 }
 
+.left {
+  margin-left: 5px;
+}
+
 #chart {
   max-width: 380px;
   margin: 35px auto;
