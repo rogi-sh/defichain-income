@@ -4,84 +4,132 @@
       <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
     </div>
     <div class="col-auto margin-col">
-      <h3><span class="badge badge-secondary left">Defichain Income</span></h3>
+      <h3><span class="badge badge-secondary left">DeFiChain Income Dashboard</span></h3>
     </div>
   </div>
 </div>
 
 <div class="container left">
+  <h2><span class="badge badge-secondary left">Your crypto holdings</span></h2>
   <div class="row">
-    <div class="col-auto margin-col">
-      <h3><span class="badge badge-pill badge-success left">Total Value Locked</span></h3>
+    <div class="col-auto bg-light margin-col">
+      <span class="badge badge-pill badge-primary left">Staking</span>
+      <div class="form-group">
+        <label for="inputDFIStaking">DFI</label>
+        <input [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
+               class="form-control form-control-sm" id="inputDFIStaking" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your stake DFI amount.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <span class="badge badge-pill badge-primary left">Liquidity Mining</span>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">BTC Pool</span>
+          <div class="form-group">
+            <label for="inputBTCBTCPool">BTC</label>
+            <input [(ngModel)]="btc" (ngModelChange)="onChangeBtcBtcPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
+            <small class="form-text text-muted">Add your btc pool BTC amount.</small>
+
+            <label for="inputDFIBTCPool">DFI</label>
+            <input [(ngModel)]="dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your btc pool DFI amount.</small>
+          </div>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">ETH Pool</span>
+          <div class="form-group">
+            <label for="inputETHETHPool">ETH</label>
+            <input [(ngModel)]="eth" (ngModelChange)="onChangeEthEthPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
+            <small class="form-text text-muted">Add your eth pool ETH amount.</small>
+
+            <label for="inputDFIETHPool">DFI</label>
+            <input [(ngModel)]="dfiInEthPool" (ngModelChange)="onChangeDfiEthPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your eth pool DFI amount.</small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-auto margin-col">
-      <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl | currency:'USD'}}</span></p>
-    </div>
-    <div class="col-auto margin-col">
-      <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl * usdToEur| currency:'EUR'}}</span>
-      </p>
-    </div>
-  </div>
-</div>
-
-<div class="container left">
-  <h3><span class="badge badge-secondary left">Your Holdings</span></h3>
 
 </div>
+
+
 <div class="container left">
+  <h2><span class="badge badge-secondary left">Your value</span></h2>
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <div class="row">
         <div class="col-auto margin-col">
           BTC value
-          <span class="badge badge-pill badge-primary left"> {{btc * poolBtc?.priceA | currency:'USD'}}
-            /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
+          <h3><span class="badge badge-pill badge-primary left"> {{btc * poolBtc?.priceA | currency:'USD'}}
+            /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span></h3>
         </div>
       </div>
       <div class="row">
         <div class="col-auto margin-col">
           ETH value
-          <span class="badge badge-pill badge-primary left"> {{eth * poolEth?.priceA | currency:'USD'}}
-            /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
+          <h3><span class="badge badge-pill badge-primary left"> {{eth * poolEth?.priceA | currency:'USD'}}
+            /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span></h3>
         </div>
       </div>
       <div class="row">
         <div class="col-auto margin-col">
           DFI value
-          <span
+          <h3><span
             class="badge badge-pill badge-primary left">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
             / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
+          </h3>
         </div>
       </div>
 
       <div class="row">
         <div class="col-auto margin-col">
-          <h3><span
+          Total value
+          <h2><span
             class="badge badge-pill badge-success left"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
             /  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
-          </h3>
+          </h2>
         </div>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
       <div class="row">
         <div class="col-auto margin-col">
-          Pool price BTC <span class="badge badge-pill badge-primary left"> {{poolBtc?.priceA | currency:'USD'}}
+          TVL <span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
+          /  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto margin-col">
+          Pool price BTC <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
           /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
         </div>
       </div>
       <div class="row">
         <div class="col-auto margin-col">
-          Pool price ETH <span class="badge badge-pill badge-primary left"> {{poolEth?.priceA | currency:'USD'}}
+          Pool price ETH <span class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
           /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
         </div>
       </div>
       <div class="row">
         <div class="col-auto margin-col">
-          Pool price DFI <span class="badge badge-pill badge-primary left"> {{poolBtc?.priceB | currency:'USD'}}
+          Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
           /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto margin-col">
+          APY BTC Pool <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto margin-col">
+          APY ETH Pool <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
         </div>
       </div>
     </div>
@@ -89,9 +137,10 @@
 </div>
 
 <div class="container left">
+  <h2><span class="badge badge-secondary left">Your income</span></h2>
   <div class="row">
     <div class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-success left">Overall Income</span>
+      <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
       <p>Min <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMin + poolOut.dfiPerMin| number: '1.2-2' }}
         DFI
         , {{(stakingOut.dfiPerMin + poolOut.dfiPerMin) * poolBtc?.priceB | currency:'USD' }}
@@ -119,7 +168,7 @@
 <div class="container left">
   <div class="row">
     <div class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-success left">Staking Income</span>
+      <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
       <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMin| number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerMin * poolBtc?.priceB | currency:'USD' }}
@@ -138,7 +187,7 @@
         , {{stakingOut.dfiPerMonth * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
     </div>
     <div class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-success left">Liguidity Mining Income</span>
+      <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
       <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC, {{eth}}
         ETH, {{dfiInEthPool + dfiInBtcPool}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{poolOut.dfiPerMin| number: '1.2-2' }} DFI
@@ -209,4 +258,27 @@
     </div>
   </div>
 </div>
+<br><br><br><br><br><br>
 
+<footer>
+  <div class="container left">
+    <div class="row">
+      <h5>IMPRINT</h5>
+    </div>
+    <div class="row">
+      <span class="small">Igor Shelkovenkov</span>
+    </div>
+    <div class="row">
+      <span class="small">Schlickumer Weg 49</span>
+    </div>
+    <div class="row">
+      <span class="small">40699 Erkrath</span>
+    </div>
+    <div class="row">
+      <span class="small">Mail &nbsp;</span> <a class ="small" href="mailto:crypto@shelkovenkov.de"> crypto@shelkovenkov.de</a>
+    </div>
+    <div class="row">
+      <span class="small">Telegram &nbsp;</span> <a class ="small" href="https://t.me/ishelkovenkov"> https://t.me/ishelkovenkov</a>
+    </div>
+  </div>
+</footer>

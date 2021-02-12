@@ -10,17 +10,24 @@ import {DexInfo, Pool, PoolBtcOut, PoolEthOut, PoolOut, StakingOut} from '../int
 export class AppComponent implements OnInit {
   title = 'defichain-income';
 
+  // fixed variables
   dfiProBlockBtc = 80;
   dfiProBlockEth = 15;
   blocktimeInS = 37;
-
   usdToEur = 0.82;
 
+  // User Infos
+  btcInBtcPoolKey = 'btcInBtcPoolKey';
   btc = 2.17;
+  dfiInBtcPoolKey = 'dfiInBtcPoolKey';
   dfiInBtcPool = 28282.49;
+  ethInEthPoolKey = 'ethInEthPoolKey';
   eth = 14.34;
   dfiInEthPool = 7070.63;
+  dfiInEthPoolKey = 'dfiInEthPoolKey';
 
+  // Staking infos
+  dfiInStakingKey = 'dfiInStaking';
   dfiInStaking = 11050;
   stakingApy = 37;
 
@@ -42,6 +49,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadLocalStorage();
     this.loadDex();
     setInterval( () => {
       console.log('Refresh ...');
@@ -112,6 +120,44 @@ export class AppComponent implements OnInit {
     this.stakingOut.dfiPerMin = this.stakingOut.dfiPerHour / 60;
     this.stakingOut.dfiPerWeek = this.stakingOut.dfiPerDay  * 7;
     this.stakingOut.dfiPerMonth = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking;
+  }
+
+  loadLocalStorage(): void {
+    if (localStorage.getItem(this.dfiInStakingKey) !== null) {
+      this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
+    }
+    if (localStorage.getItem(this.btcInBtcPoolKey) !== null) {
+      this.btc = +localStorage.getItem(this.btcInBtcPoolKey);
+    }
+    if (localStorage.getItem(this.dfiInBtcPoolKey) !== null) {
+      this.dfiInBtcPool = +localStorage.getItem(this.dfiInBtcPoolKey);
+    }
+    if (localStorage.getItem(this.ethInEthPoolKey) !== null) {
+      this.eth = +localStorage.getItem(this.ethInEthPoolKey);
+    }
+    if (localStorage.getItem(this.dfiInEthPoolKey) !== null) {
+      this.dfiInEthPool = +localStorage.getItem(this.dfiInEthPoolKey);
+    }
+  }
+
+  onChangeDfiStaking(newValue): void {
+    localStorage.setItem(this.dfiInStakingKey, newValue);
+  }
+
+  onChangeBtcBtcPool(newValue): void {
+    localStorage.setItem(this.btcInBtcPoolKey, newValue);
+  }
+
+  onChangeDfiBtcPool(newValue): void {
+    localStorage.setItem(this.dfiInBtcPoolKey, newValue);
+  }
+
+  onChangeEthEthPool(newValue): void {
+    localStorage.setItem(this.ethInEthPoolKey, newValue);
+  }
+
+  onChangeDfiEthPool(newValue): void {
+    localStorage.setItem(this.dfiInEthPoolKey, newValue);
   }
 
 }
