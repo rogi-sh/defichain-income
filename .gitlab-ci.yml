@@ -63,6 +63,6 @@ deploy:
     - ssh-add ~/.ssh/id_rsa
     - ssh-keyscan -H $PROD_SERVER >> ~/.ssh/known_hosts
   script:
-    - sshpass -p $LOGIN_KEY ssh igor@$PROD_SERVER "cd Privat && cd deficahin-income && docker login -u $REGISTRY_LOGIN -p $REGISTRY_KEY registry.topiet.de && ./deploy.sh && exit"
+    - sshpass -p $LOGIN_KEY ssh igor@$PROD_SERVER "cd Privat && cd defichain-income && docker login -u $REGISTRY_LOGIN -p $REGISTRY_KEY registry.topiet.de && ./deploy.sh && exit"
   only:
      - tags
