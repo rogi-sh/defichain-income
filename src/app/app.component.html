@@ -1,20 +1,31 @@
 <div class="container left">
   <div class="row">
     <div class="col-auto margin-col">
+      <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
+    </div>
+    <div class="col-auto margin-col">
       <h3><span class="badge badge-secondary left">Defichain Income</span></h3>
-      <h3><span class="badge badge-pill badge-success left">Total Value Locked</span></h3>
-      <div class="row">
-        <div class="col-auto">
-          <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl | currency:'USD'}}</span></p>
-        </div>
-        <div class="col-auto">
-          <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl * usdToEur| currency:'EUR'}}</span>
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </div>
+
+<div class="container left">
+  <div class="row">
+    <div class="col-auto margin-col">
+      <h3><span class="badge badge-pill badge-success left">Total Value Locked</span></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-auto margin-col">
+      <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl | currency:'USD'}}</span></p>
+    </div>
+    <div class="col-auto margin-col">
+      <p class="p-0 left"><span class="badge badge-pill badge-info">{{dex?.tvl * usdToEur| currency:'EUR'}}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
 <div class="container left">
   <h3><span class="badge badge-secondary left">Your Holdings</span></h3>
 
