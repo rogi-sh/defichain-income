@@ -12,25 +12,26 @@
           <div class="row">
             <div class="col-auto margin-col">
               TVL <span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
-              /  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
+              /  {{dex?.tvl * usdToEur | currency:'EUR'}}
+              /  {{dex?.tvl * usdToChf | currency:'CHF'}}</span>
             </div>
           </div>
           <div class="row">
             <div class="col-auto margin-col">
               Pool price BTC <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
-              /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
+              /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}} / {{poolBtc?.priceA * usdToChf | currency:'CHF'}}</span>
             </div>
           </div>
           <div class="row">
             <div class="col-auto margin-col">
               Pool price ETH <span class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
-              /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
+              /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}  / {{poolEth?.priceA * usdToChf | currency:'CHF'}}</span>
             </div>
           </div>
           <div class="row">
             <div class="col-auto margin-col">
               Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
-              /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
+              /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}  / {{poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
             </div>
           </div>
           <div class="row">
@@ -104,7 +105,8 @@
     <div class="col-auto bg-light margin-col">
       <h2><span
         class="badge badge-pill badge-success left"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
-        /  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
+        /  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}
+       / {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToChf | currency:'CHF'}}</span>
       </h2>
 
       <apx-chart *ngIf="chartOptions"
@@ -119,14 +121,17 @@
 
       BTC value
       <h3><span class="badge badge-pill badge-primary left"> {{btc * poolBtc?.priceA | currency:'USD'}}
-        /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span></h3>
+        /  {{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}} /  {{btc * poolBtc?.priceA * usdToChf | currency:'CHF'}}
+      </span></h3>
       ETH value
       <h3><span class="badge badge-pill badge-primary left"> {{eth * poolEth?.priceA | currency:'USD'}}
-        /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span></h3>
+        /  {{eth * poolEth?.priceA * usdToEur | currency:'EUR'}} /  {{eth * poolEth?.priceA * usdToChf | currency:'CHF'}}
+      </span></h3>
       DFI value
       <h3><span
         class="badge badge-pill badge-primary left">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}
-        / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
+        / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}}
+        / {{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
       </h3>
     </div>
   </div>
@@ -141,23 +146,31 @@
       <p>Min <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMin + poolOut.dfiPerMin| number: '1.2-2' }}
         DFI
         , {{(stakingOut.dfiPerMin + poolOut.dfiPerMin) * poolBtc?.priceB | currency:'USD' }}
-        , {{(stakingOut.dfiPerMin + poolOut.dfiPerMin) * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{(stakingOut.dfiPerMin + poolOut.dfiPerMin) * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{(stakingOut.dfiPerMin + poolOut.dfiPerMin) * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Hour <span
         class="badge badge-pill badge-info">{{stakingOut.dfiPerHour + poolOut.dfiPerHour | number: '1.2-2' }} DFI
         , {{(stakingOut.dfiPerHour + poolOut.dfiPerHour) * poolBtc?.priceB | currency:'USD' }}
-        , {{(stakingOut.dfiPerHour + poolOut.dfiPerHour) * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{(stakingOut.dfiPerHour + poolOut.dfiPerHour) * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{(stakingOut.dfiPerHour + poolOut.dfiPerHour) * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Day <span class="badge badge-pill badge-info">{{stakingOut.dfiPerDay + poolOut.dfiPerDay | number: '1.2-2' }}
         DFI
         , {{(stakingOut.dfiPerDay + poolOut.dfiPerDay) * poolBtc?.priceB | currency:'USD' }}
-        , {{(stakingOut.dfiPerDay + poolOut.dfiPerDay) * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{(stakingOut.dfiPerDay + poolOut.dfiPerDay) * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{(stakingOut.dfiPerDay + poolOut.dfiPerDay) * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Week <span
         class="badge badge-pill badge-info"> {{stakingOut.dfiPerWeek + poolOut.dfiPerWeek | number: '1.2-2' }} DFI
         , {{(stakingOut.dfiPerWeek + poolOut.dfiPerWeek) * poolBtc?.priceB | currency:'USD' }}
-        , {{(stakingOut.dfiPerWeek + poolOut.dfiPerWeek) * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{(stakingOut.dfiPerWeek + poolOut.dfiPerWeek) * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{(stakingOut.dfiPerWeek + poolOut.dfiPerWeek) * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
       <p>Month <span
         class="badge badge-pill badge-info">{{stakingOut.dfiPerMonth + poolOut.dfiPerMonth | number: '1.2-2' }} DFI
         , {{(stakingOut.dfiPerMonth + poolOut.dfiPerMonth) * poolBtc?.priceB  | currency:'USD' }}
-        , {{(stakingOut.dfiPerMonth + poolOut.dfiPerMonth) * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{(stakingOut.dfiPerMonth + poolOut.dfiPerMonth) * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{(stakingOut.dfiPerMonth + poolOut.dfiPerMonth) * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
     </div>
 
   </div>
@@ -169,39 +182,59 @@
       <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMin| number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerMin * poolBtc?.priceB | currency:'USD' }}
-        , {{stakingOut.dfiPerMin * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{stakingOut.dfiPerMin * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{stakingOut.dfiPerMin * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Hour <span class="badge badge-pill badge-info">{{stakingOut.dfiPerHour | number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerHour * poolBtc?.priceB | currency:'USD' }}
-        , {{stakingOut.dfiPerHour * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{stakingOut.dfiPerHour * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{stakingOut.dfiPerHour * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Day <span class="badge badge-pill badge-info">{{stakingOut.dfiPerDay  | number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerDay * poolBtc?.priceB | currency:'USD' }}
-        , {{stakingOut.dfiPerDay * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{stakingOut.dfiPerDay * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{stakingOut.dfiPerDay * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Week <span class="badge badge-pill badge-info"> {{stakingOut.dfiPerWeek | number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerWeek * poolBtc?.priceB | currency:'USD' }}
-        , {{stakingOut.dfiPerWeek * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{stakingOut.dfiPerWeek * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{stakingOut.dfiPerWeek * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Month <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMonth | number: '1.2-2' }} DFI
         , {{stakingOut.dfiPerMonth * poolBtc?.priceB | currency:'USD' }}
-        , {{stakingOut.dfiPerMonth * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{stakingOut.dfiPerMonth * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{stakingOut.dfiPerMonth * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
     </div>
+
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
       <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC, {{eth}}
         ETH, {{dfiInEthPool + dfiInBtcPool}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{poolOut.dfiPerMin| number: '1.2-2' }} DFI
         , {{poolOut.dfiPerMin * poolBtc?.priceB | currency:'USD' }}
-        , {{poolOut.dfiPerMin * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolOut.dfiPerMin * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolOut.dfiPerMin * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Hour <span class="badge badge-pill badge-info">{{poolOut.dfiPerHour | number: '1.2-2' }} DFI
         , {{poolOut.dfiPerHour * poolBtc?.priceB | currency:'USD' }}
-        , {{poolOut.dfiPerHour * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolOut.dfiPerHour * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolOut.dfiPerHour * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Day <span class="badge badge-pill badge-info">{{poolOut.dfiPerDay  | number: '1.2-2' }} DFI
         , {{poolOut.dfiPerDay * poolBtc?.priceB | currency:'USD' }}
-        , {{poolOut.dfiPerDay * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolOut.dfiPerDay * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolOut.dfiPerDay * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Week <span class="badge badge-pill badge-info"> {{poolOut.dfiPerWeek | number: '1.2-2' }} DFI
         , {{poolOut.dfiPerWeek * poolBtc?.priceB | currency:'USD' }}
-        , {{poolOut.dfiPerWeek * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolOut.dfiPerWeek * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolOut.dfiPerWeek * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Month <span class="badge badge-pill badge-info">{{poolOut.dfiPerMonth | number: '1.2-2' }} DFI
         , {{poolOut.dfiPerMonth * poolBtc?.priceB | currency:'USD' }}
-        , {{poolOut.dfiPerMonth * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolOut.dfiPerMonth * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolOut.dfiPerMonth * poolBtc?.priceB * usdToChf | currency:'CHF' }}
+      </span></p>
     </div>
 
 
@@ -216,19 +249,28 @@
       <span class="badge badge-pill badge-success">EARNINGS</span>
       <p>Min <span class="badge badge-pill badge-info">{{poolBtcOut.dfiPerMinBtc | number: '1.2-2' }} DFI
         , {{poolBtcOut.dfiPerMinBtc * poolBtc?.priceB | currency:'USD' }}
-        , {{poolBtcOut.dfiPerMinBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolBtcOut.dfiPerMinBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolBtcOut.dfiPerMinBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Hour <span class="badge badge-pill badge-info">{{poolBtcOut.dfiPerHourBtc | number: '1.2-2' }} DFI
         , {{poolBtcOut.dfiPerHourBtc * poolBtc?.priceB | currency:'USD' }}
-        , {{poolBtcOut.dfiPerHourBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolBtcOut.dfiPerHourBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolBtcOut.dfiPerHourBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Day <span class="badge badge-pill badge-info">{{poolBtcOut.dfiPerDayBtc | number: '1.2-2' }} DFI
         , {{poolBtcOut.dfiPerDayBtc * poolBtc?.priceB | currency:'USD' }}
-        , {{poolBtcOut.dfiPerDayBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolBtcOut.dfiPerDayBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolBtcOut.dfiPerDayBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Week <span class="badge badge-pill badge-info"> {{poolBtcOut.dfiPerWeekBtc | number: '1.2-2' }} DFI
         , {{poolBtcOut.dfiPerWeekBtc * poolBtc?.priceB | currency:'USD' }}
-        , {{poolBtcOut.dfiPerWeekBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolBtcOut.dfiPerWeekBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolBtcOut.dfiPerWeekBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Month <span class="badge badge-pill badge-info">{{poolBtcOut.dfiPerMonthBtc | number: '1.2-2' }} DFI
         , {{poolBtcOut.dfiPerMonthBtc * poolBtc?.priceB | currency:'USD' }}
-        , {{poolBtcOut.dfiPerMonthBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolBtcOut.dfiPerMonthBtc * poolBtc?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolBtcOut.dfiPerMonthBtc * poolBtc?.priceB * usdToChf | currency:'CHF' }} </span></p>
 
     </div>
     <div class="col-auto bg-light margin-col">
@@ -238,19 +280,28 @@
       <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
       <p>Min <span class="badge badge-pill badge-info">{{poolEthOut.dfiPerMinEth | number: '1.2-2' }} DFI
         , {{poolEthOut.dfiPerMinEth * poolEth?.priceB | currency:'USD' }}
-        , {{poolEthOut.dfiPerMinEth * poolEth?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolEthOut.dfiPerMinEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolEthOut.dfiPerMinEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Hour <span class="badge badge-pill badge-info"> {{poolEthOut.dfiPerHourEth | number: '1.2-2' }} DFI
         , {{poolEthOut.dfiPerHourEth * poolEth?.priceB | currency:'USD' }}
-        , {{poolEthOut.dfiPerHourEth * poolEth?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolEthOut.dfiPerHourEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolEthOut.dfiPerHourEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Day <span class="badge badge-pill badge-info">{{poolEthOut.dfiPerDayEth | number: '1.2-2' }} DFI
         , {{poolEthOut.dfiPerDayEth * poolEth?.priceB | currency:'USD' }}
-        , {{poolEthOut.dfiPerDayEth * poolEth?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolEthOut.dfiPerDayEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolEthOut.dfiPerDayEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Week <span class="badge badge-pill badge-info">{{poolEthOut.dfiPerWeekEth | number: '1.2-2' }} DFI
         , {{poolEthOut.dfiPerWeekEth * poolEth?.priceB | currency:'USD' }}
-        , {{poolEthOut.dfiPerWeekEth * poolEth?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolEthOut.dfiPerWeekEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolEthOut.dfiPerWeekEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
       <p>Month <span class="badge badge-pill badge-info">{{poolEthOut.dfiPerMonthEth | number: '1.2-2' }} DFI
         , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB | currency:'USD' }}
-        , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB * usdToEur | currency:'EUR' }}</span></p>
+        , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
 
     </div>
   </div>
