@@ -155,26 +155,31 @@ export class AppComponent implements OnInit {
 
   onChangeDfiStaking(newValue): void {
     localStorage.setItem(this.dfiInStakingKey, newValue);
+    this.berechneStakingOut();
     this.buildDataForChart();
   }
 
   onChangeBtcBtcPool(newValue): void {
     localStorage.setItem(this.btcInBtcPoolKey, newValue);
+    this.berechnePoolOutBtc();
     this.buildDataForChart();
   }
 
   onChangeDfiBtcPool(newValue): void {
     localStorage.setItem(this.dfiInBtcPoolKey, newValue);
+    this.berechnePoolOutBtc();
     this.buildDataForChart();
   }
 
   onChangeEthEthPool(newValue): void {
     localStorage.setItem(this.ethInEthPoolKey, newValue);
+    this.berechnePoolOutEth();
     this.buildDataForChart();
   }
 
   onChangeDfiEthPool(newValue): void {
     localStorage.setItem(this.dfiInEthPoolKey, newValue);
+    this.berechnePoolOutEth();
     this.buildDataForChart();
   }
 
