@@ -3,23 +3,25 @@
     <div class="col-auto margin-col">
       <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
     </div>
-    <div class="col-3 margin-col">
+    <div class="col-sm-3 margin-col">
       <h1><span class="badge badge-secondary left">DeFiChain Income Dashboard</span></h1>
       <p><span class="badge badge-secondary left">{{env.version}}</span></p>
-      <p>Welcome, on this website you can track your income of your cryptos during staking or liquidity mining with your
-        defichain app.</p>
+      <p>Welcome, on this website you can track your income of your cryptos</p>
+      <p>during staking or liquidity mining with your defichain app.</p>
       <p>All data powered by <a href="https://dex.defichain.com/mainnet/pool">
         https://dex.defichain.com/mainnet/pool</a></p>
       <p>Data are refreshed every 60s. No F5 needed.</p>
     </div>
     <div class="col-auto margin-col">
+      <h1><span class="badge badge-secondary left">DEX Statistics</span></h1>
       <div class="row">
         <div class="col-auto bg-light margin-col">
           <div class="row">
             <div class="col-auto margin-col">
-              TVL <h2><span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
-              /  {{dex?.tvl * usdToEur | currency:'EUR'}}
-              /  {{dex?.tvl * usdToChf | currency:'CHF'}}</span></h2>
+              TVL
+              <h2><span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}</span></h2>
+              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToEur | currency:'EUR'}}</span></h2>
+              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToChf | currency:'CHF'}}</span></h2>
             </div>
           </div>
           <div class="row">
@@ -178,85 +180,85 @@
 </div>
 
 <div class="container left">
-  <h1><span class="badge badge-secondary left">Your value</span></h1>
-  <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-    <button (click)="onChangeFiat('USD')" type="button" class="btn small btn-secondary">USD</button>
-    <button (click)="onChangeFiat('EUR')" type="button" class="btn small btn-secondary">EUR</button>
-    <button (click)="onChangeFiat('CHF')" type="button" class="btn small btn-secondary">CHF</button>
-  </div>
   <div class="row">
-    <div class="col-auto bg-light margin-col">
-      <h2><span
-        class="badge badge-pill badge-success left">
+    <div class="col-sm bg-light margin-col">
+      <h1><span class="badge badge-secondary left">Your value</span></h1>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button (click)="onChangeFiat('USD')" type="button" class="btn small btn-secondary">USD</button>
+        <button (click)="onChangeFiat('EUR')" type="button" class="btn small btn-secondary">EUR</button>
+        <button (click)="onChangeFiat('CHF')" type="button" class="btn small btn-secondary">CHF</button>
+      </div>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <h2><span
+            class="badge badge-pill badge-success left">
         <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
         <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF'}}</span>
       </span>
-      </h2>
+          </h2>
 
-      <apx-chart *ngIf="chartOptions"
-                 [series]="chartOptions?.series"
-                 [chart]="chartOptions?.chart"
-                 [labels]="chartOptions?.labels"
-                 [fill]="chartOptions?.fill"
-                 [dataLabels]="chartOptions?.dataLabels"
-                 [responsive]="chartOptions?.responsive"
-      ></apx-chart>
+          <apx-chart *ngIf="chartOptions"
+                     [series]="chartOptions?.series"
+                     [chart]="chartOptions?.chart"
+                     [labels]="chartOptions?.labels"
+                     [fill]="chartOptions?.fill"
+                     [dataLabels]="chartOptions?.dataLabels"
+                     [responsive]="chartOptions?.responsive"
+          ></apx-chart>
 
-      <h3><span
-        class="badge badge-pill badge-primary left"> {{getDfiCount()}} DFI -
+          <h3><span
+            class="badge badge-pill badge-primary left"> {{getDfiCount()}} DFI -
         <span *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
         <span *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'">{{getDfiValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span>
-      </h3>
-      <div class="row">
-        <div *ngIf="btc > 0" class="col-auto bg-light margin-col">
-          <h3><span class="badge badge-pill badge-primary left"> {{btc}} BTC -
+          </h3>
+          <div class="row">
+            <div *ngIf="btc > 0" class="col-auto bg-light margin-col">
+              <h3><span class="badge badge-pill badge-primary left"> {{btc}} BTC -
         <span *ngIf="fiat === 'USD'">{{getBtcValueUsd() | currency:'USD'}}</span>
         <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span></h3>
-        </div>
-        <div *ngIf="eth > 0" class="col-auto bg-light margin-col">
-          <h3><span class="badge badge-pill badge-primary left"> {{eth}} ETH -
+            </div>
+            <div *ngIf="eth > 0" class="col-auto bg-light margin-col">
+              <h3><span class="badge badge-pill badge-primary left"> {{eth}} ETH -
             <span *ngIf="fiat === 'USD'">{{getEthValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div *ngIf="usdt > 0" class="col-auto bg-light margin-col">
-          <h3><span class="badge badge-pill badge-primary left"> {{usdt}} USDT -
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="usdt > 0" class="col-auto bg-light margin-col">
+              <h3><span class="badge badge-pill badge-primary left"> {{usdt}} USDT -
             <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span></h3>
-        </div>
-        <div *ngIf="ltc > 0" class="col-auto bg-light margin-col">
-          <h3><span class="badge badge-pill badge-primary left"> {{ltc}} LTC -
+            </div>
+            <div *ngIf="ltc > 0" class="col-auto bg-light margin-col">
+              <h3><span class="badge badge-pill badge-primary left"> {{ltc}} LTC -
             <span *ngIf="fiat === 'USD'">{{getLtcValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span></h3>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
-  </div>
-</div>
-
-
-<div class="container left">
-  <h1><span class="badge badge-secondary left">Your income</span></h1>
-  <div class="row">
-    <div class="col-auto bg-light margin-col">
-      <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
-      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
-        ETH - USDT {{usdt}} - LTC {{ltc}}  - {{getDfiCountIncome()}} DFI </span></p>
-      <p>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
-        DFI =
+    <div class="col-sm bg-light margin-col">
+      <h1><span class="badge badge-secondary left">Your income</span></h1>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
+          <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
+            ETH - USDT {{usdt}} - LTC {{ltc}}  - {{getDfiCountIncome()}} DFI </span></p>
+          <p>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
+            DFI =
          <span
            *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMinUsd() | currency:'USD' }}</span>
         <span
@@ -265,10 +267,10 @@
           *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMinUsd() * usdToChf | currency:'CHF' }}</span>
       </span>
 
-      </p>
+          </p>
 
-      <p>Hour <span class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
-        DFI =
+          <p>Hour <span class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
+            DFI =
         <span
           *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD' }}</span>
          <span
@@ -276,18 +278,18 @@
         <span
           *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerHourUsd() * usdToChf | currency:'CHF' }}</span>
       </span>
-      </p>
+          </p>
 
-      <p>Day <span class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
-        DFI =
+          <p>Day <span class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
+            DFI =
         <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD' }}</span>
         <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR' }}</span>
         <span *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerDayUsd() * usdToChf | currency:'CHF' }}</span>
       </span>
-      </p>
+          </p>
 
-      <p>Week <span class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
-        DFI =
+          <p>Week <span class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
+            DFI =
          <span
            *ngIf="fiat === 'USD'">  {{getDfiIncomeValuePerWeekUsd() | currency:'USD' }}</span>
          <span
@@ -295,9 +297,9 @@
          <span
            *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerWeekUsd() * usdToChf | currency:'CHF' }}</span>
       </span>
-      </p>
-      <p>Month <span class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
-        DFI =
+          </p>
+          <p>Month <span class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
+            DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD' }}</span>
            <span
@@ -306,9 +308,9 @@
            <span
              *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF' }}</span>
         </span>
-      </p>
-      <p>Year <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
-        DFI =
+          </p>
+          <p>Year <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
+            DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>
            <span
@@ -317,63 +319,67 @@
            <span
              *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF' }}</span>
         </span>
-      </p>
-    </div>
+          </p>
+        </div>
 
-  </div>
-</div>
-<div class="container left">
-  <div class="row">
-    <div *ngIf="dfiInStaking > 0" class="col-auto bg-light margin-col">
-      <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
-      <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI </span></p>
-      <app-earning [out]="stakingOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
-    </div>
-
-    <div *ngIf="btc > 0 || eth > 0 " class="col-auto bg-light margin-col">
-      <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
-      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
-        ETH - USDT {{usdt}} - LTC {{ltc}} - {{getDfiCountInLM()}} DFI </span></p>
-      <app-earning [out]="poolOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
-    </div>
-
-
-  </div>
-</div>
-<div class="container left">
-  <div class="row">
-    <div *ngIf="btc > 0 || dfiInBtcPool > 0" class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
-      <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></p>
-
-      <span class="badge badge-pill badge-success">EARNINGS</span>
-      <app-earning [out]="poolBtcOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
-    </div>
-
-    <div *ngIf=" eth > 0 || dfiInEthPool" class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
-      <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></p>
-
-      <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
-      <app-earning [out]="poolEthOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
-
-    </div>
-    <div *ngIf=" usdt > 0 || dfiInUsdtPool > 0" class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span>
-      <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></p>
-
-      <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
-      <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
-    </div>
-    <div *ngIf=" ltc > 0 || dfiInLtcPool > 0" class="col-auto bg-light margin-col">
-      <span class="badge badge-pill badge-dark">LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}%</span>
-      <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span></p>
-
-      <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
-      <app-earning [out]="poolLtcOut" [pool]="poolLtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
     </div>
   </div>
-</div>
-<br><br><br><br><br><br>
+
+
+  <div class="container left">
+    <div class="row">
+      <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
+        <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
+        <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI </span></p>
+        <app-earning [out]="stakingOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
+
+      <div *ngIf="btc > 0 || eth > 0 " class="col-sm bg-light margin-col">
+        <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
+        <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
+          ETH - USDT {{usdt}} - LTC {{ltc}} - {{getDfiCountInLM()}} DFI </span></p>
+        <app-earning [out]="poolOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container left">
+    <h1><span class="badge badge-secondary left">Your pools</span></h1>
+    <div class="row">
+      <div *ngIf="btc > 0 || dfiInBtcPool > 0" class="col-sm bg-light margin-col">
+        <span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span>
+        <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></p>
+
+        <span class="badge badge-pill badge-success">EARNINGS</span>
+        <app-earning [out]="poolBtcOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
+
+      <div *ngIf=" eth > 0 || dfiInEthPool" class="col-sm bg-light margin-col">
+        <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
+        <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></p>
+
+        <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
+        <app-earning [out]="poolEthOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+
+      </div>
+      <div *ngIf=" usdt > 0 || dfiInUsdtPool > 0" class="col-sm bg-light margin-col">
+        <span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span>
+        <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></p>
+
+        <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
+        <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
+      <div *ngIf=" ltc > 0 || dfiInLtcPool > 0" class="col-sm bg-light margin-col">
+        <span class="badge badge-pill badge-dark">LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}%</span>
+        <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span></p>
+
+        <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
+        <app-earning [out]="poolLtcOut" [pool]="poolLtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
+      </div>
+    </div>
+  </div>
+  <br><br><br><br><br><br>
 
 
