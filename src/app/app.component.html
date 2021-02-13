@@ -57,6 +57,15 @@
   <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
   <div class="row">
     <div class="col-auto bg-light margin-col">
+      <span class="badge badge-pill badge-primary left">Wallet</span>
+      <div class="form-group">
+        <label for="inputDFIWallet">DFI</label>
+        <input [(ngModel)]="dfiInWallet" (ngModelChange)="onChangeDfiWallet($event)" type="number"
+               class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your wallet DFI amount.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
       <span class="badge badge-pill badge-primary left">Staking</span>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
@@ -152,11 +161,11 @@
       <h3><span
         class="badge badge-pill badge-primary left">
         <span
-          *ngIf="fiat === 'USD'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}}</span>
+          *ngIf="fiat === 'USD'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB | currency:'USD'}}</span>
         <span
-          *ngIf="fiat === 'EUR'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
+          *ngIf="fiat === 'EUR'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
         <span
-          *ngIf="fiat === 'CHF'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
+          *ngIf="fiat === 'CHF'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
         </span>
       </h3>
     </div>
@@ -165,7 +174,7 @@
 
 
 <div class="container left">
-  <h2><span class="badge badge-secondary left">Your income</span></h2>
+  <h1><span class="badge badge-secondary left">Your income</span></h1>
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>

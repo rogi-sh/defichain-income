@@ -40,6 +40,10 @@ export class AppComponent implements OnInit {
   dfiInStaking = 11050;
   stakingApy = 37;
 
+  // Wallet
+  dfiInWallet = 0;
+  dfiInWalletKey = 'dfiInWalletKey';
+
   dex: DexInfo;
 
   poolBtc: Pool;
@@ -151,11 +155,20 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.dfiInEthPoolKey) !== null) {
       this.dfiInEthPool = +localStorage.getItem(this.dfiInEthPoolKey);
     }
+    if (localStorage.getItem(this.dfiInWalletKey) !== null) {
+      this.dfiInWallet = +localStorage.getItem(this.dfiInWalletKey);
+    }
+
   }
 
   onChangeDfiStaking(newValue): void {
     localStorage.setItem(this.dfiInStakingKey, newValue);
     this.berechneStakingOut();
+    this.buildDataForChart();
+  }
+
+  onChangeDfiWallet(newValue): void {
+    localStorage.setItem(this.dfiInWalletKey, newValue);
     this.buildDataForChart();
   }
 
@@ -198,7 +211,7 @@ export class AppComponent implements OnInit {
 
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
-    dataDfi.value = (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInStaking) * this.poolBtc?.priceB;
+    dataDfi.value = (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInStaking + this.dfiInWallet) * this.poolBtc?.priceB;
 
     this.chartOptions = {
       series: [+(dataBtc.value / allValue * 100).toFixed(1),
