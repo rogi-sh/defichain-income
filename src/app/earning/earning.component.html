@@ -1,0 +1,24 @@
+<p>Min <span class="badge badge-pill badge-info">{{out.dfiPerMin| number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerMinUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerMinUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerMinUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+
+<p>Hour <span class="badge badge-pill badge-info">{{out.dfiPerHour | number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerHourUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerHourUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerHourUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+
+<p>Day <span class="badge badge-pill badge-info">{{out.dfiPerDay  | number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerDayUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerDayUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerDayUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+
+<p>Week <span class="badge badge-pill badge-info"> {{out.dfiPerWeek | number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerWeekUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerWeekUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerWeekUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+
+<p>Month <span class="badge badge-pill badge-info">{{out.dfiPerMonth | number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerMonthUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF' }}</span></p>

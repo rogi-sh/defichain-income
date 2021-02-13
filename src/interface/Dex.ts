@@ -26,31 +26,7 @@ export interface Pool {
   priceB: number;
 }
 
-export class PoolBtcOut {
-  dfiPerMinBtc: number;
-  dfiPerHourBtc: number;
-  dfiPerDayBtc: number;
-  dfiPerWeekBtc: number;
-  dfiPerMonthBtc: number;
-}
-
-export class PoolEthOut {
-  dfiPerMinEth: number;
-  dfiPerHourEth: number;
-  dfiPerDayEth: number;
-  dfiPerWeekEth: number;
-  dfiPerMonthEth: number;
-}
-
-export class PoolUsdtOut {
-  dfiPerMinUsdt: number;
-  dfiPerHourUsdt: number;
-  dfiPerDayUsdt: number;
-  dfiPerWeekUsdt: number;
-  dfiPerMonthUsdt: number;
-}
-
-export class PoolOut {
+export class Outcome {
   dfiPerMin: number;
   dfiPerHour: number;
   dfiPerDay: number;
@@ -58,12 +34,12 @@ export class PoolOut {
   dfiPerMonth: number;
 }
 
-export class StakingOut {
-  dfiPerMin: number;
-  dfiPerHour: number;
-  dfiPerDay: number;
-  dfiPerWeek: number;
-  dfiPerMonth: number;
-}
+export class PoolBtcOut extends Outcome {}
+
+export class PoolEthOut extends Outcome {}
+
+export class PoolUsdtOut extends Outcome {}
+
+export class OutcomeStaking extends Outcome {}
 
 
