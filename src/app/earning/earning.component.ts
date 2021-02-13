@@ -12,7 +12,7 @@ export class EarningComponent implements OnInit {
   out: Outcome;
 
   @Input()
-  poolBtc: Pool;
+  pool: Pool;
 
   @Input()
   usdToEur: number;
@@ -28,27 +28,27 @@ export class EarningComponent implements OnInit {
 
   // get income of pool
   getOutcomeOfPoolPerMinUsd(out: Outcome): number {
-    return out.dfiPerMin * this.poolBtc?.priceB;
+    return out.dfiPerMin * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerHourUsd(out: Outcome): number {
-    return out.dfiPerHour * this.poolBtc?.priceB;
+    return out.dfiPerHour * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerDayUsd(out: Outcome): number {
-    return out.dfiPerDay * this.poolBtc?.priceB;
+    return out.dfiPerDay * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerWeekUsd(out: Outcome): number {
-    return out.dfiPerWeek * this.poolBtc?.priceB;
+    return out.dfiPerWeek * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerMonthUsd(out: Outcome): number {
-    return out.dfiPerMonth * this.poolBtc?.priceB;
+    return out.dfiPerMonth * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerYearUsd(out: Outcome): number {
-    return out.dfiPerYear * this.poolBtc?.priceB;
+    return out.dfiPerYear * this.pool?.priceB;
   }
 
 }

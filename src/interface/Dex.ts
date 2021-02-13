@@ -41,6 +41,8 @@ export class PoolEthOut extends Outcome {}
 
 export class PoolUsdtOut extends Outcome {}
 
+export class PoolLtcOut extends Outcome {}
+
 export class OutcomeStaking extends Outcome {}
 
 
