@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
-import {DexInfo, Pool, PoolBtcOut, PoolEthOut, Outcome, PoolUsdtOut, OutcomeStaking} from '../interface/Dex';
+import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolEthOut, PoolUsdtOut} from '../interface/Dex';
 import {ChartOptions, Data} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
@@ -113,42 +113,49 @@ export class AppComponent implements OnInit {
   }
 
   berechnePoolOutBtc(): void {
-    const reserveANumber = +this.poolBtc?.reserveA;
-    const reserveBNumber = +this.poolBtc?.reserveB;
-    const anteileBTC = this.btc / reserveANumber * 100;
-    const anteileDFI = this.dfiInBtcPool / reserveBNumber * 100;
-    this.anteilAmPoolBtc = (anteileBTC + anteileDFI) / 2;
-    this.poolBtcOut.dfiPerMin = this.dfiProBlockBtc / this.blocktimeInS * 60 * this.anteilAmPoolBtc / 100;
-    this.poolBtcOut.dfiPerHour = this.poolBtcOut.dfiPerMin * 60;
-    this.poolBtcOut.dfiPerDay = this.poolBtcOut.dfiPerHour * 24;
-    this.poolBtcOut.dfiPerWeek = this.poolBtcOut.dfiPerDay * 7;
-    this.poolBtcOut.dfiPerMonth = this.poolBtcOut.dfiPerDay * 30;
+    this.berechnePool('BTC', this.poolBtc, this.poolBtcOut, this.dfiProBlockBtc);
   }
 
   berechnePoolOutEth(): void {
-    const reserveANumber = +this.poolEth?.reserveA;
-    const reserveBNumber = +this.poolEth?.reserveB;
-    const anteileETH = this.eth / reserveANumber * 100;
-    const anteileDFI = this.dfiInEthPool / reserveBNumber * 100;
-    this.anteilAmPoolEth = (anteileETH + anteileDFI) / 2;
-    this.poolEthOut.dfiPerMin = this.dfiProBlockEth / this.blocktimeInS * 60 * this.anteilAmPoolEth / 100;
-    this.poolEthOut.dfiPerHour = this.poolEthOut.dfiPerMin * 60;
-    this.poolEthOut.dfiPerDay = this.poolEthOut.dfiPerHour * 24;
-    this.poolEthOut.dfiPerWeek = this.poolEthOut.dfiPerDay * 7;
-    this.poolEthOut.dfiPerMonth = this.poolEthOut.dfiPerDay * 30;
+    this.berechnePool('ETH', this.poolEth, this.poolEthOut, this.dfiProBlockEth);
   }
 
   berechnePoolOutUsdt(): void {
-    const reserveANumber = +this.poolUsdt?.reserveA;
-    const reserveBNumber = +this.poolUsdt?.reserveB;
-    const anteileUSDT = this.usdt / reserveANumber * 100;
-    const anteileDFI = this.dfiInUsdtPool / reserveBNumber * 100;
-    this.anteilAmPoolUsdt = (anteileUSDT + anteileDFI) / 2;
-    this.poolUsdtOut.dfiPerMin = this.dfiProBlockUsdt / this.blocktimeInS * 60 * this.anteilAmPoolUsdt / 100;
-    this.poolUsdtOut.dfiPerHour = this.poolUsdtOut.dfiPerMin * 60;
-    this.poolUsdtOut.dfiPerDay = this.poolUsdtOut.dfiPerHour * 24;
-    this.poolUsdtOut.dfiPerWeek = this.poolUsdtOut.dfiPerDay * 7;
-    this.poolUsdtOut.dfiPerMonth = this.poolUsdtOut.dfiPerDay * 30;
+    this.berechnePool('USDT', this.poolUsdt, this.poolUsdtOut, this.dfiProBlockUsdt);
+  }
+
+  private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
+    const reserveANumber = +pool?.reserveA;
+    const reserveBNumber = +pool?.reserveB;
+
+    if (poolName === 'BTC') {
+      this.anteilAmPoolBtc = this.berechneAnteilAmPool(this.btc, this.dfiInBtcPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+    }
+    if (poolName === 'ETH') {
+      this.anteilAmPoolEth = this.berechneAnteilAmPool(this.eth, this.dfiInEthPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+    }
+    if (poolName === 'USDT') {
+      this.anteilAmPoolUsdt =
+        this.berechneAnteilAmPool(this.usdt, this.dfiInUsdtPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+    }
+
+    outcome.dfiPerHour = outcome.dfiPerMin * 60;
+    outcome.dfiPerDay = outcome.dfiPerHour * 24;
+    outcome.dfiPerWeek = outcome.dfiPerDay * 7;
+    outcome.dfiPerMonth = outcome.dfiPerDay * 30;
+    outcome.dfiPerYear = outcome.dfiPerDay * 365;
+  }
+
+  private berechneAnteilAmPool(poolCoin: number, dfInPool: number, reserveBNumber: number, reserveANumber: number, outcome: Outcome, dfiProBlock: number): number {
+    const anteileDFI = dfInPool / reserveBNumber * 100;
+    const anteile = poolCoin / reserveANumber * 100;
+    const anteilAmPool = (anteile + anteileDFI) / 2;
+    outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
+    return anteilAmPool;
+  }
+
+  private getDfiPerMin(dfiProBlock: number): number {
+    return dfiProBlock / this.blocktimeInS * 60;
   }
 
   berechnePoolOut(): void {
@@ -157,6 +164,7 @@ export class AppComponent implements OnInit {
     this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolUsdtOut.dfiPerDay;
     this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek + this.poolUsdtOut.dfiPerWeek;
     this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth + this.poolUsdtOut.dfiPerMonth;
+    this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear + this.poolUsdtOut.dfiPerYear;
   }
 
   berechneStakingOut(): void {
@@ -165,6 +173,7 @@ export class AppComponent implements OnInit {
     this.stakingOut.dfiPerMin = this.stakingOut.dfiPerHour / 60;
     this.stakingOut.dfiPerWeek = this.stakingOut.dfiPerDay * 7;
     this.stakingOut.dfiPerMonth = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking;
+    this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100);
   }
 
   loadLocalStorage(): void {
@@ -255,26 +264,23 @@ export class AppComponent implements OnInit {
 
   buildDataForChart(): void {
 
-    const allValue = this.btc * this.poolBtc?.priceA + this.eth
-      * this.poolEth?.priceA + this.usdt * this.poolUsdt?.priceA
-      + (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInStaking) * this.poolBtc?.priceB;
+    const allValue = this.getAllValuesUsdPrice();
 
     const dataBtc = new Data();
-    dataBtc.value = this.btc * this.poolBtc?.priceA;
+    dataBtc.value = this.getBtcValueUsd();
     dataBtc.name = 'BTC';
 
     const dataEth = new Data();
     dataEth.name = 'ETH';
-    dataEth.value = this.eth * this.poolEth?.priceA;
+    dataEth.value = this.getEthValueUsd();
 
     const dataUsdt = new Data();
     dataUsdt.name = 'USDT';
-    dataUsdt.value = this.usdt * this.poolUsdt?.priceA;
+    dataUsdt.value = this.getUsdtValueUsd();
 
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
-    dataDfi.value = (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInStaking + this.dfiInWallet)
-      * this.poolBtc?.priceB;
+    dataDfi.value = this.getDfiValueUsd();
 
     this.chartOptions = {
       series: [+(dataBtc.value / allValue * 100).toFixed(1),
@@ -332,10 +338,7 @@ export class AppComponent implements OnInit {
   }
 
   getAllValuesUsdPrice(): number {
-    return this.btc * this.poolBtc?.priceA
-    + this.eth * this.poolEth?.priceA
-    + this.usdt * this.poolUsdt?.priceA
-    + (this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInStaking + this.dfiInWallet) * this.poolBtc?.priceB;
+    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getDfiValueUsd();
   }
 
   getBtcValueUsd(): number {
@@ -354,7 +357,7 @@ export class AppComponent implements OnInit {
     return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInStaking + this.dfiInWallet;
   }
 
-  getDfiCountIcome(): number {
+  getDfiCountIncome(): number {
     return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInStaking;
   }
 
@@ -406,25 +409,12 @@ export class AppComponent implements OnInit {
     return this.getDfiIncomePerMonth() * this.poolBtc?.priceB;
   }
 
-  // get income of pool
-  getOutcomeOfPoolPerMinUsd(out: Outcome): number {
-    return out.dfiPerMin * this.poolBtc?.priceB;
+  getDfiIncomePerYear(): number {
+    return this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
   }
 
-  getOutcomeOfPoolPerHourUsd(out: Outcome): number {
-    return out.dfiPerHour * this.poolBtc?.priceB;
-  }
-
-  getOutcomeOfPoolPerDayUsd(out: Outcome): number {
-    return out.dfiPerDay * this.poolBtc?.priceB;
-  }
-
-  getOutcomeOfPoolPerWeekUsd(out: Outcome): number {
-    return out.dfiPerWeek * this.poolBtc?.priceB;
-  }
-
-  getOutcomeOfPoolPerMonthUsd(out: Outcome): number {
-    return out.dfiPerMonth * this.poolBtc?.priceB;
+  getDfiIncomeValuePerYearUsd(): number {
+    return this.getDfiIncomePerYear() * this.poolBtc?.priceB;
   }
 
 }

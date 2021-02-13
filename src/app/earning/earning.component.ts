@@ -47,4 +47,8 @@ export class EarningComponent implements OnInit {
     return out.dfiPerMonth * this.poolBtc?.priceB;
   }
 
+  getOutcomeOfPoolPerYearUsd(out: Outcome): number {
+    return out.dfiPerYear * this.poolBtc?.priceB;
+  }
+
 }

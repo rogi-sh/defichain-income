@@ -32,6 +32,7 @@ export class Outcome {
   dfiPerDay: number;
   dfiPerWeek: number;
   dfiPerMonth: number;
+  dfiPerYear: number;
 }
 
 export class PoolBtcOut extends Outcome {}

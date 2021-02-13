@@ -22,3 +22,8 @@
         , {{getOutcomeOfPoolPerMonthUsd(out) | currency:'USD' }}
   , {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR' }}
   , {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+
+<p>Year <span class="badge badge-pill badge-info">{{out.dfiPerYear | number: '1.2-2' }} DFI
+        , {{getOutcomeOfPoolPerYearUsd(out) | currency:'USD' }}
+  , {{getOutcomeOfPoolPerYearUsd(out) * usdToEur | currency:'EUR' }}
+  , {{getOutcomeOfPoolPerYearUsd(out) * usdToChf | currency:'CHF' }}</span></p>

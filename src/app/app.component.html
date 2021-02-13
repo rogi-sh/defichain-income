@@ -76,16 +76,18 @@
       <span class="badge badge-pill badge-primary left">Wallet</span>
       <div class="form-group">
         <label for="inputDFIWallet">DFI</label>
-        <input [(ngModel)]="dfiInWallet" (ngModelChange)="onChangeDfiWallet($event)" type="number"
+        <input required [(ngModel)]="dfiInWallet" (ngModelChange)="onChangeDfiWallet($event)" type="number"
                class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
         <small class="form-text text-muted">Add your wallet DFI amount.</small>
+        <small class="form-text text-muted">If you not have DF in wallet set 0.</small>
       </div>
       <span class="badge badge-pill badge-primary left">Staking</span>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
-        <input [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
+        <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
                class="form-control form-control-sm" id="inputDFIStaking" placeholder="Enter dfi amount">
         <small class="form-text text-muted">Add your stake DFI amount.</small>
+        <small class="form-text text-muted">If you not stake set 0.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -95,42 +97,48 @@
           <span class="badge badge-pill badge-primary left">BTC Pool</span>
           <div class="form-group">
             <label for="inputBTCBTCPool">BTC</label>
-            <input [(ngModel)]="btc" (ngModelChange)="onChangeBtcBtcPool($event)" type="number"
+            <input required [(ngModel)]="btc" (ngModelChange)="onChangeBtcBtcPool($event)" type="number"
                    class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
             <small class="form-text text-muted">Add your btc pool BTC amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIBTCPool">DFI</label>
-            <input [(ngModel)]="dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool($event)" type="number"
+            <input required [(ngModel)]="dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool($event)" type="number"
                    class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your btc pool DFI amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">ETH Pool</span>
           <div class="form-group">
             <label for="inputETHETHPool">ETH</label>
-            <input [(ngModel)]="eth" (ngModelChange)="onChangeEthEthPool($event)" type="number"
+            <input required [(ngModel)]="eth" (ngModelChange)="onChangeEthEthPool($event)" type="number"
                    class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
             <small class="form-text text-muted">Add your eth pool ETH amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIETHPool">DFI</label>
-            <input [(ngModel)]="dfiInEthPool" (ngModelChange)="onChangeDfiEthPool($event)" type="number"
+            <input required [(ngModel)]="dfiInEthPool" (ngModelChange)="onChangeDfiEthPool($event)" type="number"
                    class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your eth pool DFI amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">USDT Pool</span>
           <div class="form-group">
             <label for="inputUSDTUSDTPool">USDT</label>
-            <input [(ngModel)]="usdt" (ngModelChange)="onChangeUsdtUsdtPool($event)" type="number"
+            <input required [(ngModel)]="usdt" (ngModelChange)="onChangeUsdtUsdtPool($event)" type="number"
                    class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
             <small class="form-text text-muted">Add your usdt pool USDT amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIUSDTPool">DFI</label>
-            <input [(ngModel)]="dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool($event)" type="number"
+            <input required [(ngModel)]="dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool($event)" type="number"
                    class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your usdt pool DFI amount.</small>
+            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
       </div>
@@ -150,12 +158,9 @@
     <div class="col-auto bg-light margin-col">
       <h2><span
         class="badge badge-pill badge-success left">
-        <span
-          *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
-        <span
-          *ngIf="fiat === 'EUR'">  {{getAllValuesUsdPrice() * usdToEur | currency:'EUR'}}</span>
-        <span
-          *ngIf="fiat === 'CHF'">  {{getAllValuesUsdPrice()  * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
+        <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice()  * usdToChf | currency:'CHF'}}</span>
       </span>
       </h2>
 
@@ -192,12 +197,9 @@
       </div>
       <h3><span
         class="badge badge-pill badge-primary left"> {{getDfiCount()}} DFI -
-        <span
-          *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
-        <span
-          *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
-        <span
-          *ngIf="fiat === 'CHF'">{{getDfiValueUsd() * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'">{{getDfiValueUsd() * usdToChf | currency:'CHF'}}</span>
         </span>
       </h3>
     </div>
@@ -211,7 +213,7 @@
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
       <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
-        ETH - USDT {{usdt}} - {{getDfiCountIcome()}} DFI </span></p>
+        ETH - USDT {{usdt}} - {{getDfiCountIncome()}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
         DFI =
          <span
@@ -262,6 +264,17 @@
 
            <span
              *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF' }}</span>
+        </span>
+      </p>
+      <p>Year <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
+        DFI =
+           <span
+             *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>
+           <span
+             *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerYearUsd() * usdToEur | currency:'EUR' }}</span>
+
+           <span
+             *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF' }}</span>
         </span>
       </p>
     </div>
