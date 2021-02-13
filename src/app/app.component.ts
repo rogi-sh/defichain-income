@@ -3,6 +3,7 @@ import {Dex} from '../service/dex.service';
 import {DexInfo, Pool, PoolBtcOut, PoolEthOut, PoolOut, StakingOut} from '../interface/Dex';
 import {ChartOptions, Data} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   public chartOptions: Partial<ChartOptions>;
 
   title = 'defichain-income';
+  env = environment;
 
   // fixed variables
   dfiProBlockBtc = 80;
