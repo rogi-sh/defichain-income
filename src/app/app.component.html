@@ -3,18 +3,21 @@
     <div class="col-auto margin-col">
       <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
     </div>
-    <div class="col-auto margin-col">
+    <div class="col-3 margin-col">
       <h1><span class="badge badge-secondary left">DeFiChain Income Dashboard</span></h1>
       <p><span class="badge badge-secondary left">{{env.version}}</span></p>
+      <p>Welcome, on this website you can track your income of your cryptos during staking or liquidity mining with your defichain app.</p>
+      <p>All data come from <a href="https://dex.defichain.com/mainnet/pool"> https://dex.defichain.com/mainnet/pool</a></p>
+      <p>Data are refreshed every 60s</p>
     </div>
     <div class="col-auto margin-col">
       <div class="row">
         <div class="col-auto bg-light margin-col">
           <div class="row">
             <div class="col-auto margin-col">
-              TVL <span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
+              TVL <h2><span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}
               /  {{dex?.tvl * usdToEur | currency:'EUR'}}
-              /  {{dex?.tvl * usdToChf | currency:'CHF'}}</span>
+              /  {{dex?.tvl * usdToChf | currency:'CHF'}}</span></h2>
             </div>
           </div>
           <div class="row">
@@ -33,6 +36,13 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
+              Pool price USDT <span class="badge badge-pill badge-dark left"> {{poolUsdt?.priceA | currency:'USD'}}
+              /  {{poolUsdt?.priceA * usdToEur | currency:'EUR'}}
+              / {{poolUsdt?.priceA * usdToChf | currency:'CHF'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
               Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
               /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}
               / {{poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
@@ -46,6 +56,11 @@
           <div class="row">
             <div class="col-auto margin-col">
               APY ETH Pool <span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              APY USDT Pool <span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span>
             </div>
           </div>
         </div>
@@ -104,6 +119,20 @@
             <small class="form-text text-muted">Add your eth pool DFI amount.</small>
           </div>
         </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">USDT Pool</span>
+          <div class="form-group">
+            <label for="inputUSDTUSDTPool">USDT</label>
+            <input [(ngModel)]="usdt" (ngModelChange)="onChangeUsdtUsdtPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
+            <small class="form-text text-muted">Add your usdt pool USDT amount.</small>
+
+            <label for="inputDFIUSDTPool">DFI</label>
+            <input [(ngModel)]="dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool($event)" type="number"
+                   class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your usdt pool DFI amount.</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -122,11 +151,11 @@
       <h2><span
         class="badge badge-pill badge-success left">
         <span
-          *ngIf="fiat === 'USD'"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB | currency:'USD'}} </span>
+          *ngIf="fiat === 'USD'"> {{btc * poolBtc?.priceA + eth * poolEth?.priceA + usdt * poolUsdt?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB | currency:'USD'}} </span>
         <span
-          *ngIf="fiat === 'EUR'">  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
+          *ngIf="fiat === 'EUR'">  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + usdt * poolUsdt?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB) * usdToEur | currency:'EUR'}}</span>
         <span
-          *ngIf="fiat === 'CHF'">  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + (dfiInEthPool + dfiInBtcPool + dfiInStaking) * poolBtc?.priceB) * usdToChf | currency:'CHF'}}</span>
+          *ngIf="fiat === 'CHF'">  {{(btc * poolBtc?.priceA + eth * poolEth?.priceA + usdt * poolUsdt?.priceA  + (dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB) * usdToChf | currency:'CHF'}}</span>
       </span>
       </h2>
 
@@ -139,32 +168,36 @@
                  [responsive]="chartOptions?.responsive"
       ></apx-chart>
       <div class="row">
-        <div class="col-auto bg-light margin-col">
-          BTC value
-          <h3><span class="badge badge-pill badge-primary left">
+        <div *ngIf="btc > 0" class="col-auto bg-light margin-col">
+          <h3><span class="badge badge-pill badge-primary left"> {{btc}} BTC -
         <span *ngIf="fiat === 'USD'">{{btc * poolBtc?.priceA | currency:'USD'}}</span>
         <span *ngIf="fiat === 'EUR'">{{btc * poolBtc?.priceA * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{btc * poolBtc?.priceA * usdToChf | currency:'CHF'}}</span>
-      </span></h3>
+        </span></h3>
         </div>
-        <div class="col-auto bg-light margin-col">
-          ETH value
-          <h3><span class="badge badge-pill badge-primary left">
-        <span *ngIf="fiat === 'USD'">{{eth * poolEth?.priceA | currency:'USD'}}</span>
-        <span *ngIf="fiat === 'EUR'">{{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
-        <span *ngIf="fiat === 'CHF'">{{eth * poolEth?.priceA * usdToChf | currency:'CHF'}}</span>
-      </span></h3>
+        <div *ngIf="eth > 0" class="col-auto bg-light margin-col">
+          <h3><span class="badge badge-pill badge-primary left"> {{eth}} ETH -
+            <span *ngIf="fiat === 'USD'">{{eth * poolEth?.priceA | currency:'USD'}}</span>
+            <span *ngIf="fiat === 'EUR'">{{eth * poolEth?.priceA * usdToEur | currency:'EUR'}}</span>
+            <span *ngIf="fiat === 'CHF'">{{eth * poolEth?.priceA * usdToChf | currency:'CHF'}}</span>
+        </span></h3>
+        </div>
+        <div *ngIf="usdt > 0" class="col-auto bg-light margin-col">
+          <h3><span class="badge badge-pill badge-primary left"> {{usdt}} USDT -
+            <span *ngIf="fiat === 'USD'">{{usdt * poolUsdt?.priceA | currency:'USD'}}</span>
+            <span *ngIf="fiat === 'EUR'">{{usdt * poolUsdt?.priceA * usdToEur | currency:'EUR'}}</span>
+            <span *ngIf="fiat === 'CHF'">{{usdt * poolUsdt?.priceA * usdToChf | currency:'CHF'}}</span>
+        </span></h3>
         </div>
       </div>
-      DFI value
       <h3><span
-        class="badge badge-pill badge-primary left">
+        class="badge badge-pill badge-primary left"> {{dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet}} DFI -
         <span
-          *ngIf="fiat === 'USD'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB | currency:'USD'}}</span>
+          *ngIf="fiat === 'USD'">{{(dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB | currency:'USD'}}</span>
         <span
-          *ngIf="fiat === 'EUR'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
+          *ngIf="fiat === 'EUR'">{{(dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToEur | currency:'EUR'}}</span>
         <span
-          *ngIf="fiat === 'CHF'">{{(dfiInEthPool + dfiInBtcPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
+          *ngIf="fiat === 'CHF'">{{(dfiInEthPool + dfiInBtcPool + dfiInUsdtPool + dfiInStaking + dfiInWallet) * poolBtc?.priceB * usdToChf | currency:'CHF'}}</span>
         </span>
       </h3>
     </div>
@@ -177,8 +210,8 @@
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
-      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC, {{eth}}
-        ETH, {{dfiInEthPool + dfiInBtcPool + dfiInStaking}} DFI </span></p>
+      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
+        ETH - USDT {{usdt}} - {{dfiInEthPool + dfiInUsdtPool + dfiInBtcPool + dfiInStaking}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{stakingOut.dfiPerMin + poolOut.dfiPerMin| number: '1.2-2' }}
         DFI =
          <span
@@ -273,8 +306,8 @@
 
     <div *ngIf="btc > 0 || eth > 0 " class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
-      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC, {{eth}}
-        ETH, {{dfiInEthPool + dfiInBtcPool}} DFI </span></p>
+      <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
+        ETH - USDT {{usdt}} - {{dfiInEthPool + dfiInUsdtPool + dfiInBtcPool}} DFI </span></p>
       <p>Min <span class="badge badge-pill badge-info">{{poolOut.dfiPerMin| number: '1.2-2' }} DFI
         , {{poolOut.dfiPerMin * poolBtc?.priceB | currency:'USD' }}
         , {{poolOut.dfiPerMin * poolBtc?.priceB * usdToEur | currency:'EUR' }}
@@ -367,6 +400,37 @@
         , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB | currency:'USD' }}
         , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB * usdToEur | currency:'EUR' }}
         , {{poolEthOut.dfiPerMonthEth * poolEth?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
+    </div>
+    <div *ngIf=" usdt > 0 || dfiInUsdtPool > 0" class="col-auto bg-light margin-col">
+      <span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span>
+      <p>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></p>
+
+      <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
+      <p>Min <span class="badge badge-pill badge-info">{{poolUsdtOut.dfiPerMinUsdt | number: '1.2-2' }} DFI
+        , {{poolUsdtOut.dfiPerMinUsdt * poolUsdt?.priceB | currency:'USD' }}
+        , {{poolUsdtOut.dfiPerMinUsdt * poolUsdt?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolUsdtOut.dfiPerMinUsdt * poolUsdt?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
+      <p>Hour <span class="badge badge-pill badge-info"> {{poolUsdtOut.dfiPerHourUsdt | number: '1.2-2' }} DFI
+        , {{poolUsdtOut.dfiPerHourUsdt * poolUsdt?.priceB | currency:'USD' }}
+        , {{poolUsdtOut.dfiPerHourUsdt * poolUsdt?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolUsdtOut.dfiPerHourUsdt * poolUsdt?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
+      <p>Day <span class="badge badge-pill badge-info">{{poolUsdtOut.dfiPerDayUsdt | number: '1.2-2' }} DFI
+        , {{poolUsdtOut.dfiPerDayUsdt * poolUsdt?.priceB | currency:'USD' }}
+        , {{poolUsdtOut.dfiPerDayUsdt * poolUsdt?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolUsdtOut.dfiPerDayUsdt * poolUsdt?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
+      <p>Week <span class="badge badge-pill badge-info">{{poolUsdtOut.dfiPerWeekUsdt | number: '1.2-2' }} DFI
+        , {{poolUsdtOut.dfiPerWeekUsdt * poolUsdt?.priceB | currency:'USD' }}
+        , {{poolUsdtOut.dfiPerWeekUsdt * poolUsdt?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolUsdtOut.dfiPerWeekUsdt * poolUsdt?.priceB * usdToChf | currency:'CHF' }}</span></p>
+
+      <p>Month <span class="badge badge-pill badge-info">{{poolUsdtOut.dfiPerMonthUsdt | number: '1.2-2' }} DFI
+        , {{poolUsdtOut.dfiPerMonthUsdt * poolUsdt?.priceB | currency:'USD' }}
+        , {{poolUsdtOut.dfiPerMonthUsdt * poolUsdt?.priceB * usdToEur | currency:'EUR' }}
+        , {{poolUsdtOut.dfiPerMonthUsdt * poolUsdt?.priceB * usdToChf | currency:'CHF' }}</span></p>
 
     </div>
   </div>

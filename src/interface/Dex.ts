@@ -42,6 +42,14 @@ export class PoolEthOut {
   dfiPerMonthEth: number;
 }
 
+export class PoolUsdtOut {
+  dfiPerMinUsdt: number;
+  dfiPerHourUsdt: number;
+  dfiPerDayUsdt: number;
+  dfiPerWeekUsdt: number;
+  dfiPerMonthUsdt: number;
+}
+
 export class PoolOut {
   dfiPerMin: number;
   dfiPerHour: number;
