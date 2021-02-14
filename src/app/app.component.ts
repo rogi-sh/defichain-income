@@ -189,11 +189,11 @@ export class AppComponent implements OnInit {
 
   berechneStakingOut(): void {
     this.stakingOut.dfiPerDay = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 365) - this.dfiInStaking;
-    this.stakingOut.dfiPerHour = this.stakingOut.dfiPerDay / 24;
-    this.stakingOut.dfiPerMin = this.stakingOut.dfiPerHour / 60;
-    this.stakingOut.dfiPerWeek = this.stakingOut.dfiPerDay * 7;
+    this.stakingOut.dfiPerHour = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 8760) - this.dfiInStaking;
+    this.stakingOut.dfiPerMin = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 525600) - this.dfiInStaking;
+    this.stakingOut.dfiPerWeek = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 52.1429) - this.dfiInStaking;
     this.stakingOut.dfiPerMonth = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking;
-    this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100);
+    this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking;
   }
 
   loadLocalStorage(): void {
