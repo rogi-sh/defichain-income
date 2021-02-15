@@ -58,6 +58,11 @@ export class AppComponent implements OnInit {
   dfiInStakingKey = 'dfiInStaking';
   dfiInStaking = 11050;
   stakingApy = 37;
+  stakingNeededForAimReturnDay = 0;
+  aimReturnDay = 0;
+
+  stakingNeededForAimReturnMonth = 0;
+  aimReturnMonth = 0;
 
   // Wallet
   dfiInWallet = 0;
@@ -172,7 +177,8 @@ export class AppComponent implements OnInit {
     outcome.dfiPerYear = outcome.dfiPerDay * 365;
   }
 
-  private berechneAnteilAmPool(poolCoin: number, dfInPool: number, reserveBNumber: number, reserveANumber: number, outcome: Outcome, dfiProBlock: number): number {
+  private berechneAnteilAmPool(poolCoin: number, dfInPool: number, reserveBNumber: number, reserveANumber: number,
+                               outcome: Outcome, dfiProBlock: number): number {
     const anteileDFI = dfInPool / reserveBNumber * 100;
     const anteile = poolCoin / reserveANumber * 100;
     const anteilAmPool = (anteile + anteileDFI) / 2;
@@ -251,6 +257,16 @@ export class AppComponent implements OnInit {
   onChangeDfiWallet(newValue): void {
     localStorage.setItem(this.dfiInWalletKey, newValue);
     this.buildDataForChart();
+  }
+
+  onChangeAimReturnDay(newValue): void {
+    const apyPerDay =  Math.pow(1 + this.stakingApy / 100, 1 / 365) - 1;
+    this.stakingNeededForAimReturnDay = newValue / apyPerDay * (100 + apyPerDay) * (1 / (1 + apyPerDay / 100)) / 100;
+  }
+
+  onChangeAimReturnMonth(newValue): void {
+    const apyPermonth =  Math.pow(1 + this.stakingApy / 100, 1 / 12) - 1;
+    this.stakingNeededForAimReturnMonth = newValue / apyPermonth * (100 + apyPermonth) * (1 / (1 + apyPermonth / 100)) / 100;
   }
 
   onChangeBtcBtcPool(newValue): void {
@@ -379,7 +395,7 @@ export class AppComponent implements OnInit {
     };
   }
 
-  private getAnteilPortfolioForChart(dataEth: Data, allValue: number) {
+  private getAnteilPortfolioForChart(dataEth: Data, allValue: number): string {
     return (dataEth.value / allValue * 100).toFixed(1);
   }
 
@@ -515,11 +531,11 @@ export class AppComponent implements OnInit {
   }
 
   getAnteilStakingOfIncome(): number {
-     return this.stakingOut.dfiPerYear /(this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
+     return this.stakingOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
   }
 
   getAnteilLMOfIncome(): number {
-    return this.poolOut.dfiPerYear /(this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
+    return this.poolOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
   }
 
   getAllPoolDfIncome(): number {

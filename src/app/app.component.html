@@ -194,12 +194,12 @@
       <h2><span class="badge badge-pill badge-success left">{{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h2>
-      <p>Choose your currency</p>
+      <small class="form-text text-muted">Choose your currency</small>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col small btn-secondary">USD</button>
-        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col small btn-secondary">EUR</button>
-        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col small btn-secondary">CHF</button>
-        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col small btn-secondary">GBP</button>
+        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-secondary">USD</button>
+        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-secondary">EUR</button>
+        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-secondary">CHF</button>
+        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-secondary">GBP</button>
       </div>
       <div class="row">
         <div class="col-auto bg-light margin-col">
@@ -371,10 +371,10 @@
   </div>
 
   <h1><span class="badge badge-secondary left">Details</span></h1>
-  <p> Click on the button for more details on</p>
+  <small class="form-text text-muted">Click for more details</small>
   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-    <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col small btn-secondary">Staking</button>
-    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col small btn-secondary">LiquidityMining</button>
+    <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-secondary">Staking</button>
+    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-secondary">LiquidityMining</button>
   </div>
 
   <div *ngIf="details === 'Staking'" class="container">
@@ -390,6 +390,36 @@
         </span></h3>
         <app-earning [out]="stakingOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
+      </div>
+      <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
+        <h2><span
+          class="badge badge-pill badge-success left">Calculate how much you have to stake to get your target return</span>
+        </h2>
+        <div class="row">
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturn">DFI per Day</label>
+              <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)" type="number"
+                     class="form-control form-control-sm" id="aimReturn" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your aim DFI reward per day.</small>
+            </div>
+            <h2><span
+              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnDay | number: '1.0-0' }}
+              DFI</span></h2>
+          </div>
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnMonth">DFI per Month</label>
+              <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
+                     type="number"
+                     class="form-control form-control-sm" id="aimReturnMonth" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your aim DFI reward per month.</small>
+            </div>
+            <h2><span
+              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
+              DFI</span></h2>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -460,4 +490,3 @@
   </div>
   <br><br><br><br><br><br>
 </div>
-
