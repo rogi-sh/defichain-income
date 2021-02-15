@@ -20,6 +20,12 @@ export class EarningComponent implements OnInit {
   @Input()
   usdToChf: number;
 
+  @Input()
+  usdToGbp: number;
+
+  @Input()
+  fiat: string;
+
   constructor() {
   }
 

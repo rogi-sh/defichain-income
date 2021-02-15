@@ -1,29 +1,55 @@
-<p>Min <span class="badge badge-pill badge-info">{{out.dfiPerMin| number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerMinUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerMinUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerMinUsd(out) * usdToChf | currency:'CHF' }}</span></p>
 
-<p>Hour <span class="badge badge-pill badge-info">{{out.dfiPerHour | number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerHourUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerHourUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerHourUsd(out) * usdToChf | currency:'CHF' }}</span></p>
-
-<p>Day <span class="badge badge-pill badge-info">{{out.dfiPerDay  | number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerDayUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerDayUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerDayUsd(out) * usdToChf | currency:'CHF' }}</span></p>
-
-<p>Week <span class="badge badge-pill badge-info"> {{out.dfiPerWeek | number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerWeekUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerWeekUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerWeekUsd(out) * usdToChf | currency:'CHF' }}</span></p>
-
-<p>Month <span class="badge badge-pill badge-info">{{out.dfiPerMonth | number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerMonthUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF' }}</span></p>
-
-<p>Year <span class="badge badge-pill badge-info">{{out.dfiPerYear | number: '1.2-2' }} DFI
-        , {{getOutcomeOfPoolPerYearUsd(out) | currency:'USD' }}
-  , {{getOutcomeOfPoolPerYearUsd(out) * usdToEur | currency:'EUR' }}
-  , {{getOutcomeOfPoolPerYearUsd(out) * usdToChf | currency:'CHF' }}</span></p>
+  <div class="row">
+    <div class="col-sm bg-light margin-col">
+      <h2>Min <span class="badge badge-pill badge-info">{{out.dfiPerMin| number: '1.2-2' }} DFI -
+         <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerMinUsd(out) | currency:'USD' }}</span>
+         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToEur | currency:'EUR' }}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToChf | currency:'CHF' }}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToGbp | currency:'GBP' }}</span>
+      </span></h2>
+    </div>
+    <div class="col-sm bg-light margin-col">
+      <h2>Hour <span class="badge badge-pill badge-info">{{out.dfiPerHour | number: '1.2-2' }} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerHourUsd(out) | currency:'USD' }}</span>
+          <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToEur | currency:'EUR' }}</span>
+            <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToChf | currency:'CHF' }}</span>
+              <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToGbp | currency:'GBP' }}</span>
+          </span></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm bg-light margin-col">
+      <h2>Day <span class="badge badge-pill badge-info">{{out.dfiPerDay  | number: '1.2-2' }} DFI -
+        <span *ngIf="fiat === 'USD'"> {{getOutcomeOfPoolPerDayUsd(out) | currency:'USD' }}</span>
+        <span *ngIf="fiat === 'EUR'">{{getOutcomeOfPoolPerDayUsd(out) * usdToEur | currency:'EUR' }}</span>
+         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToChf | currency:'CHF' }}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToGbp | currency:'GBP' }}</span>
+      </span></h2>
+    </div>
+    <div class="col-sm bg-light margin-col">
+      <h2>Week <span class="badge badge-pill badge-info"> {{out.dfiPerWeek | number: '1.2-2' }} DFI -
+        <span *ngIf="fiat === 'USD'"> {{getOutcomeOfPoolPerWeekUsd(out) | currency:'USD' }}</span>
+          <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerWeekUsd(out) * usdToEur | currency:'EUR' }}</span>
+            <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerWeekUsd(out) * usdToChf | currency:'CHF' }}</span>
+              <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerWeekUsd(out) * usdToGbp | currency:'GBP' }}</span>
+              </span></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm bg-light margin-col">
+      <h2>Month <span class="badge badge-pill badge-info">{{out.dfiPerMonth | number: '1.2-2' }} DFI -
+        <span *ngIf="fiat === 'USD'"> {{getOutcomeOfPoolPerMonthUsd(out) | currency:'USD' }}</span>
+          <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR' }}</span>
+            <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF' }}</span>
+              <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToGbp | currency:'GBP' }}</span>
+        </span></h2>
+    </div>
+    <div class="col-sm bg-light margin-col">
+      <h2>Year <span class="badge badge-pill badge-info">{{out.dfiPerYear | number: '1.2-2' }} DFI -
+        <span *ngIf="fiat === 'USD'">  {{getOutcomeOfPoolPerYearUsd(out) | currency:'USD' }}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToEur | currency:'EUR' }}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToChf | currency:'CHF' }}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToGbp | currency:'GBP' }}</span>
+        </span></h2>
+    </div>
+  </div>

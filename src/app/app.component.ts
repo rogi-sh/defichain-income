@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;
+  usdToGbp = 0.72;
   fiat = 'USD';
   fiatKey = 'fiatKey';
 
