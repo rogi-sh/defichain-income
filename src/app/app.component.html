@@ -347,6 +347,12 @@
 
       <div *ngIf="btc > 0 || eth > 0 " class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
+        <h3><span class="badge badge-pill badge-success left">
+          {{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC
+            / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH
+           / {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC
+           / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT
+        </span></h3>
         <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
           ETH - USDT {{usdt}} - LTC {{ltc}} - {{getDfiCountInLM()}} DFI </span></p>
         <app-earning [out]="poolOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>

@@ -503,4 +503,24 @@ export class AppComponent implements OnInit {
     return this.poolOut.dfiPerYear /(this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
   }
 
+  getAllPoolDfIncome(): number {
+    return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay;
+  }
+
+  getAnteilBTCPoolAnGesamtLM(): number {
+    return this.poolBtcOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilETHPoolAnGesamtLM(): number {
+    return this.poolEthOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilLTCPoolAnGesamtLM(): number {
+    return this.poolLtcOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilUSDTPoolAnGesamtLM(): number {
+    return this.poolUsdtOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
 }
