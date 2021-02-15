@@ -188,6 +188,9 @@
   <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">Your value</span></h1>
+      <h3><span class="badge badge-pill badge-success left">{{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
+        - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
+        - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h3>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
         <button (click)="onChangeFiat('USD')" type="button" class="btn small btn-secondary">USD</button>
         <button (click)="onChangeFiat('EUR')" type="button" class="btn small btn-secondary">EUR</button>
@@ -260,6 +263,8 @@
       <div class="row">
         <div class="col-auto bg-light margin-col">
           <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
+          <h3><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
+            / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h3>
           <p>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="btc > 0">{{btc}} BTC</span> <span *ngIf="eth > 0"> - {{eth}}
             ETH</span> <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span *ngIf="ltc > 0">- LTC {{ltc}}</span>  - {{getDfiCountIncome()}} DFI </span></p>
           <p>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
@@ -336,7 +341,7 @@
     <div class="row">
       <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
-        <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI </span></p>
+        <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI - {{getDF}} </span></p>
         <app-earning [out]="stakingOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
       </div>
 

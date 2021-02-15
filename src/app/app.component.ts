@@ -386,6 +386,7 @@ export class AppComponent implements OnInit {
     return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd() + this.getDfiValueUsd();
   }
 
+
   getBtcValueUsd(): number {
     return this.btc * this.poolBtc?.priceA;
   }
@@ -408,6 +409,34 @@ export class AppComponent implements OnInit {
 
   getDfiCountIncome(): number {
     return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool + this.dfiInStaking;
+  }
+
+  getDfiCountLM(): number {
+    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool;
+  }
+
+  getDfiCountLMUsd(): number {
+    return this.getDfiCountLM() * this.poolBtc?.priceB;
+  }
+
+  getDfiCountWalletUsd(): number {
+    return this.dfiInWallet * this.poolBtc?.priceB;
+  }
+
+  getAnteilWalletOfAllValue(): number {
+    return this.getDfiCountWalletUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getAnteilLMOfAllValue(): number {
+    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd()) / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getAnteilStakingOfAllValue(): number {
+    return this.getStakingValueUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getStakingValueUsd(): number {
+    return this.dfiInStaking *  this.poolBtc?.priceB;
   }
 
   getDfiCountInLM(): number {
@@ -464,6 +493,14 @@ export class AppComponent implements OnInit {
 
   getDfiIncomeValuePerYearUsd(): number {
     return this.getDfiIncomePerYear() * this.poolBtc?.priceB;
+  }
+
+  getAnteilStakingOfIncome(): number {
+     return this.stakingOut.dfiPerYear /(this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
+  }
+
+  getAnteilLMOfIncome(): number {
+    return this.poolOut.dfiPerYear /(this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
   }
 
 }
