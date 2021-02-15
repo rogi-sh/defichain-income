@@ -28,7 +28,9 @@ export class AppComponent implements OnInit {
   usdToChf = 0.89;
   usdToGbp = 0.72;
   fiat = 'USD';
+  details = 'Staking';
   fiatKey = 'fiatKey';
+  detailsKey = 'detailsKey';
 
   // User Infos
   // BTC Pool
@@ -88,6 +90,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
+    }
+    if (localStorage.getItem(this.detailsKey) !== null) {
+      this.details = localStorage.getItem(this.detailsKey);
     }
     this.loadLocalStorage();
     this.loadDex();
@@ -381,6 +386,11 @@ export class AppComponent implements OnInit {
   onChangeFiat(newValue: string): void {
     this.fiat = newValue;
     localStorage.setItem(this.fiatKey, newValue);
+  }
+
+  onChangeDetails(newValue: string): void {
+    this.details = newValue;
+    localStorage.setItem(this.detailsKey, newValue);
   }
 
   getAllValuesUsdPrice(): number {

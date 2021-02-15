@@ -75,8 +75,6 @@
             <div class="col-auto margin-col">
               APY BTC Pool <span class="badge badge-pill badge-dark">{{poolBtc?.apy | number: '1.2-2' }}%</span>
             </div>
-          </div>
-          <div class="row">
             <div class="col-auto margin-col">
               APY ETH Pool <span class="badge badge-pill badge-dark">{{poolEth?.apy | number: '1.2-2' }}%</span>
             </div>
@@ -85,8 +83,6 @@
             <div class="col-auto margin-col">
               APY USDT Pool <span class="badge badge-pill badge-dark">{{poolUsdt?.apy | number: '1.2-2' }}%</span>
             </div>
-          </div>
-          <div class="row">
             <div class="col-auto margin-col">
               APY LTC Pool <span class="badge badge-pill badge-dark">{{poolLtc?.apy | number: '1.2-2' }}%</span>
             </div>
@@ -109,7 +105,7 @@
         <small class="form-text text-muted">Add your wallet DFI amount.</small>
         <small class="form-text text-muted">If you not have DF in wallet set 0.</small>
       </div>
-     <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
+      <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
@@ -198,11 +194,12 @@
       <h2><span class="badge badge-pill badge-success left">{{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h2>
+      <p>Choose your currency</p>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button (click)="onChangeFiat('USD')" type="button" class="btn small btn-secondary">USD</button>
-        <button (click)="onChangeFiat('EUR')" type="button" class="btn small btn-secondary">EUR</button>
-        <button (click)="onChangeFiat('CHF')" type="button" class="btn small btn-secondary">CHF</button>
-        <button (click)="onChangeFiat('GBP')" type="button" class="btn small btn-secondary">GBP</button>
+        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col small btn-secondary">USD</button>
+        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col small btn-secondary">EUR</button>
+        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col small btn-secondary">CHF</button>
+        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col small btn-secondary">GBP</button>
       </div>
       <div class="row">
         <div class="col-auto bg-light margin-col">
@@ -373,8 +370,14 @@
     </div>
   </div>
 
+  <h1><span class="badge badge-secondary left">Details</span></h1>
+  <p> Click on the button for more details on</p>
+  <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+    <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col small btn-secondary">Staking</button>
+    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col small btn-secondary">LiquidityMining</button>
+  </div>
 
-  <div class="container left">
+  <div *ngIf="details === 'Staking'" class="container">
     <div class="row">
       <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
@@ -388,14 +391,17 @@
         <app-earning [out]="stakingOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-
+    </div>
+  </div>
+  <div *ngIf="details === 'LM'" class="container left">
+    <div class="row">
       <div *ngIf="btc > 0 || eth > 0 " class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
         <h3><span class="badge badge-pill badge-success left">
-          {{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC
-            / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH
-           / {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC
-           / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT
+          <span *ngIf="btc > 0">{{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC</span>
+           <span *ngIf="eth > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
+           <span *ngIf="ltc > 0">/ {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC</span>
+          <span *ngIf="usdt > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
         </span></h3>
         <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
           ETH <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
@@ -413,7 +419,7 @@
 
     </div>
   </div>
-  <div class="container left">
+  <div *ngIf="details === 'LM'" class="container left">
     <h1><span class="badge badge-secondary left">Your pools</span></h1>
     <div class="row">
       <div *ngIf="btc > 0 || dfiInBtcPool > 0" class="col-sm bg-light margin-col">
@@ -435,7 +441,7 @@
 
       </div>
       <div *ngIf=" usdt > 0 || dfiInUsdtPool > 0" class="col-sm bg-light margin-col">
-        <h3> <span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span></h3>
+        <h3><span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></h3>
 
         <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
