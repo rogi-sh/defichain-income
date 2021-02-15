@@ -341,7 +341,12 @@
     <div class="row">
       <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
-        <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI - {{getDF}} </span></p>
+        <p>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI  </span></p>
+        <p>Balance in Fiat<span class="badge badge-pill badge-primary left">
+          <span *ngIf="fiat === 'USD'" >{{getDfiCountStakingUsd() | currency:'USD'}} </span>
+          <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingUsd() * usdToEur | currency:'EUR'}}</span>
+          <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingUsd() * usdToChf | currency:'CHF'}}</span>
+        </span></p>
         <app-earning [out]="stakingOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
       </div>
 
@@ -354,7 +359,12 @@
            / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT
         </span></h3>
         <p>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
-          ETH - USDT {{usdt}} - LTC {{ltc}} - {{getDfiCountInLM()}} DFI </span></p>
+          ETH <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span *ngIf="ltc > 0">- LTC {{ltc}}</span> - {{getDfiCountInLM()}} DFI </span></p>
+        <p>Balance in Fiat<span class="badge badge-pill badge-primary left">
+          <span *ngIf="fiat === 'USD'" >{{getLMUsd() | currency:'USD'}} </span>
+          <span *ngIf="fiat === 'EUR'">{{getLMUsd() * usdToEur | currency:'EUR'}}</span>
+          <span *ngIf="fiat === 'CHF'">{{getLMUsd() * usdToChf | currency:'CHF'}}</span>
+        </span></p>
         <app-earning [out]="poolOut" [pool]="poolBtc" [usdToEur]="usdToEur" [usdToChf]="usdToChf"></app-earning>
       </div>
 
