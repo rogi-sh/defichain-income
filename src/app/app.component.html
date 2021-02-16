@@ -95,6 +95,7 @@
 
 <div class="container left">
   <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
+  <h3>If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input field.</h3>
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
@@ -103,7 +104,6 @@
         <input required [(ngModel)]="dfiInWallet" (ngModelChange)="onChangeDfiWallet($event)" type="number"
                class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
         <small class="form-text text-muted">Add your wallet DFI amount.</small>
-        <small class="form-text text-muted">If you not have DF in wallet set 0.</small>
       </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
@@ -111,7 +111,6 @@
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
                class="form-control form-control-sm" id="inputDFIStaking" placeholder="Enter dfi amount">
         <small class="form-text text-muted">Add your stake DFI amount.</small>
-        <small class="form-text text-muted">If you not stake set 0.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -121,64 +120,56 @@
           <span class="badge badge-pill badge-primary left">BTC Pool</span>
           <div class="form-group">
             <label for="inputBTCBTCPool">BTC</label>
-            <input required [(ngModel)]="btc" (ngModelChange)="onChangeBtcBtcPool($event)" type="number"
+            <input required [(ngModel)]="btc" (ngModelChange)="onChangeBtcBtcPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
             <small class="form-text text-muted">Add your btc pool BTC amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIBTCPool">DFI</label>
-            <input required [(ngModel)]="dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool($event)" type="number"
+            <input required [(ngModel)]="dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your btc pool DFI amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">ETH Pool</span>
           <div class="form-group">
             <label for="inputETHETHPool">ETH</label>
-            <input required [(ngModel)]="eth" (ngModelChange)="onChangeEthEthPool($event)" type="number"
+            <input required [(ngModel)]="eth" (ngModelChange)="onChangeEthEthPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
             <small class="form-text text-muted">Add your eth pool ETH amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIETHPool">DFI</label>
-            <input required [(ngModel)]="dfiInEthPool" (ngModelChange)="onChangeDfiEthPool($event)" type="number"
+            <input required [(ngModel)]="dfiInEthPool" (ngModelChange)="onChangeDfiEthPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your eth pool DFI amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">USDT Pool</span>
           <div class="form-group">
             <label for="inputUSDTUSDTPool">USDT</label>
-            <input required [(ngModel)]="usdt" (ngModelChange)="onChangeUsdtUsdtPool($event)" type="number"
+            <input required [(ngModel)]="usdt" (ngModelChange)="onChangeUsdtUsdtPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
             <small class="form-text text-muted">Add your usdt pool USDT amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFIUSDTPool">DFI</label>
-            <input required [(ngModel)]="dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool($event)" type="number"
+            <input required [(ngModel)]="dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your usdt pool DFI amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">LTC Pool</span>
           <div class="form-group">
             <label for="inputLTCLTCPool">LTC</label>
-            <input required [(ngModel)]="ltc" (ngModelChange)="onChangeLtcLtcPool($event)" type="number"
+            <input required [(ngModel)]="ltc" (ngModelChange)="onChangeLtcLtcPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputLTCLTCPool" placeholder="Enter usdt amount">
             <small class="form-text text-muted">Add your ltc pool LTC amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
 
             <label for="inputDFILTCPool">DFI</label>
-            <input required [(ngModel)]="dfiInLtcPool" (ngModelChange)="onChangeDfiLtcPool($event)" type="number"
+            <input required [(ngModel)]="dfiInLtcPool" (ngModelChange)="onChangeDfiLtcPool($event)" type="number" step=0.001
                    class="form-control form-control-sm" id="inputDFILTCPool" placeholder="Enter dfi amount">
             <small class="form-text text-muted">Add your ltc pool DFI amount.</small>
-            <small class="form-text text-muted">If you not in this pool set 0.</small>
           </div>
         </div>
       </div>
@@ -206,9 +197,9 @@
           <h2><span
             class="badge badge-pill badge-success left">
             <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
-            <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR'}}</span>
-            <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF'}}</span>
-            <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToChf | currency:'GBP'}}</span>
+            <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
+            <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
+            <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToChf | currency:'GBP' }}</span>
       </span>
           </h2>
 
@@ -464,8 +455,77 @@
         <app-earning [out]="poolOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-
-
+      <div class="col-sm bg-light margin-col">
+        <h2><span
+          class="badge badge-pill badge-success left">Calculate how much you have to invest in LM to get your target return</span>
+        </h2>
+        <p>Based on 50/50 Split for pairs - actual pool {{poolLmCalculationTargetReturn}}</p>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <button (click)="onChangeLmCalculationTargetPool('BTC')" type="button" class="btn margin-col small btn-danger">BTC</button>
+          <button (click)="onChangeLmCalculationTargetPool('ETH')" type="button" class="btn margin-col small btn-danger">ETH</button>
+          <button (click)="onChangeLmCalculationTargetPool('LTC')" type="button" class="btn margin-col small btn-danger">LTC</button>
+          <button (click)="onChangeLmCalculationTargetPool('USDT')" type="button" class="btn margin-col small btn-danger">USDT</button>
+        </div>
+        <div class="row">
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnMinBtcPool">DFI per Min</label>
+              <input required [(ngModel)]="aimReturnMinPool" (ngModelChange)="onChangeAimReturnMinPool($event)"
+                     type="number"
+                     class="form-control form-control-sm" id="aimReturnMinBtcPool" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your target DFI reward per min.</small>
+            </div>
+            <h3><span class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMinPool | number: '1.4-4' }}
+              share = {{dfiNeededForAimReturnMinPool | number: '1.2-2' }}
+              DFI / {{btcNeededForAimReturnMinPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
+              </span></h3>
+          </div>
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnDayBtcPool">DFI per Day</label>
+              <input required [(ngModel)]="aimReturnDayPool" (ngModelChange)="onChangeAimReturnDayPool($event)"
+                     type="number"
+                     class="form-control form-control-sm" id="aimReturnDayBtcPool" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your target DFI reward per day.</small>
+            </div>
+            <h3><span
+              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnDayPool | number: '1.4-4' }}
+              share = {{dfiNeededForAimReturnDayPool | number: '1.2-2' }}
+              DFI / {{btcNeededForAimReturnDayPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
+              </span></h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnHourBtcPool">DFI per Hour</label>
+              <input required [(ngModel)]="aimReturnHourPool" (ngModelChange)="onChangeAimReturnHourPool($event)"
+                     type="number"
+                     class="form-control form-control-sm" id="aimReturnHourBtcPool" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your target DFI reward per hour.</small>
+            </div>
+            <h3><span
+              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnHourPool | number: '1.4-4' }}
+              share = {{dfiNeededForAimReturnHourPool | number: '1.2-2' }}
+              DFI / {{btcNeededForAimReturnHourPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
+              </span></h3>
+          </div>
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnDayBtcPool">DFI per Month</label>
+              <input required [(ngModel)]="aimReturnMonthPool" (ngModelChange)="onChangeAimReturnMonthPool($event)"
+                     type="number"
+                     class="form-control form-control-sm" id="aimReturnMonthPool" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your target DFI reward per month.</small>
+            </div>
+            <h3><span
+              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMonthPool | number: '1.4-4' }}
+              share = {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }}
+              DFI / {{btcNeededForAimReturnMonthPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
+              </span></h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="details === 'LM'" class="container left">

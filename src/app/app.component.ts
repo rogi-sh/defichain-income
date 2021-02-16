@@ -62,6 +62,8 @@ export class AppComponent implements OnInit {
   dfiInStaking = 11050;
   stakingApy = 37;
 
+
+  // staking target return
   stakingNeededForAimReturnMin = 0;
   aimReturnMin = 0;
 
@@ -73,6 +75,32 @@ export class AppComponent implements OnInit {
 
   stakingNeededForAimReturnMonth = 0;
   aimReturnMonth = 0;
+
+  // lm  pool target return
+  poolLmCalculationTargetReturn = 'BTC';
+  dfiNeededForAimReturnMinPool = 0;
+  btcNeededForAimReturnMinPool = 0;
+  anteilNeededForAimReturnMinPool = 0;
+  aimReturnMinPool = 0;
+  targetReturnLMMin = 0;
+
+  dfiNeededForAimReturnHourPool = 0;
+  btcNeededForAimReturnHourPool = 0;
+  anteilNeededForAimReturnHourPool = 0;
+  aimReturnHourPool = 0;
+  targetReturnLMHour = 0;
+
+  dfiNeededForAimReturnDayPool = 0;
+  btcNeededForAimReturnDayPool = 0;
+  anteilNeededForAimReturnDayPool = 0;
+  aimReturnDayPool = 0;
+  targetReturnLMDay = 0;
+
+  dfiNeededForAimReturnMonthPool = 0;
+  btcNeededForAimReturnMonthPool = 0;
+  anteilNeededForAimReturnMonthPool = 0;
+  aimReturnMonthPool = 0;
+  targetReturnLMMonth = 0;
 
   // Wallet
   dfiInWallet = 0;
@@ -316,33 +344,87 @@ export class AppComponent implements OnInit {
     this.stakingNeededForAimReturnMonth = newValue / apyPermonth * (100 + apyPermonth) * (1 / (1 + apyPermonth / 100)) / 100;
   }
 
+  onChangeAimReturnMinPool(newValue): void {
+    const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
+    this.targetReturnLMMin = newValue;
+    this.anteilNeededForAimReturnMinPool = newValue * 100 / this.getDfiPerMin(dfiPerBlock);
+    this.dfiNeededForAimReturnMinPool = +pool.reserveB * this.anteilNeededForAimReturnMinPool / 100;
+    this.btcNeededForAimReturnMinPool = +pool.reserveA * this.anteilNeededForAimReturnMinPool / 100;
+  }
+
+
+
+  onChangeAimReturnHourPool(newValue): void {
+    const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
+    this.targetReturnLMHour = newValue;
+    this.anteilNeededForAimReturnHourPool = newValue * 100 / this.getDfiPerMin(dfiPerBlock);
+    this.dfiNeededForAimReturnHourPool = +pool.reserveB * this.anteilNeededForAimReturnHourPool / 100;
+    this.btcNeededForAimReturnHourPool = +pool.reserveA * this.anteilNeededForAimReturnHourPool / 100;
+  }
+
+  onChangeAimReturnDayPool(newValue): void {
+    const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
+    this.targetReturnLMDay = newValue;
+    this.anteilNeededForAimReturnDayPool = newValue / 60 / 24  * 100 / this.getDfiPerMin(dfiPerBlock);
+    this.dfiNeededForAimReturnDayPool = +pool.reserveB * this.anteilNeededForAimReturnDayPool / 100;
+    this.btcNeededForAimReturnDayPool = +pool.reserveA * this.anteilNeededForAimReturnDayPool / 100;
+  }
+
+  onChangeAimReturnMonthPool(newValue): void {
+    const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
+    this.targetReturnLMMonth = newValue;
+    this.anteilNeededForAimReturnMonthPool = newValue / 60 / 24 / 30  * 100 / this.getDfiPerMin(dfiPerBlock);
+    this.dfiNeededForAimReturnMonthPool = +pool.reserveB * this.anteilNeededForAimReturnMonthPool / 100;
+    this.btcNeededForAimReturnMonthPool = +pool.reserveA * this.anteilNeededForAimReturnMonthPool / 100;
+  }
+
+  private getCorrectPoolAndReward(): any {
+    let pool = null;
+    let dfiPerBlock = null;
+    if (this.poolLmCalculationTargetReturn === 'BTC') {
+      pool = this.poolBtc;
+      dfiPerBlock = this.dfiProBlockBtc;
+    } else if (this.poolLmCalculationTargetReturn === 'ETH') {
+      pool = this.poolEth;
+      dfiPerBlock = this.dfiProBlockEth;
+    } else if (this.poolLmCalculationTargetReturn === 'LTC') {
+      pool = this.poolLtc;
+      dfiPerBlock = this.dfiProBlockLtc;
+    } else {
+      pool = this.poolUsdt;
+      dfiPerBlock = this.dfiProBlockUsdt;
+
+    }
+    return {pool, dfiPerBlock};
+  }
+
   onChangeBtcBtcPool(newValue): void {
-    this.btc = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.btcInBtcPoolKey, newValue !== null ? newValue : 0);
+    this.btc = newValue;
+    localStorage.setItem(this.btcInBtcPoolKey, newValue);
     this.berechnePoolOutBtc();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeEthEthPool(newValue): void {
-    this.eth = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.ethInEthPoolKey, newValue !== null ? newValue : 0);
+    this.eth = newValue;
+    localStorage.setItem(this.ethInEthPoolKey, newValue);
     this.berechnePoolOutEth();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeUsdtUsdtPool(newValue): void {
-    this.usdt = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.usdtInUsdtPoolKey, newValue !== null ? newValue : 0);
+    this.usdt = newValue;
+    localStorage.setItem(this.usdtInUsdtPoolKey, newValue);
     this.berechnePoolOutUsdt();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeLtcLtcPool(newValue): void {
-    this.ltc = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.ltcInLtcPoolKey, newValue !== null ? newValue : 0);
+    this.ltc = newValue;
+    localStorage.setItem(this.ltcInLtcPoolKey, newValue);
     this.berechnePoolOutLtc();
     this.berechnePoolOut();
     this.buildDataForChart();
@@ -350,32 +432,32 @@ export class AppComponent implements OnInit {
 
   // DFI in POOLS
   onChangeDfiBtcPool(newValue): void {
-    this.dfiInBtcPool = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInBtcPoolKey, newValue !== null ? newValue : 0);
+    this.dfiInBtcPool = newValue;
+    localStorage.setItem(this.dfiInBtcPoolKey, newValue);
     this.berechnePoolOutBtc();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeDfiEthPool(newValue): void {
-    this.dfiInEthPool = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInEthPoolKey, newValue !== null ? newValue : 0);
+    this.dfiInEthPool = newValue;
+    localStorage.setItem(this.dfiInEthPoolKey, newValue);
     this.berechnePoolOutEth();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeDfiUsdtPool(newValue): void {
-    this.dfiInUsdtPool = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInUsdtPoolKey, newValue !== null ? newValue : 0);
+    this.dfiInUsdtPool = newValue;
+    localStorage.setItem(this.dfiInUsdtPoolKey, newValue);
     this.berechnePoolOutUsdt();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeDfiLtcPool(newValue): void {
-    this.dfiInLtcPool = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInLtcPoolKey, newValue !== null ? newValue : 0);
+    this.dfiInLtcPool = newValue;
+    localStorage.setItem(this.dfiInLtcPoolKey, newValue);
     this.berechnePoolOutLtc();
     this.berechnePoolOut();
     this.buildDataForChart();
@@ -458,6 +540,14 @@ export class AppComponent implements OnInit {
   onChangeFiat(newValue: string): void {
     this.fiat = newValue;
     localStorage.setItem(this.fiatKey, newValue);
+  }
+
+  onChangeLmCalculationTargetPool(newValue: string): void {
+    this.poolLmCalculationTargetReturn = newValue;
+    this.onChangeAimReturnMinPool(this.targetReturnLMMin);
+    this.onChangeAimReturnHourPool(this.targetReturnLMHour);
+    this.onChangeAimReturnDayPool(this.targetReturnLMDay);
+    this.onChangeAimReturnMonthPool(this.targetReturnLMMonth);
   }
 
   onChangeDetails(newValue: string): void {
