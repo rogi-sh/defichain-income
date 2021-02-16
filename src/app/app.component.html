@@ -196,10 +196,10 @@
         - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h2>
       <small class="form-text text-muted">Choose your currency</small>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-secondary">USD</button>
-        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-secondary">EUR</button>
-        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-secondary">CHF</button>
-        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-secondary">GBP</button>
+        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-danger">USD</button>
+        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-danger">EUR</button>
+        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
+        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
       </div>
       <div class="row">
         <div class="col-auto bg-light margin-col">
@@ -373,8 +373,8 @@
   <h1><span class="badge badge-secondary left">Details</span></h1>
   <small class="form-text text-muted">Click for more details</small>
   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-    <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-secondary">Staking</button>
-    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-secondary">LiquidityMining</button>
+    <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-danger">Staking</button>
+    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-danger">LiquidityMining</button>
   </div>
 
   <div *ngIf="details === 'Staking'" class="container">

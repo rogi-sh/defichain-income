@@ -38,16 +38,19 @@ export class AppComponent implements OnInit {
   btc = 2.17;
   dfiInBtcPoolKey = 'dfiInBtcPoolKey';
   dfiInBtcPool = 28282.49;
+
   // ETH Pool
   ethInEthPoolKey = 'ethInEthPoolKey';
   eth = 14.34;
   dfiInEthPool = 7070.63;
   dfiInEthPoolKey = 'dfiInEthPoolKey';
+
   // USDT Pool
   usdtInUsdtPoolKey = 'usdtInUsdtPoolKey';
   usdt = 3000;
   dfiInUsdtPool = 1000;
   dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
+
   // LTC Pool
   ltcInLtcPoolKey = 'ltcInLtcPoolKey';
   ltc = 10;
@@ -103,6 +106,7 @@ export class AppComponent implements OnInit {
     this.loadDex();
     setInterval(() => {
       console.log('Refresh ...');
+      this.loadLocalStorage();
       this.loadDex();
     }, 60000);
   }
@@ -208,54 +212,80 @@ export class AppComponent implements OnInit {
     this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking;
   }
 
+  isLocalStorageNotEmpty(key: string): boolean {
+    return localStorage.getItem(key) !== 'null';
+  }
+
   loadLocalStorage(): void {
     // Staking
-    if (localStorage.getItem(this.dfiInStakingKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
       this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
+    } else {
+      this.dfiInStaking = 0;
     }
     // BTC POOL
-    if (localStorage.getItem(this.btcInBtcPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.btcInBtcPoolKey)) {
       this.btc = +localStorage.getItem(this.btcInBtcPoolKey);
+    } else {
+      this.btc = 0;
     }
-    if (localStorage.getItem(this.dfiInBtcPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInBtcPoolKey)) {
       this.dfiInBtcPool = +localStorage.getItem(this.dfiInBtcPoolKey);
+    } else {
+      this.dfiInBtcPool = 0;
     }
     // ETH POOL
-    if (localStorage.getItem(this.ethInEthPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.ethInEthPoolKey)) {
       this.eth = +localStorage.getItem(this.ethInEthPoolKey);
+    } else {
+      this.eth = 0;
     }
-    if (localStorage.getItem(this.dfiInEthPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInEthPoolKey)) {
       this.dfiInEthPool = +localStorage.getItem(this.dfiInEthPoolKey);
+    } else {
+      this.dfiInEthPool = 0;
     }
     // USDT POOL
-    if (localStorage.getItem(this.usdtInUsdtPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.usdtInUsdtPoolKey)) {
       this.usdt = +localStorage.getItem(this.usdtInUsdtPoolKey);
+    } else {
+      this.usdt = 0;
     }
-    if (localStorage.getItem(this.dfiInUsdtPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInUsdtPoolKey)) {
       this.dfiInUsdtPool = +localStorage.getItem(this.dfiInUsdtPoolKey);
+    } else {
+      this.dfiInUsdtPool = 0;
     }
     // LTC POOL
-    if (localStorage.getItem(this.ltcInLtcPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.ltcInLtcPoolKey)) {
       this.ltc = +localStorage.getItem(this.ltcInLtcPoolKey);
+    } else {
+      this.ltc = 0;
     }
-    if (localStorage.getItem(this.dfiInLtcPoolKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInLtcPoolKey)) {
       this.dfiInLtcPool = +localStorage.getItem(this.dfiInLtcPoolKey);
+    } else {
+      this.dfiInLtcPool = 0;
     }
     // WALLET
-    if (localStorage.getItem(this.dfiInWalletKey) !== null) {
+    if (this.isLocalStorageNotEmpty(this.dfiInWalletKey)) {
       this.dfiInWallet = +localStorage.getItem(this.dfiInWalletKey);
+    } else {
+      this.dfiInWallet = 0;
     }
 
   }
 
   onChangeDfiStaking(newValue): void {
-    localStorage.setItem(this.dfiInStakingKey, newValue);
+    this.dfiInStaking = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInStakingKey, newValue !== null ? newValue : 0);
     this.berechneStakingOut();
     this.buildDataForChart();
   }
 
   onChangeDfiWallet(newValue): void {
-    localStorage.setItem(this.dfiInWalletKey, newValue);
+    this.dfiInWallet = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInWalletKey, newValue !== null ? newValue : 0);
     this.buildDataForChart();
   }
 
@@ -270,56 +300,65 @@ export class AppComponent implements OnInit {
   }
 
   onChangeBtcBtcPool(newValue): void {
-    localStorage.setItem(this.btcInBtcPoolKey, newValue);
-    this.berechnePoolOutBtc();
-    this.berechnePoolOut();
-    this.buildDataForChart();
-  }
-
-  onChangeDfiBtcPool(newValue): void {
-    localStorage.setItem(this.dfiInBtcPoolKey, newValue);
+    this.btc = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.btcInBtcPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutBtc();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeEthEthPool(newValue): void {
-    localStorage.setItem(this.ethInEthPoolKey, newValue);
+    this.eth = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.ethInEthPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutEth();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeUsdtUsdtPool(newValue): void {
-    localStorage.setItem(this.usdtInUsdtPoolKey, newValue);
+    this.usdt = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.usdtInUsdtPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutUsdt();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeLtcLtcPool(newValue): void {
-    localStorage.setItem(this.ltcInLtcPoolKey, newValue);
+    this.ltc = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.ltcInLtcPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutLtc();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
+  // DFI in POOLS
+  onChangeDfiBtcPool(newValue): void {
+    this.dfiInBtcPool = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInBtcPoolKey, newValue !== null ? newValue : 0);
+    this.berechnePoolOutBtc();
+    this.berechnePoolOut();
+    this.buildDataForChart();
+  }
+
   onChangeDfiEthPool(newValue): void {
-    localStorage.setItem(this.dfiInEthPoolKey, newValue);
+    this.dfiInEthPool = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInEthPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutEth();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeDfiUsdtPool(newValue): void {
-    localStorage.setItem(this.dfiInUsdtPoolKey, newValue);
+    this.dfiInUsdtPool = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInUsdtPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutUsdt();
     this.berechnePoolOut();
     this.buildDataForChart();
   }
 
   onChangeDfiLtcPool(newValue): void {
-    localStorage.setItem(this.dfiInLtcPoolKey, newValue);
+    this.dfiInLtcPool = newValue !== null ? newValue : 0;
+    localStorage.setItem(this.dfiInLtcPoolKey, newValue !== null ? newValue : 0);
     this.berechnePoolOutLtc();
     this.berechnePoolOut();
     this.buildDataForChart();
