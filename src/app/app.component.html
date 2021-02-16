@@ -391,11 +391,32 @@
         <app-earning [out]="stakingOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-      <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
+      <div class="col-sm bg-light margin-col">
         <h2><span
           class="badge badge-pill badge-success left">Calculate how much you have to stake to get your target return</span>
         </h2>
         <div class="row">
+          <div class="col-sm bg-light margin-col">
+            <div class="form-group">
+              <label for="aimReturnMin">DFI per Min</label>
+              <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)" type="number"
+                     class="form-control form-control-sm" id="aimReturnMin" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your aim DFI reward per min.</small>
+            </div>
+            <h2><span
+              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnMin | number: '1.0-0' }}
+              DFI</span></h2>
+
+            <div class="form-group">
+              <label for="aimReturnHour">DFI per Hour</label>
+              <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)" type="number"
+                     class="form-control form-control-sm" id="aimReturnHour" placeholder="Enter dfi amount">
+              <small class="form-text text-muted">Add your aim DFI reward per hour.</small>
+            </div>
+            <h2><span
+              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnHour | number: '1.0-0' }}
+              DFI</span></h2>
+          </div>
           <div class="col-sm bg-light margin-col">
             <div class="form-group">
               <label for="aimReturn">DFI per Day</label>
@@ -406,8 +427,6 @@
             <h2><span
               class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnDay | number: '1.0-0' }}
               DFI</span></h2>
-          </div>
-          <div class="col-sm bg-light margin-col">
             <div class="form-group">
               <label for="aimReturnMonth">DFI per Month</label>
               <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
