@@ -199,7 +199,7 @@
             <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
             <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
             <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
-            <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToChf | currency:'GBP' }}</span>
+            <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
       </span>
           </h2>
 
