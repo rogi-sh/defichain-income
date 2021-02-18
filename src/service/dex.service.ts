@@ -17,4 +17,8 @@ export class Dex {
   public getPoolDetail(id: string) {
     return this.http.get<Pool>(environment.poolDetails + id);
   }
+
+  public getAdressDetail(adress: string) {
+    return this.http.get<[string]>(environment.accountDetails + adress);
+  }
 }

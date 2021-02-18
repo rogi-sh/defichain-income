@@ -14,3 +14,18 @@ export type ChartOptions = {
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
 };
+
+export class Wallet {
+  dfi = 0;
+  btc = 0;
+  eth = 0;
+  ltc =  0;
+  doge = 0;
+  usdt = 0;
+  btcdfi = 0;
+  ethdfi = 0;
+  ltcdfi = 0;
+  dogedfi = 0;
+  usdtdfi = 0;
+}
+

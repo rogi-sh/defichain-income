@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
 import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolUsdtOut} from '../interface/Dex';
-import {ChartOptions, Data} from '../interface/Data';
+import {ChartOptions, Data, Wallet} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
 
@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
 
   title = 'defichain-income';
   env = environment;
+
+  wallet: Wallet;
 
   // fixed variables
   dfiProBlockBtc = 80;
@@ -39,12 +41,14 @@ export class AppComponent implements OnInit {
   btc = 2.17;
   dfiInBtcPoolKey = 'dfiInBtcPoolKey';
   dfiInBtcPool = 28282.49;
+  btcOnDfiChain = 0;
 
   // ETH Pool
   ethInEthPoolKey = 'ethInEthPoolKey';
   eth = 14.34;
   dfiInEthPool = 7070.63;
   dfiInEthPoolKey = 'dfiInEthPoolKey';
+  ethOnDfiChain = 0;
 
   // USDT Pool
   usdtInUsdtPoolKey = 'usdtInUsdtPoolKey';
@@ -69,6 +73,9 @@ export class AppComponent implements OnInit {
   dfiInStaking = 11050;
   stakingApy = 37;
 
+  adresses = new Array<string>();
+  adress = '';
+  adressesKey = 'adressesKey';
 
   // staking target return
   stakingNeededForAimReturnMin = 0;
@@ -148,7 +155,11 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.detailsKey) !== null) {
       this.details = localStorage.getItem(this.detailsKey);
     }
+    if (localStorage.getItem(this.adressesKey) !== null) {
+      this.adresses = JSON.parse(localStorage.getItem(this.adressesKey));
+    }
     this.loadLocalStorage();
+    this.loadAllAccounts();
     this.berechneStakingOut();
     this.loadDex();
     setInterval(() => {
@@ -182,41 +193,114 @@ export class AppComponent implements OnInit {
       });
     this.dexService.getPoolDetail('5').subscribe(
       pool => {
-        this.poolBtc.totalLiquidityLpToken = pool.totalLiquidityLpToken;
+        this.poolBtc.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
       },
       err => {
         console.error(err);
       });
     this.dexService.getPoolDetail('4').subscribe(
       pool => {
-        this.poolEth.totalLiquidityLpToken = pool.totalLiquidityLpToken;
+        this.poolEth.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
       },
       err => {
         console.error(err);
       });
     this.dexService.getPoolDetail('6').subscribe(
       pool => {
-        this.poolUsdt.totalLiquidityLpToken = pool.totalLiquidityLpToken;
+        this.poolUsdt.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
       },
       err => {
         console.error(err);
       });
     this.dexService.getPoolDetail('10').subscribe(
       pool => {
-        this.poolLtc.totalLiquidityLpToken = pool.totalLiquidityLpToken;
+        this.poolLtc.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
       },
       err => {
         console.error(err);
       });
     this.dexService.getPoolDetail('8').subscribe(
       pool => {
-        this.poolDoge.totalLiquidityLpToken = pool.totalLiquidityLpToken;
+        this.poolDoge.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
 
       },
       err => {
         console.error(err);
       });
 
+  }
+
+  loadAllAccounts(): void {
+    this.wallet = new Wallet();
+    for (let ad of this.adresses) {
+      this.loadAccountDetails(ad);
+    }
+  }
+
+  loadAccountDetails(adress: string): void {
+    this.dexService.getAdressDetail(adress).subscribe(
+      balances => {
+        for (let b of balances) {
+          this.addToWallet(b);
+        }
+        console.log(balances);
+      },
+      err => {
+        console.error(err);
+      });
+  }
+
+  addToWallet(walletItem: string) {
+    const splitted = walletItem.split('@');
+    switch (splitted[1]) {
+      case 'DFI': {
+        this.wallet.dfi += +splitted[0];
+        break;
+      }
+      case 'BTC': {
+        this.wallet.btc += +splitted[0];
+        break;
+      }
+      case 'ETH': {
+        this.wallet.eth += +splitted[0];
+        break;
+      }
+      case 'LTC': {
+        this.wallet.ltc += +splitted[0];
+        break;
+      }
+      case 'DOGE': {
+        this.wallet.doge += +splitted[0];
+        break;
+      }
+      case 'USDT': {
+        this.wallet.usdt += +splitted[0];
+        break;
+      }
+      case 'BTC-DFI': {
+        this.wallet.btcdfi += +splitted[0];
+        break;
+      }
+      case 'ETH-DFI': {
+        this.wallet.ethdfi += +splitted[0];
+        break;
+      }
+      case 'LTC-DFI': {
+        this.wallet.ltcdfi += +splitted[0];
+        break;
+      }
+      case 'DOGE-DFI': {
+        this.wallet.dogedfi += +splitted[0];
+        break;
+      }
+      case 'USDT-DFI': {
+        this.wallet.usdtdfi += +splitted[0];
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   getPool(id: string): Pool {
@@ -810,6 +894,23 @@ export class AppComponent implements OnInit {
 
   getAnteilDogePoolAnGesamtLM(): number {
     return this.poolDogeOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  addAdress(): void {
+    this.adresses.push(this.adress);
+    localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+    this.adress = '';
+    this.loadAllAccounts();
+  }
+
+  deleteAdress(adress: string): void {
+    const index = this.adresses.indexOf(adress, 0);
+    if (index > -1) {
+      this.adresses.splice(index, 1);
+      localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+      this.loadAllAccounts();
+    }
+
   }
 
 }
