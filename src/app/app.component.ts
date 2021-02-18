@@ -4,6 +4,7 @@ import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolDogeOut, PoolEth
 import {ChartOptions, Data, Wallet} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -38,39 +39,39 @@ export class AppComponent implements OnInit {
   // User Infos
   // BTC Pool
   btcInBtcPoolKey = 'btcInBtcPoolKey';
-  btc = 2.17;
+  btc = 0;
   dfiInBtcPoolKey = 'dfiInBtcPoolKey';
-  dfiInBtcPool = 28282.49;
+  dfiInBtcPool = 0;
   btcOnDfiChain = 0;
 
   // ETH Pool
   ethInEthPoolKey = 'ethInEthPoolKey';
-  eth = 14.34;
-  dfiInEthPool = 7070.63;
+  eth = 0;
+  dfiInEthPool = 0;
   dfiInEthPoolKey = 'dfiInEthPoolKey';
   ethOnDfiChain = 0;
 
   // USDT Pool
   usdtInUsdtPoolKey = 'usdtInUsdtPoolKey';
-  usdt = 3000;
-  dfiInUsdtPool = 1000;
+  usdt = 0;
+  dfiInUsdtPool = 0;
   dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
 
   // LTC Pool
   ltcInLtcPoolKey = 'ltcInLtcPoolKey';
-  ltc = 10;
-  dfiInLtcPool = 1000;
+  ltc = 0;
+  dfiInLtcPool = 0;
   dfiInLtcPoolKey = 'dfiInLtcPoolKey';
 
   // DOGE Pool
   dogeInDogePoolKey = 'dogeInDogePoolKey';
-  doge = 10;
-  dfiInDogePool = 1000;
+  doge = 0;
+  dfiInDogePool = 0;
   dfiInDogePoolKey = 'dfiInDogePoolKey';
 
   // Staking infos
   dfiInStakingKey = 'dfiInStaking';
-  dfiInStaking = 11050;
+  dfiInStaking = 0;
   stakingApy = 37;
 
   adresses = new Array<string>();
@@ -160,73 +161,53 @@ export class AppComponent implements OnInit {
     }
     this.loadLocalStorage();
     this.loadAllAccounts();
-    this.berechneStakingOut();
     this.loadDex();
     setInterval(() => {
       console.log('Refresh ...');
       this.loadLocalStorage();
+      this.loadAllAccounts();
       this.loadDex();
-    }, 6000);
+    }, 60000);
   }
 
   loadDex(): void {
 
-    this.dexService.getDex().subscribe(
-      dex => {
-        this.dex = dex;
-        this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
-        this.poolEth = dex.pools.find(x => x.poolPairId === '4');
-        this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
-        this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
-        this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
-        this.berechnePoolOutBtc();
-        this.berechnePoolOutEth();
-        this.berechnePoolOutUsdt();
-        this.berechnePoolOutLtc();
-        this.berechnePoolOutDoge();
-        this.berechnePoolOut();
-        this.berechneStakingOut();
-        this.buildDataForChart();
-      },
-      err => {
-        console.error(err);
-      });
-    this.dexService.getPoolDetail('5').subscribe(
-      pool => {
-        this.poolBtc.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
-      },
-      err => {
-        console.error(err);
-      });
-    this.dexService.getPoolDetail('4').subscribe(
-      pool => {
-        this.poolEth.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
-      },
-      err => {
-        console.error(err);
-      });
-    this.dexService.getPoolDetail('6').subscribe(
-      pool => {
-        this.poolUsdt.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
-      },
-      err => {
-        console.error(err);
-      });
-    this.dexService.getPoolDetail('10').subscribe(
-      pool => {
-        this.poolLtc.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
-      },
-      err => {
-        console.error(err);
-      });
-    this.dexService.getPoolDetail('8').subscribe(
-      pool => {
-        this.poolDoge.totalLiquidityLpToken = +pool.totalLiquidityLpToken;
+    forkJoin([
+      this.dexService.getDex(),
+      this.dexService.getPoolDetail('5'),
+      this.dexService.getPoolDetail('4'),
+      this.dexService.getPoolDetail('6'),
+      this.dexService.getPoolDetail('10'),
+      this.dexService.getPoolDetail('8')
+      ]
 
-      },
-      err => {
-        console.error(err);
-      });
+    ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge]: [DexInfo, Pool, Pool, Pool, Pool, Pool]) => {
+      this.dex = dex;
+      this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
+      this.poolEth = dex.pools.find(x => x.poolPairId === '4');
+      this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
+      this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
+      this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
+
+      this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
+      this.berechnePoolOutBtc();
+
+      this.poolEth.totalLiquidityLpToken = +poolEth.totalLiquidityLpToken;
+      this.berechnePoolOutEth();
+
+      this.poolUsdt.totalLiquidityLpToken = +poolUsdt.totalLiquidityLpToken;
+      this.berechnePoolOutUsdt();
+
+      this.poolLtc.totalLiquidityLpToken = +poolLtc.totalLiquidityLpToken;
+      this.berechnePoolOutLtc();
+
+      this.poolDoge.totalLiquidityLpToken = +poolDoge.totalLiquidityLpToken;
+      this.berechnePoolOutDoge();
+
+      this.berechneStakingOut();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }));
 
   }
 
@@ -243,7 +224,6 @@ export class AppComponent implements OnInit {
         for (let b of balances) {
           this.addToWallet(b);
         }
-        console.log(balances);
       },
       err => {
         console.error(err);
@@ -328,27 +308,31 @@ export class AppComponent implements OnInit {
   }
 
   private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
-    const reserveANumber = +pool?.reserveA;
-    const reserveBNumber = +pool?.reserveB;
 
     if (poolName === 'BTC') {
-      this.anteilAmPoolBtc = this.berechneAnteilAmPool(this.btc, this.dfiInBtcPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+      this.anteilAmPoolBtc = this.berechneAnteilAmPool(this.wallet.btcdfi, pool, outcome, dfiProBlock);
+      this.btc = this.anteilAmPoolBtc * +pool.reserveA / 100;
+      this.dfiInBtcPool = this.anteilAmPoolBtc * +pool.reserveB / 100;
     }
     if (poolName === 'ETH') {
-      this.anteilAmPoolEth = this.berechneAnteilAmPool(this.eth, this.dfiInEthPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+      this.anteilAmPoolEth = this.berechneAnteilAmPool(this.wallet.ethdfi, pool, outcome, dfiProBlock);
+      this.eth = this.anteilAmPoolEth * +pool.reserveA / 100;
+      this.dfiInEthPool = this.anteilAmPoolEth * +pool.reserveB / 100;
     }
     if (poolName === 'USDT') {
-      this.anteilAmPoolUsdt =
-        this.berechneAnteilAmPool(this.usdt, this.dfiInUsdtPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+      this.anteilAmPoolUsdt = this.berechneAnteilAmPool(this.wallet.usdtdfi, pool, outcome, dfiProBlock);
+      this.usdt = this.anteilAmPoolUsdt * +pool.reserveA / 100;
+      this.dfiInUsdtPool = this.anteilAmPoolUsdt * +pool.reserveB / 100;
     }
     if (poolName === 'LTC') {
-      this.anteilAmPoolLtc =
-        this.berechneAnteilAmPool(this.ltc, this.dfiInLtcPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+      this.anteilAmPoolLtc = this.berechneAnteilAmPool(this.wallet.ltcdfi, pool, outcome, dfiProBlock);
+      this.ltc = this.anteilAmPoolLtc * +pool.reserveA / 100;
+      this.dfiInLtcPool = this.anteilAmPoolLtc * +pool.reserveB / 100;
     }
-
     if (poolName === 'DOGE') {
-      this.anteilAmPoolDoge =
-        this.berechneAnteilAmPool(this.ltc, this.dfiInDogePool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+      this.anteilAmPoolDoge = this.berechneAnteilAmPool(this.wallet.dogedfi, pool, outcome, dfiProBlock);
+      this.doge = this.anteilAmPoolDoge * +pool.reserveA / 100;
+      this.dfiInDogePool = this.anteilAmPoolDoge * +pool.reserveB / 100;
     }
 
     outcome.dfiPerHour = outcome.dfiPerMin * 60;
@@ -358,11 +342,8 @@ export class AppComponent implements OnInit {
     outcome.dfiPerYear = outcome.dfiPerDay * 365;
   }
 
-  private berechneAnteilAmPool(poolCoin: number, dfInPool: number, reserveBNumber: number, reserveANumber: number,
-                               outcome: Outcome, dfiProBlock: number): number {
-    const anteileDFI = dfInPool / reserveBNumber * 100;
-    const anteile = poolCoin / reserveANumber * 100;
-    const anteilAmPool = (anteile + anteileDFI) / 2;
+  private berechneAnteilAmPool(lpToken: number, pool: Pool, outcome: Outcome, dfiProBlock: number): number {
+    const anteilAmPool = lpToken / pool.totalLiquidityLpToken * 100;
     outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
     return anteilAmPool;
   }

@@ -128,8 +128,16 @@
       <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)" > - Remove</button>
      </p>
     </div>
+  </div>
+</div>
+
+<div class="container left">
+  <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
+  <h3>If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input
+    field.</h3>
+  <div class="row">
     <div class="col-auto bg-light margin-col">
-      <h3>Your Coins</h3>
+      <h3>Your Wallet Coins</h3>
       <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span> </p>
       <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span> </p>
       <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
@@ -143,22 +151,7 @@
       <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
       <p> USDT-DFI <span class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span></p>
     </div>
-  </div>
-</div>
-
-<div class="container left">
-  <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
-  <h3>If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input
-    field.</h3>
-  <div class="row">
     <div class="col-auto bg-light margin-col">
-      <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
-      <div class="form-group">
-        <label for="inputDFIWallet">DFI</label>
-        <input required [(ngModel)]="dfiInWallet" (ngModelChange)="onChangeDfiWallet($event)" type="number"
-               class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your wallet DFI amount.</small>
-      </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
