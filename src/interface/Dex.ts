@@ -24,7 +24,9 @@ export interface Pool {
   tokenBSymbol: string;
   priceA: number;
   priceB: number;
+  totalLiquidityLpToken: number;
 }
+
 
 export class Outcome {
   dfiPerMin: number;
