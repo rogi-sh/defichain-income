@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
-import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolEthOut, PoolLtcOut, PoolUsdtOut} from '../interface/Dex';
+import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolUsdtOut} from '../interface/Dex';
 import {ChartOptions, Data} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   dfiProBlockEth = 15;
   dfiProBlockUsdt = 5;
   dfiProBlockLtc = 2;
+  dfiProBlockDoge = 1;
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;
@@ -56,6 +57,12 @@ export class AppComponent implements OnInit {
   ltc = 10;
   dfiInLtcPool = 1000;
   dfiInLtcPoolKey = 'dfiInLtcPoolKey';
+
+  // DOGE Pool
+  dogeInDogePoolKey = 'dogeInDogePoolKey';
+  doge = 10;
+  dfiInDogePool = 1000;
+  dfiInDogePoolKey = 'dfiInDogePoolKey';
 
   // Staking infos
   dfiInStakingKey = 'dfiInStaking';
@@ -124,6 +131,10 @@ export class AppComponent implements OnInit {
   poolLtc: Pool;
   anteilAmPoolLtc: number;
 
+  poolDoge: Pool;
+  poolDogeOut: PoolDogeOut = new PoolDogeOut();
+  anteilAmPoolDoge: number;
+
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
 
@@ -157,10 +168,12 @@ export class AppComponent implements OnInit {
           this.poolEth = dex.pools.find(x => x.poolPairId === '4');
           this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
           this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
+          this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
           this.berechnePoolOutBtc();
           this.berechnePoolOutEth();
           this.berechnePoolOutUsdt();
           this.berechnePoolOutLtc();
+          this.berechnePoolOutDoge();
           this.berechnePoolOut();
           this.berechneStakingOut();
           this.buildDataForChart();
@@ -190,6 +203,10 @@ export class AppComponent implements OnInit {
     this.berechnePool('LTC', this.poolLtc, this.poolLtcOut, this.dfiProBlockLtc);
   }
 
+  berechnePoolOutDoge(): void {
+    this.berechnePool('DOGE', this.poolDoge, this.poolDogeOut, this.dfiProBlockDoge);
+  }
+
   private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
     const reserveANumber = +pool?.reserveA;
     const reserveBNumber = +pool?.reserveB;
@@ -207,6 +224,11 @@ export class AppComponent implements OnInit {
     if (poolName === 'LTC') {
       this.anteilAmPoolLtc =
         this.berechneAnteilAmPool(this.ltc, this.dfiInLtcPool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
+    }
+
+    if (poolName === 'DOGE') {
+      this.anteilAmPoolDoge =
+        this.berechneAnteilAmPool(this.ltc, this.dfiInDogePool, reserveBNumber, reserveANumber, outcome, dfiProBlock);
     }
 
     outcome.dfiPerHour = outcome.dfiPerMin * 60;
@@ -230,12 +252,18 @@ export class AppComponent implements OnInit {
   }
 
   berechnePoolOut(): void {
-    this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin + this.poolUsdtOut.dfiPerMin + this.poolLtcOut.dfiPerMin;
-    this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour + this.poolUsdtOut.dfiPerHour + this.poolLtcOut.dfiPerHour;
-    this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolUsdtOut.dfiPerDay + this.poolLtcOut.dfiPerDay;
-    this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek + this.poolUsdtOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek;
-    this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth + this.poolUsdtOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth;
-    this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear + this.poolUsdtOut.dfiPerYear + this.poolLtcOut.dfiPerYear;
+    this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin
+      + this.poolUsdtOut.dfiPerMin + this.poolLtcOut.dfiPerMin + this.poolDogeOut.dfiPerMin;
+    this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
+      + this.poolUsdtOut.dfiPerHour + this.poolLtcOut.dfiPerHour + this.poolDogeOut.dfiPerHour;
+    this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay
+      + this.poolUsdtOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolDogeOut.dfiPerDay;
+    this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek
+      + this.poolUsdtOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek + this.poolDogeOut.dfiPerWeek;
+    this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth
+      + this.poolUsdtOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth + this.poolDogeOut.dfiPerMonth;
+    this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear
+      + this.poolUsdtOut.dfiPerYear + this.poolLtcOut.dfiPerYear + this.poolDogeOut.dfiPerYear;
   }
 
   berechneStakingOut(): void {
@@ -302,6 +330,17 @@ export class AppComponent implements OnInit {
     } else {
       this.dfiInLtcPool = 0;
     }
+    // DOGE POOL
+    if (this.isLocalStorageNotEmpty(this.dogeInDogePoolKey)) {
+      this.doge = +localStorage.getItem(this.dogeInDogePoolKey);
+    } else {
+      this.doge = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.dfiInDogePoolKey)) {
+      this.dfiInDogePool = +localStorage.getItem(this.dfiInDogePoolKey);
+    } else {
+      this.dfiInDogePool = 0;
+    }
     // WALLET
     if (this.isLocalStorageNotEmpty(this.dfiInWalletKey)) {
       this.dfiInWallet = +localStorage.getItem(this.dfiInWalletKey);
@@ -353,7 +392,6 @@ export class AppComponent implements OnInit {
   }
 
 
-
   onChangeAimReturnHourPool(newValue): void {
     const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
     this.targetReturnLMHour = newValue;
@@ -390,6 +428,9 @@ export class AppComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'LTC') {
       pool = this.poolLtc;
       dfiPerBlock = this.dfiProBlockLtc;
+    } else if (this.poolLmCalculationTargetReturn === 'DOGE') {
+      pool = this.poolDoge;
+      dfiPerBlock = this.dfiProBlockDoge;
     } else {
       pool = this.poolUsdt;
       dfiPerBlock = this.dfiProBlockUsdt;
@@ -430,6 +471,14 @@ export class AppComponent implements OnInit {
     this.buildDataForChart();
   }
 
+  onChangeDogeDogePool(newValue): void {
+    this.doge = newValue;
+    localStorage.setItem(this.dogeInDogePoolKey, newValue);
+    this.berechnePoolOutDoge();
+    this.berechnePoolOut();
+    this.buildDataForChart();
+  }
+
   // DFI in POOLS
   onChangeDfiBtcPool(newValue): void {
     this.dfiInBtcPool = newValue;
@@ -463,6 +512,14 @@ export class AppComponent implements OnInit {
     this.buildDataForChart();
   }
 
+  onChangeDfiDogePool(newValue): void {
+    this.dfiInDogePool = newValue;
+    localStorage.setItem(this.dfiInDogePoolKey, newValue);
+    this.berechnePoolOutDoge();
+    this.berechnePoolOut();
+    this.buildDataForChart();
+  }
+
   buildDataForChart(): void {
 
     const allValue = this.getAllValuesUsdPrice();
@@ -483,6 +540,10 @@ export class AppComponent implements OnInit {
     dataLtc.name = 'LTC';
     dataLtc.value = this.getLtcValueUsd();
 
+    const dataDoge = new Data();
+    dataDoge.name = 'DOGE';
+    dataDoge.value = this.getDogeValueUsd();
+
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
     dataDfi.value = this.getDfiValueUsd();
@@ -493,12 +554,14 @@ export class AppComponent implements OnInit {
         +dataEth.value.toFixed(1),
         +dataUsdt.value.toFixed(1),
         +dataLtc.value.toFixed(1),
+        +dataDoge.value.toFixed(1),
         +dataDfi.value.toFixed(1)],
 
       labels: ['BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%',
         'ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%',
         'USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue)  + '%',
         'LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue)  + '%',
+        'DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue)  + '%',
         'DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue)  + '%'],
       chart: {
         width: 320,
@@ -533,8 +596,8 @@ export class AppComponent implements OnInit {
     };
   }
 
-  private getAnteilPortfolioForChart(dataEth: Data, allValue: number): string {
-    return (dataEth.value / allValue * 100).toFixed(1);
+  private getAnteilPortfolioForChart(data: Data, allValue: number): string {
+    return (data.value / allValue * 100).toFixed(1);
   }
 
   onChangeFiat(newValue: string): void {
@@ -556,7 +619,8 @@ export class AppComponent implements OnInit {
   }
 
   getAllValuesUsdPrice(): number {
-    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd() + this.getDfiValueUsd();
+    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd()
+      + this.getDogeValueUsd() + this.getDfiValueUsd();
   }
 
   getBtcValueUsd(): number {
@@ -575,16 +639,20 @@ export class AppComponent implements OnInit {
     return this.ltc * this.poolLtc?.priceA;
   }
 
+  getDogeValueUsd(): number {
+    return this.doge * this.poolDoge?.priceA;
+  }
+
   getDfiCount(): number {
     return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInStaking + this.dfiInWallet;
   }
 
   getDfiCountIncome(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool + this.dfiInStaking;
+    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool + this.dfiInDogePool + this.dfiInStaking;
   }
 
   getDfiCountLM(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool;
+    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool  + this.dfiInLtcPool + this.dfiInDogePool;
   }
 
   getDfiCountLMUsd(): number {
@@ -604,12 +672,12 @@ export class AppComponent implements OnInit {
   }
 
   getAnteilLMOfAllValue(): number {
-    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd())
+    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd() + this.getDogeValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
   getLMUsd(): number {
-    return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd() ;
+    return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd() + this.getDogeValueUsd() ;
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -621,7 +689,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCountInLM(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool;
+    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool;
   }
 
   getDfiValueUsd(): number {
@@ -685,7 +753,7 @@ export class AppComponent implements OnInit {
   }
 
   getAllPoolDfIncome(): number {
-    return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay;
+    return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay + this.poolDogeOut.dfiPerDay;
   }
 
   getAnteilBTCPoolAnGesamtLM(): number {
@@ -702,6 +770,10 @@ export class AppComponent implements OnInit {
 
   getAnteilUSDTPoolAnGesamtLM(): number {
     return this.poolUsdtOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilDogePoolAnGesamtLM(): number {
+    return this.poolDogeOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
 
 }

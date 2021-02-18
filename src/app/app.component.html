@@ -60,6 +60,14 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
+              Pool price DOGE <span class="badge badge-pill badge-dark left"> {{poolDoge?.priceA | currency:'USD'}}
+              /  {{poolDoge?.priceA * usdToEur | currency:'EUR'}}
+              / {{poolDoge?.priceA * usdToChf | currency:'CHF'}}
+              / {{poolDoge?.priceA * usdToGbp | currency:'GBP'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
               Pool price DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
               /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}
               / {{poolBtc?.priceB * usdToChf | currency:'CHF'}}
@@ -85,6 +93,11 @@
             </div>
             <div class="col-auto margin-col">
               APY LTC Pool <span class="badge badge-pill badge-dark">{{poolLtc?.apy | number: '1.2-2' }}%</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto margin-col">
+              APY DOGE Pool <span class="badge badge-pill badge-dark">{{poolDoge?.apy | number: '1.2-2' }}%</span>
             </div>
           </div>
         </div>
@@ -172,6 +185,20 @@
             <small class="form-text text-muted">Add your ltc pool DFI amount.</small>
           </div>
         </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">DOGE Pool</span>
+          <div class="form-group">
+            <label for="inputDogeDogePool">DOGE</label>
+            <input required [(ngModel)]="doge" (ngModelChange)="onChangeDogeDogePool($event)" type="number" step=0.001
+                   class="form-control form-control-sm" id="inputDogeDogePool" placeholder="Enter usdt amount">
+            <small class="form-text text-muted">Add your doge pool DOGE amount.</small>
+
+            <label for="inputDFIDogePool">DFI</label>
+            <input required [(ngModel)]="dfiInDogePool" (ngModelChange)="onChangeDfiDogePool($event)" type="number" step=0.001
+                   class="form-control form-control-sm" id="inputDFIDogePool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your doge pool DFI amount.</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -245,7 +272,7 @@
             <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span></h2>
+              </span></h2>
             </div>
             <div *ngIf="ltc > 0" class="col-auto bg-light margin-col">
               <h2><span class="badge badge-pill badge-primary left"> {{ltc}} LTC -
@@ -253,7 +280,17 @@
             <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getLtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span></h2>
+                </span></h2>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="doge > 0" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{doge}} DOGE -
+            <span *ngIf="fiat === 'USD'">{{getDogeValueUsd() | currency:'USD'}}</span>
+            <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
+            <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDogeValueUsd() * usdToGbp | currency:'GBP'}}</span>
+              </span></h2>
             </div>
           </div>
 
@@ -270,7 +307,7 @@
           <h2>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="btc > 0">{{btc}} BTC</span> <span
             *ngIf="eth > 0"> - {{eth}}
             ETH</span> <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc}}</span>  - {{getDfiCountIncome()}} DFI </span></h2>
+            *ngIf="ltc > 0">- LTC {{ltc}}</span> <span *ngIf="doge > 0">- DOGE {{doge}}</span>  - {{getDfiCountIncome()}} DFI </span></h2>
           <div class="row">
             <div class="col-auto bg-light margin-col">
               <h2>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
@@ -442,10 +479,11 @@
            <span *ngIf="eth > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
            <span *ngIf="ltc > 0">/ {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC</span>
           <span *ngIf="usdt > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
+          <span *ngIf="doge > 0"> / {{getAnteilDogePoolAnGesamtLM() | number: '1.1-1'}} % DOGE</span>
         </span></h3>
         <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
           ETH <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc}}</span> - {{getDfiCountInLM()}} DFI </span></h3>
+            *ngIf="ltc > 0">- LTC {{ltc}}</span> <span  *ngIf="doge > 0">- DOGE {{doge}}</span> - {{getDfiCountInLM()}} DFI </span></h3>
         <h3>Balance in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getLMUsd() | currency:'USD'}} </span>
           <span *ngIf="fiat === 'EUR'">{{getLMUsd() * usdToEur | currency:'EUR'}}</span>
@@ -465,6 +503,7 @@
           <button (click)="onChangeLmCalculationTargetPool('ETH')" type="button" class="btn margin-col small btn-danger">ETH</button>
           <button (click)="onChangeLmCalculationTargetPool('LTC')" type="button" class="btn margin-col small btn-danger">LTC</button>
           <button (click)="onChangeLmCalculationTargetPool('USDT')" type="button" class="btn margin-col small btn-danger">USDT</button>
+          <button (click)="onChangeLmCalculationTargetPool('DOGE')" type="button" class="btn margin-col small btn-danger">DOGE</button>
         </div>
         <div class="row">
           <div class="col-sm bg-light margin-col">
@@ -563,6 +602,14 @@
 
         <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
         <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+                     [usdToGbp]="usdToGbp"></app-earning>
+      </div>
+      <div *ngIf=" doge > 0 || dfiInDogePool > 0" class="col-sm bg-light margin-col">
+        <h3><span class="badge badge-pill badge-dark">DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}%</span></h3>
+        <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span></h3>
+
+        <span class="badge badge-pill badge-success mat-badge-large">EARNINGS</span>
+        <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
     </div>
