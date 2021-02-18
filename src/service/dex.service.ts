@@ -1,7 +1,7 @@
 import {Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {DexInfo} from '../interface/Dex';
+import {DexInfo, Pool} from '../interface/Dex';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class Dex {
   }
 
   public getPoolDetail(id: string) {
-    return this.http.get<DexInfo>(environment.poolDetails + id);
+    return this.http.get<Pool>(environment.poolDetails + id);
+  }
+
+  public getAdressDetail(adress: string) {
+    return this.http.get<[string]>(environment.accountDetails + adress);
   }
 }
