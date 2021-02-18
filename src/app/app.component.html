@@ -106,7 +106,7 @@
   </div>
 </div>
 <div class="container left">
-  <h1><span class="badge badge-secondary left">Your defichain app dfi adresses</span></h1>
+  <h1><span class="badge badge-secondary left">Your defichain app dfi addresses</span></h1>
   <h3>Please add all your defichain app addresses.</h3>
   <p><span class="font-weight-bold">IMPORTANT</span> You have to execute <span class="badge badge-secondary left">listaccounts {{'{}'}}
     false false true</span> in your defichain app</p>
@@ -114,15 +114,15 @@
   <div class="row">
     <div class="col-4 bg-light margin-col">
       <div class="form-group">
-        <label for="inputAddress">DFI Adress</label>
+        <label for="inputAddress">DFI Address</label>
         <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress"
-               placeholder="Enter your adress">
+               placeholder="Enter your address">
         <small class="form-text text-muted">Add your wallet addresses.</small>
       </div>
       <button type="button" (click)="addAdress()" class="btn btn-success"> + Add</button>
     </div>
     <div class="col-auto bg-light margin-col">
-      <h3>Your entered adresses.</h3>
+      <h3>Your entered addresses.</h3>
      <p *ngFor="let a of adresses">
        <span class="badge badge-pill badge-primary left">{{a}}</span>
       <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)" > - Remove</button>
@@ -442,10 +442,11 @@
           <span *ngIf="usdt > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
           <span *ngIf="doge > 0"> / {{getAnteilDogePoolAnGesamtLM() | number: '1.1-1'}} % DOGE</span>
         </span></h3>
-        <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc}} BTC - {{eth}}
-          ETH <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc}}</span> <span *ngIf="doge > 0">- DOGE {{doge}}</span> - {{getDfiCountInLM()}}
-          DFI </span></h3>
+        <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc | number: '1.5-5'}} BTC
+          - {{eth | number: '1.3-3'}} ETH
+          <span *ngIf="usdt > 0">c- USDT {{usdt | number: '1.3-3' }}</span> <span
+            *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span *ngIf="doge > 0">- DOGE {{doge | number: '1.3-3'}}</span>
+          - {{getDfiCountInLM() | number: '1.3-3'}} DFI </span></h3>
         <h3>Balance in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getLMUsd() | currency:'USD'}} </span>
           <span *ngIf="fiat === 'EUR'">{{getLMUsd() * usdToEur | currency:'EUR'}}</span>
