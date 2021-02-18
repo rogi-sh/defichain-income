@@ -680,7 +680,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCount(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInStaking + this.dfiInWallet;
+    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool + this.dfiInStaking + this.dfiInWallet;
   }
 
   getDfiCountIncome(): number {
