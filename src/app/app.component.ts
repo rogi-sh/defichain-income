@@ -201,6 +201,7 @@ export class AppComponent implements OnInit {
 
   loadAllAccounts(): void {
     this.wallet = new Wallet();
+    this.dfiInWallet = 0;
     for (let ad of this.adresses) {
       this.loadAccountDetails(ad);
     }
