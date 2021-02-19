@@ -211,7 +211,7 @@
           </h2>
           <div class="row">
             <div *ngIf="btc > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{btc + wallet.btc | number: '1.5-5'}} BTC -
+              <h2><span class="badge badge-pill badge-primary left"> {{btc + wallet?.btc | number: '1.5-5'}} BTC -
         <span *ngIf="fiat === 'USD'">{{getBtcValueUsd() | currency:'USD'}}</span>
         <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -219,7 +219,7 @@
         </span></h2>
             </div>
             <div *ngIf="eth > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{eth + wallet.eth | number: '1.3-3'}} ETH -
+              <h2><span class="badge badge-pill badge-primary left"> {{eth + wallet?.eth | number: '1.3-3'}} ETH -
             <span *ngIf="fiat === 'USD'">{{getEthValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -229,7 +229,7 @@
           </div>
           <div class="row">
             <div *ngIf="usdt > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{usdt + wallet.usdt | number: '1.3-3'}} USDT -
+              <h2><span class="badge badge-pill badge-primary left"> {{usdt + wallet?.usdt | number: '1.3-3'}} USDT -
             <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -237,7 +237,7 @@
               </span></h2>
             </div>
             <div *ngIf="ltc > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{ltc + wallet.ltc | number: '1.3-3'}} LTC -
+              <h2><span class="badge badge-pill badge-primary left"> {{ltc + wallet?.ltc | number: '1.3-3'}} LTC -
             <span *ngIf="fiat === 'USD'">{{getLtcValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -247,7 +247,7 @@
           </div>
           <div class="row">
             <div *ngIf="doge > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{doge + wallet.doge| number: '1.3-3'}} DOGE -
+              <h2><span class="badge badge-pill badge-primary left"> {{doge + wallet?.doge| number: '1.3-3'}} DOGE -
             <span *ngIf="fiat === 'USD'">{{getDogeValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>

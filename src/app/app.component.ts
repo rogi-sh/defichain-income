@@ -105,10 +105,6 @@ export class AppComponent implements OnInit {
   aimReturnMonthPool = 0;
   targetReturnLMMonth = 0;
 
-  // Wallet
-  dfiInWallet = 0;
-  dfiInWalletKey = 'dfiInWalletKey';
-
   dex: DexInfo;
 
   poolBtc: Pool;
@@ -152,23 +148,38 @@ export class AppComponent implements OnInit {
     this.loadDex();
     setInterval(() => {
       console.log('Refresh ...');
+      this.resetValuePreReload();
       this.loadLocalStorage();
       this.loadAllAccounts();
       this.loadDex();
-    }, 1800000);
+    }, 300000);
+  }
+
+  resetValuePreReload(): void {
+    // Pools
+    this.btc = 0;
+    this.dfiInBtcPool = 0;
+    this.eth = 0;
+    this.dfiInEthPool = 0;
+    this.usdt = 0;
+    this.dfiInUsdtPool = 0;
+    this.ltc = 0;
+    this.dfiInLtcPool = 0;
+    this.doge = 0;
+    this.dfiInDogePool = 0;
+
   }
 
   loadDex(): void {
 
     forkJoin([
-      this.dexService.getDex(),
-      this.dexService.getPoolDetail('5'),
-      this.dexService.getPoolDetail('4'),
-      this.dexService.getPoolDetail('6'),
-      this.dexService.getPoolDetail('10'),
-      this.dexService.getPoolDetail('8')
+        this.dexService.getDex(),
+        this.dexService.getPoolDetail('5'),
+        this.dexService.getPoolDetail('4'),
+        this.dexService.getPoolDetail('6'),
+        this.dexService.getPoolDetail('10'),
+        this.dexService.getPoolDetail('8')
       ]
-
     ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge]: [DexInfo, Pool, Pool, Pool, Pool, Pool]) => {
       this.dex = dex;
       this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
@@ -200,9 +211,9 @@ export class AppComponent implements OnInit {
   }
 
   loadAllAccounts(): void {
+    // Wallet
     this.wallet = new Wallet();
-    this.dfiInWallet = 0;
-    for (let ad of this.adresses) {
+    for (const ad of this.adresses) {
       this.loadAccountDetails(ad);
     }
 
@@ -211,7 +222,7 @@ export class AppComponent implements OnInit {
   loadAccountDetails(adress: string): void {
     this.dexService.getAdressDetail(adress).subscribe(
       balances => {
-        for (let b of balances) {
+        for (const b of balances) {
           this.addToWallet(b);
         }
       },
@@ -220,11 +231,10 @@ export class AppComponent implements OnInit {
       });
   }
 
-  addToWallet(walletItem: string) {
+  addToWallet(walletItem: string): void {
     const splitted = walletItem.split('@');
     switch (splitted[1]) {
       case 'DFI': {
-        this.dfiInWallet += +splitted[0];
         this.wallet.dfi += +splitted[0];
         break;
       }
@@ -384,12 +394,6 @@ export class AppComponent implements OnInit {
     this.dfiInStaking = newValue !== null ? newValue : 0;
     localStorage.setItem(this.dfiInStakingKey, newValue !== null ? newValue : 0);
     this.berechneStakingOut();
-    this.buildDataForChart();
-  }
-
-  onChangeDfiWallet(newValue): void {
-    this.dfiInWallet = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInWalletKey, newValue !== null ? newValue : 0);
     this.buildDataForChart();
   }
 
@@ -594,7 +598,7 @@ export class AppComponent implements OnInit {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool
-      + this.dfiInDogePool + this.dfiInStaking + this.dfiInWallet;
+      + this.dfiInDogePool + this.dfiInStaking;
   }
 
   getDfiCountIncome(): number {
@@ -614,7 +618,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCountWalletUsd(): number {
-    return this.dfiInWallet * this.poolBtc?.priceB;
+    return this.wallet?.dfi * this.poolBtc?.priceB;
   }
 
   getAnteilWalletOfAllValue(): number {
@@ -622,12 +626,14 @@ export class AppComponent implements OnInit {
   }
 
   getAnteilLMOfAllValue(): number {
-    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd() + this.getDogeValueUsd())
+    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
+      + this.getUsdtValueUsd() + this.getDogeValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
   getLMUsd(): number {
-    return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd() + this.getUsdtValueUsd() + this.getDogeValueUsd();
+    return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
+      + this.getUsdtValueUsd() + this.getDogeValueUsd();
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -703,7 +709,8 @@ export class AppComponent implements OnInit {
   }
 
   getAllPoolDfIncome(): number {
-    return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay + this.poolDogeOut.dfiPerDay;
+    return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay
+      + this.poolDogeOut.dfiPerDay;
   }
 
   getAnteilBTCPoolAnGesamtLM(): number {
