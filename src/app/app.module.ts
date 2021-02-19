@@ -8,6 +8,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule} from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { EarningComponent } from './earning/earning.component';
+import {CountdownGlobalConfig, CountdownModule} from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EarningComponent } from './earning/earning.component';
     MatTabsModule,
     FormsModule,
     NgApexchartsModule,
+    CountdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

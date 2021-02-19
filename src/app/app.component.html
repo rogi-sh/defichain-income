@@ -10,7 +10,11 @@
       <p>during staking or liquidity mining with your defichain app.</p>
       <p>All data powered by <a href="https://dex.defichain.com/mainnet/pool">
         https://api.defichain.io/v1</a></p>
-      <p>Data are refreshed every 60s. No F5 needed.</p>
+      <p>Data are refreshed every {{sCountdown}}s. No F5 needed.</p>
+      <p>Time to next refresh <span class="badge badge-pill badge-dark left">
+        <countdown #cd [config]="{ leftTime: sCountdown, format: 'mm:ss' }"></countdown></span>
+      </p>
+
     </div>
     <div class="col-auto margin-col">
       <h1><span class="badge badge-secondary left">DEX Statistics</span></h1>

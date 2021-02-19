@@ -5,6 +5,7 @@ import {ChartOptions, Data, Wallet} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
+import {CountdownComponent, CountdownGlobalConfig} from 'ngx-countdown';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit {
 
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+
+  @ViewChild('cd', { static: true })
+  private countdown: CountdownComponent;
+
 
   title = 'defichain-income';
   env = environment;
@@ -130,6 +135,8 @@ export class AppComponent implements OnInit {
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
 
+  sCountdown = 300;
+
   constructor(private dexService: Dex) {
   }
 
@@ -146,13 +153,16 @@ export class AppComponent implements OnInit {
     this.loadLocalStorage();
     this.loadAllAccounts();
     this.loadDex();
+    this.countdown?.begin();
     setInterval(() => {
+
       console.log('Refresh ...');
       this.resetValuePreReload();
       this.loadLocalStorage();
       this.loadAllAccounts();
       this.loadDex();
-    }, 300000);
+      this.countdown?.restart();
+    }, this.sCountdown * 1000);
   }
 
   resetValuePreReload(): void {
