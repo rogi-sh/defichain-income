@@ -12,8 +12,19 @@
         https://api.defichain.io/v1</a></p>
       <p>Data are refreshed every {{sCountdown}}s. No F5 needed.</p>
       <p>Time to next refresh <span class="badge badge-pill badge-dark left">
-        <countdown #cd [config]="{ leftTime: sCountdown, format: 'mm:ss' }"></countdown></span>
+        <countdown #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown></span>
       </p>
+      <p>Not your refresh time? Set your own refresh time in s</p>
+      <div class="row">
+        <div class="col-auto ">
+          <input required [(ngModel)]="sCountdown" type="number"
+                 step=1 min="10" class="form-control form-control-sm" id="sCount" placeholder="Enter s to refresh">
+        </div>
+        <div class="col-auto">
+          <button type="button" (click)="onChangeRefreshS()" class="btn btn-success">set</button>
+        </div>
+      </div>
+
 
     </div>
     <div class="col-auto margin-col">
@@ -114,7 +125,7 @@
   <h3>Please add all your defichain app addresses.</h3>
   <p><span class="font-weight-bold">IMPORTANT</span> You have to execute <span class="badge badge-secondary left">listaccounts {{'{}'}}
     false false true</span> in your defichain app</p>
-  <p>After that add all unique addresses from owner attribute.</p>
+  <p>After that add all unique (no duplicates) addresses from owner attribute.</p>
   <p>Amounts may be a little late.</p>
   <div class="row">
     <div class="col-4 bg-light margin-col">
@@ -128,10 +139,10 @@
     </div>
     <div class="col-auto bg-light margin-col">
       <h3>Your entered addresses.</h3>
-     <p *ngFor="let a of adresses">
-       <span class="badge badge-pill badge-primary left">{{a}}</span>
-      <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)" > - Remove</button>
-     </p>
+      <p *ngFor="let a of adresses">
+        <span class="badge badge-pill badge-primary left">{{a}}</span>
+        <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - Remove</button>
+      </p>
     </div>
   </div>
 </div>
@@ -141,8 +152,8 @@
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <h3>Your Wallet Coins</h3>
-      <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span> </p>
-      <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span> </p>
+      <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></p>
+      <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span></p>
       <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
       <p> LTC <span class="badge badge-pill badge-primary left">{{wallet?.ltc | number: '1.3-3'}}</span></p>
       <p> USDT <span class="badge badge-pill badge-primary left">{{wallet?.usdt | number: '1.3-3'}}</span></p>
@@ -150,7 +161,7 @@
     </div>
     <div class="col-auto bg-light margin-col">
       <h3>Your LP Token</h3>
-      <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span> </p>
+      <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span></p>
       <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span></p>
       <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
       <p> USDT-DFI <span class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span></p>
@@ -270,7 +281,8 @@
           <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
           <h2><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
             / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h2>
-          <h2>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="btc > 0">{{btc | number: '1.5-5'}} BTC</span> <span
+          <h2>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="btc > 0">{{btc | number: '1.5-5'}}
+            BTC</span> <span
             *ngIf="eth > 0"> - {{eth | number: '1.3-3'}}
             ETH</span> <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
             *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span
@@ -452,7 +464,8 @@
         <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc | number: '1.5-5'}} BTC
           - {{eth | number: '1.3-3'}} ETH
           <span *ngIf="usdt > 0">c- USDT {{usdt | number: '1.3-3' }}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span *ngIf="doge > 0">- DOGE {{doge | number: '1.3-3'}}</span>
+            *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span
+            *ngIf="doge > 0">- DOGE {{doge | number: '1.3-3'}}</span>
           - {{getDfiCountInLM() | number: '1.3-3'}} DFI </span></h3>
         <h3>Balance in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getLMUsd() | currency:'USD'}} </span>

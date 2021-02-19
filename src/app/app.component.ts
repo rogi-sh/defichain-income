@@ -6,6 +6,8 @@ import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent, CountdownGlobalConfig} from 'ngx-countdown';
+// @ts-ignore
+import Timer = NodeJS.Timer;
 
 @Component({
   selector: 'app-root',
@@ -136,6 +138,9 @@ export class AppComponent implements OnInit {
   stakingOut: OutcomeStaking = new OutcomeStaking();
 
   sCountdown = 300;
+  sCountdownShow = 300;
+  sCountdownKey = 'sCountdownKey';
+  timer: Timer;
 
   constructor(private dexService: Dex) {
   }
@@ -150,18 +155,36 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.adressesKey) !== null) {
       this.adresses = JSON.parse(localStorage.getItem(this.adressesKey));
     }
+    if (localStorage.getItem(this.sCountdownKey) !== null) {
+      this.sCountdown = JSON.parse(localStorage.getItem(this.sCountdownKey));
+      this.sCountdownShow = this.sCountdown;
+    }
     this.loadLocalStorage();
     this.loadAllAccounts();
     this.loadDex();
     this.countdown?.begin();
-    setInterval(() => {
+    this.timer = setInterval(() => {
+      this.refresh();
+    }, this.sCountdown * 1000);
+  }
 
-      console.log('Refresh ...');
-      this.resetValuePreReload();
-      this.loadLocalStorage();
-      this.loadAllAccounts();
-      this.loadDex();
-      this.countdown?.restart();
+  private refresh(): void {
+    console.log('Refresh ...');
+    this.resetValuePreReload();
+    this.loadLocalStorage();
+    this.loadAllAccounts();
+    this.loadDex();
+    this.countdown?.restart();
+  }
+
+
+  onChangeRefreshS(): void {
+    localStorage.setItem(this.sCountdownKey, JSON.stringify(this.sCountdown));
+    this.sCountdownShow = this.sCountdown;
+    this.countdown?.restart();
+    clearInterval(this.timer[Symbol.toPrimitive]);
+    this.timer = setInterval(() => {
+      this.refresh();
     }, this.sCountdown * 1000);
   }
 
