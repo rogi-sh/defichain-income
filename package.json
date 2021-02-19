@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
+    "@sentry/angular": "^6.2.0",
+    "@sentry/tracing": "^6.2.0",
     "apexcharts": "3.24.0",
     "bootstrap": "^4.5.0",
     "ng-apexcharts": "^1.5.7",

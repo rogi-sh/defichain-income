@@ -5,7 +5,7 @@ import {ChartOptions, Data, Wallet} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
-import {CountdownComponent, CountdownGlobalConfig} from 'ngx-countdown';
+import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 
@@ -239,7 +239,12 @@ export class AppComponent implements OnInit {
       this.berechneStakingOut();
       this.berechnePoolOut();
       this.buildDataForChart();
-    }));
+      }
+      ),
+      err => {
+        this.loadDex();
+        console.error('Fehler beim Load Dex Data' + err.toString());
+      });
 
   }
 
