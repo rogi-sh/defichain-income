@@ -155,7 +155,7 @@ export class AppComponent implements OnInit {
       this.loadLocalStorage();
       this.loadAllAccounts();
       this.loadDex();
-    }, 60000);
+    }, 1800000);
   }
 
   loadDex(): void {
@@ -573,27 +573,28 @@ export class AppComponent implements OnInit {
   }
 
   getBtcValueUsd(): number {
-    return this.btc * this.poolBtc?.priceA;
+    return (this.btc + this.wallet.btc) * this.poolBtc?.priceA;
   }
 
   getEthValueUsd(): number {
-    return this.eth * this.poolEth?.priceA;
+    return (this.eth + this.wallet.eth) * this.poolEth?.priceA;
   }
 
   getUsdtValueUsd(): number {
-    return this.usdt * this.poolUsdt?.priceA;
+    return (this.usdt + this.wallet.usdt) * this.poolUsdt?.priceA;
   }
 
   getLtcValueUsd(): number {
-    return this.ltc * this.poolLtc?.priceA;
+    return (this.ltc + this.wallet.ltc) * this.poolLtc?.priceA;
   }
 
   getDogeValueUsd(): number {
-    return this.doge * this.poolDoge?.priceA;
+    return (this.doge + this.wallet.doge) * this.poolDoge?.priceA;
   }
 
   getDfiCount(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool + this.dfiInStaking + this.dfiInWallet;
+    return this.wallet.dfi + this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool
+      + this.dfiInDogePool + this.dfiInStaking + this.dfiInWallet;
   }
 
   getDfiCountIncome(): number {
