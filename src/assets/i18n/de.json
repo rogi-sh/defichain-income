@@ -1,0 +1,21 @@
+{
+  "title": "DeFiChain Einkommen Dashboard",
+  "welcome":  "Willkommen auf dieser Website kannst du dein Einkommen aus dem Staking deiner DFI und dem Liquidity Mining mit deiner DeFiChain App tracken.",
+  "lang": "Wähle deine Sprache",
+  "powered": "Alle Daten werden abgerufen von: ",
+  "refresh1": "Daten werden abgerufen jede ",
+  "refresh2": " Kein F5 notwendig.",
+  "refresh3": "Zeit zum nächsten Neuladen",
+  "refresh4": "Nicht zufriedem mit dem Neuladen Zeit? Dann setz deine eigene Zeit in s",
+  "refresh5": "Los",
+  "refresh6": "Gib s ein.",
+  "load1": "Bitte entscheide wie du deine Daten einträgst",
+  "load2" : "Du trägst nur die DFI Adressen aus deiner DeFiChain App ein und deine Bestände werden automatisch geladen",
+  "load3": "Du trägst deine Bestände manuell",
+  "load4": "Switche um das manuelle Eintragen deiner Bestände zu nutzen",
+  "load5": "Switche um das automatische Laden deiner Bestände zu nutzen",
+  "stats": "Statistiken",
+  "price": "Preis"
+
+
+}

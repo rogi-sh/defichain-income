@@ -8,6 +8,7 @@ import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
 
 
   title = 'defichain-income';
+  lang = 'en';
   env = environment;
 
   wallet: Wallet;
@@ -124,7 +126,18 @@ export class AppComponent implements OnInit {
   autoLoadData = true;
   autoLoadDataKey = 'autoLoadDataKey';
 
-  constructor(private dexService: Dex) {
+  constructor(private dexService: Dex, private translate: TranslateService) {
+    translate.addLangs(['en', 'de']);
+    translate.setDefaultLang('de');
+
+    const browserLang = translate.getBrowserLang();
+    console.log('browser ' + browserLang);
+    translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+  }
+
+  useLanguage(language: string): void {
+    this.translate.use(language);
+    this.lang = language;
   }
 
   ngOnInit(): void {
