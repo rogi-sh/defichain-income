@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
-  @ViewChild('cd', { static: true })
+  @ViewChild('cd', {static: true})
   private countdown: CountdownComponent;
 
 
@@ -42,27 +42,6 @@ export class AppComponent implements OnInit {
   details = 'Staking';
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
-
-  // User Infos
-  // BTC Pool
-  btc = 0;
-  dfiInBtcPool = 0;
-
-  // ETH Pool
-  eth = 0;
-  dfiInEthPool = 0;
-
-  // USDT Pool
-  usdt = 0;
-  dfiInUsdtPool = 0;
-
-  // LTC Pool
-  ltc = 0;
-  dfiInLtcPool = 0;
-
-  // DOGE Pool
-  doge = 0;
-  dfiInDogePool = 0;
 
   // Staking infos
   dfiInStakingKey = 'dfiInStaking';
@@ -142,6 +121,9 @@ export class AppComponent implements OnInit {
   sCountdownKey = 'sCountdownKey';
   timer: Timer;
 
+  autoLoadData = true;
+  autoLoadDataKey = 'autoLoadDataKey';
+
   constructor(private dexService: Dex) {
   }
 
@@ -159,9 +141,26 @@ export class AppComponent implements OnInit {
       this.sCountdown = JSON.parse(localStorage.getItem(this.sCountdownKey));
       this.sCountdownShow = this.sCountdown;
     }
-    this.loadLocalStorage();
-    this.loadAllAccounts();
-    this.loadDex();
+    if (localStorage.getItem(this.autoLoadDataKey) !== null) {
+      this.autoLoadData = JSON.parse(localStorage.getItem(this.autoLoadDataKey));
+    }
+    // Staking
+    if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
+      this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
+    } else {
+      this.dfiInStaking = 0;
+    }
+
+    this.wallet = new Wallet();
+
+    if (this.autoLoadData) {
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      this.loadLocalStorageForManuel();
+      this.loadDexManuel();
+    }
+
     this.countdown?.begin();
     this.timer = setInterval(() => {
       this.refresh();
@@ -169,11 +168,16 @@ export class AppComponent implements OnInit {
   }
 
   private refresh(): void {
-    console.log('Refresh ...');
-    this.resetValuePreReload();
-    this.loadLocalStorage();
-    this.loadAllAccounts();
-    this.loadDex();
+    if (this.autoLoadData) {
+      console.log('Refresh autofunds ...');
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      console.log('Refresh manuel funds ...');
+      this.wallet = new Wallet();
+      this.loadLocalStorageForManuel();
+      this.loadDexManuel();
+    }
     this.countdown?.restart();
   }
 
@@ -188,19 +192,9 @@ export class AppComponent implements OnInit {
     }, this.sCountdown * 1000);
   }
 
-  resetValuePreReload(): void {
-    // Pools
-    this.btc = 0;
-    this.dfiInBtcPool = 0;
-    this.eth = 0;
-    this.dfiInEthPool = 0;
-    this.usdt = 0;
-    this.dfiInUsdtPool = 0;
-    this.ltc = 0;
-    this.dfiInLtcPool = 0;
-    this.doge = 0;
-    this.dfiInDogePool = 0;
-
+  saveToggleAutoLoad(): void {
+    localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
+    this.refresh();
   }
 
   loadDex(): void {
@@ -214,38 +208,64 @@ export class AppComponent implements OnInit {
         this.dexService.getPoolDetail('8')
       ]
     ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge]: [DexInfo, Pool, Pool, Pool, Pool, Pool]) => {
-      this.dex = dex;
-      this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
-      this.poolEth = dex.pools.find(x => x.poolPairId === '4');
-      this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
-      this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
-      this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
+          this.dex = dex;
+          this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
+          this.poolEth = dex.pools.find(x => x.poolPairId === '4');
+          this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
+          this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
+          this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
 
-      this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
-      this.berechnePoolOutBtc();
+          this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
+          this.berechnePoolOutBtc();
 
-      this.poolEth.totalLiquidityLpToken = +poolEth.totalLiquidityLpToken;
-      this.berechnePoolOutEth();
+          this.poolEth.totalLiquidityLpToken = +poolEth.totalLiquidityLpToken;
+          this.berechnePoolOutEth();
 
-      this.poolUsdt.totalLiquidityLpToken = +poolUsdt.totalLiquidityLpToken;
-      this.berechnePoolOutUsdt();
+          this.poolUsdt.totalLiquidityLpToken = +poolUsdt.totalLiquidityLpToken;
+          this.berechnePoolOutUsdt();
 
-      this.poolLtc.totalLiquidityLpToken = +poolLtc.totalLiquidityLpToken;
-      this.berechnePoolOutLtc();
+          this.poolLtc.totalLiquidityLpToken = +poolLtc.totalLiquidityLpToken;
+          this.berechnePoolOutLtc();
 
-      this.poolDoge.totalLiquidityLpToken = +poolDoge.totalLiquidityLpToken;
-      this.berechnePoolOutDoge();
+          this.poolDoge.totalLiquidityLpToken = +poolDoge.totalLiquidityLpToken;
+          this.berechnePoolOutDoge();
 
-      this.berechneStakingOut();
-      this.berechnePoolOut();
-      this.buildDataForChart();
-      }
+          this.berechneStakingOut();
+          this.berechnePoolOut();
+          this.buildDataForChart();
+        }
       ),
       err => {
         this.loadDex();
         console.error('Fehler beim Load Dex Data' + err.toString());
       });
 
+  }
+
+  loadDexManuel(): void {
+    this
+      .dexService
+      .getDex()
+      .subscribe(
+        dex => {
+          this.dex = dex;
+          this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
+          this.poolEth = dex.pools.find(x => x.poolPairId === '4');
+          this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
+          this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
+          this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
+          this.berechnePoolOutBtc();
+          this.berechnePoolOutEth();
+          this.berechnePoolOutUsdt();
+          this.berechnePoolOutLtc();
+          this.berechnePoolOutDoge();
+          this.berechnePoolOut();
+          this.berechneStakingOut();
+          this.buildDataForChart();
+        },
+        err => {
+          console.error(err);
+        });
   }
 
   loadAllAccounts(): void {
@@ -349,29 +369,55 @@ export class AppComponent implements OnInit {
   private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
 
     if (poolName === 'BTC') {
-      this.anteilAmPoolBtc = this.berechneAnteilAmPool(this.wallet.btcdfi, pool, outcome, dfiProBlock);
-      this.btc = this.anteilAmPoolBtc * +pool.reserveA / 100;
-      this.dfiInBtcPool = this.anteilAmPoolBtc * +pool.reserveB / 100;
+      if (this.autoLoadData) {
+        this.anteilAmPoolBtc = this.berechneAnteilAmPool(this.wallet.btcdfi, pool, outcome, dfiProBlock);
+        this.wallet.btcInBtcPool = this.anteilAmPoolBtc * +pool.reserveA / 100;
+        this.wallet.dfiInBtcPool = this.anteilAmPoolBtc * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolBtc =
+          this.berechneAnteilAmPoolManuel(this.wallet.btcInBtcPool, this.wallet.dfiInBtcPool, pool, outcome, dfiProBlock);
+      }
     }
     if (poolName === 'ETH') {
-      this.anteilAmPoolEth = this.berechneAnteilAmPool(this.wallet.ethdfi, pool, outcome, dfiProBlock);
-      this.eth = this.anteilAmPoolEth * +pool.reserveA / 100;
-      this.dfiInEthPool = this.anteilAmPoolEth * +pool.reserveB / 100;
+      if (this.autoLoadData) {
+        this.anteilAmPoolEth = this.berechneAnteilAmPool(this.wallet.ethdfi, pool, outcome, dfiProBlock);
+        this.wallet.ethInEthPool = this.anteilAmPoolEth * +pool.reserveA / 100;
+        this.wallet.dfiInEthPool = this.anteilAmPoolEth * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolEth =
+          this.berechneAnteilAmPoolManuel(this.wallet.ethInEthPool, this.wallet.dfiInEthPool, pool, outcome, dfiProBlock);
+      }
     }
     if (poolName === 'USDT') {
-      this.anteilAmPoolUsdt = this.berechneAnteilAmPool(this.wallet.usdtdfi, pool, outcome, dfiProBlock);
-      this.usdt = this.anteilAmPoolUsdt * +pool.reserveA / 100;
-      this.dfiInUsdtPool = this.anteilAmPoolUsdt * +pool.reserveB / 100;
+      if (this.autoLoadData) {
+        this.anteilAmPoolUsdt = this.berechneAnteilAmPool(this.wallet.usdtdfi, pool, outcome, dfiProBlock);
+        this.wallet.usdtInUsdtPool = this.anteilAmPoolUsdt * +pool.reserveA / 100;
+        this.wallet.dfiInUsdtPool = this.anteilAmPoolUsdt * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolUsdt =
+          this.berechneAnteilAmPoolManuel(this.wallet.usdtInUsdtPool, this.wallet.dfiInUsdtPool, pool, outcome, dfiProBlock);
+      }
     }
     if (poolName === 'LTC') {
-      this.anteilAmPoolLtc = this.berechneAnteilAmPool(this.wallet.ltcdfi, pool, outcome, dfiProBlock);
-      this.ltc = this.anteilAmPoolLtc * +pool.reserveA / 100;
-      this.dfiInLtcPool = this.anteilAmPoolLtc * +pool.reserveB / 100;
+      if (this.autoLoadData) {
+        this.anteilAmPoolLtc = this.berechneAnteilAmPool(this.wallet.ltcdfi, pool, outcome, dfiProBlock);
+        this.wallet.ltcInLtcPool = this.anteilAmPoolLtc * +pool.reserveA / 100;
+        this.wallet.dfiInLtcPool = this.anteilAmPoolLtc * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolLtc =
+          this.berechneAnteilAmPoolManuel(this.wallet.ltcInLtcPool, this.wallet.dfiInLtcPool, pool, outcome, dfiProBlock);
+      }
     }
     if (poolName === 'DOGE') {
-      this.anteilAmPoolDoge = this.berechneAnteilAmPool(this.wallet.dogedfi, pool, outcome, dfiProBlock);
-      this.doge = this.anteilAmPoolDoge * +pool.reserveA / 100;
-      this.dfiInDogePool = this.anteilAmPoolDoge * +pool.reserveB / 100;
+      if (this.autoLoadData) {
+        this.anteilAmPoolDoge = this.berechneAnteilAmPool(this.wallet.dogedfi, pool, outcome, dfiProBlock);
+        this.wallet.dogeInDogePool = this.anteilAmPoolDoge * +pool.reserveA / 100;
+        this.wallet.dfiInDogePool = this.anteilAmPoolDoge * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolDoge =
+          this.berechneAnteilAmPoolManuel(this.wallet.dogeInDogePool, this.wallet.dfiInDogePool, pool, outcome, dfiProBlock);
+      }
+
     }
 
     outcome.dfiPerHour = outcome.dfiPerMin * 60;
@@ -383,6 +429,14 @@ export class AppComponent implements OnInit {
 
   private berechneAnteilAmPool(lpToken: number, pool: Pool, outcome: Outcome, dfiProBlock: number): number {
     const anteilAmPool = lpToken / pool.totalLiquidityLpToken * 100;
+    outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
+    return anteilAmPool;
+  }
+
+  private berechneAnteilAmPoolManuel(poolCoin: number, dfInPool: number, pool: Pool, outcome: Outcome, dfiProBlock: number): number {
+    const anteileDFI = dfInPool / +pool.reserveB * 100;
+    const anteile = poolCoin / +pool.reserveA * 100;
+    const anteilAmPool = (anteile + anteileDFI) / 2;
     outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
     return anteilAmPool;
   }
@@ -419,18 +473,98 @@ export class AppComponent implements OnInit {
     return localStorage.getItem(key) !== 'null';
   }
 
-  loadLocalStorage(): void {
-    // Staking
-    if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
-      this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
+  loadLocalStorageForManuel(): void {
+    // BTC POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.btcInBtcPoolKey)) {
+      this.wallet.btcInBtcPool = +localStorage.getItem(this.wallet.btcInBtcPoolKey);
     } else {
-      this.dfiInStaking = 0;
+      this.wallet.btcInBtcPool = 0;
     }
+    if (this.isLocalStorageNotEmpty(this.wallet.btcKey)) {
+      this.wallet.btc = +localStorage.getItem(this.wallet.btcKey);
+    } else {
+      this.wallet.btc = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInBtcPoolKey)) {
+      this.wallet.dfiInBtcPool = +localStorage.getItem(this.wallet.dfiInBtcPoolKey);
+    } else {
+      this.wallet.dfiInBtcPool = 0;
+    }
+    // ETH POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.ethInEthPoolKey)) {
+      this.wallet.ethInEthPool = +localStorage.getItem(this.wallet.ethInEthPoolKey);
+    } else {
+      this.wallet.ethInEthPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.ethKey)) {
+      this.wallet.eth = +localStorage.getItem(this.wallet.ethKey);
+    } else {
+      this.wallet.eth = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInEthPoolKey)) {
+      this.wallet.dfiInEthPool = +localStorage.getItem(this.wallet.dfiInEthPoolKey);
+    } else {
+      this.wallet.dfiInEthPool = 0;
+    }
+    // USDT POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.usdtInUsdtPoolKey)) {
+      this.wallet.usdtInUsdtPool = +localStorage.getItem(this.wallet.usdtInUsdtPoolKey);
+    } else {
+      this.wallet.usdtInUsdtPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.usdtKey)) {
+      this.wallet.usdt = +localStorage.getItem(this.wallet.usdtKey);
+    } else {
+      this.wallet.usdt = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInUsdtPoolKey)) {
+      this.wallet.dfiInUsdtPool = +localStorage.getItem(this.wallet.dfiInUsdtPoolKey);
+    } else {
+      this.wallet.dfiInUsdtPool = 0;
+    }
+    // LTC POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.ltcInLtcPoolKey)) {
+      this.wallet.ltcInLtcPool = +localStorage.getItem(this.wallet.ltcInLtcPoolKey);
+    } else {
+      this.wallet.ltcInLtcPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.ltcKey)) {
+      this.wallet.ltc = +localStorage.getItem(this.wallet.ltcKey);
+    } else {
+      this.wallet.ltc = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInLtcPoolKey)) {
+      this.wallet.dfiInLtcPool = +localStorage.getItem(this.wallet.dfiInLtcPoolKey);
+    } else {
+      this.wallet.dfiInLtcPool = 0;
+    }
+    // DOGE POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.dogeInDogePoolKey)) {
+      this.wallet.dogeInDogePool = +localStorage.getItem(this.wallet.dogeInDogePoolKey);
+    } else {
+      this.wallet.dogeInDogePool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dogeKey)) {
+      this.wallet.doge = +localStorage.getItem(this.wallet.dogeKey);
+    } else {
+      this.wallet.doge = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInDogePoolKey)) {
+      this.wallet.dfiInDogePool = +localStorage.getItem(this.wallet.dfiInDogePoolKey);
+    } else {
+      this.wallet.dfiInDogePool = 0;
+    }
+    // WALLET
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiKey)) {
+      this.wallet.dfi = +localStorage.getItem(this.wallet.dfiKey);
+    } else {
+      this.wallet.dfi = 0;
+    }
+
   }
 
-  onChangeDfiStaking(newValue): void {
-    this.dfiInStaking = newValue !== null ? newValue : 0;
-    localStorage.setItem(this.dfiInStakingKey, newValue !== null ? newValue : 0);
+  onChangeDfiStaking(): void {
+    localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking ));
     this.berechneStakingOut();
     this.buildDataForChart();
   }
@@ -615,36 +749,38 @@ export class AppComponent implements OnInit {
   }
 
   getBtcValueUsd(): number {
-    return (this.btc + this.wallet.btc) * this.poolBtc?.priceA;
+    return (this.wallet.btcInBtcPool + this.wallet.btc) * this.poolBtc?.priceA;
   }
 
   getEthValueUsd(): number {
-    return (this.eth + this.wallet.eth) * this.poolEth?.priceA;
+    return (this.wallet.ethInEthPool + this.wallet.eth) * this.poolEth?.priceA;
   }
 
   getUsdtValueUsd(): number {
-    return (this.usdt + this.wallet.usdt) * this.poolUsdt?.priceA;
+    return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
   }
 
   getLtcValueUsd(): number {
-    return (this.ltc + this.wallet.ltc) * this.poolLtc?.priceA;
+    return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.poolLtc?.priceA;
   }
 
   getDogeValueUsd(): number {
-    return (this.doge + this.wallet.doge) * this.poolDoge?.priceA;
+    return (this.wallet.dogeInDogePool + this.wallet.doge) * this.poolDoge?.priceA;
   }
 
   getDfiCount(): number {
-    return this.wallet.dfi + this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool
-      + this.dfiInDogePool + this.dfiInStaking;
+    return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
+      + this.wallet.dfiInDogePool + this.dfiInStaking;
   }
 
   getDfiCountIncome(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool + this.dfiInStaking;
+    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
+      + this.wallet.dfiInDogePool + this.dfiInStaking;
   }
 
   getDfiCountLM(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool;
+    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
+      + this.wallet.dfiInDogePool;
   }
 
   getDfiCountLMUsd(): number {
@@ -683,7 +819,8 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCountInLM(): number {
-    return this.dfiInEthPool + this.dfiInBtcPool + this.dfiInUsdtPool + this.dfiInLtcPool + this.dfiInDogePool;
+    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
+      + this.wallet.dfiInDogePool;
   }
 
   getDfiValueUsd(): number {
@@ -788,4 +925,141 @@ export class AppComponent implements OnInit {
 
   }
 
+  // ============= ONCHANGE INPUT =================
+  onChangeDfiWallet(): void {
+    if (this.checkInputNumber(this.wallet.dfi)) {
+      localStorage.setItem(this.wallet.dfiKey, JSON.stringify(this.wallet.dfi));
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeBtcBtcPool(): void {
+    if (this.checkInputNumber(this.wallet.btcInBtcPool )) {
+      localStorage.setItem(this.wallet.btcInBtcPoolKey, JSON.stringify(this.wallet.btcInBtcPool));
+      this.berechnePoolOutBtc();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeBtcWallet(): void {
+    if (this.checkInputNumber(this.wallet.btc )) {
+      localStorage.setItem(this.wallet.btcKey, JSON.stringify(this.wallet.btc));
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeEthEthPool(): void {
+    if (this.checkInputNumber(this.wallet.ethInEthPool )) {
+      localStorage.setItem(this.wallet.ethInEthPoolKey, JSON.stringify(this.wallet.ethInEthPool));
+      this.berechnePoolOutEth();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeEthWallet(): void {
+    if (this.checkInputNumber(this.wallet.eth )) {
+      localStorage.setItem(this.wallet.ethKey, JSON.stringify(this.wallet.eth));
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeUsdtUsdtPool(): void {
+    if (this.checkInputNumber(this.wallet.usdtInUsdtPool )) {
+      localStorage.setItem(this.wallet.usdtInUsdtPoolKey, JSON.stringify(this.wallet.usdtInUsdtPool));
+      this.berechnePoolOutUsdt();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeUsdtWallet(): void {
+    if (this.checkInputNumber(this.wallet.usdt )) {
+      localStorage.setItem(this.wallet.usdtKey, JSON.stringify(this.wallet.usdt));
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeLtcLtcPool(): void {
+    if (this.checkInputNumber(this.wallet.ltc )) {
+      localStorage.setItem(this.wallet.ltcInLtcPoolKey, JSON.stringify(this.wallet.ltc));
+      this.berechnePoolOutLtc();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeLtcWallet(): void {
+    if (this.checkInputNumber(this.wallet.ltc)) {
+      localStorage.setItem(this.wallet.ltcKey, JSON.stringify(this.wallet.ltc ));
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDogeDogePool(): void {
+    if (this.checkInputNumber(this.wallet.doge )) {
+      localStorage.setItem(this.wallet.dogeInDogePoolKey, JSON.stringify(this.wallet.doge));
+      this.berechnePoolOutDoge();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDogeWallet(): void {
+    if (this.checkInputNumber(this.wallet.doge )) {
+      localStorage.setItem(this.wallet.dogeKey, JSON.stringify(this.wallet.doge));
+      this.buildDataForChart();
+    }
+  }
+
+  // DFI in POOLS
+  onChangeDfiBtcPool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInBtcPool )) {
+      localStorage.setItem(this.wallet.dfiInBtcPoolKey, JSON.stringify(this.wallet.dfiInBtcPool));
+      this.berechnePoolOutBtc();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDfiEthPool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInEthPool)) {
+      localStorage.setItem(this.wallet.dfiInEthPoolKey, JSON.stringify(this.wallet.dfiInEthPool));
+      this.berechnePoolOutEth();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDfiUsdtPool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInUsdtPool )) {
+      localStorage.setItem(this.wallet.dfiInUsdtPoolKey, JSON.stringify(this.wallet.dfiInUsdtPool));
+      this.berechnePoolOutUsdt();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDfiLtcPool(): void {
+    if ( this.checkInputNumber(this.wallet.dfiInLtcPool)) {
+      localStorage.setItem(this.wallet.dfiInLtcPoolKey, JSON.stringify( this.wallet.dfiInLtcPool));
+      this.berechnePoolOutLtc();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  onChangeDfiDogePool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInDogePool)) {
+      localStorage.setItem(this.wallet.dfiInDogePoolKey, JSON.stringify(this.wallet.dfiInDogePool));
+      this.berechnePoolOutDoge();
+      this.berechnePoolOut();
+      this.buildDataForChart();
+    }
+  }
+
+  checkInputNumber(value: number): boolean {
+    return value !== null && value >= 0;
+  }
 }

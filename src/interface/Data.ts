@@ -17,15 +17,56 @@ export type ChartOptions = {
 
 export class Wallet {
   dfi = 0;
-  btc = 0;
-  eth = 0;
-  ltc =  0;
-  doge = 0;
-  usdt = 0;
+  dfiKey = 'dfiKey';
+
   btcdfi = 0;
   ethdfi = 0;
   ltcdfi = 0;
   dogedfi = 0;
   usdtdfi = 0;
+
+  // User Infos
+  // BTC Pool
+  btcInBtcPool = 0;
+  btcInBtcPoolKey = 'btcInBtcPoolKey';
+  btc = 0;
+  btcKey = 'btcKey';
+  dfiInBtcPoolKey = 'dfiInBtcPoolKey';
+  dfiInBtcPool = 0;
+
+  // ETH Pool
+  ethInEthPool = 0;
+  ethInEthPoolKey = 'ethInEthPoolKey';
+  eth = 0;
+  ethKey = 'ethKey';
+  dfiInEthPool = 0;
+  dfiInEthPoolKey = 'dfiInEthPoolKey';
+
+  // USDT Pool
+  usdtInUsdtPool = 0;
+  usdtInUsdtPoolKey = 'usdtInUsdtPoolKey';
+  usdt = 0;
+  usdtKey = 'usdtKey';
+  dfiInUsdtPool = 0;
+  dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
+
+  // LTC Pool
+  ltcInLtcPool = 0;
+  ltcInLtcPoolKey = 'ltcInLtcPoolKey';
+  ltc = 0;
+  ltcKey = 'ltcKey';
+  dfiInLtcPool = 0;
+  dfiInLtcPoolKey = 'dfiInLtcPoolKey';
+
+  // DOGE Pool
+  dogeInDogePool = 0;
+  dogeInDogePoolKey = 'dogeInDogePoolKey';
+  doge = 0;
+  dogeKey = 'dogeKey';
+  dfiInDogePool = 0;
+  dfiInDogePoolKey = 'dfiInDogePoolKey';
+
 }
+
+
 

@@ -3,14 +3,14 @@
     <div class="col-auto margin-col">
       <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
     </div>
-    <div class="col-sm-3 margin-col">
+    <div class="col-sm-4 margin-col">
       <h1><span class="badge badge-secondary left">DeFiChain Income Dashboard</span></h1>
       <p><span class="badge badge-secondary left">{{env.version}}</span></p>
       <p>Welcome, on this website you can track your income of your cryptos</p>
       <p>during staking or liquidity mining with your defichain app.</p>
       <p>All data powered by <a href="https://dex.defichain.com/mainnet/pool">
         https://api.defichain.io/v1</a></p>
-      <p>Data are refreshed every {{sCountdown}}s. No F5 needed.</p>
+      <h3><span class="badge badge-pill badge-success left">Data are refreshed every {{sCountdown}}s. No F5 needed.</span></h3>
       <p>Time to next refresh <span class="badge badge-pill badge-dark left">
         <countdown #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown></span>
       </p>
@@ -24,7 +24,17 @@
           <button type="button" (click)="onChangeRefreshS()" class="btn btn-success">set</button>
         </div>
       </div>
-
+      <br>
+      <h3><span class="badge badge-pill badge-success left">Please decide how your data will be loaded</span></h3>
+      <p><span class="badge badge-pill badge-dark left">ON</span> -> you add your addresses from defichain app and
+        everything will be loaded <span class="badge badge-pill badge-dark left">automatically</span></p>
+      <p><span class="badge badge-pill badge-dark left">OFF</span> -> you have to enter your values <span
+        class="badge badge-pill badge-dark left">manually</span>.</p>
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="autoLoadData" (ngModelChange) = "saveToggleAutoLoad()" type="checkbox" class="custom-control-input" id="customSwitch1">
+        <label class="custom-control-label"
+               for="customSwitch1">{{autoLoadData ? 'Toggle to off auto load.' : 'Toggle to on auto load.'}}</label>
+      </div>
 
     </div>
     <div class="col-auto margin-col">
@@ -120,61 +130,202 @@
     </div>
   </div>
 </div>
-<div class="container left">
-  <h1><span class="badge badge-secondary left">Your defichain app dfi addresses</span></h1>
-  <h3>Please add all your defichain app addresses.</h3>
-  <p><span class="font-weight-bold">IMPORTANT</span> You have to execute <span class="badge badge-secondary left">listaccounts {{'{}'}}
-    false false true</span> in your defichain app</p>
-  <p>After that add all unique (no duplicates) addresses from owner attribute.</p>
-  <p>Amounts may be a little late.</p>
-  <div class="row">
-    <div class="col-4 bg-light margin-col">
-      <div class="form-group">
-        <label for="inputAddress">DFI Address</label>
-        <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress"
-               placeholder="Enter your address">
-        <small class="form-text text-muted">Add your wallet addresses.</small>
+<div *ngIf="autoLoadData">
+
+  <div class="container left">
+    <h1><span class="badge badge-secondary left">Your defichain app dfi addresses</span></h1>
+    <h3>Please add all your defichain app addresses.</h3>
+    <p><span class="font-weight-bold">IMPORTANT</span> You have to execute <span class="badge badge-secondary left">listaccounts {{'{}'}}
+      false false true</span> in your defichain app</p>
+    <p>After that add all unique (no duplicates) addresses from owner attribute.</p>
+    <p>Amounts may be a little late.</p>
+    <div class="row">
+      <div class="col-4 bg-light margin-col">
+        <div class="form-group">
+          <label for="inputAddress">DFI Address</label>
+          <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress"
+                 placeholder="Enter your address">
+          <small class="form-text text-muted">Add your wallet addresses.</small>
+        </div>
+        <button type="button" (click)="addAdress()" class="btn btn-success"> + Add</button>
       </div>
-      <button type="button" (click)="addAdress()" class="btn btn-success"> + Add</button>
+      <div class="col-auto bg-light margin-col">
+        <h3>Your entered addresses.</h3>
+        <p *ngFor="let a of adresses">
+          <span class="badge badge-pill badge-primary left">{{a}}</span>
+          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - Remove</button>
+        </p>
+      </div>
     </div>
-    <div class="col-auto bg-light margin-col">
-      <h3>Your entered addresses.</h3>
-      <p *ngFor="let a of adresses">
-        <span class="badge badge-pill badge-primary left">{{a}}</span>
-        <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - Remove</button>
-      </p>
+  </div>
+
+  <div class="container left">
+    <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
+    <div class="row">
+      <div class="col-auto bg-light margin-col">
+        <h3>Your Wallet Coins</h3>
+        <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></p>
+        <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span></p>
+        <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
+        <p> LTC <span class="badge badge-pill badge-primary left">{{wallet?.ltc | number: '1.3-3'}}</span></p>
+        <p> USDT <span class="badge badge-pill badge-primary left">{{wallet?.usdt | number: '1.3-3'}}</span></p>
+        <p> DOGE <span class="badge badge-pill badge-primary left">{{wallet?.doge | number: '1.3-3'}}</span></p>
+      </div>
+      <div class="col-auto bg-light margin-col">
+        <h3>Your LP Token</h3>
+        <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span></p>
+        <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span></p>
+        <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
+        <p> USDT-DFI <span class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span></p>
+        <p> DOGE-DFI <span class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span></p>
+      </div>
+      <div class="col-auto bg-light margin-col">
+        <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
+        <div class="form-group">
+          <label for="inputDFIStakingAuto">DFI</label>
+          <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
+                 class="form-control form-control-sm" id="inputDFIStakingAuto" placeholder="Enter dfi amount">
+          <small class="form-text text-muted">Add your stake DFI amount.</small>
+          <small class="form-text text-muted">Set 0 if you not stake.</small>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
-<div class="container left">
+<div *ngIf="!autoLoadData" class="container left">
   <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
+  <h3>If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input field.</h3>
   <div class="row">
     <div class="col-auto bg-light margin-col">
-      <h3>Your Wallet Coins</h3>
-      <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></p>
-      <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span></p>
-      <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
-      <p> LTC <span class="badge badge-pill badge-primary left">{{wallet?.ltc | number: '1.3-3'}}</span></p>
-      <p> USDT <span class="badge badge-pill badge-primary left">{{wallet?.usdt | number: '1.3-3'}}</span></p>
-      <p> DOGE <span class="badge badge-pill badge-primary left">{{wallet?.doge | number: '1.3-3'}}</span></p>
-    </div>
-    <div class="col-auto bg-light margin-col">
-      <h3>Your LP Token</h3>
-      <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span></p>
-      <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span></p>
-      <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
-      <p> USDT-DFI <span class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span></p>
-      <p> DOGE-DFI <span class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span></p>
-    </div>
-    <div class="col-auto bg-light margin-col">
+      <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
+      <div class="form-group">
+        <label for="inputDFIWallet">DFI</label>
+        <input required [(ngModel)]="wallet.dfi" (ngModelChange)="onChangeDfiWallet()" type="number"
+               class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your wallet DFI amount.</small>
+      </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
-        <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking($event)" type="number"
+        <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
                class="form-control form-control-sm" id="inputDFIStaking" placeholder="Enter dfi amount">
         <small class="form-text text-muted">Add your stake DFI amount.</small>
-        <small class="form-text text-muted">Set 0 if you not stake.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
+      <div class="form-group">
+        <label for="inputBTCWallet">BTC</label>
+        <input required [(ngModel)]="wallet.btc" (ngModelChange)="onChangeBtcWallet()" type="number"
+               class="form-control form-control-sm" id="inputBTCWallet" placeholder="Enter btc amount">
+        <small class="form-text text-muted">Add your wallet BTC amount.</small>
+      </div>
+      <div class="form-group">
+        <label for="inputETHWallet">ETH</label>
+        <input required [(ngModel)]="wallet.eth" (ngModelChange)="onChangeEthWallet()" type="number"
+               class="form-control form-control-sm" id="inputETHWallet" placeholder="Enter eth amount">
+        <small class="form-text text-muted">Add your wallet ETH amount.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
+      <div class="form-group">
+        <label for="inputLTCWallet">LTC</label>
+        <input required [(ngModel)]="wallet.ltc" (ngModelChange)="onChangeLtcWallet()" type="number"
+               class="form-control form-control-sm" id="inputLTCWallet" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your wallet LTC amount.</small>
+      </div>
+      <div class="form-group">
+        <label for="inputUSDTWallet">USDT</label>
+        <input required [(ngModel)]="wallet.usdt" (ngModelChange)="onChangeUsdtWallet()" type="number"
+               class="form-control form-control-sm" id="inputUSDTWallet" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your wallet USDT amount.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
+      <div class="form-group">
+        <label for="inputDOGEWallet">DOGE</label>
+        <input required [(ngModel)]="wallet.doge" (ngModelChange)="onChangeDogeWallet()" type="number"
+               class="form-control form-control-sm" id="inputDOGEWallet" placeholder="Enter dfi amount">
+        <small class="form-text text-muted">Add your wallet DOGE amount.</small>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <h2><span class="badge badge-pill badge-primary left">Liquidity Mining</span></h2>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">BTC Pool</span>
+          <div class="form-group">
+            <label for="inputBTCBTCPool">BTC</label>
+            <input required [(ngModel)]="wallet.btcInBtcPool" (ngModelChange)="onChangeBtcBtcPool()" type="number"
+                   class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
+            <small class="form-text text-muted">Add your btc pool BTC amount.</small>
+
+            <label for="inputDFIBTCPool">DFI</label>
+            <input required [(ngModel)]="wallet.dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool()" type="number"
+                   class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your btc pool DFI amount.</small>
+          </div>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">ETH Pool</span>
+          <div class="form-group">
+            <label for="inputETHETHPool">ETH</label>
+            <input required [(ngModel)]="wallet.ethInEthPool" (ngModelChange)="onChangeEthEthPool()" type="number"
+                   class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
+            <small class="form-text text-muted">Add your eth pool ETH amount.</small>
+
+            <label for="inputDFIETHPool">DFI</label>
+            <input required [(ngModel)]="wallet.dfiInEthPool" (ngModelChange)="onChangeDfiEthPool()" type="number"
+                   class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your eth pool DFI amount.</small>
+          </div>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">USDT Pool</span>
+          <div class="form-group">
+            <label for="inputUSDTUSDTPool">USDT</label>
+            <input required [(ngModel)]="wallet.usdtInUsdtPool" (ngModelChange)="onChangeUsdtUsdtPool()" type="number"
+                   class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
+            <small class="form-text text-muted">Add your usdt pool USDT amount.</small>
+
+            <label for="inputDFIUSDTPool">DFI</label>
+            <input required [(ngModel)]="wallet.dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool()" type="number"
+                   class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your usdt pool DFI amount.</small>
+          </div>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">LTC Pool</span>
+          <div class="form-group">
+            <label for="inputLTCLTCPool">LTC</label>
+            <input required [(ngModel)]="wallet.ltcInLtcPool" (ngModelChange)="onChangeLtcLtcPool()" type="number"
+                   class="form-control form-control-sm" id="inputLTCLTCPool" placeholder="Enter usdt amount">
+            <small class="form-text text-muted">Add your ltc pool LTC amount.</small>
+
+            <label for="inputDFILTCPool">DFI</label>
+            <input required [(ngModel)]="wallet.dfiInLtcPool" (ngModelChange)="onChangeDfiLtcPool()" type="number"
+                   class="form-control form-control-sm" id="inputDFILTCPool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your ltc pool DFI amount.</small>
+          </div>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <span class="badge badge-pill badge-primary left">DOGE Pool</span>
+          <div class="form-group">
+            <label for="inputDogeDogePool">DOGE</label>
+            <input required [(ngModel)]="wallet.dogeInDogePool" (ngModelChange)="onChangeDogeDogePool()" type="number"
+                   class="form-control form-control-sm" id="inputDogeDogePool" placeholder="Enter usdt amount">
+            <small class="form-text text-muted">Add your doge pool DOGE amount.</small>
+
+            <label for="inputDFIDogePool">DFI</label>
+            <input required [(ngModel)]="wallet.dfiInDogePool" (ngModelChange)="onChangeDfiDogePool()" type="number"
+                   class="form-control form-control-sm" id="inputDFIDogePool" placeholder="Enter dfi amount">
+            <small class="form-text text-muted">Add your doge pool DFI amount.</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -182,9 +333,10 @@
 </div>
 
 <div class="container left">
+  <h1><span class="badge badge-secondary left">Your value</span></h1>
   <div class="row">
     <div class="col-sm bg-light margin-col">
-      <h1><span class="badge badge-secondary left">Your value</span></h1>
+
       <h2><span class="badge badge-pill badge-success left">
         {{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
@@ -225,16 +377,16 @@
         </span>
           </h2>
           <div class="row">
-            <div *ngIf="btc > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{btc + wallet?.btc | number: '1.5-5'}} BTC -
+            <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}} BTC -
         <span *ngIf="fiat === 'USD'">{{getBtcValueUsd() | currency:'USD'}}</span>
         <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'"> {{getBtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
         </span></h2>
             </div>
-            <div *ngIf="eth > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{eth + wallet?.eth | number: '1.3-3'}} ETH -
+            <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{wallet?.eth + wallet?.ethInEthPool | number: '1.3-3'}} ETH -
             <span *ngIf="fiat === 'USD'">{{getEthValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -243,16 +395,16 @@
             </div>
           </div>
           <div class="row">
-            <div *ngIf="usdt > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{usdt + wallet?.usdt | number: '1.3-3'}} USDT -
+            <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.3-3'}} USDT -
             <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
               </span></h2>
             </div>
-            <div *ngIf="ltc > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{ltc + wallet?.ltc | number: '1.3-3'}} LTC -
+            <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.3-3'}} LTC -
             <span *ngIf="fiat === 'USD'">{{getLtcValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -261,8 +413,8 @@
             </div>
           </div>
           <div class="row">
-            <div *ngIf="doge > 0" class="col-auto bg-light margin-col">
-              <h2><span class="badge badge-pill badge-primary left"> {{doge + wallet?.doge| number: '1.3-3'}} DOGE -
+            <div *ngIf="wallet?.doge > 0 ||wallet.dogeInDogePool" class="col-auto bg-light margin-col">
+              <h2><span class="badge badge-pill badge-primary left"> {{wallet?.doge + wallet?.dogeInDogePool | number: '1.3-3'}} DOGE -
             <span *ngIf="fiat === 'USD'">{{getDogeValueUsd() | currency:'USD'}}</span>
             <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
             <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>
@@ -281,12 +433,12 @@
           <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
           <h2><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
             / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h2>
-          <h2>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="btc > 0">{{btc | number: '1.5-5'}}
+          <h2>Balance <span class="badge badge-pill badge-primary left"> <span *ngIf="wallet?.btcInBtcPool > 0">{{wallet?.btcInBtcPool | number: '1.5-5'}}
             BTC</span> <span
-            *ngIf="eth > 0"> - {{eth | number: '1.3-3'}}
-            ETH</span> <span *ngIf="usdt > 0">- USDT {{usdt}}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span
-            *ngIf="doge > 0">- DOGE {{doge | number: '1.2-2'}}</span>
+            *ngIf="wallet?.ethInEthPool > 0"> - {{wallet?.ethInEthPool | number: '1.3-3'}}
+            ETH</span> <span *ngIf="wallet?.usdtInUsdtPool > 0">- USDT {{wallet?.usdtInUsdtPool}}</span> <span
+            *ngIf="wallet?.ltcInLtcPool > 0">- LTC {{wallet.ltcInLtcPool | number: '1.3-3'}}</span> <span
+            *ngIf="wallet?.dogeInDogePool > 0">- DOGE {{wallet?.dogeInDogePool | number: '1.2-2'}}</span>
             - {{getDfiCountIncome() | number: '1.2-2'}} DFI </span></h2>
           <div class="row">
             <div class="col-auto bg-light margin-col">
@@ -452,20 +604,20 @@
   </div>
   <div *ngIf="details === 'LM'" class="container left">
     <div class="row">
-      <div *ngIf="btc > 0 || eth > 0 " class="col-sm bg-light margin-col">
+      <div class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
         <h3><span class="badge badge-pill badge-success left">
-          <span *ngIf="btc > 0">{{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC</span>
-           <span *ngIf="eth > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
-           <span *ngIf="ltc > 0">/ {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC</span>
-          <span *ngIf="usdt > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
-          <span *ngIf="doge > 0"> / {{getAnteilDogePoolAnGesamtLM() | number: '1.1-1'}} % DOGE</span>
+          <span *ngIf="wallet?.btcInBtcPool > 0">{{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC</span>
+           <span *ngIf="wallet?.ethInEthPool > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
+           <span *ngIf="wallet?.ltcInLtcPool > 0">/ {{getAnteilLTCPoolAnGesamtLM() | number: '1.1-1'}} % LTC</span>
+          <span *ngIf="wallet?.usdtInUsdtPool > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
+          <span *ngIf="wallet?.dogeInDogePool> 0"> / {{getAnteilDogePoolAnGesamtLM() | number: '1.1-1'}} % DOGE</span>
         </span></h3>
-        <h3>Balance <span class="badge badge-pill badge-primary left"> {{btc | number: '1.5-5'}} BTC
-          - {{eth | number: '1.3-3'}} ETH
-          <span *ngIf="usdt > 0">c- USDT {{usdt | number: '1.3-3' }}</span> <span
-            *ngIf="ltc > 0">- LTC {{ltc | number: '1.3-3'}}</span> <span
-            *ngIf="doge > 0">- DOGE {{doge | number: '1.3-3'}}</span>
+        <h3>Balance <span class="badge badge-pill badge-primary left"> {{wallet?.btcInBtcPool | number: '1.5-5'}} BTC
+          - {{wallet?.ethInEthPool | number: '1.3-3'}} ETH
+          <span *ngIf="wallet?.usdtInUsdtPool > 0">c- USDT {{wallet?.usdtInUsdtPool | number: '1.3-3' }}</span> <span
+            *ngIf="wallet?.ltcInLtcPool > 0">- LTC {{wallet?.ltcInLtcPool | number: '1.3-3'}}</span> <span
+            *ngIf="wallet?.dogeInDogePool > 0">- DOGE {{wallet?.dogeInDogePool | number: '1.3-3'}}</span>
           - {{getDfiCountInLM() | number: '1.3-3'}} DFI </span></h3>
         <h3>Balance in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getLMUsd() | currency:'USD'}} </span>
@@ -563,7 +715,7 @@
   <div *ngIf="details === 'LM'" class="container left">
     <h1><span class="badge badge-secondary left">Your pools</span></h1>
     <div class="row">
-      <div *ngIf="btc > 0 || dfiInBtcPool > 0" class="col-sm bg-light margin-col">
+      <div *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></h3>
 
@@ -572,7 +724,7 @@
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
 
-      <div *ngIf=" eth > 0 || dfiInEthPool" class="col-sm bg-light margin-col">
+      <div *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></h3>
 
@@ -581,7 +733,7 @@
                      [usdToGbp]="usdToGbp"></app-earning>
 
       </div>
-      <div *ngIf=" usdt > 0 || dfiInUsdtPool > 0" class="col-sm bg-light margin-col">
+      <div *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></h3>
 
@@ -589,7 +741,7 @@
         <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-      <div *ngIf=" ltc > 0 || dfiInLtcPool > 0" class="col-sm bg-light margin-col">
+      <div *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span></h3>
 
@@ -597,7 +749,7 @@
         <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-      <div *ngIf=" doge > 0 || dfiInDogePool > 0" class="col-sm bg-light margin-col">
+      <div *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}%</span></h3>
         <h3>Pool share <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span></h3>
 
