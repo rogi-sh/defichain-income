@@ -15,7 +15,41 @@
   "load4": "Toggle to use manuel enter your funds.",
   "load5": "Toggle to use automatically load your funds.",
   "stats": "Statistics",
-  "price": "price"
+  "price": "price",
+  "address": {
+    "label": "address",
+    "title": "Your defichain app dfi addresses",
+    "title2": "Please add all your defichain app addresses.",
+    "imp": "IMPORTANT",
+    "exc": "You have to execute ",
+    "exc2": " in your defichain app",
+    "exc3": "After that add all unique (no duplicates) addresses from the response (owner attribute).",
+    "late": "Amounts may deviate slightly due to delay.",
+    "add": "Add your wallet addresses to track.",
+    "added": "Your tracked addresses.",
+    "button-add": "add",
+    "button-remove": "remove"
+  },
+  "holdings": {
+    "title": "Your crypto holdings",
+    "wallet": "Your Wallet Coins",
+    "lp": "Your LP Token",
+    "stake-add": "Add your stake DFI amount.",
+    "no-stake": "Set 0 if you not stake."
+  },
+  "value": {
+    "title": "Your actual value",
+    "cur": "Choose your currency"
+  },
+  "income": {
+    "title": "Your total income"
+  },
+  "hour": "Hour",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "year": "Year",
+  "balance": "Holdings"
 
 
 

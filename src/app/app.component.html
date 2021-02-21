@@ -147,37 +147,36 @@
 <div *ngIf="autoLoadData">
 <br>
   <div class="container left">
-    <h1><span class="badge badge-secondary left">Your defichain app dfi addresses</span></h1>
-    <h3>Please add all your defichain app addresses.</h3>
-    <p><span class="font-weight-bold">IMPORTANT</span> You have to execute <span class="badge badge-secondary left">listaccounts {{'{}'}}
-      false false true</span> in your defichain app</p>
-    <p>After that add all unique (no duplicates) addresses from owner attribute.</p>
-    <p>Amounts may be a little late.</p>
+    <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
+    <h3>{{ 'address.title2' | translate }}</h3>
+    <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span class="badge badge-secondary left">listaccounts {{'{}'}}
+      false false true</span> {{ 'address.exc2' | translate }}</p>
+    <p>{{ 'address.exc3' | translate }}</p>
+    <p>{{ 'address.late' | translate }}</p>
     <div class="row">
       <div class="col-4 bg-light margin-col">
         <div class="form-group">
-          <label for="inputAddress">DFI Address</label>
-          <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress"
-                 placeholder="Enter your address">
-          <small class="form-text text-muted">Add your wallet addresses.</small>
+          <label for="inputAddress">DFI {{ 'address.label' | translate }}</label>
+          <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress">
+          <small class="form-text text-muted">{{ 'address.add' | translate }}</small>
         </div>
-        <button type="button" (click)="addAdress()" class="btn btn-success"> + Add</button>
+        <button type="button" (click)="addAdress()" class="btn btn-success"> + {{ 'address.button-add' | translate }}</button>
       </div>
       <div class="col-auto bg-light margin-col">
-        <h3>Your entered addresses.</h3>
+        <h3>{{ 'address.added' | translate }}</h3>
         <p *ngFor="let a of adresses">
           <span class="badge badge-pill badge-primary left">{{a}}</span>
-          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - Remove</button>
+          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - {{ 'address.button-remove' | translate }}</button>
         </p>
       </div>
     </div>
   </div>
 
   <div class="container left">
-    <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
+    <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
     <div class="row">
       <div class="col-auto bg-light margin-col">
-        <h3>Your Wallet Coins</h3>
+        <h3>{{ 'holdings.wallet' | translate }}</h3>
         <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></p>
         <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span></p>
         <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
@@ -186,7 +185,7 @@
         <p> DOGE <span class="badge badge-pill badge-primary left">{{wallet?.doge | number: '1.3-3'}}</span></p>
       </div>
       <div class="col-auto bg-light margin-col">
-        <h3>Your LP Token</h3>
+        <h3>{{ 'holdings.lp' | translate }}</h3>
         <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span></p>
         <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span></p>
         <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
@@ -198,9 +197,9 @@
         <div class="form-group">
           <label for="inputDFIStakingAuto">DFI</label>
           <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
-                 class="form-control form-control-sm" id="inputDFIStakingAuto" placeholder="Enter dfi amount">
-          <small class="form-text text-muted">Add your stake DFI amount.</small>
-          <small class="form-text text-muted">Set 0 if you not stake.</small>
+                 class="form-control form-control-sm" id="inputDFIStakingAuto">
+          <small class="form-text text-muted">{{ 'holdings.stake-add' | translate }}</small>
+          <small class="form-text text-muted">{{ 'holdings.no-stake' | translate }}</small>
         </div>
       </div>
     </div>
@@ -348,15 +347,14 @@
 </div>
 
 <div class="container left">
-  <h1><span class="badge badge-secondary left">Your value</span></h1>
   <div class="row">
     <div class="col-sm bg-light margin-col">
-
+      <h1><span class="badge badge-secondary left">{{ 'value.title' | translate }}</span></h1>
       <h2><span class="badge badge-pill badge-success left">
         {{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h2>
-      <small class="form-text text-muted">Choose your currency</small>
+      <small class="form-text text-muted">{{ 'value.cur' | translate }}</small>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
         <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-danger">USD</button>
         <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-danger">EUR</button>
@@ -452,13 +450,12 @@
       </div>
     </div>
     <div class="col-sm bg-light margin-col">
-      <h1><span class="badge badge-secondary left">Your income</span></h1>
+      <h1><span class="badge badge-secondary left">{{ 'income.title' | translate }}</span></h1>
       <div class="row">
         <div class="col-auto bg-light margin-col">
-          <h2><span class="badge badge-pill badge-success left">Overall Income</span></h2>
           <h2><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
             / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h2>
-          <h2>Balance <span class="badge badge-pill badge-primary left"> <span
+          <h2><span class="badge badge-pill badge-primary left"> <span
             *ngIf="wallet?.btcInBtcPool > 0">{{wallet?.btcInBtcPool | number: '1.5-5'}}
             BTC</span> <span
             *ngIf="wallet?.ethInEthPool > 0"> - {{wallet?.ethInEthPool | number: '1.3-3'}}
@@ -479,7 +476,7 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>Hour <span class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
+              <h2>{{ 'hour' | translate }} <span class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
                 DFI =
                 <span
                   *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD' }}</span>
@@ -495,7 +492,7 @@
           </div>
           <div class="row">
             <div class="col-auto bg-light margin-col">
-              <h2>Day <span class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
+              <h2>{{ 'day' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
                 DFI =
         <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD' }}</span>
         <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR' }}</span>
@@ -505,7 +502,7 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>Week <span class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
+              <h2>{{ 'week' | translate }} <span class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
                 DFI =
          <span
            *ngIf="fiat === 'USD'">  {{getDfiIncomeValuePerWeekUsd() | currency:'USD' }}</span>
@@ -521,7 +518,7 @@
           </div>
           <div class="row">
             <div class="col-auto bg-light margin-col">
-              <h2>Month <span class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
+              <h2>{{ 'month' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
                 DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD' }}</span>
@@ -535,7 +532,7 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>Year <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
+              <h2>{{ 'year' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
                 DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>

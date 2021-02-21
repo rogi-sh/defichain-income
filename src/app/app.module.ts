@@ -19,7 +19,7 @@ Sentry.init({
   dsn: 'https://698bab4662af4c5e8832caeea75b7901@o283448.ingest.sentry.io/5645017',
   integrations: [
     new Integrations.BrowserTracing({
-      tracingOrigins: ['localhost', 'https://www.defichain-income.com'],
+      tracingOrigins: ['https://www.defichain-income.com'],
       routingInstrumentation: Sentry.routingInstrumentation,
     }),
   ],

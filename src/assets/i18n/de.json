@@ -15,7 +15,41 @@
   "load4": "Switche um das manuelle Eintragen deiner Bestände zu nutzen",
   "load5": "Switche um das automatische Laden deiner Bestände zu nutzen",
   "stats": "Statistiken",
-  "price": "Preis"
+  "price": "Preis",
+  "address": {
+    "label": "Adresse",
+    "title": "Deine Adressen aus der DeFiChain App",
+    "title2": "Bitte gib alle deine DeFiChain App Addressen ein.",
+    "imp": "WICHTIG",
+    "exc": "Führe folgenden Befehl ",
+    "exc2": " in der Konsole deiner DeFiChain App aus.",
+    "exc3": "Danach trage alle Adressen (nicht doppelt!) aus der Ausgabe ein (Attribut Owner).",
+    "late": "Bestände können aufgrund von Verzögerung etwas abweichen.",
+    "add": "Füge deine DFI Adressen für das Tracking hinzu",
+    "added": "Diese Adressen werden aktuell getrackt",
+    "button-add": "hinzufügen",
+    "button-remove": "entfernen"
+  },
+  "holdings": {
+    "title": "Deine Kryptobestände",
+    "wallet": "Dein Wallet Bestand",
+    "lp": "Dein LP Token Bestand",
+    "stake-add": "Trage dein DFI Staking Bestand ein.",
+    "no-stake": "Setz 0 wenn du keine DFI im Staking hast."
+  },
+  "value": {
+    "title": "Dein aktueller Wert",
+    "cur": "Wähle deine Währung aus"
+  },
+  "income": {
+    "title": "Dein gesamten Einkommen"
+  },
+  "hour": "Stunde",
+  "day": "Tag",
+  "week": "Woche",
+  "month": "Monat",
+  "year": "Jahr",
+  "balance": "Bestand"
 
 
 }
