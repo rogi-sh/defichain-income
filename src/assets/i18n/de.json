@@ -35,7 +35,8 @@
     "wallet": "Dein Wallet Bestand",
     "lp": "Dein LP Token Bestand",
     "stake-add": "Trage dein DFI Staking Bestand ein.",
-    "no-stake": "Setz 0 wenn du keine DFI im Staking hast."
+    "no-stake": "Setz 0 wenn du keine DFI im Staking hast.",
+    "set-zero": "Wenn du keine Bestände in Wallet, Staking oder in einigen der lm-Pools hast, ist es wichtig, im Eingabefeld 0 zu setzen."
   },
   "value": {
     "title": "Dein aktueller Wert",
@@ -56,7 +57,8 @@
   "target-reward-input": "Trage deine Ziel-DFI-Belohnung pro ",
   "target-reward-title": "Berechne wie viel du einsetzen musst, um deine Zielrendite zu erreichen",
   "imprint": "IMPRESSUM",
-  "support": "Wenn Dir der Inhalt hier gefällt und Du mich/dieses Projekt unterstützen willst mit"
-
+  "support": "Wenn Dir der Inhalt hier gefällt und Du mich/dieses Projekt unterstützen willst mit",
+  "amount": "Bestand",
+  "add-amount": "Trage deinen "
 
 }

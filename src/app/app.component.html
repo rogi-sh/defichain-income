@@ -208,24 +208,23 @@
 </div>
 
 <div *ngIf="!autoLoadData" class="container left">
-  <h1><span class="badge badge-secondary left">Your crypto holdings</span></h1>
-  <h3>If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input
-    field.</h3>
+  <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
+  <h3>{{ 'holdings.set-zero' | translate }}</h3>
   <div class="row">
     <div class="col-auto bg-light margin-col">
       <h2><span class="badge badge-pill badge-primary left">Wallet</span></h2>
       <div class="form-group">
         <label for="inputDFIWallet">DFI</label>
         <input required [(ngModel)]="wallet.dfi" (ngModelChange)="onChangeDfiWallet()" type="number"
-               class="form-control form-control-sm" id="inputDFIWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your wallet DFI amount.</small>
+               class="form-control form-control-sm" id="inputDFIWallet">
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DFI {{ 'amount' | translate }}.</small>
       </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
-               class="form-control form-control-sm" id="inputDFIStaking" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your stake DFI amount.</small>
+               class="form-control form-control-sm" id="inputDFIStaking">
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} stake DFI {{ 'amount' | translate }}.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -233,14 +232,14 @@
       <div class="form-group">
         <label for="inputBTCWallet">BTC</label>
         <input required [(ngModel)]="wallet.btc" (ngModelChange)="onChangeBtcWallet()" type="number"
-               class="form-control form-control-sm" id="inputBTCWallet" placeholder="Enter btc amount">
-        <small class="form-text text-muted">Add your wallet BTC amount.</small>
+               class="form-control form-control-sm" id="inputBTCWallet">
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet BTC {{ 'amount' | translate }}.</small>
       </div>
       <div class="form-group">
         <label for="inputETHWallet">ETH</label>
         <input required [(ngModel)]="wallet.eth" (ngModelChange)="onChangeEthWallet()" type="number"
                class="form-control form-control-sm" id="inputETHWallet" placeholder="Enter eth amount">
-        <small class="form-text text-muted">Add your wallet ETH amount.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet ETH {{ 'amount' | translate }}.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -249,13 +248,13 @@
         <label for="inputLTCWallet">LTC</label>
         <input required [(ngModel)]="wallet.ltc" (ngModelChange)="onChangeLtcWallet()" type="number"
                class="form-control form-control-sm" id="inputLTCWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your wallet LTC amount.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet LTC {{ 'amount' | translate }}.</small>
       </div>
       <div class="form-group">
         <label for="inputUSDTWallet">USDT</label>
         <input required [(ngModel)]="wallet.usdt" (ngModelChange)="onChangeUsdtWallet()" type="number"
                class="form-control form-control-sm" id="inputUSDTWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your wallet USDT amount.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet USDT {{ 'amount' | translate }}.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -264,7 +263,7 @@
         <label for="inputDOGEWallet">DOGE</label>
         <input required [(ngModel)]="wallet.doge" (ngModelChange)="onChangeDogeWallet()" type="number"
                class="form-control form-control-sm" id="inputDOGEWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">Add your wallet DOGE amount.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DOGE {{ 'amount' | translate }}.</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -276,12 +275,12 @@
             <label for="inputBTCBTCPool">BTC</label>
             <input required [(ngModel)]="wallet.btcInBtcPool" (ngModelChange)="onChangeBtcBtcPool()" type="number"
                    class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
-            <small class="form-text text-muted">Add your btc pool BTC amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool BTC {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIBTCPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool()" type="number"
                    class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">Add your btc pool DFI amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -290,12 +289,12 @@
             <label for="inputETHETHPool">ETH</label>
             <input required [(ngModel)]="wallet.ethInEthPool" (ngModelChange)="onChangeEthEthPool()" type="number"
                    class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
-            <small class="form-text text-muted">Add your eth pool ETH amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool ETH {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIETHPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInEthPool" (ngModelChange)="onChangeDfiEthPool()" type="number"
                    class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">Add your eth pool DFI amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -304,12 +303,12 @@
             <label for="inputUSDTUSDTPool">USDT</label>
             <input required [(ngModel)]="wallet.usdtInUsdtPool" (ngModelChange)="onChangeUsdtUsdtPool()" type="number"
                    class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">Add your usdt pool USDT amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool USDT {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIUSDTPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool()" type="number"
                    class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">Add your usdt pool DFI amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -318,12 +317,12 @@
             <label for="inputLTCLTCPool">LTC</label>
             <input required [(ngModel)]="wallet.ltcInLtcPool" (ngModelChange)="onChangeLtcLtcPool()" type="number"
                    class="form-control form-control-sm" id="inputLTCLTCPool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">Add your ltc pool LTC amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool LTC {{ 'amount' | translate }}.</small>
 
             <label for="inputDFILTCPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInLtcPool" (ngModelChange)="onChangeDfiLtcPool()" type="number"
                    class="form-control form-control-sm" id="inputDFILTCPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">Add your ltc pool DFI amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -332,12 +331,12 @@
             <label for="inputDogeDogePool">DOGE</label>
             <input required [(ngModel)]="wallet.dogeInDogePool" (ngModelChange)="onChangeDogeDogePool()" type="number"
                    class="form-control form-control-sm" id="inputDogeDogePool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">Add your doge pool DOGE amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool DOGE {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIDogePool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInDogePool" (ngModelChange)="onChangeDfiDogePool()" type="number"
                    class="form-control form-control-sm" id="inputDFIDogePool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">Add your doge pool DFI amount.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
       </div>

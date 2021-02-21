@@ -35,7 +35,8 @@
     "wallet": "Your Wallet Coins",
     "lp": "Your LP Token",
     "stake-add": "Add your stake DFI amount.",
-    "no-stake": "Set 0 if you not stake."
+    "no-stake": "Set 0 if you not stake.",
+    "set-zero" : "If you not have holdings in wallet, staking or in some of the lm pools it is important to set 0 in input field."
   },
   "value": {
     "title": "Your actual value",
@@ -57,7 +58,8 @@
   "target-reward-title": "Calculate how much you have to stake to get your target return",
   "imprint": "Imprint",
   "support": "If you like the content here and want to support me/this project with"
-
+  "amount": "amount",
+  "add-amount": "Add your "
 
 
 
