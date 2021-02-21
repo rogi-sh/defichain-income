@@ -42,14 +42,22 @@
     "cur": "Choose your currency"
   },
   "income": {
-    "title": "Your total income"
+    "title": "Your total income",
+    "word": "Income"
   },
   "hour": "Hour",
   "day": "Day",
   "week": "Week",
   "month": "Month",
   "year": "Year",
-  "balance": "Holdings"
+  "balance": "Holdings",
+  "details": "Click for more details",
+  "invest-needed": "You have to invest ",
+  "target-reward-input": "Add your aim DFI reward per ",
+  "target-reward-title": "Calculate how much you have to stake to get your target return",
+  "imprint": "Imprint",
+  "support": "If you like the content here and want to support me/this project with"
+
 
 
 

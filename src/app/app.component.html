@@ -554,7 +554,7 @@
   </div>
 
   <h1><span class="badge badge-secondary left">Details</span></h1>
-  <small class="form-text text-muted">Click for more details</small>
+  <small class="form-text text-muted">{{ 'details' | translate }}</small>
   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
     <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-danger">Staking</button>
     <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-danger">LiquidityMining</button>
@@ -563,9 +563,9 @@
   <div *ngIf="details === 'Staking'" class="container">
     <div class="row">
       <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
-        <h2><span class="badge badge-pill badge-success left">Staking Income</span></h2>
-        <h3>Balance <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI  </span></h3>
-        <h3>Balance in Fiat<span class="badge badge-pill badge-primary left">
+        <h2><span class="badge badge-pill badge-success left">Staking {{ 'income.word' | translate }}</span></h2>
+        <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI  </span></h3>
+        <h3>{{ 'balance' | translate }} in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getDfiCountStakingUsd() | currency:'USD'}} </span>
           <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingUsd() * usdToEur | currency:'EUR'}}</span>
           <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingUsd() * usdToChf | currency:'CHF'}}</span>
@@ -576,7 +576,7 @@
       </div>
       <div class="col-sm bg-light margin-col">
         <h2><span
-          class="badge badge-pill badge-success left">Calculate how much you have to stake to get your target return</span>
+          class="badge badge-pill badge-success left">{{ 'target-reward-title' | translate }} </span>
         </h2>
         <div class="row">
           <div class="col-sm bg-light margin-col">
@@ -584,41 +584,41 @@
               <label for="aimReturnMin">DFI per Min</label>
               <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)" type="number"
                      class="form-control form-control-sm" id="aimReturnMin" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">Add your aim DFI reward per min.</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
             </div>
             <h2><span
-              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnMin | number: '1.0-0' }}
+              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMin | number: '1.0-0' }}
               DFI</span></h2>
 
             <div class="form-group">
-              <label for="aimReturnHour">DFI per Hour</label>
+              <label for="aimReturnHour">DFI per {{ 'hour' | translate }} </label>
               <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)" type="number"
                      class="form-control form-control-sm" id="aimReturnHour" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">Add your aim DFI reward per hour.</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }}{{ 'hour' | translate }} .</small>
             </div>
             <h2><span
-              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnHour | number: '1.0-0' }}
+              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnHour | number: '1.0-0' }}
               DFI</span></h2>
           </div>
           <div class="col-sm bg-light margin-col">
             <div class="form-group">
-              <label for="aimReturn">DFI per Day</label>
+              <label for="aimReturn">DFI per {{ 'day' | translate }} </label>
               <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)" type="number"
                      class="form-control form-control-sm" id="aimReturn" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">Add your aim DFI reward per day.</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }} .</small>
             </div>
             <h2><span
-              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnDay | number: '1.0-0' }}
+              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnDay | number: '1.0-0' }}
               DFI</span></h2>
             <div class="form-group">
-              <label for="aimReturnMonth">DFI per Month</label>
+              <label for="aimReturnMonth">DFI per {{ 'month' | translate }} </label>
               <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
                      type="number"
                      class="form-control form-control-sm" id="aimReturnMonth" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">Add your aim DFI reward per month.</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }} .</small>
             </div>
             <h2><span
-              class="badge badge-pill badge-success left">You have to invest {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
+              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
               DFI</span></h2>
           </div>
         </div>
@@ -628,7 +628,7 @@
   <div *ngIf="details === 'LM'" class="container left">
     <div class="row">
       <div class="col-sm bg-light margin-col">
-        <h2><span class="badge badge-pill badge-success left">Liguidity Mining Income</span></h2>
+        <h2><span class="badge badge-pill badge-success left">Liguidity Mining {{ 'income' | translate }}</span></h2>
         <h3><span class="badge badge-pill badge-success left">
           <span *ngIf="wallet?.btcInBtcPool > 0">{{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC</span>
            <span *ngIf="wallet?.ethInEthPool > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
@@ -783,4 +783,32 @@
     </div>
   </div>
   <br><br><br><br><br><br>
+  <footer>
+    <div style="margin-left: 15px" class="container">
+      <div class="row">
+        <h5>{{ 'imprint' | translate }}</h5>
+      </div>
+      <div class="row">
+        {{ 'support' | translate }} DFI (DefiChain token): <br>
+        dZ5gsU6AHnDhTYHXh5nJvoq3yrrkve1WAi
+      </div>
+      <br>
+      <div class="row">
+        <span class="small">Igor Shelkovenkov</span>
+      </div>
+      <div class="row">
+        <span class="small">Schlickumer Weg 49</span>
+      </div>
+      <div class="row">
+        <span class="small">40699 Erkrath</span>
+      </div>
+      <div class="row">
+        <span class="small">Mail &nbsp;</span> <a class ="small" href="mailto:crypto@shelkovenkov.de"> crypto@shelkovenkov.de</a>
+      </div>
+      <div class="row">
+        <span class="small">Telegram &nbsp;</span> <a class ="small" href="https://t.me/ishelkovenkov"> https://t.me/ishelkovenkov</a>
+      </div>
+
+    </div>
+  </footer>
 </div>

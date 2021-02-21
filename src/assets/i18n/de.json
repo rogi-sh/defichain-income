@@ -42,14 +42,21 @@
     "cur": "Wähle deine Währung aus"
   },
   "income": {
-    "title": "Dein gesamten Einkommen"
+    "title": "Dein gesamten Einkommen",
+    "word": "Einkommen"
   },
   "hour": "Stunde",
   "day": "Tag",
   "week": "Woche",
   "month": "Monat",
   "year": "Jahr",
-  "balance": "Bestand"
+  "balance": "Bestand",
+  "details": "Klick für mehr Details",
+  "invest-needed": "Notwendiges Invest ist ",
+  "target-reward-input": "Trage deine Ziel-DFI-Belohnung pro ",
+  "target-reward-title": "Berechne wie viel du einsetzen musst, um deine Zielrendite zu erreichen",
+  "imprint": "IMPRESSUM",
+  "support": "Wenn Dir der Inhalt hier gefällt und Du mich/dieses Projekt unterstützen willst mit"
 
 
 }
