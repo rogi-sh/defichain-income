@@ -56,9 +56,13 @@
   "invest-needed": "Notwendiges Invest ist ",
   "target-reward-input": "Trage deine Ziel-DFI-Belohnung pro ",
   "target-reward-title": "Berechne wie viel du einsetzen musst, um deine Zielrendite zu erreichen",
+  "target-reward-title-lm": "Berechnen wie viel Du in LM investieren musst, um deine Zielrendite zu erreichen",
+  "target-reward-sub-lm": "Basierend auf 50/50 Aufteilung für Paare - aktueller ",
   "imprint": "IMPRESSUM",
   "support": "Wenn Dir der Inhalt hier gefällt und Du mich/dieses Projekt unterstützen willst mit",
   "amount": "Bestand",
-  "add-amount": "Trage deinen "
+  "add-amount": "Trage deinen ",
+  "share": " Anteil",
+  "your": "Deine"
 
 }

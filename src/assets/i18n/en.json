@@ -56,10 +56,14 @@
   "invest-needed": "You have to invest ",
   "target-reward-input": "Add your aim DFI reward per ",
   "target-reward-title": "Calculate how much you have to stake to get your target return",
+  "target-reward-title-lm": "Calculate how much you have to invest in LM to get your target return",
+  "target-reward-sub-lm": "Based on 50/50 Split for pairs - actual",
   "imprint": "Imprint",
   "support": "If you like the content here and want to support me/this project with",
   "amount": "amount",
-  "add-amount": "Add your "
+  "add-amount": "Add your ",
+  "share": "share",
+  "your": "Your"
 
 
 
