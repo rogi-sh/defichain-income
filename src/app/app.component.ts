@@ -614,7 +614,7 @@ export class AppComponent implements OnInit {
   onChangeAimReturnHourPool(newValue): void {
     const {pool, dfiPerBlock} = this.getCorrectPoolAndReward();
     this.targetReturnLMHour = newValue;
-    this.anteilNeededForAimReturnHourPool = newValue * 100 / this.getDfiPerMin(dfiPerBlock);
+    this.anteilNeededForAimReturnHourPool = newValue / 60 * 100 / this.getDfiPerMin(dfiPerBlock);
     this.dfiNeededForAimReturnHourPool = +pool.reserveB * this.anteilNeededForAimReturnHourPool / 100;
     this.btcNeededForAimReturnHourPool = +pool.reserveA * this.anteilNeededForAimReturnHourPool / 100;
   }
