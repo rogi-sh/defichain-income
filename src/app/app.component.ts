@@ -160,6 +160,9 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.autoLoadDataKey) !== null) {
       this.autoLoadData = JSON.parse(localStorage.getItem(this.autoLoadDataKey));
     }
+    if (localStorage.getItem(this.showInputAreaKey) !== null) {
+      this.showInputArea = JSON.parse(localStorage.getItem(this.showInputAreaKey));
+    }
     // Staking
     if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
       this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
