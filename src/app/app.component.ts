@@ -129,6 +129,8 @@ export class AppComponent implements OnInit {
   showInputArea = true;
   showInputAreaKey = 'showInputAreaKey';
 
+  apiOnline = true;
+
   constructor(private dexService: Dex, private translate: TranslateService) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
@@ -184,6 +186,10 @@ export class AppComponent implements OnInit {
     this.timer = setInterval(() => {
       this.refresh();
     }, this.sCountdown * 1000);
+
+    setInterval(() => {
+      this.testApi();
+    }, 1000);
   }
 
   private refresh(): void {
@@ -218,6 +224,25 @@ export class AppComponent implements OnInit {
 
   saveToggleInputShow(): void {
     localStorage.setItem(this.showInputAreaKey, JSON.stringify(this.showInputArea));
+  }
+
+  testApi(): void {
+
+    forkJoin([
+        this.dexService.getDex(),
+        this.dexService.getPoolDetail('5'),
+        this.dexService.getAdressDetail('dQTQr6Zr9rvcDi5s7jWhKjjsqDXhHsu16U')
+      ]
+    ).subscribe((([dex, poolBtc, dsts]: [DexInfo, Pool, [string]]) => {
+          this.apiOnline = true;
+
+        }
+      ),
+      err => {
+        this.apiOnline = false;
+
+      });
+
   }
 
   loadDex(): void {
