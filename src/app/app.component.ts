@@ -126,6 +126,9 @@ export class AppComponent implements OnInit {
   autoLoadData = true;
   autoLoadDataKey = 'autoLoadDataKey';
 
+  showInputArea = true;
+  showInputAreaKey = 'showInputAreaKey';
+
   constructor(private dexService: Dex, private translate: TranslateService) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
@@ -208,6 +211,10 @@ export class AppComponent implements OnInit {
   saveToggleAutoLoad(): void {
     localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
     this.refresh();
+  }
+
+  saveToggleInputShow(): void {
+    localStorage.setItem(this.showInputAreaKey, JSON.stringify(this.showInputArea));
   }
 
   loadDex(): void {

@@ -49,6 +49,12 @@
                for="customSwitch1">{{ 'load5' | translate }}</label>
 
       </div>
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleAutoLoad()" type="checkbox"
+               class="custom-control-input" id="customSwitch2">
+        <label class="custom-control-label"
+               for="customSwitch2">{{ 'showInput1' | translate }} </label>
+      </div>
 
     </div>
     <div class="col-auto margin-col">
@@ -142,9 +148,11 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
-<div *ngIf="autoLoadData">
+
+<div *ngIf="autoLoadData && showInputArea">
 <br>
   <div class="container left">
     <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
@@ -207,7 +215,7 @@
   </div>
 </div>
 
-<div *ngIf="!autoLoadData" class="container left">
+<div *ngIf="!autoLoadData && showInputArea" class="container left">
   <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
   <h3>{{ 'holdings.set-zero' | translate }}</h3>
   <div class="row">
