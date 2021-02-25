@@ -25,8 +25,6 @@
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "@sentry/angular": "^6.2.0",
-    "@sentry/tracing": "^6.2.0",
     "apexcharts": "3.24.0",
     "bootstrap": "^4.5.0",
     "ng-apexcharts": "^1.5.7",
