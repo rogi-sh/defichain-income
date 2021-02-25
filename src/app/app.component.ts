@@ -259,8 +259,13 @@ export class AppComponent implements OnInit {
         }
       ),
       err => {
-        this.loadDex();
-        console.error('Fehler beim Load Dex Data' + err.toString());
+        console.error('Fehler beim Load Dex Data wait: ' + err.toString());
+        setTimeout(() => {
+            this.loadDex();
+            console.error('Try again ...');
+          },
+          5000);
+
       });
 
   }
