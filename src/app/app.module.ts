@@ -12,6 +12,7 @@ import {CountdownModule} from 'ngx-countdown';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         deps: [HttpClient],
       },
     }),
+    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

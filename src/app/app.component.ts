@@ -9,6 +9,9 @@ import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
+import {Apollo} from 'apollo-angular';
+import {GEN_AUTH_KEY} from '../interface/Graphql';
+import {createPerformWatchHost} from '@angular/compiler-cli/src/perform_watch';
 
 @Component({
   selector: 'app-root',
@@ -135,7 +138,10 @@ export class AppComponent implements OnInit {
   loggedInAuth = '';
   loggedInKey = 'loggedInKey';
 
-  constructor(private dexService: Dex, private translate: TranslateService) {
+  loggedInAuthQuery;
+
+
+    constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
 
@@ -145,8 +151,10 @@ export class AppComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
+    if (localStorage.getItem(this.loggedInKey) !== null) {
+      this.loggedInAuth = localStorage.getItem(this.loggedInKey);
+    }
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
     }
@@ -206,11 +214,18 @@ export class AppComponent implements OnInit {
     }
     this.countdown?.restart();
   }
-
   genAuthKey(): void {
-    this.loggedInAuth = Math.random().toString(36).substring(7);;
-    localStorage.setItem(this.loggedInKey, JSON.stringify(this.loggedInAuth));
+   this.apollo.query({
+      query: GEN_AUTH_KEY,
+      pollInterval: 0,
+    })
+      .subscribe((result: any) => {
+        this.loggedInAuth = result?.data?.getAuthKey;
+        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+      });
+
   }
+
 
   useLanguage(language: string): void {
     this.translate.use(language);
@@ -627,7 +642,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDfiStaking(): void {
-    localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking ));
+    localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking));
     this.berechneStakingOut();
     this.buildDataForChart();
   }
@@ -997,7 +1012,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeBtcBtcPool(): void {
-    if (this.checkInputNumber(this.wallet.btcInBtcPool )) {
+    if (this.checkInputNumber(this.wallet.btcInBtcPool)) {
       localStorage.setItem(this.wallet.btcInBtcPoolKey, JSON.stringify(this.wallet.btcInBtcPool));
       this.berechnePoolOutBtc();
       this.berechnePoolOut();
@@ -1006,14 +1021,14 @@ export class AppComponent implements OnInit {
   }
 
   onChangeBtcWallet(): void {
-    if (this.checkInputNumber(this.wallet.btc )) {
+    if (this.checkInputNumber(this.wallet.btc)) {
       localStorage.setItem(this.wallet.btcKey, JSON.stringify(this.wallet.btc));
       this.buildDataForChart();
     }
   }
 
   onChangeEthEthPool(): void {
-    if (this.checkInputNumber(this.wallet.ethInEthPool )) {
+    if (this.checkInputNumber(this.wallet.ethInEthPool)) {
       localStorage.setItem(this.wallet.ethInEthPoolKey, JSON.stringify(this.wallet.ethInEthPool));
       this.berechnePoolOutEth();
       this.berechnePoolOut();
@@ -1022,14 +1037,14 @@ export class AppComponent implements OnInit {
   }
 
   onChangeEthWallet(): void {
-    if (this.checkInputNumber(this.wallet.eth )) {
+    if (this.checkInputNumber(this.wallet.eth)) {
       localStorage.setItem(this.wallet.ethKey, JSON.stringify(this.wallet.eth));
       this.buildDataForChart();
     }
   }
 
   onChangeUsdtUsdtPool(): void {
-    if (this.checkInputNumber(this.wallet.usdtInUsdtPool )) {
+    if (this.checkInputNumber(this.wallet.usdtInUsdtPool)) {
       localStorage.setItem(this.wallet.usdtInUsdtPoolKey, JSON.stringify(this.wallet.usdtInUsdtPool));
       this.berechnePoolOutUsdt();
       this.berechnePoolOut();
@@ -1038,14 +1053,14 @@ export class AppComponent implements OnInit {
   }
 
   onChangeUsdtWallet(): void {
-    if (this.checkInputNumber(this.wallet.usdt )) {
+    if (this.checkInputNumber(this.wallet.usdt)) {
       localStorage.setItem(this.wallet.usdtKey, JSON.stringify(this.wallet.usdt));
       this.buildDataForChart();
     }
   }
 
   onChangeLtcLtcPool(): void {
-    if (this.checkInputNumber(this.wallet.ltc )) {
+    if (this.checkInputNumber(this.wallet.ltc)) {
       localStorage.setItem(this.wallet.ltcInLtcPoolKey, JSON.stringify(this.wallet.ltc));
       this.berechnePoolOutLtc();
       this.berechnePoolOut();
@@ -1055,13 +1070,13 @@ export class AppComponent implements OnInit {
 
   onChangeLtcWallet(): void {
     if (this.checkInputNumber(this.wallet.ltc)) {
-      localStorage.setItem(this.wallet.ltcKey, JSON.stringify(this.wallet.ltc ));
+      localStorage.setItem(this.wallet.ltcKey, JSON.stringify(this.wallet.ltc));
       this.buildDataForChart();
     }
   }
 
   onChangeDogeDogePool(): void {
-    if (this.checkInputNumber(this.wallet.doge )) {
+    if (this.checkInputNumber(this.wallet.doge)) {
       localStorage.setItem(this.wallet.dogeInDogePoolKey, JSON.stringify(this.wallet.doge));
       this.berechnePoolOutDoge();
       this.berechnePoolOut();
@@ -1070,7 +1085,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDogeWallet(): void {
-    if (this.checkInputNumber(this.wallet.doge )) {
+    if (this.checkInputNumber(this.wallet.doge)) {
       localStorage.setItem(this.wallet.dogeKey, JSON.stringify(this.wallet.doge));
       this.buildDataForChart();
     }
@@ -1078,7 +1093,7 @@ export class AppComponent implements OnInit {
 
   // DFI in POOLS
   onChangeDfiBtcPool(): void {
-    if (this.checkInputNumber(this.wallet.dfiInBtcPool )) {
+    if (this.checkInputNumber(this.wallet.dfiInBtcPool)) {
       localStorage.setItem(this.wallet.dfiInBtcPoolKey, JSON.stringify(this.wallet.dfiInBtcPool));
       this.berechnePoolOutBtc();
       this.berechnePoolOut();
@@ -1096,7 +1111,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDfiUsdtPool(): void {
-    if (this.checkInputNumber(this.wallet.dfiInUsdtPool )) {
+    if (this.checkInputNumber(this.wallet.dfiInUsdtPool)) {
       localStorage.setItem(this.wallet.dfiInUsdtPoolKey, JSON.stringify(this.wallet.dfiInUsdtPool));
       this.berechnePoolOutUsdt();
       this.berechnePoolOut();
@@ -1105,8 +1120,8 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDfiLtcPool(): void {
-    if ( this.checkInputNumber(this.wallet.dfiInLtcPool)) {
-      localStorage.setItem(this.wallet.dfiInLtcPoolKey, JSON.stringify( this.wallet.dfiInLtcPool));
+    if (this.checkInputNumber(this.wallet.dfiInLtcPool)) {
+      localStorage.setItem(this.wallet.dfiInLtcPoolKey, JSON.stringify(this.wallet.dfiInLtcPool));
       this.berechnePoolOutLtc();
       this.berechnePoolOut();
       this.buildDataForChart();
