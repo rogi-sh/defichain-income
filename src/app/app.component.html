@@ -2,42 +2,42 @@
   <div class="row">
     <div class="col-auto margin-col">
       <img src="{{poolBtc?.logo}}" class="img-fluid mb-4" alt="DefiChain Logo">
-    </div>
-    <div class="col-sm-4 margin-col">
       <h1><span class="badge badge-secondary left">{{ 'title' | translate }}</span></h1>
       <p>{{ 'welcome' | translate }}</p>
-      <div class="row">
-        <div class="col-auto margin-col">
-          <h3><span class="badge badge-secondary left">{{env.version}}</span></h3>
-        </div>
-        <div class="col-auto margin-col">
-          <small class="form-text text-muted">{{ 'lang' | translate }}</small>
-          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
-            <button (click)="useLanguage('en')" type="button" class="btn margin-col btn-danger">EN</button>
-          </div>
-        </div>
-      </div>
-      <br>
       <p>{{ 'powered' | translate }} <a href="https://dex.defichain.com/mainnet/pool">
         https://api.defichain.io/v1</a></p>
-      <h3><span class="badge badge-pill badge-success left">{{ 'refresh1' | translate }}  {{sCountdown}}
-        s.{{ 'refresh2' | translate }}  </span></h3>
+      <h3><span class="badge badge-secondary left">{{env.version}}</span></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm bg-light margin-col">
+      <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
+
+      <h2><span class="badge badge-pill badge-secondary left">{{ 'lang' | translate }}</span></h2>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
+        <button (click)="useLanguage('en')" type="button" class="btn margin-col btn-danger">EN</button>
+      </div>
+      <br>
+      <br>
+      <h2><span class="badge badge-pill badge-secondary left">{{ 'refresh1' | translate }}  {{sCountdown}}
+        s.  </span></h2>
       <p>{{ 'refresh3' | translate }} <span class="badge badge-pill badge-dark left">
-        <countdown #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown></span>
+               <countdown #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown></span>
       </p>
-      <p>{{ 'refresh4' | translate }} </p>
       <div class="row">
         <div class="col-auto ">
           <input required [(ngModel)]="sCountdown" type="number"
-                 step=1 min="10" class="form-control form-control-sm" id="sCount" placeholder= "{{ 'refresh6' | translate }}">
+                 step=1 min="10" class="form-control form-control-sm" id="sCount"
+                 placeholder="{{ 'refresh6' | translate }}">
         </div>
         <div class="col-auto">
-          <button type="button" (click)="onChangeRefreshS()" class="btn btn-success">{{ 'refresh5' | translate }}</button>
+          <button type="button" (click)="onChangeRefreshS()"
+                  class="btn btn-success">{{ 'refresh5' | translate }}</button>
         </div>
       </div>
       <br>
-      <h3><span class="badge badge-pill badge-success left">{{ 'load1' | translate }}</span></h3>
+      <h2><span class="badge badge-pill badge-secondary left">{{ 'load1' | translate }}</span></h2>
       <p><span class="badge badge-pill badge-dark left">ON</span> -> {{ 'load2' | translate }}</p>
       <p><span class="badge badge-pill badge-dark left">OFF</span> -> {{ 'load3' | translate }}</p>
       <div class="custom-control custom-switch">
@@ -57,24 +57,30 @@
       </div>
 
     </div>
-    <div class="col-auto margin-col">
+
+    <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">DEX {{ 'stats' | translate }}</span></h1>
-      <h2>Api Status <span *ngIf="apiOnline" class="badge badge-success">Online</span>
-          <span *ngIf="!apiOnline"  class="badge badge-danger">Offline</span></h2>
+
       <div class="row">
         <div class="col-auto bg-light margin-col">
           <div class="row">
             <div class="col-auto margin-col">
+              <h2>Api Status <span *ngIf="apiOnline" class="badge badge-success">Online</span>
+                <span *ngIf="!apiOnline" class="badge badge-danger">Offline</span></h2>
               TVL
               <h2><span class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}</span></h2>
-              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToEur | currency:'EUR'}}</span></h2>
-              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToChf | currency:'CHF'}}</span></h2>
-              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToGbp | currency:'GBP'}}</span></h2>
+              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
+              </h2>
+              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToChf | currency:'CHF'}}</span>
+              </h2>
+              <h2><span class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToGbp | currency:'GBP'}}</span>
+              </h2>
             </div>
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} BTC <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
+              Pool {{ 'price' | translate }} BTC <span
+              class="badge badge-pill badge-dark left"> {{poolBtc?.priceA | currency:'USD'}}
               /  {{poolBtc?.priceA * usdToEur | currency:'EUR'}}
               / {{poolBtc?.priceA * usdToChf | currency:'CHF'}}
               / {{poolBtc?.priceA * usdToGbp | currency:'GBP'}}
@@ -83,7 +89,8 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} ETH <span class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
+              Pool {{ 'price' | translate }} ETH <span
+              class="badge badge-pill badge-dark left"> {{poolEth?.priceA | currency:'USD'}}
               /  {{poolEth?.priceA * usdToEur | currency:'EUR'}}
               / {{poolEth?.priceA * usdToChf | currency:'CHF'}}
               / {{poolEth?.priceA * usdToGbp | currency:'GBP'}}</span>
@@ -91,7 +98,8 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} USDT <span class="badge badge-pill badge-dark left"> {{poolUsdt?.priceA | currency:'USD'}}
+              Pool {{ 'price' | translate }} USDT <span
+              class="badge badge-pill badge-dark left"> {{poolUsdt?.priceA | currency:'USD'}}
               /  {{poolUsdt?.priceA * usdToEur | currency:'EUR'}}
               / {{poolUsdt?.priceA * usdToChf | currency:'CHF'}}
               / {{poolUsdt?.priceA * usdToGbp | currency:'GBP'}}</span>
@@ -99,7 +107,8 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} LTC <span class="badge badge-pill badge-dark left"> {{poolLtc?.priceA | currency:'USD'}}
+              Pool {{ 'price' | translate }} LTC <span
+              class="badge badge-pill badge-dark left"> {{poolLtc?.priceA | currency:'USD'}}
               /  {{poolLtc?.priceA * usdToEur | currency:'EUR'}}
               / {{poolLtc?.priceA * usdToChf | currency:'CHF'}}
               / {{poolLtc?.priceA * usdToGbp | currency:'GBP'}}</span>
@@ -107,7 +116,8 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} DOGE <span class="badge badge-pill badge-dark left"> {{poolDoge?.priceA | currency:'USD'}}
+              Pool {{ 'price' | translate }} DOGE <span
+              class="badge badge-pill badge-dark left"> {{poolDoge?.priceA | currency:'USD'}}
               /  {{poolDoge?.priceA * usdToEur | currency:'EUR'}}
               / {{poolDoge?.priceA * usdToChf | currency:'CHF'}}
               / {{poolDoge?.priceA * usdToGbp | currency:'GBP'}}</span>
@@ -115,7 +125,8 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              Pool {{ 'price' | translate }} DFI <span class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
+              Pool {{ 'price' | translate }} DFI <span
+              class="badge badge-pill badge-dark left"> {{poolBtc?.priceB | currency:'USD'}}
               /  {{poolBtc?.priceB * usdToEur | currency:'EUR'}}
               / {{poolBtc?.priceB * usdToChf | currency:'CHF'}}
               / {{poolBtc?.priceB * usdToGbp | currency:'GBP'}}</span>
@@ -155,28 +166,31 @@
 </div>
 
 <div *ngIf="autoLoadData && showInputArea">
-<br>
+  <br>
   <div class="container left">
     <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
     <h3>{{ 'address.title2' | translate }}</h3>
-    <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span class="badge badge-secondary left">listaccounts {{'{}'}}
+    <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span
+      class="badge badge-secondary left">listaccounts {{'{}'}}
       false false true</span> {{ 'address.exc2' | translate }}</p>
     <p>{{ 'address.exc3' | translate }}</p>
     <p>{{ 'address.late' | translate }}</p>
     <div class="row">
-      <div class="col-4 bg-light margin-col">
+      <div class="col-sm-4 bg-light margin-col">
         <div class="form-group">
           <label for="inputAddress">DFI {{ 'address.label' | translate }}</label>
           <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress">
           <small class="form-text text-muted">{{ 'address.add' | translate }}</small>
         </div>
-        <button type="button" (click)="addAdress()" class="btn btn-success"> + {{ 'address.button-add' | translate }}</button>
+        <button type="button" (click)="addAdress()" class="btn btn-success">
+          + {{ 'address.button-add' | translate }}</button>
       </div>
       <div class="col-auto bg-light margin-col">
         <h3>{{ 'address.added' | translate }}</h3>
         <p *ngFor="let a of adresses">
           <span class="badge badge-pill badge-primary left">{{a}}</span>
-          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)"> - {{ 'address.button-remove' | translate }}</button>
+          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)">
+            - {{ 'address.button-remove' | translate }}</button>
         </p>
       </div>
     </div>
@@ -196,11 +210,18 @@
       </div>
       <div class="col-auto bg-light margin-col">
         <h3>{{ 'holdings.lp' | translate }}</h3>
-        <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span></p>
-        <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span></p>
-        <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span></p>
-        <p> USDT-DFI <span class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span></p>
-        <p> DOGE-DFI <span class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span></p>
+        <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span>
+        </p>
+        <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span>
+        </p>
+        <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span>
+        </p>
+        <p> USDT-DFI <span
+          class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span>
+        </p>
+        <p> DOGE-DFI <span
+          class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span>
+        </p>
       </div>
       <div class="col-auto bg-light margin-col">
         <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
@@ -227,14 +248,16 @@
         <label for="inputDFIWallet">DFI</label>
         <input required [(ngModel)]="wallet.dfi" (ngModelChange)="onChangeDfiWallet()" type="number"
                class="form-control form-control-sm" id="inputDFIWallet">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DFI {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DFI {{ 'amount' | translate }}
+          .</small>
       </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
                class="form-control form-control-sm" id="inputDFIStaking">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} stake DFI {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} stake DFI {{ 'amount' | translate }}
+          .</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -243,13 +266,15 @@
         <label for="inputBTCWallet">BTC</label>
         <input required [(ngModel)]="wallet.btc" (ngModelChange)="onChangeBtcWallet()" type="number"
                class="form-control form-control-sm" id="inputBTCWallet">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet BTC {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet BTC {{ 'amount' | translate }}
+          .</small>
       </div>
       <div class="form-group">
         <label for="inputETHWallet">ETH</label>
         <input required [(ngModel)]="wallet.eth" (ngModelChange)="onChangeEthWallet()" type="number"
                class="form-control form-control-sm" id="inputETHWallet" placeholder="Enter eth amount">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet ETH {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet ETH {{ 'amount' | translate }}
+          .</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -258,13 +283,15 @@
         <label for="inputLTCWallet">LTC</label>
         <input required [(ngModel)]="wallet.ltc" (ngModelChange)="onChangeLtcWallet()" type="number"
                class="form-control form-control-sm" id="inputLTCWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet LTC {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet LTC {{ 'amount' | translate }}
+          .</small>
       </div>
       <div class="form-group">
         <label for="inputUSDTWallet">USDT</label>
         <input required [(ngModel)]="wallet.usdt" (ngModelChange)="onChangeUsdtWallet()" type="number"
                class="form-control form-control-sm" id="inputUSDTWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet USDT {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet USDT {{ 'amount' | translate }}
+          .</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -273,7 +300,8 @@
         <label for="inputDOGEWallet">DOGE</label>
         <input required [(ngModel)]="wallet.doge" (ngModelChange)="onChangeDogeWallet()" type="number"
                class="form-control form-control-sm" id="inputDOGEWallet" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DOGE {{ 'amount' | translate }}.</small>
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} wallet DOGE {{ 'amount' | translate }}
+          .</small>
       </div>
     </div>
     <div class="col-auto bg-light margin-col">
@@ -285,12 +313,16 @@
             <label for="inputBTCBTCPool">BTC</label>
             <input required [(ngModel)]="wallet.btcInBtcPool" (ngModelChange)="onChangeBtcBtcPool()" type="number"
                    class="form-control form-control-sm" id="inputBTCBTCPool" placeholder="Enter btc amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool BTC {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool
+              BTC {{ 'amount' | translate }}
+              .</small>
 
             <label for="inputDFIBTCPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInBtcPool" (ngModelChange)="onChangeDfiBtcPool()" type="number"
                    class="form-control form-control-sm" id="inputDFIBTCPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool DFI {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} btc pool
+              DFI {{ 'amount' | translate }}
+              .</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -299,26 +331,34 @@
             <label for="inputETHETHPool">ETH</label>
             <input required [(ngModel)]="wallet.ethInEthPool" (ngModelChange)="onChangeEthEthPool()" type="number"
                    class="form-control form-control-sm" id="inputETHETHPool" placeholder="Enter eth amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool ETH {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool
+              ETH {{ 'amount' | translate }}
+              .</small>
 
             <label for="inputDFIETHPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInEthPool" (ngModelChange)="onChangeDfiEthPool()" type="number"
                    class="form-control form-control-sm" id="inputDFIETHPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool DFI {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} eth pool
+              DFI {{ 'amount' | translate }}
+              .</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">USDT Pool</span>
           <div class="form-group">
             <label for="inputUSDTUSDTPool">USDT</label>
-            <input required [(ngModel)]="wallet.usdtInUsdtPool" (ngModelChange)="onChangeUsdtUsdtPool()" type="number"
+            <input required [(ngModel)]="wallet.usdtInUsdtPool" (ngModelChange)="onChangeUsdtUsdtPool()"
+                   type="number"
                    class="form-control form-control-sm" id="inputUSDTUSDTPool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool USDT {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool
+              USDT {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIUSDTPool">DFI</label>
-            <input required [(ngModel)]="wallet.dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool()" type="number"
+            <input required [(ngModel)]="wallet.dfiInUsdtPool" (ngModelChange)="onChangeDfiUsdtPool()"
+                   type="number"
                    class="form-control form-control-sm" id="inputDFIUSDTPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool DFI {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} usdt pool
+              DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
@@ -327,26 +367,34 @@
             <label for="inputLTCLTCPool">LTC</label>
             <input required [(ngModel)]="wallet.ltcInLtcPool" (ngModelChange)="onChangeLtcLtcPool()" type="number"
                    class="form-control form-control-sm" id="inputLTCLTCPool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool LTC {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool
+              LTC {{ 'amount' | translate }}
+              .</small>
 
             <label for="inputDFILTCPool">DFI</label>
             <input required [(ngModel)]="wallet.dfiInLtcPool" (ngModelChange)="onChangeDfiLtcPool()" type="number"
                    class="form-control form-control-sm" id="inputDFILTCPool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool DFI {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} ltc pool
+              DFI {{ 'amount' | translate }}
+              .</small>
           </div>
         </div>
         <div class="col-auto bg-light margin-col">
           <span class="badge badge-pill badge-primary left">DOGE Pool</span>
           <div class="form-group">
             <label for="inputDogeDogePool">DOGE</label>
-            <input required [(ngModel)]="wallet.dogeInDogePool" (ngModelChange)="onChangeDogeDogePool()" type="number"
+            <input required [(ngModel)]="wallet.dogeInDogePool" (ngModelChange)="onChangeDogeDogePool()"
+                   type="number"
                    class="form-control form-control-sm" id="inputDogeDogePool" placeholder="Enter usdt amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool DOGE {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool
+              DOGE {{ 'amount' | translate }}.</small>
 
             <label for="inputDFIDogePool">DFI</label>
-            <input required [(ngModel)]="wallet.dfiInDogePool" (ngModelChange)="onChangeDfiDogePool()" type="number"
+            <input required [(ngModel)]="wallet.dfiInDogePool" (ngModelChange)="onChangeDfiDogePool()"
+                   type="number"
                    class="form-control form-control-sm" id="inputDFIDogePool" placeholder="Enter dfi amount">
-            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool DFI {{ 'amount' | translate }}.</small>
+            <small class="form-text text-muted">{{ 'add-amount' | translate }} doge pool
+              DFI {{ 'amount' | translate }}.</small>
           </div>
         </div>
       </div>
@@ -485,7 +533,8 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>{{ 'hour' | translate }} <span class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
+              <h2>{{ 'hour' | translate }} <span
+                class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
                 DFI =
                 <span
                   *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD' }}</span>
@@ -501,7 +550,8 @@
           </div>
           <div class="row">
             <div class="col-auto bg-light margin-col">
-              <h2>{{ 'day' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
+              <h2>{{ 'day' | translate }} <span
+                class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
                 DFI =
         <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD' }}</span>
         <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR' }}</span>
@@ -511,7 +561,8 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>{{ 'week' | translate }} <span class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
+              <h2>{{ 'week' | translate }} <span
+                class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
                 DFI =
          <span
            *ngIf="fiat === 'USD'">  {{getDfiIncomeValuePerWeekUsd() | currency:'USD' }}</span>
@@ -527,7 +578,8 @@
           </div>
           <div class="row">
             <div class="col-auto bg-light margin-col">
-              <h2>{{ 'month' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
+              <h2>{{ 'month' | translate }} <span
+                class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
                 DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD' }}</span>
@@ -541,7 +593,8 @@
               </h2>
             </div>
             <div class="col-auto bg-light margin-col">
-              <h2>{{ 'year' | translate }} <span class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
+              <h2>{{ 'year' | translate }} <span
+                class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
                 DFI =
            <span
              *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>
@@ -566,14 +619,16 @@
   <small class="form-text text-muted">{{ 'details' | translate }}</small>
   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
     <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-danger">Staking</button>
-    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-danger">LiquidityMining</button>
+    <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-danger">LiquidityMining
+    </button>
   </div>
 
   <div *ngIf="details === 'Staking'" class="container">
     <div class="row">
       <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Staking {{ 'income.word' | translate }}</span></h2>
-        <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{dfiInStaking}} DFI  </span></h3>
+        <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{dfiInStaking}}
+          DFI  </span></h3>
         <h3>{{ 'balance' | translate }} in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getDfiCountStakingUsd() | currency:'USD'}} </span>
           <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingUsd() * usdToEur | currency:'EUR'}}</span>
@@ -591,7 +646,8 @@
           <div class="col-sm bg-light margin-col">
             <div class="form-group">
               <label for="aimReturnMin">DFI per Min</label>
-              <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)" type="number"
+              <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)"
+                     type="number"
                      class="form-control form-control-sm" id="aimReturnMin" placeholder="Enter dfi amount">
               <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
             </div>
@@ -601,9 +657,11 @@
 
             <div class="form-group">
               <label for="aimReturnHour">DFI per {{ 'hour' | translate }} </label>
-              <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)" type="number"
+              <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)"
+                     type="number"
                      class="form-control form-control-sm" id="aimReturnHour" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }}{{ 'hour' | translate }} .</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }}{{ 'hour' | translate }}
+                .</small>
             </div>
             <h2><span
               class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnHour | number: '1.0-0' }}
@@ -612,9 +670,11 @@
           <div class="col-sm bg-light margin-col">
             <div class="form-group">
               <label for="aimReturn">DFI per {{ 'day' | translate }} </label>
-              <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)" type="number"
+              <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)"
+                     type="number"
                      class="form-control form-control-sm" id="aimReturn" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }} .</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}
+                .</small>
             </div>
             <h2><span
               class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnDay | number: '1.0-0' }}
@@ -624,7 +684,9 @@
               <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
                      type="number"
                      class="form-control form-control-sm" id="aimReturnMonth" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }} .</small>
+              <small
+                class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}
+                .</small>
             </div>
             <h2><span
               class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
@@ -637,7 +699,9 @@
   <div *ngIf="details === 'LM'" class="container left">
     <div class="row">
       <div class="col-sm bg-light margin-col">
-        <h2><span class="badge badge-pill badge-success left">Liguidity Mining {{ 'income.word' | translate }}</span></h2>
+        <h2><span
+          class="badge badge-pill badge-success left">Liguidity Mining {{ 'income.word' | translate }}</span>
+        </h2>
         <h3><span class="badge badge-pill badge-success left">
           <span *ngIf="wallet?.btcInBtcPool > 0">{{getAnteilBTCPoolAnGesamtLM() | number: '1.1-1'}} % BTC</span>
            <span *ngIf="wallet?.ethInEthPool > 0"> / {{getAnteilETHPoolAnGesamtLM() | number: '1.1-1'}} % ETH</span>
@@ -645,7 +709,8 @@
           <span *ngIf="wallet?.usdtInUsdtPool > 0"> / {{getAnteilUSDTPoolAnGesamtLM() | number: '1.1-1'}} % USDT</span>
           <span *ngIf="wallet?.dogeInDogePool> 0"> / {{getAnteilDogePoolAnGesamtLM() | number: '1.1-1'}} % DOGE</span>
         </span></h3>
-        <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{wallet?.btcInBtcPool | number: '1.5-5'}} BTC
+        <h3>{{ 'balance' | translate }} <span
+          class="badge badge-pill badge-primary left"> {{wallet?.btcInBtcPool | number: '1.5-5'}} BTC
           - {{wallet?.ethInEthPool | number: '1.3-3'}} ETH
           <span *ngIf="wallet?.usdtInUsdtPool > 0">c- USDT {{wallet?.usdtInUsdtPool | number: '1.3-3' }}</span> <span
             *ngIf="wallet?.ltcInLtcPool > 0">- LTC {{wallet?.ltcInLtcPool | number: '1.3-3'}}</span> <span
@@ -691,7 +756,8 @@
                      class="form-control form-control-sm" id="aimReturnMinBtcPool" placeholder="Enter dfi amount">
               <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
             </div>
-            <h3><span class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMinPool | number: '1.4-4' }}
+            <h3><span
+              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMinPool | number: '1.4-4' }}
               {{ 'share' | translate }} = {{dfiNeededForAimReturnMinPool | number: '1.2-2' }}
               DFI / {{btcNeededForAimReturnMinPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
               </span></h3>
@@ -702,7 +768,8 @@
               <input required [(ngModel)]="aimReturnDayPool" (ngModelChange)="onChangeAimReturnDayPool($event)"
                      type="number"
                      class="form-control form-control-sm" id="aimReturnDayBtcPool" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}.</small>
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}
+                .</small>
             </div>
             <h3><span
               class="badge badge-pill badge-success left">{{anteilNeededForAimReturnDayPool | number: '1.4-4' }}
@@ -717,8 +784,10 @@
               <label for="aimReturnHourBtcPool">DFI per {{ 'hour' | translate }}</label>
               <input required [(ngModel)]="aimReturnHourPool" (ngModelChange)="onChangeAimReturnHourPool($event)"
                      type="number"
-                     class="form-control form-control-sm" id="aimReturnHourBtcPool" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'hour' | translate }}.</small>
+                     class="form-control form-control-sm" id="aimReturnHourBtcPool"
+                     placeholder="Enter dfi amount">
+              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'hour' | translate }}
+                .</small>
             </div>
             <h3><span
               class="badge badge-pill badge-success left">{{anteilNeededForAimReturnHourPool | number: '1.4-4' }}
@@ -729,10 +798,13 @@
           <div class="col-sm bg-light margin-col">
             <div class="form-group">
               <label for="aimReturnDayBtcPool">DFI per {{ 'month' | translate }}</label>
-              <input required [(ngModel)]="aimReturnMonthPool" (ngModelChange)="onChangeAimReturnMonthPool($event)"
+              <input required [(ngModel)]="aimReturnMonthPool"
+                     (ngModelChange)="onChangeAimReturnMonthPool($event)"
                      type="number"
                      class="form-control form-control-sm" id="aimReturnMonthPool" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}.</small>
+              <small
+                class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}
+                .</small>
             </div>
             <h3><span
               class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMonthPool | number: '1.4-4' }}
@@ -749,7 +821,8 @@
     <div class="row">
       <div *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}%</span></h3>
-        <h3>Pool {{ 'share' | translate }} <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></h3>
+        <h3>Pool {{ 'share' | translate }} <span
+          class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} % </span></h3>
 
         <app-earning [out]="poolBtcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
@@ -757,7 +830,8 @@
 
       <div *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">ETH/DFI {{poolEth?.apy | number: '1.2-2' }}%</span></h3>
-        <h3>Pool {{ 'share' | translate }} <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></h3>
+        <h3>Pool {{ 'share' | translate }} <span
+          class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span></h3>
 
         <app-earning [out]="poolEthOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
@@ -765,23 +839,28 @@
       </div>
       <div *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}%</span></h3>
-        <h3>Pool {{ 'share' | translate }} <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></h3>
+        <h3>Pool {{ 'share' | translate }} <span
+          class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span></h3>
 
-        <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+        <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
+                     [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
       <div *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}%</span></h3>
-        <h3>Pool {{ 'share' | translate }} <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span></h3>
+        <h3>Pool {{ 'share' | translate }} <span
+          class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span></h3>
 
         <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
       <div *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0" class="col-sm bg-light margin-col">
         <h3><span class="badge badge-pill badge-dark">DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}%</span></h3>
-        <h3>Pool {{ 'share' | translate }} <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span></h3>
+        <h3>Pool {{ 'share' | translate }} <span
+          class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span></h3>
 
-        <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+        <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
+                     [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
     </div>
@@ -807,10 +886,12 @@
         <span class="small">40699 Erkrath</span>
       </div>
       <div class="row">
-        <span class="small">Mail &nbsp;</span> <a class ="small" href="mailto:crypto@shelkovenkov.de"> crypto@shelkovenkov.de</a>
+        <span class="small">Mail &nbsp;</span> <a class="small" href="mailto:crypto@shelkovenkov.de">
+        crypto@shelkovenkov.de</a>
       </div>
       <div class="row">
-        <span class="small">Telegram &nbsp;</span> <a class ="small" href="https://t.me/ishelkovenkov"> https://t.me/ishelkovenkov</a>
+        <span class="small">Telegram &nbsp;</span> <a class="small" href="https://t.me/ishelkovenkov">
+        https://t.me/ishelkovenkov</a>
       </div>
 
     </div>
