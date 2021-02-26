@@ -189,7 +189,7 @@ export class AppComponent implements OnInit {
 
     setInterval(() => {
       this.testApi();
-    }, 1000);
+    }, 900000);
   }
 
   private refresh(): void {
