@@ -55,7 +55,14 @@
         <label class="custom-control-label"
                for="customSwitch2">{{ 'showInput1' | translate }} </label>
       </div>
+      <br>
+      <h2><span class="badge badge-pill badge-secondary left">{{ 'login' | translate }}</span></h2>
+      <p>{{ 'login2' | translate }}</p>
 
+      <p>
+        <button (click)="genAuthKey()" type="button" class="btn margin-col btn-danger">Go</button>
+        {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
+      </p>
     </div>
 
     <div class="col-sm bg-light margin-col">

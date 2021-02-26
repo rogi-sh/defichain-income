@@ -131,6 +131,10 @@ export class AppComponent implements OnInit {
 
   apiOnline = true;
 
+  loggedIn = false;
+  loggedInAuth = '';
+  loggedInKey = 'loggedInKey';
+
   constructor(private dexService: Dex, private translate: TranslateService) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
@@ -140,10 +144,7 @@ export class AppComponent implements OnInit {
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
   }
 
-  useLanguage(language: string): void {
-    this.translate.use(language);
-    this.lang = language;
-  }
+
 
   ngOnInit(): void {
     if (localStorage.getItem(this.fiatKey) !== null) {
@@ -206,6 +207,15 @@ export class AppComponent implements OnInit {
     this.countdown?.restart();
   }
 
+  genAuthKey(): void {
+    this.loggedInAuth = Math.random().toString(36).substring(7);;
+    localStorage.setItem(this.loggedInKey, JSON.stringify(this.loggedInAuth));
+  }
+
+  useLanguage(language: string): void {
+    this.translate.use(language);
+    this.lang = language;
+  }
 
   onChangeRefreshS(): void {
     localStorage.setItem(this.sCountdownKey, JSON.stringify(this.sCountdown));

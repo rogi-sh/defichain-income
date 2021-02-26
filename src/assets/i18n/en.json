@@ -16,6 +16,9 @@
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
   "price": "price",
+  "login": "Login ",
+  "login2": "Create an AuthKey with which you can log in. Your data will then be persistent and available on all devices.",
+  "login3": "Your Auth Key:",
   "address": {
     "label": "address",
     "title": "Your defichain app dfi addresses",
