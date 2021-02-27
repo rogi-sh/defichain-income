@@ -56,13 +56,18 @@
                for="customSwitch2">{{ 'showInput1' | translate }} </label>
       </div>
       <br>
-      <h2><span class="badge badge-pill badge-secondary left">{{ 'login' | translate }}</span></h2>
-      <p>{{ 'login2' | translate }}</p>
-
-      <h2>
-        <button (click)="genAuthKey()" type="button" class="btn margin-col btn-danger">Go</button>
+      <h2><span class="badge badge-pill badge-secondary left">{{ 'save' | translate }}</span></h2>
+      <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
+      <p *ngIf="!loggedIn">
+        <button (click)="register()" type="button" class="btn margin-col btn-danger">{{ 'register' | translate }}</button>
+      </p>
+      <p *ngIf="!loggedIn">{{ 'login2' | translate }}</p>
+      <p *ngIf="!loggedIn">
+        <button (click)="login()" type="button" class="btn margin-col btn-danger">{{ 'login' | translate }}</button>
+      </p>
+      <p *ngIf="loggedIn">
         {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
-      </h2>
+      </p>
     </div>
 
     <div class="col-sm bg-light margin-col">

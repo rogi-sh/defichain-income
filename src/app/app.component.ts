@@ -10,8 +10,7 @@ import {CountdownComponent} from 'ngx-countdown';
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
 import {Apollo} from 'apollo-angular';
-import {GEN_AUTH_KEY} from '../interface/Graphql';
-import {createPerformWatchHost} from '@angular/compiler-cli/src/perform_watch';
+import {REGISTER} from '../interface/Graphql';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit {
 
   @ViewChild('cd', {static: true})
   private countdown: CountdownComponent;
-
 
   title = 'defichain-income';
   lang = 'en';
@@ -138,10 +136,7 @@ export class AppComponent implements OnInit {
   loggedInAuth = '';
   loggedInKey = 'loggedInKey';
 
-  loggedInAuthQuery;
-
-
-    constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo) {
+  constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
 
@@ -154,6 +149,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem(this.loggedInKey) !== null) {
       this.loggedInAuth = localStorage.getItem(this.loggedInKey);
+      this.loggedIn = true;
     }
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
@@ -214,16 +210,48 @@ export class AppComponent implements OnInit {
     }
     this.countdown?.restart();
   }
-  genAuthKey(): void {
-   this.apollo.query({
-      query: GEN_AUTH_KEY,
-      pollInterval: 0,
-    })
-      .subscribe((result: any) => {
-        this.loggedInAuth = result?.data?.getAuthKey;
-        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
-      });
 
+  register(): void {
+    this.apollo.mutate({
+      mutation: REGISTER,
+      variables: {
+        addresses: this.adresses,
+        dfi: this.wallet.dfi,
+        btc: this.wallet.btc,
+        eth: this.wallet.eth,
+        doge: this.wallet.doge,
+        ltc: this.wallet.ltc,
+        usdt: this.wallet.usdt,
+        btcdfi: this.wallet.btcdfi,
+        ethdfi: this.wallet.ethdfi,
+        ltcdfi: this.wallet.ltcdfi,
+        usdtdfi: this.wallet.usdtdfi,
+        dogedfi: this.wallet.dogedfi,
+        btcInBtcPool: this.wallet.btcInBtcPool,
+        dfiInBtcPool: this.wallet.dfiInBtcPool,
+        ethInEthPool: this.wallet.ethInEthPool,
+        dfiInEthPool: this.wallet.dfiInEthPool,
+        usdtInUsdtPool: this.wallet.usdtInUsdtPool,
+        dfiInUsdtPool: this.wallet.dfiInUsdtPool,
+        ltcInLtcPool: this.wallet.ltcInLtcPool,
+        dfiInLtcPool: this.wallet.dfiInLtcPool,
+        dogeInDogePool: this.wallet.dogeInDogePool,
+        dfiInDogePool: this.wallet.dfiInDogePool
+      }
+    }).subscribe((result: any) => {
+      if (result?.data?.addUser) {
+        this.loggedInAuth = result?.data?.addUser?.key;
+        this.loggedIn = true;
+        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+      }
+    }, (error) => {
+      console.log('there was an error sending the query', error);
+    });
+
+  }
+
+  login(): void {
+    console.log('Login');
   }
 
 
