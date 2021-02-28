@@ -19,9 +19,10 @@
   "price": "Preis",
   "save": "Datenspeicherung ",
   "login": "Login",
-  "register": "Registrierung",
+  "register": "Registrieren",
   "loginExplain": "Du kannst deine Daten persistent halten. Regsitriere dich weiter unten. Bei der Registrirung wird ein Auth Key erstellt. Diesen speicherst du ab und das ist dein Schlüssel für den Login. Deine bis dahin eingegebenen Daten und Addressen werden alle übernommen. Danach bist du automaitsch eingeloggt. Mit dem Auth Key kannst du deine Daten dann auf anderen Geräten direkt abrufen.",
   "login2": "Hast du bereits einen Auth Key?",
+  "login21": "Trage hier deinen Auth Key ein",
   "login3": "Eingeloggt mit Auth Key:",
   "address": {
     "label": "Adresse",

@@ -21,6 +21,7 @@
   "register": "Register",
   "loginExplain": "Du kannst deine Daten persistent halten. Registriere dich weiter unten. Bei der Registrirung wird ein Auth Key erstellt. Diesen speicherst du ab und das ist dein Schlüssel für den Login. Deine bis dahin eingegebenen Daten und Addressen werden alle übernommen. Danach musst du dich nur einloggen und alle deine Eingaben werden geladen.",
   "login2": "Do you already have an Auth Key?",
+  "login21": "Enter your Auth Key here",
   "login3": "Logged in with Auth Key:",
   "address": {
     "label": "address",

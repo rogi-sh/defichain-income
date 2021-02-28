@@ -43,5 +43,18 @@ export const REGISTER = gql`
   }
 `;
 
+export const LOGIN = gql`
+  query ($key: String) {
+    userByKey(key: $key) {
+      id, key, addresses, wallet {
+        dfi, btc,eth, doge, usdt, ltc,
+        btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi,
+        btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
+        dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool
+      }
+    }
+  }
+`;
+
 
 

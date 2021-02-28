@@ -10,7 +10,7 @@ import {CountdownComponent} from 'ngx-countdown';
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
 import {Apollo} from 'apollo-angular';
-import {REGISTER} from '../interface/Graphql';
+import {LOGIN, REGISTER} from '../interface/Graphql';
 
 @Component({
   selector: 'app-root',
@@ -134,6 +134,7 @@ export class AppComponent implements OnInit {
 
   loggedIn = false;
   loggedInAuth = '';
+  loggedInAuthInput;
   loggedInKey = 'loggedInKey';
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo) {
@@ -250,8 +251,32 @@ export class AppComponent implements OnInit {
 
   }
 
+  logout(): void {
+    this.loggedInAuth = '';
+    this.loggedIn = false;
+    localStorage.removeItem(this.loggedInKey);
+  }
+
   login(): void {
-    console.log('Login');
+    if (this.loggedInAuthInput) {
+      this.apollo.query({
+        query: LOGIN,
+        variables: {
+          key: this.loggedInAuthInput
+        }
+      }).subscribe((result: any) => {
+        if (result?.data?.userByKey) {
+          this.loggedInAuth = this.loggedInAuthInput;
+          this.loggedIn = true;
+          localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+          this.wallet = new Wallet();
+          this.wallet = result?.data?.userByKey.wallet;
+          this.adresses = result?.data?.userByKey.addresses;
+        }
+      }, (error) => {
+        console.log('there was an error sending the query', error);
+      });
+    }
   }
 
 
