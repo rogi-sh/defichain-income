@@ -15,7 +15,46 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
 };
 
+export interface WalletDto {
+  dfi: number;
+
+  dfiInStaking: number;
+
+  btcdfi: number;
+  ethdfi: number;
+  ltcdfi: number;
+  dogedfi: number;
+  usdtdfi: number;
+
+  // User Infos
+  // BTC Pool
+  btcInBtcPool: number;
+  btc: number;
+  dfiInBtcPool: number;
+
+  // ETH Pool
+  ethInEthPool : number;
+  eth : number;
+  dfiInEthPool : number;
+
+  // USDT Pool
+  usdtInUsdtPool : number;
+  usdt : number;
+  dfiInUsdtPool : number;
+
+  // LTC Pool
+  ltcInLtcPool : number;
+  ltc : number;
+  dfiInLtcPool : number;
+
+  // DOGE Pool
+  dogeInDogePool : number;
+  doge : number;
+  dfiInDogePool : number;
+}
+
 export class Wallet {
+
   dfi = 0;
   dfiKey = 'dfiKey';
 

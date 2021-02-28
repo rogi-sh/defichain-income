@@ -68,13 +68,16 @@
           <input [(ngModel)]="loggedInAuthInput" type="text" class="form-control form-control-sm">
           <small class="form-text text-muted">{{ 'login21' | translate }}</small>
         </div>
-        <button (click)="login()" type="button" class="btn margin-col btn-danger">{{ 'login' | translate }}</button>
+        <button (click)="login()" type="button" class="btn margin-col btn-success">{{ 'login' | translate }}</button>
       </div>
       <p *ngIf="loggedIn">
         {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
       </p>
       <p *ngIf="loggedIn">  <button (click)="logout()" type="button"
                    class="btn margin-col btn-danger">Logout</button></p>
+
+      <p *ngIf="loggedIn">  <button (click)="update()" type="button"
+                                    class="btn margin-col btn-success">Update</button></p>
 
     </div>
 
