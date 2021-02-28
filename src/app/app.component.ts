@@ -41,15 +41,11 @@ export class AppComponent implements OnInit {
   usdToEur = 0.82;
   usdToChf = 0.89;
   usdToGbp = 0.72;
+  stakingApy = 37;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
-
-  // Staking infos
-  dfiInStakingKey = 'dfiInStaking';
-  dfiInStaking = 0;
-  stakingApy = 37;
 
   adresses = new Array<string>();
   adress = '';
@@ -133,7 +129,7 @@ export class AppComponent implements OnInit {
   apiOnline = true;
 
   loggedIn = false;
-  loggedInAuth = '';
+  loggedInAuth;
   loggedInAuthInput;
   loggedInKey = 'loggedInKey';
 
@@ -148,9 +144,34 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.wallet = new Wallet();
+    this.loadInitLocalStorage();
+
+    if (this.autoLoadData) {
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      if (!this.loggedIn) {
+        this.loadLocalStorageForManuel();
+      }
+      this.loadDexManuel();
+    }
+
+    this.countdown?.begin();
+    this.timer = setInterval(() => {
+      this.refresh();
+    }, this.sCountdown * 1000);
+
+    setInterval(() => {
+      this.testApi();
+    }, 900000);
+  }
+
+  private loadInitLocalStorage(): void {
     if (localStorage.getItem(this.loggedInKey) !== null) {
       this.loggedInAuth = localStorage.getItem(this.loggedInKey);
       this.loggedIn = true;
+      this.login();
     }
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
@@ -171,42 +192,22 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.showInputAreaKey) !== null) {
       this.showInputArea = JSON.parse(localStorage.getItem(this.showInputAreaKey));
     }
-    // Staking
-    if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
-      this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
-    } else {
-      this.dfiInStaking = 0;
-    }
-
-    this.wallet = new Wallet();
-
-    if (this.autoLoadData) {
-      this.loadAllAccounts();
-      this.loadDex();
-    } else {
-      this.loadLocalStorageForManuel();
-      this.loadDexManuel();
-    }
-
-    this.countdown?.begin();
-    this.timer = setInterval(() => {
-      this.refresh();
-    }, this.sCountdown * 1000);
-
-    setInterval(() => {
-      this.testApi();
-    }, 900000);
   }
 
   private refresh(): void {
     if (this.autoLoadData) {
       console.log('Refresh autofunds ...');
+      const newWallet = new Wallet();
+      newWallet.dfiInStaking = this.wallet.dfiInStaking;
+      this.wallet = newWallet;
       this.loadAllAccounts();
       this.loadDex();
     } else {
       console.log('Refresh manuel funds ...');
-      this.wallet = new Wallet();
-      this.loadLocalStorageForManuel();
+      if (!this.loggedIn) {
+        this.wallet = new Wallet();
+        this.loadLocalStorageForManuel();
+      }
       this.loadDexManuel();
     }
     this.countdown?.restart();
@@ -246,7 +247,7 @@ export class AppComponent implements OnInit {
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
       }
     }, (error) => {
-      console.log('there was an error sending the query', error);
+      console.log('there was an error sending mutation register', error);
     });
 
   }
@@ -258,23 +259,31 @@ export class AppComponent implements OnInit {
   }
 
   login(): void {
-    if (this.loggedInAuthInput) {
+    if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
         query: LOGIN,
         variables: {
-          key: this.loggedInAuthInput
+          key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
         }
       }).subscribe((result: any) => {
         if (result?.data?.userByKey) {
-          this.loggedInAuth = this.loggedInAuthInput;
+          this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
           this.loggedIn = true;
           localStorage.setItem(this.loggedInKey, this.loggedInAuth);
           this.wallet = new Wallet();
           this.wallet = result?.data?.userByKey.wallet;
           this.adresses = result?.data?.userByKey.addresses;
+
+          if (this.autoLoadData) {
+            this.loadAllAccounts();
+            this.loadDex();
+          } else {
+            this.loadLocalStorageForManuel();
+            this.loadDexManuel();
+          }
         }
       }, (error) => {
-        console.log('there was an error sending the query', error);
+        console.log('there was an error sending the query for login', error);
       });
     }
   }
@@ -401,10 +410,12 @@ export class AppComponent implements OnInit {
 
   loadAllAccounts(): void {
     // Wallet
-    this.wallet = new Wallet();
     for (const ad of this.adresses) {
       this.loadAccountDetails(ad);
     }
+
+    // TODO Update wallet in DB
+
 
   }
 
@@ -592,12 +603,12 @@ export class AppComponent implements OnInit {
   }
 
   berechneStakingOut(): void {
-    this.stakingOut.dfiPerDay = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 365) - this.dfiInStaking;
-    this.stakingOut.dfiPerHour = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 8760) - this.dfiInStaking;
-    this.stakingOut.dfiPerMin = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 525600) - this.dfiInStaking;
-    this.stakingOut.dfiPerWeek = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 52.1429) - this.dfiInStaking;
-    this.stakingOut.dfiPerMonth = this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking;
-    this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking;
+    this.stakingOut.dfiPerDay = this.wallet.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 365) - this.wallet.dfiInStaking;
+    this.stakingOut.dfiPerHour = this.wallet.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 8760) - this.wallet.dfiInStaking;
+    this.stakingOut.dfiPerMin = this.wallet.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 525600) - this.wallet.dfiInStaking;
+    this.stakingOut.dfiPerWeek = this.wallet.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 52.1429) - this.wallet.dfiInStaking;
+    this.stakingOut.dfiPerMonth = this.wallet.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.wallet.dfiInStaking;
+    this.stakingOut.dfiPerYear = this.wallet.dfiInStaking * (1 + this.stakingApy / 100) - this.wallet.dfiInStaking;
   }
 
   isLocalStorageNotEmpty(key: string): boolean {
@@ -695,7 +706,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDfiStaking(): void {
-    localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking));
+    localStorage.setItem(this.wallet.dfiInStakingKey, JSON.stringify(this.wallet.dfiInStaking));
     this.berechneStakingOut();
     this.buildDataForChart();
   }
@@ -901,12 +912,12 @@ export class AppComponent implements OnInit {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInStaking;
   }
 
   getDfiCountIncome(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInStaking;
   }
 
   getDfiCountLM(): number {
@@ -919,7 +930,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCountStakingUsd(): number {
-    return this.dfiInStaking * this.poolBtc?.priceB;
+    return this.wallet.dfiInStaking * this.poolBtc?.priceB;
   }
 
   getDfiCountWalletUsd(): number {
@@ -946,7 +957,7 @@ export class AppComponent implements OnInit {
   }
 
   getStakingValueUsd(): number {
-    return this.dfiInStaking * this.poolBtc?.priceB;
+    return this.wallet.dfiInStaking * this.poolBtc?.priceB;
   }
 
   getDfiCountInLM(): number {

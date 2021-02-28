@@ -246,7 +246,7 @@
           <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
           <div class="form-group">
             <label for="inputDFIStakingAuto">DFI</label>
-            <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
+            <input required [(ngModel)]="wallet.dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
                    class="form-control form-control-sm" id="inputDFIStakingAuto">
             <small class="form-text text-muted">{{ 'holdings.stake-add' | translate }}</small>
             <small class="form-text text-muted">{{ 'holdings.no-stake' | translate }}</small>
@@ -255,6 +255,7 @@
       </div>
 
     </div>
+    <br>
   </div>
 
   <div *ngIf="!autoLoadData && showInputArea" class="container left">
@@ -273,7 +274,7 @@
         <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
         <div class="form-group">
           <label for="inputDFIStaking">DFI</label>
-          <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
+          <input required [(ngModel)]="wallet.dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
                  class="form-control form-control-sm" id="inputDFIStaking">
           <small class="form-text text-muted">{{ 'add-amount' | translate }} stake DFI {{ 'amount' | translate }}
             .</small>
@@ -644,9 +645,9 @@
 
     <div *ngIf="details === 'Staking'" class="container">
       <div class="row">
-        <div *ngIf="dfiInStaking > 0" class="col-sm bg-light margin-col">
+        <div *ngIf="wallet.dfiInStaking > 0" class="col-sm bg-light margin-col">
           <h2><span class="badge badge-pill badge-success left">Staking {{ 'income.word' | translate }}</span></h2>
-          <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{dfiInStaking}}
+          <h3>{{ 'balance' | translate }} <span class="badge badge-pill badge-primary left"> {{wallet.dfiInStaking}}
             DFI  </span></h3>
           <h3>{{ 'balance' | translate }} in Fiat<span class="badge badge-pill badge-primary left">
           <span *ngIf="fiat === 'USD'">{{getDfiCountStakingUsd() | currency:'USD'}} </span>
@@ -916,3 +917,4 @@
       </div>
     </footer>
   </div>
+</div>
