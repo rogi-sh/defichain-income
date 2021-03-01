@@ -3,5 +3,5 @@ export const environment = {
   dex: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
-  version: 'v2.3.1'
+  version: 'v2.3.2'
 };
