@@ -47,7 +47,6 @@
                for="customSwitch1">{{ 'load4' | translate }} </label>
         <label *ngIf="!autoLoadData" class="custom-control-label"
                for="customSwitch1">{{ 'load5' | translate }}</label>
-
       </div>
       <div class="custom-control custom-switch">
         <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleInputShow()" type="checkbox"
@@ -134,7 +133,10 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-              APY Staking <span class="badge badge-pill badge-dark">{{this.stakingApy | number: '1.0-0' }}%</span>
+              APY Staking Cake <span class="badge badge-pill badge-dark"> {{this.stakingApyCake | number: '1.1-1' }}%</span>
+            </div>
+            <div class="col-auto margin-col">
+              APY Staking MN <span class="badge badge-pill badge-dark"> {{this.stakingApyMN | number: '1.1-1' }}%</span>
             </div>
           </div>
           <div class="row">
@@ -225,6 +227,15 @@
       </div>
       <div class="col-auto bg-light margin-col">
         <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
+        <small class="form-text text-muted">{{ 'stakingOnCake' | translate }}</small>
+        <div class="custom-control custom-switch">
+          <input [(ngModel)]="stakingOnCake" (ngModelChange)="saveToggleStakingOnCake()" type="checkbox"
+                 class="custom-control-input" id="stakingCake2">
+          <label *ngIf="stakingOnCake" class="custom-control-label"
+                 for="stakingCake2">Cake {{stakingApyCake | number: '1.1-1' }}%</label>
+          <label *ngIf="!stakingOnCake" class="custom-control-label"
+                 for="stakingCake2">Masternode {{stakingApyMN | number: '1.1-1' }}%</label>
+        </div>
         <div class="form-group">
           <label for="inputDFIStakingAuto">DFI</label>
           <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"
@@ -252,6 +263,15 @@
           .</small>
       </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
+      <small class="form-text text-muted">{{ 'stakingOnCake' | translate }}</small>
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="stakingOnCake" (ngModelChange)="saveToggleStakingOnCake()" type="checkbox"
+               class="custom-control-input" id="stakingCake">
+        <label *ngIf="stakingOnCake" class="custom-control-label"
+               for="stakingCake">Cake</label>
+        <label *ngIf="!stakingOnCake" class="custom-control-label"
+               for="stakingCake">Masternode</label>
+      </div>
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"

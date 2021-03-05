@@ -16,6 +16,7 @@
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
   "price": "price",
+  "stakingOnCake": "Where do yo stake?",
   "address": {
     "label": "address",
     "title": "Your defichain app dfi addresses",

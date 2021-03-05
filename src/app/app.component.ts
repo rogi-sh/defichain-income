@@ -49,6 +49,10 @@ export class AppComponent implements OnInit {
   dfiInStakingKey = 'dfiInStaking';
   dfiInStaking = 0;
   stakingApy = 37;
+  stakingApyCake = 37;
+  stakingApyMN = 42.5;
+  stakingApyKey = 'stakingApyKey';
+  stakingOnCake = true;
 
   adresses = new Array<string>();
   adress = '';
@@ -171,6 +175,10 @@ export class AppComponent implements OnInit {
     } else {
       this.dfiInStaking = 0;
     }
+    if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
+      this.stakingOnCake = JSON.parse(localStorage.getItem(this.stakingApyKey));
+      this.stakingApy = this.stakingOnCake ? this.stakingApyCake : this.stakingApyMN;
+    }
 
     this.wallet = new Wallet();
 
@@ -220,6 +228,13 @@ export class AppComponent implements OnInit {
   saveToggleAutoLoad(): void {
     localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
     this.refresh();
+  }
+
+  saveToggleStakingOnCake(): void {
+    localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingOnCake));
+    this.stakingApy = this.stakingOnCake ? this.stakingApyCake : this.stakingApyMN;
+    this.berechneStakingOut();
+    this.berechnePoolOut();
   }
 
   saveToggleInputShow(): void {
