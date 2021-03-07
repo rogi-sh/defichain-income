@@ -1,4 +1,12 @@
-import {ApexChart, ApexDataLabels, ApexFill, ApexLegend, ApexNonAxisChartSeries, ApexResponsive} from 'ng-apexcharts';
+import {ApexChart,
+  ApexDataLabels,
+  ApexFill,
+  ApexLegend,
+  ApexNonAxisChartSeries,
+  ApexResponsive,
+  ApexAxisChartSeries,
+  ApexTitleSubtitle,
+  ApexXAxis} from 'ng-apexcharts';
 
 export class Data {
   name: string;
@@ -13,6 +21,13 @@ export type ChartOptions = {
   fill: ApexFill;
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
+};
+
+export type ChartOptions2 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  title: ApexTitleSubtitle;
+  xaxis: ApexXAxis;
 };
 
 export class Wallet {
