@@ -20,6 +20,7 @@ export type ChartOptions = {
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
+  colors: string[];
   fill: ApexFill;
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
@@ -39,6 +40,7 @@ export type ChartOptions3 = {
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
+  colors: string[];
   fill: ApexFill;
   legend: ApexLegend;
   dataLabels: ApexDataLabels;

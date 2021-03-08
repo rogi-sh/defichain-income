@@ -779,7 +779,7 @@ export class AppComponent implements OnInit {
         +dataLtc.value.toFixed(1),
         +dataDoge.value.toFixed(1),
         +dataDfi.value.toFixed(1)],
-
+      colors: ['#ff9900', '#3c3c3d', '#26a17b', '#b8b8b8', '#cb9800', '#ff00af'],
       labels: ['BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%',
         'ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%',
         'USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue) + '%',
@@ -826,6 +826,7 @@ export class AppComponent implements OnInit {
       series: this.getSeriesValue(),
 
       labels: this.getLabelsValue(),
+      colors: this.getColorsValue(),
       chart: {
         width: 320,
         type: 'donut'
@@ -1009,6 +1010,35 @@ export class AppComponent implements OnInit {
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
       incomeNumbers.push('USDT-Pool ');
+    }
+
+    return incomeNumbers;
+  }
+
+  getColorsValue(): Array<string> {
+
+    const incomeNumbers = new Array<string>();
+
+    if (this.getAnteilWalletOfAllValue() > 0) {
+      incomeNumbers.push('#1ab7ea');
+    }
+    if (this.getAnteilStakingOfAllValue() > 0) {
+      incomeNumbers.push('#ff00af');
+    }
+    if (this.getAnteilLMOfBtcPoolValue() > 0) {
+      incomeNumbers.push( '#ff9900');
+    }
+    if (this.getAnteilLMOfEthPoolValue() > 0) {
+      incomeNumbers.push('#3c3c3d');
+    }
+    if (this.getAnteilLMOfLtcPoolValue() > 0) {
+      incomeNumbers.push('#b8b8b8');
+    }
+    if (this.getAnteilLMOfDogePoolValue() > 0) {
+      incomeNumbers.push('#cb9800');
+    }
+    if (this.getAnteilLMOfUsdtPoolValue() > 0) {
+      incomeNumbers.push(  '#26a17b');
     }
 
     return incomeNumbers;
