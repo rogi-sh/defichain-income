@@ -8,6 +8,7 @@ import {ApexChart,
   ApexTitleSubtitle,
   ApexXAxis,
   ApexStroke} from 'ng-apexcharts';
+import {Outcome} from './Dex';
 
 export class Data {
   name: string;
@@ -96,5 +97,8 @@ export class Wallet {
 
 }
 
-
+export class StakingCalc extends Outcome {
+  dfiAmount = 10000;
+  apy = 43.598;
+}
 

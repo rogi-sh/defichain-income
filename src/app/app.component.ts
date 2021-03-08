@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
 import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolUsdtOut} from '../interface/Dex';
-import {ChartOptions, ChartOptions2, ChartOptions3, Data, Wallet} from '../interface/Data';
+import {ChartOptions, ChartOptions2, ChartOptions3, Data, StakingCalc, Wallet} from '../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
@@ -127,6 +127,7 @@ export class AppComponent implements OnInit {
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
+  stakingCalcOut: StakingCalc = new StakingCalc();
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -185,6 +186,8 @@ export class AppComponent implements OnInit {
       this.stakingOnCake = JSON.parse(localStorage.getItem(this.stakingApyKey));
       this.stakingApy = this.stakingOnCake ? this.stakingApyCake : this.stakingApyMN;
     }
+
+    this.calcStakingOutCome();
 
     this.wallet = new Wallet();
 
@@ -1051,6 +1054,10 @@ export class AppComponent implements OnInit {
     return this.dfiInStaking * this.poolBtc?.priceB;
   }
 
+  getDfiCountStakingCalcUsd(): number {
+    return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
+  }
+
   getDfiCountWalletUsd(): number {
     return this.wallet?.dfi * this.poolBtc?.priceB;
   }
@@ -1377,5 +1384,19 @@ export class AppComponent implements OnInit {
 
   checkInputNumber(value: number): boolean {
     return value !== null && value >= 0;
+  }
+
+  calcStakingOutCome(): void {
+    this.stakingCalcOut.dfiPerDay = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 365)
+      - this.stakingCalcOut.dfiAmount;
+    this.stakingCalcOut.dfiPerHour = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 8760)
+      - this.stakingCalcOut.dfiAmount;
+    this.stakingCalcOut.dfiPerMin = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 525600)
+      - this.stakingCalcOut.dfiAmount;
+    this.stakingCalcOut.dfiPerWeek = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 52.1429)
+      - this.stakingCalcOut.dfiAmount;
+    this.stakingCalcOut.dfiPerMonth = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 12)
+      - this.stakingCalcOut.dfiAmount;
+    this.stakingCalcOut.dfiPerYear = this.stakingCalcOut.dfiAmount * (1 + this.stakingCalcOut.apy / 100) - this.stakingCalcOut.dfiAmount;
   }
 }
