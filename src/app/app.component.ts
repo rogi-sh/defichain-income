@@ -772,26 +772,15 @@ export class AppComponent implements OnInit {
     dataDfi.value = this.getDfiValueUsd();
 
     this.chartOptions = {
-      series: [
-        +dataBtc.value.toFixed(1),
-        +dataEth.value.toFixed(1),
-        +dataUsdt.value.toFixed(1),
-        +dataLtc.value.toFixed(1),
-        +dataDoge.value.toFixed(1),
-        +dataDfi.value.toFixed(1)],
-      colors: ['#ff9900', '#3c3c3d', '#26a17b', '#b8b8b8', '#cb9800', '#ff00af'],
-      labels: ['BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%',
-        'ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%',
-        'USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue) + '%',
-        'LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue) + '%',
-        'DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue) + '%',
-        'DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue) + '%'],
+      series: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataLtc, dataDoge, dataDfi),
+      colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataLtc, dataDoge, dataDfi),
+      labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataLtc, dataDoge, dataDfi),
       chart: {
-        width: 320,
+        width: 420,
         type: 'donut'
       },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       fill: {
         type: 'gradient'
@@ -819,6 +808,80 @@ export class AppComponent implements OnInit {
     };
   }
 
+  private getSeriesOverallValue(dataBtc: Data, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data, dataDfi: Data): Array<number> {
+    const incomeNumbers = new Array<number>();
+
+    if (dataBtc.value > 0) {
+      incomeNumbers.push(+dataBtc.value.toFixed(2));
+    }
+    if (dataEth.value > 0) {
+      incomeNumbers.push(+dataEth.value.toFixed(2));
+    }
+    if (dataUsdt.value > 0) {
+      incomeNumbers.push(+dataUsdt.value.toFixed(2));
+    }
+    if (dataLtc.value > 0) {
+      incomeNumbers.push(+dataLtc.value.toFixed(2));
+    }
+    if (dataDoge.value > 0) {
+      incomeNumbers.push(+dataDoge.value.toFixed(2));
+    }
+    if (dataDfi.value > 0) {
+      incomeNumbers.push(+dataDfi.value.toFixed(2));
+    }
+
+    return incomeNumbers;
+  }
+
+  private getColorsOverallValue(dataBtc: Data, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data, dataDfi: Data): Array<string> {
+    const incomeNumbers = new Array<string>();
+
+    if (dataBtc.value > 0) {
+      incomeNumbers.push('#ff9900');
+    }
+    if (dataEth.value > 0) {
+      incomeNumbers.push('#3c3c3d');
+    }
+    if (dataUsdt.value > 0) {
+      incomeNumbers.push('#26a17b');
+    }
+    if (dataLtc.value > 0) {
+      incomeNumbers.push('#b8b8b8');
+    }
+    if (dataDoge.value > 0) {
+      incomeNumbers.push('#cb9800');
+    }
+    if (dataDfi.value > 0) {
+      incomeNumbers.push('#ff00af');
+    }
+
+    return incomeNumbers;
+  }
+
+  private getLabelsOverallValue(dataBtc: Data, allValue: number, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data, dataDfi: Data): Array<string> {
+
+    const incomeNumbers = new Array<string>();
+    if (+this.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
+      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%');
+    }
+    if (+this.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
+      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%');
+    }
+    if (+this.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
+      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue) + '%');
+    }
+    if (+this.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
+      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue) + '%');
+    }
+    if (+this.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
+      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue) + '%');
+    }
+    if (+this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
+      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue) + '%');
+    }
+    return incomeNumbers;
+  }
+
   buildDataForChartValue(): void {
 
     this.chartOptions3 = {
@@ -828,7 +891,7 @@ export class AppComponent implements OnInit {
       labels: this.getLabelsValue(),
       colors: this.getColorsValue(),
       chart: {
-        width: 320,
+        width: 420,
         type: 'donut'
       },
       dataLabels: {
@@ -1125,7 +1188,7 @@ export class AppComponent implements OnInit {
 
 
   private getAnteilPortfolioForChart(data: Data, allValue: number): string {
-    return (data.value / allValue * 100).toFixed(1);
+    return (data.value / allValue * 100).toFixed(5);
   }
 
   onChangeFiat(newValue: string): void {
