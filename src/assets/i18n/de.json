@@ -42,11 +42,14 @@
   },
   "value": {
     "title": "Dein aktueller Wert",
-    "cur": "Wähle deine Währung aus"
+    "cur": "Wähle deine Währung aus",
+    "dist": "Verteilung deines Bestands",
+    "hold": "Wert des Bestands"
   },
   "income": {
     "title": "Dein gesamtes Einkommen",
-    "word": "Einkommen"
+    "word": "Einkommen",
+    "distribution": "Verteilung deines monatlichen Einkommens"
   },
   "hour": "Stunde",
   "day": "Tag",

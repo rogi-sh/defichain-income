@@ -435,10 +435,28 @@
   <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">{{ 'value.title' | translate }}</span></h1>
+
+      <h3>{{ 'value.dist' | translate }}</h3>
+
       <h2><span class="badge badge-pill badge-success left">
-        {{this.getAnteilWalletOfAllValue() | number: '1.1-1'}} % Wallet
-        - {{getAnteilStakingOfAllValue() | number: '1.1-1'}} % Staking
-        - {{getAnteilLMOfAllValue()| number: '1.1-1'}} % LM</span></h2>
+        {{this.getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
+        - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
+        - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM</span></h2>
+
+
+      <div id="chart3">
+        <apx-chart *ngIf="chartOptions3 && chartOptions3.series.length > 0"
+                   [series]="chartOptions3?.series"
+                   [chart]="chartOptions3?.chart"
+                   [labels]="chartOptions3?.labels"
+                   [fill]="chartOptions3?.fill"
+                   [dataLabels]="chartOptions3?.dataLabels"
+                   [responsive]="chartOptions3?.responsive"
+        ></apx-chart>
+      </div>
+
+      <h3>{{ 'value.hold' | translate }}</h3>
+
       <div class="row">
         <div class="col-auto bg-light margin-col">
           <h2><span
@@ -447,7 +465,7 @@
             <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
             <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
             <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
-      </span>
+        </span>
           </h2>
 
           <apx-chart *ngIf="chartOptions"
@@ -531,18 +549,20 @@
       <h1><span class="badge badge-secondary left">{{ 'income.title' | translate }}</span></h1>
       <div class="row">
         <div class="col-auto bg-light margin-col">
+          <h3>{{ 'income.distribution' | translate }}</h3>
           <h2><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
             / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h2>
 
-          <div id="chart2">
-            <apx-chart *ngIf="chartOptions2"
-                       [series]="chartOptions2?.series"
-                       [chart]="chartOptions2?.chart"
-                       [xaxis]="chartOptions2?.xaxis"
-                       [title]="chartOptions2?.title"
-            ></apx-chart>
 
-          </div>
+          <apx-chart *ngIf="chartOptions2 && chartOptions2.series.length > 0"
+                     [series]="chartOptions2?.series"
+                     [chart]="chartOptions2?.chart"
+                     [labels]="chartOptions2?.labels"
+                     [fill]="chartOptions2?.fill"
+                     [stroke]="chartOptions2?.stroke"
+                     [responsive]="chartOptions2?.responsive"
+          ></apx-chart>
+
           <div class="row">
             <div class="col-auto bg-light margin-col">
               <h3>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}

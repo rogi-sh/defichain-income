@@ -41,11 +41,14 @@
   },
   "value": {
     "title": "Your actual value",
-    "cur": "Choose your currency"
+    "cur": "Choose your currency",
+    "dist": "Distribution of holdings",
+    "hold": "Value of holdings"
   },
   "income": {
     "title": "Your total income",
-    "word": "Income"
+    "word": "Income",
+    "distribution": "Distribution of your monthly income"
   },
   "hour": "Hour",
   "day": "Day",

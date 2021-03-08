@@ -6,7 +6,8 @@ import {ApexChart,
   ApexResponsive,
   ApexAxisChartSeries,
   ApexTitleSubtitle,
-  ApexXAxis} from 'ng-apexcharts';
+  ApexXAxis,
+  ApexStroke} from 'ng-apexcharts';
 
 export class Data {
   name: string;
@@ -24,10 +25,22 @@ export type ChartOptions = {
 };
 
 export type ChartOptions2 = {
-  series: ApexAxisChartSeries;
+  series: ApexNonAxisChartSeries;
   chart: ApexChart;
-  title: ApexTitleSubtitle;
-  xaxis: ApexXAxis;
+  responsive: ApexResponsive[];
+  labels: any;
+  stroke: ApexStroke;
+  fill: ApexFill;
+};
+
+export type ChartOptions3 = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+  fill: ApexFill;
+  legend: ApexLegend;
+  dataLabels: ApexDataLabels;
 };
 
 export class Wallet {

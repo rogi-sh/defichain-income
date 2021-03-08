@@ -13,9 +13,14 @@
   padding: 0;
 }
 
-
 #chart2 {
-  max-width: 450px;
-  max-height: 250px;
+  max-width: 380px;
   margin: 35px auto;
+  padding: 0;
+}
+
+#chart3 {
+  max-width: 380px;
+  margin: 35px auto;
+  padding: 0;
 }
