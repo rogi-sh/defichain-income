@@ -27,7 +27,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "apexcharts": "3.24.0",
     "bootstrap": "^4.5.0",
-    "ng-apexcharts": "^1.5.7",
+    "ng-apexcharts": "^1.5.8",
     "ngx-countdown": "^11.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
