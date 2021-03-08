@@ -7,7 +7,7 @@ import {ApexChart,
   ApexAxisChartSeries,
   ApexTitleSubtitle,
   ApexXAxis,
-  ApexStroke} from 'ng-apexcharts';
+  ApexStroke, ApexPlotOptions, ApexYAxis, ApexTooltip} from 'ng-apexcharts';
 import {Outcome} from './Dex';
 
 export class Data {
@@ -42,6 +42,16 @@ export type ChartOptions3 = {
   fill: ApexFill;
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
+};
+
+export type ChartOptions4 = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  labels: string[];
+  colors: string[];
+  legend: ApexLegend;
+  plotOptions: ApexPlotOptions;
+  responsive: ApexResponsive | ApexResponsive[];
 };
 
 export class Wallet {
@@ -102,3 +112,6 @@ export class StakingCalc extends Outcome {
   apy = 43.598;
 }
 
+export class StakingCalcNormal extends Outcome {}
+
+export class StakingCalcMN extends Outcome {}

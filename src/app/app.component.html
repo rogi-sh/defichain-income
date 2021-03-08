@@ -768,6 +768,30 @@
         <app-earning [out]="stakingCalcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
+      <div class="col-sm bg-light margin-col">
+        <h2><span class="badge badge-pill badge-success left">Staking {{ 'income.calcVis' | translate }}</span></h2>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMin, stakingCalcMN.dfiPerMin, stakingCalcOut.dfiPerMin)" type="button" class="btn margin-col btn-danger">MIN</button>
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerHour, stakingCalcMN.dfiPerHour, stakingCalcOut.dfiPerHour)" type="button" class="btn margin-col btn-danger">HOUR</button>
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerDay, stakingCalcMN.dfiPerDay, stakingCalcOut.dfiPerDay)" type="button" class="btn margin-col btn-danger">DAY</button>
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerWeek, stakingCalcMN.dfiPerWeek, stakingCalcOut.dfiPerWeek)" type="button" class="btn margin-col btn-danger">WEEK</button>
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMonth, stakingCalcMN.dfiPerMonth, stakingCalcOut.dfiPerMonth)" type="button" class="btn margin-col btn-danger">MONTH</button>
+          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerYear, stakingCalcMN.dfiPerYear, stakingCalcOut.dfiPerYear)" type="button" class="btn margin-col btn-danger">YEAR</button>
+        </div>
+        <div id="chart4">
+          <apx-chart *ngIf="chartOptions4"
+            [series]="chartOptions4?.series"
+            [chart]="chartOptions4?.chart"
+            [plotOptions]="chartOptions4?.plotOptions"
+            [labels]="chartOptions4?.labels"
+            [legend]="chartOptions4?.legend"
+            [colors]="chartOptions4?.colors"
+            [responsive]="chartOptions4?.responsive"
+          ></apx-chart>
+        </div>
+
+      </div>
+
     </div>
   </div>
   <div *ngIf="details === 'LM'" class="container left">
