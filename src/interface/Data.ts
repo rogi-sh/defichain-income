@@ -31,6 +31,7 @@ export type ChartOptions2 = {
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
+  colors: string[];
   stroke: ApexStroke;
   fill: ApexFill;
 };

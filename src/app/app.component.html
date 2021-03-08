@@ -460,14 +460,14 @@
 
       <div class="row">
         <div class="col-auto bg-light margin-col">
-          <h2><span
+          <h1><span
             class="badge badge-pill badge-success left">
             <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
             <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
             <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
             <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
         </span>
-          </h2>
+          </h1>
 
           <apx-chart *ngIf="chartOptions"
                      [series]="chartOptions?.series"
@@ -560,6 +560,7 @@
                      [series]="chartOptions2?.series"
                      [chart]="chartOptions2?.chart"
                      [labels]="chartOptions2?.labels"
+                     [colors]="chartOptions2?.colors"
                      [fill]="chartOptions2?.fill"
                      [stroke]="chartOptions2?.stroke"
                      [responsive]="chartOptions2?.responsive"

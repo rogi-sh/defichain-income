@@ -865,6 +865,7 @@ export class AppComponent implements OnInit {
     this.chartOptions2 = {
 
       series: this.getSeriesIncome(),
+      colors: this.getColorsIncome(),
       chart: {
         type: 'polarArea'
       },
@@ -873,7 +874,7 @@ export class AppComponent implements OnInit {
       },
       labels: this.getSeriesIncomeTitle(),
       fill: {
-        opacity: 0.8
+        opacity: 0.9
       },
       responsive: [
         {
@@ -1069,6 +1070,33 @@ export class AppComponent implements OnInit {
 
     return incomeNumbers;
   }
+
+  getColorsIncome(): Array<string> {
+
+    const incomeNumbers = new Array<string>();
+
+    if (this.stakingOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#ff00af');
+    }
+    if (this.poolBtcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push( '#ff9900');
+    }
+    if (this.poolEthOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#3c3c3d');
+    }
+    if (this.poolLtcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#b8b8b8');
+    }
+    if (this.poolUsdtOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(  '#26a17b');
+    }
+    if (this.poolDogeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#cb9800');
+    }
+
+    return incomeNumbers;
+  }
+
 
   getSeriesIncomeTitle(): Array<string> {
 
