@@ -19,7 +19,8 @@
   "showInput1": "Zeige Eingabe oder Adressen meiner Bestände an",
   "stats": "Statistiken",
   "price": "Preis",
-  "stakingOnCake": "Wo stakest Du?",
+  "stakingOnCake": "Mit welchem APY stakest Du?",
+  "stakingOnCake2": "Bspw. Cake 37% / MN 42.5% / Freezer 38+",
   "address": {
     "label": "Adresse",
     "title": "Deine Adressen aus der DeFiChain App",

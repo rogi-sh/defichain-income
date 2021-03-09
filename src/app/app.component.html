@@ -249,13 +249,14 @@
       <div class="col-auto bg-light margin-col">
         <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
         <small class="form-text text-muted">{{ 'stakingOnCake' | translate }}</small>
-        <div class="custom-control custom-switch">
-          <input [(ngModel)]="stakingOnCake" (ngModelChange)="saveToggleStakingOnCake()" type="checkbox"
-                 class="custom-control-input" id="stakingCake2">
-          <label *ngIf="stakingOnCake" class="custom-control-label"
-                 for="stakingCake2">Cake {{stakingApyCake | number: '1.1-1' }}%</label>
-          <label *ngIf="!stakingOnCake" class="custom-control-label"
-                 for="stakingCake2">Masternode {{stakingApyMN | number: '1.1-1' }}%</label>
+        <small class="form-text text-muted">{{ 'stakingOnCake2' | translate }}</small>
+
+        <div class="form-group">
+          <label for="inputApyStaking2">Staking APY</label>
+          <input required [(ngModel)]="stakingApy" (ngModelChange)="saveInputStaking()" type="number"
+                 class="form-control form-control-sm" id="inputApyStaking2">
+          <small class="form-text text-muted">{{ 'add-amount' | translate }} Staking APY in %
+            .</small>
         </div>
         <div class="form-group">
           <label for="inputDFIStakingAuto">DFI</label>
@@ -285,14 +286,16 @@
       </div>
       <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
       <small class="form-text text-muted">{{ 'stakingOnCake' | translate }}</small>
-      <div class="custom-control custom-switch">
-        <input [(ngModel)]="stakingOnCake" (ngModelChange)="saveToggleStakingOnCake()" type="checkbox"
-               class="custom-control-input" id="stakingCake">
-        <label *ngIf="stakingOnCake" class="custom-control-label"
-               for="stakingCake">Cake</label>
-        <label *ngIf="!stakingOnCake" class="custom-control-label"
-               for="stakingCake">Masternode</label>
+      <small class="form-text text-muted">{{ 'stakingOnCake2' | translate }}</small>
+
+      <div class="form-group">
+        <label for="inputApyStaking">Staking APY</label>
+        <input required [(ngModel)]="stakingApy" (ngModelChange)="saveInputStaking()" type="number"
+               class="form-control form-control-sm" id="inputApyStaking">
+        <small class="form-text text-muted">{{ 'add-amount' | translate }} Staking APY in %
+          .</small>
       </div>
+
       <div class="form-group">
         <label for="inputDFIStaking">DFI</label>
         <input required [(ngModel)]="dfiInStaking" (ngModelChange)="onChangeDfiStaking()" type="number"

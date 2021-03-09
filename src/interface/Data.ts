@@ -112,7 +112,7 @@ export class Wallet {
 
 export class StakingCalc extends Outcome {
   dfiAmount = 10000;
-  apy = 43.598;
+  apy = 38;
 }
 
 export class StakingCalcNormal extends Outcome {}

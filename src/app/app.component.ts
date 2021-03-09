@@ -72,7 +72,6 @@ export class AppComponent implements OnInit {
   stakingApyCake = 37;
   stakingApyMN = 42.5;
   stakingApyKey = 'stakingApyKey';
-  stakingOnCake = true;
 
   adresses = new Array<string>();
   adress = '';
@@ -205,8 +204,7 @@ export class AppComponent implements OnInit {
       this.dfiInStaking = 0;
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
-      this.stakingOnCake = JSON.parse(localStorage.getItem(this.stakingApyKey));
-      this.stakingApy = this.stakingOnCake ? this.stakingApyCake : this.stakingApyMN;
+      this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
     }
 
     this.calcStakingOutCome();
@@ -265,11 +263,12 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.showSettingsAreaKey, JSON.stringify(this.showSettingsArea));
   }
 
-  saveToggleStakingOnCake(): void {
-    localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingOnCake));
-    this.stakingApy = this.stakingOnCake ? this.stakingApyCake : this.stakingApyMN;
+  saveInputStaking(): void {
+    localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
+    this.buildDataForChartIncome();
+
   }
 
   saveToggleInputShow(): void {
@@ -675,6 +674,7 @@ export class AppComponent implements OnInit {
     this.berechneStakingOut();
     this.buildDataForChart();
     this.buildDataForChartIncome();
+    this.buildDataForChartValue();
   }
 
   onChangeAimReturnDay(newValue): void {
@@ -1011,8 +1011,9 @@ export class AppComponent implements OnInit {
         labels: {
           useSeriesColors: true
         },
-        formatter: function(seriesName, opts) {
-          return seriesName + ':  ' + array[opts.seriesIndex] + 'DFI';
+        // tslint:disable-next-line:only-arrow-functions
+        formatter(seriesName, opts): string {
+          return seriesName + ':  ' + array[opts.seriesIndex] + ' DFI';
         },
         itemMargin: {
           horizontal: 3
@@ -1176,22 +1177,22 @@ export class AppComponent implements OnInit {
     const incomeNumbers = new Array<string>();
 
     if (this.stakingOut.dfiPerMonth > 0) {
-      incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolBtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolEthOut.dfiPerMonth > 0) {
-      incomeNumbers.push('ETH-Pool - ' + this.poolEthOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('ETH-Pool - ' + this.poolEthOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolLtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('LTC-Pool - ' + this.poolLtcOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('LTC-Pool - ' + this.poolLtcOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolUsdtOut.dfiPerMonth > 0) {
-      incomeNumbers.push('USDT-Pool - ' + this.poolUsdtOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('USDT-Pool - ' + this.poolUsdtOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolDogeOut.dfiPerMonth > 0) {
-      incomeNumbers.push('DOGE-Pool - ' + this.poolDogeOut.dfiPerMonth.toFixed(2));
+      incomeNumbers.push('DOGE-Pool - ' + this.poolDogeOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     return incomeNumbers;
   }

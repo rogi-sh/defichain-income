@@ -18,7 +18,8 @@
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
   "price": "price",
-  "stakingOnCake": "Where do yo stake?",
+  "stakingOnCake": "What is your APY for staking?",
+  "stakingOnCake2": "E.g. Cake 37% / MN 42.5%  / Freezer 38+",
   "address": {
     "label": "address",
     "title": "Your defichain app dfi addresses",
