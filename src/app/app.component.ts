@@ -156,6 +156,9 @@ export class AppComponent implements OnInit {
   showInputArea = true;
   showInputAreaKey = 'showInputAreaKey';
 
+  showSettingsArea = false;
+  showSettingsAreaKey = 'showSettingsAreaKey';
+
   apiOnline = true;
 
   constructor(private dexService: Dex, private translate: TranslateService) {
@@ -191,6 +194,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.showInputAreaKey) !== null) {
       this.showInputArea = JSON.parse(localStorage.getItem(this.showInputAreaKey));
+    }
+    if (localStorage.getItem(this.showSettingsAreaKey) !== null) {
+      this.showSettingsArea = JSON.parse(localStorage.getItem(this.showSettingsAreaKey));
     }
     // Staking
     if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
@@ -253,6 +259,10 @@ export class AppComponent implements OnInit {
   saveToggleAutoLoad(): void {
     localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
     this.refresh();
+  }
+
+  saveToggleSettingsLoad(): void {
+    localStorage.setItem(this.showSettingsAreaKey, JSON.stringify(this.showSettingsArea));
   }
 
   saveToggleStakingOnCake(): void {

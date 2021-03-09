@@ -13,7 +13,15 @@
   <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
-
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="showSettingsArea" (ngModelChange)="saveToggleSettingsLoad()" type="checkbox"
+               class="custom-control-input" id="settingsSwitch">
+        <label *ngIf="showSettingsArea" class="custom-control-label"
+               for="settingsSwitch">{{ 'settings1' | translate }} </label>
+        <label *ngIf="!showSettingsArea" class="custom-control-label"
+               for="settingsSwitch">{{ 'settings2' | translate }}</label>
+      </div>
+      <div *ngIf="showSettingsArea">
       <h2><span class="badge badge-pill badge-secondary left">{{ 'lang' | translate }}</span></h2>
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
         <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
@@ -63,7 +71,7 @@
         <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
         <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
       </div>
-
+    </div>
     </div>
   </div>
   <div class="row">

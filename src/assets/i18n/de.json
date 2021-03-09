@@ -9,6 +9,8 @@
   "refresh3": "Zeit zum nächsten Neuladen",
   "refresh5": "Los",
   "refresh6": "Gib s ein.",
+  "settings1": "Einstellungen ausblenden",
+  "settings2": "Einstellungen einblenden",
   "load1": "Bitte entscheide wie du deine Daten einträgst",
   "load2" : "Du trägst nur die DFI Adressen aus deiner DeFiChain App ein und deine Bestände werden automatisch geladen",
   "load3": "Du trägst deine Bestände manuell",
