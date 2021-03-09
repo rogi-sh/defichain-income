@@ -9,6 +9,7 @@
       <h3><span class="badge badge-secondary left">{{env.version}}</span></h3>
     </div>
   </div>
+
   <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
@@ -64,7 +65,8 @@
       </div>
 
     </div>
-
+  </div>
+  <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">DEX {{ 'stats' | translate }}</span></h1>
 
@@ -171,7 +173,10 @@
         </div>
       </div>
     </div>
-
+    <div class="col-sm bg-light margin-col">
+      <h1><span class="badge badge-secondary left">DFI {{ 'stats' | translate }}</span></h1>
+      <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain" data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m"></div>
+    </div>
   </div>
 </div>
 
