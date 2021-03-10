@@ -936,7 +936,7 @@ export class AppComponent implements OnInit {
       incomeNumbers.push('#cb9800');
     }
     if (dataBch.value > 0) {
-      incomeNumbers.push('#ee8c28');
+      incomeNumbers.push('#4CC947');
     }
     if (dataDfi.value > 0) {
       incomeNumbers.push('#ff00af');
@@ -1200,7 +1200,7 @@ export class AppComponent implements OnInit {
       incomeNumbers.push('#cb9800');
     }
     if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push('#ee8c28');
+      incomeNumbers.push('#4CC947');
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
       incomeNumbers.push('#26a17b');
@@ -1262,7 +1262,7 @@ export class AppComponent implements OnInit {
       incomeNumbers.push('#cb9800');
     }
     if (this.poolBchOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#ee8c28');
+      incomeNumbers.push('#4CC947');
     }
 
     return incomeNumbers;
