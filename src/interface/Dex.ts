@@ -39,6 +39,8 @@ export class Outcome {
 
 export class PoolBtcOut extends Outcome {}
 
+export class PoolBchOut extends Outcome {}
+
 export class PoolEthOut extends Outcome {}
 
 export class PoolUsdtOut extends Outcome {}

@@ -62,6 +62,7 @@ export class Wallet {
   dfiKey = 'dfiKey';
 
   btcdfi = 0;
+  bchdfi = 0;
   ethdfi = 0;
   ltcdfi = 0;
   dogedfi = 0;
@@ -107,6 +108,14 @@ export class Wallet {
   dogeKey = 'dogeKey';
   dfiInDogePool = 0;
   dfiInDogePoolKey = 'dfiInDogePoolKey';
+
+  // BCH Pool
+  bchInBchPool = 0;
+  bchInBchPoolKey = 'bchInBchPoolKey';
+  bch = 0;
+  bchKey = 'bchKey';
+  dfiInBchPoolKey = 'dfiInBchPoolKey';
+  dfiInBchPool = 0;
 
 }
 
