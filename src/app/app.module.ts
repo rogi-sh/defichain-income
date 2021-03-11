@@ -13,12 +13,14 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ChangelogComponent } from './changelog/changelog.component';
+import { DexStatisticsComponent } from './dex-statistics/dex-statistics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EarningComponent,
-    ChangelogComponent
+    ChangelogComponent,
+    DexStatisticsComponent
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,6 @@ export class AppComponent implements OnInit {
   @ViewChild('chart4') chart4: ChartComponent;
   public chartOptions4: Partial<ChartOptions4>;
 
-
   @ViewChild('cd', {static: true})
   private countdown: CountdownComponent;
 
