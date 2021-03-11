@@ -4,9 +4,6 @@ import {ApexChart,
   ApexLegend,
   ApexNonAxisChartSeries,
   ApexResponsive,
-  ApexAxisChartSeries,
-  ApexTitleSubtitle,
-  ApexXAxis,
   ApexStroke, ApexPlotOptions, ApexYAxis, ApexTooltip} from 'ng-apexcharts';
 import {Outcome} from './Dex';
 

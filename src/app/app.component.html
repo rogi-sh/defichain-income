@@ -6,10 +6,9 @@
       <p>{{ 'welcome' | translate }}</p>
       <p>{{ 'powered' | translate }} <a href="https://dex.defichain.com/mainnet/pool">
         https://api.defichain.io/v1</a></p>
-      <h3><span class="badge badge-secondary left">{{env.version}}</span></h3>
+          <app-changelog></app-changelog>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
@@ -22,56 +21,56 @@
                for="settingsSwitch">{{ 'settings2' | translate }}</label>
       </div>
       <div *ngIf="showSettingsArea">
-      <h2><span class="badge badge-pill badge-secondary left">{{ 'lang' | translate }}</span></h2>
-      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
-        <button (click)="useLanguage('en')" type="button" class="btn margin-col btn-danger">EN</button>
-      </div>
-      <br>
-      <br>
-      <h2><span class="badge badge-pill badge-secondary left">{{ 'refresh1' | translate }}  {{sCountdown}}
-        s.  </span></h2>
-      <p>{{ 'refresh3' | translate }} <span class="badge badge-pill badge-dark left">
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'lang' | translate }}</span></h2>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
+          <button (click)="useLanguage('en')" type="button" class="btn margin-col btn-danger">EN</button>
+        </div>
+        <br>
+        <br>
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'refresh1' | translate }}  {{sCountdown}}
+          s.  </span></h2>
+        <p>{{ 'refresh3' | translate }} <span class="badge badge-pill badge-dark left">
                <countdown #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown></span>
-      </p>
-      <div class="row">
-        <div class="col-auto ">
-          <input required [(ngModel)]="sCountdown" type="number"
-                 step=1 min="10" class="form-control form-control-sm" id="sCount"
-                 placeholder="{{ 'refresh6' | translate }}">
+        </p>
+        <div class="row">
+          <div class="col-auto ">
+            <input required [(ngModel)]="sCountdown" type="number"
+                   step=1 min="10" class="form-control form-control-sm" id="sCount"
+                   placeholder="{{ 'refresh6' | translate }}">
+          </div>
+          <div class="col-auto">
+            <button type="button" (click)="onChangeRefreshS()"
+                    class="btn btn-success">{{ 'refresh5' | translate }}</button>
+          </div>
         </div>
-        <div class="col-auto">
-          <button type="button" (click)="onChangeRefreshS()"
-                  class="btn btn-success">{{ 'refresh5' | translate }}</button>
+        <br>
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'load1' | translate }}</span></h2>
+        <p><span class="badge badge-pill badge-dark left">ON</span> -> {{ 'load2' | translate }}</p>
+        <p><span class="badge badge-pill badge-dark left">OFF</span> -> {{ 'load3' | translate }}</p>
+        <div class="custom-control custom-switch">
+          <input [(ngModel)]="autoLoadData" (ngModelChange)="saveToggleAutoLoad()" type="checkbox"
+                 class="custom-control-input" id="customSwitch1">
+          <label *ngIf="autoLoadData" class="custom-control-label"
+                 for="customSwitch1">{{ 'load4' | translate }} </label>
+          <label *ngIf="!autoLoadData" class="custom-control-label"
+                 for="customSwitch1">{{ 'load5' | translate }}</label>
+        </div>
+        <div class="custom-control custom-switch">
+          <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleInputShow()" type="checkbox"
+                 class="custom-control-input" id="customSwitch2">
+          <label class="custom-control-label"
+                 for="customSwitch2">{{ 'showInput1' | translate }} </label>
+        </div>
+        <br>
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'value.cur' | translate }}</span></h2>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-danger">USD</button>
+          <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-danger">EUR</button>
+          <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
+          <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
         </div>
       </div>
-      <br>
-      <h2><span class="badge badge-pill badge-secondary left">{{ 'load1' | translate }}</span></h2>
-      <p><span class="badge badge-pill badge-dark left">ON</span> -> {{ 'load2' | translate }}</p>
-      <p><span class="badge badge-pill badge-dark left">OFF</span> -> {{ 'load3' | translate }}</p>
-      <div class="custom-control custom-switch">
-        <input [(ngModel)]="autoLoadData" (ngModelChange)="saveToggleAutoLoad()" type="checkbox"
-               class="custom-control-input" id="customSwitch1">
-        <label *ngIf="autoLoadData" class="custom-control-label"
-               for="customSwitch1">{{ 'load4' | translate }} </label>
-        <label *ngIf="!autoLoadData" class="custom-control-label"
-               for="customSwitch1">{{ 'load5' | translate }}</label>
-      </div>
-      <div class="custom-control custom-switch">
-        <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleInputShow()" type="checkbox"
-               class="custom-control-input" id="customSwitch2">
-        <label class="custom-control-label"
-               for="customSwitch2">{{ 'showInput1' | translate }} </label>
-      </div>
-      <br>
-      <h2><span class="badge badge-pill badge-secondary left">{{ 'value.cur' | translate }}</span></h2>
-      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button (click)="onChangeFiat('USD')" type="button" class="btn margin-col btn-danger">USD</button>
-        <button (click)="onChangeFiat('EUR')" type="button" class="btn margin-col btn-danger">EUR</button>
-        <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
-        <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
-      </div>
-    </div>
     </div>
   </div>
   <div class="row">
@@ -85,19 +84,23 @@
               <h2>Api Status <span *ngIf="apiOnline" class="badge badge-success">Online</span>
                 <span *ngIf="!apiOnline" class="badge badge-danger">Offline</span></h2>
               TVL
-              <h2><span *ngIf="fiat === 'USD'" class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}</span>
+              <h2><span *ngIf="fiat === 'USD'"
+                        class="badge badge-pill badge-dark left"> {{dex?.tvl | currency:'USD'}}</span>
               </h2>
-              <h2><span *ngIf="fiat === 'EUR'" class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
+              <h2><span *ngIf="fiat === 'EUR'"
+                        class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToEur | currency:'EUR'}}</span>
               </h2>
-              <h2><span *ngIf="fiat === 'CHF'" class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToChf | currency:'CHF'}}</span>
+              <h2><span *ngIf="fiat === 'CHF'"
+                        class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToChf | currency:'CHF'}}</span>
               </h2>
-              <h2><span *ngIf="fiat === 'GBP'" class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToGbp | currency:'GBP'}}</span>
+              <h2><span *ngIf="fiat === 'GBP'"
+                        class="badge badge-pill badge-dark left">  {{dex?.tvl * usdToGbp | currency:'GBP'}}</span>
               </h2>
             </div>
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} BTC <span
+              {{ 'price' | translate }} BTC <span
               class="badge badge-pill badge-dark left">
                <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceA | currency:'USD'}} </span>
               <span *ngIf="fiat === 'EUR'">  {{poolBtc?.priceA * usdToEur | currency:'EUR'}} </span>
@@ -106,7 +109,7 @@
             </span>
             </div>
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} ETH <span
+              {{ 'price' | translate }} ETH <span
               class="badge badge-pill badge-dark left">
               <span *ngIf="fiat === 'USD'">  {{poolEth?.priceA | currency:'USD'}} </span>
               <span *ngIf="fiat === 'EUR'">   {{poolEth?.priceA * usdToEur | currency:'EUR'}} </span>
@@ -128,7 +131,7 @@
             </span>
             </div>
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} LTC <span
+              {{ 'price' | translate }} LTC <span
               class="badge badge-pill badge-dark left">
 
               <span *ngIf="fiat === 'USD'">  {{poolLtc?.priceA | currency:'USD'}} </span>
@@ -141,7 +144,7 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} DOGE <span
+              {{ 'price' | translate }} DOGE <span
               class="badge badge-pill badge-dark left">
 
               <span *ngIf="fiat === 'USD'">  {{poolDoge?.priceA | currency:'USD'}} </span>
@@ -152,7 +155,7 @@
             </span>
             </div>
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} BCH <span
+              {{ 'price' | translate }} BCH <span
               class="badge badge-pill badge-dark left">
 
               <span *ngIf="fiat === 'USD'">  {{poolBch?.priceA | currency:'USD'}} </span>
@@ -165,13 +168,13 @@
           </div>
           <div class="row">
             <div class="col-auto margin-col">
-               {{ 'price' | translate }} DFI <span
+              {{ 'price' | translate }} DFI <span
               class="badge badge-pill badge-dark left">
 
               <span *ngIf="fiat === 'USD'">  {{poolBtc?.priceB| currency:'USD'}} </span>
               <span *ngIf="fiat === 'EUR'">  {{poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'">  {{poolBtc?.priceB* usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'">  {{poolBtc?.priceB* usdToGbp | currency:'GBP'}} </span>
+              <span *ngIf="fiat === 'CHF'">  {{poolBtc?.priceB * usdToChf | currency:'CHF'}} </span>
+              <span *ngIf="fiat === 'GBP'">  {{poolBtc?.priceB * usdToGbp | currency:'GBP'}} </span>
             </span>
             </div>
           </div>
@@ -185,7 +188,8 @@
               </span>
             </div>
             <div class="col-auto margin-col">
-              Staking MN <span class="badge badge-pill badge-dark"> {{this.stakingApyMN | number: '1.1-1' }}% APY</span>
+              Staking MN <span class="badge badge-pill badge-dark"> {{this.stakingApyMN | number: '1.1-1' }}
+              % APY</span>
             </div>
           </div>
           <br>
@@ -196,8 +200,8 @@
 
                 <span *ngIf="fiat === 'USD'">  {{poolBtc?.totalStaked| currency:'USD'}} </span>
               <span *ngIf="fiat === 'EUR'">  {{poolBtc?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'">  {{poolBtc?.totalStaked* usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'">  {{poolBtc?.totalStaked* usdToGbp | currency:'GBP'}} </span>
+              <span *ngIf="fiat === 'CHF'">  {{poolBtc?.totalStaked * usdToChf | currency:'CHF'}} </span>
+              <span *ngIf="fiat === 'GBP'">  {{poolBtc?.totalStaked * usdToGbp | currency:'GBP'}} </span>
               TVL
             </span>
             </div>
@@ -254,7 +258,8 @@
     </div>
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">DFI {{ 'stats' | translate }}</span></h1>
-      <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain" data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m"></div>
+      <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain"
+           data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m"></div>
     </div>
   </div>
 </div>
@@ -901,22 +906,40 @@
       <div class="col-sm bg-light margin-col">
         <h2><span class="badge badge-pill badge-success left">Staking {{ 'income.calcVis' | translate }}</span></h2>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMin, stakingCalcMN.dfiPerMin, stakingCalcOut.dfiPerMin)" type="button" class="btn margin-col btn-danger">MIN</button>
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerHour, stakingCalcMN.dfiPerHour, stakingCalcOut.dfiPerHour)" type="button" class="btn margin-col btn-danger">HOUR</button>
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerDay, stakingCalcMN.dfiPerDay, stakingCalcOut.dfiPerDay)" type="button" class="btn margin-col btn-danger">DAY</button>
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerWeek, stakingCalcMN.dfiPerWeek, stakingCalcOut.dfiPerWeek)" type="button" class="btn margin-col btn-danger">WEEK</button>
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMonth, stakingCalcMN.dfiPerMonth, stakingCalcOut.dfiPerMonth)" type="button" class="btn margin-col btn-danger">MONTH</button>
-          <button (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerYear, stakingCalcMN.dfiPerYear, stakingCalcOut.dfiPerYear)" type="button" class="btn margin-col btn-danger">YEAR</button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMin, stakingCalcMN.dfiPerMin, stakingCalcOut.dfiPerMin)"
+            type="button" class="btn margin-col btn-danger">MIN
+          </button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerHour, stakingCalcMN.dfiPerHour, stakingCalcOut.dfiPerHour)"
+            type="button" class="btn margin-col btn-danger">HOUR
+          </button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerDay, stakingCalcMN.dfiPerDay, stakingCalcOut.dfiPerDay)"
+            type="button" class="btn margin-col btn-danger">DAY
+          </button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerWeek, stakingCalcMN.dfiPerWeek, stakingCalcOut.dfiPerWeek)"
+            type="button" class="btn margin-col btn-danger">WEEK
+          </button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMonth, stakingCalcMN.dfiPerMonth, stakingCalcOut.dfiPerMonth)"
+            type="button" class="btn margin-col btn-danger">MONTH
+          </button>
+          <button
+            (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerYear, stakingCalcMN.dfiPerYear, stakingCalcOut.dfiPerYear)"
+            type="button" class="btn margin-col btn-danger">YEAR
+          </button>
         </div>
         <div id="chart4">
           <apx-chart *ngIf="chartOptions4"
-            [series]="chartOptions4?.series"
-            [chart]="chartOptions4?.chart"
-            [plotOptions]="chartOptions4?.plotOptions"
-            [labels]="chartOptions4?.labels"
-            [legend]="chartOptions4?.legend"
-            [colors]="chartOptions4?.colors"
-            [responsive]="chartOptions4?.responsive"
+                     [series]="chartOptions4?.series"
+                     [chart]="chartOptions4?.chart"
+                     [plotOptions]="chartOptions4?.plotOptions"
+                     [labels]="chartOptions4?.labels"
+                     [legend]="chartOptions4?.legend"
+                     [colors]="chartOptions4?.colors"
+                     [responsive]="chartOptions4?.responsive"
           ></apx-chart>
         </div>
 
@@ -1139,3 +1162,4 @@
     </div>
   </footer>
 </div>
+
