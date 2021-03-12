@@ -15,6 +15,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { DexStatisticsComponent } from './dex-statistics/dex-statistics.component';
 import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.component';
+import { LmTargetCalculatorComponent } from './lm-target-calculator/lm-target-calculator.component';
+import { StakingTargetCalculatorComponent } from './staking-target-calculator/staking-target-calculator.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.componen
     EarningComponent,
     ChangelogComponent,
     DexStatisticsComponent,
-    ApyCalculatorComponent
+    ApyCalculatorComponent,
+    LmTargetCalculatorComponent,
+    StakingTargetCalculatorComponent
   ],
   imports: [
     BrowserModule,

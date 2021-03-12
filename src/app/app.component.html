@@ -644,62 +644,8 @@
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
 
-      <div class="col-sm bg-light margin-col">
-        <h2><span
-          class="badge badge-pill badge-success left">{{ 'target-reward-title' | translate }} </span>
-        </h2>
-        <div class="row">
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturnMin">DFI per Min</label>
-              <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnMin" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
-            </div>
-            <h2><span
-              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMin | number: '1.0-0' }}
-              DFI</span></h2>
-
-            <div class="form-group">
-              <label for="aimReturnHour">DFI per {{ 'hour' | translate }} </label>
-              <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnHour" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }}{{ 'hour' | translate }}
-                .</small>
-            </div>
-            <h2><span
-              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnHour | number: '1.0-0' }}
-              DFI</span></h2>
-          </div>
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturn">DFI per {{ 'day' | translate }} </label>
-              <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturn" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}
-                .</small>
-            </div>
-            <h2><span
-              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnDay | number: '1.0-0' }}
-              DFI</span></h2>
-            <div class="form-group">
-              <label for="aimReturnMonth">DFI per {{ 'month' | translate }} </label>
-              <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnMonth" placeholder="Enter dfi amount">
-              <small
-                class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}
-                .</small>
-            </div>
-            <h2><span
-              class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
-              DFI</span></h2>
-          </div>
-        </div>
-      </div>
+      <app-staking-target-calculator [stakingApy]="stakingApy">
+      </app-staking-target-calculator>
     </div>
 
   </div>
@@ -734,98 +680,11 @@
         <app-earning [out]="poolOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-      <div class="col-sm bg-light margin-col">
-        <h2><span
-          class="badge badge-pill badge-success left">{{ 'target-reward-title-lm' | translate }}</span>
-        </h2>
-        <p>{{ 'target-reward-sub-lm' | translate }} pool {{poolLmCalculationTargetReturn}}</p>
-        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-          <button (click)="onChangeLmCalculationTargetPool('BTC')" type="button"
-                  class="btn margin-col small btn-danger">BTC
-          </button>
-          <button (click)="onChangeLmCalculationTargetPool('ETH')" type="button"
-                  class="btn margin-col small btn-danger">ETH
-          </button>
-          <button (click)="onChangeLmCalculationTargetPool('LTC')" type="button"
-                  class="btn margin-col small btn-danger">LTC
-          </button>
-          <button (click)="onChangeLmCalculationTargetPool('USDT')" type="button"
-                  class="btn margin-col small btn-danger">USDT
-          </button>
-          <button (click)="onChangeLmCalculationTargetPool('DOGE')" type="button"
-                  class="btn margin-col small btn-danger">DOGE
-          </button>
-          <button (click)="onChangeLmCalculationTargetPool('BCH')" type="button"
-                  class="btn margin-col small btn-danger">BCH
-          </button>
-        </div>
-        <div class="row">
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturnMinBtcPool">DFI per Min</label>
-              <input required [(ngModel)]="aimReturnMinPool" (ngModelChange)="onChangeAimReturnMinPool($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnMinBtcPool" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
-            </div>
-            <h3><span
-              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMinPool | number: '1.4-4' }}
-              {{ 'share' | translate }} = {{dfiNeededForAimReturnMinPool | number: '1.2-2' }}
-              DFI / {{btcNeededForAimReturnMinPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
-              </span></h3>
-          </div>
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturnDayBtcPool">DFI per {{ 'day' | translate }}</label>
-              <input required [(ngModel)]="aimReturnDayPool" (ngModelChange)="onChangeAimReturnDayPool($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnDayBtcPool" placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}
-                .</small>
-            </div>
-            <h3><span
-              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnDayPool | number: '1.4-4' }}
-              {{ 'share' | translate }} = {{dfiNeededForAimReturnDayPool | number: '1.2-2' }}
-              DFI / {{btcNeededForAimReturnDayPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
-              </span></h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturnHourBtcPool">DFI per {{ 'hour' | translate }}</label>
-              <input required [(ngModel)]="aimReturnHourPool" (ngModelChange)="onChangeAimReturnHourPool($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnHourBtcPool"
-                     placeholder="Enter dfi amount">
-              <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'hour' | translate }}
-                .</small>
-            </div>
-            <h3><span
-              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnHourPool | number: '1.4-4' }}
-              {{ 'share' | translate }} = {{dfiNeededForAimReturnHourPool | number: '1.2-2' }}
-              DFI / {{btcNeededForAimReturnHourPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
-              </span></h3>
-          </div>
-          <div class="col-sm bg-light margin-col">
-            <div class="form-group">
-              <label for="aimReturnDayBtcPool">DFI per {{ 'month' | translate }}</label>
-              <input required [(ngModel)]="aimReturnMonthPool"
-                     (ngModelChange)="onChangeAimReturnMonthPool($event)"
-                     type="number"
-                     class="form-control form-control-sm" id="aimReturnMonthPool" placeholder="Enter dfi amount">
-              <small
-                class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}
-                .</small>
-            </div>
-            <h3><span
-              class="badge badge-pill badge-success left">{{anteilNeededForAimReturnMonthPool | number: '1.4-4' }}
-              {{ 'share' | translate }} = {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }}
-              DFI / {{btcNeededForAimReturnMonthPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
-              </span></h3>
-          </div>
-        </div>
-      </div>
+      <app-lm-target-calculator [poolBtc]="poolBtc" [poolBch]="poolBch" [poolDoge]="poolDoge" [poolLtc]="poolLtc" [poolUsdt]="poolUsdt"
+                                [poolEth]="poolEth" [blocktimeInS]="blocktimeInS" [dfiProBlockBch]="dfiProBlockBch" [dfiProBlockBtc]="dfiProBlockBtc"
+                                [dfiProBlockDoge]="dfiProBlockDoge" [dfiProBlockEth]="dfiProBlockEth" [dfiProBlockLtc]="dfiProBlockLtc" [dfiProBlockUsdt]="dfiProBlockUsdt">
+
+      </app-lm-target-calculator>
     </div>
   </div>
   <div *ngIf="details === 'LM'" class="container left">
