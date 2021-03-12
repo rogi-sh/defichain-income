@@ -63,6 +63,7 @@
   "year": "Year",
   "balance": "Holdings",
   "details": "Click for more details",
+  "details-calc": "Calculations",
   "invest-needed": "You have to invest ",
   "target-reward-input": "Add your aim DFI reward per ",
   "target-reward-title": "Calculate how much you have to stake to get your target return",

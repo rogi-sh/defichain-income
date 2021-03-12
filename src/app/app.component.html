@@ -506,9 +506,11 @@
       </div>
     </div>
     <div class="col-sm bg-light margin-col">
-    <app-income [poolBtc]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp" [poolBchOut]="poolBchOut"
-      [poolBtcOut]="poolBtcOut" [poolDogeOut]="poolDogeOut" [poolEthOut]="poolEthOut" [poolLtcOut]="poolLtcOut" [poolOut]="poolOut"
-                [poolUsdtOut]="poolUsdtOut" [stakingOut]="stakingOut"> </app-income>
+      <app-income [poolBtc]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
+                  [poolBchOut]="poolBchOut"
+                  [poolBtcOut]="poolBtcOut" [poolDogeOut]="poolDogeOut" [poolEthOut]="poolEthOut"
+                  [poolLtcOut]="poolLtcOut" [poolOut]="poolOut"
+                  [poolUsdtOut]="poolUsdtOut" [stakingOut]="stakingOut"></app-income>
     </div>
   </div>
 
@@ -517,6 +519,9 @@
   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
     <button (click)="onChangeDetails('Staking')" type="button" class="btn margin-col btn-danger">Staking</button>
     <button (click)="onChangeDetails('LM')" type="button" class="btn margin-col btn-danger">LiquidityMining
+    </button>
+    <button (click)="onChangeDetails('Calc')" type="button"
+            class="btn margin-col btn-danger">{{ 'details-calc' | translate }}
     </button>
   </div>
 
@@ -536,8 +541,7 @@
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
 
-      <app-staking-target-calculator [stakingApy]="stakingApy">
-      </app-staking-target-calculator>
+
     </div>
 
   </div>
@@ -572,11 +576,7 @@
         <app-earning [out]="poolOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                      [usdToGbp]="usdToGbp"></app-earning>
       </div>
-      <app-lm-target-calculator [poolBtc]="poolBtc" [poolBch]="poolBch" [poolDoge]="poolDoge" [poolLtc]="poolLtc" [poolUsdt]="poolUsdt"
-                                [poolEth]="poolEth" [blocktimeInS]="blocktimeInS" [dfiProBlockBch]="dfiProBlockBch" [dfiProBlockBtc]="dfiProBlockBtc"
-                                [dfiProBlockDoge]="dfiProBlockDoge" [dfiProBlockEth]="dfiProBlockEth" [dfiProBlockLtc]="dfiProBlockLtc" [dfiProBlockUsdt]="dfiProBlockUsdt">
 
-      </app-lm-target-calculator>
     </div>
   </div>
   <div *ngIf="details === 'LM'" class="container left">
@@ -637,9 +637,27 @@
       </div>
     </div>
   </div>
-  <app-apy-calculator [stakingApyMN]="stakingApyMN" [stakingApyCake]="stakingApyCake" [poolBtc]="poolBtc"
-                      [usdToGbp]="usdToGbp"
-                      [usdToChf]="usdToChf" [usdToEur]="usdToEur" [fiat]="fiat"></app-apy-calculator>
+
+
+  <div *ngIf="details === 'Calc'" class="container left">
+    <div class="row">
+      <app-staking-target-calculator [stakingApy]="stakingApy">
+      </app-staking-target-calculator>
+      <app-lm-target-calculator [poolBtc]="poolBtc" [poolBch]="poolBch" [poolDoge]="poolDoge" [poolLtc]="poolLtc"
+                                [poolUsdt]="poolUsdt"
+                                [poolEth]="poolEth" [blocktimeInS]="blocktimeInS" [dfiProBlockBch]="dfiProBlockBch"
+                                [dfiProBlockBtc]="dfiProBlockBtc"
+                                [dfiProBlockDoge]="dfiProBlockDoge" [dfiProBlockEth]="dfiProBlockEth"
+                                [dfiProBlockLtc]="dfiProBlockLtc" [dfiProBlockUsdt]="dfiProBlockUsdt">
+
+      </app-lm-target-calculator>
+    </div>
+    <app-apy-calculator [stakingApyMN]="stakingApyMN" [stakingApyCake]="stakingApyCake" [poolBtc]="poolBtc"
+                        [usdToGbp]="usdToGbp"
+                        [usdToChf]="usdToChf" [usdToEur]="usdToEur" [fiat]="fiat"></app-apy-calculator>
+
+
+  </div>
   <br><br><br><br><br><br>
   <footer>
     <div style="margin-left: 15px" class="container">
