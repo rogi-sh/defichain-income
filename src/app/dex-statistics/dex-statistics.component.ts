@@ -53,6 +53,7 @@ export class DexStatisticsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

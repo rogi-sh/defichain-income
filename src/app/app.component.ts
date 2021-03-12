@@ -253,13 +253,7 @@ export class AppComponent implements OnInit {
         this.dexService.getPoolDetail('12')
       ]
     ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge, poolBch]: [DexInfo, Pool, Pool, Pool, Pool, Pool, Pool]) => {
-          this.dex = dex;
-          this.poolBtc = poolBtc;
-          this.poolEth = poolEth;
-          this.poolUsdt = poolUsdt;
-          this.poolLtc = poolLtc;
-          this.poolDoge = poolDoge;
-          this.poolBch = poolBch;
+          this.extractPools(dex);
 
           this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
           this.berechnePoolOutBtc();
@@ -299,20 +293,23 @@ export class AppComponent implements OnInit {
 
   }
 
+  private extractPools(dex: DexInfo): void {
+    this.dex = dex;
+    this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
+    this.poolEth = dex.pools.find(x => x.poolPairId === '4');
+    this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
+    this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
+    this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
+    this.poolBch = dex.pools.find(x => x.poolPairId === '12');
+  }
+
   loadDexManuel(): void {
     this
       .dexService
       .getDex()
       .subscribe(
         dex => {
-          this.dex = dex;
-          console.log('DEX' + JSON.stringify(this.dex));
-          this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
-          this.poolEth = dex.pools.find(x => x.poolPairId === '4');
-          this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
-          this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
-          this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
-          this.poolBch = dex.pools.find(x => x.poolPairId === '12');
+          this.extractPools(dex);
           this.berechnePoolOutBtc();
           this.berechnePoolOutEth();
           this.berechnePoolOutUsdt();
@@ -676,16 +673,16 @@ export class AppComponent implements OnInit {
 
   buildDataForChart(): void {
 
-    this.valueComponent.buildDataForChart();
+    this.valueComponent?.buildDataForChart();
   }
 
   buildDataForChartValue(): void {
 
-    this.valueComponent.buildDataForChartValue();
+    this.valueComponent?.buildDataForChartValue();
   }
 
   buildDataForChartIncome(): void {
-    this.incomeComponent.buildDataForChartIncome();
+    this.incomeComponent?.buildDataForChartIncome();
   }
 
   onChangeFiat(newValue: string): void {

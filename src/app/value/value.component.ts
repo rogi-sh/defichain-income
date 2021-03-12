@@ -170,14 +170,9 @@ export class ValueComponent implements OnInit {
       ]
     };
 
-    console.log('Chart ' + JSON.stringify(this.chartOptions3));
   }
 
   getSeriesValue(): Array<number> {
-
-    console.log('Series called');
-    console.log('Wallet ' + JSON.stringify(this.wallet));
-    console.log('Pool BTC ' + JSON.stringify(this.poolBtc));
 
     const incomeNumbers = new Array<number>();
 
@@ -205,8 +200,6 @@ export class ValueComponent implements OnInit {
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
       incomeNumbers.push(Math.round(this.getAnteilLMOfUsdtPoolValue() * 100) / 100);
     }
-
-    console.log('Series ' + JSON.stringify(incomeNumbers));
 
     return incomeNumbers;
   }

@@ -105,10 +105,7 @@
     <div class="row">
       <div class="col-auto margin-col">
         Staking Cake
-        <span class="badge badge-pill badge-dark"> {{this.stakingApyCake | number: '1.1-1' }}% APY
-
-
-              </span>
+        <span class="badge badge-pill badge-dark"> {{this.stakingApyCake | number: '1.1-1' }}% APY</span>
       </div>
       <div class="col-auto margin-col">
         Staking MN <span class="badge badge-pill badge-dark"> {{this.stakingApyMN | number: '1.1-1' }}
@@ -121,7 +118,7 @@
         BTC Pool
         <span class="badge badge-pill badge-dark">{{poolBtc?.apy | number: '1.2-2' }}% APY /
 
-                <span *ngIf="fiat === 'USD'">  {{poolBtc?.totalStaked| currency:'USD'}} </span>
+              <span *ngIf="fiat === 'USD'">  {{poolBtc?.totalStaked| currency:'USD'}} </span>
               <span *ngIf="fiat === 'EUR'">  {{poolBtc?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolBtc?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolBtc?.totalStaked * usdToGbp | currency:'GBP'}} </span>
@@ -131,8 +128,8 @@
       <div class="col-auto margin-col">
         ETH Pool <span class="badge badge-pill badge-dark">{{poolEth?.apy | number: '1.2-2' }}% APY /
 
-                       <span *ngIf="fiat === 'USD'">  {{poolEth?.totalStaked | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'">   {{poolEth?.totalStaked * usdToEur | currency:'EUR'}} </span>
+              <span *ngIf="fiat === 'USD'">  {{poolEth?.totalStaked | currency:'USD'}} </span>
+              <span *ngIf="fiat === 'EUR'">  {{poolEth?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolEth?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolEth?.totalStaked * usdToGbp | currency:'GBP'}} </span>
               TVL
@@ -146,6 +143,7 @@
               <span *ngIf="fiat === 'EUR'">  {{poolUsdt?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolUsdt?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolUsdt?.totalStaked * usdToGbp | currency:'GBP'}} </span>
+            TVL
             </span>
       </div>
       <div class="col-auto margin-col">
@@ -154,6 +152,7 @@
               <span *ngIf="fiat === 'EUR'">  {{poolLtc?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolLtc?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolLtc?.totalStaked * usdToGbp | currency:'GBP'}} </span>
+        TVL
             </span>
       </div>
     </div>
@@ -165,6 +164,7 @@
               <span *ngIf="fiat === 'EUR'">  {{poolDoge?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolDoge?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolDoge?.totalStaked * usdToGbp | currency:'GBP'}} </span>
+        TVL
             </span>
       </div>
       <div class="col-auto margin-col">
@@ -173,6 +173,7 @@
               <span *ngIf="fiat === 'EUR'">  {{poolBch?.totalStaked * usdToEur | currency:'EUR'}} </span>
               <span *ngIf="fiat === 'CHF'">  {{poolBch?.totalStaked * usdToChf | currency:'CHF'}} </span>
               <span *ngIf="fiat === 'GBP'">  {{poolBch?.totalStaked * usdToGbp | currency:'GBP'}} </span>
+        TVL
             </span>
       </div>
     </div>
