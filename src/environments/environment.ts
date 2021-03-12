@@ -7,7 +7,7 @@ export const environment = {
   dex: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
-  version: '2.14.0'
+  version: '2.15.0'
 };
 
 /*

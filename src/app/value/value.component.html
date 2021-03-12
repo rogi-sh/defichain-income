@@ -50,6 +50,10 @@
             <span *ngIf="fiat === 'GBP'">{{getDfiValueUsd() * usdToGbp | currency:'GBP'}}</span>
         </span>
     </h2>
+    <h3><span
+      class="badge badge-pill badge-primary left"> {{getDfiCountLM() | number: '1.2-2'}}
+      LM - {{dfiInStaking| number: '1.2-2'}} Staking -
+      {{wallet?.dfi| number: '1.2-2'}} Wallet </span></h3>
     <div class="row">
       <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="col-auto bg-light margin-col">
         <h2><span
