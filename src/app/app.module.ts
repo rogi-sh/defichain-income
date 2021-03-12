@@ -14,13 +14,15 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { DexStatisticsComponent } from './dex-statistics/dex-statistics.component';
+import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EarningComponent,
     ChangelogComponent,
-    DexStatisticsComponent
+    DexStatisticsComponent,
+    ApyCalculatorComponent
   ],
   imports: [
     BrowserModule,

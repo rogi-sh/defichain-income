@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
+// @ts-ignore
 import { DexService } from './dex-service.service';
 
 describe('DexServiceService', () => {

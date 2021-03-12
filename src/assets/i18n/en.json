@@ -54,7 +54,7 @@
     "distribution": "Distribution of your monthly income",
     "calc": "Calculator",
     "calcVis": "Calculator Visualization Comparison",
-    "calcText": "Calculate how much return you can get from staking e.g. in the freezer at Cake. The result is automatically compared and visualized with the current APY and with Staking Apy of a masternode."
+    "calcText": "Calculate how much return you can get e.g. in the freezer at Cake. The result is automatically compared and visualized with the current APY and with Staking Apy of a masternode."
   },
   "hour": "Hour",
   "day": "Day",

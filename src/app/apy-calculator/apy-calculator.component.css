@@ -1,0 +1,14 @@
+.margin-col {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.left {
+  margin-left: 5px;
+}
+
+
+#chart4 {
+  max-width: 650px;
+  margin: 35px auto;
+}

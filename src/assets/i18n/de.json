@@ -55,7 +55,7 @@
     "distribution": "Verteilung deines monatlichen Einkommens",
     "calc": "Rechner",
     "calcVis": "Rechner Visualisierung im Vergleich",
-    "calcText": "Berechnne wie viel Rendite beim Staking bekommen kannst z.B. im Freezer bei Cake. Das Ergebnis wird automatisch mit dem aktuellen APY und mit Staking Apy einer Masternode verglichen und visualisiert."
+    "calcText": "Berechnne wie viel Rendite du bekommen kannst z.B. im Freezer bei Cake. Das Ergebnis wird automatisch mit dem aktuellen APY und mit Staking Apy einer Masternode verglichen und visualisiert."
   },
   "hour": "Stunde",
   "day": "Tag",
