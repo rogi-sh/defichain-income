@@ -1,25 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
-import {
-  DexInfo,
-  Outcome,
-  OutcomeStaking,
-  Pool,
-  PoolBchOut,
-  PoolBtcOut,
-  PoolDogeOut,
-  PoolEthOut,
-  PoolLtcOut,
-  PoolUsdtOut
-} from '../interface/Dex';
-import {
-  ChartOptions,
-  ChartOptions2,
-  ChartOptions3,
-  Data,
-  Wallet
-} from '../interface/Data';
-import {ChartComponent} from 'ng-apexcharts';
+import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
+  PoolUsdtOut} from '../interface/Dex';
+import {Wallet} from '../interface/Data';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
@@ -27,6 +10,7 @@ import {CountdownComponent} from 'ngx-countdown';
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
 import {IncomeComponent} from './income/income.component';
+import {ValueComponent} from './value/value.component';
 
 @Component({
   selector: 'app-root',
@@ -35,20 +19,14 @@ import {IncomeComponent} from './income/income.component';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('chart') chart: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
-
-  @ViewChild('chart2') chart2: ChartComponent;
-  public chartOptions2: Partial<ChartOptions2>;
-
-  @ViewChild('chart3') chart3: ChartComponent;
-  public chartOptions3: Partial<ChartOptions3>;
-
   @ViewChild('cd', {static: true})
   private countdown: CountdownComponent;
 
   @ViewChild(IncomeComponent)
   private incomeComponent: IncomeComponent;
+
+  @ViewChild(ValueComponent)
+  private valueComponent: ValueComponent;
 
   title = 'defichain-income';
   lang = 'en';
@@ -276,12 +254,12 @@ export class AppComponent implements OnInit {
       ]
     ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge, poolBch]: [DexInfo, Pool, Pool, Pool, Pool, Pool, Pool]) => {
           this.dex = dex;
-          this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
-          this.poolEth = dex.pools.find(x => x.poolPairId === '4');
-          this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
-          this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
-          this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
-          this.poolBch = dex.pools.find(x => x.poolPairId === '12');
+          this.poolBtc = poolBtc;
+          this.poolEth = poolEth;
+          this.poolUsdt = poolUsdt;
+          this.poolLtc = poolLtc;
+          this.poolDoge = poolDoge;
+          this.poolBch = poolBch;
 
           this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
           this.berechnePoolOutBtc();
@@ -303,6 +281,7 @@ export class AppComponent implements OnInit {
 
           this.berechneStakingOut();
           this.berechnePoolOut();
+
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
@@ -327,6 +306,7 @@ export class AppComponent implements OnInit {
       .subscribe(
         dex => {
           this.dex = dex;
+          console.log('DEX' + JSON.stringify(this.dex));
           this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
           this.poolEth = dex.pools.find(x => x.poolPairId === '4');
           this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
@@ -341,6 +321,7 @@ export class AppComponent implements OnInit {
           this.berechnePoolOutBch();
           this.berechnePoolOut();
           this.berechneStakingOut();
+          console.log('PoolBTC' + JSON.stringify(this.poolBtc));
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
@@ -687,6 +668,7 @@ export class AppComponent implements OnInit {
   onChangeDfiStaking(): void {
     localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking));
     this.berechneStakingOut();
+    this.berechnePoolOut();
     this.buildDataForChart();
     this.buildDataForChartIncome();
     this.buildDataForChartValue();
@@ -694,302 +676,16 @@ export class AppComponent implements OnInit {
 
   buildDataForChart(): void {
 
-    const allValue = this.getAllValuesUsdPrice();
-
-    const dataBtc = new Data();
-    dataBtc.value = this.getBtcValueUsd();
-    dataBtc.name = 'BTC';
-
-    const dataEth = new Data();
-    dataEth.name = 'ETH';
-    dataEth.value = this.getEthValueUsd();
-
-    const dataUsdt = new Data();
-    dataUsdt.name = 'USDT';
-    dataUsdt.value = this.getUsdtValueUsd();
-
-    const dataLtc = new Data();
-    dataLtc.name = 'LTC';
-    dataLtc.value = this.getLtcValueUsd();
-
-    const dataDoge = new Data();
-    dataDoge.name = 'DOGE';
-    dataDoge.value = this.getDogeValueUsd();
-
-    const dataBch = new Data();
-    dataBch.name = 'BCH';
-    dataBch.value = this.getBchValueUsd();
-
-    const dataDfi = new Data();
-    dataDfi.name = 'DFI';
-    dataDfi.value = this.getDfiValueUsd();
-
-    this.chartOptions = {
-      series: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
-      colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
-      labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
-      chart: {
-        width: 420,
-        type: 'donut'
-      },
-      dataLabels: {
-        enabled: true
-      },
-      fill: {
-        type: 'gradient'
-      },
-      legend: {
-        // tslint:disable-next-line:only-arrow-functions typedef
-        formatter(val, opts) {
-          return '55';
-
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
-    };
-  }
-
-  private getSeriesOverallValue(dataBtc: Data, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data, dataBch: Data,
-                                dataDfi: Data): Array<number> {
-    const incomeNumbers = new Array<number>();
-
-    if (dataBtc.value > 0) {
-      incomeNumbers.push(+dataBtc.value.toFixed(2));
-    }
-    if (dataEth.value > 0) {
-      incomeNumbers.push(+dataEth.value.toFixed(2));
-    }
-    if (dataUsdt.value > 0) {
-      incomeNumbers.push(+dataUsdt.value.toFixed(2));
-    }
-    if (dataLtc.value > 0) {
-      incomeNumbers.push(+dataLtc.value.toFixed(2));
-    }
-    if (dataDoge.value > 0) {
-      incomeNumbers.push(+dataDoge.value.toFixed(2));
-    }
-    if (dataBch.value > 0) {
-      incomeNumbers.push(+dataBch.value.toFixed(2));
-    }
-    if (dataDfi.value > 0) {
-      incomeNumbers.push(+dataDfi.value.toFixed(2));
-    }
-
-    return incomeNumbers;
-  }
-
-  private getColorsOverallValue(dataBtc: Data, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data, dataBch: Data,
-                                dataDfi: Data): Array<string> {
-    const incomeNumbers = new Array<string>();
-
-    if (dataBtc.value > 0) {
-      incomeNumbers.push('#ff9900');
-    }
-    if (dataEth.value > 0) {
-      incomeNumbers.push('#3c3c3d');
-    }
-    if (dataUsdt.value > 0) {
-      incomeNumbers.push('#26a17b');
-    }
-    if (dataLtc.value > 0) {
-      incomeNumbers.push('#b8b8b8');
-    }
-    if (dataDoge.value > 0) {
-      incomeNumbers.push('#cb9800');
-    }
-    if (dataBch.value > 0) {
-      incomeNumbers.push('#4CC947');
-    }
-    if (dataDfi.value > 0) {
-      incomeNumbers.push('#ff00af');
-    }
-
-    return incomeNumbers;
-  }
-
-  private getLabelsOverallValue(dataBtc: Data, allValue: number, dataEth: Data, dataUsdt: Data, dataLtc: Data, dataDoge: Data,
-                                dataBch: Data, dataDfi: Data): Array<string> {
-
-    const incomeNumbers = new Array<string>();
-    if (+AppComponent.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
-      incomeNumbers.push('BTC ' + AppComponent.getAnteilPortfolioForChart(dataBtc, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
-      incomeNumbers.push('ETH ' + AppComponent.getAnteilPortfolioForChart(dataEth, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
-      incomeNumbers.push('USDT ' + AppComponent.getAnteilPortfolioForChart(dataUsdt, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
-      incomeNumbers.push('LTC ' + AppComponent.getAnteilPortfolioForChart(dataLtc, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
-      incomeNumbers.push('DOGE ' + AppComponent.getAnteilPortfolioForChart(dataDoge, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataBch, allValue) > 0) {
-      incomeNumbers.push('BCH ' + AppComponent.getAnteilPortfolioForChart(dataBch, allValue) + '%');
-    }
-    if (+AppComponent.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
-      incomeNumbers.push('DFI ' + AppComponent.getAnteilPortfolioForChart(dataDfi, allValue) + '%');
-    }
-    return incomeNumbers;
+    this.valueComponent.buildDataForChart();
   }
 
   buildDataForChartValue(): void {
 
-    this.chartOptions3 = {
-
-      series: this.getSeriesValue(),
-
-      labels: this.getLabelsValue(),
-      colors: this.getColorsValue(),
-      chart: {
-        width: 420,
-        type: 'donut'
-      },
-      dataLabels: {
-        enabled: true
-      },
-      fill: {
-        type: 'gradient'
-      },
-      legend: {
-        // tslint:disable-next-line:only-arrow-functions typedef
-        formatter(val, opts) {
-          return '55';
-
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
-    };
+    this.valueComponent.buildDataForChartValue();
   }
 
   buildDataForChartIncome(): void {
     this.incomeComponent.buildDataForChartIncome();
-  }
-
-  getSeriesValue(): Array<number> {
-
-    const incomeNumbers = new Array<number>();
-
-    if (this.getValueWallet() > 0) {
-      incomeNumbers.push(Math.round(this.getValueWallet() * 100) / 100);
-    }
-    if (this.getStakingValueUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
-    }
-    if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfBtcPoolValue() * 100) / 100);
-    }
-    if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfEthPoolValue() * 100) / 100);
-    }
-    if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfLtcPoolValue() * 100) / 100);
-    }
-    if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfDogePoolValue() * 100) / 100);
-    }
-    if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfBchPoolValue() * 100) / 100);
-    }
-    if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdtPoolValue() * 100) / 100);
-    }
-
-    return incomeNumbers;
-  }
-
-  getLabelsValue(): Array<string> {
-
-    const incomeNumbers = new Array<string>();
-
-    if (this.getAnteilWalletOfAllValue() > 0) {
-      incomeNumbers.push('Wallet ');
-    }
-    if (this.getAnteilStakingOfAllValue() > 0) {
-      incomeNumbers.push('Staking ');
-    }
-    if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push('BTC-Pool ');
-    }
-    if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push('ETH-Pool ');
-    }
-    if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push('LTC-Pool ');
-    }
-    if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push('DOGE-Pool ');
-    }
-    if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push('BCH-Pool ');
-    }
-    if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push('USDT-Pool ');
-    }
-
-    return incomeNumbers;
-  }
-
-  getColorsValue(): Array<string> {
-
-    const incomeNumbers = new Array<string>();
-
-    if (this.getAnteilWalletOfAllValue() > 0) {
-      incomeNumbers.push('#1ab7ea');
-    }
-    if (this.getAnteilStakingOfAllValue() > 0) {
-      incomeNumbers.push('#ff00af');
-    }
-    if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push('#ff9900');
-    }
-    if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push('#3c3c3d');
-    }
-    if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push('#b8b8b8');
-    }
-    if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push('#cb9800');
-    }
-    if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push('#4CC947');
-    }
-    if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push('#26a17b');
-    }
-
-    return incomeNumbers;
-  }
-
-  private static getAnteilPortfolioForChart(data: Data, allValue: number): string {
-    return (data.value / allValue * 100).toFixed(5);
   }
 
   onChangeFiat(newValue: string): void {
@@ -1036,11 +732,6 @@ export class AppComponent implements OnInit {
       + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking;
   }
 
-  getDfiCountIncome(): number {
-    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.dfiInStaking;
-  }
-
   getDfiCountLM(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
       + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool;
@@ -1054,35 +745,12 @@ export class AppComponent implements OnInit {
     return this.dfiInStaking * this.poolBtc?.priceB;
   }
 
-  getDfiCountWalletUsd(): number {
-    return this.wallet?.dfi * this.poolBtc?.priceB;
-  }
-
-  getAnteilWalletOfAllValue(): number {
-    return this.getDfiCountWalletUsd() / this.getAllValuesUsdPrice() * 100;
-  }
-
-  getValueWallet(): number {
-    return this.getDfiCountWalletUsd();
-  }
-
   getAnteilLMOfAllValue(): number {
     return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
       + this.getUsdtValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
-  getAnteilLMOfBtcPoolValue(): number {
-    return ((this.wallet.dfiInBtcPool * this.poolBtc?.priceB) + (this.wallet.btcInBtcPool * this.poolBtc?.priceA));
-  }
-
-  getAnteilLMOfEthPoolValue(): number {
-    return ((this.wallet.dfiInEthPool * this.poolEth?.priceB) + (this.wallet.ethInEthPool * this.poolEth?.priceA));
-  }
-
-  getAnteilLMOfLtcPoolValue(): number {
-    return ((this.wallet.dfiInLtcPool * this.poolLtc?.priceB) + (this.wallet.ltcInLtcPool * this.poolLtc?.priceA));
-  }
 
   getAnteilLMOfUsdtPoolValue(): number {
     return ((this.wallet.dfiInUsdtPool * this.poolUsdt?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
@@ -1090,10 +758,6 @@ export class AppComponent implements OnInit {
 
   getAnteilLMOfDogePoolValue(): number {
     return ((this.wallet.dfiInDogePool * this.poolDoge?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
-  }
-
-  getAnteilLMOfBchPoolValue(): number {
-    return ((this.wallet.dfiInBchPool * this.poolBch?.priceB) + (this.wallet.bchInBchPool * this.poolBch?.priceA));
   }
 
   getLMUsd(): number {

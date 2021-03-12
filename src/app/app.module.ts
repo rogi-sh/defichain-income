@@ -18,6 +18,7 @@ import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.componen
 import { LmTargetCalculatorComponent } from './lm-target-calculator/lm-target-calculator.component';
 import { StakingTargetCalculatorComponent } from './staking-target-calculator/staking-target-calculator.component';
 import { IncomeComponent } from './income/income.component';
+import { ValueComponent } from './value/value.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { IncomeComponent } from './income/income.component';
     ApyCalculatorComponent,
     LmTargetCalculatorComponent,
     StakingTargetCalculatorComponent,
-    IncomeComponent
+    IncomeComponent,
+    ValueComponent
   ],
   imports: [
     BrowserModule,
