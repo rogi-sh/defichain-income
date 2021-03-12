@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.14.0 - 12.3.2021';
+    this.log.comment = 'Big code refactoring, Details now with separate calc tab';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.13.0 - 11.3.2021';
     this.log.comment = 'Changelog added, klick version button';
 

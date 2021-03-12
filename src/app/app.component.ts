@@ -122,6 +122,30 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadFromLocalStorage();
+
+    this.wallet = new Wallet();
+
+    if (this.autoLoadData) {
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      this.loadLocalStorageForManuel();
+      this.loadDexManuel();
+    }
+
+    this.countdown?.begin();
+    this.timer = setInterval(() => {
+      this.refresh();
+    }, this.sCountdown * 1000);
+
+    this.testApi();
+    setInterval(() => {
+      this.testApi();
+    }, 900000);
+  }
+
+  private loadFromLocalStorage(): void {
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
     }
@@ -153,26 +177,6 @@ export class AppComponent implements OnInit {
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
     }
-
-    this.wallet = new Wallet();
-
-    if (this.autoLoadData) {
-      this.loadAllAccounts();
-      this.loadDex();
-    } else {
-      this.loadLocalStorageForManuel();
-      this.loadDexManuel();
-    }
-
-    this.countdown?.begin();
-    this.timer = setInterval(() => {
-      this.refresh();
-    }, this.sCountdown * 1000);
-
-    this.testApi();
-    setInterval(() => {
-      this.testApi();
-    }, 900000);
   }
 
   private refresh(): void {
