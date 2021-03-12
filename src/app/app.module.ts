@@ -17,6 +17,7 @@ import { DexStatisticsComponent } from './dex-statistics/dex-statistics.componen
 import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.component';
 import { LmTargetCalculatorComponent } from './lm-target-calculator/lm-target-calculator.component';
 import { StakingTargetCalculatorComponent } from './staking-target-calculator/staking-target-calculator.component';
+import { IncomeComponent } from './income/income.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StakingTargetCalculatorComponent } from './staking-target-calculator/st
     DexStatisticsComponent,
     ApyCalculatorComponent,
     LmTargetCalculatorComponent,
-    StakingTargetCalculatorComponent
+    StakingTargetCalculatorComponent,
+    IncomeComponent
   ],
   imports: [
     BrowserModule,

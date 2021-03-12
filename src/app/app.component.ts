@@ -26,6 +26,7 @@ import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
+import {IncomeComponent} from './income/income.component';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,9 @@ export class AppComponent implements OnInit {
 
   @ViewChild('cd', {static: true})
   private countdown: CountdownComponent;
+
+  @ViewChild(IncomeComponent)
+  private incomeComponent: IncomeComponent;
 
   title = 'defichain-income';
   lang = 'en';
@@ -187,6 +191,7 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
+    this.testApi();
     setInterval(() => {
       this.testApi();
     }, 900000);
@@ -251,6 +256,7 @@ export class AppComponent implements OnInit {
         }
       ),
       err => {
+        console.error('Api down?');
         this.apiOnline = false;
 
       });
@@ -303,7 +309,7 @@ export class AppComponent implements OnInit {
         }
       ),
       err => {
-        console.error('Fehler beim Load Dex Data wait: ' + err.toString());
+        console.error('Fehler beim Load Dex Data wait: ' + JSON.stringify(err.message));
         setTimeout(() => {
             this.loadDex();
             console.error('Try again ...');
@@ -817,26 +823,26 @@ export class AppComponent implements OnInit {
                                 dataBch: Data, dataDfi: Data): Array<string> {
 
     const incomeNumbers = new Array<string>();
-    if (+this.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
-      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
+      incomeNumbers.push('BTC ' + AppComponent.getAnteilPortfolioForChart(dataBtc, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
-      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
+      incomeNumbers.push('ETH ' + AppComponent.getAnteilPortfolioForChart(dataEth, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
-      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
+      incomeNumbers.push('USDT ' + AppComponent.getAnteilPortfolioForChart(dataUsdt, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
-      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
+      incomeNumbers.push('LTC ' + AppComponent.getAnteilPortfolioForChart(dataLtc, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
-      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
+      incomeNumbers.push('DOGE ' + AppComponent.getAnteilPortfolioForChart(dataDoge, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataBch, allValue) > 0) {
-      incomeNumbers.push('BCH ' + this.getAnteilPortfolioForChart(dataBch, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataBch, allValue) > 0) {
+      incomeNumbers.push('BCH ' + AppComponent.getAnteilPortfolioForChart(dataBch, allValue) + '%');
     }
-    if (+this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
-      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue) + '%');
+    if (+AppComponent.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
+      incomeNumbers.push('DFI ' + AppComponent.getAnteilPortfolioForChart(dataDfi, allValue) + '%');
     }
     return incomeNumbers;
   }
@@ -883,35 +889,7 @@ export class AppComponent implements OnInit {
   }
 
   buildDataForChartIncome(): void {
-
-    this.chartOptions2 = {
-
-      series: this.getSeriesIncome(),
-      colors: this.getColorsIncome(),
-      chart: {
-        type: 'polarArea'
-      },
-      stroke: {
-        colors: ['#fff']
-      },
-      labels: this.getSeriesIncomeTitle(),
-      fill: {
-        opacity: 0.9
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
-    };
+    this.incomeComponent.buildDataForChartIncome();
   }
 
   getSeriesValue(): Array<number> {
@@ -1010,96 +988,7 @@ export class AppComponent implements OnInit {
     return incomeNumbers;
   }
 
-  getSeriesIncome(): Array<number> {
-
-    const incomeNumbers = new Array<number>();
-
-    if (this.stakingOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.stakingOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolBtcOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolBtcOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolEthOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolEthOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolLtcOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolLtcOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolUsdtOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolUsdtOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolDogeOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolDogeOut.dfiPerMonth * 100) / 100);
-    }
-    if (this.poolBchOut?.dfiPerMonth > 0) {
-      incomeNumbers.push(Math.round(this.poolBchOut.dfiPerMonth * 100) / 100);
-    }
-
-
-    return incomeNumbers;
-  }
-
-  getColorsIncome(): Array<string> {
-
-    const incomeNumbers = new Array<string>();
-
-    if (this.stakingOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#ff00af');
-    }
-    if (this.poolBtcOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#ff9900');
-    }
-    if (this.poolEthOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#3c3c3d');
-    }
-    if (this.poolLtcOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#b8b8b8');
-    }
-    if (this.poolUsdtOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#26a17b');
-    }
-    if (this.poolDogeOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#cb9800');
-    }
-    if (this.poolBchOut?.dfiPerMonth > 0) {
-      incomeNumbers.push('#4CC947');
-    }
-
-    return incomeNumbers;
-  }
-
-
-  getSeriesIncomeTitle(): Array<string> {
-
-    const incomeNumbers = new Array<string>();
-
-    if (this.stakingOut.dfiPerMonth > 0) {
-      incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolBtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolEthOut.dfiPerMonth > 0) {
-      incomeNumbers.push('ETH-Pool - ' + this.poolEthOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolLtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('LTC-Pool - ' + this.poolLtcOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolUsdtOut.dfiPerMonth > 0) {
-      incomeNumbers.push('USDT-Pool - ' + this.poolUsdtOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolDogeOut.dfiPerMonth > 0) {
-      incomeNumbers.push('DOGE-Pool - ' + this.poolDogeOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    if (this.poolBchOut.dfiPerMonth > 0) {
-      incomeNumbers.push('BCH-Pool - ' + this.poolBchOut.dfiPerMonth.toFixed(2) + ' DFI');
-    }
-    return incomeNumbers;
-  }
-
-
-  private getAnteilPortfolioForChart(data: Data, allValue: number): string {
+  private static getAnteilPortfolioForChart(data: Data, allValue: number): string {
     return (data.value / allValue * 100).toFixed(5);
   }
 
@@ -1229,60 +1118,8 @@ export class AppComponent implements OnInit {
     return this.getDfiCount() * this.poolBtc?.priceB;
   }
 
-  getDfiIncomePerMin(): number {
-    return this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin;
-  }
-
-  getDfiIncomeValuePerMinUsd(): number {
-    return this.getDfiIncomePerMin() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerHour(): number {
-    return this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour;
-  }
-
-  getDfiIncomeValuePerHourUsd(): number {
-    return this.getDfiIncomePerHour() * this.poolBtc?.priceB;
-  }
-
   getDfiIncomePerDay(): number {
     return this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay;
-  }
-
-  getDfiIncomeValuePerDayUsd(): number {
-    return this.getDfiIncomePerDay() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerWeek(): number {
-    return this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
-  }
-
-  getDfiIncomeValuePerWeekUsd(): number {
-    return this.getDfiIncomePerWeek() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerMonth(): number {
-    return this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
-  }
-
-  getDfiIncomeValuePerMonthUsd(): number {
-    return this.getDfiIncomePerMonth() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerYear(): number {
-    return this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
-  }
-
-  getDfiIncomeValuePerYearUsd(): number {
-    return this.getDfiIncomePerYear() * this.poolBtc?.priceB;
-  }
-
-  getAnteilStakingOfIncome(): number {
-    return this.stakingOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
-  }
-
-  getAnteilLMOfIncome(): number {
-    return this.poolOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
   }
 
   getAllPoolDfIncome(): number {
