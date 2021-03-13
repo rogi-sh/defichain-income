@@ -93,64 +93,34 @@
 <div *ngIf="autoLoadData && showInputArea">
   <br>
   <div class="container left">
-    <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
-    <h3>{{ 'address.title2' | translate }}</h3>
-    <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span
-      class="badge badge-secondary left">listaccounts {{'{}'}}
-      false false true</span> {{ 'address.exc2' | translate }}</p>
-    <p>{{ 'address.exc3' | translate }}</p>
-    <p>{{ 'address.late' | translate }}</p>
     <div class="row">
-      <div class="col-sm-4 bg-light margin-col">
-        <div class="form-group">
-          <label for="inputAddress">DFI {{ 'address.label' | translate }}</label>
-          <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress">
-          <small class="form-text text-muted">{{ 'address.add' | translate }}</small>
+      <div class="col-auto bg-light margin-col">
+        <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
+        <h3>{{ 'address.title2' | translate }}</h3>
+        <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span
+          class="badge badge-secondary left">listaccounts {{'{}'}}
+          false false true</span> {{ 'address.exc2' | translate }}</p>
+        <p>{{ 'address.exc3' | translate }}</p>
+        <p>{{ 'address.late' | translate }}</p>
+        <div class="row">
+          <div class="col-sm-4 bg-light margin-col">
+            <div class="form-group">
+              <label for="inputAddress">DFI {{ 'address.label' | translate }}</label>
+              <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress">
+              <small class="form-text text-muted">{{ 'address.add' | translate }}</small>
+            </div>
+            <button type="button" (click)="addAdress()" class="btn btn-success">
+              + {{ 'address.button-add' | translate }}</button>
+          </div>
+          <div class="col-auto bg-light margin-col">
+            <h3>{{ 'address.added' | translate }}</h3>
+            <p *ngFor="let a of adresses">
+              <span class="badge badge-pill badge-primary left">{{a}}</span>
+              <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)">
+                - {{ 'address.button-remove' | translate }}</button>
+            </p>
+          </div>
         </div>
-        <button type="button" (click)="addAdress()" class="btn btn-success">
-          + {{ 'address.button-add' | translate }}</button>
-      </div>
-      <div class="col-auto bg-light margin-col">
-        <h3>{{ 'address.added' | translate }}</h3>
-        <p *ngFor="let a of adresses">
-          <span class="badge badge-pill badge-primary left">{{a}}</span>
-          <button class="badge badge-pill badge-danger left" (click)="deleteAdress(a)">
-            - {{ 'address.button-remove' | translate }}</button>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container left">
-    <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
-    <div class="row">
-      <div class="col-auto bg-light margin-col">
-        <h3>{{ 'holdings.wallet' | translate }}</h3>
-        <p> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></p>
-        <p> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.3-3'}}</span></p>
-        <p> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.3-3'}}</span></p>
-        <p> LTC <span class="badge badge-pill badge-primary left">{{wallet?.ltc | number: '1.3-3'}}</span></p>
-        <p> USDT <span class="badge badge-pill badge-primary left">{{wallet?.usdt | number: '1.3-3'}}</span></p>
-        <p> DOGE <span class="badge badge-pill badge-primary left">{{wallet?.doge | number: '1.3-3'}}</span></p>
-        <p> BCH <span class="badge badge-pill badge-primary left">{{wallet?.bch | number: '1.3-3'}}</span></p>
-      </div>
-      <div class="col-auto bg-light margin-col">
-        <h3>{{ 'holdings.lp' | translate }}</h3>
-        <p> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span>
-        </p>
-        <p> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span>
-        </p>
-        <p> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span>
-        </p>
-        <p> USDT-DFI <span
-          class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span>
-        </p>
-        <p> DOGE-DFI <span
-          class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span>
-        </p>
-        <p> BCH-DFI <span
-          class="badge badge-pill badge-primary left">{{wallet?.bchdfi | number: '1.3-3'}}</span>
-        </p>
       </div>
       <div class="col-auto bg-light margin-col">
         <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
@@ -173,9 +143,56 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+<div *ngIf="autoLoadData" class="container left">
+  <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
+  <div class="row">
+    <div class="col-auto bg-light margin-col">
+      <h3>{{ 'holdings.wallet' | translate }}</h3>
+      <h4> DFI <span class="badge badge-pill badge-primary left">{{wallet?.dfi | number: '1.3-3'}}</span></h4>
+      <h4> DFI in Staking <span class="badge badge-pill badge-primary left">{{dfiInStaking | number: '1.3-3'}}
+        / {{stakingApy}} APY %</span></h4>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <h4> BTC <span class="badge badge-pill badge-primary left">{{wallet?.btc | number: '1.5-5'}}</span></h4>
+          <h4> ETH <span class="badge badge-pill badge-primary left">{{wallet?.eth | number: '1.5-5'}}</span></h4>
+          <h4> LTC <span class="badge badge-pill badge-primary left">{{wallet?.ltc | number: '1.5-5'}}</span></h4>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <h4> USDT <span class="badge badge-pill badge-primary left">{{wallet?.usdt | number: '1.5-5'}}</span></h4>
+          <h4> DOGE <span class="badge badge-pill badge-primary left">{{wallet?.doge | number: '1.5-5'}}</span></h4>
+          <h4> BCH <span class="badge badge-pill badge-primary left">{{wallet?.bch | number: '1.5-5'}}</span></h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto bg-light margin-col">
+      <h3>{{ 'holdings.lp' | translate }}</h3>
+      <div class="row">
+        <div class="col-auto bg-light margin-col">
+          <h4> BTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.btcdfi | number: '1.3-3'}}</span>
+          </h4>
+          <h4> ETH-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ethdfi | number: '1.3-3'}}</span>
+          </h4>
+          <h4> LTC-DFI <span class="badge badge-pill badge-primary left">{{wallet?.ltcdfi | number: '1.3-3'}}</span>
+          </h4>
+        </div>
+        <div class="col-auto bg-light margin-col">
+          <h4> USDT-DFI <span
+            class="badge badge-pill badge-primary left">{{wallet?.usdtdfi | number: '1.3-3'}}</span>
+          </h4>
+          <h4> DOGE-DFI <span
+            class="badge badge-pill badge-primary left">{{wallet?.dogedfi | number: '1.3-3'}}</span>
+          </h4>
+          <h4> BCH-DFI <span
+            class="badge badge-pill badge-primary left">{{wallet?.bchdfi | number: '1.3-3'}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div *ngIf="!autoLoadData && showInputArea" class="container left">
   <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
@@ -383,13 +400,14 @@
   <div class="row">
     <div *ngIf="wallet && poolBtc" class="col-sm bg-light margin-col">
       <app-value [poolBtc]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
-                  [poolEth]="poolEth" [poolUsdt]="poolUsdt" [poolLtc]="poolLtc" [poolDoge]="poolDoge" [poolBch]="poolBch"
-                 [dfiInStaking]="dfiInStaking" [wallet]="wallet"  ></app-value>
+                 [poolEth]="poolEth" [poolUsdt]="poolUsdt" [poolLtc]="poolLtc" [poolDoge]="poolDoge" [poolBch]="poolBch"
+                 [dfiInStaking]="dfiInStaking" [wallet]="wallet"></app-value>
     </div>
     <div class="col-sm bg-light margin-col">
-      <app-income *ngIf="poolBtc && poolBtcOut && poolOut"  [poolBtc]="poolBtc" [fiat]="fiat"
+      <app-income *ngIf="poolBtc && poolBtcOut && poolOut" [poolBtc]="poolBtc" [fiat]="fiat"
                   [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
-                  [poolBchOut]="poolBchOut" [poolBtcOut]="poolBtcOut" [poolDogeOut]="poolDogeOut" [poolEthOut]="poolEthOut"
+                  [poolBchOut]="poolBchOut" [poolBtcOut]="poolBtcOut" [poolDogeOut]="poolDogeOut"
+                  [poolEthOut]="poolEthOut"
                   [poolLtcOut]="poolLtcOut" [poolOut]="poolOut"
                   [poolUsdtOut]="poolUsdtOut" [stakingOut]="stakingOut"></app-income>
     </div>

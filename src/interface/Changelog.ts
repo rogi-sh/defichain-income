@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.16.0 - 13.3.2021';
+    this.log.comment = 'Holdings list not in input area and allways visible for auto funds load';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.15.0 - 12.3.2021';
     this.log.comment = 'Show how much dfi in staking, lm or wallet in value chart';
 
