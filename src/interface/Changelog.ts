@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.17.1 - 14.3.2021';
+    this.log.comment = 'Allow request from anywhere';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.17.0 - 14.3.2021';
     this.log.comment = 'Sourcecode is opensource, add link to repo';
 
