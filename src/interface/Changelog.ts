@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.17.0 - 14.3.2021';
+    this.log.comment = 'Sourcecode is opensource, add link to repo';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.16.0 - 13.3.2021';
     this.log.comment = 'Holdings list not in input area and allways visible for auto funds load';
 
