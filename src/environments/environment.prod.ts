@@ -3,5 +3,6 @@ export const environment = {
   dex: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
-  version: '2.17.1'
+  balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
+  version: '2.18.0'
 };

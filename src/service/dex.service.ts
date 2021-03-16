@@ -3,6 +3,7 @@ import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {DexInfo, Pool} from '../interface/Dex';
 import {Observable} from 'rxjs';
+import {Balance} from '../interface/Data';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,12 @@ export class Dex {
     return this.http.get<Pool>(environment.poolDetails + id);
   }
 
-  public getAdressDetail(adress: string): Observable<[string]>  {
-    return this.http.get<[string]>(environment.accountDetails + adress);
+  public getAdressDetail(address: string): Observable<[string]>  {
+    return this.http.get<[string]>(environment.accountDetails + address);
+  }
+
+  public getAdressBalance(address: string): Observable<Balance>  {
+    const url = environment.balance.replace('SET-ADDRESS', address);
+    return this.http.get<Balance>(url);
   }
 }

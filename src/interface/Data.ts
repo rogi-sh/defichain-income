@@ -12,6 +12,11 @@ export class Data {
   value: number;
 }
 
+export class Balance {
+  confirmed: number;
+  balance: number;
+}
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;

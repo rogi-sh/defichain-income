@@ -86,8 +86,30 @@
     </div>
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">DFI {{ 'stats' | translate }}</span></h1>
-      <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain"
-           data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m"></div>
+      <div *ngIf="fiat === 'USD'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
+      <div *ngIf="fiat === 'EUR'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="eur" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
+      <div *ngIf="fiat === 'CHF'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="chf" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
+      <div *ngIf="fiat === 'GBP'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="gbp" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -96,16 +118,18 @@
   <br>
   <div class="container left">
     <div class="row">
-      <div class="col-auto bg-light margin-col">
+      <div class="col-sm bg-light margin-col">
         <h1><span class="badge badge-secondary left">{{ 'address.title' | translate }} </span></h1>
-        <h3>{{ 'address.title2' | translate }}</h3>
-        <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span> {{ 'address.exc' | translate }} <span
-          class="badge badge-secondary left">listaccounts {{'{}'}}
-          false false true</span> {{ 'address.exc2' | translate }}</p>
+        <h3 class="form-text text-muted">{{ 'address.title2' | translate }}</h3>
+        <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span></p>
+        <p>  {{ 'address.exc' | translate }} </p>
+        <p><span class="h3 badge badge-secondary left">listaccounts {{'{}'}} false false true</span> <span> ->{{ 'address.exc2' | translate }}</span></p>
+
+        <p><span class="badge badge-secondary left">listaddressgroupings</span>  <span> ->{{ 'address.exc21' | translate }}</span></p>
+
         <p>{{ 'address.exc3' | translate }}</p>
-        <p>{{ 'address.late' | translate }}</p>
         <div class="row">
-          <div class="col-sm-4 bg-light margin-col">
+          <div class="col-sm-6 bg-light margin-col">
             <div class="form-group">
               <label for="inputAddress">DFI {{ 'address.label' | translate }}</label>
               <input type="text" [(ngModel)]="adress" class="form-control form-control-sm" id="inputAddress">
@@ -125,8 +149,8 @@
         </div>
       </div>
       <div class="col-auto bg-light margin-col">
-        <h2><span class="badge badge-pill badge-primary left">Staking</span></h2>
-        <small class="form-text text-muted">{{ 'stakingOnCake' | translate }}</small>
+        <h1><span class="badge badge-secondary left">Staking</span></h1>
+        <h3 class="form-text text-muted">{{ 'stakingOnCake' | translate }}</h3>
         <small class="form-text text-muted">{{ 'stakingOnCake2' | translate }}</small>
 
         <div class="form-group">

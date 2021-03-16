@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
 import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
   PoolUsdtOut} from '../interface/Dex';
-import {Wallet} from '../interface/Data';
+import {Balance, Wallet} from '../interface/Data';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
@@ -345,15 +345,29 @@ export class AppComponent implements OnInit {
     this.dexService.getAdressDetail(adress).subscribe(
       balances => {
         for (const b of balances) {
-          this.addToWallet(b);
+          this.addTokensToWallet(b);
         }
+      },
+      err => {
+        console.error(err);
+      });
+
+    this.dexService.getAdressBalance(adress).subscribe(
+      balance => {
+          this.addCoinsToWallet(balance);
       },
       err => {
         console.error(err);
       });
   }
 
-  addToWallet(walletItem: string): void {
+  addCoinsToWallet(balance: Balance): void {
+
+    // Balance is in Satoshi
+    this.wallet.dfi += balance.balance * 0.00000001;
+  }
+
+  addTokensToWallet(walletItem: string): void {
     const splitted = walletItem.split('@');
     switch (splitted[1]) {
       case 'DFI': {
@@ -692,6 +706,8 @@ export class AppComponent implements OnInit {
   onChangeFiat(newValue: string): void {
     this.fiat = newValue;
     localStorage.setItem(this.fiatKey, newValue);
+    // for coinpaprika
+    window.location.reload();
   }
 
   onChangeDetails(newValue: string): void {

@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.18.0 - 16.3.2021';
+    this.log.comment = 'Get dfi coins from address, different currencies for coinpaprika widget';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.17.1 - 14.3.2021';
     this.log.comment = 'Allow request from anywhere';
 
