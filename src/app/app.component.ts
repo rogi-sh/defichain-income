@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   dfiProBlockUsdt = 5;
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
-  dfiProBlockBch = 0.01;
+  dfiProBlockBch = 1;
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;

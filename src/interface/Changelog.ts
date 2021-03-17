@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.18.1 - 17.3.2021';
+    this.log.comment = 'BCH Pool 1 DFI per Block';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.18.0 - 16.3.2021';
     this.log.comment = 'Get dfi coins from address, different currencies for coinpaprika widget';
 
