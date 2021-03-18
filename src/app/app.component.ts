@@ -11,6 +11,7 @@ import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
 import {IncomeComponent} from './income/income.component';
 import {ValueComponent} from './value/value.component';
+import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
 
 @Component({
   selector: 'app-root',
@@ -107,18 +108,24 @@ export class AppComponent implements OnInit {
 
   apiOnline = true;
 
-  constructor(private dexService: Dex, private translate: TranslateService) {
+  constructor(private dexService: Dex, private translate: TranslateService, private matomoInjector: MatomoInjector,
+              private matomoTracker: MatomoTracker) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
     console.log('browser ' + browserLang);
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+
+    // setze matomo URL
+    this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
+
   }
 
   useLanguage(language: string): void {
     this.translate.use(language);
     this.lang = language;
+    this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
   ngOnInit(): void {
@@ -206,11 +213,13 @@ export class AppComponent implements OnInit {
 
   saveToggleAutoLoad(): void {
     localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
+    this.matomoTracker.trackEvent('Klick', 'Change Input Type', JSON.stringify(this.autoLoadData));
     this.refresh();
   }
 
   saveToggleSettingsLoad(): void {
     localStorage.setItem(this.showSettingsAreaKey, JSON.stringify(this.showSettingsArea));
+    this.matomoTracker.trackEvent('Klick', 'Change Show Settings', JSON.stringify(this.showSettingsArea));
   }
 
   saveInputStaking(): void {
@@ -223,6 +232,7 @@ export class AppComponent implements OnInit {
 
   saveToggleInputShow(): void {
     localStorage.setItem(this.showInputAreaKey, JSON.stringify(this.showInputArea));
+    this.matomoTracker.trackEvent('Klick', 'Change Show Input', JSON.stringify(this.showSettingsArea));
   }
 
   testApi(): void {
@@ -705,6 +715,8 @@ export class AppComponent implements OnInit {
 
   onChangeFiat(newValue: string): void {
     this.fiat = newValue;
+    this.matomoTracker.trackEvent('Klick', 'Change Fiat', newValue);
+
     localStorage.setItem(this.fiatKey, newValue);
     // for coinpaprika
     window.location.reload();
@@ -713,6 +725,7 @@ export class AppComponent implements OnInit {
   onChangeDetails(newValue: string): void {
     this.details = newValue;
     localStorage.setItem(this.detailsKey, newValue);
+    this.matomoTracker.trackEvent('Klick', 'Change Details', newValue);
   }
 
   getAllValuesUsdPrice(): number {

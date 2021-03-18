@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.19.0 - 19.3.2021';
+    this.log.comment = 'Matomo integration for actions on website (NO Tracking of funds or inputs)';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.18.2 - 19.3.2021';
     this.log.comment = 'Small text fixes';
 

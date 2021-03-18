@@ -19,6 +19,7 @@ import { LmTargetCalculatorComponent } from './lm-target-calculator/lm-target-ca
 import { StakingTargetCalculatorComponent } from './staking-target-calculator/staking-target-calculator.component';
 import { IncomeComponent } from './income/income.component';
 import { ValueComponent } from './value/value.component';
+import {MatomoModule} from 'ngx-matomo';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ValueComponent } from './value/value.component';
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
+    MatomoModule,
     MatTabsModule,
     FormsModule,
     NgApexchartsModule,
