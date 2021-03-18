@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.18.2 - 19.3.2021';
+    this.log.comment = 'Small text fixes';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.18.1 - 17.3.2021';
     this.log.comment = 'BCH Pool 1 DFI per Block';
 
