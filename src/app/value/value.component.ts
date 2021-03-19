@@ -62,7 +62,12 @@ export class ValueComponent implements OnInit {
   }
 
   getAnteilWalletOfAllValue(): number {
-    return this.getDfiCountWalletUsd() / this.getAllValuesUsdPrice() * 100;
+    return this.getWalletValueUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getWalletValueUsd(): number {
+    return this.getDfiCountWalletUsd() + this.getBtcWalletValueUsd() + this.getEthWalletValueUsd() +
+      this.getUsdtWalletValueUsd() + this.getLtcWalletValueUsd() + this.getDogeWalletValueUsd() + this.getBchWalletValueUsd();
   }
 
   getDfiCountWalletUsd(): number {
@@ -78,24 +83,49 @@ export class ValueComponent implements OnInit {
     return (this.wallet.btcInBtcPool + this.wallet.btc) * this.poolBtc?.priceA;
   }
 
+  getBtcWalletValueUsd(): number {
+    return this.wallet.btc * this.poolBtc?.priceA;
+  }
+
   getEthValueUsd(): number {
     return (this.wallet.ethInEthPool + this.wallet.eth) * this.poolEth?.priceA;
   }
 
+  getEthWalletValueUsd(): number {
+    return  this.wallet.eth * this.poolEth?.priceA;
+  }
+
+
   getUsdtValueUsd(): number {
     return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
+  }
+
+  getUsdtWalletValueUsd(): number {
+    return this.wallet.usdt * this.poolUsdt?.priceA;
   }
 
   getLtcValueUsd(): number {
     return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.poolLtc?.priceA;
   }
 
+  getLtcWalletValueUsd(): number {
+    return this.wallet.ltc * this.poolLtc?.priceA;
+  }
+
   getDogeValueUsd(): number {
     return (this.wallet.dogeInDogePool + this.wallet.doge) * this.poolDoge?.priceA;
   }
 
+  getDogeWalletValueUsd(): number {
+    return this.wallet.doge * this.poolDoge?.priceA;
+  }
+
   getBchValueUsd(): number {
     return (this.wallet.bchInBchPool + this.wallet.bch) * this.poolBch?.priceA;
+  }
+
+  getBchWalletValueUsd(): number {
+    return this.wallet.bch * this.poolBch?.priceA;
   }
 
   getDfiValueUsd(): number {
@@ -176,8 +206,8 @@ export class ValueComponent implements OnInit {
 
     const incomeNumbers = new Array<number>();
 
-    if (this.getValueWallet() > 0) {
-      incomeNumbers.push(Math.round(this.getValueWallet() * 100) / 100);
+    if (this.getWalletValueUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getWalletValueUsd() * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
@@ -202,10 +232,6 @@ export class ValueComponent implements OnInit {
     }
 
     return incomeNumbers;
-  }
-
-  getValueWallet(): number {
-    return this.getDfiCountWalletUsd();
   }
 
   getAnteilLMOfBtcPoolValue(): number {
