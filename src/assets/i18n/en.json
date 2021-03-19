@@ -29,7 +29,7 @@
     "exc": "You have to execute in your defichain app to get all your addresses.",
     "exc2": " Herewith you get addresses where your TOKENS (BTC, DFI, BTC-DFI ...) are located.",
     "exc21": " Herewith you get addresses where your DFI COINS are located.",
-    "exc3": "Enter all addresses (not twice!) with a balance > 0.",
+    "exc3": "Enter all addresses (not twice!) with a balance > 0. As soon as you receive or send DFI Coins you have to add edit addresses again (UTXO).",
     "add": "Add your wallet addresses to track.",
     "added": "Your tracked addresses.",
     "button-add": "add",
