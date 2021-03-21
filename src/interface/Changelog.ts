@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.21.0 - 21.3.2021';
+    this.log.comment = 'Add btc and eth as currency for coinpaprika widget';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.20.0 - 21.3.2021';
     this.log.comment = 'Add reference to history graphql interface';
 

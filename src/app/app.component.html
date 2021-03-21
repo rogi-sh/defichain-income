@@ -89,26 +89,44 @@
     </div>
     <div class="col-sm bg-light margin-col">
       <h1><span class="badge badge-secondary left">DFI {{ 'stats' | translate }}</span></h1>
-      <div *ngIf="fiat === 'USD'">
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button (click)="onChangeCPCurrency('BTC')" type="button" class="btn margin-col btn-danger">BTC</button>
+        <button (click)="onChangeCPCurrency('ETH')" type="button" class="btn margin-col btn-danger">ETH</button>
+      </div>
+      <br>
+      <br>
+      <div *ngIf="coinpaprikaCurrency === 'USD'">
         <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain"
              data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
 
         </div>
       </div>
-      <div *ngIf="fiat === 'EUR'">
+      <div *ngIf="coinpaprikaCurrency === 'EUR'">
         <div class="coinpaprika-currency-widget" data-primary-currency="eur" data-currency="dfi-defi-chain"
              data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
 
         </div>
       </div>
-      <div *ngIf="fiat === 'CHF'">
+      <div *ngIf="coinpaprikaCurrency === 'CHF'">
         <div class="coinpaprika-currency-widget" data-primary-currency="chf" data-currency="dfi-defi-chain"
              data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
 
         </div>
       </div>
-      <div *ngIf="fiat === 'GBP'">
+      <div *ngIf="coinpaprikaCurrency === 'GBP'">
         <div class="coinpaprika-currency-widget" data-primary-currency="gbp" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
+      <div *ngIf="coinpaprikaCurrency === 'BTC'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="btc" data-currency="dfi-defi-chain"
+             data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+
+        </div>
+      </div>
+      <div *ngIf="coinpaprikaCurrency === 'ETH'">
+        <div class="coinpaprika-currency-widget" data-primary-currency="eth" data-currency="dfi-defi-chain"
              data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
 
         </div>
