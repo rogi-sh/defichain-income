@@ -51,9 +51,6 @@ export class AppComponent implements OnInit {
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
 
-  coinpaprikaCurrency = 'USD';
-  coinpaprikaCurrencyKey = 'coinpaprikaCurrencyKey';
-
   // Staking infos
   dfiInStakingKey = 'dfiInStaking';
   dfiInStaking = 0;
@@ -158,10 +155,6 @@ export class AppComponent implements OnInit {
   private loadFromLocalStorage(): void {
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
-      this.coinpaprikaCurrency = this.fiat;
-    }
-    if (localStorage.getItem(this.coinpaprikaCurrencyKey) !== null) {
-      this.coinpaprikaCurrency = localStorage.getItem(this.coinpaprikaCurrencyKey);
     }
     if (localStorage.getItem(this.detailsKey) !== null) {
       this.details = localStorage.getItem(this.detailsKey);
@@ -722,20 +715,9 @@ export class AppComponent implements OnInit {
 
   onChangeFiat(newValue: string): void {
     this.fiat = newValue;
-    this.coinpaprikaCurrency = newValue;
     this.matomoTracker.trackEvent('Klick', 'Change Fiat', newValue);
 
     localStorage.setItem(this.fiatKey, newValue);
-    localStorage.setItem(this.coinpaprikaCurrencyKey, newValue);
-    // for coinpaprika
-    window.location.reload();
-  }
-
-  onChangeCPCurrency(newValue: string): void {
-    this.coinpaprikaCurrency = newValue;
-    this.matomoTracker.trackEvent('Klick', 'Change CP Currency', newValue);
-
-    localStorage.setItem(this.coinpaprikaCurrencyKey, newValue);
     // for coinpaprika
     window.location.reload();
   }

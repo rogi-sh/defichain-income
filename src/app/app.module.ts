@@ -20,6 +20,7 @@ import { StakingTargetCalculatorComponent } from './staking-target-calculator/st
 import { IncomeComponent } from './income/income.component';
 import { ValueComponent } from './value/value.component';
 import {MatomoModule} from 'ngx-matomo';
+import { DfiStatisticsComponent } from './dfi-statistics/dfi-statistics.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatomoModule} from 'ngx-matomo';
     LmTargetCalculatorComponent,
     StakingTargetCalculatorComponent,
     IncomeComponent,
-    ValueComponent
+    ValueComponent,
+    DfiStatisticsComponent
   ],
   imports: [
     BrowserModule,
