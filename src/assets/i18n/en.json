@@ -3,6 +3,7 @@
   "welcome": "Welcome, on this website you can track your income of your cryptos during staking od DFI or liquidity mining with your defichain app.",
   "lang": "Choose your lang",
   "powered": "All data and prices powered by: ",
+  "history" : "Historical pool and farming data can be accessed via GraphQL here starting 3/21/2021.",
   "opensource": "Sourcecode is OpenSource in: ",
   "setting": "Settings",
   "refresh1": "Set your refresh time: ",

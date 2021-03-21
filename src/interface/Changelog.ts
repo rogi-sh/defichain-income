@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.20.0 - 21.3.2021';
+    this.log.comment = 'Add reference to history graphql interface';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.19.1 - 19.3.2021';
     this.log.comment = 'Wallet in Distribution of holdings chart include all funds in the wallet like dfi, btc ...';
 

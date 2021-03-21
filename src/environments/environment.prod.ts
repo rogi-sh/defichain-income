@@ -4,7 +4,7 @@ export const environment = {
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
-  version: '2.19.1',
+  version: '2.20.0',
   // Matomo
   matomoId: 6,
   matomoUrl: 'https://analytics.topiet.de/'

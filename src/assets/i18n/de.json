@@ -4,6 +4,7 @@
   "lang": "Wähle deine Sprache",
   "setting": "Einstellungen",
   "powered": "Alle Daten und Preise werden abgerufen von: ",
+  "history" : "Historische Pool- und Farming-Daten können ab dem 21.3.2021 hier über GraphQL abgerufen werden.",
   "opensource": "Sourcecode ist OpenSource unter: ",
   "refresh1": "Setze deine Refresh-Zeit:  ",
   "refresh2": " Kein F5 notwendig.",
