@@ -1,7 +1,17 @@
 <h1><span class="badge badge-secondary left">DFI {{ 'stats' | translate }}</span></h1>
 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
   <button (click)="onChangeCPCurrency('BTC')" type="button" class="btn margin-col btn-danger">BTC</button>
+  <button (click)="onChangeCPCurrency('BCH')" type="button" class="btn margin-col btn-danger">BCH</button>
   <button (click)="onChangeCPCurrency('ETH')" type="button" class="btn margin-col btn-danger">ETH</button>
+  <button (click)="onChangeCPCurrency('LTC')" type="button" class="btn margin-col btn-danger">LTC</button>
+  <button (click)="onChangeCPCurrency('DOGE')" type="button" class="btn margin-col btn-danger">DOGE</button>
+  <button (click)="onChangeCPCurrency('USDT')" type="button" class="btn margin-col btn-danger">USDT</button>
+
+
+</div>
+<br>
+<br>
+<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
   <button (click)="onChangeCPCurrency('USD')" type="button" class="btn margin-col btn-danger">USD</button>
   <button (click)="onChangeCPCurrency('EUR')" type="button" class="btn margin-col btn-danger">EUR</button>
   <button (click)="onChangeCPCurrency('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
@@ -9,39 +19,12 @@
 </div>
 <br>
 <br>
-<div *ngIf="coinpaprikaCurrency === 'USD'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="usd" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
 
-  </div>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_59a11"></div>
 </div>
-<div *ngIf="coinpaprikaCurrency === 'EUR'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="eur" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
+<!-- TradingView Widget END -->
 
-  </div>
-</div>
-<div *ngIf="coinpaprikaCurrency === 'CHF'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="chf" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
-
-  </div>
-</div>
-<div *ngIf="coinpaprikaCurrency === 'GBP'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="gbp" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
-
-  </div>
-</div>
-<div *ngIf="coinpaprikaCurrency === 'BTC'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="btc" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
-
-  </div>
-</div>
-<div *ngIf="coinpaprikaCurrency === 'ETH'">
-  <div class="coinpaprika-currency-widget" data-primary-currency="eth" data-currency="dfi-defi-chain"
-       data-modules='["market_details","chart"]' data-update-active="true" data-update-timeout="1m">
-
-  </div>
-</div>
+<br>
+<br>

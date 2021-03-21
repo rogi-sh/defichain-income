@@ -79,7 +79,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm bg-light margin-col">
+    <div class="col-sm-4 bg-light margin-col">
       <app-dex-statistics [apiOnline]="apiOnline" [fiat]="fiat" [dex]="dex" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                           [usdToGbp]="usdToGbp" [poolBtc]="poolBtc" [poolEth]="poolEth" [poolUsdt]="poolUsdt"
                           [poolLtc]="poolLtc"
@@ -151,6 +151,7 @@
   </div>
 </div>
 <div *ngIf="autoLoadData" class="container left">
+  <br>
   <h1><span class="badge badge-secondary left">{{ 'holdings.title' | translate }}</span></h1>
   <div class="row">
     <div class="col-auto bg-light margin-col">

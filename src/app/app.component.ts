@@ -718,8 +718,7 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Fiat', newValue);
 
     localStorage.setItem(this.fiatKey, newValue);
-    // for coinpaprika
-    window.location.reload();
+
   }
 
   onChangeDetails(newValue: string): void {
