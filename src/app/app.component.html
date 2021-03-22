@@ -6,9 +6,9 @@
       <p>{{ 'welcome' | translate }}</p>
       <p>{{ 'powered' | translate }} <a href="https://dex.defichain.com/mainnet/pool">
         https://api.defichain.io/v1</a></p>
-      <p>{{ 'opensource' | translate }} <a href="https://git.topiet.de/igor/defichain-income">
+      <p>{{ 'opensource' | translate }} <a (click)="trackGit()" href="https://git.topiet.de/igor/defichain-income">
         https://git.topiet.de/igor/defichain-income</a></p>
-      <p>{{ 'history' | translate }} <a href="https://graphql.defichain-income.com/graphql" target="_blank">
+      <p>{{ 'history' | translate }} <a (click)="trackGraphQL()" href="https://graphql.defichain-income.com/graphql" target="_blank">
         https://graphql.defichain-income.com/graphql</a></p>
 
       <app-changelog></app-changelog>

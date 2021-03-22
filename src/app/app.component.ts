@@ -721,6 +721,15 @@ export class AppComponent implements OnInit {
 
   }
 
+  trackGraphQL(): void {
+    this.matomoTracker.trackEvent('Klick', 'GraphQL Reflink');
+  }
+
+  trackGit(): void {
+    this.matomoTracker.trackEvent('Klick', 'GitRepo Reflink');
+
+  }
+
   onChangeDetails(newValue: string): void {
     this.details = newValue;
     localStorage.setItem(this.detailsKey, newValue);
