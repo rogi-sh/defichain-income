@@ -1,7 +1,7 @@
 import {Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {DexInfo, Pool} from '../interface/Dex';
+import {DexInfo, DexPoolPair, Pool} from '../interface/Dex';
 import {Observable} from 'rxjs';
 import {Balance} from '../interface/Data';
 
@@ -18,6 +18,10 @@ export class Dex {
 
   public getPoolDetail(id: string): Observable<Pool>  {
     return this.http.get<Pool>(environment.poolDetails + id);
+  }
+
+  public getListpoolpairs(): Observable<DexPoolPair>  {
+    return this.http.get<DexPoolPair>(environment.listpoolpairs);
   }
 
   public getAdressDetail(address: string): Observable<[string]>  {

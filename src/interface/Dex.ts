@@ -4,6 +4,16 @@ export interface DexInfo {
   provider_logo: string;
 }
 
+export interface DexPoolPair {
+  '4': Pool;
+  '5': Pool;
+  '6': Pool;
+  '8': Pool;
+  '10': Pool;
+  '12': Pool;
+}
+
+
 export interface Pool {
   apr: number;
   name: string;
@@ -25,6 +35,7 @@ export interface Pool {
   priceA: number;
   priceB: number;
   totalLiquidityLpToken: number;
+  totalLiquidity: number;
 }
 
 

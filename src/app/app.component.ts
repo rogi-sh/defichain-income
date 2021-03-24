@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
-import {DexInfo, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
-  PoolUsdtOut} from '../interface/Dex';
+import {
+  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
+  PoolUsdtOut
+} from '../interface/Dex';
 import {Balance, Wallet} from '../interface/Data';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
@@ -20,7 +22,7 @@ import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('cd', {static: true})
+  @ViewChild('cd', {static: false})
   private countdown: CountdownComponent;
 
   @ViewChild(IncomeComponent)
@@ -147,9 +149,10 @@ export class AppComponent implements OnInit {
     }, this.sCountdown * 1000);
 
     this.testApi();
+
     setInterval(() => {
       this.testApi();
-    }, 900000);
+    }, 2000000);
   }
 
   private loadFromLocalStorage(): void {
@@ -240,9 +243,10 @@ export class AppComponent implements OnInit {
     forkJoin([
         this.dexService.getDex(),
         this.dexService.getPoolDetail('5'),
+        this.dexService.getListpoolpairs(),
         this.dexService.getAdressDetail('dQTQr6Zr9rvcDi5s7jWhKjjsqDXhHsu16U')
       ]
-    ).subscribe((([dex, poolBtc, dsts]: [DexInfo, Pool, [string]]) => {
+    ).subscribe((([dex, poolBtc, poolpairs, dsts]: [DexInfo, Pool, DexPoolPair, [string]]) => {
           this.apiOnline = true;
 
         }
@@ -259,32 +263,26 @@ export class AppComponent implements OnInit {
 
     forkJoin([
         this.dexService.getDex(),
-        this.dexService.getPoolDetail('5'),
-        this.dexService.getPoolDetail('4'),
-        this.dexService.getPoolDetail('6'),
-        this.dexService.getPoolDetail('10'),
-        this.dexService.getPoolDetail('8'),
-        this.dexService.getPoolDetail('12')
-      ]
-    ).subscribe((([dex, poolBtc, poolEth, poolUsdt, poolLtc, poolDoge, poolBch]: [DexInfo, Pool, Pool, Pool, Pool, Pool, Pool]) => {
+        this.dexService.getListpoolpairs()]
+    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
           this.extractPools(dex);
 
-          this.poolBtc.totalLiquidityLpToken = +poolBtc.totalLiquidityLpToken;
+          this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
           this.berechnePoolOutBtc();
 
-          this.poolEth.totalLiquidityLpToken = +poolEth.totalLiquidityLpToken;
+          this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
           this.berechnePoolOutEth();
 
-          this.poolUsdt.totalLiquidityLpToken = +poolUsdt.totalLiquidityLpToken;
+          this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
           this.berechnePoolOutUsdt();
 
-          this.poolLtc.totalLiquidityLpToken = +poolLtc.totalLiquidityLpToken;
+          this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
           this.berechnePoolOutLtc();
 
-          this.poolDoge.totalLiquidityLpToken = +poolDoge.totalLiquidityLpToken;
+          this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
           this.berechnePoolOutDoge();
 
-          this.poolBch.totalLiquidityLpToken = +poolBch.totalLiquidityLpToken;
+          this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
           this.berechnePoolOutBch();
 
           this.berechneStakingOut();
