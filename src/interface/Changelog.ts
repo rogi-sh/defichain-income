@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '2.22.1 - 24.3.2021';
+    this.log.comment = 'replace pool requests, more time for testapi, lib updates, countdown fix';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '2.22.0 - 21.3.2021';
     this.log.comment = 'replace coinpaprika by tradeview widget';
 
