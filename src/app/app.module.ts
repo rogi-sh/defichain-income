@@ -12,18 +12,36 @@ import {CountdownModule} from 'ngx-countdown';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ChangelogComponent } from './changelog/changelog.component';
+import { DexStatisticsComponent } from './dex-statistics/dex-statistics.component';
+import { ApyCalculatorComponent } from './apy-calculator/apy-calculator.component';
+import { LmTargetCalculatorComponent } from './lm-target-calculator/lm-target-calculator.component';
+import { StakingTargetCalculatorComponent } from './staking-target-calculator/staking-target-calculator.component';
+import { IncomeComponent } from './income/income.component';
+import { ValueComponent } from './value/value.component';
+import {MatomoModule} from 'ngx-matomo';
+import { DfiStatisticsComponent } from './dfi-statistics/dfi-statistics.component';
 import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EarningComponent
+    EarningComponent,
+    ChangelogComponent,
+    DexStatisticsComponent,
+    ApyCalculatorComponent,
+    LmTargetCalculatorComponent,
+    StakingTargetCalculatorComponent,
+    IncomeComponent,
+    ValueComponent,
+    DfiStatisticsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
+    MatomoModule,
     MatTabsModule,
     FormsModule,
     NgApexchartsModule,
