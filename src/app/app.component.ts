@@ -119,6 +119,8 @@ export class AppComponent implements OnInit {
   loggedInAuth;
   loggedInAuthInput;
   loggedInKey = 'loggedInKey';
+  errorBackend = null;
+  successBackend = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -232,11 +234,13 @@ export class AppComponent implements OnInit {
         doge: this.wallet.doge,
         ltc: this.wallet.ltc,
         usdt: this.wallet.usdt,
+        bch: this.wallet.bch,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
         usdtdfi: this.wallet.usdtdfi,
         dogedfi: this.wallet.dogedfi,
+        bchdfi: this.wallet.bchdfi,
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
         ethInEthPool: this.wallet.ethInEthPool,
@@ -246,16 +250,26 @@ export class AppComponent implements OnInit {
         ltcInLtcPool: this.wallet.ltcInLtcPool,
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
-        dfiInDogePool: this.wallet.dfiInDogePool
+        dfiInDogePool: this.wallet.dfiInDogePool,
+        bchInBchPool: this.wallet.bchInBchPool,
+        dfiInBchPool: this.wallet.dfiInBchPool
       }
     }).subscribe((result: any) => {
       if (result?.data?.addUser) {
         this.loggedInAuth = result?.data?.addUser?.key;
         this.loggedIn = true;
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+        this.successBackend = 'OK';
+        setInterval(() => {
+          this.successBackend = null;
+        }, 3000);
       }
     }, (error) => {
       console.log('there was an error sending mutation register', error);
+      this.errorBackend = error.message;
+      setInterval(() => {
+        this.errorBackend = null;
+      }, 3000);
     });
 
   }

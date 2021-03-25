@@ -78,12 +78,19 @@
           <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
         </div>
         <br>
+        <br>
         <h2><span class="badge badge-pill badge-secondary left">{{ 'save' | translate }}</span></h2>
         <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
         <p *ngIf="!loggedIn">
           <button (click)="register()" type="button"
                   class="btn margin-col btn-danger">{{ 'register' | translate }}</button>
         </p>
+        <div *ngIf="errorBackend" class="alert alert-danger" role="alert">
+          {{errorBackend}}
+        </div>
+        <div *ngIf="successBackend" class="alert alert-success" role="alert">
+          {{successBackend}}
+        </div>
         <p *ngIf="!loggedIn">{{ 'login2' | translate }}</p>
         <div *ngIf="!loggedIn">
           <div class="form-group">

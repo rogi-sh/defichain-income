@@ -2,9 +2,9 @@ import {gql} from 'apollo-angular';
 
 export const REGISTER = gql`
   mutation ($addresses: [String], $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
-    $usdtdfi: Float, $dfi: Float, $dfiInStaking: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
+    $usdtdfi: Float, $bchdfi: Float, $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float,
-    $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float ){
+    $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float, $bchInBchPool: Float, $dfiInBchPool: Float ){
     addUser (
       user : {
         addresses : $addresses
@@ -14,6 +14,7 @@ export const REGISTER = gql`
           dogedfi: $dogedfi
           ltcdfi: $ltcdfi
           usdtdfi: $usdtdfi
+          bchdfi: $bchdfi
           dfi: $dfi
           dfiInStaking: $dfiInStaking
           btc: $btc
@@ -21,6 +22,7 @@ export const REGISTER = gql`
           doge: $doge
           usdt: $usdt
           ltc: $ltc
+          bch: $bch
           btcInBtcPool: $btcInBtcPool
           dfiInBtcPool: $dfiInBtcPool
           ethInEthPool: $ethInEthPool
@@ -31,14 +33,17 @@ export const REGISTER = gql`
           dfiInLtcPool: $dfiInLtcPool
           dogeInDogePool: $dogeInDogePool
           dfiInDogePool: $dfiInDogePool
+          bchInBchPool: $bchInBchPool
+          dfiInBchPool: $dfiInBchPool
         }
       }
     )
     {id, key, addresses, wallet {
-      dfi, dfiInStaking, btc,eth, doge, usdt, ltc,
-      btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi,
+      dfi, dfiInStaking, btc, bch, eth, doge, usdt, ltc,
+      btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi, bchdfi,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
-      dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool
+      dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
+      bchInBchPool, dfiInBchPool
     }
     }
   }
@@ -94,7 +99,7 @@ export const LOGIN = gql`
     userByKey(key: $key) {
       id, key, addresses, wallet {
         dfi, dfiInStaking, btc,eth, doge, usdt, ltc,
-        btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi,
+        btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi,
         btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
         dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool
       }
