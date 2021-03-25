@@ -150,14 +150,8 @@ export class AppComponent implements OnInit {
 
     if (this.loggedIn) {
       this.loadDataByKey();
-    }
-
-    if (this.autoLoadData) {
-      this.loadAllAccounts();
-      this.loadDex();
     } else {
-      this.loadLocalStorageForManuel();
-      this.loadDexManuel();
+      this.loadAllStuff();
     }
 
     this.countdown?.begin();
@@ -170,6 +164,19 @@ export class AppComponent implements OnInit {
     setInterval(() => {
       this.testApi();
     }, 2000000);
+  }
+
+  private loadAllStuff(): void {
+    if (this.autoLoadData) {
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      // if logged in not necessary because already loaded
+      if (!this.loggedIn) {
+        this.loadLocalStorageForManuel();
+      }
+      this.loadDexManual();
+    }
   }
 
   private loadFromLocalStorage(): void {
@@ -217,7 +224,7 @@ export class AppComponent implements OnInit {
       console.log('Refresh manuel funds ...');
       this.wallet = new Wallet();
       this.loadLocalStorageForManuel();
-      this.loadDexManuel();
+      this.loadDexManual();
     }
     this.countdown?.restart();
   }
@@ -287,11 +294,13 @@ export class AppComponent implements OnInit {
         doge: this.wallet.doge,
         ltc: this.wallet.ltc,
         usdt: this.wallet.usdt,
+        bch: this.wallet.bch,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
         usdtdfi: this.wallet.usdtdfi,
         dogedfi: this.wallet.dogedfi,
+        bchdfi: this.wallet.bchdfi,
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
         ethInEthPool: this.wallet.ethInEthPool,
@@ -340,23 +349,26 @@ export class AppComponent implements OnInit {
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
 
+          this.loadAllStuff();
+
+          this.successBackend = 'Data Loaded!';
+          setInterval(() => {
+            this.successBackend = null;
+          }, 5000);
+
         }
       }, (error) => {
         console.log('there was an error sending the query for login', error);
+        this.errorBackend = error.message;
+        setInterval(() => {
+          this.errorBackend = null;
+        }, 5000);
       });
     }
   }
 
   login(): void {
     this.loadDataByKey();
-
-    if (this.autoLoadData) {
-      this.loadAllAccounts();
-      this.loadDex();
-    } else {
-      this.loadLocalStorageForManuel();
-      this.loadDexManuel();
-    }
   }
 
 
@@ -447,7 +459,6 @@ export class AppComponent implements OnInit {
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
-          localStorage.setItem("walletDex", JSON.stringify(this.wallet));
 
         }
       ),
@@ -473,7 +484,7 @@ export class AppComponent implements OnInit {
     this.poolBch = dex.pools.find(x => x.poolPairId === '12');
   }
 
-  loadDexManuel(): void {
+  loadDexManual(): void {
     this
       .dexService
       .getDex()
@@ -491,7 +502,6 @@ export class AppComponent implements OnInit {
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
-          localStorage.setItem('walletDex', JSON.stringify(this.wallet));
 
         },
         err => {
@@ -501,7 +511,6 @@ export class AppComponent implements OnInit {
 
   loadAllAccounts(): void {
     // Wallet
-    this.wallet = new Wallet();
     for (const ad of this.adresses) {
       this.loadAccountDetails(ad);
     }
@@ -526,21 +535,6 @@ export class AppComponent implements OnInit {
       err => {
         console.error(err);
       });
-  }
-
-
-  private clearWallet(): void {
-    this.wallet.dfi = 0;
-    this.wallet.btc = 0;
-    this.wallet.eth = 0;
-    this.wallet.ltc = 0;
-    this.wallet.doge = 0;
-    this.wallet.usdt = 0;
-    this.wallet.btcdfi = 0;
-    this.wallet.ethdfi = 0;
-    this.wallet.ltcdfi = 0;
-    this.wallet.dogedfi = 0;
-    this.wallet.usdtdfi = 0;
   }
 
   addCoinsToWallet(balance: Balance): void {
@@ -753,7 +747,7 @@ export class AppComponent implements OnInit {
   }
 
   isLocalStorageNotEmpty(key: string): boolean {
-    return localStorage.getItem(key) !== 'null';
+    return localStorage.getItem(key) !== null;
   }
 
   loadLocalStorageForManuel(): void {
@@ -1254,6 +1248,7 @@ export class AppComponent implements OnInit {
     walletFinal.ltcdfi = wallet.ltcdfi;
     walletFinal.dogedfi = wallet.dogedfi;
     walletFinal.usdtdfi = wallet.usdtdfi;
+    walletFinal.bchdfi = wallet.bchdfi;
 
     walletFinal.btcInBtcPool = wallet.btcInBtcPool;
     walletFinal.dfiInBtcPool = wallet.dfiInBtcPool;
@@ -1266,11 +1261,15 @@ export class AppComponent implements OnInit {
     walletFinal.dogeInDogePool = wallet.dogeInDogePool;
     walletFinal.dfiInDogePool = wallet.dfiInDogePool;
 
+    walletFinal.bchInBchPool = wallet.bchInBchPool;
+    walletFinal.dfiInBchPool = wallet.dfiInBchPool;
+
     walletFinal.btc = wallet.btc;
     walletFinal.eth = wallet.eth;
     walletFinal.ltc = wallet.ltc;
     walletFinal.doge = wallet.doge;
     walletFinal.usdt = wallet.usdt;
+    walletFinal.bch = wallet.bch;
 
     return walletFinal;
   }

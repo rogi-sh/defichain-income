@@ -51,9 +51,10 @@ export const REGISTER = gql`
 
 export const UPDATE = gql`
   mutation ($key: String!, $addresses: [String], $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
-    $usdtdfi: Float, $dfi: Float, $dfiInStaking: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
+    $usdtdfi: Float, $bchdfi: Float,  $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float,
-    $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float ){
+    $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float,
+    $bchInBchPool: Float, $dfiInBchPool: Float){
     updateUser (
       user : {
         key: $key
@@ -64,6 +65,7 @@ export const UPDATE = gql`
           dogedfi: $dogedfi
           ltcdfi: $ltcdfi
           usdtdfi: $usdtdfi
+          bchdfi: $bchdfi
           dfi: $dfi
           dfiInStaking: $dfiInStaking
           btc: $btc
@@ -71,6 +73,7 @@ export const UPDATE = gql`
           doge: $doge
           usdt: $usdt
           ltc: $ltc
+          bch: $bch
           btcInBtcPool: $btcInBtcPool
           dfiInBtcPool: $dfiInBtcPool
           ethInEthPool: $ethInEthPool
@@ -81,14 +84,17 @@ export const UPDATE = gql`
           dfiInLtcPool: $dfiInLtcPool
           dogeInDogePool: $dogeInDogePool
           dfiInDogePool: $dfiInDogePool
+          bchInBchPool: $bchInBchPool
+          dfiInBchPool: $dfiInBchPool
         }
       }
     )
     {id, key, addresses, wallet {
-      dfi, dfiInStaking, btc,eth, doge, usdt, ltc,
-      btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi,
+      dfi, dfiInStaking, btc,eth, doge, usdt, ltc, bch
+      btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi, bchdfi,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
-      dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool
+      dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
+      bchInBchPool,dfiInBchPool
     }
     }
   }
@@ -98,10 +104,11 @@ export const LOGIN = gql`
   query ($key: String) {
     userByKey(key: $key) {
       id, key, addresses, wallet {
-        dfi, dfiInStaking, btc,eth, doge, usdt, ltc,
-        btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi,
+        dfi, dfiInStaking, btc,eth, doge, usdt, ltc, bch,
+        btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi, bchdfi,
         btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
-        dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool
+        dfiInUsdtPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
+        bchInBchPool,dfiInBchPool
       }
     }
   }

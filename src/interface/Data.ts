@@ -71,6 +71,7 @@ export interface WalletDto {
   ltcdfi: number;
   dogedfi: number;
   usdtdfi: number;
+  bchdfi: number;
 
   // User Infos
   // BTC Pool

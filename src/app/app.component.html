@@ -102,12 +102,22 @@
         <p *ngIf="loggedIn">
           {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
         </p>
-        <p *ngIf="loggedIn">  <button (click)="logout()" type="button"
-                                      class="btn margin-col btn-danger">Logout</button></p>
-
-        <p *ngIf="loggedIn">  <button (click)="update()" type="button"
-                                      class="btn margin-col btn-success">Update</button></p>
-
+        <div class="row">
+          <div class="col-sm-2 bg-light margin-col">
+            <p *ngIf="loggedIn">
+              <button (click)="logout()" type="button"
+                      class="btn margin-col btn-danger">Logout
+              </button>
+            </p>
+          </div>
+          <div class="col-sm-2 bg-light margin-col">
+            <p *ngIf="loggedIn">
+              <button (click)="update()" type="button"
+                      class="btn margin-col btn-success">Update
+              </button>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -135,9 +145,11 @@
         <h3 class="form-text text-muted">{{ 'address.title2' | translate }}</h3>
         <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span></p>
         <p>  {{ 'address.exc' | translate }} </p>
-        <p><span class="h3 badge badge-secondary left">listaccounts {{'{}'}} false false true</span> <span> ->{{ 'address.exc2' | translate }}</span></p>
+        <p><span class="h3 badge badge-secondary left">listaccounts {{'{}'}} false false true</span>
+          <span> ->{{ 'address.exc2' | translate }}</span></p>
 
-        <p><span class="badge badge-secondary left">listaddressgroupings</span>  <span> ->{{ 'address.exc21' | translate }}</span></p>
+        <p><span class="badge badge-secondary left">listaddressgroupings</span>
+          <span> ->{{ 'address.exc21' | translate }}</span></p>
 
         <p>{{ 'address.exc3' | translate }}</p>
         <div class="row">
