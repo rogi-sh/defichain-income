@@ -79,7 +79,8 @@
         </div>
         <br>
         <br>
-        <h2><span class="badge badge-pill badge-secondary left">{{ 'save' | translate }}</span></h2>
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'save' | translate }}</span> <span class="badge badge-success left">Beta </span></h2>
+        <p></p>
         <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
         <p *ngIf="!loggedIn">
           <button (click)="register()" type="button"
@@ -99,9 +100,9 @@
           </div>
           <button (click)="login()" type="button" class="btn margin-col btn-success">{{ 'login' | translate }}</button>
         </div>
-        <p *ngIf="loggedIn">
+        <h2 *ngIf="loggedIn">
           {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
-        </p>
+        </h2>
         <div class="row">
           <div class="col-sm-2 bg-light margin-col">
             <p *ngIf="loggedIn">

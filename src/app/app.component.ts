@@ -326,6 +326,9 @@ export class AppComponent implements OnInit {
     this.loggedInAuth = '';
     this.loggedIn = false;
     localStorage.removeItem(this.loggedInKey);
+    this.wallet = new Wallet();
+    this.dfiInStaking = 0;
+    this.adresses = [];
   }
 
   loadDataByKey(): void {
@@ -356,6 +359,13 @@ export class AppComponent implements OnInit {
             this.successBackend = null;
           }, 5000);
 
+        } else {
+          console.log('No user found');
+          this.errorBackend = 'No users found';
+          this.logout();
+          setInterval(() => {
+            this.errorBackend = null;
+          }, 5000);
         }
       }, (error) => {
         console.log('there was an error sending the query for login', error);
@@ -1023,7 +1033,8 @@ export class AppComponent implements OnInit {
     this.adresses.push(this.adress);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
-    this.loadAllAccounts();
+    this.clearWallet();
+    this.loadAllStuff();
   }
 
   deleteAdress(adress: string): void {
@@ -1031,10 +1042,17 @@ export class AppComponent implements OnInit {
     if (index > -1) {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
-      this.loadAllAccounts();
+      this.clearWallet();
+      this.loadAllStuff();
     }
 
   }
+
+  clearWallet(): void {
+    let newWallet = new Wallet ();
+    newWallet.dfiInStaking = this.dfiInStaking;
+    this.wallet = newWallet;
+}
 
   // ============= ONCHANGE INPUT =================
   onChangeDfiWallet(): void {
