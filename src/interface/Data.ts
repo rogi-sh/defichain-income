@@ -1,10 +1,12 @@
-import {ApexChart,
+import {
+  ApexChart,
   ApexDataLabels,
   ApexFill,
   ApexLegend,
   ApexNonAxisChartSeries,
   ApexResponsive,
-  ApexStroke, ApexPlotOptions, ApexYAxis, ApexTooltip} from 'ng-apexcharts';
+  ApexStroke, ApexPlotOptions
+} from 'ng-apexcharts';
 import {Outcome} from './Dex';
 
 export class Data {
@@ -59,9 +61,57 @@ export type ChartOptions4 = {
   responsive: ApexResponsive | ApexResponsive[];
 };
 
+export interface WalletDto {
+  dfi: number;
+
+  dfiInStaking: number;
+
+  btcdfi: number;
+  ethdfi: number;
+  ltcdfi: number;
+  dogedfi: number;
+  usdtdfi: number;
+  bchdfi: number;
+
+  // User Infos
+  // BTC Pool
+  btcInBtcPool: number;
+  btc: number;
+  dfiInBtcPool: number;
+
+  // ETH Pool
+  ethInEthPool: number;
+  eth: number;
+  dfiInEthPool: number;
+
+  // USDT Pool
+  usdtInUsdtPool: number;
+  usdt: number;
+  dfiInUsdtPool: number;
+
+  // LTC Pool
+  ltcInLtcPool: number;
+  ltc: number;
+  dfiInLtcPool: number;
+
+  // DOGE Pool
+  dogeInDogePool: number;
+  doge: number;
+  dfiInDogePool: number;
+
+  // BCH Pool
+  bchInBchPool: number;
+  bch: number;
+  dfiInBchPool: number;
+}
+
 export class Wallet {
+
   dfi = 0;
   dfiKey = 'dfiKey';
+
+  dfiInStaking = 0;
+  dfiInStakingKey = 'dfiInStakingKey';
 
   btcdfi = 0;
   bchdfi = 0;
@@ -126,6 +176,8 @@ export class StakingCalc extends Outcome {
   apy = 38;
 }
 
-export class StakingCalcNormal extends Outcome {}
+export class StakingCalcNormal extends Outcome {
+}
 
-export class StakingCalcMN extends Outcome {}
+export class StakingCalcMN extends Outcome {
+}

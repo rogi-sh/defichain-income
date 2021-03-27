@@ -4,7 +4,7 @@ import {
   DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
   PoolUsdtOut
 } from '../interface/Dex';
-import {Balance, Wallet} from '../interface/Data';
+import {Balance, Wallet, WalletDto} from '../interface/Data';
 import {environment} from '../environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
@@ -14,6 +14,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {IncomeComponent} from './income/income.component';
 import {ValueComponent} from './value/value.component';
 import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
+import {Apollo} from 'apollo-angular';
+import {LOGIN, REGISTER, UPDATE} from '../interface/Graphql';
+
 
 @Component({
   selector: 'app-root',
@@ -36,6 +39,7 @@ export class AppComponent implements OnInit {
   env = environment;
 
   wallet: Wallet;
+  walletDTO: WalletDto;
 
   // fixed variables
   dfiProBlockBtc = 80;
@@ -54,14 +58,15 @@ export class AppComponent implements OnInit {
   detailsKey = 'detailsKey';
 
   // Staking infos
-  dfiInStakingKey = 'dfiInStaking';
   dfiInStaking = 0;
+  dfiInStakingKey = 'dfiInStakingKey';
   stakingApy = 37;
   stakingApyCake = 37;
   stakingApyMN = 42.5;
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
+  addressesDto;
   adress = '';
   adressesKey = 'adressesKey';
 
@@ -110,8 +115,15 @@ export class AppComponent implements OnInit {
 
   apiOnline = true;
 
-  constructor(private dexService: Dex, private translate: TranslateService, private matomoInjector: MatomoInjector,
-              private matomoTracker: MatomoTracker) {
+  loggedIn = false;
+  loggedInAuth;
+  loggedInAuthInput;
+  loggedInKey = 'loggedInKey';
+  errorBackend = null;
+  successBackend = null;
+
+  constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
+              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('de');
 
@@ -131,16 +143,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadFromLocalStorage();
 
     this.wallet = new Wallet();
 
-    if (this.autoLoadData) {
-      this.loadAllAccounts();
-      this.loadDex();
+    this.loadFromLocalStorage();
+
+    if (this.loggedIn) {
+      this.loadDataByKey();
     } else {
-      this.loadLocalStorageForManuel();
-      this.loadDexManuel();
+      this.loadAllStuff();
     }
 
     this.countdown?.begin();
@@ -155,7 +166,24 @@ export class AppComponent implements OnInit {
     }, 2000000);
   }
 
+  private loadAllStuff(): void {
+    if (this.autoLoadData) {
+      this.loadAllAccounts();
+      this.loadDex();
+    } else {
+      // if logged in not necessary because already loaded
+      if (!this.loggedIn) {
+        this.loadLocalStorageForManuel();
+      }
+      this.loadDexManual();
+    }
+  }
+
   private loadFromLocalStorage(): void {
+    if (localStorage.getItem(this.loggedInKey) !== null) {
+      this.loggedInAuth = localStorage.getItem(this.loggedInKey);
+      this.loggedIn = true;
+    }
     if (localStorage.getItem(this.fiatKey) !== null) {
       this.fiat = localStorage.getItem(this.fiatKey);
     }
@@ -178,11 +206,9 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.showSettingsAreaKey) !== null) {
       this.showSettingsArea = JSON.parse(localStorage.getItem(this.showSettingsAreaKey));
     }
-    // Staking
+    // Staking special
     if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
       this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
-    } else {
-      this.dfiInStaking = 0;
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
@@ -198,9 +224,161 @@ export class AppComponent implements OnInit {
       console.log('Refresh manuel funds ...');
       this.wallet = new Wallet();
       this.loadLocalStorageForManuel();
-      this.loadDexManuel();
+      this.loadDexManual();
     }
     this.countdown?.restart();
+  }
+
+  register(): void {
+    this.apollo.mutate({
+      mutation: REGISTER,
+      variables: {
+        addresses: this.adresses,
+        dfiInStaking: this.dfiInStaking,
+        dfi: this.wallet.dfi,
+        btc: this.wallet.btc,
+        eth: this.wallet.eth,
+        doge: this.wallet.doge,
+        ltc: this.wallet.ltc,
+        usdt: this.wallet.usdt,
+        bch: this.wallet.bch,
+        btcdfi: this.wallet.btcdfi,
+        ethdfi: this.wallet.ethdfi,
+        ltcdfi: this.wallet.ltcdfi,
+        usdtdfi: this.wallet.usdtdfi,
+        dogedfi: this.wallet.dogedfi,
+        bchdfi: this.wallet.bchdfi,
+        btcInBtcPool: this.wallet.btcInBtcPool,
+        dfiInBtcPool: this.wallet.dfiInBtcPool,
+        ethInEthPool: this.wallet.ethInEthPool,
+        dfiInEthPool: this.wallet.dfiInEthPool,
+        usdtInUsdtPool: this.wallet.usdtInUsdtPool,
+        dfiInUsdtPool: this.wallet.dfiInUsdtPool,
+        ltcInLtcPool: this.wallet.ltcInLtcPool,
+        dfiInLtcPool: this.wallet.dfiInLtcPool,
+        dogeInDogePool: this.wallet.dogeInDogePool,
+        dfiInDogePool: this.wallet.dfiInDogePool,
+        bchInBchPool: this.wallet.bchInBchPool,
+        dfiInBchPool: this.wallet.dfiInBchPool
+      }
+    }).subscribe((result: any) => {
+      if (result?.data?.addUser) {
+        this.loggedInAuth = result?.data?.addUser?.key;
+        this.loggedIn = true;
+        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+        this.successBackend = 'OK';
+        setInterval(() => {
+          this.successBackend = null;
+        }, 3000);
+      }
+    }, (error) => {
+      console.log('there was an error sending mutation register', error);
+      this.errorBackend = error.message;
+      setInterval(() => {
+        this.errorBackend = null;
+      }, 3000);
+    });
+
+  }
+
+  update(): void {
+    this.apollo.mutate({
+      mutation: UPDATE,
+      variables: {
+        key: this.loggedInAuth,
+        addresses: this.adresses,
+        dfiInStaking: this.dfiInStaking,
+        dfi: this.wallet.dfi,
+        btc: this.wallet.btc,
+        eth: this.wallet.eth,
+        doge: this.wallet.doge,
+        ltc: this.wallet.ltc,
+        usdt: this.wallet.usdt,
+        bch: this.wallet.bch,
+        btcdfi: this.wallet.btcdfi,
+        ethdfi: this.wallet.ethdfi,
+        ltcdfi: this.wallet.ltcdfi,
+        usdtdfi: this.wallet.usdtdfi,
+        dogedfi: this.wallet.dogedfi,
+        bchdfi: this.wallet.bchdfi,
+        btcInBtcPool: this.wallet.btcInBtcPool,
+        dfiInBtcPool: this.wallet.dfiInBtcPool,
+        ethInEthPool: this.wallet.ethInEthPool,
+        dfiInEthPool: this.wallet.dfiInEthPool,
+        usdtInUsdtPool: this.wallet.usdtInUsdtPool,
+        dfiInUsdtPool: this.wallet.dfiInUsdtPool,
+        ltcInLtcPool: this.wallet.ltcInLtcPool,
+        dfiInLtcPool: this.wallet.dfiInLtcPool,
+        dogeInDogePool: this.wallet.dogeInDogePool,
+        dfiInDogePool: this.wallet.dfiInDogePool
+      }
+    }).subscribe((result: any) => {
+      if (result?.data?.addUser) {
+        console.log('User Updated!');
+      }
+    }, (error) => {
+      console.log('there was an error sending mutation register', error);
+    });
+
+  }
+
+  logout(): void {
+    this.loggedInAuth = '';
+    this.loggedIn = false;
+    localStorage.removeItem(this.loggedInKey);
+    this.wallet = new Wallet();
+    this.dfiInStaking = 0;
+    this.adresses = [];
+  }
+
+  loadDataByKey(): void {
+    if (this.loggedInAuthInput || this.loggedInAuth) {
+      this.apollo.query({
+        query: LOGIN,
+        variables: {
+          key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
+        }
+      }).subscribe((result: any) => {
+        if (result?.data?.userByKey) {
+          this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
+          this.loggedIn = true;
+          localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+          this.walletDTO = result?.data?.userByKey.wallet;
+          this.dfiInStaking = this.walletDTO.dfiInStaking;
+          if (!this.autoLoadData) {
+            this.wallet = this.copyValues(this.walletDTO);
+          }
+
+          this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
+          this.adresses = this.addressesDto.slice();
+
+          this.loadAllStuff();
+
+          this.successBackend = 'Data Loaded!';
+          setInterval(() => {
+            this.successBackend = null;
+          }, 5000);
+
+        } else {
+          console.log('No user found');
+          this.errorBackend = 'No users found';
+          this.logout();
+          setInterval(() => {
+            this.errorBackend = null;
+          }, 5000);
+        }
+      }, (error) => {
+        console.log('there was an error sending the query for login', error);
+        this.errorBackend = error.message;
+        setInterval(() => {
+          this.errorBackend = null;
+        }, 5000);
+      });
+    }
+  }
+
+  login(): void {
+    this.loadDataByKey();
   }
 
 
@@ -291,6 +469,7 @@ export class AppComponent implements OnInit {
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
+
         }
       ),
       err => {
@@ -315,7 +494,7 @@ export class AppComponent implements OnInit {
     this.poolBch = dex.pools.find(x => x.poolPairId === '12');
   }
 
-  loadDexManuel(): void {
+  loadDexManual(): void {
     this
       .dexService
       .getDex()
@@ -330,10 +509,10 @@ export class AppComponent implements OnInit {
           this.berechnePoolOutBch();
           this.berechnePoolOut();
           this.berechneStakingOut();
-          console.log('PoolBTC' + JSON.stringify(this.poolBtc));
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
+
         },
         err => {
           console.error(err);
@@ -342,7 +521,6 @@ export class AppComponent implements OnInit {
 
   loadAllAccounts(): void {
     // Wallet
-    this.wallet = new Wallet();
     for (const ad of this.adresses) {
       this.loadAccountDetails(ad);
     }
@@ -362,7 +540,7 @@ export class AppComponent implements OnInit {
 
     this.dexService.getAdressBalance(adress).subscribe(
       balance => {
-          this.addCoinsToWallet(balance);
+        this.addCoinsToWallet(balance);
       },
       err => {
         console.error(err);
@@ -579,7 +757,7 @@ export class AppComponent implements OnInit {
   }
 
   isLocalStorageNotEmpty(key: string): boolean {
-    return localStorage.getItem(key) !== 'null';
+    return localStorage.getItem(key) !== null;
   }
 
   loadLocalStorageForManuel(): void {
@@ -855,7 +1033,8 @@ export class AppComponent implements OnInit {
     this.adresses.push(this.adress);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
-    this.loadAllAccounts();
+    this.clearWallet();
+    this.loadAllStuff();
   }
 
   deleteAdress(adress: string): void {
@@ -863,10 +1042,17 @@ export class AppComponent implements OnInit {
     if (index > -1) {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
-      this.loadAllAccounts();
+      this.clearWallet();
+      this.loadAllStuff();
     }
 
   }
+
+  clearWallet(): void {
+    let newWallet = new Wallet ();
+    newWallet.dfiInStaking = this.dfiInStaking;
+    this.wallet = newWallet;
+}
 
   // ============= ONCHANGE INPUT =================
   onChangeDfiWallet(): void {
@@ -1067,6 +1253,43 @@ export class AppComponent implements OnInit {
 
   checkInputNumber(value: number): boolean {
     return value !== null && value >= 0;
+  }
+
+
+  copyValues(wallet: WalletDto): Wallet {
+    const walletFinal = new Wallet();
+    walletFinal.dfiInStaking = wallet.dfiInStaking;
+    walletFinal.dfi = wallet.dfi;
+
+    walletFinal.btcdfi = wallet.btcdfi;
+    walletFinal.ethdfi = wallet.ethdfi;
+    walletFinal.ltcdfi = wallet.ltcdfi;
+    walletFinal.dogedfi = wallet.dogedfi;
+    walletFinal.usdtdfi = wallet.usdtdfi;
+    walletFinal.bchdfi = wallet.bchdfi;
+
+    walletFinal.btcInBtcPool = wallet.btcInBtcPool;
+    walletFinal.dfiInBtcPool = wallet.dfiInBtcPool;
+    walletFinal.ethInEthPool = wallet.ethInEthPool;
+    walletFinal.dfiInEthPool = wallet.dfiInEthPool;
+    walletFinal.usdtInUsdtPool = wallet.usdtInUsdtPool;
+    walletFinal.dfiInUsdtPool = wallet.dfiInUsdtPool;
+    walletFinal.ltcInLtcPool = wallet.ltcInLtcPool;
+    walletFinal.dfiInLtcPool = wallet.dfiInLtcPool;
+    walletFinal.dogeInDogePool = wallet.dogeInDogePool;
+    walletFinal.dfiInDogePool = wallet.dfiInDogePool;
+
+    walletFinal.bchInBchPool = wallet.bchInBchPool;
+    walletFinal.dfiInBchPool = wallet.dfiInBchPool;
+
+    walletFinal.btc = wallet.btc;
+    walletFinal.eth = wallet.eth;
+    walletFinal.ltc = wallet.ltc;
+    walletFinal.doge = wallet.doge;
+    walletFinal.usdt = wallet.usdt;
+    walletFinal.bch = wallet.bch;
+
+    return walletFinal;
   }
 
 }

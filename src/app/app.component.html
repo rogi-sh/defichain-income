@@ -77,6 +77,48 @@
           <button (click)="onChangeFiat('CHF')" type="button" class="btn margin-col btn-danger">CHF</button>
           <button (click)="onChangeFiat('GBP')" type="button" class="btn margin-col btn-danger">GBP</button>
         </div>
+        <br>
+        <br>
+        <h2><span class="badge badge-pill badge-secondary left">{{ 'save' | translate }}</span> <span class="badge badge-success left">Beta </span></h2>
+        <p></p>
+        <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
+        <p *ngIf="!loggedIn">
+          <button (click)="register()" type="button"
+                  class="btn margin-col btn-danger">{{ 'register' | translate }}</button>
+        </p>
+        <div *ngIf="errorBackend" class="alert alert-danger" role="alert">
+          {{errorBackend}}
+        </div>
+        <div *ngIf="successBackend" class="alert alert-success" role="alert">
+          {{successBackend}}
+        </div>
+        <p *ngIf="!loggedIn">{{ 'login2' | translate }}</p>
+        <div *ngIf="!loggedIn">
+          <div class="form-group">
+            <input [(ngModel)]="loggedInAuthInput" type="text" class="form-control form-control-sm">
+            <small class="form-text text-muted">{{ 'login21' | translate }}</small>
+          </div>
+          <button (click)="login()" type="button" class="btn margin-col btn-success">{{ 'login' | translate }}</button>
+        </div>
+        <h2 *ngIf="loggedIn">
+          {{ 'login3' | translate }} <span class="badge badge-pill badge-primary left">{{loggedInAuth}}</span>
+        </h2>
+        <div class="row">
+          <div class="col-sm-2 bg-light margin-col">
+            <p *ngIf="loggedIn">
+              <button (click)="logout()" type="button"
+                      class="btn margin-col btn-danger">Logout
+              </button>
+            </p>
+          </div>
+          <div class="col-sm-2 bg-light margin-col">
+            <p *ngIf="loggedIn">
+              <button (click)="update()" type="button"
+                      class="btn margin-col btn-success">Update
+              </button>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -104,9 +146,11 @@
         <h3 class="form-text text-muted">{{ 'address.title2' | translate }}</h3>
         <p><span class="font-weight-bold">{{ 'address.imp' | translate }}</span></p>
         <p>  {{ 'address.exc' | translate }} </p>
-        <p><span class="h3 badge badge-secondary left">listaccounts {{'{}'}} false false true</span> <span> ->{{ 'address.exc2' | translate }}</span></p>
+        <p><span class="h3 badge badge-secondary left">listaccounts {{'{}'}} false false true</span>
+          <span> ->{{ 'address.exc2' | translate }}</span></p>
 
-        <p><span class="badge badge-secondary left">listaddressgroupings</span>  <span> ->{{ 'address.exc21' | translate }}</span></p>
+        <p><span class="badge badge-secondary left">listaddressgroupings</span>
+          <span> ->{{ 'address.exc21' | translate }}</span></p>
 
         <p>{{ 'address.exc3' | translate }}</p>
         <div class="row">

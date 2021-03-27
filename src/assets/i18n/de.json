@@ -21,8 +21,16 @@
   "showInput1": "Zeige Eingabe oder Adressen meiner Bestände an",
   "stats": "Statistiken",
   "price": "Preis",
+  "save": "Login ",
+  "login": "Login",
+  "register": "Registrieren",
+  "loginExplain": "Log dich ein um deine Eingaben nur einmal eigeben zu müssen. Für die Registrierung musst du keine Daten Logindaten eingebe. Du bekommst deinen Privaten Auth Key und speicherst diesen ab. Das ist dein Schlüssel für den Login auf allen anderen Geräten. Deine bis dahin eingegebenen Daten und Addressen werden alle übernommen. Danach bist du automatisch eingeloggt. Mit dem Auth Key kannst du deine Daten dann auf anderen Geräten direkt abrufen. Falls deine Bestände sich ändern, bitte speichere es ab mit Klick auf Update",
+  "login2": "Hast du bereits einen Auth Key?",
+  "login21": "Trage hier deinen Auth Key ein",
+  "login3": "Eingeloggt mit Auth Key:",
   "stakingOnCake": "Mit welchem APY stakest Du?",
   "stakingOnCake2": "Bspw. Cake 37% / MN 42.5% / Freezer 38+",
+
   "address": {
     "label": "Adresse",
     "title": "Deine Adressen",

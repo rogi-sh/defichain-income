@@ -19,9 +19,17 @@
   "load5": "Toggle to use automatically load your funds.",
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
-  "price": "Price",
+  "price": "price",
+  "save": "Login ",
+  "login": "Login",
+  "register": "Register",
+  "loginExplain": "Log in to enter your data only once. For registration you don't have to enter any login data. You get your private auth key and save it. This is your key for login on all other devices. All the data and addresses you have entered so far will be saved. After that you are automatically logged in. With the Auth Key you can access your data directly on other devices. If your data changes, please save it by clicking Update.",
+  "login2": "Do you already have an Auth Key?",
+  "login21": "Enter your Auth Key here",
+  "login3": "Logged in with Auth Key:",
   "stakingOnCake": "What is your APY for staking?",
   "stakingOnCake2": "E.g. Cake 37% / MN 42.5%  / Freezer 38+",
+
   "address": {
     "label": "address",
     "title": "Your dfi addresses",

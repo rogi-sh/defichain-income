@@ -21,6 +21,7 @@ import { IncomeComponent } from './income/income.component';
 import { ValueComponent } from './value/value.component';
 import {MatomoModule} from 'ngx-matomo';
 import { DfiStatisticsComponent } from './dfi-statistics/dfi-statistics.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { DfiStatisticsComponent } from './dfi-statistics/dfi-statistics.componen
         deps: [HttpClient],
       },
     }),
+    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
