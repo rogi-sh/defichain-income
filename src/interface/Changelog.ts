@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.0.01 - 27.3.2021';
+    this.log.comment = 'fix refresh';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.0.0 - 27.3.2021';
     this.log.comment = 'Login functionality';
 

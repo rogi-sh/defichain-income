@@ -216,14 +216,17 @@ export class AppComponent implements OnInit {
   }
 
   private refresh(): void {
+    this.clearWallet();
     if (this.autoLoadData) {
       console.log('Refresh autofunds ...');
       this.loadAllAccounts();
       this.loadDex();
     } else {
       console.log('Refresh manuel funds ...');
-      this.wallet = new Wallet();
-      this.loadLocalStorageForManuel();
+      // if logged in not necessary because already loaded
+      if (!this.loggedIn) {
+        this.loadLocalStorageForManuel();
+      }
       this.loadDexManual();
     }
     this.countdown?.restart();
