@@ -450,7 +450,6 @@ export class AppComponent implements OnInit {
   }
 
   loadDex(): void {
-
     forkJoin([
         this.dexService.getDex(),
         this.dexService.getListpoolpairs()]
@@ -534,12 +533,11 @@ export class AppComponent implements OnInit {
   async loadAllAccounts(): Promise<void> {
     // Wallet
     for (const ad of this.adresses) {
-      this.loadAccountDetails(ad);
+      await this.loadAccountDetails(ad);
     }
-
   }
 
-  loadAccountDetails(adress: string): void {
+  async loadAccountDetails(adress: string): Promise<void> {
     this.dexService.getAdressDetail(adress).subscribe(
       balances => {
         for (const b of balances) {

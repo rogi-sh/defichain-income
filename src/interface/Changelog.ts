@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.1.0 - 27.3.2021';
+    this.log.comment = 'shortcuts, waut for load addresses';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.0.4 - 27.3.2021';
     this.log.comment = 'fix reload malfunction';
 

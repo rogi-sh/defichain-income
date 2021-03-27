@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <div class="col-sm bg-light margin-col">
-      <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
+      <h1><span class="badge badge-secondary left"> Shortcuts</span></h1>
       <div class="custom-control custom-switch">
         <input [(ngModel)]="showSettingsArea" (ngModelChange)="saveToggleSettingsLoad()" type="checkbox"
                class="custom-control-input" id="settingsSwitch">
@@ -27,7 +27,23 @@
         <label *ngIf="!showSettingsArea" class="custom-control-label"
                for="settingsSwitch">{{ 'settings2' | translate }}</label>
       </div>
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleInputShow()" type="checkbox"
+               class="custom-control-input" id="customSwitch2">
+        <label class="custom-control-label"
+               for="customSwitch2">{{ 'showInput1' | translate }} </label>
+      </div>
+      <div class="custom-control custom-switch">
+        <input [(ngModel)]="autoLoadData" (ngModelChange)="saveToggleAutoLoad()" type="checkbox"
+               class="custom-control-input" id="customSwitch1">
+        <label *ngIf="autoLoadData" class="custom-control-label"
+               for="customSwitch1">{{ 'load4' | translate }} </label>
+        <label *ngIf="!autoLoadData" class="custom-control-label"
+               for="customSwitch1">{{ 'load5' | translate }}</label>
+      </div>
+
       <div *ngIf="showSettingsArea">
+        <h1><span class="badge badge-secondary left"> {{ 'setting' | translate }}</span></h1>
         <h2><span class="badge badge-pill badge-secondary left">{{ 'lang' | translate }}</span></h2>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <button (click)="useLanguage('de')" type="button" class="btn margin-col btn-danger">DE</button>
@@ -55,20 +71,8 @@
         <h2><span class="badge badge-pill badge-secondary left">{{ 'load1' | translate }}</span></h2>
         <p><span class="badge badge-pill badge-dark left">ON</span> -> {{ 'load2' | translate }}</p>
         <p><span class="badge badge-pill badge-dark left">OFF</span> -> {{ 'load3' | translate }}</p>
-        <div class="custom-control custom-switch">
-          <input [(ngModel)]="autoLoadData" (ngModelChange)="saveToggleAutoLoad()" type="checkbox"
-                 class="custom-control-input" id="customSwitch1">
-          <label *ngIf="autoLoadData" class="custom-control-label"
-                 for="customSwitch1">{{ 'load4' | translate }} </label>
-          <label *ngIf="!autoLoadData" class="custom-control-label"
-                 for="customSwitch1">{{ 'load5' | translate }}</label>
-        </div>
-        <div class="custom-control custom-switch">
-          <input [(ngModel)]="showInputArea" (ngModelChange)="saveToggleInputShow()" type="checkbox"
-                 class="custom-control-input" id="customSwitch2">
-          <label class="custom-control-label"
-                 for="customSwitch2">{{ 'showInput1' | translate }} </label>
-        </div>
+
+
         <br>
         <h2><span class="badge badge-pill badge-secondary left">{{ 'value.cur' | translate }}</span></h2>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
