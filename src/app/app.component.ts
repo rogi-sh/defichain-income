@@ -318,9 +318,17 @@ export class AppComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.addUser) {
         console.log('User Updated!');
+        this.successBackend = 'User updated';
+        setInterval(() => {
+          this.successBackend = null;
+        }, 3000);
       }
     }, (error) => {
       console.log('there was an error sending mutation register', error);
+      this.errorBackend = error.message;
+      setInterval(() => {
+        this.errorBackend = null;
+      }, 3000);
     });
 
   }
