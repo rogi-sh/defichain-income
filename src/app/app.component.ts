@@ -215,11 +215,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private refresh(): void {
+  async refresh(): Promise<void> {
     this.clearWallet();
     if (this.autoLoadData) {
       console.log('Refresh autofunds ...');
-      this.loadAllAccounts();
+      await this.loadAllAccounts();
       this.loadDex();
     } else {
       console.log('Refresh manuel funds ...');
