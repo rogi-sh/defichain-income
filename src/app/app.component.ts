@@ -401,6 +401,7 @@ export class AppComponent implements OnInit {
     this.timer = setInterval(() => {
       this.refresh();
     }, this.sCountdown * 1000);
+    window.location.reload();
   }
 
   saveToggleAutoLoad(): void {
