@@ -142,7 +142,7 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     this.wallet = new Wallet();
 
@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
     if (this.loggedIn) {
       this.loadDataByKey();
     } else {
-      this.loadAllStuff();
+      await this.loadAllStuff();
     }
 
     this.countdown?.begin();
@@ -166,9 +166,9 @@ export class AppComponent implements OnInit {
     }, 2000000);
   }
 
-  private loadAllStuff(): void {
+  async loadAllStuff(): Promise<void> {
     if (this.autoLoadData) {
-      this.loadAllAccounts();
+      await this.loadAllAccounts();
       this.loadDex();
     } else {
       // if logged in not necessary because already loaded
@@ -316,19 +316,19 @@ export class AppComponent implements OnInit {
         dfiInDogePool: this.wallet.dfiInDogePool
       }
     }).subscribe((result: any) => {
-      if (result?.data?.addUser) {
+      if (result?.data?.updateUser) {
         console.log('User Updated!');
         this.successBackend = 'User updated';
         setInterval(() => {
           this.successBackend = null;
-        }, 3000);
+        }, 5000);
       }
     }, (error) => {
       console.log('there was an error sending mutation register', error);
       this.errorBackend = error.message;
       setInterval(() => {
         this.errorBackend = null;
-      }, 3000);
+      }, 5000);
     });
 
   }
@@ -349,7 +349,7 @@ export class AppComponent implements OnInit {
         variables: {
           key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
         }
-      }).subscribe((result: any) => {
+      }).subscribe(async (result: any) => {
         if (result?.data?.userByKey) {
           this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
           this.loggedIn = true;
@@ -363,7 +363,7 @@ export class AppComponent implements OnInit {
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
 
-          this.loadAllStuff();
+          await this.loadAllStuff();
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {
@@ -530,7 +530,7 @@ export class AppComponent implements OnInit {
         });
   }
 
-  loadAllAccounts(): void {
+  async loadAllAccounts(): Promise<void> {
     // Wallet
     for (const ad of this.adresses) {
       this.loadAccountDetails(ad);
@@ -1060,7 +1060,7 @@ export class AppComponent implements OnInit {
   }
 
   clearWallet(): void {
-    let newWallet = new Wallet ();
+    const newWallet = new Wallet ();
     newWallet.dfiInStaking = this.dfiInStaking;
     this.wallet = newWallet;
 }

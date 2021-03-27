@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.0.3 - 27.3.2021';
+    this.log.comment = 'wait for load accounts';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.0.2 - 27.3.2021';
     this.log.comment = 'user message if update data';
 
