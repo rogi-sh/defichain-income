@@ -130,7 +130,6 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
-    console.log('browser ' + browserLang);
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
 
     // setze matomo URL
@@ -221,10 +220,8 @@ export class AppComponent implements OnInit {
     this.clearWallet();
     this.dataLoaded = false;
     if (this.autoLoadData) {
-      console.log('Refresh auto funds ...');
       this.loadAllAccounts();
     } else {
-      console.log('Refresh manuel funds ...');
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
@@ -353,7 +350,7 @@ export class AppComponent implements OnInit {
         variables: {
           key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
         }
-      }).subscribe(async (result: any) => {
+      }).subscribe((result: any) => {
         if (result?.data?.userByKey) {
           this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
           this.loggedIn = true;
@@ -367,7 +364,7 @@ export class AppComponent implements OnInit {
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
 
-          await this.loadAddressesAndDexData();
+          this.loadAddressesAndDexData();
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {
@@ -540,7 +537,6 @@ export class AppComponent implements OnInit {
     }
 
     forkJoin(requestArray).subscribe(results => {
-        console.log('results' + JSON.stringify(results));
         results.forEach((value, i) => {
           if (i % 2 === 0) {
             const balances = value as [string];
@@ -550,7 +546,6 @@ export class AppComponent implements OnInit {
           }
         });
 
-        console.log('ready with addresses');
         this.loadDex();
 
       },
@@ -562,31 +557,6 @@ export class AppComponent implements OnInit {
           },
           5000);
 
-      });
-
-    console.log('loadAllAccounts ready');
-  }
-
-  async loadAccountDetails(adress: string): Promise<void> {
-
-    this.dexService.getAdressDetail(adress).subscribe(
-      balances => {
-        for (const b of balances) {
-          this.addTokensToWallet(b);
-        }
-        console.log('getAdressDetail ready' + adress);
-      },
-      err => {
-        console.error(err);
-      });
-
-    this.dexService.getAdressBalance(adress).subscribe(
-      balance => {
-        this.addCoinsToWallet(balance);
-        console.log('getAdressBalance ready ' + adress);
-      },
-      err => {
-        console.error(err);
       });
   }
 
