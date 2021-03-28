@@ -455,12 +455,12 @@
 <div class="container left">
   <div class="row">
     <div *ngIf="wallet && poolBtc" class="col-sm bg-light margin-col">
-      <app-value [poolBtc]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
+      <app-value *ngIf="dataLoaded" [poolBtc]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
                  [poolEth]="poolEth" [poolUsdt]="poolUsdt" [poolLtc]="poolLtc" [poolDoge]="poolDoge" [poolBch]="poolBch"
                  [dfiInStaking]="dfiInStaking" [wallet]="wallet"></app-value>
     </div>
     <div class="col-sm bg-light margin-col">
-      <app-income *ngIf="poolBtc && poolBtcOut && poolOut" [poolBtc]="poolBtc" [fiat]="fiat"
+      <app-income *ngIf="dataLoaded" [poolBtc]="poolBtc" [fiat]="fiat"
                   [usdToEur]="usdToEur" [usdToChf]="usdToChf" [usdToGbp]="usdToGbp"
                   [poolBchOut]="poolBchOut" [poolBtcOut]="poolBtcOut" [poolDogeOut]="poolDogeOut"
                   [poolEthOut]="poolEthOut"

@@ -122,6 +122,8 @@ export class AppComponent implements OnInit {
   errorBackend = null;
   successBackend = null;
 
+  dataLoaded = false;
+
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
     translate.addLangs(['en', 'de']);
@@ -217,6 +219,7 @@ export class AppComponent implements OnInit {
 
   async refresh(): Promise<void> {
     this.clearWallet();
+    this.dataLoaded = false;
     if (this.autoLoadData) {
       console.log('Refresh autofunds ...');
       await this.loadAllAccounts();
@@ -477,9 +480,7 @@ export class AppComponent implements OnInit {
           this.berechneStakingOut();
           this.berechnePoolOut();
 
-          this.buildDataForChart();
-          this.buildDataForChartValue();
-          this.buildDataForChartIncome();
+          this.dataLoaded = true;
 
         }
       ),
@@ -523,10 +524,15 @@ export class AppComponent implements OnInit {
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
-
+          this.dataLoaded = true;
         },
         err => {
           console.error(err);
+          setTimeout(() => {
+              this.loadDexManual();
+              console.error('Try again ...');
+            },
+            5000);
         });
   }
 
