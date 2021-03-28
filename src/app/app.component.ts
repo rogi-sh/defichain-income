@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
   showInputArea = true;
   showInputAreaKey = 'showInputAreaKey';
 
-  showSettingsArea = false;
+  showSettingsArea = true;
   showSettingsAreaKey = 'showSettingsAreaKey';
 
   apiOnline = true;
@@ -171,13 +171,17 @@ export class AppComponent implements OnInit {
   async loadAllStuff(): Promise<void> {
     if (this.autoLoadData) {
       await this.loadAllAccounts();
-      this.loadDex();
+      await this.loadDex();
+      this.dataLoaded = true;
+      console.log("Data loaded");
     } else {
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
       }
       this.loadDexManual();
+      this.dataLoaded = true;
+      console.log("Data loaded");
     }
   }
 
@@ -223,7 +227,9 @@ export class AppComponent implements OnInit {
     if (this.autoLoadData) {
       console.log('Refresh autofunds ...');
       await this.loadAllAccounts();
-      this.loadDex();
+      await this.loadDex();
+      this.dataLoaded = true;
+      console.log("Data loaded");
     } else {
       console.log('Refresh manuel funds ...');
       // if logged in not necessary because already loaded
@@ -231,6 +237,8 @@ export class AppComponent implements OnInit {
         this.loadLocalStorageForManuel();
       }
       this.loadDexManual();
+      this.dataLoaded = true;
+      console.log("Data loaded");
     }
     this.countdown?.restart();
   }
@@ -346,6 +354,7 @@ export class AppComponent implements OnInit {
   }
 
   loadDataByKey(): void {
+
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
         query: LOGIN,
@@ -392,6 +401,7 @@ export class AppComponent implements OnInit {
   }
 
   login(): void {
+    this.dataLoaded = false;
     this.loadDataByKey();
   }
 
@@ -452,7 +462,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  loadDex(): void {
+  async loadDex(): Promise<void> {
     forkJoin([
         this.dexService.getDex(),
         this.dexService.getListpoolpairs()]
@@ -479,8 +489,6 @@ export class AppComponent implements OnInit {
 
           this.berechneStakingOut();
           this.berechnePoolOut();
-
-          this.dataLoaded = true;
 
         }
       ),
@@ -524,7 +532,6 @@ export class AppComponent implements OnInit {
           this.buildDataForChart();
           this.buildDataForChartValue();
           this.buildDataForChartIncome();
-          this.dataLoaded = true;
         },
         err => {
           console.error(err);

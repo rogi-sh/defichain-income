@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.1.2 - 28.3.2021';
+    this.log.comment = 'add onchanges event for charts childs components, settings per dfault on';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.1.1 - 28.3.2021';
     this.log.comment = 'render charts only after data loaded';
 
