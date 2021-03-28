@@ -144,16 +144,16 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
 
     if (this.loggedIn) {
-      this.loadDataByKey();
+      this.loadDataFromServerAndLoadAllStuff();
     } else {
-      await this.loadAllStuff();
+      this.loadAddressesAndDexData();
     }
 
     this.countdown?.begin();
@@ -168,12 +168,9 @@ export class AppComponent implements OnInit {
     }, 2000000);
   }
 
-  async loadAllStuff(): Promise<void> {
+  loadAddressesAndDexData(): void {
     if (this.autoLoadData) {
-      await this.loadAllAccounts();
-      await this.loadDex();
-      this.dataLoaded = true;
-      console.log("Data loaded");
+      this.loadAllAccounts();
     } else {
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
@@ -181,7 +178,6 @@ export class AppComponent implements OnInit {
       }
       this.loadDexManual();
       this.dataLoaded = true;
-      console.log("Data loaded");
     }
   }
 
@@ -221,15 +217,12 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async refresh(): Promise<void> {
+  refresh(): void {
     this.clearWallet();
     this.dataLoaded = false;
     if (this.autoLoadData) {
-      console.log('Refresh autofunds ...');
-      await this.loadAllAccounts();
-      await this.loadDex();
-      this.dataLoaded = true;
-      console.log("Data loaded");
+      console.log('Refresh auto funds ...');
+      this.loadAllAccounts();
     } else {
       console.log('Refresh manuel funds ...');
       // if logged in not necessary because already loaded
@@ -237,8 +230,7 @@ export class AppComponent implements OnInit {
         this.loadLocalStorageForManuel();
       }
       this.loadDexManual();
-      this.dataLoaded = true;
-      console.log("Data loaded");
+
     }
     this.countdown?.restart();
   }
@@ -353,7 +345,7 @@ export class AppComponent implements OnInit {
     this.adresses = [];
   }
 
-  loadDataByKey(): void {
+  loadDataFromServerAndLoadAllStuff(): void {
 
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
@@ -375,7 +367,7 @@ export class AppComponent implements OnInit {
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
 
-          await this.loadAllStuff();
+          await this.loadAddressesAndDexData();
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {
@@ -383,7 +375,6 @@ export class AppComponent implements OnInit {
           }, 5000);
 
         } else {
-          console.log('No user found');
           this.errorBackend = 'No users found';
           this.logout();
           setInterval(() => {
@@ -391,7 +382,6 @@ export class AppComponent implements OnInit {
           }, 5000);
         }
       }, (error) => {
-        console.log('there was an error sending the query for login', error);
         this.errorBackend = error.message;
         setInterval(() => {
           this.errorBackend = null;
@@ -402,7 +392,7 @@ export class AppComponent implements OnInit {
 
   login(): void {
     this.dataLoaded = false;
-    this.loadDataByKey();
+    this.loadDataFromServerAndLoadAllStuff();
   }
 
 
@@ -462,7 +452,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  async loadDex(): Promise<void> {
+  loadDex(): void {
     forkJoin([
         this.dexService.getDex(),
         this.dexService.getListpoolpairs()]
@@ -489,6 +479,7 @@ export class AppComponent implements OnInit {
 
           this.berechneStakingOut();
           this.berechnePoolOut();
+          this.dataLoaded = true;
 
         }
       ),
@@ -529,9 +520,7 @@ export class AppComponent implements OnInit {
           this.berechnePoolOutBch();
           this.berechnePoolOut();
           this.berechneStakingOut();
-          this.buildDataForChart();
-          this.buildDataForChartValue();
-          this.buildDataForChartIncome();
+          this.dataLoaded = true;
         },
         err => {
           console.error(err);
@@ -543,19 +532,49 @@ export class AppComponent implements OnInit {
         });
   }
 
-  async loadAllAccounts(): Promise<void> {
-    // Wallet
+  loadAllAccounts(): void {
+    const requestArray = [];
     for (const ad of this.adresses) {
-      await this.loadAccountDetails(ad);
+      requestArray.push( this.dexService.getAdressDetail(ad));
+      requestArray.push( this.dexService.getAdressBalance(ad));
     }
+
+    forkJoin(requestArray).subscribe(results => {
+        console.log('results' + JSON.stringify(results));
+        results.forEach((value, i) => {
+          if (i % 2 === 0) {
+            const balances = value as [string];
+            balances.forEach(value2 => this.addTokensToWallet(value2));
+          } else {
+            this.addCoinsToWallet(value as Balance);
+          }
+        });
+
+        console.log('ready with addresses');
+        this.loadDex();
+
+      },
+      err => {
+        console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
+        setTimeout(() => {
+            this.loadDex();
+            console.error('Try again ...');
+          },
+          5000);
+
+      });
+
+    console.log('loadAllAccounts ready');
   }
 
   async loadAccountDetails(adress: string): Promise<void> {
+
     this.dexService.getAdressDetail(adress).subscribe(
       balances => {
         for (const b of balances) {
           this.addTokensToWallet(b);
         }
+        console.log('getAdressDetail ready' + adress);
       },
       err => {
         console.error(err);
@@ -564,6 +583,7 @@ export class AppComponent implements OnInit {
     this.dexService.getAdressBalance(adress).subscribe(
       balance => {
         this.addCoinsToWallet(balance);
+        console.log('getAdressBalance ready ' + adress);
       },
       err => {
         console.error(err);
@@ -1057,7 +1077,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();
-    this.loadAllStuff();
+    this.loadAddressesAndDexData();
   }
 
   deleteAdress(adress: string): void {
@@ -1066,7 +1086,7 @@ export class AppComponent implements OnInit {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
       this.clearWallet();
-      this.loadAllStuff();
+      this.loadAddressesAndDexData();
     }
 
   }

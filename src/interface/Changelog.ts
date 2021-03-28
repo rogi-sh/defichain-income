@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.2.0 - 29.3.2021';
+    this.log.comment = 'bulletproof loading of addresses and dex';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.1.2 - 28.3.2021';
     this.log.comment = 'add onchanges event for charts childs components, settings per dfault on';
 
