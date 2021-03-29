@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Pool} from '../../interface/Dex';
-import {ChartOptions, ChartOptions3, Data, Wallet} from '../../interface/Data';
+import {Pool} from '../../../interface/Dex';
+import {ChartOptions, ChartOptions3, Data, Wallet} from '../../../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
 
 @Component({

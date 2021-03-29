@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from '../../environments/environment';
-import {Changelog} from '../../interface/Changelog';
+import {environment} from '../../../environments/environment';
+import {Changelog} from '../../../interface/Changelog';
 
 @Component({
   selector: 'app-changelog',

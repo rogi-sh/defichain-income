@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal} from '../../interface/Data';
+import {ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal} from '../../../interface/Data';
 import {ChartComponent} from 'ng-apexcharts';
-import {Pool} from '../../interface/Dex';
+import {Pool} from '../../../interface/Dex';
 
 @Component({
   selector: 'app-apy-calculator',

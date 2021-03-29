@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
-import {ChartOptions2} from '../../interface/Data';
-import {Outcome, OutcomeStaking, Pool} from '../../interface/Dex';
+import {ChartOptions2} from '../../../interface/Data';
+import {Outcome, OutcomeStaking, Pool} from '../../../interface/Dex';
 
 @Component({
   selector: 'app-income',

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pool} from '../../interface/Dex';
+import {Pool} from '../../../interface/Dex';
 
 @Component({
   selector: 'app-lm-target-calculator',
