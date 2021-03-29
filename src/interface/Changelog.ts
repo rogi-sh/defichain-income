@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.2.1 - 29.3.2021';
+    this.log.comment = 'clear wallet only when autoload of funds from addresses';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.2.0 - 29.3.2021';
     this.log.comment = 'bulletproof loading of addresses and dex';
 

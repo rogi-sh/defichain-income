@@ -217,9 +217,10 @@ export class AppComponent implements OnInit {
   }
 
   refresh(): void {
-    this.clearWallet();
     this.dataLoaded = false;
     if (this.autoLoadData) {
+      // only clear when not manual
+      this.clearWallet();
       this.loadAllAccounts();
     } else {
       // if logged in not necessary because already loaded
@@ -451,8 +452,8 @@ export class AppComponent implements OnInit {
 
   loadDex(): void {
     forkJoin([
-        this.dexService.getDex(),
-        this.dexService.getListpoolpairs()]
+      this.dexService.getDex(),
+      this.dexService.getListpoolpairs()]
     ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
           this.extractPools(dex);
 
@@ -532,8 +533,8 @@ export class AppComponent implements OnInit {
   loadAllAccounts(): void {
     const requestArray = [];
     for (const ad of this.adresses) {
-      requestArray.push( this.dexService.getAdressDetail(ad));
-      requestArray.push( this.dexService.getAdressBalance(ad));
+      requestArray.push(this.dexService.getAdressDetail(ad));
+      requestArray.push(this.dexService.getAdressBalance(ad));
     }
 
     forkJoin(requestArray).subscribe(results => {
@@ -1062,10 +1063,10 @@ export class AppComponent implements OnInit {
   }
 
   clearWallet(): void {
-    const newWallet = new Wallet ();
+    const newWallet = new Wallet();
     newWallet.dfiInStaking = this.dfiInStaking;
     this.wallet = newWallet;
-}
+  }
 
   // ============= ONCHANGE INPUT =================
   onChangeDfiWallet(): void {

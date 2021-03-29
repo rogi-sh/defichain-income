@@ -9,7 +9,7 @@ export const environment = {
   listpoolpairs: 'https://api.defichain.io/v1/listpoolpairs',
   accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
-  version: '3.2.0',
+  version: '3.2.1',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
