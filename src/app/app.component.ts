@@ -431,22 +431,18 @@ export class AppComponent implements OnInit {
 
   testApi(): void {
 
-    forkJoin([
-        this.dexService.getDex(),
-        this.dexService.getPoolDetail('5'),
-        this.dexService.getListpoolpairs(),
-        this.dexService.getAdressDetail('dQTQr6Zr9rvcDi5s7jWhKjjsqDXhHsu16U')
-      ]
-    ).subscribe((([dex, poolBtc, poolpairs, dsts]: [DexInfo, Pool, DexPoolPair, [string]]) => {
-          this.apiOnline = true;
+    this.dexService
+      .getHealthCheck()
+      .subscribe(ok => {
+          if ('OK' === ok) {
+            this.apiOnline = true;
+          }
+        },
+        err => {
+          console.error('Api down?' + err.message);
+          this.apiOnline = false;
 
-        }
-      ),
-      err => {
-        console.error('Api down?');
-        this.apiOnline = false;
-
-      });
+        });
 
   }
 

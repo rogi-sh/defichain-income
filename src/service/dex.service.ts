@@ -28,6 +28,16 @@ export class Dex {
     return this.http.get<[string]>(environment.accountDetails + address);
   }
 
+  public getHealthCheck(): Observable<any>  {
+    // tslint:disable-next-line:ban-types
+    const requestOptions: Object = {
+      /* other options here */
+      responseType: 'text'
+    };
+
+    return this.http.get<any>(environment.health, requestOptions);
+  }
+
   public getAdressBalance(address: string): Observable<Balance>  {
     const url = environment.balance.replace('SET-ADDRESS', address);
     return this.http.get<Balance>(url);

@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.2.2 - 31.3.2021';
+    this.log.comment = 'correct health check api, fix getacount api call';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.2.1 - 29.3.2021';
     this.log.comment = 'clear wallet only when autoload of funds from addresses';
 
