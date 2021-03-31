@@ -1,9 +1,3 @@
-.margin-col {
-  margin-top: 10px;
-  margin-right: 5px;
+.dashboard-height {
+  height: calc(100vh - 6rem);
 }
-
-.left {
-  margin-left: 5px;
-}
-

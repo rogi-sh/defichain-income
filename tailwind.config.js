@@ -7,10 +7,16 @@ module.exports = {
   },
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '97%': '97%',
+      }
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      textColor: ['active, focus, hover'],
+    },
   },
   plugins: [],
 };

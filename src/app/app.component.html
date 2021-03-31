@@ -1,27 +1,128 @@
-<div class="h-screen bg-gray-200">
-  <header class="h-24 py-3 px-2 flex">
+<div class="h-screen max-h-screen bg-gray-100">
+  <header
+    class="h-12 py-1 px-2 justify-center flex sm:h-24 sm:py-3 sm:justify-start"
+  >
+    <div class="absolute left-2 flex">
+      <object
+        type="image/svg+xml"
+        data="../assets/icons/menu.svg"
+        class="sm:hidden"
+      ></object>
+    </div>
+
     <a routerLink="/" class="w-28">
-      <img src="../assets/img/Defi-income.svg" class="h-full" alt="DefiChain-Income Logo">
+      <img
+        src="../assets/img/Defi-income.svg"
+        class="h-full"
+        alt="DefiChain-Income Logo"
+      />
     </a>
-    <div class="ml-4 h-full py-3 text-sm">
-      <strong>
-        Login with key:
-      </strong>
-      <div>
-        b50d33cc-5986-4f8f-9300-85c7051fe249
-      </div>
+    <div class="hidden sm:inline ml-4 h-full py-3 text-sm">
+      <strong> Login with key: </strong>
+      <div>b50d33cc-5986-4f8f-9300-85c7051fe249</div>
     </div>
   </header>
-  <div class="flex items-stretch">
-    <div class="transition duration-300 ease-in-out transform sm:w-24 bg-red-100 text-center">
-      <div class="flex flex-col">
-        <a routerLink="/dashboard" [routerLinkActive]="['text-pink-500']">Dashboard</a>
-        <a routerLink="/holdings" [routerLinkActive]="['text-pink-500']">Holdings</a>
+  <div class="flex items-stretch dashboard-height">
+    <div
+      class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24"
+    >
+      <div class="flex flex-col text-center h-full relative">
+        <a
+          routerLink="/dashboard"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/home.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <a
+          routerLink="/holdings"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/doughnut-chart.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <a
+          routerLink="/holdings"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/income.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <a
+          routerLink="/holdings"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/line-chart-outlined.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <a
+          routerLink="/holdings"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/bar-chart-outlined.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <a
+          routerLink="/holdings"
+          [routerLinkActive]="['text-pink-500']"
+          class="hover:text-pink-400 py-3"
+        >
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/calculator.svg"
+            class="mx-auto"
+          ></object>
+        </a>
+        <div
+          class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full"
+        >
+          <a
+            routerLink="/holdings"
+            [routerLinkActive]="['text-pink-500']"
+            class="hover:text-pink-400 my-2"
+          >
+            <object
+              type="image/svg+xml"
+              data="../assets/icons/info-circle-filled.svg"
+              class="mx-auto"
+            ></object>
+          </a>
+          <a
+            routerLink="/holdings"
+            [routerLinkActive]="['text-pink-500']"
+            class="hover:text-pink-400 my-2"
+          >
+            <object
+              type="image/svg+xml"
+              data="../assets/icons/settings.svg"
+              class="mx-auto"
+            ></object>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="flex-1 items-center px-4">
-      <div class="w-full rounded-xl px-4 py-2 bg-white mx-auto">
-        <h1 class="font-bold">Bestände</h1>
+    <div class="flex-1 items-center px-2 sm:pr-4">
+      <div class="w-full h-97% rounded-xl p-4 bg-white mx-auto mb-5">
         <router-outlet></router-outlet>
       </div>
     </div>
