@@ -1,3 +1,5 @@
-.dashboard-height {
-  height: calc(100vh - 6rem);
+@media (min-width: 640px) {
+  .dashboard-height {
+    height: calc(100vh - 6rem);
+  }
 }

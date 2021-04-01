@@ -121,6 +121,7 @@ export class AppComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
+  menu = false;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -340,6 +341,10 @@ export class AppComponent implements OnInit {
     this.wallet = new Wallet();
     this.dfiInStaking = 0;
     this.adresses = [];
+  }
+
+  toggleMenu(): void {
+    this.menu = !this.menu;
   }
 
   loadDataByKey(): void {

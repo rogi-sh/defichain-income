@@ -1,12 +1,15 @@
-<div class="h-screen max-h-screen bg-gray-100">
+<div class="h-screen sm:max-h-screen bg-gray-100">
   <header
     class="h-12 py-1 px-2 justify-center flex sm:h-24 sm:py-3 sm:justify-start"
   >
-    <div class="absolute left-2 flex">
+    <div
+      class="sm:hidden absolute left-2 flex cursor-pointer"
+      ng-click="toggleMenu()"
+    >
       <object
         type="image/svg+xml"
         data="../assets/icons/menu.svg"
-        class="sm:hidden"
+        class="cursor-pointer"
       ></object>
     </div>
 
@@ -18,10 +21,58 @@
       />
     </a>
     <div class="hidden sm:inline ml-4 h-full py-3 text-sm">
-      <strong> Login with key: </strong>
+      <strong>Login with key: </strong>
       <div>b50d33cc-5986-4f8f-9300-85c7051fe249</div>
     </div>
+
+    <div class="absolute right-4 self-center">
+      <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
+      Online
+    </div>
   </header>
+
+
+  <div class="sm:hidden w-full h-screen z-50 fixed inset-0 bg-gray-100" *ngIf="menu">
+    <a
+      routerLink="/"
+      class="absolute w-28 mt-1 left-1/2 transform -translate-x-1/2"
+    >
+      <img src="../assets/img/Defi-income.svg" alt="DefiChain-Income Logo" />
+    </a>
+    <div class="absolute right-5 top-5 z-10">
+      <object
+        type="image/svg+xml"
+        data="../assets/icons/close.svg"
+        class="cursor-pointer"
+      ></object>
+    </div>
+
+    <div class="mt-20 mx-8">
+      <a
+        routerLink="/dashboard"
+        [routerLinkActive]="['text-pink-500']"
+        class="hover:text-pink-400 py-3 flex"
+      >
+        <object class="w-10" type="image/svg+xml" data="../assets/icons/home.svg"></object>
+        <div class="inline self-center ml-2 text-xl">
+          Dashboard
+        </div>
+      </a>
+
+      <a
+        routerLink="/holdings"
+        [routerLinkActive]="['text-pink-500']"
+        class="hover:text-pink-400 py-3 flex"
+      >
+        <object class="w-10" type="image/svg+xml" data="../assets/icons/doughnut-chart.svg"></object>
+        <div class="inline self-center ml-2 text-xl">
+          Holdings
+        </div>
+      </a>
+
+    </div>
+  </div>
+
   <div class="flex items-stretch dashboard-height">
     <div
       class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24"
@@ -121,8 +172,8 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 items-center px-2 sm:pr-4">
-      <div class="w-full h-97% rounded-xl p-4 bg-white mx-auto mb-5">
+    <div class="flex-1 items-center px-2 mt-2 sm:mt-0 sm:pr-4">
+      <div class="w-full sm:h-97% rounded-xl p-4 bg-white mx-auto sm:mb-5">
         <router-outlet></router-outlet>
       </div>
     </div>
