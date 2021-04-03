@@ -1,3 +1,29 @@
-<div class="">
-  I am Holdings
+<div>
+  <h1 class="text-3xl">Bestände</h1>
+  <div
+    class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2"
+  >
+    <div>
+      <h2 class="text-lg">Distribution of holdings</h2>
+      <div *ngIf="wallet && poolBtc">
+        <app-value
+          [poolBtc]="poolBtc"
+          [fiat]="fiat"
+          [usdToEur]="usdToEur"
+          [usdToChf]="usdToChf"
+          [usdToGbp]="usdToGbp"
+          [poolEth]="poolEth"
+          [poolUsdt]="poolUsdt"
+          [poolLtc]="poolLtc"
+          [poolDoge]="poolDoge"
+          [poolBch]="poolBch"
+          [dfiInStaking]="dfiInStaking"
+          [wallet]="wallet"
+        ></app-value>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-lg">Value of holdings</h2>
+    </div>
+  </div>
 </div>

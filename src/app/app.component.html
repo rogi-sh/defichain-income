@@ -1,22 +1,22 @@
-<div class="h-screen sm:max-h-screen bg-gray-100">
+<div class="h-screen sm:max-h-screen bg-gray-100" xmlns="http://www.w3.org/1999/html">
   <header
     class="h-12 py-1 px-2 justify-center flex sm:h-24 sm:py-3 sm:justify-start"
   >
-    <div
+    <a
       class="sm:hidden absolute left-2 flex cursor-pointer"
-      ng-click="toggleMenu()"
+      (click)="toggleMenu()"
     >
       <object
         type="image/svg+xml"
         data="../assets/icons/menu.svg"
-        class="cursor-pointer"
+        class="pointer-events-none"
       ></object>
-    </div>
+    </a>
 
     <a routerLink="/" class="w-28">
       <img
         src="../assets/img/Defi-income.svg"
-        class="h-full"
+        class="h-full mx-auto"
         alt="DefiChain-Income Logo"
       />
     </a>
@@ -25,25 +25,34 @@
       <div>b50d33cc-5986-4f8f-9300-85c7051fe249</div>
     </div>
 
-    <div class="absolute right-4 self-center">
+    <div class="absolute right-4 self-center" *ngIf="apiOnline">
       <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
       Online
+    </div>
+
+    <div class="absolute right-4 self-center" *ngIf="!apiOnline">
+      <div class="inline-block rounded bg-red-600 h-2 w-2"></div>
+      Offline
     </div>
   </header>
 
 
-  <div class="sm:hidden w-full h-screen z-50 fixed inset-0 bg-gray-100" *ngIf="menu">
+  <div 
+    class="fixed top-0 h-full sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100"
+    [ngClass]="menu ? 'w-full' : ''"
+    *ngIf="menu"
+  >
     <a
       routerLink="/"
-      class="absolute w-28 mt-1 left-1/2 transform -translate-x-1/2"
+      class="absolute w-28 h-12 mt-1 left-1/2 transform -translate-x-1/2"
     >
-      <img src="../assets/img/Defi-income.svg" alt="DefiChain-Income Logo" />
+      <img src="../assets/img/Defi-income.svg" alt="DefiChain-Income Logo" class="mx-auto" />
     </a>
-    <div class="absolute right-5 top-5 z-10">
+    <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="toggleMenu()">
       <object
         type="image/svg+xml"
         data="../assets/icons/close.svg"
-        class="cursor-pointer"
+        class="pointer-events-none"
       ></object>
     </div>
 
@@ -86,7 +95,7 @@
           <object
             type="image/svg+xml"
             data="../assets/icons/home.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <a
@@ -97,7 +106,7 @@
           <object
             type="image/svg+xml"
             data="../assets/icons/doughnut-chart.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <a
@@ -108,29 +117,29 @@
           <object
             type="image/svg+xml"
             data="../assets/icons/income.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <a
-          routerLink="/holdings"
+          routerLink="/dex"
           [routerLinkActive]="['text-pink-500']"
           class="hover:text-pink-400 py-3"
         >
           <object
             type="image/svg+xml"
             data="../assets/icons/line-chart-outlined.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <a
-          routerLink="/holdings"
+          routerLink="/defi"
           [routerLinkActive]="['text-pink-500']"
           class="hover:text-pink-400 py-3"
         >
           <object
             type="image/svg+xml"
             data="../assets/icons/bar-chart-outlined.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <a
@@ -141,7 +150,7 @@
           <object
             type="image/svg+xml"
             data="../assets/icons/calculator.svg"
-            class="mx-auto"
+            class="mx-auto pointer-events-none"
           ></object>
         </a>
         <div
@@ -155,7 +164,7 @@
             <object
               type="image/svg+xml"
               data="../assets/icons/info-circle-filled.svg"
-              class="mx-auto"
+              class="mx-auto pointer-events-none"
             ></object>
           </a>
           <a
@@ -166,14 +175,14 @@
             <object
               type="image/svg+xml"
               data="../assets/icons/settings.svg"
-              class="mx-auto"
+              class="mx-auto pointer-events-none"
             ></object>
           </a>
         </div>
       </div>
     </div>
-    <div class="flex-1 items-center px-2 mt-2 sm:mt-0 sm:pr-4">
-      <div class="w-full sm:h-97% rounded-xl p-4 bg-white mx-auto sm:mb-5">
+    <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
+      <div class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl p-3 bg-white mx-auto sm:mb-5">
         <router-outlet></router-outlet>
       </div>
     </div>

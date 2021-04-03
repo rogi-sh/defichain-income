@@ -1,26 +1,38 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Dex} from '../../../service/dex.service';
-import {
-  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
-  PoolUsdtOut
-} from '../../../interface/Dex';
-import {Balance, Wallet, WalletDto} from '../../../interface/Data';
-import {environment} from '../../../environments/environment';
 import {forkJoin} from 'rxjs';
+import {Apollo} from 'apollo-angular';
 import {CountdownComponent} from 'ngx-countdown';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
+
+import {IncomeComponent} from '@components/income/income.component';
+import {ValueComponent} from '@components/value/value.component';
+import {Dex} from '@services/dex.service';
+import {
+  DexInfo,
+  DexPoolPair,
+  Outcome,
+  OutcomeStaking,
+  Pool,
+  PoolBchOut,
+  PoolBtcOut,
+  PoolDogeOut,
+  PoolEthOut,
+  PoolLtcOut,
+  PoolUsdtOut
+} from '@interfaces/Dex';
+import {Balance, Wallet, WalletDto} from '@interfaces/Data';
+import {environment} from '@environments/environment';
+import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
+
 // @ts-ignore
 import Timer = NodeJS.Timer;
-import {TranslateService} from '@ngx-translate/core';
-import {IncomeComponent} from '../../components/income/income.component';
-import {ValueComponent} from '../../components/value/value.component';
-import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
-import {Apollo} from 'apollo-angular';
-import {LOGIN, REGISTER, UPDATE} from '../../../interface/Graphql';
 
 @Component({
-  templateUrl: './holdings.component.html',
+  selector: 'app-dex-page',
+  templateUrl: './dex.component.html'
 })
-export class HoldingsComponent implements OnInit {
+export class DexComponent implements OnInit {
 
   @ViewChild('cd', {static: false})
   private countdown: CountdownComponent;
@@ -118,7 +130,6 @@ export class HoldingsComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
-  menu = false;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -338,11 +349,6 @@ export class HoldingsComponent implements OnInit {
     this.wallet = new Wallet();
     this.dfiInStaking = 0;
     this.adresses = [];
-  }
-
-  toggleMenu(): void {
-    console.log(123);
-    this.menu = !this.menu;
   }
 
   loadDataByKey(): void {
@@ -1305,4 +1311,5 @@ export class HoldingsComponent implements OnInit {
 
     return walletFinal;
   }
+
 }

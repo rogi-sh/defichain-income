@@ -1,21 +1,21 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Dex} from '../../../service/dex.service';
+import {Dex} from '@services/dex.service';
 import {
   DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
   PoolUsdtOut
-} from '../../../interface/Dex';
-import {Balance, Wallet, WalletDto} from '../../../interface/Data';
-import {environment} from '../../../environments/environment';
+} from '@interfaces/Dex';
+import {Balance, Wallet, WalletDto} from '@interfaces/Data';
+import {environment} from '@environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
-import {IncomeComponent} from '../../components/income/income.component';
-import {ValueComponent} from '../../components/value/value.component';
+import {IncomeComponent} from '@components/income/income.component';
+import {ValueComponent} from '@components/value/value.component';
 import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
 import {Apollo} from 'apollo-angular';
-import {LOGIN, REGISTER, UPDATE} from '../../../interface/Graphql';
+import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 
 
 @Component({
