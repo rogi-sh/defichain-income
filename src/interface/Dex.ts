@@ -19,7 +19,8 @@ export interface Pool {
   name: string;
   pair: string;
   logo: string;
-  poolRewards: string [];
+  customRewards: string [];
+  rewardPct: number;
   pairLink: string;
   apy: number;
   idTokenA: string;
@@ -36,6 +37,23 @@ export interface Pool {
   priceB: number;
   totalLiquidityLpToken: number;
   totalLiquidity: number;
+}
+
+export interface Stats {
+  blockHeight: number;
+  rewards: Rewards;
+}
+
+export interface Rewards {
+    anchorPercent: number;
+    liquidityPoolPercent: number;
+    communityPercent: number;
+    total: number;
+    community: number;
+    minter: number;
+    anchorReward: number;
+    liquidityPool: number;
+
 }
 
 

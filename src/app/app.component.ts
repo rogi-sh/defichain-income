@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '../service/dex.service';
 import {
   DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
-  PoolUsdtOut
+  PoolUsdtOut, Stats
 } from '../interface/Dex';
 import {Balance, Wallet, WalletDto} from '../interface/Data';
 import {environment} from '../environments/environment';
@@ -48,6 +48,8 @@ export class AppComponent implements OnInit {
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
   dfiProBlockBch = 1;
+  rewards: Stats;
+
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;
@@ -143,11 +145,21 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
+
+    this.testApi();
+    setInterval(() => {
+      this.testApi();
+    }, 2000000);
+
+    this.getRewards();
+    setInterval(() => {
+      this.getRewards();
+    }, 3600000);
 
     if (this.loggedIn) {
       this.loadDataFromServerAndLoadAllStuff();
@@ -160,11 +172,6 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
-    this.testApi();
-
-    setInterval(() => {
-      this.testApi();
-    }, 2000000);
   }
 
   loadAddressesAndDexData(): void {
@@ -446,9 +453,26 @@ export class AppComponent implements OnInit {
 
   }
 
+  getRewards(): void {
+    this.dexService.getStats().subscribe(
+      dex => {
+        this.rewards = dex;
+        this.computeRewardsPerBlockInPools();
+
+      },
+      err => {
+        console.error(err);
+        setTimeout(() => {
+            this.getRewards();
+            console.error('Try again ...');
+          },
+          5000);
+      });
+  }
+
   loadDex(): void {
     forkJoin([
-      this.dexService.getDex(),
+      this.dexService.getListyieldfarming(),
       this.dexService.getListpoolpairs()]
     ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
           this.extractPools(dex);
@@ -499,10 +523,41 @@ export class AppComponent implements OnInit {
     this.poolBch = dex.pools.find(x => x.poolPairId === '12');
   }
 
+  private computeRewardsPerBlockInPools(): void {
+
+    this.dfiProBlockBtc = this.poolBtc.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockBtc += this.getCustomRewards(this.poolBtc.customRewards);
+
+    this.dfiProBlockEth = this.poolEth.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockEth += this.getCustomRewards(this.poolEth.customRewards);
+
+    this.dfiProBlockLtc = this.poolLtc.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockLtc += this.getCustomRewards(this.poolLtc.customRewards);
+
+    this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockUsdt += this.getCustomRewards(this.poolUsdt.customRewards);
+
+    this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockDoge += this.getCustomRewards(this.poolDoge.customRewards);
+
+    this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
+
+  }
+
+  private getCustomRewards(rewards: string []): number {
+      let reward = 0;
+      rewards.forEach(r => {
+        reward += +r.split('@') [0];
+      });
+
+      return reward;
+  }
+
   loadDexManual(): void {
     this
       .dexService
-      .getDex()
+      .getListyieldfarming()
       .subscribe(
         dex => {
           this.extractPools(dex);
