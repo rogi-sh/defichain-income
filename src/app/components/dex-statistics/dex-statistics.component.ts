@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DexInfo, Pool} from '@interfaces/Dex';
+import {DexInfo, Outcome, Pool, Rewards, Stats} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -49,6 +49,9 @@ export class DexStatisticsComponent implements OnInit {
 
   @Input()
   stakingApyCake: number;
+
+  @Input()
+  rewards: Stats;
 
   constructor() { }
 

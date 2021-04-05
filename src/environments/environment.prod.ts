@@ -1,11 +1,13 @@
 export const environment = {
   production: true,
-  dex: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
+  listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   listpoolpairs: 'https://api.defichain.io/v1/listpoolpairs',
-  accountDetails: 'https://api.defichain.io/v1/getaccount?owner=',
+  accountDetails: 'https://api.defichain.io/v1/getaccount?start=0&including_start=true&owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
-  version: '3.0.3',
+  health: 'https://api.defichain.io/ok',
+  stats: 'https://api.defichain.io/v1/stats',
+  version: '3.3.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

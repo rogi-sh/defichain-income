@@ -13,6 +13,69 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.3.0 - 5.4.2021';
+    this.log.comment = 'rewards from api, show rewards';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.2.3 - 1.4.2021';
+    this.log.comment = 'account api fix';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.2.2 - 31.3.2021';
+    this.log.comment = 'correct health check api, fix getacount api call';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.2.1 - 29.3.2021';
+    this.log.comment = 'clear wallet only when autoload of funds from addresses';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.2.0 - 29.3.2021';
+    this.log.comment = 'bulletproof loading of addresses and listyieldfarming';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.1.2 - 28.3.2021';
+    this.log.comment = 'add onchanges event for charts childs components, settings per dfault on';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.1.1 - 28.3.2021';
+    this.log.comment = 'render charts only after data loaded';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.1.0 - 27.3.2021';
+    this.log.comment = 'shortcuts, waut for load addresses';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.0.4 - 27.3.2021';
+    this.log.comment = 'fix reload malfunction';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.0.3 - 27.3.2021';
     this.log.comment = 'wait for load accounts';
 
@@ -226,7 +289,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '2.2.3 - 25.2.2021';
-    this.log.comment = 'Wait 5 s before try again load dex ';
+    this.log.comment = 'Wait 5 s before try again load listyieldfarming ';
 
     this.logs.push(this.log);
 

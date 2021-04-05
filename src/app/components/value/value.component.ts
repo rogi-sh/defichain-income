@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Pool} from '../../../interface/Dex';
-import {ChartOptions, ChartOptions3, Data, Wallet} from '../../../interface/Data';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Pool} from '@interfaces/Dex';
+import {ChartOptions, ChartOptions3, Data, Wallet} from '@interfaces/Data';
 import {ChartComponent} from 'ng-apexcharts';
 
 @Component({
@@ -8,7 +8,7 @@ import {ChartComponent} from 'ng-apexcharts';
   templateUrl: './value.component.html',
   styleUrls: ['./value.component.css']
 })
-export class ValueComponent implements OnInit {
+export class ValueComponent implements OnInit, OnChanges {
 
   @ViewChild('chart3') chart3: ChartComponent;
   public chartOptions3: Partial<ChartOptions3>;
@@ -17,48 +17,52 @@ export class ValueComponent implements OnInit {
   public chartOptions: Partial<ChartOptions>;
 
   @Input()
-  wallet: Wallet;
+  wallet!: Wallet;
 
   @Input()
-  dfiInStaking: number;
+  dfiInStaking!: number;
 
   @Input()
-  usdToEur: number;
+  usdToEur!: number;
 
   @Input()
-  usdToChf: number;
+  usdToChf!: number;
 
   @Input()
-  usdToGbp: number;
+  usdToGbp!: number;
 
   @Input()
-  fiat: string;
+  fiat!: string;
 
   @Input()
-  poolBtc: Pool;
+  poolBtc!: Pool;
 
   @Input()
-  poolEth: Pool;
+  poolEth!: Pool;
 
   @Input()
-  poolUsdt: Pool;
+  poolUsdt!: Pool;
 
   @Input()
-  poolLtc: Pool;
+  poolLtc!: Pool;
 
   @Input()
-  poolDoge: Pool;
+  poolDoge!: Pool;
 
   @Input()
-  poolBch: Pool;
+  poolBch!: Pool;
 
   constructor() { }
 
   ngOnInit(): void {
-
     this.buildDataForChart();
     this.buildDataForChartValue();
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.buildDataForChart();
+    this.buildDataForChartValue();
   }
 
   getAnteilWalletOfAllValue(): number {

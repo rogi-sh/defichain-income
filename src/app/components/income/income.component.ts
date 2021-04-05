@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
 import {ChartOptions2} from '../../../interface/Data';
 import {Outcome, OutcomeStaking, Pool} from '../../../interface/Dex';
@@ -8,53 +8,57 @@ import {Outcome, OutcomeStaking, Pool} from '../../../interface/Dex';
   templateUrl: './income.component.html',
   styleUrls: ['./income.component.css']
 })
-export class IncomeComponent implements OnInit {
+export class IncomeComponent implements OnInit, OnChanges {
 
   @ViewChild('chart2') chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;
 
   @Input()
-  stakingOut: OutcomeStaking;
+  stakingOut!: OutcomeStaking;
 
   @Input()
-  poolOut: Outcome;
+  poolOut!: Outcome;
 
   @Input()
-  poolBtcOut: Outcome;
+  poolBtcOut!: Outcome;
 
   @Input()
-  poolEthOut: Outcome;
+  poolEthOut!: Outcome;
 
   @Input()
-  poolUsdtOut: Outcome;
+  poolUsdtOut!: Outcome;
 
   @Input()
-  poolLtcOut: Outcome;
+  poolLtcOut!: Outcome;
 
   @Input()
-  poolBchOut: Outcome;
+  poolBchOut!: Outcome;
 
   @Input()
-  poolDogeOut: Outcome;
+  poolDogeOut!: Outcome;
 
   @Input()
-  poolBtc: Pool;
+  poolBtc!: Pool;
 
   @Input()
-  usdToEur: number;
+  usdToEur!: number;
 
   @Input()
-  usdToChf: number;
+  usdToChf!: number;
 
   @Input()
-  usdToGbp: number;
+  usdToGbp!: number;
 
   @Input()
-  fiat: string;
+  fiat!: string;
 
-  constructor() { }
+  constructor()  { }
 
   ngOnInit(): void {
+    this.buildDataForChartIncome();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.buildDataForChartIncome();
   }
 

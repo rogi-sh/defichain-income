@@ -1,7 +1,7 @@
 import {Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {DexInfo, DexPoolPair, Pool} from '../interface/Dex';
+import {DexInfo, DexPoolPair, Stats} from '../interface/Dex';
 import {Observable} from 'rxjs';
 import {Balance} from '../interface/Data';
 
@@ -12,12 +12,12 @@ export class Dex {
 
   constructor(private http: HttpClient) {  }
 
-  public getDex(): Observable<DexInfo> {
-    return this.http.get<DexInfo>(environment.dex);
+  public getListyieldfarming(): Observable<DexInfo> {
+    return this.http.get<DexInfo>(environment.listyieldfarming);
   }
 
-  public getPoolDetail(id: string): Observable<Pool>  {
-    return this.http.get<Pool>(environment.poolDetails + id);
+  public getStats(): Observable<Stats>  {
+    return this.http.get<Stats>(environment.stats);
   }
 
   public getListpoolpairs(): Observable<DexPoolPair>  {
@@ -26,6 +26,16 @@ export class Dex {
 
   public getAdressDetail(address: string): Observable<[string]>  {
     return this.http.get<[string]>(environment.accountDetails + address);
+  }
+
+  public getHealthCheck(): Observable<any>  {
+    // tslint:disable-next-line:ban-types
+    const requestOptions: Object = {
+      /* other options here */
+      responseType: 'text'
+    };
+
+    return this.http.get<any>(environment.health, requestOptions);
   }
 
   public getAdressBalance(address: string): Observable<Balance>  {
