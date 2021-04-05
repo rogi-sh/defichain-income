@@ -1,70 +1,100 @@
-<div class="row">
-  <div class="col-sm-4 bg-light margin-col">
-    <h2><span class="badge badge-pill badge-success left">{{ 'income.calc' | translate }}</span></h2>
-    <p>{{ 'income.calcText' | translate }}</p>
-    <div class="form-group">
-      <label for="stakingCalcOur">DFI Amount</label>
-      <input required [(ngModel)]="stakingCalcOut.dfiAmount" (ngModelChange)="calcStakingOutCome()"
-             type="number"
-             class="form-control form-control-sm" id="stakingCalcOur">
+<div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 select-none mt-4">
+  <div class="pr-4 lg:border-r-2">
+    <p class="mb-4">{{ 'income.calcText' | translate }}</p>
+    <div class="flex w-full flex-wrap">
+      <div class="w-full sm:w-1/2 sm:pr-2">
+        <label class="block text-sm font-semibold" for="stakingCalcOur">
+          DFI Amount
+        </label>
+        <input
+          required
+          [(ngModel)]="stakingCalcOut.dfiAmount"
+          (ngModelChange)="calcStakingOutCome()"
+          type="number"
+          class="bg-gray-100 p-2 rounded-md w-full"
+          id="stakingCalcOur"
+        >
+      </div>
+  
+      <div class="w-full sm:w-1/2 sm:pr-2">
+        <label class="block text-sm font-semibold" for="stakingCalcOutApy">
+          APY
+        </label>
+        <input 
+        required
+        [(ngModel)]="stakingCalcOut.apy"
+        (ngModelChange)="calcStakingOutCome()"
+        type="number"
+        class="bg-gray-100 p-2 rounded-md w-full"
+        id="stakingCalcOutApy"
+      >
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="stakingCalcOutApy">APY</label>
-      <input required [(ngModel)]="stakingCalcOut.apy" (ngModelChange)="calcStakingOutCome()"
-             type="number"
-             class="form-control form-control-sm" id="stakingCalcOutApy">
-    </div>
-
-    <h3>{{ 'balance' | translate }} in Fiat<span class="badge badge-pill badge-primary left">
-          <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency:'USD'}} </span>
-          <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency:'EUR'}}</span>
-          <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency:'CHF'}}</span>
-          <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span></h3>
-
-    <app-earning [out]="stakingCalcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
-                 [usdToGbp]="usdToGbp"></app-earning>
   </div>
-  <div class="col-sm bg-light margin-col">
-    <h2><span class="badge badge-pill badge-success left">{{ 'income.calcVis' | translate }}</span></h2>
-    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMin, stakingCalcMN.dfiPerMin, stakingCalcOut.dfiPerMin)"
-        type="button" class="btn margin-col btn-danger">MIN
-      </button>
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerHour, stakingCalcMN.dfiPerHour, stakingCalcOut.dfiPerHour)"
-        type="button" class="btn margin-col btn-danger">HOUR
-      </button>
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerDay, stakingCalcMN.dfiPerDay, stakingCalcOut.dfiPerDay)"
-        type="button" class="btn margin-col btn-danger">DAY
-      </button>
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerWeek, stakingCalcMN.dfiPerWeek, stakingCalcOut.dfiPerWeek)"
-        type="button" class="btn margin-col btn-danger">WEEK
-      </button>
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerMonth, stakingCalcMN.dfiPerMonth, stakingCalcOut.dfiPerMonth)"
-        type="button" class="btn margin-col btn-danger">MONTH
-      </button>
-      <button
-        (click)="buildDataForChartCalcStaking(stakingCalcNormal.dfiPerYear, stakingCalcMN.dfiPerYear, stakingCalcOut.dfiPerYear)"
-        type="button" class="btn margin-col btn-danger">YEAR
-      </button>
-    </div>
+
+  <div class="lg:pl-4">
+    <select
+      class="bg-gray-100 px-3 py-2 rounded-md w-40"
+      (change)="buildDataForChartCalcStaking($event.target.value)"
+    >
+      <option value="Min">
+        Min
+      </option>
+      <option value="Hour">
+        Hour
+      </option>
+      <option value="Day">
+        Day
+      </option>
+      <option value="Week">
+        Week
+      </option>
+      <option value="Month" selected="selected">
+        Month
+      </option>
+      <option value="Year">
+        Year
+      </option>
+    </select>
+
     <div id="chart4">
-      <apx-chart *ngIf="chartOptions4"
-                 [series]="chartOptions4?.series"
-                 [chart]="chartOptions4?.chart"
-                 [plotOptions]="chartOptions4?.plotOptions"
-                 [labels]="chartOptions4?.labels"
-                 [legend]="chartOptions4?.legend"
-                 [colors]="chartOptions4?.colors"
-                 [responsive]="chartOptions4?.responsive"
+      <apx-chart 
+        *ngIf="chartOptions4"
+        [series]="chartOptions4?.series"
+        [chart]="chartOptions4?.chart"
+        [plotOptions]="chartOptions4?.plotOptions"
+        [labels]="chartOptions4?.labels"
+        [legend]="chartOptions4?.legend"
+        [colors]="chartOptions4?.colors"
+        [responsive]="chartOptions4?.responsive"
       ></apx-chart>
     </div>
 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 bg-light margin-col">
+
+
+    <h3>
+      {{ 'balance' | translate }} in Fiat
+      <span class="badge badge-pill badge-primary left">
+        <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency:'GBP'}}</span>
+      </span>
+    </h3>
+
+    <app-earning
+      [out]="stakingCalcOut"
+      [pool]="poolBtc"
+      [fiat]="fiat"
+      [usdToEur]="usdToEur"
+      [usdToChf]="usdToChf"
+      [usdToGbp]="usdToGbp"
+    >
+    </app-earning>
   </div>
 </div>

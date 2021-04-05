@@ -1,12 +1,16 @@
 <div>
-  <div class="row my-2">
-    <div class="col-auto margin-col">
+  <div class="flex my-2">
+    <div class="mr-4">
       Staking Cake
-      <span class="badge badge-pill badge-dark"> {{this.stakingApyCake | number: '1.1-1' }}% APY</span>
+      <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+        {{ this.stakingApyCake | number: '1.1-1' }}% APY
+      </span>
     </div>
-    <div class="col-auto margin-col">
-      Staking MN <span class="badge badge-pill badge-dark"> {{this.stakingApyMN | number: '1.1-1' }}
-      % APY</span>
+    <div>
+      Staking MN
+      <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+        {{ this.stakingApyMN | number: '1.1-1' }}% APY
+      </span>
     </div>
   </div>
 
@@ -20,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="bg-gray-100">
+      <tr class="bg-gray-100 hover:bg-gray-200">
         <td class="p-2">BTC</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceA | currency:'USD'}} </span>
@@ -39,7 +43,7 @@
         </td>
       </tr>
 
-      <tr class="bg-white">
+      <tr class="hover:bg-gray-200">
         <td class="p-2">ETH</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolEth?.priceA | currency:'USD'}} </span>
@@ -58,7 +62,7 @@
         </td>
       </tr>
 
-      <tr class="bg-gray-100">
+      <tr class="bg-gray-100 hover:bg-gray-200">
         <td class="p-2">USDT</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolUsdt?.priceA | currency:'USD'}} </span>
@@ -77,7 +81,7 @@
         </td>
       </tr>
 
-      <tr class="bg-white">
+      <tr class="hover:bg-gray-200">
         <td class="p-2">LTC</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolLtc?.priceA | currency:'USD'}} </span>
@@ -96,7 +100,7 @@
         </td>
       </tr>
 
-      <tr class="bg-gray-100">
+      <tr class="bg-gray-100 hover:bg-gray-200">
         <td class="p-2">DOGE</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolDoge?.priceA | currency:'USD'}} </span>
@@ -115,7 +119,7 @@
         </td>
       </tr>
 
-      <tr class="bg-white">
+      <tr class="hover:bg-gray-200">
         <td class="p-2">BCH</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolBch?.priceA | currency:'USD'}} </span>
@@ -134,7 +138,7 @@
         </td>
       </tr>
 
-      <tr class="bg-gray-100">
+      <tr class="bg-gray-100 hover:bg-gray-200">
         <td class="p-2">DFI</td>
         <td class="text-right p-2">
           <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceB | currency:'USD'}} </span>

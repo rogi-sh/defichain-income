@@ -29,6 +29,7 @@ import { ValueComponent } from '@components/value/value.component';
 
 import { DexComponent } from '@pages/dex/dex.component';
 import { DefiComponent } from '@pages/defi/defi.component';
+import { CalculatorComponent } from '@pages/calculator/calculator.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { DefiComponent } from '@pages/defi/defi.component';
     ValueComponent,
     DexComponent,
     DefiComponent,
+    CalculatorComponent,
   ],
   imports: [
     BrowserModule,

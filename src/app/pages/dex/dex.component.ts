@@ -1311,5 +1311,4 @@ export class DexComponent implements OnInit {
 
     return walletFinal;
   }
-
 }

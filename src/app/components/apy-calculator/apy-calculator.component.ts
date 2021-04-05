@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal} from '../../../interface/Data';
-import {ChartComponent} from 'ng-apexcharts';
-import {Pool} from '../../../interface/Dex';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChartComponent } from 'ng-apexcharts';
+
+import { Pool } from '@interfaces/Dex';
+import { ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal } from '@interfaces/Data';
 
 @Component({
   selector: 'app-apy-calculator',
@@ -40,12 +41,12 @@ export class ApyCalculatorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit (): void {
 
     this.calcStakingOutCome();
   }
 
-  calcStakingOutCome(): void {
+  calcStakingOutCome (): void {
 
     // Calc
     this.stakingCalcOut.dfiPerDay = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 365)
@@ -87,22 +88,26 @@ export class ApyCalculatorComponent implements OnInit {
       - this.stakingCalcOut.dfiAmount;
     this.stakingCalcMN.dfiPerYear = this.stakingCalcOut.dfiAmount * (1 + this.stakingApyMN / 100) - this.stakingCalcOut.dfiAmount;
 
-    this.buildDataForChartCalcStaking(+this.stakingCalcNormal.dfiPerMonth.toFixed(2),
-      +this.stakingCalcMN.dfiPerMonth.toFixed(2), +this.stakingCalcOut.dfiPerMonth.toFixed(2));
+    this.buildDataForChartCalcStaking('Month');
   }
 
-  getDfiCountStakingCalcUsd(): number {
+  getDfiCountStakingCalcUsd (): number {
     return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
   }
 
-  buildDataForChartCalcStaking(normal: number, mn: number, calc: number): void {
+  buildDataForChartCalcStaking (type: string): void {
+    const key = `dfiPer${ type }`
+    const normal = this.stakingCalcNormal[key];
+    console.log(this.stakingCalcMN)
+    console.log(this.stakingCalcMN[key])
+    const mn = this.stakingCalcMN[key];
+    const calc = this.stakingCalcOut[key];
 
+    console.log(calc, mn, normal)
     const array = [+normal.toFixed(2), +mn.toFixed(2), +calc.toFixed(2)];
-
     const max = Math.max(+normal.toFixed(2), +mn.toFixed(2), +calc.toFixed(2));
 
     this.chartOptions4 = {
-
       series: [+(normal / max * 100).toFixed(2), +(mn / max * 100).toFixed(2), +(calc / max * 100).toFixed(2)],
       chart: {
         height: 390,
@@ -129,7 +134,7 @@ export class ApyCalculatorComponent implements OnInit {
           }
         }
       },
-      colors: ['#1ab7ea', '#CDCD5C', '#3CB371'],
+      colors: ['#FF00AF', '#BD1087', '#1AB7EA'],
       labels: ['Normal', 'Masternode', 'Calc'],
       legend: {
         show: true,
@@ -142,7 +147,7 @@ export class ApyCalculatorComponent implements OnInit {
           useSeriesColors: true
         },
         // tslint:disable-next-line:only-arrow-functions
-        formatter(seriesName, opts): string {
+        formatter (seriesName, opts): string {
           return seriesName + ':  ' + array[opts.seriesIndex] + ' DFI';
         },
         itemMargin: {
