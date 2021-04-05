@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.3.0 - 5.4.2021';
+    this.log.comment = 'rewards from api, show rewards';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.2.3 - 1.4.2021';
     this.log.comment = 'account api fix';
 
@@ -35,7 +42,7 @@ export class Changelog {
     this.log = new Log();
 
     this.log.version = '3.2.0 - 29.3.2021';
-    this.log.comment = 'bulletproof loading of addresses and dex';
+    this.log.comment = 'bulletproof loading of addresses and listyieldfarming';
 
     this.logs.push(this.log);
 
@@ -282,7 +289,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '2.2.3 - 25.2.2021';
-    this.log.comment = 'Wait 5 s before try again load dex ';
+    this.log.comment = 'Wait 5 s before try again load listyieldfarming ';
 
     this.logs.push(this.log);
 

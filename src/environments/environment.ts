@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  dex: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
+  listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   listpoolpairs: 'https://api.defichain.io/v1/listpoolpairs',
   accountDetails: 'https://api.defichain.io/v1/getaccount?start=0&including_start=true&owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
-  version: '3.2.3',
+  stats: 'https://api.defichain.io/v1/stats',
+  version: '3.3.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
