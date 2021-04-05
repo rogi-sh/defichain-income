@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.3.0 - 5.4.2021';
+    this.log.comment = 'rewards from api, show rewards';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.2.3 - 1.4.2021';
     this.log.comment = 'account api fix';
 
