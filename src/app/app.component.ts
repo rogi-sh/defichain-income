@@ -145,7 +145,7 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.wallet = new Wallet();
 
@@ -457,8 +457,7 @@ export class AppComponent implements OnInit {
     this.dexService.getStats().subscribe(
       dex => {
         this.rewards = dex;
-        this.computeRewardsPerBlockInPools();
-
+        console.log('Rewards loaded!');
       },
       err => {
         console.error(err);
@@ -475,29 +474,7 @@ export class AppComponent implements OnInit {
       this.dexService.getListyieldfarming(),
       this.dexService.getListpoolpairs()]
     ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
-          this.extractPools(dex);
-
-          this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
-          this.berechnePoolOutBtc();
-
-          this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
-          this.berechnePoolOutEth();
-
-          this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
-          this.berechnePoolOutUsdt();
-
-          this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
-          this.berechnePoolOutLtc();
-
-          this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
-          this.berechnePoolOutDoge();
-
-          this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
-          this.berechnePoolOutBch();
-
-          this.berechneStakingOut();
-          this.berechnePoolOut();
-          this.dataLoaded = true;
+          this.parsePoolsAndComputeOutcome(dex, poolPairs);
 
         }
       ),
@@ -511,6 +488,47 @@ export class AppComponent implements OnInit {
 
       });
 
+  }
+
+  private parsePoolsAndComputeOutcome(dex: DexInfo, poolPairs: DexPoolPair): void {
+    this.extractPools(dex);
+
+    this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
+    this.poolBtc.customRewards = poolPairs['5'].customRewards;
+    this.poolBtc.rewardPct = poolPairs['5'].rewardPct;
+
+    this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
+    this.poolEth.customRewards = poolPairs['4'].customRewards;
+    this.poolEth.rewardPct = poolPairs['4'].rewardPct;
+
+    this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
+    this.poolUsdt.customRewards = poolPairs['6'].customRewards;
+    this.poolUsdt.rewardPct = poolPairs['6'].rewardPct;
+
+    this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
+    this.poolLtc.customRewards = poolPairs['10'].customRewards;
+    this.poolLtc.rewardPct = poolPairs['10'].rewardPct;
+
+    this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
+    this.poolDoge.customRewards = poolPairs['8'].customRewards;
+    this.poolDoge.rewardPct = poolPairs['8'].rewardPct;
+
+    this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
+    this.poolBch.customRewards = poolPairs['12'].customRewards;
+    this.poolBch.rewardPct = poolPairs['12'].rewardPct;
+
+    this.computeRewardsPerBlockInPools();
+
+    this.berechnePoolOutBtc();
+    this.berechnePoolOutEth();
+    this.berechnePoolOutBch();
+    this.berechnePoolOutLtc();
+    this.berechnePoolOutUsdt();
+    this.berechnePoolOutDoge();
+
+    this.berechneStakingOut();
+    this.berechnePoolOut();
+    this.dataLoaded = true;
   }
 
   private extractPools(dex: DexInfo): void {
@@ -543,6 +561,12 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidityPool;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
+    console.log('computed btc' + this.dfiProBlockBtc);
+    console.log('computed eth' + this.dfiProBlockEth);
+    console.log('computed usdt' + this.dfiProBlockUsdt);
+    console.log('computed ltc' + this.dfiProBlockLtc);
+    console.log('computed bch' + this.dfiProBlockBch);
+    console.log('computed doge' + this.dfiProBlockDoge);
   }
 
   private getCustomRewards(rewards: string []): number {
@@ -555,30 +579,21 @@ export class AppComponent implements OnInit {
   }
 
   loadDexManual(): void {
-    this
-      .dexService
-      .getListyieldfarming()
-      .subscribe(
-        dex => {
-          this.extractPools(dex);
-          this.berechnePoolOutBtc();
-          this.berechnePoolOutEth();
-          this.berechnePoolOutUsdt();
-          this.berechnePoolOutLtc();
-          this.berechnePoolOutDoge();
-          this.berechnePoolOutBch();
-          this.berechnePoolOut();
-          this.berechneStakingOut();
-          this.dataLoaded = true;
-        },
-        err => {
-          console.error(err);
-          setTimeout(() => {
-              this.loadDexManual();
-              console.error('Try again ...');
-            },
-            5000);
-        });
+    forkJoin([
+      this.dexService.getListyieldfarming(),
+      this.dexService.getListpoolpairs()]
+    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
+          this.parsePoolsAndComputeOutcome(dex, poolPairs);
+        }
+      ),
+      err => {
+        console.error(err);
+        setTimeout(() => {
+            this.loadDexManual();
+            console.error('Try again ...');
+          },
+          5000);
+      });
   }
 
   loadAllAccounts(): void {

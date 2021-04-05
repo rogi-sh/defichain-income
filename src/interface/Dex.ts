@@ -20,6 +20,7 @@ export interface Pool {
   pair: string;
   logo: string;
   customRewards: string [];
+  poolRewards: string [];
   rewardPct: number;
   pairLink: string;
   apy: number;

@@ -23,6 +23,11 @@
     </div>
     <div class="row">
       <div class="col-auto margin-col">
+        Block <span class="badge badge-pill badge-dark left"> {{rewards?.blockHeight }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto margin-col">
         {{ 'price' | translate }} BTC <span
         class="badge badge-pill badge-dark left">
                <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceA | currency:'USD'}} </span>
@@ -175,6 +180,25 @@
               <span *ngIf="fiat === 'GBP'">  {{poolBch?.totalStaked * usdToGbp | currency:'GBP'}} </span>
         TVL
             </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto margin-col">
+        Rewards DFI/Block
+      </div>
+      <div class="col-auto margin-col">
+        <span class="badge badge-pill badge-dark left">
+          Total {{rewards?.rewards?.total }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto margin-col">
+        <span class="badge badge-pill badge-dark left">
+          LM {{rewards?.rewards?.liquidityPool }} / Mining {{rewards?.rewards?.minter }}</span>
+      </div>
+      <div class="col-auto margin-col">
+            <span class="badge badge-pill badge-dark left">
+              Anchor {{rewards?.rewards?.anchorReward }} / Community {{rewards?.rewards?.community }}</span>
       </div>
     </div>
   </div>
