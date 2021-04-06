@@ -1,6 +1,17 @@
 <div>
   <h1 class="text-3xl mb-4">Bestände</h1>
-  <div class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2">
+
+  <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500" (click)="handleSettingsDialog()">
+    <embed
+      type="image/svg+xml"
+      src="/assets/icons/settings.svg"
+      class="pointer-events-none w-8 h-8 fill-current"
+    />
+  </a>
+
+  <div
+    class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2"
+  >
     <div>
       <h2 class="text-lg">Distribution of holdings</h2>
       <div *ngIf="wallet && poolBtc">
@@ -22,6 +33,340 @@
     </div>
     <div>
       <h2 class="text-lg">Value of holdings</h2>
+    </div>
+  </div>
+
+  <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
+    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4">
+      <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
+        <object
+          type="image/svg+xml"
+          data="../assets/icons/close.svg"
+          class="pointer-events-none select-none"
+        ></object>
+      </div>
+
+      <div class="w-full h-full pt-8 relative">
+        <div class="uppercase grid grid-flow-col grid-cols-2">
+          <a
+            (click)="handleTab('manual')"
+            class="text-center border-r cursor-pointer"
+            [ngClass]="{'text-pink-500': selectedTab === 'manual'}"
+          >
+            Manual enter
+          </a>
+            <a
+              (click)="handleTab('api')"
+              class="text-center cursor-pointer"
+              [ngClass]="{'text-pink-500': selectedTab === 'api'}"
+            >
+              Api Key
+          </a>
+        </div>
+
+        <div class="py-3 h-full">
+          <div *ngIf="selectedTab === 'manual'" class="overflow-y-auto h-full pr-2">
+            <div class="text-sm">Wallet</div>
+            <div class="grid grid-flow-row grid-rows-2 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+            </div>
+
+            <div class="text-sm">Staking</div>
+            <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+            </div>
+
+            <div class="text-sm">Liquidity Mining</div>
+            <div class="grid grid-flow-row grid-rows-6 grid-cols-2 md:grid-cols-3 gap-3 pb-4">
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div class="md:col-start-1">
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+              <div>
+                <label class="block text-sm font-semibold" for="stakingCalcOur">
+                  DFI Amount
+                </label>
+                <input
+                  required
+                  [(ngModel)]="stakingCalcOut.dfiAmount"
+                  (ngModelChange)="calcStakingOutCome()"
+                  type="number"
+                  class="bg-gray-100 p-2 rounded-md w-full"
+                  id="stakingCalcOur"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="selectedTab === 'api'">
+            <label class="block text-sm font-semibold" for="stakingCalcOur">
+              DFI Amount
+            </label>
+            <input
+              required
+              [(ngModel)]="stakingCalcOut.dfiAmount"
+              (ngModelChange)="calcStakingOutCome()"
+              type="number"
+              class="bg-gray-100 p-2 rounded-md w-full"
+              id="stakingCalcOur"
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

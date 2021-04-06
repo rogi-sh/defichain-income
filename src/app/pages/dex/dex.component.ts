@@ -1,36 +1,26 @@
-import {forkJoin} from 'rxjs';
-import {Apollo} from 'apollo-angular';
-import {CountdownComponent} from 'ngx-countdown';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
-
-import {IncomeComponent} from '@components/income/income.component';
-import {ValueComponent} from '@components/value/value.component';
 import {Dex} from '@services/dex.service';
 import {
-  DexInfo,
-  DexPoolPair,
-  Outcome,
-  OutcomeStaking,
-  Pool,
-  PoolBchOut,
-  PoolBtcOut,
-  PoolDogeOut,
-  PoolEthOut,
-  PoolLtcOut,
-  PoolUsdtOut
+  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
+  PoolUsdtOut, Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
 import {environment} from '@environments/environment';
-import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
-
+import {forkJoin} from 'rxjs';
+import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
+import {TranslateService} from '@ngx-translate/core';
+import {IncomeComponent} from '@components/income/income.component';
+import {ValueComponent} from '@components/value/value.component';
+import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
+import {Apollo} from 'apollo-angular';
+import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
+
 
 @Component({
   selector: 'app-dex-page',
-  templateUrl: './dex.component.html'
+  templateUrl: './dex.component.html',
 })
 export class DexComponent implements OnInit {
 
@@ -57,6 +47,8 @@ export class DexComponent implements OnInit {
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
   dfiProBlockBch = 1;
+  rewards: Stats;
+
   blocktimeInS = 37;
   usdToEur = 0.82;
   usdToChf = 0.89;
@@ -119,7 +111,7 @@ export class DexComponent implements OnInit {
   showInputArea = true;
   showInputAreaKey = 'showInputAreaKey';
 
-  showSettingsArea = false;
+  showSettingsArea = true;
   showSettingsAreaKey = 'showSettingsAreaKey';
 
   apiOnline = true;
@@ -130,6 +122,7 @@ export class DexComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
+  dataLoaded = false;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -137,7 +130,6 @@ export class DexComponent implements OnInit {
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
-    console.log('browser ' + browserLang);
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
 
     // setze matomo URL
@@ -151,16 +143,26 @@ export class DexComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
 
+    this.testApi();
+    setInterval(() => {
+      this.testApi();
+    }, 2000000);
+
+    this.getRewards();
+    setInterval(() => {
+      this.getRewards();
+    }, 3600000);
+
     if (this.loggedIn) {
-      this.loadDataByKey();
+      this.loadDataFromServerAndLoadAllStuff();
     } else {
-      await this.loadAllStuff();
+      this.loadAddressesAndDexData();
     }
 
     this.countdown?.begin();
@@ -168,23 +170,18 @@ export class DexComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
-    this.testApi();
-
-    setInterval(() => {
-      this.testApi();
-    }, 2000000);
   }
 
-  async loadAllStuff(): Promise<void> {
+  loadAddressesAndDexData(): void {
     if (this.autoLoadData) {
-      await this.loadAllAccounts();
-      this.loadDex();
+      this.loadAllAccounts();
     } else {
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
       }
       this.loadDexManual();
+      this.dataLoaded = true;
     }
   }
 
@@ -224,19 +221,19 @@ export class DexComponent implements OnInit {
     }
   }
 
-  async refresh(): Promise<void> {
-    this.clearWallet();
+  refresh(): void {
+    this.dataLoaded = false;
     if (this.autoLoadData) {
-      console.log('Refresh autofunds ...');
-      await this.loadAllAccounts();
-      this.loadDex();
+      // only clear when not manual
+      this.clearWallet();
+      this.loadAllAccounts();
     } else {
-      console.log('Refresh manuel funds ...');
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
       }
       this.loadDexManual();
+
     }
     this.countdown?.restart();
   }
@@ -351,14 +348,14 @@ export class DexComponent implements OnInit {
     this.adresses = [];
   }
 
-  loadDataByKey(): void {
+  loadDataFromServerAndLoadAllStuff(): void {
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
         query: LOGIN,
         variables: {
           key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
         }
-      }).subscribe(async (result: any) => {
+      }).subscribe((result: any) => {
         if (result?.data?.userByKey) {
           this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
           this.loggedIn = true;
@@ -372,7 +369,7 @@ export class DexComponent implements OnInit {
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
 
-          await this.loadAllStuff();
+          this.loadAddressesAndDexData();
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {
@@ -380,7 +377,6 @@ export class DexComponent implements OnInit {
           }, 5000);
 
         } else {
-          console.log('No user found');
           this.errorBackend = 'No users found';
           this.logout();
           setInterval(() => {
@@ -388,7 +384,6 @@ export class DexComponent implements OnInit {
           }, 5000);
         }
       }, (error) => {
-        console.log('there was an error sending the query for login', error);
         this.errorBackend = error.message;
         setInterval(() => {
           this.errorBackend = null;
@@ -398,7 +393,8 @@ export class DexComponent implements OnInit {
   }
 
   login(): void {
-    this.loadDataByKey();
+    this.dataLoaded = false;
+    this.loadDataFromServerAndLoadAllStuff();
   }
 
 
@@ -410,6 +406,7 @@ export class DexComponent implements OnInit {
     this.timer = setInterval(() => {
       this.refresh();
     }, this.sCountdown * 1000);
+    window.location.reload();
   }
 
   saveToggleAutoLoad(): void {
@@ -438,57 +435,43 @@ export class DexComponent implements OnInit {
 
   testApi(): void {
 
-    forkJoin([
-        this.dexService.getDex(),
-        this.dexService.getPoolDetail('5'),
-        this.dexService.getListpoolpairs(),
-        this.dexService.getAdressDetail('dQTQr6Zr9rvcDi5s7jWhKjjsqDXhHsu16U')
-      ]
-    ).subscribe((([dex, poolBtc, poolpairs, dsts]: [DexInfo, Pool, DexPoolPair, [string]]) => {
-          this.apiOnline = true;
+    this.dexService
+      .getHealthCheck()
+      .subscribe(ok => {
+          if ('OK' === ok) {
+            this.apiOnline = true;
+          }
+        },
+        err => {
+          console.error('Api down?' + err.message);
+          this.apiOnline = false;
 
-        }
-      ),
-      err => {
-        console.error('Api down?');
-        this.apiOnline = false;
-
-      });
+        });
 
   }
 
+  getRewards(): void {
+    this.dexService.getStats().subscribe(
+      dex => {
+        this.rewards = dex;
+        console.log('Rewards loaded!');
+      },
+      err => {
+        console.error(err);
+        setTimeout(() => {
+            this.getRewards();
+            console.error('Try again ...');
+          },
+          5000);
+      });
+  }
+
   loadDex(): void {
-
     forkJoin([
-        this.dexService.getDex(),
-        this.dexService.getListpoolpairs()]
+      this.dexService.getListyieldfarming(),
+      this.dexService.getListpoolpairs()]
     ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
-          this.extractPools(dex);
-
-          this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
-          this.berechnePoolOutBtc();
-
-          this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
-          this.berechnePoolOutEth();
-
-          this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
-          this.berechnePoolOutUsdt();
-
-          this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
-          this.berechnePoolOutLtc();
-
-          this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
-          this.berechnePoolOutDoge();
-
-          this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
-          this.berechnePoolOutBch();
-
-          this.berechneStakingOut();
-          this.berechnePoolOut();
-
-          this.buildDataForChart();
-          this.buildDataForChartValue();
-          this.buildDataForChartIncome();
+          this.parsePoolsAndComputeOutcome(dex, poolPairs);
 
         }
       ),
@@ -504,6 +487,47 @@ export class DexComponent implements OnInit {
 
   }
 
+  private parsePoolsAndComputeOutcome(dex: DexInfo, poolPairs: DexPoolPair): void {
+    this.extractPools(dex);
+
+    this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
+    this.poolBtc.customRewards = poolPairs['5'].customRewards;
+    this.poolBtc.rewardPct = poolPairs['5'].rewardPct;
+
+    this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
+    this.poolEth.customRewards = poolPairs['4'].customRewards;
+    this.poolEth.rewardPct = poolPairs['4'].rewardPct;
+
+    this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
+    this.poolUsdt.customRewards = poolPairs['6'].customRewards;
+    this.poolUsdt.rewardPct = poolPairs['6'].rewardPct;
+
+    this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
+    this.poolLtc.customRewards = poolPairs['10'].customRewards;
+    this.poolLtc.rewardPct = poolPairs['10'].rewardPct;
+
+    this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
+    this.poolDoge.customRewards = poolPairs['8'].customRewards;
+    this.poolDoge.rewardPct = poolPairs['8'].rewardPct;
+
+    this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
+    this.poolBch.customRewards = poolPairs['12'].customRewards;
+    this.poolBch.rewardPct = poolPairs['12'].rewardPct;
+
+    this.computeRewardsPerBlockInPools();
+
+    this.berechnePoolOutBtc();
+    this.berechnePoolOutEth();
+    this.berechnePoolOutBch();
+    this.berechnePoolOutLtc();
+    this.berechnePoolOutUsdt();
+    this.berechnePoolOutDoge();
+
+    this.berechneStakingOut();
+    this.berechnePoolOut();
+    this.dataLoaded = true;
+  }
+
   private extractPools(dex: DexInfo): void {
     this.dex = dex;
     this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
@@ -514,56 +538,89 @@ export class DexComponent implements OnInit {
     this.poolBch = dex.pools.find(x => x.poolPairId === '12');
   }
 
-  loadDexManual(): void {
-    this
-      .dexService
-      .getDex()
-      .subscribe(
-        dex => {
-          this.extractPools(dex);
-          this.berechnePoolOutBtc();
-          this.berechnePoolOutEth();
-          this.berechnePoolOutUsdt();
-          this.berechnePoolOutLtc();
-          this.berechnePoolOutDoge();
-          this.berechnePoolOutBch();
-          this.berechnePoolOut();
-          this.berechneStakingOut();
-          this.buildDataForChart();
-          this.buildDataForChartValue();
-          this.buildDataForChartIncome();
+  private computeRewardsPerBlockInPools(): void {
 
-        },
-        err => {
-          console.error(err);
-        });
+    this.dfiProBlockBtc = this.poolBtc.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockBtc += this.getCustomRewards(this.poolBtc.customRewards);
+
+    this.dfiProBlockEth = this.poolEth.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockEth += this.getCustomRewards(this.poolEth.customRewards);
+
+    this.dfiProBlockLtc = this.poolLtc.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockLtc += this.getCustomRewards(this.poolLtc.customRewards);
+
+    this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockUsdt += this.getCustomRewards(this.poolUsdt.customRewards);
+
+    this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockDoge += this.getCustomRewards(this.poolDoge.customRewards);
+
+    this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidityPool;
+    this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
+
+    console.log('computed btc' + this.dfiProBlockBtc);
+    console.log('computed eth' + this.dfiProBlockEth);
+    console.log('computed usdt' + this.dfiProBlockUsdt);
+    console.log('computed ltc' + this.dfiProBlockLtc);
+    console.log('computed bch' + this.dfiProBlockBch);
+    console.log('computed doge' + this.dfiProBlockDoge);
   }
 
-  async loadAllAccounts(): Promise<void> {
-    // Wallet
-    for (const ad of this.adresses) {
-      this.loadAccountDetails(ad);
-    }
-
-  }
-
-  loadAccountDetails(adress: string): void {
-    this.dexService.getAdressDetail(adress).subscribe(
-      balances => {
-        for (const b of balances) {
-          this.addTokensToWallet(b);
-        }
-      },
-      err => {
-        console.error(err);
+  private getCustomRewards(rewards: string []): number {
+      let reward = 0;
+      rewards.forEach(r => {
+        reward += +r.split('@') [0];
       });
 
-    this.dexService.getAdressBalance(adress).subscribe(
-      balance => {
-        this.addCoinsToWallet(balance);
-      },
+      return reward;
+  }
+
+  loadDexManual(): void {
+    forkJoin([
+      this.dexService.getListyieldfarming(),
+      this.dexService.getListpoolpairs()]
+    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
+          this.parsePoolsAndComputeOutcome(dex, poolPairs);
+        }
+      ),
       err => {
         console.error(err);
+        setTimeout(() => {
+            this.loadDexManual();
+            console.error('Try again ...');
+          },
+          5000);
+      });
+  }
+
+  loadAllAccounts(): void {
+    const requestArray = [];
+    for (const ad of this.adresses) {
+      requestArray.push(this.dexService.getAdressDetail(ad));
+      requestArray.push(this.dexService.getAdressBalance(ad));
+    }
+
+    forkJoin(requestArray).subscribe(results => {
+        results.forEach((value, i) => {
+          if (i % 2 === 0) {
+            const balances = value as [string];
+            balances.forEach(value2 => this.addTokensToWallet(value2));
+          } else {
+            this.addCoinsToWallet(value as Balance);
+          }
+        });
+
+        this.loadDex();
+
+      },
+      err => {
+        console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
+        setTimeout(() => {
+            this.loadDex();
+            console.error('Try again ...');
+          },
+          5000);
+
       });
   }
 
@@ -1054,7 +1111,7 @@ export class DexComponent implements OnInit {
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();
-    this.loadAllStuff();
+    this.loadAddressesAndDexData();
   }
 
   deleteAdress(adress: string): void {
@@ -1063,16 +1120,16 @@ export class DexComponent implements OnInit {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
       this.clearWallet();
-      this.loadAllStuff();
+      this.loadAddressesAndDexData();
     }
 
   }
 
   clearWallet(): void {
-    const newWallet = new Wallet ();
+    const newWallet = new Wallet();
     newWallet.dfiInStaking = this.dfiInStaking;
     this.wallet = newWallet;
-}
+  }
 
   // ============= ONCHANGE INPUT =================
   onChangeDfiWallet(): void {
@@ -1311,4 +1368,5 @@ export class DexComponent implements OnInit {
 
     return walletFinal;
   }
+
 }

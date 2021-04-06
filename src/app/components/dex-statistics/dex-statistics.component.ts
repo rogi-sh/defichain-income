@@ -4,13 +4,8 @@ import {DexInfo, Outcome, Pool, Rewards, Stats} from '@interfaces/Dex';
 @Component({
   selector: 'app-dex-statistics',
   templateUrl: './dex-statistics.component.html',
-  styleUrls: ['./dex-statistics.component.css']
 })
 export class DexStatisticsComponent implements OnInit {
-
-  @Input()
-  apiOnline: boolean;
-
   @Input()
   fiat: string;
 

@@ -26,10 +26,13 @@ import { IncomeComponent } from '@components/income/income.component';
 import { LmTargetCalculatorComponent } from '@components/lm-target-calculator/lm-target-calculator.component';
 import { StakingTargetCalculatorComponent } from '@components/staking-target-calculator/staking-target-calculator.component';
 import { ValueComponent } from '@components/value/value.component';
+import { InputComponent } from '@components/input/input.component';
 
 import { DexComponent } from '@pages/dex/dex.component';
 import { DefiComponent } from '@pages/defi/defi.component';
+import { HoldingsComponent } from '@pages/holdings/holdings.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
+import { environment } from '@environments/environment';
 
 
 @NgModule({
@@ -44,9 +47,11 @@ import { CalculatorComponent } from '@pages/calculator/calculator.component';
     LmTargetCalculatorComponent,
     StakingTargetCalculatorComponent,
     ValueComponent,
+    InputComponent,
     DexComponent,
     DefiComponent,
     CalculatorComponent,
+    HoldingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,10 @@ import { CalculatorComponent } from '@pages/calculator/calculator.component';
 })
 export class AppModule { }
 
-enableProdMode();
+if (environment.production) {
+  enableProdMode();
+}
+
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .then(success => console.log(`Bootstrap success`))

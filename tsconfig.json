@@ -26,6 +26,7 @@
     }
   },
   "angularCompilerOptions": {
+    "debug": true,
     "enableI18nLegacyMessageIdFormat": false
   }
 }

@@ -98,8 +98,6 @@ export class ApyCalculatorComponent implements OnInit {
   buildDataForChartCalcStaking (type: string): void {
     const key = `dfiPer${ type }`
     const normal = this.stakingCalcNormal[key];
-    console.log(this.stakingCalcMN)
-    console.log(this.stakingCalcMN[key])
     const mn = this.stakingCalcMN[key];
     const calc = this.stakingCalcOut[key];
 

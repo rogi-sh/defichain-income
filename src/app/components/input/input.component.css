@@ -1,0 +1,33 @@
+label {
+  top: 0%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: rgba(37, 99, 235, 1);
+}
+
+label::after {
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 15px;
+  background: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+.empty input:not(:focus) + label {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+input:not(:focus) + label {
+  color: rgba(70, 70, 70, 1);
+}
+input {
+  border-width: 1px;
+}
+input:focus {
+  outline: none;
+  border-color: rgba(37, 99, 235, 1);
+}
