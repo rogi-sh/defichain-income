@@ -1,8 +1,9 @@
 label {
-  top: 0%;
-  transform: translateY(-50%);
+  top: 5px;
+  left: 8px;
+  transform: translateY(1%);
   font-size: 11px;
-  color: rgba(37, 99, 235, 1);
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
 }
 
 label::after {
@@ -13,7 +14,6 @@ label::after {
   content: ' ';
   width: 100%;
   height: 15px;
-  background: rgba(243, 244, 246, var(--tw-bg-opacity));
 }
 
 .empty input:not(:focus) + label {
@@ -21,13 +21,21 @@ label::after {
   transform: translateY(-50%);
   font-size: 14px;
 }
+
 input:not(:focus) + label {
   color: rgba(70, 70, 70, 1);
 }
+
 input {
   border-width: 1px;
 }
+
+input::placeholder {
+  display: none;
+  color: transparent;
+}
+
 input:focus {
   outline: none;
-  border-color: rgba(37, 99, 235, 1);
+  border-color: rgba(236, 72, 153, var(--tw-text-opacity));
 }

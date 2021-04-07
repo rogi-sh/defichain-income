@@ -13,7 +13,7 @@
       ></object>
     </a>
 
-    <a routerLink="/" class="w-28">
+    <a (click)="handlePage('dashboard')" class="w-28">
       <img
         src="../assets/img/Defi-income.svg"
         class="h-full mx-auto"
@@ -43,7 +43,7 @@
     *ngIf="menu"
   >
     <a
-      routerLink="/"
+      (click)="handlePage('dashboard')"
       class="absolute w-28 h-12 mt-1 left-1/2 transform -translate-x-1/2"
     >
       <img src="../assets/img/Defi-income.svg" alt="DefiChain-Income Logo" class="mx-auto" />
@@ -58,8 +58,8 @@
 
     <div class="mt-20 mx-8">
       <a
-        routerLink="/dashboard"
-        [routerLinkActive]="['text-pink-500']"
+        (click)="handlePage('dashboard')"
+        [ngClass]="{'text-pink-500': currentPage === 'dashboard'}"
         class="hover:text-pink-400 py-3 flex"
       >
         <object class="w-10" type="image/svg+xml" data="../assets/icons/home.svg"></object>
@@ -69,8 +69,8 @@
       </a>
 
       <a
-        routerLink="/holdings"
-        [routerLinkActive]="['text-pink-500']"
+        (click)="handlePage('holdings')"
+        [ngClass]="{'text-pink-500': currentPage === 'holdings'}"
         class="hover:text-pink-400 py-3 flex"
       >
         <object class="w-10" type="image/svg+xml" data="../assets/icons/doughnut-chart.svg"></object>
@@ -88,8 +88,8 @@
     >
       <div class="flex flex-col text-center h-full relative">
         <a
-          routerLink="/dashboard"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('dashboard')"
+          [ngClass]="{'text-pink-500': currentPage === 'dashboard'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -99,8 +99,8 @@
           ></object>
         </a>
         <a
-          routerLink="/holdings"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('holdings')"
+          [ngClass]="{'text-pink-500': currentPage === 'holdings'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -110,8 +110,8 @@
           ></object>
         </a>
         <a
-          routerLink="/holdings"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('income')"
+          [ngClass]="{'text-pink-500': currentPage === 'income'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -121,8 +121,8 @@
           ></object>
         </a>
         <a
-          routerLink="/dex"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('dex')"
+          [ngClass]="{'text-pink-500': currentPage === 'dex'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -132,8 +132,8 @@
           ></object>
         </a>
         <a
-          routerLink="/defi"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('defi')"
+          [ngClass]="{'text-pink-500': currentPage === 'defi'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -143,8 +143,8 @@
           ></object>
         </a>
         <a
-          routerLink="/calculator"
-          [routerLinkActive]="['text-pink-500']"
+          (click)="handlePage('calculator')"
+          [ngClass]="{'text-pink-500': currentPage === 'calculator'}"
           class="hover:text-pink-400 py-3"
         >
           <object
@@ -157,8 +157,8 @@
           class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full"
         >
           <a
-            routerLink="/holdings"
-            [routerLinkActive]="['text-pink-500']"
+            (click)="handlePage('holdings')"
+            [ngClass]="{'text-pink-500': currentPage === 'holdings'}"
             class="hover:text-pink-400 my-2"
           >
             <object
@@ -168,8 +168,8 @@
             ></object>
           </a>
           <a
-            routerLink="/holdings"
-            [routerLinkActive]="['text-pink-500']"
+            (click)="handlePage('holdings')"
+            [ngClass]="{'text-pink-500': currentPage === 'holdings'}"
             class="hover:text-pink-400 my-2"
           >
             <object
@@ -183,8 +183,32 @@
     </div>
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl p-3 bg-white mx-auto sm:mb-5 sm:overflow-auto relative">
-        <app-input></app-input>
-        <router-outlet></router-outlet>
+        <container-element [ngSwitch]="currentPage">
+          <div *ngSwitchCase="'income'">
+            <app-income-page></app-income-page>
+          </div>
+          <div *ngSwitchCase="'holdings'">
+            <app-holdings-page></app-holdings-page>
+          </div>
+          <div *ngSwitchCase="'dex'">
+            <app-dex-page></app-dex-page>
+          </div>
+          <div *ngSwitchCase="'defi'">
+            <app-defi-page></app-defi-page>
+          </div>
+          <div *ngSwitchCase="'calculator'">
+            <app-calculator-page></app-calculator-page>
+          </div>
+          <div *ngSwitchCase="'info'">
+            <app-info-page></app-info-page>
+          </div>
+          <div *ngSwitchCase="'settings'">
+            <app-settings-page></app-settings-page>
+          </div>
+          <div *ngSwitchDefault>
+            <app-dashboard-page></app-dashboard-page>
+          </div>
+       </container-element>
       </div>
     </div>
   </div>

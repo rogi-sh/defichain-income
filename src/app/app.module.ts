@@ -14,7 +14,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatomoModule } from 'ngx-matomo';
 
 import { GraphQLModule } from './graphql.module';
-import { AppRoutingModule } from './app-routing.module';
 
 
 import { ApyCalculatorComponent } from '@components/apy-calculator/apy-calculator.component';
@@ -73,7 +72,6 @@ import { environment } from '@environments/environment';
       },
     }),
     GraphQLModule,
-    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
+  currentPage = 'holdings';
 
   wallet: Wallet;
   walletDTO: WalletDto;
@@ -173,6 +174,10 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
+  }
+
+  handlePage(pageTag: string): void {
+    this.currentPage = pageTag
   }
 
   loadAddressesAndDexData(): void {

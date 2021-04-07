@@ -10,7 +10,7 @@ import { Pool, PoolBtcOut } from '@interfaces/Dex';
 })
 export class HoldingsComponent implements OnInit {
   public dialogOpen: boolean = true;
-  public selectedTab: string = 'manual';
+  public selectedTab: string = 'api';
   
   wallet: Wallet;
   walletDTO: WalletDto;

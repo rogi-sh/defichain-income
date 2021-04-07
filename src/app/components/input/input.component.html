@@ -1,15 +1,19 @@
 <div
-  class="relative h-10 input-component mb-5"
+  class="relative h-14 input-component"
   [ngClass]="!value ? 'empty' : ''"
+  title="{{label}}"
 >
   <input
-    id="name"
-    type="text"
-    name="name"
-    (change)="ngOnChanges($event.target.value)"
-    class="h-full w-full bg-gray-100 px-2 transition-all border-blue rounded"
+    id="{{name}}"
+    type="{{type}}"
+    name="{{name}}"
+    placeholder="{{label}}"
+    value="{{value}}"
+    required="{{required}}"
+    (change)="handleInput($event.target.value)"
+    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
   />
-  <label for="name" class="absolute left-2 transition-all px-1">
-    Name
+  <label for="{name}" class="absolute left-2 transition-all px-1 pointer-events-none">
+    {{label}}
   </label>
 </div>

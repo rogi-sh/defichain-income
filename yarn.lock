@@ -393,13 +393,6 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/router@~11.2.5":
-  version "11.2.7"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-11.2.7.tgz#924609812a3469d0073da5c33207d517183243d9"
-  integrity sha512-Uf+DYpusYo/TMRz9NK3LS1cVuFnbbbSQYwIJNY7v9YX1aFdDBKVVOQJGfs3CTVv44J1VVoJsLWfbIJw2pGUIuQ==
-  dependencies:
-    tslib "^2.0.0"
-
 "@apollo/client@^3.3.11":
   version "3.3.13"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.13.tgz#0aadde13b80ce129d1261161413a9de2b0dec70e"
