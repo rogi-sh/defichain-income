@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DexInfo, Outcome, Pool, Rewards, Stats} from '@interfaces/Dex';
+import {DexInfo, Pool, Stats} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-dex-statistics',

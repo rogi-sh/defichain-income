@@ -13,7 +13,7 @@
     class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2"
   >
     <div>
-      <h2 class="text-lg">Distribution of holdings</h2>
+      <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
       <div *ngIf="wallet && poolBtc">
         <app-value
           [poolBtc]="poolBtc"
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div>
-      <h2 class="text-lg">Value of holdings</h2>
+      <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
     </div>
   </div>
 
@@ -143,18 +143,34 @@
           </div>
 
           <div *ngIf="selectedTab === 'api'">
-
             <div class="inline-block w-3/4">
-              <app-input required></app-input>
+              <app-input
+                required
+                id="inputAddress"
+                name="apiKey"
+                label="DFI Address"
+                [value]="adress"
+              >
+              </app-input>
             </div>
             <div class="inline-block w-1/4 pl-2 align-top">
-              <button class="bg-pink-500 rounded-md w-full h-14 text-white align-top">
+              <button class="bg-pink-500 rounded-md w-full h-14 text-white align-top" (click)="addAdress()">
                 Add
               </button>
             </div>
 
             <div class="block mt-2">
-              <div>Link</div>
+              <div 
+                *ngFor="let adress of adresses; index as i;"
+                class="relative px-3"
+                [ngClass]="{'bg-gray-200': i % 2}"
+              >
+                {{ adress }}
+                <a class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer" (click)="deleteAdress(adress)">
+                  X
+                </a>
+              </div>
+              <!-- <div *ngFor="let adress of adresses">{{adress}}</div> -->
             </div>
           </div>
         </div>

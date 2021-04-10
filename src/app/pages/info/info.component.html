@@ -1,0 +1,39 @@
+<div>
+  <h1 class="text-3xl mb-4">Info</h1>
+  <a
+    class="absolute right-3 top-3 text-pink-500 rounded-full border border-pink-500 px-5 align-middle hover:text-pink-600 hover:border-pink-600"
+    href="https://dex.defichain.com/mainnet/pool">
+    Open in GitLab
+    <app-icon class="align-middle" name="gitlab"></app-icon>
+  </a>
+
+  <p class="mb-2">{{ "welcome" | translate }}</p>
+  <p class="mb-2">
+    {{ "powered" | translate }}
+    <a class="text-pink-500 hover:underline" href="https://dex.defichain.com/mainnet/pool">
+      https://api.defichain.io/v1
+    </a>
+  </p>
+  <p class="mb-2">
+    {{ "opensource" | translate }}
+    <a
+      (click)="trackGit()"
+      href="https://git.topiet.de/igor/defichain-income"
+      class="text-pink-500 hover:underline"
+      target="_blank"
+    >
+      https://git.topiet.de/igor/defichain-income
+    </a>
+  </p>
+  <p class="mb-2">
+    {{ "history" | translate }}
+    <a
+      (click)="trackGraphQL()"
+      href="https://graphql.defichain-income.com/graphql"
+      target="_blank"
+      class="text-pink-500 hover:underline"
+    >
+      https://graphql.defichain-income.com/graphql
+    </a>
+  </p>
+</div>

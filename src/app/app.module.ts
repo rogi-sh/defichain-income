@@ -15,6 +15,7 @@ import { MatomoModule } from 'ngx-matomo';
 
 import { GraphQLModule } from './graphql.module';
 
+import { environment } from '@environments/environment';
 
 import { ApyCalculatorComponent } from '@components/apy-calculator/apy-calculator.component';
 import { ChangelogComponent } from '@components/changelog/changelog.component';
@@ -26,12 +27,14 @@ import { LmTargetCalculatorComponent } from '@components/lm-target-calculator/lm
 import { StakingTargetCalculatorComponent } from '@components/staking-target-calculator/staking-target-calculator.component';
 import { ValueComponent } from '@components/value/value.component';
 import { InputComponent } from '@components/input/input.component';
+import { IconComponent } from '@components/icon/icon.component';
 
 import { DexComponent } from '@pages/dex/dex.component';
 import { DefiComponent } from '@pages/defi/defi.component';
+import { IncomePageComponent } from '@pages/income/income.component';
 import { HoldingsComponent } from '@pages/holdings/holdings.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
-import { environment } from '@environments/environment';
+import { InfoComponent } from '@pages/info/info.component';
 
 
 @NgModule({
@@ -47,10 +50,13 @@ import { environment } from '@environments/environment';
     StakingTargetCalculatorComponent,
     ValueComponent,
     InputComponent,
+    IconComponent,
     DexComponent,
     DefiComponent,
     CalculatorComponent,
     HoldingsComponent,
+    IncomePageComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

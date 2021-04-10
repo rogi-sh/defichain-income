@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Wallet, WalletDto } from '@interfaces/Data';
@@ -9,33 +9,63 @@ import { Pool, PoolBtcOut } from '@interfaces/Dex';
   templateUrl: './holdings.component.html',
 })
 export class HoldingsComponent implements OnInit {
-  public dialogOpen: boolean = true;
-  public selectedTab: string = 'api';
-  
-  wallet: Wallet;
-  walletDTO: WalletDto;
+  public dialogOpen: boolean = false;
+  public selectedTab: string = 'manual';
 
-  poolBtc: Pool;
-  poolBtcOut: PoolBtcOut = new PoolBtcOut();
-  anteilAmPoolBtc: number;
+  @Input()
+  addAdress: Function;
 
-  // Staking infos
-  dfiInStaking = 0;
-  dfiInStakingKey = 'dfiInStakingKey';
+  @Input()
+  deleteAdress: Function;
+
+  @Input()
+  adress: string;
+
+  @Input()
+  adresses: Array<string>;
+
+  @Input()
+  dataLoaded: boolean;
+
+  @Input()
+  wallet!: Wallet;
+
+  @Input()
+  dfiInStaking!: number;
+
+  @Input()
+  usdToEur!: number;
+
+  @Input()
+  usdToChf!: number;
+
+  @Input()
+  usdToGbp!: number;
+
+  @Input()
+  fiat!: string;
+
+  @Input()
+  poolBtc!: Pool;
+
+  @Input()
+  poolEth!: Pool;
+
+  @Input()
+  poolUsdt!: Pool;
+
+  @Input()
+  poolLtc!: Pool;
+
+  @Input()
+  poolDoge!: Pool;
+
+  @Input()
+  poolBch!: Pool;
 
   constructor(private modalService: NgbModal) { }
 
-  ngOnInit (): void {
-    this.wallet = new Wallet();
-  }
-
-  open (content): void {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-
-    }, (reason) => {
-
-    });
-  }
+  ngOnInit (): void {}
 
   handleSettingsDialog(): void {
     this.dialogOpen = !this.dialogOpen
@@ -44,47 +74,4 @@ export class HoldingsComponent implements OnInit {
   handleTab(selectedTab: string): void {
     this.selectedTab = selectedTab
   }
-
-  clearWallet(): void {
-    const newWallet = new Wallet();
-    newWallet.dfiInStaking = this.dfiInStaking;
-    this.wallet = newWallet;
-  }
-
-  copyValues(wallet: WalletDto): Wallet {
-    const walletFinal = new Wallet();
-    walletFinal.dfiInStaking = wallet.dfiInStaking;
-    walletFinal.dfi = wallet.dfi;
-
-    walletFinal.btcdfi = wallet.btcdfi;
-    walletFinal.ethdfi = wallet.ethdfi;
-    walletFinal.ltcdfi = wallet.ltcdfi;
-    walletFinal.dogedfi = wallet.dogedfi;
-    walletFinal.usdtdfi = wallet.usdtdfi;
-    walletFinal.bchdfi = wallet.bchdfi;
-
-    walletFinal.btcInBtcPool = wallet.btcInBtcPool;
-    walletFinal.dfiInBtcPool = wallet.dfiInBtcPool;
-    walletFinal.ethInEthPool = wallet.ethInEthPool;
-    walletFinal.dfiInEthPool = wallet.dfiInEthPool;
-    walletFinal.usdtInUsdtPool = wallet.usdtInUsdtPool;
-    walletFinal.dfiInUsdtPool = wallet.dfiInUsdtPool;
-    walletFinal.ltcInLtcPool = wallet.ltcInLtcPool;
-    walletFinal.dfiInLtcPool = wallet.dfiInLtcPool;
-    walletFinal.dogeInDogePool = wallet.dogeInDogePool;
-    walletFinal.dfiInDogePool = wallet.dfiInDogePool;
-
-    walletFinal.bchInBchPool = wallet.bchInBchPool;
-    walletFinal.dfiInBchPool = wallet.dfiInBchPool;
-
-    walletFinal.btc = wallet.btc;
-    walletFinal.eth = wallet.eth;
-    walletFinal.ltc = wallet.ltc;
-    walletFinal.doge = wallet.doge;
-    walletFinal.usdt = wallet.usdt;
-    walletFinal.bch = wallet.bch;
-
-    return walletFinal;
-  }
-
 }

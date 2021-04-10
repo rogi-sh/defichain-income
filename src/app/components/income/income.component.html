@@ -1,111 +1,161 @@
-  <h1><span class="badge badge-secondary left">{{ 'income.title' | translate }}</span></h1>
-  <div class="row">
-    <div class="col-auto bg-light margin-col">
-      <h3 class="bold">{{ 'income.distribution' | translate }}</h3>
-      <h2><span class="badge badge-pill badge-success left">{{getAnteilStakingOfIncome() | number: '1.2-2'}} % Staking
-            / {{getAnteilLMOfIncome() | number: '1.2-2'}} % LM</span></h2>
-
-
-      <apx-chart *ngIf="chartOptions2 && chartOptions2.series.length > 0"
-                 [series]="chartOptions2?.series"
-                 [chart]="chartOptions2?.chart"
-                 [labels]="chartOptions2?.labels"
-                 [colors]="chartOptions2?.colors"
-                 [fill]="chartOptions2?.fill"
-                 [stroke]="chartOptions2?.stroke"
-                 [responsive]="chartOptions2?.responsive"
-      ></apx-chart>
-
-      <div class="row">
-        <div class="col-auto bg-light margin-col">
-          <h2>Min <span class="badge badge-pill badge-info">{{getDfiIncomePerMin() | number: '1.2-2' }}
-            DFI =
-                  <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMinUsd() | currency:'USD' }}</span>
-                  <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMinUsd() * usdToEur | currency:'EUR' }}</span>
-                    <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMinUsd() * usdToChf | currency:'CHF' }}</span>
-                    <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMinUsd() * usdToGbp | currency:'GBP' }}</span>
-                      </span>
-
-          </h2>
-        </div>
-        <div class="col-auto bg-light margin-col">
-          <h2>{{ 'hour' | translate }} <span
-            class="badge badge-pill badge-info">{{ getDfiIncomePerHour()| number: '1.2-2' }}
-            DFI =
-                <span
-                  *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD' }}</span>
-                 <span
-                   *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerHourUsd() * usdToEur | currency:'EUR' }}</span>
-                   <span
-                     *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerHourUsd() * usdToChf | currency:'CHF' }}</span>
-                  <span
-                    *ngIf="fiat === 'GBP'"> {{getDfiIncomeValuePerHourUsd() * usdToGbp | currency:'GBP' }}</span>
-                  </span>
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto bg-light margin-col">
-          <h2>{{ 'day' | translate }} <span
-            class="badge badge-pill badge-info">{{getDfiIncomePerDay() | number: '1.2-2' }}
-            DFI =
-        <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD' }}</span>
-        <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR' }}</span>
-        <span *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerDayUsd() * usdToChf | currency:'CHF' }}</span>
-            <span *ngIf="fiat === 'GBP'"> {{getDfiIncomeValuePerDayUsd() * usdToGbp | currency:'GBP' }}</span>
+<h1>
+  <span class="badge badge-secondary left">
+    {{"income.title" | translate}}
+  </span>
+</h1>
+<div class="row">
+  <div class="col-auto bg-light margin-col">
+    <h3 class="bold">{{ "income.distribution" | translate }}</h3>
+    <h2>
+      <span class="badge badge-pill badge-success left">
+        {{ getAnteilStakingOfIncome() | number: "1.2-2" }} % Staking /
+        {{ getAnteilLMOfIncome() | number: "1.2-2" }} % LM
       </span>
-          </h2>
-        </div>
-        <div class="col-auto bg-light margin-col">
-          <h2>{{ 'week' | translate }} <span
-            class="badge badge-pill badge-info"> {{getDfiIncomePerWeek() | number: '1.2-2' }}
-            DFI =
-         <span
-           *ngIf="fiat === 'USD'">  {{getDfiIncomeValuePerWeekUsd() | currency:'USD' }}</span>
-         <span
-           *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerWeekUsd() * usdToEur | currency:'EUR' }}</span>
-         <span
-           *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerWeekUsd() * usdToChf | currency:'CHF' }}</span>
-         <span
-           *ngIf="fiat === 'GBP'"> {{getDfiIncomeValuePerWeekUsd() * usdToGbp | currency:'GBP' }}</span>
-      </span>
-          </h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto bg-light margin-col">
-          <h2>{{ 'month' | translate }} <span
-            class="badge badge-pill badge-info">{{getDfiIncomePerMonth() | number: '1.2-2' }}
-            DFI =
-           <span
-             *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD' }}</span>
-           <span
-             *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMonthUsd() * usdToEur | currency:'EUR' }}</span>
-           <span
-             *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF' }}</span>
-             <span
-               *ngIf="fiat === 'GBP'"> {{getDfiIncomeValuePerMonthUsd() * usdToGbp | currency:'GBP' }}</span>
-        </span>
-          </h2>
-        </div>
-        <div class="col-auto bg-light margin-col">
-          <h2>{{ 'year' | translate }} <span
-            class="badge badge-pill badge-info">{{getDfiIncomePerYear() | number: '1.2-2' }}
-            DFI =
-           <span
-             *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>
-           <span
-             *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerYearUsd() * usdToEur | currency:'EUR' }}</span>
+    </h2>
 
-           <span
-             *ngIf="fiat === 'CHF'"> {{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF' }}</span>
-               <span
-                 *ngIf="fiat === 'GBP'"> {{getDfiIncomeValuePerYearUsd() * usdToGbp | currency:'GBP' }}</span>
-        </span>
-          </h2>
-        </div>
+    <apx-chart
+      *ngIf="chartOptions2 && chartOptions2.series.length > 0"
+      [series]="chartOptions2?.series"
+      [chart]="chartOptions2?.chart"
+      [labels]="chartOptions2?.labels"
+      [colors]="chartOptions2?.colors"
+      [fill]="chartOptions2?.fill"
+      [stroke]="chartOptions2?.stroke"
+      [responsive]="chartOptions2?.responsive"
+    ></apx-chart>
+
+    <div class="row">
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          Min
+          <span class="badge badge-pill badge-info"
+            >{{ getDfiIncomePerMin() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerMinUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerMinUsd() * usdToEur | currency: "EUR" }}
+            </span>
+            <span *ngIf="fiat === 'CHF'">{{
+              getDfiIncomeValuePerMinUsd() * usdToChf | currency: "CHF"
+            }}</span>
+            <span *ngIf="fiat === 'GBP'">{{
+              getDfiIncomeValuePerMinUsd() * usdToGbp | currency: "GBP"
+            }}</span>
+          </span>
+        </h2>
+      </div>
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          {{ "hour" | translate }}
+          <span class="badge badge-pill badge-info"
+            >{{ getDfiIncomePerHour() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerHourUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerHourUsd() * usdToEur | currency: "EUR" }}
+            </span>
+            <span *ngIf="fiat === 'CHF'">
+              {{ getDfiIncomeValuePerHourUsd() * usdToChf | currency: "CHF" }}
+            </span>
+            <span *ngIf="fiat === 'GBP'">
+              {{ getDfiIncomeValuePerHourUsd() * usdToGbp | currency: "GBP" }}
+            </span>
+          </span>
+        </h2>
       </div>
     </div>
+    <div class="row">
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          {{ "day" | translate }}
+          <span class="badge badge-pill badge-info"
+            >{{ getDfiIncomePerDay() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerDayUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerDayUsd() * usdToEur | currency: "EUR" }}
+            </span>
+            <span *ngIf="fiat === 'CHF'">
+              {{ getDfiIncomeValuePerDayUsd() * usdToChf | currency: "CHF" }}
+            </span>
+            <span *ngIf="fiat === 'GBP'">
+              {{ getDfiIncomeValuePerDayUsd() * usdToGbp | currency: "GBP" }}
+            </span>
+          </span>
+        </h2>
+      </div>
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          {{ "week" | translate }}
+          <span class="badge badge-pill badge-info">
+            {{ getDfiIncomePerWeek() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerWeekUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerWeekUsd() * usdToEur | currency: "EUR" }}
+            </span>
+            <span *ngIf="fiat === 'CHF'">
+              {{ getDfiIncomeValuePerWeekUsd() * usdToChf | currency: "CHF" }}
+            </span>
+            <span *ngIf="fiat === 'GBP'">
+              {{ getDfiIncomeValuePerWeekUsd() * usdToGbp | currency: "GBP" }}
+            </span>
+          </span>
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          {{ "month" | translate }}
+          <span class="badge badge-pill badge-info"
+            >{{ getDfiIncomePerMonth() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerMonthUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerMonthUsd() * usdToEur | currency: "EUR" }}
+            </span>
+            <span *ngIf="fiat === 'CHF'">
+              {{ getDfiIncomeValuePerMonthUsd() * usdToChf | currency: "CHF" }}
+            </span>
+            <span *ngIf="fiat === 'GBP'">
+              {{ getDfiIncomeValuePerMonthUsd() * usdToGbp | currency: "GBP" }}
+            </span>
+          </span>
+        </h2>
+      </div>
+      <div class="col-auto bg-light margin-col">
+        <h2>
+          {{ "year" | translate }}
+          <span class="badge badge-pill badge-info"
+            >{{ getDfiIncomePerYear() | number: "1.2-2" }}
+            DFI =
+            <span *ngIf="fiat === 'USD'">
+              {{ getDfiIncomeValuePerYearUsd() | currency: "USD" }}
+            </span>
+            <span *ngIf="fiat === 'EUR'">
+              {{ getDfiIncomeValuePerYearUsd() * usdToEur | currency: "EUR" }}
+            </span>
 
+            <span *ngIf="fiat === 'CHF'">
+              {{ getDfiIncomeValuePerYearUsd() * usdToChf | currency: "CHF" }}
+            </span>
+            <span *ngIf="fiat === 'GBP'">
+              {{ getDfiIncomeValuePerYearUsd() * usdToGbp | currency: "GBP" }}
+            </span>
+          </span>
+        </h2>
+      </div>
+    </div>
   </div>
-
+</div>

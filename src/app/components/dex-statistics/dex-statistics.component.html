@@ -1,12 +1,12 @@
 <div>
-  <div class="flex my-2">
-    <div class="mr-4">
+  <div class="flex my-2 w-full flex-wrap">
+    <div class="w-full sm:w-auto sm:mr-4">
       Staking Cake
       <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
         {{ this.stakingApyCake | number: '1.1-1' }}% APY
       </span>
     </div>
-    <div>
+    <div class="mt-2 w-full sm:w-auto sm:mt-0">
       Staking MN
       <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
         {{ this.stakingApyMN | number: '1.1-1' }}% APY

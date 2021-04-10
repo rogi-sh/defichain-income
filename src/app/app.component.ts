@@ -124,7 +124,7 @@ export class AppComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
-  menu = false;
+  menu = true;
 
   dataLoaded = false;
 
@@ -178,6 +178,7 @@ export class AppComponent implements OnInit {
 
   handlePage(pageTag: string): void {
     this.currentPage = pageTag
+    this.menu = false
   }
 
   loadAddressesAndDexData(): void {

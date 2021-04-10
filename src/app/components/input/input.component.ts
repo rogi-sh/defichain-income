@@ -13,17 +13,13 @@ export class InputComponent implements OnInit {
   value: string | number = null;
 
   @Input()
-  label: string;
+  label: string = '';
 
   @Input()
-  name: string;
+  name: string = '';
   
   @Input()
   required: boolean = false;
-
-  @Input()
-  handleInput: Function;
-
 
   constructor() { }
 
