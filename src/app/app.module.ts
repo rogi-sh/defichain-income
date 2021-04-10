@@ -35,7 +35,7 @@ import { IncomePageComponent } from '@pages/income/income.component';
 import { HoldingsComponent } from '@pages/holdings/holdings.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
-
+import { SettingsComponent } from '@pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +57,7 @@ import { InfoComponent } from '@pages/info/info.component';
     HoldingsComponent,
     IncomePageComponent,
     InfoComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

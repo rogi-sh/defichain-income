@@ -9,7 +9,7 @@ import { Pool, PoolBtcOut } from '@interfaces/Dex';
   templateUrl: './holdings.component.html',
 })
 export class HoldingsComponent implements OnInit {
-  public dialogOpen: boolean = false;
+  public dialogOpen: boolean = true;
   public selectedTab: string = 'manual';
 
   @Input()
@@ -62,6 +62,69 @@ export class HoldingsComponent implements OnInit {
 
   @Input()
   poolBch!: Pool;
+  
+  @Input()
+  stakingApy: Number;
+
+  @Input()
+  onChangeBtcWallet: Function;
+
+  @Input()
+  onChangeEthWallet: Function;
+
+  @Input()
+  onChangeLtcWallet: Function;
+
+  @Input()
+  onChangeUsdtWallet: Function;
+
+  @Input()
+  onChangeDogeWallet: Function;
+
+  @Input()
+  onChangeBchWallet: Function;
+
+  @Input()
+  saveInputStaking: Function;
+
+  @Input()
+  onChangeDfiStaking: Function;
+
+  @Input()
+  onChangeBtcBtcPool: Function;
+  
+  @Input()
+  onChangeDfiBtcPool: Function;
+
+  @Input()
+  onChangeEthEthPool: Function;
+  
+  @Input()
+  onChangeDfiEthPool: Function;
+  
+  @Input()
+  onChangeUsdtUsdtPool: Function;
+  
+  @Input()
+  onChangeDfiUsdtPool: Function;
+  
+  @Input()
+  onChangeLtcLtcPool: Function;
+  
+  @Input()
+  onChangeDfiLtcPool: Function;
+  
+  @Input()
+  onChangeDogeDogePool: Function;
+  
+  @Input()
+  onChangeDfiDogePool: Function;
+  
+  @Input()
+  onChangeBchBchPool: Function;
+  
+  @Input()
+  onChangeDfiBchPool: Function;
 
   constructor(private modalService: NgbModal) { }
 

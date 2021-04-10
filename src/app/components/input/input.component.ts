@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -9,8 +9,11 @@ export class InputComponent implements OnInit {
   @Input()
   type: 'text' | 'number' = 'text';
 
+  @Input() inputModel: string;
+  @Output() inputModelChange = new EventEmitter<string>();
+  
   @Input()
-  value: string | number = null;
+  handleChange: Function;
 
   @Input()
   label: string = '';
@@ -21,11 +24,16 @@ export class InputComponent implements OnInit {
   @Input()
   required: boolean = false;
 
-  constructor() { }
+  @Input()
+  min?: number = null;
 
-  ngOnInit(): void {
-  }
+  @Input()
+  max?: number = null;
 
-  ngOnChanges(): void {
-  }
+  @Input()
+  step?: number = null;
+
+  constructor() {}
+
+  ngOnInit(): void {}
 }

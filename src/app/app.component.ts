@@ -124,9 +124,9 @@ export class AppComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
-  menu = true;
+  menu = false;
 
-  dataLoaded = false;
+  dataLoaded = true;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -150,6 +150,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.wallet = new Wallet();
+
+    console.log(132, this.wallet.ltc)
 
     this.loadFromLocalStorage();
 

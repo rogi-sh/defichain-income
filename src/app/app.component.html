@@ -23,11 +23,11 @@
         alt="DefiChain-Income Logo"
       />
     </a>
-    <div class="hidden sm:inline ml-4 h-full py-3 text-sm">
-      <strong>Login with key: </strong>
-      <div>b50d33cc-5986-4f8f-9300-85c7051fe249</div>
-    </div>
 
+    <div *ngIf="loggedIn" class="hidden sm:inline ml-4 h-full py-3 text-sm">
+      <strong>{{ 'login3' | translate }}</strong>
+      <div>{{loggedInAuth}}</div>
+    </div>
 
     <div class="hidden sm:flex absolute right-6 self-center">
       <div *ngIf="apiOnline">
@@ -299,6 +299,27 @@
               [poolBch]="poolBch"
               [dfiInStaking]="dfiInStaking"
               [wallet]="wallet"
+              [stakingApy]="stakingApy"
+              [onChangeBtcWallet]="onChangeBtcWallet"
+              [onChangeEthWallet]="onChangeEthWallet"
+              [onChangeLtcWallet]="onChangeLtcWallet"
+              [onChangeUsdtWallet]="onChangeUsdtWallet"
+              [onChangeDogeWallet]="onChangeDogeWallet"
+              [onChangeBchWallet]="onChangeBchWallet"
+              [saveInputStaking]="saveInputStaking"
+              [onChangeBtcBtcPool]="onChangeBtcBtcPool"
+              [onChangeDfiBtcPool]="onChangeDfiBtcPool"
+              
+              [onChangeEthEthPool]="onChangeEthEthPool"
+              [onChangeDfiEthPool]="onChangeDfiEthPool"
+              [onChangeUsdtUsdtPool]="onChangeUsdtUsdtPool"
+              [onChangeDfiUsdtPool]="onChangeDfiUsdtPool"
+              [onChangeLtcLtcPool]="onChangeLtcLtcPool"
+              [onChangeDfiLtcPool]="onChangeDfiLtcPool"
+              [onChangeDogeDogePool]="onChangeDogeDogePool"
+              [onChangeDfiDogePool]="onChangeDfiDogePool"
+              [onChangeBchBchPool]="onChangeBchBchPool"
+              [onChangeDfiBchPool]="onChangeDfiBchPool"
             ></app-holdings-page>
           </div>
           <div *ngSwitchCase="'dex'">
@@ -352,7 +373,16 @@
             ></app-info-page>
           </div>
           <div *ngSwitchCase="'settings'">
-            <app-settings-page></app-settings-page>
+            <app-settings-page
+              [sCountdown]="sCountdown"
+              [sCountdownShow]="sCountdownShow"
+              [onChangeRefreshS]="onChangeRefreshS"
+              [loggedIn]="loggedIn"
+              [errorBackend]="errorBackend"
+              [successBackend]="successBackend"
+              [register]="register"
+              [login]="login"
+            ></app-settings-page>
           </div>
           <div *ngSwitchDefault>
             <app-dashboard-page></app-dashboard-page>
