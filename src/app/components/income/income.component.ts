@@ -1,14 +1,14 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
-import {ChartOptions2} from '../../../interface/Data';
-import {Outcome, OutcomeStaking, Pool} from '../../../interface/Dex';
+import {ChartOptions2, StakingCalc} from '@interfaces/Data';
+import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-income',
-  templateUrl: './income.component.html',
-  styleUrls: ['./income.component.css']
+  templateUrl: './income.component.html'
 })
 export class IncomeComponent implements OnInit, OnChanges {
+  stakingCalcOut: StakingCalc = new StakingCalc();
   selectedTab: string = 'Staking';
 
   @ViewChild('chart2') chart2: ChartComponent;
@@ -169,7 +169,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
     return incomeNumbers;
   }
-
+  getDfiCountStakingCalcUsd (): number {
+    return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
+  }
   getColorsIncome(): Array<string> {
 
     const incomeNumbers = new Array<string>();

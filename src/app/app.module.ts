@@ -31,7 +31,6 @@ import { IconComponent } from '@components/icon/icon.component';
 
 import { DexComponent } from '@pages/dex/dex.component';
 import { DefiComponent } from '@pages/defi/defi.component';
-import { IncomePageComponent } from '@pages/income/income.component';
 import { HoldingsComponent } from '@pages/holdings/holdings.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
@@ -55,7 +54,6 @@ import { SettingsComponent } from '@pages/settings/settings.component';
     DefiComponent,
     CalculatorComponent,
     HoldingsComponent,
-    IncomePageComponent,
     InfoComponent,
     SettingsComponent,
   ],
