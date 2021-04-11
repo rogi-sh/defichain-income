@@ -43,7 +43,7 @@
       <select
         class="ml-4 bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
         (change)="useLanguage($event.target.value)"
-        value="lang"
+        [value]="lang"
       >
         <option value="de">DE</option>
         <option value="en" selected>EN</option>
@@ -52,7 +52,7 @@
       <select
         class="bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
         (change)="onChangeFiat($event.target.value)"
-        value="fiat"
+        [value]="fiat"
         style="text-align-last: center;"
       >
         <option class="text-center" value="USD" selected>$</option>
