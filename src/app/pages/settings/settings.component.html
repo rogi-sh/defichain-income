@@ -35,7 +35,7 @@
         <button 
           (click)="register()"
           type="button"
-          class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top"
+          class="max-w-xs bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top"
         >
           {{ 'register' | translate }}
         </button>
@@ -53,7 +53,7 @@
       <div *ngIf="!loggedIn" class="flex">
         <div class="w-3/4 pr-2">
           <app-input
-            name="{{ 'login21' | translate }}"
+            label="{{ 'login21' | translate }}"
             [value]="loggedInAuthInput"
           ></app-input>
         </div>

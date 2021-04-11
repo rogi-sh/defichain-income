@@ -1,25 +1,42 @@
-<h1><span class="badge badge-secondary left">{{ 'value.title' | translate }}</span></h1>
+<div class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2">
+  <div>
+    <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
 
-<h3 style="font-weight: bold">{{ 'value.dist' | translate }}</h3>
+    <apx-chart
+      class="w-full"
+      *ngIf="chartOptions3 && chartOptions3.series.length > 0"
+      [series]="chartOptions3?.series"
+      [chart]="chartOptions3?.chart"
+      [labels]="chartOptions3?.labels"
+      [colors]="chartOptions3?.colors"
+      [fill]="chartOptions3?.fill"
+      [dataLabels]="chartOptions3?.dataLabels"
+      [responsive]="chartOptions3?.responsive"
+      ></apx-chart>
+    </div>
+    <div>
+      <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
+      
+    <apx-chart *ngIf="chartOptions && chartOptions.series.length > 0"
+      class="w-full"
+      [series]="chartOptions?.series"
+      [chart]="chartOptions?.chart"
+      [labels]="chartOptions?.labels"
+      [colors]="chartOptions?.colors"
+      [fill]="chartOptions?.fill"
+      [dataLabels]="chartOptions?.dataLabels"
+      [responsive]="chartOptions?.responsive"
+    ></apx-chart>
+  </div>
+</div>
 
-<h2><span class="badge badge-pill badge-success left">
-        {{this.getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
+
+<!-- <h2><span class="badge badge-pill badge-success left">
+        {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM</span></h2>
 
 
-<apx-chart *ngIf="chartOptions3 && chartOptions3.series.length > 0"
-           [series]="chartOptions3?.series"
-           [chart]="chartOptions3?.chart"
-           [labels]="chartOptions3?.labels"
-           [colors]="chartOptions3?.colors"
-           [fill]="chartOptions3?.fill"
-           [dataLabels]="chartOptions3?.dataLabels"
-           [responsive]="chartOptions3?.responsive"
-></apx-chart>
-
-
-<h3 class="bold">{{ 'value.hold' | translate }}</h3>
 
 <div class="row">
   <div class="col-auto bg-light margin-col">
@@ -31,17 +48,6 @@
             <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
         </span>
     </h1>
-
-    <apx-chart *ngIf="chartOptions && chartOptions.series.length > 0"
-               [series]="chartOptions?.series"
-               [chart]="chartOptions?.chart"
-               [labels]="chartOptions?.labels"
-               [colors]="chartOptions?.colors"
-               [fill]="chartOptions?.fill"
-               [dataLabels]="chartOptions?.dataLabels"
-               [responsive]="chartOptions?.responsive"
-    ></apx-chart>
-
     <h2><span
       class="badge badge-pill badge-primary left"> {{getDfiCount() | number: '1.2-2' }} DFI -
         <span *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
@@ -122,4 +128,4 @@
     </div>
 
   </div>
-</div>
+</div> -->

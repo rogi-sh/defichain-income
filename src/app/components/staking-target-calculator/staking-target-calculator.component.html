@@ -1,58 +1,119 @@
 <div class="col-sm bg-light margin-col">
-  <h2>
-    <span class="badge badge-pill badge-success left">{{ 'target-reward-title' | translate }} </span>
+  <h2 class="text-lg mb-1">
+    {{ 'target-reward-title' | translate }}
   </h2>
-  <span class="badge badge-pill badge-success left">Staking Apy {{stakingApy}} %</span>
-  <br>
-  <div class="row">
-    <div class="col-sm bg-light margin-col">
-      <div class="form-group">
-        <label for="aimReturnMin">DFI per Min</label>
-        <input required [(ngModel)]="aimReturnMin" (ngModelChange)="onChangeAimReturnMin($event)"
-               type="number"
-               class="form-control form-control-sm" id="aimReturnMin" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'target-reward-input' | translate }} Min.</small>
-      </div>
-      <h2><span
-        class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMin | number: '1.0-0' }}
-        DFI</span></h2>
+  <span>Staking Apy <span class="bg-pink-500 px-2 rounded-full text-white">{{stakingApy}} %</span></span>
 
-      <div class="form-group">
-        <label for="aimReturnHour">DFI per {{ 'hour' | translate }} </label>
-        <input required [(ngModel)]="aimReturnHour" (ngModelChange)="onChangeAimReturnHour($event)"
-               type="number"
-               class="form-control form-control-sm" id="aimReturnHour" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'target-reward-input' | translate }}{{ 'hour' | translate }}
-          .</small>
+
+  <div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1">
+    <div class="pr-4 lg:border-r-2">
+      <div class="mt-5 grid grid-cols-1 grid-rows-4 gap-4">
+        <div 
+          class="relative h-14 input-component w-auto inline-block mr-2 "
+          [ngClass]="!aimReturnMin ? 'empty' : ''"
+          title="DFI per {{ 'Min' | translate }}"
+        >
+          <label for="aimReturnMin" class="absolute left-2 transition-all px-1 pointer-events-none">
+            DFI per {{ 'Min' | translate }}
+          </label>
+          <input
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            required
+            [(ngModel)]="aimReturnMin"
+            (ngModelChange)="onChangeAimReturnMin($event)"
+            type="number"
+            id="aimReturnMin"
+            placeholder="Enter dfi amount"
+          >
+        </div>
+
+        <div 
+          class="relative h-14 input-component w-auto inline-block mr-2"
+          [ngClass]="!aimReturnHour ? 'empty' : ''"
+          title="DFI per {{ 'hour' | translate }}"
+        >
+          <label for="aimReturnHour" class="absolute left-2 transition-all px-1 pointer-events-none">
+            DFI per {{ 'Hour' | translate }}
+          </label>
+          <input
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            required
+            [(ngModel)]="aimReturnHour"
+            (ngModelChange)="onChangeAimReturnHour($event)"
+            type="number"
+            id="aimReturnHour"
+            placeholder="Enter dfi amount"
+          >
+        </div>
+        
+        <div 
+          class="relative h-14 input-component w-auto inline-block mr-2"
+          [ngClass]="!aimReturnDay ? 'empty' : ''"
+          title="DFI per {{ 'day' | translate }}"
+        >
+          <label for="aimReturnDay" class="absolute left-2 transition-all px-1 pointer-events-none">
+            DFI per {{ 'day' | translate }}
+          </label>
+          <input
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            required
+            [(ngModel)]="aimReturnDay"
+            (ngModelChange)="onChangeAimReturnDay($event)"
+            type="number"
+            id="aimReturnDay"
+            placeholder="Enter dfi amount"
+          >
+        </div>
+        
+        <div
+          class="relative h-14 input-component w-auto inline-block mr-2"
+          [ngClass]="!aimReturnMonth ? 'empty' : ''"
+          title="DFI per {{ 'month' | translate }}"
+        >
+          <label for="aimReturnMonth" class="absolute left-2 transition-all px-1 pointer-events-none">
+            DFI per {{ 'month' | translate }}
+          </label>
+          <input
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            required
+            [(ngModel)]="aimReturnMonth"
+            (ngModelChange)="onChangeAimReturnMonth($event)"
+            type="number"
+            id="aimReturnMonth"
+            placeholder="Enter dfi amount"
+          >
+        </div>
+
+       
       </div>
-      <h2><span
-        class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnHour | number: '1.0-0' }}
-        DFI</span></h2>
     </div>
-    <div class="col-sm bg-light margin-col">
-      <div class="form-group">
-        <label for="aimReturn">DFI per {{ 'day' | translate }} </label>
-        <input required [(ngModel)]="aimReturnDay" (ngModelChange)="onChangeAimReturnDay($event)"
-               type="number"
-               class="form-control form-control-sm" id="aimReturn" placeholder="Enter dfi amount">
-        <small class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'day' | translate }}
-          .</small>
+
+    <div class="lg:pl-4">
+      <div class="text-lg mb-2">
+        {{ 'invest-needed' | translate }} 
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnMin | number: '1.0-0' }}
+        </div>
       </div>
-      <h2><span
-        class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnDay | number: '1.0-0' }}
-        DFI</span></h2>
-      <div class="form-group">
-        <label for="aimReturnMonth">DFI per {{ 'month' | translate }} </label>
-        <input required [(ngModel)]="aimReturnMonth" (ngModelChange)="onChangeAimReturnMonth($event)"
-               type="number"
-               class="form-control form-control-sm" id="aimReturnMonth" placeholder="Enter dfi amount">
-        <small
-          class="form-text text-muted">{{ 'target-reward-input' | translate }} {{ 'month' | translate }}
-          .</small>
+      <div class="text-lg mb-2">
+        {{ 'invest-needed' | translate }} 
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnHour | number: '1.0-0' }}
+        </div>
       </div>
-      <h2><span
-        class="badge badge-pill badge-success left">{{ 'invest-needed' | translate }} {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
-        DFI</span></h2>
+      <div class="text-lg mb-2">
+        {{ 'invest-needed' | translate }} 
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnDay | number: '1.0-0' }}
+        </div>
+      </div>
+      <div class="text-lg mb-2">
+        {{ 'invest-needed' | translate }} 
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

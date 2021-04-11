@@ -9,6 +9,11 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        pink: {
+          500: '#FF00AF',
+        }
+      },
       height: {
         '97%': '97%',
       }

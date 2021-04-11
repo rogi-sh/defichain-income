@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
-  currentPage = 'holdings';
+  currentPage = 'income';
 
   wallet: Wallet;
   walletDTO: WalletDto;
@@ -148,10 +148,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.wallet = new Wallet();
-
-    console.log(132, this.wallet.ltc)
 
     this.loadFromLocalStorage();
 
@@ -1123,6 +1120,7 @@ export class AppComponent implements OnInit {
 
   addAdress(): void {
     this.adresses.push(this.adress);
+    console.log(this.adresses)
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();

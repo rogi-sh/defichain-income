@@ -9,6 +9,7 @@ import {Outcome, OutcomeStaking, Pool} from '../../../interface/Dex';
   styleUrls: ['./income.component.css']
 })
 export class IncomeComponent implements OnInit, OnChanges {
+  selectedTab: string = 'Staking';
 
   @ViewChild('chart2') chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;
@@ -51,6 +52,27 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   fiat!: string;
+
+  @Input()
+  getAnteilBTCPoolAnGesamtLM: Function;
+
+  @Input()
+  getAnteilETHPoolAnGesamtLM: Function;
+
+  @Input()
+  getAnteilLTCPoolAnGesamtLM: Function;
+
+  @Input()
+  getAnteilUSDTPoolAnGesamtLM: Function;
+
+  @Input()
+  getAnteilDogePoolAnGesamtLM: Function;
+
+  @Input()
+  getAnteilBchPoolAnGesamtLM: Function;
+
+  @Input()
+  getDfiCountInLM: Function;
 
   constructor()  { }
 
@@ -238,4 +260,7 @@ export class IncomeComponent implements OnInit, OnChanges {
     };
   }
 
+  handleTab(selectedTab: string): void {
+    this.selectedTab = selectedTab
+  }
 }

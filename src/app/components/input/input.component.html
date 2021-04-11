@@ -1,17 +1,16 @@
 <div
   class="relative h-14 input-component"
-  [ngClass]="inputModel === '' ? 'empty' : ''"
+  [ngClass]="value === '' ? 'empty' : ''"
   [title]="label"
 >
   <input
     [id]="label"
     [type]="type"
-    [type]="type"
     [name]="name"
     [placeholder]="label"
     [required]="required"
-    [(ngModel)]="inputModel"
-    (ngModelChange)="this.inputModelChange.emit(inputModel)"
+    [(ngModel)]="value"
+    (ngModelChange)="this.valueChange.emit(value)"
     [min]="min"
     [max]="max"
     [step]="step"

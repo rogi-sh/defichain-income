@@ -1,17 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Wallet, WalletDto } from '@interfaces/Data';
-import { Pool, PoolBtcOut } from '@interfaces/Dex';
+import { Wallet } from '@interfaces/Data';
+import { Pool } from '@interfaces/Dex';
 
 @Component({
   selector: 'app-holdings-page',
   templateUrl: './holdings.component.html',
 })
 export class HoldingsComponent implements OnInit {
-  public dialogOpen: boolean = true;
-  public selectedTab: string = 'manual';
-
+  dialogOpen: boolean = false;
+  selectedTab: string = 'manual';
+  
   @Input()
   addAdress: Function;
 
@@ -25,43 +24,40 @@ export class HoldingsComponent implements OnInit {
   adresses: Array<string>;
 
   @Input()
-  dataLoaded: boolean;
+  wallet: Wallet;
 
   @Input()
-  wallet!: Wallet;
+  dfiInStaking: number;
 
   @Input()
-  dfiInStaking!: number;
+  usdToEur: number;
 
   @Input()
-  usdToEur!: number;
+  usdToChf: number;
 
   @Input()
-  usdToChf!: number;
+  usdToGbp: number;
 
   @Input()
-  usdToGbp!: number;
+  fiat: string;
 
   @Input()
-  fiat!: string;
+  poolBtc: Pool;
 
   @Input()
-  poolBtc!: Pool;
+  poolEth: Pool;
 
   @Input()
-  poolEth!: Pool;
+  poolUsdt: Pool;
 
   @Input()
-  poolUsdt!: Pool;
+  poolLtc: Pool;
 
   @Input()
-  poolLtc!: Pool;
+  poolDoge: Pool;
 
   @Input()
-  poolDoge!: Pool;
-
-  @Input()
-  poolBch!: Pool;
+  poolBch: Pool;
   
   @Input()
   stakingApy: Number;
@@ -126,7 +122,7 @@ export class HoldingsComponent implements OnInit {
   @Input()
   onChangeDfiBchPool: Function;
 
-  constructor(private modalService: NgbModal) { }
+  constructor() {}
 
   ngOnInit (): void {}
 

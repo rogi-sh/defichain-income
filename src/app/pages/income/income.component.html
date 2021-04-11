@@ -1,8 +1,7 @@
 <div>
   <h1 class="text-3xl mb-4">{{"income.title" | translate}}</h1>
 
-  <app-income 
-    *ngIf="dataLoaded"
+  <app-income
     [poolBtc]="poolBtc"
     [fiat]="fiat"
     [usdToEur]="usdToEur"

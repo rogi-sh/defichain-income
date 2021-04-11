@@ -6,8 +6,7 @@ import { Outcome, OutcomeStaking, Pool } from '@interfaces/Dex';
   templateUrl: './income.component.html'
 })
 export class IncomePageComponent implements OnInit {
-  @Input()
-  dataLoaded!: boolean;
+  selectedTab: string = 'Staking';
 
   @Input()
   stakingOut!: OutcomeStaking;
@@ -51,5 +50,9 @@ export class IncomePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  handleTab(selectedTab: string): void {
+    this.selectedTab = selectedTab
   }
 }

@@ -2,42 +2,30 @@
   <h1 class="text-3xl mb-4">Bestände</h1>
 
   <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500" (click)="handleSettingsDialog()">
-    <embed
-      type="image/svg+xml"
-      src="/assets/icons/settings.svg"
-      class="pointer-events-none w-8 h-8 fill-current"
-    />
+    <div class="pointer-events-none w-8 h-8">
+      <app-icon name="settings"></app-icon>
+    </div>
   </a>
 
-  <div
-    class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-rows-1 sm:grid-cols-2"
-  >
-    <div>
-      <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
-      <div *ngIf="wallet && poolBtc">
-        <app-value
-          [poolBtc]="poolBtc"
-          [fiat]="fiat"
-          [usdToEur]="usdToEur"
-          [usdToChf]="usdToChf"
-          [usdToGbp]="usdToGbp"
-          [poolEth]="poolEth"
-          [poolUsdt]="poolUsdt"
-          [poolLtc]="poolLtc"
-          [poolDoge]="poolDoge"
-          [poolBch]="poolBch"
-          [dfiInStaking]="dfiInStaking"
-          [wallet]="wallet"
-        ></app-value>
-      </div>
-    </div>
-    <div>
-      <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
-    </div>
+  <div *ngIf="wallet && poolBtc">
+    <app-value
+      [poolBtc]="poolBtc"
+      [fiat]="fiat"
+      [usdToEur]="usdToEur"
+      [usdToChf]="usdToChf"
+      [usdToGbp]="usdToGbp"
+      [poolEth]="poolEth"
+      [poolUsdt]="poolUsdt"
+      [poolLtc]="poolLtc"
+      [poolDoge]="poolDoge"
+      [poolBch]="poolBch"
+      [dfiInStaking]="dfiInStaking"
+      [wallet]="wallet"
+    ></app-value>
   </div>
 
   <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
-    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4">
+    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-hidden">
       <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
         <object
           type="image/svg+xml"
@@ -55,12 +43,12 @@
           >
             Manual enter
           </a>
-            <a
-              (click)="handleTab('api')"
-              class="text-center cursor-pointer"
-              [ngClass]="{'text-pink-500': selectedTab === 'api'}"
-            >
-              Api Key
+          <a
+            (click)="handleTab('api')"
+            class="text-center cursor-pointer"
+            [ngClass]="{'text-pink-500': selectedTab === 'api'}"
+          >
+            Adressen
           </a>
         </div>
 
@@ -73,8 +61,8 @@
                   name="btc"
                   type="number"
                   label="BTC"
-                  [handleChange]="onChangeBtcWallet"
-                  [(inputModel)]="wallet.btc"
+                  [handleChange]="onChangeBtcWallet.bind(this)"
+                  [(value)]="wallet.btc"
                 ></app-input>
               </div>
               <div>
@@ -83,7 +71,7 @@
                   type="number"
                   label="ETH"
                   [handleChange]="onChangeEthWallet"
-                  [(inputModel)]="wallet.eth"
+                  [(value)]="wallet.eth"
                 ></app-input>
               </div>
               <div>
@@ -92,7 +80,7 @@
                   type="number"
                   label="LTC"
                   [handleChange]="onChangeLtcWallet"
-                  [(inputModel)]="wallet.ltc"
+                  [(value)]="wallet.ltc"
                 ></app-input> 
               </div>
               <div>
@@ -101,7 +89,7 @@
                   type="number"
                   label="USDT"
                   [handleChange]="onChangeUsdtWallet"
-                  [(inputModel)]="wallet.usdt"
+                  [(value)]="wallet.usdt"
                 ></app-input>
               </div>
               <div>
@@ -110,7 +98,7 @@
                   type="number"
                   [handleChange]="onChangeDogeWallet"
                   label="DOGE"
-                  [(inputModel)]="wallet.doge"
+                  [(value)]="wallet.doge"
                 ></app-input>
               </div>
               <div>
@@ -119,7 +107,7 @@
                   type="number"
                   [handleChange]="onChangeBchWallet"
                   label="BCH"
-                  [(inputModel)]="wallet.bch"
+                  [(value)]="wallet.bch"
                 ></app-input>
               </div>
             </div>
@@ -132,7 +120,7 @@
                   type="number"
                   [handleChange]="saveInputStaking"
                   label="Staking APY"
-                  [(inputModel)]="stakingApy"  
+                  [(value)]="stakingApy"  
                 ></app-input>
               </div>
               <div>
@@ -141,7 +129,7 @@
                   type="number"
                   [handleChange]="onChangeDfiStaking"
                   label="DEFI"
-                  [(inputModel)]="dfiInStaking"  
+                  [(value)]="dfiInStaking"  
                 ></app-input>
               </div>
             </div>
@@ -154,7 +142,7 @@
                   type="number"
                   [handleChange]="onChangeBtcBtcPool"
                   label="BTC"
-                  [(inputModel)]="wallet.btcInBtcPool"
+                  [(value)]="wallet.btcInBtcPool"
                 ></app-input>
               </div>
               <div>
@@ -163,7 +151,7 @@
                   type="number"
                   [handleChange]="onChangeDfiBtcPool"
                   label="DEFI"
-                  [(inputModel)]="wallet.dfiInBtcPool"
+                  [(value)]="wallet.dfiInBtcPool"
                 ></app-input>
               </div>
               <div class="md:col-start-1">
@@ -172,7 +160,7 @@
                   type="number"
                   [handleChange]="onChangeEthEthPool"
                   label="ETH"
-                  [(inputModel)]="wallet.ethInEthPool"
+                  [(value)]="wallet.ethInEthPool"
                 ></app-input>
               </div>
               <div>
@@ -181,7 +169,7 @@
                   type="number"
                   [handleChange]="onChangeDfiEthPool"
                   label="DEFI"
-                  [(inputModel)]="wallet.dfiInEthPool"
+                  [(value)]="wallet.dfiInEthPool"
                 ></app-input>
               </div>
               <div class="md:col-start-1">
@@ -190,7 +178,7 @@
                   type="number"
                   [handleChange]="onChangeUsdtUsdtPool"
                   label="USDT"
-                  [(inputModel)]="wallet.usdtInUsdtPool"
+                  [(value)]="wallet.usdtInUsdtPool"
                 ></app-input>
               </div>
               <div>
@@ -199,7 +187,7 @@
                   type="number"
                   [handleChange]="onChangeDfiUsdtPool"
                   label="Defi"
-                  [(inputModel)]="wallet.dfiInUsdtPool"
+                  [(value)]="wallet.dfiInUsdtPool"
                 ></app-input>
               </div>
               <div class="md:col-start-1">
@@ -208,7 +196,7 @@
                   type="number"
                   [handleChange]="onChangeLtcLtcPool"
                   label="LTC"
-                  [(inputModel)]="wallet.ltcInLtcPool"
+                  [(value)]="wallet.ltcInLtcPool"
                 ></app-input>
               </div>
               <div>
@@ -217,7 +205,7 @@
                   type="number"
                   [handleChange]="onChangeDfiLtcPool"
                   label="DEFI"
-                  [(inputModel)]="wallet.dfiInLtcPool"
+                  [(value)]="wallet.dfiInLtcPool"
                 ></app-input>
               </div>
               <div class="md:col-start-1">
@@ -226,7 +214,7 @@
                   type="number"
                   [handleChange]="onChangeDogeDogePool"
                   label="Doge"
-                  [(inputModel)]="wallet.dogeInDogePool"
+                  [(value)]="wallet.dogeInDogePool"
                 ></app-input>
               </div>
               <div>
@@ -235,7 +223,7 @@
                   type="number"
                   [handleChange]="onChangeDfiDogePool"
                   label="DEFI"
-                  [(inputModel)]="wallet.dfiInDogePool"
+                  [(value)]="wallet.dfiInDogePool"
                 ></app-input>
               </div>
               <div class="md:col-start-1">
@@ -244,7 +232,7 @@
                   type="number"
                   [handleChange]="onChangeBchBchPool"
                   label="BCH"
-                  [(inputModel)]="wallet.bchInBchPool"
+                  [(value)]="wallet.bchInBchPool"
                 ></app-input>
               </div>
               <div>
@@ -253,43 +241,51 @@
                   type="number"
                   [handleChange]="onChangeDfiBchPool"
                   label="DEFI"
-                  [(inputModel)]="wallet.dfiInBchPool"
+                  [(value)]="wallet.dfiInBchPool"
                 ></app-input>
               </div>
             </div>
           </div>
 
           <div *ngIf="selectedTab === 'api'">
-            <div class="inline-block w-3/4">
-              <app-input
-                required
-                id="inputAddress"
-                name="apiKey"
-                label="DFI Address"
-                [value]="adress"
-              >
-              </app-input>
-            </div>
-            <div class="inline-block w-1/4 pl-2 align-top">
-              <button class="bg-pink-500 rounded-md w-full h-14 text-white align-top" (click)="addAdress()">
-                Add
-              </button>
+            <div>
+              <div class="inline-block w-3/4">
+                <app-input
+                  required
+                  id="inputAddress"
+                  name="apiKey"
+                  label="DFI Address"
+                  [value]="this.adress"
+                >
+                </app-input>
+              </div>
+              <div class="inline-block w-1/4 pl-2 align-top">
+                <button
+                  class="bg-pink-500 rounded-md w-full h-14 text-white align-top focus:outline-none"
+                  (click)="addAdress()"
+                >
+                  Add
+                </button>
+              </div>
             </div>
 
-            <div class="block mt-2">
-              <div 
-                *ngFor="let adress of adresses; index as i;"
-                class="relative px-3"
-                [ngClass]="{'bg-gray-200': i % 2}"
-              >
-                {{ adress }}
-                <a class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer" (click)="deleteAdress(adress)">
-                  X
-                </a>
+            <div class="flex">
+              <div class="block mt-2 h-auto w-full">
+                <div 
+                  *ngFor="let a of adresses; index as i;"
+                  class="relative px-3"
+                  [ngClass]="{'bg-gray-200': i % 2}"
+                >
+                  {{ a }}
+                  <a class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer" (click)="this.deleteAdress(a)">
+                    X
+                  </a>
+                </div>
               </div>
-              <!-- <div *ngFor="let adress of adresses">{{adress}}</div> -->
             </div>
           </div>
+
+
         </div>
       </div>
     </div>

@@ -29,6 +29,12 @@ export class SettingsComponent implements OnInit {
   
   @Input()
   login: Function;
+  
+  @Input()
+  loggedInAuthInput: string;
+  
+  @Input()
+  loggedInAuth: string;
 
   constructor(private modalService: NgbModal) { }
 

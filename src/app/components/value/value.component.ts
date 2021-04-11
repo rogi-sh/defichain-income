@@ -6,7 +6,6 @@ import {ChartComponent} from 'ng-apexcharts';
 @Component({
   selector: 'app-value',
   templateUrl: './value.component.html',
-  styleUrls: ['./value.component.css']
 })
 export class ValueComponent implements OnInit, OnChanges {
 
@@ -333,8 +332,10 @@ export class ValueComponent implements OnInit, OnChanges {
 
   buildDataForChart(): void {
 
+    console.log(this.getAllValuesUsdPrice())
     const allValue = this.getAllValuesUsdPrice();
 
+    console.log(allValue)
     const dataBtc = new Data();
     dataBtc.value = this.getBtcValueUsd();
     dataBtc.name = 'BTC';

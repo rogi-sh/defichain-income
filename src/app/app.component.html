@@ -158,7 +158,9 @@
           [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
           class="hover:text-pink-400 text-center cursor-pointer flex"
         >
-          <app-icon name="settings"></app-icon>
+          <div class="w-10 h-10">
+            <app-icon name="settings"></app-icon>
+          </div>
           <div class="inline self-center ml-2 text-xl">Settings</div>
         </a>
       </div>
@@ -252,21 +254,64 @@
             [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
             class="hover:text-pink-400 my-2 block cursor-pointer"
           >
-            <app-icon name="settings"></app-icon>
+            <div class="w-10 h-10 mx-auto">
+              <app-icon name="settings"></app-icon>
+            </div>
           </a>
         </div>
       </div>
     </div>
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div
+        *ngIf="dataLoaded"
         class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl p-3 bg-white mx-auto sm:mb-5 sm:overflow-auto relative"
       >
         <container-element [ngSwitch]="currentPage">
-          <div *ngSwitchCase="'income'">
-            <app-income-page
-              [dataLoaded]="dataLoaded"
-              [poolBtc]="poolBtc"
+          <div *ngSwitchCase="'holdings'">
+            <app-holdings-page
+              [addAdress]="addAdress.bind(this)"
+              [deleteAdress]="deleteAdress.bind(this)"
+              [adress]="adress"
+              [adresses]="adresses"
               [fiat]="fiat"
+              [usdToEur]="usdToEur"
+              [usdToChf]="usdToChf"
+              [usdToGbp]="usdToGbp"
+              [poolBtc]="poolBtc"
+              [poolEth]="poolEth"
+              [poolUsdt]="poolUsdt"
+              [poolLtc]="poolLtc"
+              [poolDoge]="poolDoge"
+              [poolBch]="poolBch"
+              [dfiInStaking]="dfiInStaking"
+              [wallet]="wallet"
+              [stakingApy]="stakingApy"
+              [onChangeBtcWallet]="onChangeBtcWallet.bind(this)"
+              [onChangeEthWallet]="onChangeEthWallet.bind(this)"
+              [onChangeLtcWallet]="onChangeLtcWallet.bind(this)"
+              [onChangeUsdtWallet]="onChangeUsdtWallet.bind(this)"
+              [onChangeDogeWallet]="onChangeDogeWallet.bind(this)"
+              [onChangeBchWallet]="onChangeBchWallet.bind(this)"
+              [saveInputStaking]="saveInputStaking.bind(this)"
+              [onChangeBtcBtcPool]="onChangeBtcBtcPool.bind(this)"
+              [onChangeDfiBtcPool]="onChangeDfiBtcPool.bind(this)"
+              [onChangeEthEthPool]="onChangeEthEthPool.bind(this)"
+              [onChangeDfiEthPool]="onChangeDfiEthPool.bind(this)"
+              [onChangeUsdtUsdtPool]="onChangeUsdtUsdtPool.bind(this)"
+              [onChangeDfiUsdtPool]="onChangeDfiUsdtPool.bind(this)"
+              [onChangeLtcLtcPool]="onChangeLtcLtcPool.bind(this)"
+              [onChangeDfiLtcPool]="onChangeDfiLtcPool.bind(this)"
+              [onChangeDogeDogePool]="onChangeDogeDogePool.bind(this)"
+              [onChangeDfiDogePool]="onChangeDfiDogePool.bind(this)"
+              [onChangeBchBchPool]="onChangeBchBchPool.bind(this)"
+              [onChangeDfiBchPool]="onChangeDfiBchPool.bind(this)"
+            ></app-holdings-page>
+          </div>
+          <div *ngSwitchCase="'income'">
+            <app-income
+              *ngIf="dataLoaded"
+              [fiat]="fiat"
+              [poolBtc]="poolBtc"
               [usdToEur]="usdToEur"
               [usdToChf]="usdToChf"
               [usdToGbp]="usdToGbp"
@@ -278,49 +323,15 @@
               [poolOut]="poolOut"
               [poolUsdtOut]="poolUsdtOut"
               [stakingOut]="stakingOut"
-            ></app-income-page> 
-          </div>
-          <div *ngSwitchCase="'holdings'">
-            <app-holdings-page
-              [dataLoaded]="dataLoaded"
-              [addAdress]="addAdress"
-              [deleteAdress]="deleteAdress"
-              [adress]="adress"
-              [adresses]="adresses"
-              [poolBtc]="poolBtc"
-              [fiat]="fiat"
-              [usdToEur]="usdToEur"
-              [usdToChf]="usdToChf"
-              [usdToGbp]="usdToGbp"
-              [poolEth]="poolEth"
-              [poolUsdt]="poolUsdt"
-              [poolLtc]="poolLtc"
-              [poolDoge]="poolDoge"
-              [poolBch]="poolBch"
-              [dfiInStaking]="dfiInStaking"
-              [wallet]="wallet"
-              [stakingApy]="stakingApy"
-              [onChangeBtcWallet]="onChangeBtcWallet"
-              [onChangeEthWallet]="onChangeEthWallet"
-              [onChangeLtcWallet]="onChangeLtcWallet"
-              [onChangeUsdtWallet]="onChangeUsdtWallet"
-              [onChangeDogeWallet]="onChangeDogeWallet"
-              [onChangeBchWallet]="onChangeBchWallet"
-              [saveInputStaking]="saveInputStaking"
-              [onChangeBtcBtcPool]="onChangeBtcBtcPool"
-              [onChangeDfiBtcPool]="onChangeDfiBtcPool"
-              
-              [onChangeEthEthPool]="onChangeEthEthPool"
-              [onChangeDfiEthPool]="onChangeDfiEthPool"
-              [onChangeUsdtUsdtPool]="onChangeUsdtUsdtPool"
-              [onChangeDfiUsdtPool]="onChangeDfiUsdtPool"
-              [onChangeLtcLtcPool]="onChangeLtcLtcPool"
-              [onChangeDfiLtcPool]="onChangeDfiLtcPool"
-              [onChangeDogeDogePool]="onChangeDogeDogePool"
-              [onChangeDfiDogePool]="onChangeDfiDogePool"
-              [onChangeBchBchPool]="onChangeBchBchPool"
-              [onChangeDfiBchPool]="onChangeDfiBchPool"
-            ></app-holdings-page>
+              [stakingCalcOut]="stakingCalcOut"
+              [getAnteilBTCPoolAnGesamtLM]="getAnteilBTCPoolAnGesamtLM"
+              [getAnteilETHPoolAnGesamtLM]="getAnteilETHPoolAnGesamtLM"
+              [getAnteilLTCPoolAnGesamtLM]="getAnteilLTCPoolAnGesamtLM"
+              [getAnteilUSDTPoolAnGesamtLM]="getAnteilUSDTPoolAnGesamtLM"
+              [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM"
+              [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM"
+              [getDfiCountInLM]="getDfiCountInLM"
+            ></app-income>
           </div>
           <div *ngSwitchCase="'dex'">
             <app-dex-page
@@ -329,10 +340,7 @@
               [usdToEur]="usdToEur"
               [usdToChf]="usdToChf"
               [usdToGbp]="usdToGbp"
-              [poolBtc]="poolBtc"
-              [poolEth]="poolEth"
-              [poolUsdt]="poolUsdt"
-              [poolLtc]="poolLtc"
+              [poolBtc]="poolBtc"Week DFI =
               [poolDoge]="poolDoge"
               [poolBch]="poolBch"
               [stakingApyCake]="stakingApyCake"
@@ -345,6 +353,7 @@
           </div>
           <div *ngSwitchCase="'calculator'">
             <app-calculator-page
+              [stakingApy]="stakingApy"
               [stakingApyMN]="stakingApyMN"
               [stakingApyCake]="stakingApyCake"
               [poolBtc]="poolBtc"
@@ -356,32 +365,37 @@
               [out]="poolOut"
               [wallet]="wallet"
               [balance]="balance"
-              [getAnteilBTCPoolAnGesamtLM]="getAnteilBTCPoolAnGesamtLM"
-              [getAnteilETHPoolAnGesamtLM]="getAnteilETHPoolAnGesamtLM"
-              [getAnteilLTCPoolAnGesamtLM]="getAnteilLTCPoolAnGesamtLM"
-              [getAnteilUSDTPoolAnGesamtLM]="getAnteilUSDTPoolAnGesamtLM"
-              [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM"
-              [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM"
-              [getDfiCountInLM]="getDfiCountInLM"
-              [getLMUsd]="getLMUsd"
+              [poolBtc]="poolBtc"
+              [poolBch]="poolBch"
+              [poolDoge]="poolDoge"
+              [poolLtc]="poolLtc"
+              [poolUsdt]="poolUsdt"
+              [poolEth]="poolEth"
+              [blocktimeInS]="blocktimeInS"
+              [dfiProBlockBch]="dfiProBlockBch"
+              [dfiProBlockBtc]="dfiProBlockBtc"
+              [dfiProBlockDoge]="dfiProBlockDoge"
+              [dfiProBlockEth]="dfiProBlockEth"
+              [dfiProBlockLtc]="dfiProBlockLtc"
+              [dfiProBlockUsdt]="dfiProBlockUsdt"
             ></app-calculator-page>
           </div>
           <div *ngSwitchCase="'info'">
             <app-info-page
-              [trackGraphQL]="trackGraphQL"
-              [trackGit]="trackGit"
+              [trackGraphQL]="trackGraphQL.bind(this)"
+              [trackGit]="trackGit.bind(this)"
             ></app-info-page>
           </div>
           <div *ngSwitchCase="'settings'">
             <app-settings-page
               [sCountdown]="sCountdown"
               [sCountdownShow]="sCountdownShow"
-              [onChangeRefreshS]="onChangeRefreshS"
+              [onChangeRefreshS]="onChangeRefreshS.bind(this)"
               [loggedIn]="loggedIn"
               [errorBackend]="errorBackend"
               [successBackend]="successBackend"
-              [register]="register"
-              [login]="login"
+              [register]="register.bind(this)"
+              [login]="login.bind(this)"
             ></app-settings-page>
           </div>
           <div *ngSwitchDefault>

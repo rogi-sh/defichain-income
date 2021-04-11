@@ -9,8 +9,8 @@ export class InputComponent implements OnInit {
   @Input()
   type: 'text' | 'number' = 'text';
 
-  @Input() inputModel: string;
-  @Output() inputModelChange = new EventEmitter<string>();
+  @Input() value: string;
+  @Output() valueChange = new EventEmitter<string>();
   
   @Input()
   handleChange: Function;

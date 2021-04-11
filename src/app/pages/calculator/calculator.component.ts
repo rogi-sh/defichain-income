@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Wallet } from '@interfaces/Data';
-import { Outcome, Pool } from '@interfaces/Dex';
+import { Pool } from '@interfaces/Dex';
 import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
@@ -8,26 +7,8 @@ import { MatomoTracker } from 'ngx-matomo';
   templateUrl: './calculator.component.html',
 })
 export class CalculatorComponent implements OnInit {
-  details = 'LM';
+  details = 'Staking';
   detailsKey = 'detailsKey';
-
-  @Input()
-  out: Outcome;
-
-  @Input()
-  pool: Pool;
-
-  @Input()
-  usdToEur: number;
-
-  @Input()
-  usdToChf: number;
-
-  @Input()
-  usdToGbp: number;
-
-  @Input()
-  fiat: string;
 
   @Input()
   stakingApyCake: number;
@@ -39,31 +20,55 @@ export class CalculatorComponent implements OnInit {
   poolBtc: Pool;
 
   @Input()
-  wallet: Wallet;
+  fiat: string;
 
   @Input()
-  getAnteilBTCPoolAnGesamtLM: Function;
+  usdToEur: number;
 
   @Input()
-  getAnteilETHPoolAnGesamtLM: Function;
+  usdToChf: number;
 
   @Input()
-  getAnteilLTCPoolAnGesamtLM: Function;
+  usdToGbp: number;
 
   @Input()
-  getAnteilUSDTPoolAnGesamtLM: Function;
+  poolEth: Pool;
 
   @Input()
-  getAnteilDogePoolAnGesamtLM: Function;
+  poolUsdt: Pool;
 
   @Input()
-  getAnteilBchPoolAnGesamtLM: Function;
+  poolLtc: Pool;
 
   @Input()
-  getDfiCountInLM: Function;
+  poolDoge: Pool;
 
   @Input()
-  getLMUsd: Function;
+  poolBch: Pool;
+
+  @Input()
+  dfiProBlockBtc;
+
+  @Input()
+  dfiProBlockEth;
+
+  @Input()
+  dfiProBlockUsdt;
+
+  @Input()
+  dfiProBlockLtc;
+
+  @Input()
+  dfiProBlockDoge;
+
+  @Input()
+  dfiProBlockBch;
+
+  @Input()
+  blocktimeInS;
+
+  @Input()
+  stakingApy: number;
 
   constructor(private matomoTracker: MatomoTracker) { }
   ngOnInit (): void {

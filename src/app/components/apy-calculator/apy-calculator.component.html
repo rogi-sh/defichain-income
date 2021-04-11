@@ -2,55 +2,41 @@
   <div class="pr-4 lg:border-r-2">
     <p class="mb-4">{{ 'income.calcText' | translate }}</p>
     <div class="flex w-full flex-wrap">
-      <div class="w-full sm:w-1/2 sm:pr-2">
-        <label class="block text-sm font-semibold" for="stakingCalcOur">
+      <div 
+        class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
+        [ngClass]="!stakingCalcOut.dfiAmount ? 'empty' : ''"
+        title="DFI per {{ 'Min' | translate }}"
+      >
+        <label for="stakingCalcOur" class="absolute left-2 transition-all px-1 pointer-events-none">
           DFI Amount
         </label>
         <input
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
           required
           [(ngModel)]="stakingCalcOut.dfiAmount"
           (ngModelChange)="calcStakingOutCome()"
           type="number"
-          class="bg-gray-100 p-2 rounded-md w-full"
           id="stakingCalcOur"
         >
       </div>
-  
-      <div class="w-full sm:w-1/2 sm:pr-2">
-        <label class="block text-sm font-semibold" for="stakingCalcOutApy">
+      
+      <div
+        class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
+        [ngClass]="!stakingCalcOut.apy ? 'empty' : ''"
+        title="DFI per {{ 'Min' | translate }}"
+      >
+        <label for="stakingCalcOutApy" class="absolute left-2 transition-all px-1 pointer-events-none">
           APY
         </label>
-        <input 
-        required
-        [(ngModel)]="stakingCalcOut.apy"
-        (ngModelChange)="calcStakingOutCome()"
-        type="number"
-        class="bg-gray-100 p-2 rounded-md w-full"
-        id="stakingCalcOutApy"
-      >
+        <input
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+          required
+          [(ngModel)]="stakingCalcOut.apy"
+          (ngModelChange)="calcStakingOutCome()"
+          type="number"
+          id="stakingCalcOutApy"
+        >
       </div>
-    </div>
-
-    <div class="mt-20">
-      <h3>
-        {{ 'balance' | translate }} in Fiat
-        <span class="badge badge-pill badge-primary left">
-          <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency:'USD'}}</span>
-          <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency:'EUR'}}</span>
-          <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency:'CHF'}}</span>
-          <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span>
-      </h3>
-
-      <app-earning
-        [out]="stakingCalcOut"
-        [pool]="poolBtc"
-        [fiat]="fiat"
-        [usdToEur]="usdToEur"
-        [usdToChf]="usdToChf"
-        [usdToGbp]="usdToGbp"
-      >
-      </app-earning>
     </div>
   </div>
 
@@ -60,22 +46,22 @@
       (change)="buildDataForChartCalcStaking($event.target.value)"
     >
       <option value="Min">
-        Min
+        {{ 'Min' | translate }}
       </option>
       <option value="Hour">
-        Hour
+        {{ 'Hour' | translate }}
       </option>
       <option value="Day">
-        Day
+        {{ 'Day' | translate }}
       </option>
       <option value="Week">
-        Week
+        {{ 'Week' | translate }}
       </option>
       <option value="Month" selected="selected">
-        Month
+        {{ 'Month' | translate }}
       </option>
       <option value="Year">
-        Year
+        {{ 'Year' | translate }}
       </option>
     </select>
 
