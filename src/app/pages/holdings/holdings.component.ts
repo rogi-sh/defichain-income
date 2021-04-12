@@ -8,14 +8,15 @@ import { Pool } from '@interfaces/Dex';
   templateUrl: './holdings.component.html',
 })
 export class HoldingsComponent implements OnInit {
-  dialogOpen: boolean = false;
-  selectedTab: string = 'manual';
-  
-  @Input()
-  addAdress: Function;
+  dialogOpen = false;
+  isInfoOpen = false;
+  selectedTab = 'manual';
 
   @Input()
-  deleteAdress: Function;
+  addAdress: () => void;
+
+  @Input()
+  deleteAdress: () => void;
 
   @Input()
   adress: string;
@@ -58,79 +59,86 @@ export class HoldingsComponent implements OnInit {
 
   @Input()
   poolBch: Pool;
-  
-  @Input()
-  stakingApy: Number;
 
   @Input()
-  onChangeBtcWallet: Function;
+  stakingApy: number;
+  
+  @Input()
+  autoLoadData: boolean;
 
   @Input()
-  onChangeEthWallet: Function;
+  onChangeBtcWallet: () => void;
 
   @Input()
-  onChangeLtcWallet: Function;
+  onChangeEthWallet: () => void;
 
   @Input()
-  onChangeUsdtWallet: Function;
+  onChangeLtcWallet: () => void;
 
   @Input()
-  onChangeDogeWallet: Function;
+  onChangeUsdtWallet: () => void;
 
   @Input()
-  onChangeBchWallet: Function;
+  onChangeDogeWallet: () => void;
 
   @Input()
-  saveInputStaking: Function;
+  onChangeBchWallet: () => void;
 
   @Input()
-  onChangeDfiStaking: Function;
+  saveInputStaking: () => void;
 
   @Input()
-  onChangeBtcBtcPool: Function;
-  
-  @Input()
-  onChangeDfiBtcPool: Function;
+  onChangeDfiStaking: () => void;
 
   @Input()
-  onChangeEthEthPool: Function;
-  
+  onChangeBtcBtcPool: () => void;
+
   @Input()
-  onChangeDfiEthPool: Function;
-  
+  onChangeDfiBtcPool: () => void;
+
   @Input()
-  onChangeUsdtUsdtPool: Function;
-  
+  onChangeEthEthPool: () => void;
+
   @Input()
-  onChangeDfiUsdtPool: Function;
-  
+  onChangeDfiEthPool: () => void;
+
   @Input()
-  onChangeLtcLtcPool: Function;
-  
+  onChangeUsdtUsdtPool: () => void;
+
   @Input()
-  onChangeDfiLtcPool: Function;
-  
+  onChangeDfiUsdtPool: () => void;
+
   @Input()
-  onChangeDogeDogePool: Function;
-  
+  onChangeLtcLtcPool: () => void;
+
   @Input()
-  onChangeDfiDogePool: Function;
-  
+  onChangeDfiLtcPool: () => void;
+
   @Input()
-  onChangeBchBchPool: Function;
-  
+  onChangeDogeDogePool: () => void;
+
   @Input()
-  onChangeDfiBchPool: Function;
+  onChangeDfiDogePool: () => void;
+
+  @Input()
+  onChangeBchBchPool: () => void;
+
+  @Input()
+  onChangeDfiBchPool: () => void;
 
   constructor() {}
 
-  ngOnInit (): void {}
+  ngOnInit(): void {}
 
   handleSettingsDialog(): void {
-    this.dialogOpen = !this.dialogOpen
+    this.dialogOpen = !this.dialogOpen;
   }
 
   handleTab(selectedTab: string): void {
-    this.selectedTab = selectedTab
+    this.selectedTab = selectedTab;
+  }
+
+  openInfoMenu(): void {
+    this.isInfoOpen = !this.isInfoOpen;
   }
 }

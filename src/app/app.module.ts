@@ -26,7 +26,6 @@ import { IncomeComponent } from '@components/income/income.component';
 import { LmTargetCalculatorComponent } from '@components/lm-target-calculator/lm-target-calculator.component';
 import { StakingTargetCalculatorComponent } from '@components/staking-target-calculator/staking-target-calculator.component';
 import { ValueComponent } from '@components/value/value.component';
-import { InputComponent } from '@components/input/input.component';
 import { IconComponent } from '@components/icon/icon.component';
 
 import { DexComponent } from '@pages/dex/dex.component';
@@ -48,7 +47,6 @@ import { SettingsComponent } from '@pages/settings/settings.component';
     LmTargetCalculatorComponent,
     StakingTargetCalculatorComponent,
     ValueComponent,
-    InputComponent,
     IconComponent,
     DexComponent,
     DefiComponent,
@@ -83,9 +81,9 @@ import { SettingsComponent } from '@pages/settings/settings.component';
 })
 export class AppModule { }
 
-if (environment.production) {
-  enableProdMode();
-}
+// if (environment.production) {
+//   enableProdMode();
+// }
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
@@ -94,6 +92,6 @@ platformBrowserDynamic()
 
 // required for AOT compilation
 // tslint:disable-next-line:typedef
-export function HttpLoaderFactory (http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
-import {ChartOptions2, StakingCalc} from '@interfaces/Data';
+import {ChartOptions2, StakingCalc, Wallet} from '@interfaces/Data';
 import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 
 @Component({
@@ -9,7 +9,7 @@ import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 })
 export class IncomeComponent implements OnInit, OnChanges {
   stakingCalcOut: StakingCalc = new StakingCalc();
-  selectedTab: string = 'Staking';
+  selectedTab = 'Staking';
 
   @ViewChild('chart2') chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;
@@ -54,26 +54,35 @@ export class IncomeComponent implements OnInit, OnChanges {
   fiat!: string;
 
   @Input()
-  getAnteilBTCPoolAnGesamtLM: Function;
+  dfiInStaking!: number;
+  
+  @Input()
+  getAnteilBTCPoolAnGesamtLM: number;
+  
+  @Input()
+  getAnteilETHPoolAnGesamtLM: number;
+  
+  @Input()
+  getAnteilLTCPoolAnGesamtLM: number;
+  
+  @Input()
+  getAnteilUSDTPoolAnGesamtLM: number;
+  
+  @Input()
+  getAnteilDogePoolAnGesamtLM: number;
+  
+  @Input()
+  getAnteilBchPoolAnGesamtLM: number;
+  
+  @Input()
+  getDfiCountInLM: number;
 
   @Input()
-  getAnteilETHPoolAnGesamtLM: Function;
+  getLMUsd: number;
 
   @Input()
-  getAnteilLTCPoolAnGesamtLM: Function;
-
-  @Input()
-  getAnteilUSDTPoolAnGesamtLM: Function;
-
-  @Input()
-  getAnteilDogePoolAnGesamtLM: Function;
-
-  @Input()
-  getAnteilBchPoolAnGesamtLM: Function;
-
-  @Input()
-  getDfiCountInLM: Function;
-
+  wallet: Wallet;
+  
   constructor()  { }
 
   ngOnInit(): void {
@@ -169,7 +178,7 @@ export class IncomeComponent implements OnInit, OnChanges {
 
     return incomeNumbers;
   }
-  getDfiCountStakingCalcUsd (): number {
+  getDfiCountStakingCalcUsd(): number {
     return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
   }
   getColorsIncome(): Array<string> {
@@ -251,7 +260,7 @@ export class IncomeComponent implements OnInit, OnChanges {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: '100%'
             },
             legend: {
               position: 'bottom'
@@ -263,6 +272,6 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   handleTab(selectedTab: string): void {
-    this.selectedTab = selectedTab
+    this.selectedTab = selectedTab;
   }
 }

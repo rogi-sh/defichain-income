@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
-  currentPage = 'income';
+  currentPage = 'dashboard';
 
   wallet: Wallet;
   walletDTO: WalletDto;
@@ -176,8 +176,8 @@ export class AppComponent implements OnInit {
   }
 
   handlePage(pageTag: string): void {
-    this.currentPage = pageTag
-    this.menu = false
+    this.currentPage = pageTag;
+    this.menu = false;
   }
 
   loadAddressesAndDexData(): void {
@@ -433,6 +433,7 @@ export class AppComponent implements OnInit {
   }
 
   saveInputStaking(): void {
+    console.log(123, this.stakingApyKey)
     localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
@@ -1120,7 +1121,7 @@ export class AppComponent implements OnInit {
 
   addAdress(): void {
     this.adresses.push(this.adress);
-    console.log(this.adresses)
+    console.log(this.adresses);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();

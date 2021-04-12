@@ -41,12 +41,12 @@ export class ApyCalculatorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
 
     this.calcStakingOutCome();
   }
 
-  calcStakingOutCome (): void {
+  calcStakingOutCome(): void {
 
     // Calc
     this.stakingCalcOut.dfiPerDay = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingCalcOut.apy / 100, 1 / 365)
@@ -91,17 +91,17 @@ export class ApyCalculatorComponent implements OnInit {
     this.buildDataForChartCalcStaking('Month');
   }
 
-  getDfiCountStakingCalcUsd (): number {
+  getDfiCountStakingCalcUsd(): number {
     return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
   }
 
-  buildDataForChartCalcStaking (type: string): void {
-    const key = `dfiPer${ type }`
+  buildDataForChartCalcStaking(type: string): void {
+    const key = `dfiPer${ type }`;
     const normal = this.stakingCalcNormal[key];
     const mn = this.stakingCalcMN[key];
     const calc = this.stakingCalcOut[key];
 
-    console.log(calc, mn, normal)
+    console.log(calc, mn, normal);
     const array = [+normal.toFixed(2), +mn.toFixed(2), +calc.toFixed(2)];
     const max = Math.max(+normal.toFixed(2), +mn.toFixed(2), +calc.toFixed(2));
 
@@ -145,7 +145,7 @@ export class ApyCalculatorComponent implements OnInit {
           useSeriesColors: true
         },
         // tslint:disable-next-line:only-arrow-functions
-        formatter (seriesName, opts): string {
+        formatter(seriesName, opts): string {
           return seriesName + ':  ' + array[opts.seriesIndex] + ' DFI';
         },
         itemMargin: {

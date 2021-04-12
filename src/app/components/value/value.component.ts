@@ -172,7 +172,7 @@ export class ValueComponent implements OnInit, OnChanges {
       labels: this.getLabelsValue(),
       colors: this.getColorsValue(),
       chart: {
-        width: 420,
+        width: '100%',
         type: 'donut'
       },
       dataLabels: {
@@ -193,7 +193,7 @@ export class ValueComponent implements OnInit, OnChanges {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: '100%'
             },
             legend: {
               position: 'bottom'
@@ -332,10 +332,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   buildDataForChart(): void {
 
-    console.log(this.getAllValuesUsdPrice())
     const allValue = this.getAllValuesUsdPrice();
 
-    console.log(allValue)
     const dataBtc = new Data();
     dataBtc.value = this.getBtcValueUsd();
     dataBtc.name = 'BTC';
@@ -369,7 +367,7 @@ export class ValueComponent implements OnInit, OnChanges {
       colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
       labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
       chart: {
-        width: 420,
+        width: '100%',
         type: 'donut'
       },
       dataLabels: {
@@ -390,7 +388,7 @@ export class ValueComponent implements OnInit, OnChanges {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: '100%'
             },
             legend: {
               position: 'bottom'

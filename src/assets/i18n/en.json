@@ -42,7 +42,9 @@
     "add": "Add your wallet addresses to track.",
     "added": "Your tracked addresses.",
     "button-add": "add",
-    "button-remove": "remove"
+    "button-remove": "remove",
+    "show-information": "Show more Information",
+    "hide-information": "Show less Information"
   },
   "holdings": {
     "title": "Your crypto holdings",

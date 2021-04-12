@@ -1,5 +1,5 @@
 <div>
-  <h1 class="text-3xl mb-4">Bestände</h1>
+  <h1 class="text-3xl mb-4">{{ 'holdings.title' | translate }}</h1>
 
   <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500" (click)="handleSettingsDialog()">
     <div class="pointer-events-none w-8 h-8">
@@ -25,7 +25,7 @@
   </div>
 
   <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
-    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
       <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
         <object
           type="image/svg+xml"
@@ -35,237 +35,512 @@
       </div>
 
       <div class="w-full h-full pt-8 relative">
-        <div class="uppercase grid grid-flow-col grid-cols-2">
-          <a
-            (click)="handleTab('manual')"
-            class="text-center border-r cursor-pointer"
-            [ngClass]="{'text-pink-500': selectedTab === 'manual'}"
-          >
-            Manual enter
-          </a>
-          <a
-            (click)="handleTab('api')"
-            class="text-center cursor-pointer"
-            [ngClass]="{'text-pink-500': selectedTab === 'api'}"
-          >
-            Adressen
-          </a>
-        </div>
-
         <div class="py-3 h-full">
-          <div *ngIf="selectedTab === 'manual'" class="overflow-y-auto h-full pr-2">
+          <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2">
             <div class="text-sm">Wallet</div>
             <div class="grid grid-flow-row grid-rows-2 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
               <div>
-                <app-input
-                  name="btc"
-                  type="number"
-                  label="BTC"
-                  [handleChange]="onChangeBtcWallet.bind(this)"
-                  [(value)]="wallet.btc"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.btc ? 'empty' : ''"
+                  title="BTC"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.btc"
+                    (ngModelChange)="onChangeBtcWallet()" 
+                    type="number"
+                    id="inputBTCWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputBTCWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    BTC
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="eth"
-                  type="number"
-                  label="ETH"
-                  [handleChange]="onChangeEthWallet"
-                  [(value)]="wallet.eth"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.eth ? 'empty' : ''"
+                  title="ETH"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.eth"
+                    (ngModelChange)="onChangeEthWallet()" 
+                    type="number"
+                    id="inputETHWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputETHWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    ETH
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="ltc"
-                  type="number"
-                  label="LTC"
-                  [handleChange]="onChangeLtcWallet"
-                  [(value)]="wallet.ltc"
-                ></app-input> 
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.ltc ? 'empty' : ''"
+                  title="LTC"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.ltc"
+                    (ngModelChange)="onChangeLtcWallet()" 
+                    type="number"
+                    id="inputLTCWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputLTCWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    LTC
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="usdt"
-                  type="number"
-                  label="USDT"
-                  [handleChange]="onChangeUsdtWallet"
-                  [(value)]="wallet.usdt"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.usdt ? 'empty' : ''"
+                  title="USDT"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.usdt"
+                    (ngModelChange)="onChangeUsdtWallet()" 
+                    type="number"
+                    id="inputUsdtWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputUsdtWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    USDT
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="doge"
-                  type="number"
-                  [handleChange]="onChangeDogeWallet"
-                  label="DOGE"
-                  [(value)]="wallet.doge"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.doge ? 'empty' : ''"
+                  title="DOGE"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.doge"
+                    (ngModelChange)="onChangeDogeWallet()" 
+                    type="number"
+                    id="inputDOGEWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputDOGEWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DOGE
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="bch"
-                  type="number"
-                  [handleChange]="onChangeBchWallet"
-                  label="BCH"
-                  [(value)]="wallet.bch"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.bch ? 'empty' : ''"
+                  title="BCH"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.bch"
+                    (ngModelChange)="onChangeBchWallet()" 
+                    type="number"
+                    id="inputBchWallet"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputBchWallet" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    BCH
+                  </label>
+                </div>
               </div>
             </div>
 
             <div class="text-sm">Staking</div>
             <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
               <div>
-                <app-input
-                  name="staking-apy"
-                  type="number"
-                  [handleChange]="saveInputStaking"
-                  label="Staking APY"
-                  [(value)]="stakingApy"  
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass!]="stakingApy ? 'empty' : ''"
+                  title="Staking APY"
+                >
+                  <input
+                    required
+                    [(ngModel)]="stakingApy"
+                    (ngModelChange)="saveInputStaking()" 
+                    type="number"
+                    id="saveInputStaking"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="saveInputStaking" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    Staking APY
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="defi"
-                  type="number"
-                  [handleChange]="onChangeDfiStaking"
-                  label="DEFI"
-                  [(value)]="dfiInStaking"  
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass!]="dfiInStaking ? 'empty' : ''"
+                  title="DEFI"
+                >
+                  <input
+                    required
+                    [(ngModel)]="dfiInStaking"
+                    (ngModelChange)="onChangeDfiStaking()" 
+                    type="number"
+                    id="dfiInStaking"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="dfiInStaking" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DEFI
+                  </label>
+                </div>
               </div>
             </div>
 
             <div class="text-sm">Liquidity Mining</div>
             <div class="grid grid-flow-row grid-rows-6 grid-cols-2 md:grid-cols-3 gap-3 pb-4">
               <div>
-                <app-input
-                  name="btc"
-                  type="number"
-                  [handleChange]="onChangeBtcBtcPool"
-                  label="BTC"
-                  [(value)]="wallet.btcInBtcPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.btcInBtcPool ? 'empty' : ''"
+                  title="BTC"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.btcInBtcPool"
+                    (ngModelChange)="onChangeBtcBtcPool()" 
+                    type="number"
+                    id="onChangeBtcBtcPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeBtcBtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    BTC
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="defi"
-                  type="number"
-                  [handleChange]="onChangeDfiBtcPool"
-                  label="DEFI"
-                  [(value)]="wallet.dfiInBtcPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInBtcPool ? 'empty' : ''"
+                  title="DEFI"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInBtcPool"
+                    (ngModelChange)="onChangeDfiBtcPool()" 
+                    type="number"
+                    id="onChangeDfiBtcPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiBtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DEFI
+                  </label>
+                </div>
               </div>
               <div class="md:col-start-1">
-                <app-input
-                  name="ethInEthPool"
-                  type="number"
-                  [handleChange]="onChangeEthEthPool"
-                  label="ETH"
-                  [(value)]="wallet.ethInEthPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.ethInEthPool ? 'empty' : ''"
+                  title="ETH"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.ethInEthPool"
+                    (ngModelChange)="onChangeEthEthPool()" 
+                    type="number"
+                    id="onChangeEthEthPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeEthEthPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    ETH
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="dfiInETHcPool"
-                  type="number"
-                  [handleChange]="onChangeDfiEthPool"
-                  label="DEFI"
-                  [(value)]="wallet.dfiInEthPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInEthPool ? 'empty' : ''"
+                  title="ETH"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInEthPool"
+                    (ngModelChange)="onChangeDfiEthPool()" 
+                    type="number"
+                    id="onChangeDfiEthPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiEthPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    ETH
+                  </label>
+                </div>
               </div>
               <div class="md:col-start-1">
-                <app-input
-                  name="usdt"
-                  type="number"
-                  [handleChange]="onChangeUsdtUsdtPool"
-                  label="USDT"
-                  [(value)]="wallet.usdtInUsdtPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.usdtInUsdtPool ? 'empty' : ''"
+                  title="USDT"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.usdtInUsdtPool"
+                    (ngModelChange)="onChangeUsdtUsdtPool()" 
+                    type="number"
+                    id="onChangeUsdtUsdtPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeUsdtUsdtPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    USDT
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="dfiInUsdtPool"
-                  type="number"
-                  [handleChange]="onChangeDfiUsdtPool"
-                  label="Defi"
-                  [(value)]="wallet.dfiInUsdtPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInUsdtPool ? 'empty' : ''"
+                  title="Defi"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInUsdtPool"
+                    (ngModelChange)="onChangeDfiUsdtPool()" 
+                    type="number"
+                    id="onChangeDfiUsdtPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiUsdtPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    Defi
+                  </label>
+                </div>
               </div>
               <div class="md:col-start-1">
-                <app-input
-                  name="ltcInLtcPool"
-                  type="number"
-                  [handleChange]="onChangeLtcLtcPool"
-                  label="LTC"
-                  [(value)]="wallet.ltcInLtcPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.ltcInLtcPool ? 'empty' : ''"
+                  title="LTC"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.ltcInLtcPool"
+                    (ngModelChange)="onChangeLtcLtcPool()" 
+                    type="number"
+                    id="onChangeLtcLtcPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeLtcLtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    LTC
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="dfiInLtcPool"
-                  type="number"
-                  [handleChange]="onChangeDfiLtcPool"
-                  label="DEFI"
-                  [(value)]="wallet.dfiInLtcPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInLtcPool ? 'empty' : ''"
+                  title="DEFI"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInLtcPool"
+                    (ngModelChange)="onChangeDfiLtcPool()" 
+                    type="number"
+                    id="onChangeDfiLtcPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiLtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DEFI
+                  </label>
+                </div>
               </div>
               <div class="md:col-start-1">
-                <app-input
-                  name="dogeInDogePool"
-                  type="number"
-                  [handleChange]="onChangeDogeDogePool"
-                  label="Doge"
-                  [(value)]="wallet.dogeInDogePool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dogeInDogePool ? 'empty' : ''"
+                  title="Doge"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dogeInDogePool"
+                    (ngModelChange)="onChangeDogeDogePool()" 
+                    type="number"
+                    id="onChangeDogeDogePool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDogeDogePool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    Doge
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="dfiInDogePool"
-                  type="number"
-                  [handleChange]="onChangeDfiDogePool"
-                  label="DEFI"
-                  [(value)]="wallet.dfiInDogePool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInDogePool ? 'empty' : ''"
+                  title="DEFI"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInDogePool"
+                    (ngModelChange)="onChangeDfiDogePool()" 
+                    type="number"
+                    id="onChangeDfiDogePool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiDogePool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DEFI
+                  </label>
+                </div>
               </div>
               <div class="md:col-start-1">
-                <app-input
-                  name="bchInBchPool"
-                  type="number"
-                  [handleChange]="onChangeBchBchPool"
-                  label="BCH"
-                  [(value)]="wallet.bchInBchPool"
-                ></app-input>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.bchInBchPool ? 'empty' : ''"
+                  title="BCH"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.bchInBchPool"
+                    (ngModelChange)="onChangeBchBchPool()" 
+                    type="number"
+                    id="onChangeBchBchPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeBchBchPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    BCH
+                  </label>
+                </div>
               </div>
               <div>
-                <app-input
-                  name="dfiInBchPool"
-                  type="number"
-                  [handleChange]="onChangeDfiBchPool"
-                  label="DEFI"
-                  [(value)]="wallet.dfiInBchPool"
-                ></app-input>
+
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!wallet.dfiInBchPool ? 'empty' : ''"
+                  title="Defi"
+                >
+                  <input
+                    required
+                    [(ngModel)]="wallet.dfiInBchPool"
+                    (ngModelChange)="onChangeDfiBchPool()" 
+                    type="number"
+                    id="onChangeDfiBchPool"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="onChangeDfiBchPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    Defi
+                  </label>
+                </div>
               </div>
             </div>
           </div>
 
-          <div *ngIf="selectedTab === 'api'">
-            <div>
-              <div class="inline-block w-3/4">
-                <app-input
-                  required
-                  id="inputAddress"
-                  name="apiKey"
-                  label="DFI Address"
-                  [value]="this.adress"
+          <div *ngIf="autoLoadData">
+            <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
+              <div>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!dfiInStaking ? 'empty' : ''"
+                  title="DFI"
                 >
-                </app-input>
+                  <input
+                    required
+                    [(ngModel)]="dfiInStaking"
+                    (ngModelChange)="onChangeDfiStaking()"
+                    type="number"
+                    id="inputDFIStakingAuto"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputDFIStakingAuto" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    DFI
+                  </label>
+                </div>
               </div>
-              <div class="inline-block w-1/4 pl-2 align-top">
-                <button
-                  class="bg-pink-500 rounded-md w-full h-14 text-white align-top focus:outline-none"
-                  (click)="addAdress()"
+              <div>
+                <div
+                  class="relative h-14 input-component"
+                  [ngClass]="!dfiInStaking ? 'empty' : ''"
+                  title="Staking APY"
                 >
-                  Add
-                </button>
+                  <input
+                    required
+                    [(ngModel)]="stakingApy"
+                    (ngModelChange)="saveInputStaking()"
+                    type="number"
+                    id="inputApyStaking2"
+                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                  >
+                  <label [for]="inputApyStaking2" class="absolute left-2 transition-all px-1 pointer-events-none">
+                    Staking APY
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="block my-2 relative">
+                <a
+                  class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer"
+                  (click)="openInfoMenu()"
+                >
+                  <span *ngIf="!isInfoOpen">
+                    {{ 'address.show-information' | translate }}
+                  </span>
+                  <span *ngIf="isInfoOpen">
+                    {{ 'address.hide-information' | translate }}
+                  </span>
+                </a>
+              </div>
+              <div class="h-full transition duration-300 ease-in-out transform mt-4" [ngClass]="{'hidden': !isInfoOpen}">
+                <h1>
+                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+                    {{ 'address.title' | translate }}
+                  </span>
+                </h1>
+                <h3 class="text-gray-500">{{ 'address.title2' | translate }}</h3>
+                <p class="mb-2">
+                  <span class="text-bold">{{ 'address.imp' | translate }}</span>
+                </p>
+                <p class="mb-2">
+                  {{ 'address.exc' | translate }}
+                </p>
+                <p class="mb-2">
+                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+                    listaccounts {{'{}'}} false false true
+                  </span>
+                  <span> ->{{ 'address.exc2' | translate }}</span>
+                </p>
+        
+                <p class="mb-2">
+                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">listaddressgroupings</span>
+                  <span> ->{{ 'address.exc21' | translate }}</span>
+                </p>
+        
+                <p>{{ 'address.exc3' | translate }}</p>
+              </div>
+
+              <div class="mt-4">
+                <div class="inline-block w-3/4">
+                  <div
+                    class="relative h-14 input-component"
+                    [ngClass]="!wallet.bchInBchPool ? 'empty' : ''"
+                    title="DFI Address"
+                  >
+                    <input
+                      required
+                      [(ngModel)]="adress"
+                      type="number"
+                      id="inputAddress"
+                      class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                    >
+                    <label [for]="inputAddress" class="absolute left-2 transition-all px-1 pointer-events-none">
+                      DFI Address
+                    </label>
+                  </div>
+                </div>
+                <div class="inline-block w-1/4 pl-2 align-top">
+                  <button
+                    class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none"
+                    (click)="addAdress()"
+                  >
+                    {{ 'address.button-add' | translate }}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -273,11 +548,13 @@
               <div class="block mt-2 h-auto w-full">
                 <div 
                   *ngFor="let a of adresses; index as i;"
-                  class="relative px-3"
+                  class="relative lg:px-2"
                   [ngClass]="{'bg-gray-200': i % 2}"
                 >
-                  {{ a }}
-                  <a class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer" (click)="this.deleteAdress(a)">
+                  <div class="w-3/4 overflow-hidden overflow-ellipsis">
+                    {{ a }}
+                  </div>
+                  <a class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer" (click)="deleteAdress(a)">
                     X
                   </a>
                 </div>

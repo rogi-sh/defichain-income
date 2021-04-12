@@ -7,7 +7,7 @@ import { MatomoTracker } from 'ngx-matomo';
   templateUrl: './calculator.component.html',
 })
 export class CalculatorComponent implements OnInit {
-  details = 'Staking';
+  details = 'Calc';
   detailsKey = 'detailsKey';
 
   @Input()
@@ -71,10 +71,10 @@ export class CalculatorComponent implements OnInit {
   stakingApy: number;
 
   constructor(private matomoTracker: MatomoTracker) { }
-  ngOnInit (): void {
+  ngOnInit(): void {
   }
 
-  onChangeDetails (newValue: string): void {
+  onChangeDetails(newValue: string): void {
     this.details = newValue;
     localStorage.setItem(this.detailsKey, newValue);
     this.matomoTracker.trackEvent('Klick', 'Change Details', newValue);

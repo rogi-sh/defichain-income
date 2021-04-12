@@ -43,7 +43,9 @@
     "add": "Füge deine DFI Adressen für das Tracking hinzu",
     "added": "Diese Adressen werden aktuell abgefragt",
     "button-add": "hinzufügen",
-    "button-remove": "entfernen"
+    "button-remove": "entfernen",
+    "show-information": "Informationen öffnen",
+    "hide-information": "Informationen schließen"
   },
   "holdings": {
     "title": "Deine Kryptobestände",

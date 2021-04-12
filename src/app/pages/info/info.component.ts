@@ -6,10 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
   @Input()
-  trackGit: Function;
+  trackGit: () => void;
 
   @Input()
-  trackGraphQL: Function;
+  trackGraphQL: () => void;
 
   constructor() { }
 

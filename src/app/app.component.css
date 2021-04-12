@@ -4,15 +4,15 @@
   }
 }
 
-label {
+.input-component label {
   top: 5px;
   left: 8px;
   transform: translateY(1%);
   font-size: 11px;
-  color: rgba(236, 72, 153, var(--tw-text-opacity));
+  color: rgba(70, 70, 70, 1);
 }
 
-label::after {
+.input-component label::after {
   position: absolute;
   z-index: -1;
   top: 8px;
@@ -43,5 +43,16 @@ input::placeholder {
 
 input:focus {
   outline: none;
-  border-color: rgba(236, 72, 153, var(--tw-text-opacity));
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked,
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked + .toggle-label,
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #FF00AF;
 }
