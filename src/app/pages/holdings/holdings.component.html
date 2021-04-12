@@ -524,7 +524,6 @@
                     <input
                       required
                       [(ngModel)]="adress"
-                      type="number"
                       id="inputAddress"
                       class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                     >
@@ -549,7 +548,7 @@
                 <div 
                   *ngFor="let a of adresses; index as i;"
                   class="relative lg:px-2"
-                  [ngClass]="{'bg-gray-200': i % 2}"
+                  [ngClass]="{'bg-gray-200': i % 2 === 1}"
                 >
                   <div class="w-3/4 overflow-hidden overflow-ellipsis">
                     {{ a }}
