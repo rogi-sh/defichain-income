@@ -11,7 +11,7 @@ export const environment = {
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
-  version: '3.3.1',
+  version: '3.3.2',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
