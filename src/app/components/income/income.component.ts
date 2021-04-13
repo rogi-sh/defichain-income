@@ -83,6 +83,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   @Input()
   wallet: Wallet;
 
+  @Input()
+  showOnlyGraph: boolean;
+
   constructor()  { }
 
   ngOnInit(): void {

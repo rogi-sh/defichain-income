@@ -50,6 +50,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
   @Input()
   poolBch!: Pool;
+  
+  @Input()
+  hideHoldings: boolean;
 
   constructor() { }
 

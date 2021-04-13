@@ -939,123 +939,9 @@
               </div>
             </div>
 
-            <h1 class="text-xl font-semibold text-pink-500 mt-3 mb-2">
-                {{ 'your' | translate }} pools
-            </h1>
-            <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
-              <div 
-                *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBtc}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolBtcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-              </div>
-        
-              <div 
-                *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APY - {{dfiProBlockEth}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolEthOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-        
-              </div>
-              <div 
-                *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APY - {{dfiProBlockUsdt}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
-                             [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-              </div>
-              <div 
-                *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockLtc}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-              </div>
-              <div 
-                *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APY - {{dfiProBlockDoge}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
-                             [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-              </div>
-              <div 
-                *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0" 
-                class="bg-gray-100 rounded-md p-2"
-              >
-                <h2>
-                  <span class="text-lg font-semibold mb-1">
-                    BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBch}} DFI/Block
-                  </span>
-                </h2>
-                <h3>
-                  Pool {{ 'share' | translate }}
-                  <span class="badge badge-pill badge-info">{{anteilAmPoolBch | number: '1.4-4' }} %</span>
-                </h3>
-        
-                <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
-                             [usdToChf]="usdToChf"
-                             [usdToGbp]="usdToGbp"></app-earning>
-              </div>
-            </div>
-
           </div>
           <div *ngSwitchCase="'income'">
             <app-income 
-              *ngIf="dataLoaded"
               [poolBtc]="poolBtc"
               [fiat]="fiat"
               [usdToEur]="usdToEur"
@@ -1080,21 +966,142 @@
               [getDfiCountInLM]="getDfiCountInLM()"
               [getLMUsd]="getLMUsd()"
             ></app-income>
+
+            <h1 class="text-xl font-semibold text-pink-500 mt-3 mb-2">
+                {{ 'your' | translate }} pools
+            </h1>
+            <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
+              <div 
+                *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBtc}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolBtcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+              </div>
+        
+              <div 
+                *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APY - {{dfiProBlockEth}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolEthOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+        
+              </div>
+              <div 
+                *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APY - {{dfiProBlockUsdt}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
+                            [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+              </div>
+              <div 
+                *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockLtc}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+              </div>
+              <div 
+                *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APY - {{dfiProBlockDoge}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
+                            [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+              </div>
+              <div 
+                *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0" 
+                class="bg-gray-100 rounded-md p-2"
+              >
+                <h2>
+                  <span class="text-lg font-semibold mb-1">
+                    BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBch}} DFI/Block
+                  </span>
+                </h2>
+                <h3>
+                  Pool {{ 'share' | translate }}
+                  <span class="badge badge-pill badge-info">{{anteilAmPoolBch | number: '1.4-4' }} %</span>
+                </h3>
+        
+                <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
+                            [usdToChf]="usdToChf"
+                            [usdToGbp]="usdToGbp"></app-earning>
+              </div>
+            </div>
           </div>
           <div *ngSwitchCase="'dex'">
-            <app-dex-page
-              [fiat]="fiat"
-              [dex]="dex"
-              [usdToEur]="usdToEur"
-              [usdToChf]="usdToChf"
-              [usdToGbp]="usdToGbp"
-              [poolBtc]="poolBtc"
-              [poolDoge]="poolDoge"
-              [poolBch]="poolBch"
-              [stakingApyCake]="stakingApyCake"
-              [stakingApyMN]="stakingApyMN"
-              [rewards]="rewards"
-            ></app-dex-page>
+            <h1 class="text-3xl mb-4 text-pink-500">DEX</h1>
+
+            <div class="overflow-x-auto sm:overflow-visible max-w-full">
+              <app-dex-statistics
+                [fiat]="fiat"
+                [dex]="dex"
+                [usdToEur]="usdToEur"
+                [usdToChf]="usdToChf"
+                [usdToGbp]="usdToGbp"
+                [poolBtc]="poolBtc"
+                [poolEth]="poolEth"
+                [poolUsdt]="poolUsdt"
+                [poolLtc]="poolLtc"
+                [poolDoge]="poolDoge"
+                [poolBch]="poolBch"
+                [stakingApyCake]="stakingApyCake"
+                [stakingApyMN]="stakingApyMN"
+                [rewards]="rewards"
+              >
+              </app-dex-statistics>
+            </div>
           </div>
           <div *ngSwitchCase="'defi'">
             <app-defi-page></app-defi-page>
@@ -1272,8 +1279,37 @@
             <h1 class="text-3xl mb-4 text-pink-500">Dashboard</h1>
 
             <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
-              <div class="lg:col-span-2" *ngIf="wallet && poolBtc">
+              <div *ngIf="wallet && poolBtc">
+                <app-income 
+                  [showOnlyGraph]="true"
+                  [poolBtc]="poolBtc"
+                  [fiat]="fiat"
+                  [usdToEur]="usdToEur"
+                  [usdToChf]="usdToChf"
+                  [usdToGbp]="usdToGbp"
+                  [poolBchOut]="poolBchOut"
+                  [poolBtcOut]="poolBtcOut"
+                  [poolDogeOut]="poolDogeOut"
+                  [poolEthOut]="poolEthOut"
+                  [poolLtcOut]="poolLtcOut"
+                  [poolOut]="poolOut"
+                  [poolUsdtOut]="poolUsdtOut"
+                  [stakingOut]="stakingOut"
+                  [dfiInStaking]="dfiInStaking"
+                  [wallet]="wallet"
+                  [getAnteilBTCPoolAnGesamtLM]="getAnteilBTCPoolAnGesamtLM()"
+                  [getAnteilETHPoolAnGesamtLM]="getAnteilETHPoolAnGesamtLM()"
+                  [getAnteilLTCPoolAnGesamtLM]="getAnteilLTCPoolAnGesamtLM()"
+                  [getAnteilUSDTPoolAnGesamtLM]="getAnteilUSDTPoolAnGesamtLM()"
+                  [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM()"
+                  [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM()"
+                  [getDfiCountInLM]="getDfiCountInLM()"
+                  [getLMUsd]="getLMUsd()"
+                ></app-income>
+              </div>
+              <div *ngIf="wallet && poolBtc">
                 <app-value
+                  [hideHoldings]="true"
                   [poolBtc]="poolBtc"
                   [fiat]="fiat"
                   [usdToEur]="usdToEur"
@@ -1303,6 +1339,7 @@
                 [poolBch]="poolBch"
                 [stakingApyCake]="stakingApyCake"
                 [stakingApyMN]="stakingApyMN"
+                [rewards]="rewards"
                 >
                 </app-dex-statistics>
               </div>
