@@ -42,7 +42,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.btc ? 'empty' : ''"
+                  [ngClass]="wallet.btc === null || wallet.btc === undefined  ? 'empty' : ''"
                   title="BTC"
                 >
                   <input
@@ -61,7 +61,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.eth ? 'empty' : ''"
+                  [ngClass]="wallet.eth === null || wallet.eth === undefined  ? 'empty' : ''"
                   title="ETH"
                 >
                   <input
@@ -80,7 +80,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.ltc ? 'empty' : ''"
+                  [ngClass]="wallet.ltc === null || wallet.ltc === undefined  ? 'empty' : ''"
                   title="LTC"
                 >
                   <input
@@ -99,7 +99,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.usdt ? 'empty' : ''"
+                  [ngClass]="wallet.usdt === null || wallet.usdt === undefined  ? 'empty' : ''"
                   title="USDT"
                 >
                   <input
@@ -118,7 +118,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.doge ? 'empty' : ''"
+                  [ngClass]="wallet.doge === null || wallet.doge === undefined  ? 'empty' : ''"
                   title="DOGE"
                 >
                   <input
@@ -137,7 +137,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.bch ? 'empty' : ''"
+                  [ngClass]="wallet.bch === null || wallet.bch === undefined  ? 'empty' : ''"
                   title="BCH"
                 >
                   <input
@@ -202,7 +202,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.btcInBtcPool ? 'empty' : ''"
+                  [ngClass]="wallet.btcInBtcPool === null || wallet.btcInBtcPool === undefined  ? 'empty' : ''"
                   title="BTC"
                 >
                   <input
@@ -221,7 +221,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInBtcPool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInBtcPool === null || wallet.dfiInBtcPool === undefined  ? 'empty' : ''"
                   title="DEFI"
                 >
                   <input
@@ -240,7 +240,7 @@
               <div class="md:col-start-1">
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.ethInEthPool ? 'empty' : ''"
+                  [ngClass]="wallet.ethInEthPool === null || wallet.ethInEthPool === undefined  ? 'empty' : ''"
                   title="ETH"
                 >
                   <input
@@ -259,7 +259,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInEthPool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInEthPool === null || wallet.dfiInEthPool === undefined  ? 'empty' : ''"
                   title="ETH"
                 >
                   <input
@@ -278,7 +278,7 @@
               <div class="md:col-start-1">
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.usdtInUsdtPool ? 'empty' : ''"
+                  [ngClass]="wallet.usdtInUsdtPool === null || wallet.usdtInUsdtPool === undefined  ? 'empty' : ''"
                   title="USDT"
                 >
                   <input
@@ -297,7 +297,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInUsdtPool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInUsdtPool === null || wallet.dfiInUsdtPool === undefined  ? 'empty' : ''"
                   title="Defi"
                 >
                   <input
@@ -316,7 +316,7 @@
               <div class="md:col-start-1">
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.ltcInLtcPool ? 'empty' : ''"
+                  [ngClass]="wallet.ltcInLtcPool === null || wallet.ltcInLtcPool === undefined  ? 'empty' : ''"
                   title="LTC"
                 >
                   <input
@@ -335,7 +335,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInLtcPool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInLtcPool === null || wallet.dfiInLtcPool === undefined  ? 'empty' : ''"
                   title="DEFI"
                 >
                   <input
@@ -354,7 +354,7 @@
               <div class="md:col-start-1">
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dogeInDogePool ? 'empty' : ''"
+                  [ngClass]="wallet.dogeInDogePool === null || wallet.dogeInDogePool === undefined  ? 'empty' : ''"
                   title="Doge"
                 >
                   <input
@@ -373,7 +373,7 @@
               <div>
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInDogePool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInDogePool === null || wallet.dfiInDogePool === undefined  ? 'empty' : ''"
                   title="DEFI"
                 >
                   <input
@@ -392,7 +392,7 @@
               <div class="md:col-start-1">
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.bchInBchPool ? 'empty' : ''"
+                  [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
                   title="BCH"
                 >
                   <input
@@ -412,7 +412,7 @@
 
                 <div
                   class="relative h-14 input-component"
-                  [ngClass]="!wallet.dfiInBchPool ? 'empty' : ''"
+                  [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
                   title="Defi"
                 >
                   <input
@@ -518,7 +518,7 @@
                 <div class="inline-block w-3/4">
                   <div
                     class="relative h-14 input-component"
-                    [ngClass]="!wallet.bchInBchPool ? 'empty' : ''"
+                    [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
                     title="DFI Address"
                   >
                     <input

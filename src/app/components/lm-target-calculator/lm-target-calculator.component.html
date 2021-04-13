@@ -104,12 +104,12 @@
 
     <div class="mt-4 lg:mt-0 lg:pl-4">
       <h1 class="text-2xl font-bold mb-4 w-full text-center">{{ 'income.calc' | translate }}</h1>
-      <div class="mb-2 grid grid-flow-col grid-cols-4 select-none">
-        <div class="text-xl">
+      <div class="py-2 grid grid-flow-col grid-cols-4 select-none border-b">
+        <div class="text-xl font-semibold">
           DFI per {{ 'month' | translate }}
         </div>
         <div class="text-xl text-center">
-          DFI / {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }}
+          {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }} / DFI
         </div>
         <div class="text-xl text-center">
           {{anteilNeededForAimReturnMonthPool | number: '1.4-4' }}
@@ -122,12 +122,12 @@
         </div>
       </div>
 
-      <div class="mb-2 grid grid-flow-col grid-cols-4 select-none">
-        <div class="text-xl">
-          DFI per {{ 'day' | translate }}
-        </div>
+      <div class="py-2 grid grid-flow-col grid-cols-4 select-none border-b">
+      <div class="text-xl font-semibold">
+        DFI per {{ 'day' | translate }}
+      </div>
         <div class="text-xl text-center">
-          DFI / {{dfiNeededForAimReturnDayPool | number: '1.2-2' }}
+          {{dfiNeededForAimReturnDayPool | number: '1.2-2' }} / DFI
         </div>
         <div class="text-xl text-center">
           {{anteilNeededForAimReturnDayPool | number: '1.4-4' }}
@@ -140,12 +140,12 @@
         </div>
       </div>
 
-      <div class="mb-2 grid grid-flow-col grid-cols-4 select-none">
-        <div class="text-xl">
+      <div class="py-2 grid grid-flow-col grid-cols-4 select-none border-b">
+        <div class="text-xl font-semibold">
           DFI per {{ 'hour' | translate }}
         </div>
         <div class="text-xl text-center">
-          DFI / {{dfiNeededForAimReturnHourPool | number: '1.2-2' }}
+          {{dfiNeededForAimReturnHourPool | number: '1.2-2' }} / DFI
         </div>
         <div class="text-xl text-center">
           {{anteilNeededForAimReturnHourPool | number: '1.4-4' }}
@@ -158,12 +158,12 @@
         </div>
       </div>
 
-      <div class="mb-2 grid grid-flow-col grid-cols-4 select-none">
-        <div class="text-xl">
+      <div class="py-2 grid grid-flow-col grid-cols-4 select-none border-b">
+        <div class="text-xl font-semibold">
           DFI per {{ 'Min' | translate }}
         </div>
         <div class="text-xl text-center">
-          DFI / {{dfiNeededForAimReturnMinPool | number: '1.2-2' }}
+          {{dfiNeededForAimReturnMinPool | number: '1.2-2' }} / DFI
         </div>
         <div class="text-xl text-center">
           {{anteilNeededForAimReturnMinPool | number: '1.4-4' }}

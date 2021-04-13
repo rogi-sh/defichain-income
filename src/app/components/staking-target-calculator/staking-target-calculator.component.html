@@ -4,7 +4,7 @@
   </h2>
   <span>Staking Apy <span class="bg-pink-500 px-2 rounded-full text-white">{{stakingApy}} %</span></span>
 
-  <div class="mt-5 grid grid-cols-2 grid-rows-4 gap-4 w-1/2">
+  <div class="mt-5 grid grid-cols-2 grid-rows-4 gap-4 lg:w-1/2">
     <div 
       class="relative h-14 input-component w-auto inline-block mr-2 "
       [ngClass]="!aimReturnMin ? 'empty' : ''"
@@ -24,9 +24,11 @@
       >
     </div>
     <div>
-      <div class="text-lg mb-2 flex h-full items-center">
-        {{ 'invest-needed' | translate }} 
-        <div class="ml-2 inline-block text-lg text-pink-500">
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }}
+        </div>
+        <div class="inline-block text-lg text-pink-500">
           {{stakingNeededForAimReturnMin | number: '1.0-0' }}
         </div>
       </div>
@@ -51,9 +53,11 @@
       >
     </div>
     <div>
-      <div class="text-lg mb-2 flex h-full items-center">
-        {{ 'invest-needed' | translate }} 
-        <div class="ml-2 inline-block text-lg text-pink-500">
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
           {{stakingNeededForAimReturnHour | number: '1.0-0' }}
         </div>
       </div>
@@ -78,9 +82,11 @@
       >
     </div>
     <div>
-      <div class="text-lg mb-2 flex h-full items-center">
-        {{ 'invest-needed' | translate }} 
-        <div class="ml-2 inline-block text-lg text-pink-500">
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
           {{stakingNeededForAimReturnDay | number: '1.0-0' }}
         </div>
       </div>
@@ -105,9 +111,11 @@
       >
     </div>
     <div>
-      <div class="text-lg mb-2 flex h-full items-center">
-        {{ 'invest-needed' | translate }} 
-        <div class="ml-2 inline-block text-lg text-pink-500">
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
           {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
         </div>
       </div>

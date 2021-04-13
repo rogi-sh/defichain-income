@@ -4,21 +4,21 @@
     <div class="grid grid-flow-col grid-cols-3 select-none">
       <a
         (click)="onChangeDetails('Staking')"
-        class="text-center cursor-pointer uppercase border-r-2"
+        class="text-center cursor-pointer uppercase border-r-2 self-center"
         [ngClass]="{ 'text-pink-500': details === 'Staking' }"
       >
         Staking
       </a>
       <a
         (click)="onChangeDetails('LM')"
-        class="text-center cursor-pointer uppercase border-r-2"
+        class="text-center cursor-pointer uppercase border-r-2 self-center"
         [ngClass]="{ 'text-pink-500': details === 'LM' }"
       >
         Liquidity Mining
       </a>
       <a
         (click)="onChangeDetails('Calc')"
-        class="text-center cursor-pointer uppercase"
+        class="text-center cursor-pointer uppercase self-center"
         [ngClass]="{ 'text-pink-500': details === 'Calc' }"
       >
         {{ "details-calc" | translate }}

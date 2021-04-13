@@ -128,6 +128,10 @@ export class AppComponent implements OnInit {
 
   dataLoaded = true;
 
+  dialogOpen = false;
+  isInfoOpen = false;
+  selectedTab = 'manual';
+
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
     translate.addLangs(['en', 'de']);
@@ -1382,4 +1386,15 @@ export class AppComponent implements OnInit {
     return walletFinal;
   }
 
+  handleSettingsDialog(): void {
+    this.dialogOpen = !this.dialogOpen;
+  }
+
+  handleTab(selectedTab: string): void {
+    this.selectedTab = selectedTab;
+  }
+
+  openInfoMenu(): void {
+    this.isInfoOpen = !this.isInfoOpen;
+  }
 }
