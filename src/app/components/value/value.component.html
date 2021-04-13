@@ -25,12 +25,10 @@
     <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
     <h2>
       <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.3-3'}}
-        USDT -
-        <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
-        <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
-        <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
-        <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
+        <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
+        <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
       </span>
     </h2>
     <div class="w-full max-w-lg mx-auto" *ngIf="chartOptions && chartOptions.series.length > 0">
