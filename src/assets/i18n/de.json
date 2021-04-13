@@ -65,6 +65,7 @@
   "income": {
     "title": "Dein gesamtes Einkommen",
     "word": "Einkommen",
+    "share": "Anteil",
     "distribution": "Verteilung deines monatlichen Einkommens",
     "calc": "Rechner",
     "calcVis": "Rechner Visualisierung im Vergleich",

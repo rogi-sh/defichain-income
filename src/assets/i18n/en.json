@@ -64,6 +64,7 @@
   "income": {
     "title": "Your total income",
     "word": "Income",
+    "share": "Share",
     "distribution": "Distribution of your monthly income",
     "calc": "Calculator",
     "calcVis": "Calculator Visualization Comparison",

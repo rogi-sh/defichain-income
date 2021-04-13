@@ -1,21 +1,23 @@
 <div>
   <div class="flex my-2 w-full flex-wrap">
     <div class="mb-1 w-full sm:w-auto sm:mr-4">
-      Staking Cake
+      Staking Cake:
       <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.stakingApyCake | number: '1.1-1' }}% APY
       </span>
     </div>
     <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4">
-      Staking MN
+      Staking MN:
       <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.stakingApyMN | number: '1.1-1' }}% APY
       </span>
     </div>
-    
-    <div class="mb-1 w-full sm:w-auto grid gap-2 grid-flow-col auto-cols-auto auto-rows-auto">
+  </div>
+
+  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2">
+    <div class="mb-1 w-full sm:w-auto grid gap-2 sm:grid-flow-col sm:grid-cols-2 auto-rows-max">
       <div>
-        Rewards DFI/Block
+        Rewards DFI/Block:
       </div>
       <div>
         <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
@@ -31,6 +33,33 @@
         <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           Anchor {{rewards?.rewards?.anchorReward }} / Community {{rewards?.rewards?.community }}
         </span>
+      </div>
+    </div>
+
+    <div>
+      <div class="mt-2 mr-2">
+        <span class="mr-2">TVL:</span>
+        <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          <span *ngIf="fiat === 'USD'">
+            {{dex?.tvl | currency:'USD'}}
+          </span>
+          <span *ngIf="fiat === 'EUR'">
+            {{dex?.tvl * usdToEur | currency:'EUR'}}
+          </span>
+          <span *ngIf="fiat === 'CHF'">
+            {{dex?.tvl * usdToChf | currency:'CHF'}}
+          </span>
+          <span *ngIf="fiat === 'GBP'">
+            {{dex?.tvl * usdToGbp | currency:'GBP'}}
+          </span>
+        </div>
+      </div>
+    
+      <div class="mt-2 mb-2">
+        <span class="mr-2">Block:</span>
+        <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          {{ rewards?.blockHeight }}
+        </div>
       </div>
     </div>
   </div>
@@ -174,31 +203,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-
-  <div class="mt-2 inline-block mr-2">
-    TVL
-    <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-      <span *ngIf="fiat === 'USD'">
-        {{dex?.tvl | currency:'USD'}}
-      </span>
-      <span *ngIf="fiat === 'EUR'">
-        {{dex?.tvl * usdToEur | currency:'EUR'}}
-      </span>
-      <span *ngIf="fiat === 'CHF'">
-        {{dex?.tvl * usdToChf | currency:'CHF'}}
-      </span>
-      <span *ngIf="fiat === 'GBP'">
-        {{dex?.tvl * usdToGbp | currency:'GBP'}}
-      </span>
-    </div>
-  </div>
-
-  <div class="mt-2 inline-block">
-    Block
-    <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-      {{ rewards?.blockHeight }}
     </div>
   </div>
 </div>
