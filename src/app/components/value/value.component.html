@@ -2,7 +2,7 @@
   <div class="mb-4 lg:mb-0 order-2 lg:order-1">
     <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+      <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
@@ -24,7 +24,7 @@
   <div class="order-1 lg:order-2">
     <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+      <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.3-3'}}
         USDT -
         <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>

@@ -1,7 +1,9 @@
 <div>
-   <h1 class="text-3xl mb-4 text-pink-500">{{"income.title" | translate}}</h1>
+  <h1 class="text-3xl mb-4 text-pink-500">{{ "income.title" | translate }}</h1>
 
-  <div class="grid grid-flow-row grid-cols-1 lg:grid-cols-2 auto-rows-max gap-4 lg:gap-2">
+  <div
+    class="grid grid-flow-row grid-cols-1 lg:grid-cols-2 auto-rows-max gap-4 lg:gap-2"
+  >
     <div class="order-2 lg:order-1">
       <apx-chart
         *ngIf="chartOptions2 && chartOptions2.series.length > 0"
@@ -35,78 +37,126 @@
 
       <div *ngIf="selectedTab === 'Staking'">
         <div *ngIf="dfiInStaking < 1">
-          {{ 'noStakingAvailable' | translate }}
+          {{ "noStakingAvailable" | translate }}
         </div>
         <div *ngIf="dfiInStaking > 0">
-          <h3 class="mb-2">
-            {{ 'balance' | translate }}
-            <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
-              {{dfiInStaking}} DFI
-            </span>
+          <h3 class="mb-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+            <div>
+              {{ "balance" | translate }}
+            </div>
+            <div>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{ dfiInStaking }} DFI
+              </span>
+            </div>
+
           </h3>
-          <h3 class="mb-2">
-            {{ 'balance' | translate }} in Fiat
-            <span class="rounded-full bg-pink-500 text-white text-sm px-2 py-1">
-              <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency:'USD'}}</span>
-              <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency:'EUR'}}</span>
-              <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency:'CHF'}}</span>
-              <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency:'GBP'}}</span>
-            </span>
+          <h3 class="mb-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+            <div>
+              {{ "balance" | translate }} in Fiat
+            </div>
+            <div>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'">{{ getDfiCountStakingCalcUsd() | currency: "USD" }}</span>
+                <span *ngIf="fiat === 'EUR'">{{ getDfiCountStakingCalcUsd() * usdToEur | currency: "EUR" }}</span>
+                <span *ngIf="fiat === 'CHF'">{{ getDfiCountStakingCalcUsd() * usdToChf | currency: "CHF" }}</span>
+                <span *ngIf="fiat === 'GBP'">{{ getDfiCountStakingCalcUsd() * usdToGbp | currency: "GBP" }}</span>
+              </span>
+            </div>
           </h3>
-      
-          <app-earning
-            [out]="stakingCalcOut"
-            [pool]="poolBtc"
-            [fiat]="fiat"
-            [usdToEur]="usdToEur"
-            [usdToChf]="usdToChf"
-            [usdToGbp]="usdToGbp"
-          >
-          </app-earning>
+
+          <div class="mt-2">
+            <app-earning
+              [out]="stakingOut"
+              [pool]="poolBtc"
+              [fiat]="fiat"
+              [usdToEur]="usdToEur"
+              [usdToChf]="usdToChf"
+              [usdToGbp]="usdToGbp"
+              >
+            </app-earning>
+          </div>
         </div>
       </div>
 
       <div *ngIf="selectedTab === 'LM'">
-        <h3>
-          <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
-            <span *ngIf="wallet?.btcInBtcPool > 0">{{ getAnteilBTCPoolAnGesamtLM | number: "1.1-1" }} % BTC</span>
-            <span *ngIf="wallet?.ethInEthPool > 0"> / {{ getAnteilETHPoolAnGesamtLM | number: "1.1-1" }} % ETH</span>
-            <span *ngIf="wallet?.ltcInLtcPool > 0"> / {{ getAnteilLTCPoolAnGesamtLM | number: "1.1-1" }} % LTC</span>
-            <span *ngIf="wallet?.usdtInUsdtPool > 0"> / {{ getAnteilUSDTPoolAnGesamtLM | number: "1.1-1" }} % USDT</span>
-            <span *ngIf="wallet?.dogeInDogePool > 0"> / {{ getAnteilDogePoolAnGesamtLM | number: "1.1-1" }} % DOGE</span>
-            <span *ngIf="wallet?.bchInBchPool > 0"> / {{ getAnteilBchPoolAnGesamtLM | number: "1.1-1" }} % BCH</span>
+        <div class="mb-2">
+          <span
+            class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-3 gap-6 border-b pb-2"
+          >
+            <span class="text-xl" *ngIf="wallet?.btcInBtcPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilBTCPoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              BTC
+            </span>
+            <span class="text-xl" *ngIf="wallet?.ethInEthPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilETHPoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              ETH
+            </span>
+            <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilLTCPoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              LTC
+            </span>
+            <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilUSDTPoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              USDT
+            </span>
+            <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilDogePoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              DOGE
+            </span>
+            <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{ getAnteilBchPoolAnGesamtLM | number: "1.1-1" }} %
+              </span>
+              BCH
+            </span>
           </span>
-        </h3>
-        <h3>
+        </div>
+
+        <h3 class="text-xl font-semibold text-pink-500 mt-4 mb-1">
           {{ "balance" | translate }}
         </h3>
 
-        <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
-          {{ wallet?.btcInBtcPool | number: "1.5-5" }} BTC -
-          {{ wallet?.ethInEthPool | number: "1.3-3" }} ETH
-          <span *ngIf="wallet?.usdtInUsdtPool > 0">
-            - USDT {{ wallet?.usdtInUsdtPool | number: "1.3-3" }}
+        <span class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
+          <span class="text-xl">{{ wallet?.btcInBtcPool | number: "1.5-5" }} BTC</span>
+          <span class="text-xl">{{ wallet?.ethInEthPool | number: "1.3-3" }} ETH</span>
+          <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
+            USDT {{ wallet?.usdtInUsdtPool | number: "1.3-3" }}
           </span>
-          <span *ngIf="wallet?.ltcInLtcPool > 0">
-            - LTC {{ wallet?.ltcInLtcPool | number: "1.3-3" }}
+          <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
+            LTC {{ wallet?.ltcInLtcPool | number: "1.3-3" }}
           </span>
-          <span *ngIf="wallet?.dogeInDogePool > 0">
-            - DOGE {{ wallet?.dogeInDogePool | number: "1.3-3" }}
+          <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
+            DOGE {{ wallet?.dogeInDogePool | number: "1.3-3" }}
           </span>
-          <span *ngIf="wallet?.bchInBchPool > 0">
-            - BCH {{ wallet?.bchInBchPool | number: "1.3-3" }}
+          <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
+            BCH {{ wallet?.bchInBchPool | number: "1.3-3" }}
           </span>
-          - {{ getDfiCountInLM | number: "1.3-3" }} DFI
+          <span class="text-xl"> {{ getDfiCountInLM | number: "1.3-3" }} DFI </span>
         </span>
 
-        <h3 class="mb-2">
-          {{ "balance" | translate }} in Fiat
-          <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
-            <span *ngIf="fiat === 'USD'">{{ getLMUsd | currency: "USD" }}</span>
-            <span *ngIf="fiat === 'EUR'">{{ getLMUsd * usdToEur | currency: "EUR" }}</span>
-            <span *ngIf="fiat === 'CHF'">{{ getLMUsd * usdToChf | currency: "CHF" }}</span>
-            <span *ngIf="fiat === 'GBP'">{{ getLMUsd * usdToGbp | currency: "GBP" }}</span>
+        <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+          <span>
+            {{ "balance" | translate }} in Fiat
           </span>
+          <div>
+            <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+              <span *ngIf="fiat === 'USD'">{{ getLMUsd | currency: "USD" }}</span>
+              <span *ngIf="fiat === 'EUR'">{{ getLMUsd * usdToEur | currency: "EUR" }}</span>
+              <span *ngIf="fiat === 'CHF'">{{ getLMUsd * usdToChf | currency: "CHF" }}</span>
+              <span *ngIf="fiat === 'GBP'">{{ getLMUsd * usdToGbp | currency: "GBP" }}</span>
+            </span>
+          </div>
         </h3>
         <app-earning
           [out]="poolOut"
@@ -117,7 +167,6 @@
           [usdToGbp]="usdToGbp"
         ></app-earning>
       </div>
-
-    </div>    
+    </div>
   </div>
 </div>

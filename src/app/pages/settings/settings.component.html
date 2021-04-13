@@ -115,7 +115,7 @@
       <h2 *ngIf="loggedIn">
         {{ 'login3' | translate }}
         <br/>
-        <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">{{loggedInAuth}}</span>
+        <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{loggedInAuth}}</span>
       </h2>
 
       <div *ngIf="loggedIn" class="mt-4">

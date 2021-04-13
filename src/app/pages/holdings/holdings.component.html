@@ -488,7 +488,7 @@
               </div>
               <div class="h-full transition duration-300 ease-in-out transform mt-4" [ngClass]="{'hidden': !isInfoOpen}">
                 <h1>
-                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+                  <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                     {{ 'address.title' | translate }}
                   </span>
                 </h1>
@@ -500,14 +500,14 @@
                   {{ 'address.exc' | translate }}
                 </p>
                 <p class="mb-2">
-                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">
+                  <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                     listaccounts {{'{}'}} false false true
                   </span>
                   <span> ->{{ 'address.exc2' | translate }}</span>
                 </p>
         
                 <p class="mb-2">
-                  <span class="rounded-full bg-gray-800 text-white text-sm px-2 py-1">listaddressgroupings</span>
+                  <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
                   <span> ->{{ 'address.exc21' | translate }}</span>
                 </p>
         
