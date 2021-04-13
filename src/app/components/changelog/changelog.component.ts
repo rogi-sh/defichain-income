@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from '../../../environments/environment';
-import {Changelog} from '../../../interface/Changelog';
+import {environment} from '@environments/environment';
+import {Changelog} from '@interfaces/Changelog';
 
 @Component({
   selector: 'app-changelog',
@@ -9,6 +9,7 @@ import {Changelog} from '../../../interface/Changelog';
   styleUrls: ['./changelog.component.css']
 })
 export class ChangelogComponent implements OnInit {
+  isOpen = false;
 
   logs: Changelog;
 
@@ -21,12 +22,8 @@ export class ChangelogComponent implements OnInit {
     this.logs = new Changelog();
   }
 
-  open(content): void{
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-
-    }, (reason) => {
-
-    });
+  handleOpen(): void{
+    this.isOpen = !this.isOpen
   }
 
 }
