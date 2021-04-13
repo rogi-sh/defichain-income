@@ -81,9 +81,9 @@ import { SettingsComponent } from '@pages/settings/settings.component';
 })
 export class AppModule { }
 
-// if (environment.production) {
-//   enableProdMode();
-// }
+if (environment.production) {
+  enableProdMode();
+}
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

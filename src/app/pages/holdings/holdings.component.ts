@@ -62,7 +62,7 @@ export class HoldingsComponent implements OnInit {
 
   @Input()
   stakingApy: number;
-  
+
   @Input()
   autoLoadData: boolean;
 

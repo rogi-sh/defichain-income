@@ -105,7 +105,7 @@
         class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
       >
         <app-icon name="doughnut-chart"></app-icon>
-        <div class="inline self-center ml-2 text-xl">Holdings</div>
+        <div class="inline self-center ml-2 text-xl">{{ 'holdings.title' | translate }}</div>
       </a>
 
       <a
@@ -114,7 +114,7 @@
         class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
       >
         <app-icon name="income"></app-icon>
-        <div class="inline self-center ml-2 text-xl">Income</div>
+        <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
       </a>
 
       <a
@@ -141,7 +141,7 @@
         class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
       >
         <app-icon name="calculator"></app-icon>
-        <div class="inline self-center ml-2 text-xl">Calculator</div>
+        <div class="inline self-center ml-2 text-xl">{{ 'income.calc' | translate }}</div>
       </a>
 
       <div class="pt-3 mt-3 border-t border-gray-500">
@@ -161,7 +161,7 @@
           <div class="w-10 h-10">
             <app-icon name="settings"></app-icon>
           </div>
-          <div class="inline self-center ml-2 text-xl">Settings</div>
+          <div class="inline self-center ml-2 text-xl">{{ 'setting' | translate }}</div>
         </a>
       </div>
 
@@ -611,7 +611,7 @@
           </div>
           <div *ngSwitchCase="'settings'">
             <div>
-               <h1 class="text-3xl mb-4 text-pink-500">Settings</h1>
+               <h1 class="text-3xl mb-4 text-pink-500">{{ 'setting' | translate }}</h1>
               <div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-3 gap-6">
                 <div>
                   <div class="flex">

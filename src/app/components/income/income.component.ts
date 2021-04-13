@@ -55,25 +55,25 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   dfiInStaking!: number;
-  
+
   @Input()
   getAnteilBTCPoolAnGesamtLM: number;
-  
+
   @Input()
   getAnteilETHPoolAnGesamtLM: number;
-  
+
   @Input()
   getAnteilLTCPoolAnGesamtLM: number;
-  
+
   @Input()
   getAnteilUSDTPoolAnGesamtLM: number;
-  
+
   @Input()
   getAnteilDogePoolAnGesamtLM: number;
-  
+
   @Input()
   getAnteilBchPoolAnGesamtLM: number;
-  
+
   @Input()
   getDfiCountInLM: number;
 
@@ -82,7 +82,7 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   wallet: Wallet;
-  
+
   constructor()  { }
 
   ngOnInit(): void {

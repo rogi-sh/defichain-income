@@ -433,7 +433,6 @@ export class AppComponent implements OnInit {
   }
 
   saveInputStaking(): void {
-    console.log(123, this.stakingApyKey)
     localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
