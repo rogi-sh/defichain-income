@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   listpoolpairs: 'https://api.defichain.io/v1/listpoolpairs',
