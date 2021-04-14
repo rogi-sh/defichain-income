@@ -27,7 +27,7 @@
   <div class="order-1 lg:order-2">
     <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
         <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
         <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>

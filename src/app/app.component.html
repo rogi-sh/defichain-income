@@ -451,7 +451,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass!]="dfiInStaking ? 'empty' : ''"
-                              title="DEFI"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -462,7 +462,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="dfiInStaking" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                DEFI
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -493,7 +493,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInBtcPool === null || wallet.dfiInBtcPool === undefined  ? 'empty' : ''"
-                              title="DEFI"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -504,7 +504,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiBtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                DEFI
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -531,7 +531,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInEthPool === null || wallet.dfiInEthPool === undefined  ? 'empty' : ''"
-                              title="ETH"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -542,7 +542,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiEthPool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                ETH
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -569,7 +569,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInUsdtPool === null || wallet.dfiInUsdtPool === undefined  ? 'empty' : ''"
-                              title="Defi"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -580,7 +580,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiUsdtPool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                Defi
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -607,7 +607,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInLtcPool === null || wallet.dfiInLtcPool === undefined  ? 'empty' : ''"
-                              title="DEFI"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -618,7 +618,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiLtcPool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                DEFI
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -645,7 +645,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInDogePool === null || wallet.dfiInDogePool === undefined  ? 'empty' : ''"
-                              title="DEFI"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -656,7 +656,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiDogePool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                DEFI
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -684,7 +684,7 @@
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
-                              title="Defi"
+                              title="DFI"
                             >
                               <input
                                 required
@@ -695,7 +695,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
                               <label [for]="onChangeDfiBchPool" class="absolute left-2 transition-all px-1 pointer-events-none">
-                                Defi
+                                DFI
                               </label>
                             </div>
                           </div>
@@ -1270,9 +1270,17 @@
                     <button
                       (click)="logout()"
                       type="button"
-                      class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-10 text-pink-500 align-top"
+                      class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-10 text-pink-500 align-top mr-2"
                     >
                       Logout
+                    </button>
+
+                    <button
+                      (click)="update()"
+                      type="button"
+                      class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-1/4 h-10 text-white align-top"
+                    >
+                      Update
                     </button>
                   </div>
                 </div>
