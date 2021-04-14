@@ -38,7 +38,7 @@
         <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
         Online
       </div>
-      
+
       <div *ngIf="!apiOnline">
         <div class="inline-block rounded bg-red-600 h-2 w-2"></div>
         Offline
@@ -49,8 +49,8 @@
         (change)="useLanguage($event.target.value)"
         [value]="lang"
       >
-        <option value="de">DE</option>
-        <option value="en" selected>EN</option>
+        <option value="de" [selected]="isLangSet('de')">DE</option>
+        <option value="en" [selected]="isLangSet('en')">EN</option>
       </select>
 
       <select
@@ -271,13 +271,13 @@
           <div *ngSwitchCase="'holdings'">
             <div>
               <h1 class="text-3xl mb-4 text-pink-500">{{ 'holdings.title' | translate }}</h1>
-            
+
               <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500" (click)="handleSettingsDialog()">
                 <div class="pointer-events-none w-8 h-8">
                   <app-icon name="settings"></app-icon>
                 </div>
               </a>
-            
+
               <div *ngIf="wallet && poolBtc">
                 <app-value
                   [poolBtc]="poolBtc"
@@ -294,7 +294,7 @@
                   [wallet]="wallet"
                 ></app-value>
               </div>
-            
+
               <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
                 <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
                   <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
@@ -304,7 +304,7 @@
                       class="pointer-events-none select-none"
                     ></object>
                   </div>
-            
+
                   <div class="w-full h-full pt-8 relative">
                     <div class="py-3 h-full">
                       <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2">
@@ -319,7 +319,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.btc"
-                                (ngModelChange)="onChangeBtcWallet()" 
+                                (ngModelChange)="onChangeBtcWallet()"
                                 type="number"
                                 id="inputBTCWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -338,7 +338,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.eth"
-                                (ngModelChange)="onChangeEthWallet()" 
+                                (ngModelChange)="onChangeEthWallet()"
                                 type="number"
                                 id="inputETHWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -357,7 +357,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.ltc"
-                                (ngModelChange)="onChangeLtcWallet()" 
+                                (ngModelChange)="onChangeLtcWallet()"
                                 type="number"
                                 id="inputLTCWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -376,7 +376,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.usdt"
-                                (ngModelChange)="onChangeUsdtWallet()" 
+                                (ngModelChange)="onChangeUsdtWallet()"
                                 type="number"
                                 id="inputUsdtWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -395,7 +395,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.doge"
-                                (ngModelChange)="onChangeDogeWallet()" 
+                                (ngModelChange)="onChangeDogeWallet()"
                                 type="number"
                                 id="inputDOGEWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -414,7 +414,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.bch"
-                                (ngModelChange)="onChangeBchWallet()" 
+                                (ngModelChange)="onChangeBchWallet()"
                                 type="number"
                                 id="inputBchWallet"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -425,7 +425,7 @@
                             </div>
                           </div>
                         </div>
-            
+
                         <div class="text-sm">Staking</div>
                         <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                           <div>
@@ -437,7 +437,7 @@
                               <input
                                 required
                                 [(ngModel)]="stakingApy"
-                                (ngModelChange)="saveInputStaking()" 
+                                (ngModelChange)="saveInputStaking()"
                                 type="number"
                                 id="saveInputStaking"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -456,7 +456,7 @@
                               <input
                                 required
                                 [(ngModel)]="dfiInStaking"
-                                (ngModelChange)="onChangeDfiStaking()" 
+                                (ngModelChange)="onChangeDfiStaking()"
                                 type="number"
                                 id="dfiInStaking"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -467,7 +467,7 @@
                             </div>
                           </div>
                         </div>
-            
+
                         <div class="text-sm">Liquidity Mining</div>
                         <div class="grid grid-flow-row grid-rows-6 grid-cols-2 md:grid-cols-3 gap-3 pb-4">
                           <div>
@@ -479,7 +479,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.btcInBtcPool"
-                                (ngModelChange)="onChangeBtcBtcPool()" 
+                                (ngModelChange)="onChangeBtcBtcPool()"
                                 type="number"
                                 id="onChangeBtcBtcPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -498,7 +498,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInBtcPool"
-                                (ngModelChange)="onChangeDfiBtcPool()" 
+                                (ngModelChange)="onChangeDfiBtcPool()"
                                 type="number"
                                 id="onChangeDfiBtcPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -517,7 +517,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.ethInEthPool"
-                                (ngModelChange)="onChangeEthEthPool()" 
+                                (ngModelChange)="onChangeEthEthPool()"
                                 type="number"
                                 id="onChangeEthEthPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -536,7 +536,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInEthPool"
-                                (ngModelChange)="onChangeDfiEthPool()" 
+                                (ngModelChange)="onChangeDfiEthPool()"
                                 type="number"
                                 id="onChangeDfiEthPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -555,7 +555,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.usdtInUsdtPool"
-                                (ngModelChange)="onChangeUsdtUsdtPool()" 
+                                (ngModelChange)="onChangeUsdtUsdtPool()"
                                 type="number"
                                 id="onChangeUsdtUsdtPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -574,7 +574,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInUsdtPool"
-                                (ngModelChange)="onChangeDfiUsdtPool()" 
+                                (ngModelChange)="onChangeDfiUsdtPool()"
                                 type="number"
                                 id="onChangeDfiUsdtPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -593,7 +593,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.ltcInLtcPool"
-                                (ngModelChange)="onChangeLtcLtcPool()" 
+                                (ngModelChange)="onChangeLtcLtcPool()"
                                 type="number"
                                 id="onChangeLtcLtcPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -612,7 +612,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInLtcPool"
-                                (ngModelChange)="onChangeDfiLtcPool()" 
+                                (ngModelChange)="onChangeDfiLtcPool()"
                                 type="number"
                                 id="onChangeDfiLtcPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -631,7 +631,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dogeInDogePool"
-                                (ngModelChange)="onChangeDogeDogePool()" 
+                                (ngModelChange)="onChangeDogeDogePool()"
                                 type="number"
                                 id="onChangeDogeDogePool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -650,7 +650,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInDogePool"
-                                (ngModelChange)="onChangeDfiDogePool()" 
+                                (ngModelChange)="onChangeDfiDogePool()"
                                 type="number"
                                 id="onChangeDfiDogePool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -669,7 +669,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.bchInBchPool"
-                                (ngModelChange)="onChangeBchBchPool()" 
+                                (ngModelChange)="onChangeBchBchPool()"
                                 type="number"
                                 id="onChangeBchBchPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -680,7 +680,7 @@
                             </div>
                           </div>
                           <div>
-            
+
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
@@ -689,7 +689,7 @@
                               <input
                                 required
                                 [(ngModel)]="wallet.dfiInBchPool"
-                                (ngModelChange)="onChangeDfiBchPool()" 
+                                (ngModelChange)="onChangeDfiBchPool()"
                                 type="number"
                                 id="onChangeDfiBchPool"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -701,7 +701,7 @@
                           </div>
                         </div>
                       </div>
-            
+
                       <div *ngIf="autoLoadData">
                         <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
                           <div>
@@ -776,15 +776,15 @@
                               </span>
                               <span> ->{{ 'address.exc2' | translate }}</span>
                             </p>
-                    
+
                             <p class="mb-2">
                               <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
                               <span> ->{{ 'address.exc21' | translate }}</span>
                             </p>
-                    
+
                             <p>{{ 'address.exc3' | translate }}</p>
                           </div>
-            
+
                           <div class="mt-4">
                             <div class="inline-block w-3/4">
                               <div
@@ -813,10 +813,10 @@
                             </div>
                           </div>
                         </div>
-            
+
                         <div class="flex">
                           <div class="block mt-2 h-auto w-full">
-                            <div 
+                            <div
                               *ngFor="let a of adresses; index as i;"
                               class="relative lg:px-2"
                               [ngClass]="{'bg-gray-200': i % 2 === 1}"
@@ -839,7 +839,7 @@
                 </div>
               </div>
             </div>
-           
+
             <div
               class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
             >
@@ -945,7 +945,7 @@
 
           </div>
           <div *ngSwitchCase="'income'">
-            <app-income 
+            <app-income
               [poolBtc]="poolBtc"
               [fiat]="fiat"
               [usdToEur]="usdToEur"
@@ -975,8 +975,8 @@
                 {{ 'your' | translate }} pools
             </h1>
             <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
-              <div 
-                *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0" 
+              <div
+                *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -988,13 +988,13 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolBtcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
               </div>
-        
-              <div 
-                *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool" 
+
+              <div
+                *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -1006,13 +1006,13 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolEthOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
-        
+
               </div>
-              <div 
-                *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0" 
+              <div
+                *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -1024,13 +1024,13 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
                             [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
               </div>
-              <div 
-                *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0" 
+              <div
+                *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -1042,12 +1042,12 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur" [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
               </div>
-              <div 
-                *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0" 
+              <div
+                *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -1059,13 +1059,13 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
                             [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
               </div>
-              <div 
-                *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0" 
+              <div
+                *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
                 class="bg-gray-100 rounded-md p-2"
               >
                 <h2>
@@ -1077,7 +1077,7 @@
                   Pool {{ 'share' | translate }}
                   <span class="badge badge-pill badge-info">{{anteilAmPoolBch | number: '1.4-4' }} %</span>
                 </h3>
-        
+
                 <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
                             [usdToChf]="usdToChf"
                             [usdToGbp]="usdToGbp"></app-earning>
@@ -1172,7 +1172,7 @@
                       </div>
                     </div>
                     <div class="inline-block w-1/4 pl-2 align-top">
-                      <button 
+                      <button
                         type="button"
                         (click)="onChangeRefreshS()"
                         class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
@@ -1181,20 +1181,20 @@
                       </button>
                     </div>
                   </div>
-                  
+
                   <div class="w-full text-xs text-gray-400 mt-1">
                     {{ 'refresh3' | translate }}
                     <countdown class="text-pink-400" #cd [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
                   </div>
-            
-            
+
+
                   <div class="w-full mt-5">
                     <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                      <input 
+                      <input
                         type="checkbox"
                         id="autoLoadData"
                         [(ngModel)]="autoLoadData"
-                        (ngModelChange)="saveToggleAutoLoad()" 
+                        (ngModelChange)="saveToggleAutoLoad()"
                         type="checkbox"
                         [ngClass]="{ 'isChecked': autoLoadData }"
                         class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
@@ -1215,7 +1215,7 @@
                 <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3">
                   <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
                   <p *ngIf="!loggedIn" class="my-3">
-                    <button 
+                    <button
                       (click)="register()"
                       type="button"
                       class="max-w-xs bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top"
@@ -1223,16 +1223,16 @@
                       {{ 'register' | translate }}
                     </button>
                   </p>
-                  
+
                   <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2" role="alert">
                     {{errorBackend}}
                   </div>
                   <div *ngIf="successBackend"  class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2" role="alert">
                     {{successBackend}}
                   </div>
-            
+
                   <p *ngIf="!loggedIn" class="py-2">{{ 'login2' | translate }}</p>
-                  
+
                   <div *ngIf="!loggedIn" class="flex">
                     <div class="w-3/4 pr-2">
                       <div
@@ -1284,7 +1284,7 @@
 
             <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
               <div *ngIf="wallet && poolBtc">
-                <app-income 
+                <app-income
                   [showOnlyGraph]="true"
                   [poolBtc]="poolBtc"
                   [fiat]="fiat"

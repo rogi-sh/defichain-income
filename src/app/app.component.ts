@@ -138,7 +138,8 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+    this.lang = browserLang.match(/en|de/) ? browserLang : 'en';
+    translate.use(this.lang);
 
     // setze matomo URL
     this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
@@ -149,6 +150,10 @@ export class AppComponent implements OnInit {
     this.translate.use(language);
     this.lang = language;
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
+  }
+
+  isLangSet(lang: string): boolean {
+    return this.lang === lang;
   }
 
   ngOnInit(): void {
@@ -574,12 +579,6 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidityPool;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
-    console.log('computed btc' + this.dfiProBlockBtc);
-    console.log('computed eth' + this.dfiProBlockEth);
-    console.log('computed usdt' + this.dfiProBlockUsdt);
-    console.log('computed ltc' + this.dfiProBlockLtc);
-    console.log('computed bch' + this.dfiProBlockBch);
-    console.log('computed doge' + this.dfiProBlockDoge);
   }
 
   private getCustomRewards(rewards: string []): number {
