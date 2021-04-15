@@ -29,7 +29,6 @@ import { ValueComponent } from '@components/value/value.component';
 import { IconComponent } from '@components/icon/icon.component';
 
 import { DefiComponent } from '@pages/defi/defi.component';
-import { HoldingsComponent } from '@pages/holdings/holdings.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
 
@@ -48,7 +47,6 @@ import { InfoComponent } from '@pages/info/info.component';
     IconComponent,
     DefiComponent,
     CalculatorComponent,
-    HoldingsComponent,
     InfoComponent,
   ],
   imports: [

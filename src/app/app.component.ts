@@ -1123,7 +1123,6 @@ export class AppComponent implements OnInit {
 
   addAdress(): void {
     this.adresses.push(this.adress);
-    console.log(this.adresses);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();
