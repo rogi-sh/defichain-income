@@ -9,7 +9,7 @@ import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 })
 export class IncomeComponent implements OnInit, OnChanges {
   stakingCalcOut: StakingCalc = new StakingCalc();
-  selectedTab = 'Staking';
+  selectedTab = 'All';
 
   @ViewChild('chart2') chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions2>;

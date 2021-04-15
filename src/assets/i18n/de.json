@@ -63,6 +63,7 @@
     "hold": "Wert des Bestands"
   },
   "income": {
+    "all": "Gesamt",
     "title": "Dein gesamtes Einkommen",
     "word": "Einkommen",
     "share": "Anteil",

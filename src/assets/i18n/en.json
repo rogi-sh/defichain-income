@@ -62,6 +62,7 @@
     "hold": "Value of holdings"
   },
   "income": {
+    "all": "All",
     "title": "Your total income",
     "word": "Income",
     "share": "Share",
