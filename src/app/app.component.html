@@ -30,7 +30,7 @@
     </div>
 
     <div class="flex absolute right-6 self-center">
-      <div class="h-full mr-2 sm:mr-5 items-center flex">
+      <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center flex">
       <span
         class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
@@ -213,6 +213,7 @@
           (click)="handlePage('dashboard')"
           [ngClass]="{ 'text-pink-500': currentPage === 'dashboard' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="Dashboard"
         >
           <app-icon name="home"></app-icon>
         </a>
@@ -220,6 +221,7 @@
           (click)="handlePage('holdings')"
           [ngClass]="{ 'text-pink-500': currentPage === 'holdings' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'holdings.title' | translate }}"
         >
           <app-icon name="doughnut-chart"></app-icon>
         </a>
@@ -227,6 +229,7 @@
           (click)="handlePage('income')"
           [ngClass]="{ 'text-pink-500': currentPage === 'income' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'income.word' | translate }}"
         >
           <app-icon name="income"></app-icon>
         </a>
@@ -235,14 +238,16 @@
           (click)="handlePage('dex')"
           [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="DEX"
         >
-          <app-icon name="line-chart"></app-icon>
+            <app-icon name="line-chart"></app-icon>
         </a>
-
+        
         <a
           (click)="handlePage('defi')"
           [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="DEFI"
         >
           <app-icon name="bar-chart"></app-icon>
         </a>
@@ -250,6 +255,7 @@
           (click)="handlePage('calculator')"
           [ngClass]="{ 'text-pink-500': currentPage === 'calculator' }"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'income.calc' | translate }}"
         >
           <app-icon name="calculator"></app-icon>
         </a>
@@ -260,6 +266,7 @@
             (click)="handlePage('info')"
             [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
             class="hover:text-pink-400 my-2 block cursor-pointer"
+            title="Info"
           >
             <app-icon name="info"></app-icon>
           </a>
@@ -267,6 +274,7 @@
             (click)="handlePage('settings')"
             [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
             class="hover:text-pink-400 my-2 block cursor-pointer"
+            title="{{ 'setting' | translate }}"
           >
             <div class="w-10 h-10 mx-auto">
               <app-icon name="settings"></app-icon>
