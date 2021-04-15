@@ -963,7 +963,7 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-gray-100 rounded-md p-2">
+              <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2">
                 <h3 class="text-lg font-bold mb-2">{{ 'holdings.lp' | translate }}</h3>
                 <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                   <div>BTC-DFI</div>
