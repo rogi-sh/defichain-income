@@ -113,18 +113,18 @@ export class Wallet {
   dfiInStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
 
-  btcdfi = 5;
-  bchdfi = 5;
-  ethdfi = 5;
-  ltcdfi = 5;
-  dogedfi = 5;
-  usdtdfi = 5;
+  btcdfi = 0;
+  bchdfi = 0;
+  ethdfi = 0;
+  ltcdfi = 0;
+  dogedfi = 0;
+  usdtdfi = 0;
 
   // User Infos
   // BTC Pool
   btcInBtcPool = 0;
   btcInBtcPoolKey = 'btcInBtcPoolKey';
-  btc = 1;
+  btc = 0;
   btcKey = 'btcKey';
   dfiInBtcPoolKey = 'dfiInBtcPoolKey';
   dfiInBtcPool = 0;
@@ -132,7 +132,7 @@ export class Wallet {
   // ETH Pool
   ethInEthPool = 0;
   ethInEthPoolKey = 'ethInEthPoolKey';
-  eth = 2;
+  eth = 0;
   ethKey = 'ethKey';
   dfiInEthPool = 0;
   dfiInEthPoolKey = 'dfiInEthPoolKey';
@@ -140,7 +140,7 @@ export class Wallet {
   // USDT Pool
   usdtInUsdtPool = 0;
   usdtInUsdtPoolKey = 'usdtInUsdtPoolKey';
-  usdt = 20;
+  usdt = 0;
   usdtKey = 'usdtKey';
   dfiInUsdtPool = 0;
   dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
@@ -148,7 +148,7 @@ export class Wallet {
   // LTC Pool
   ltcInLtcPool = 0;
   ltcInLtcPoolKey = 'ltcInLtcPoolKey';
-  ltc = 3;
+  ltc = 0;
   ltcKey = 'ltcKey';
   dfiInLtcPool = 0;
   dfiInLtcPoolKey = 'dfiInLtcPoolKey';
@@ -156,7 +156,7 @@ export class Wallet {
   // DOGE Pool
   dogeInDogePool = 0;
   dogeInDogePoolKey = 'dogeInDogePoolKey';
-  doge = 5;
+  doge = 0;
   dogeKey = 'dogeKey';
   dfiInDogePool = 0;
   dfiInDogePoolKey = 'dfiInDogePoolKey';
@@ -164,7 +164,7 @@ export class Wallet {
   // BCH Pool
   bchInBchPool = 0;
   bchInBchPoolKey = 'bchInBchPoolKey';
-  bch = 7;
+  bch = 0;
   bchKey = 'bchKey';
   dfiInBchPoolKey = 'dfiInBchPoolKey';
   dfiInBchPool = 0;
