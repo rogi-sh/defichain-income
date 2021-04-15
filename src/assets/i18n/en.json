@@ -59,7 +59,9 @@
     "title": "Your actual value",
     "cur": "Choose your currency",
     "dist": "Distribution of holdings",
-    "hold": "Value of holdings"
+    "hold": "Value of holdings",
+    "open-details": "Show details",
+    "hide-details": "Hide details"
   },
   "income": {
     "all": "All",

@@ -23,7 +23,7 @@ export class ChangelogComponent implements OnInit {
   }
 
   handleOpen(): void{
-    this.isOpen = !this.isOpen
+    this.isOpen = !this.isOpen;
   }
 
 }

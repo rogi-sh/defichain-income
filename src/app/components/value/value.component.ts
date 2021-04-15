@@ -50,11 +50,11 @@ export class ValueComponent implements OnInit, OnChanges {
 
   @Input()
   poolBch!: Pool;
-  
+
   @Input()
   hideHoldings: boolean;
 
-  constructor() { }
+  detailsOpen: boolean = false;
 
   ngOnInit(): void {
     this.buildDataForChart();
@@ -255,7 +255,6 @@ export class ValueComponent implements OnInit, OnChanges {
   getAnteilLMOfUsdtPoolValue(): number {
     return ((this.wallet.dfiInUsdtPool * this.poolUsdt?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
   }
-
   getAnteilLMOfDogePoolValue(): number {
     return ((this.wallet.dfiInDogePool * this.poolDoge?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
   }
@@ -490,5 +489,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getAnteilPortfolioForChart(data: Data, allValue: number): number {
     return +(data.value / allValue * 100).toFixed(5);
+  }
+
+  handleDetails() {
+    this.detailsOpen = !this.detailsOpen;
   }
 }
