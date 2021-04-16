@@ -48,131 +48,131 @@
       </div>
 
       <div *ngIf="selectedTab === 'All'">
-        <div class="grid grid-flow-col grid-cols-3 gap-2">
-          <div class="mb-2 grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               {{ 'Min' | translate }}
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{getDfiIncomePerMin() | number: '1.2-2' }}
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{getDfiIncomePerMin() | number: '1.2-2'}}
               </div>
             </div>
           </div>
-          <div class="grid grid-flow-col grid-cols-2 gap-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               DFI
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMinUsd() | currency:'USD' }}</span>
-                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMinUsd() * usdToEur | currency:'EUR' }}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMinUsd() * usdToChf | currency:'CHF' }}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMinUsd() * usdToGbp | currency:'GBP' }}</span>
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMinUsd() | currency:'USD'}}</span>
+                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMinUsd() * usdToEur | currency:'EUR'}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMinUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMinUsd() * usdToGbp | currency:'GBP'}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-flow-col grid-cols-3 gap-2">
-          <div class="mb-2 grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               {{ 'hour' | translate }}
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{getDfiIncomePerHour() | number: '1.2-2' }}
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{getDfiIncomePerHour() | number: '1.2-2'}}
               </div>
             </div>
           </div>
-          <div class="grid grid-flow-col grid-cols-2 gap-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               DFI
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD' }}</span>
-                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerHourUsd() * usdToEur | currency:'EUR' }}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerHourUsd() * usdToChf | currency:'CHF' }}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerHourUsd() * usdToGbp | currency:'GBP' }}</span>
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerHourUsd() | currency:'USD'}}</span>
+                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerHourUsd() * usdToEur | currency:'EUR'}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerHourUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerHourUsd() * usdToGbp | currency:'GBP'}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-flow-col grid-cols-3 gap-2">
-          <div class="mb-2 grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               {{ 'day' | translate }}
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{getDfiIncomePerDay() | number: '1.2-2' }}
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{getDfiIncomePerDay() | number: '1.2-2'}}
               </div>
             </div>
           </div>
-          <div class="grid grid-flow-col grid-cols-2 gap-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               DFI
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD' }}</span>
-                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR' }}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerDayUsd() * usdToChf | currency:'CHF' }}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerDayUsd() * usdToGbp | currency:'GBP' }}</span>
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerDayUsd() | currency:'USD'}}</span>
+                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR'}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerDayUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerDayUsd() * usdToGbp | currency:'GBP'}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-flow-col grid-cols-3 gap-2">
-          <div class="mb-2 grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               {{ 'month' | translate }}
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{getDfiIncomePerMonth() | number: '1.2-2' }}
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{getDfiIncomePerMonth() | number: '1.2-2'}}
               </div>
             </div>
           </div>
-          <div class="grid grid-flow-col grid-cols-2 gap-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               DFI
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD' }}</span>
-                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMonthUsd() * usdToEur | currency:'EUR' }}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF' }}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMonthUsd() * usdToGbp | currency:'GBP' }}</span>
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerMonthUsd() | currency:'USD'}}</span>
+                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMonthUsd() * usdToEur | currency:'EUR'}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMonthUsd() * usdToGbp | currency:'GBP'}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-flow-col grid-cols-3 gap-2">
-          <div class="mb-2 grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 gap-2 mb-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               {{ 'year' | translate }}
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{getDfiIncomePerYear() | number: '1.2-2' }}
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{getDfiIncomePerYear() | number: '1.2-2'}}
               </div>
             </div>
           </div>
-          <div class="grid grid-flow-col grid-cols-2 gap-2">
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
             <span>
               DFI
             </span>
             <div>
-              <div class="inline-block rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD' }}</span>
-                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerYearUsd() * usdToEur | currency:'EUR' }}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF' }}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerYearUsd() * usdToGbp | currency:'GBP' }}</span>
+              <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'"> {{getDfiIncomeValuePerYearUsd() | currency:'USD'}}</span>
+                <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerYearUsd() * usdToEur | currency:'EUR'}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF'}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerYearUsd() * usdToGbp | currency:'GBP'}}</span>
               </div>
             </div>
           </div>
@@ -189,22 +189,22 @@
               {{ "balance" | translate }}
             </div>
             <div>
-              <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{ dfiInStaking }} DFI
+              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                {{dfiInStaking}} DFI
               </span>
             </div>
 
           </h3>
           <h3 class="mb-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
             <div>
-              {{ "balance" | translate }} in Fiat
+              {{ "balance" | translate}} in Fiat
             </div>
             <div>
-              <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'">{{ getDfiCountStakingCalcUsd() | currency: "USD" }}</span>
-                <span *ngIf="fiat === 'EUR'">{{ getDfiCountStakingCalcUsd() * usdToEur | currency: "EUR" }}</span>
-                <span *ngIf="fiat === 'CHF'">{{ getDfiCountStakingCalcUsd() * usdToChf | currency: "CHF" }}</span>
-                <span *ngIf="fiat === 'GBP'">{{ getDfiCountStakingCalcUsd() * usdToGbp | currency: "GBP" }}</span>
+              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency: "USD"}}</span>
+                <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency: "EUR"}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency: "CHF"}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency: "GBP"}}</span>
               </span>
             </div>
           </h3>
@@ -228,43 +228,43 @@
           {{ "income.share" | translate }}
         </h3>
 
-        <div class="grid grid-flow-col grid-cols-2 gap-2">
+        <div class="grid grid-flow-col grid-cols-2 md:gap-2">
           <span
             class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-3 gap-6 border-b pb-2"
           >
             <span class="text-xl" *ngIf="wallet?.btcInBtcPool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilBTCPoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilBTCPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               BTC
             </span>
             <span class="text-xl" *ngIf="wallet?.ethInEthPool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilETHPoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilETHPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               ETH
             </span>
             <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilLTCPoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilLTCPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               LTC
             </span>
             <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilUSDTPoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilUSDTPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               USDT
             </span>
             <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilDogePoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilDogePoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               DOGE
             </span>
             <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
               <span class="text-pink-500 font-semibold">
-                {{ getAnteilBchPoolAnGesamtLM | number: "1.1-1" }} %
+                {{getAnteilBchPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               BCH
             </span>
@@ -278,43 +278,43 @@
         <span class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
           <span class="text-xl">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.btcInBtcPool | number: "1.5-5" }}
+              {{wallet?.btcInBtcPool | number: "1.5-5"}}
             </span>
             BTC
           </span>
           <span class="text-xl">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.ethInEthPool | number: "1.3-3" }}
+              {{wallet?.ethInEthPool | number: "1.3-3"}}
             </span>
             ETH
           </span>
           <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.usdtInUsdtPool | number: "1.3-3" }}
+              {{wallet?.usdtInUsdtPool | number: "1.3-3"}}
             </span>
             USDT
           </span>
           <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.ltcInLtcPool | number: "1.3-3" }}
+              {{wallet?.ltcInLtcPool | number: "1.3-3"}}
             </span>
             LTC 
           </span>
           <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.dogeInDogePool | number: "1.3-3" }}
+              {{wallet?.dogeInDogePool | number: "1.3-3"}}
             </span>
             DOGE 
           </span>
           <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
             <span class="text-pink-500 font-semibold">
-              {{ wallet?.bchInBchPool | number: "1.3-3" }}
+              {{wallet?.bchInBchPool | number: "1.3-3"}}
             </span>
             BCH 
           </span>
           <span class="text-xl">
             <span class="text-pink-500 font-semibold">
-              {{ getDfiCountInLM | number: "1.3-3" }} 
+              {{getDfiCountInLM | number: "1.3-3"}} 
             </span>
             DFI
           </span>
@@ -322,14 +322,14 @@
 
         <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
           <span>
-            {{ "balance" | translate }} in Fiat
+            {{ "balance" | translate}} in Fi at
           </span>
           <div>
             <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-              <span *ngIf="fiat === 'USD'">{{ getLMUsd | currency: "USD" }}</span>
-              <span *ngIf="fiat === 'EUR'">{{ getLMUsd * usdToEur | currency: "EUR" }}</span>
-              <span *ngIf="fiat === 'CHF'">{{ getLMUsd * usdToChf | currency: "CHF" }}</span>
-              <span *ngIf="fiat === 'GBP'">{{ getLMUsd * usdToGbp | currency: "GBP" }}</span>
+              <span *ngIf="fiat === 'USD'">{{getLMUsd | currency: "USD"}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getLMUsd * usdToEur | currency: "EUR"}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getLMUsd * usdToChf | currency: "CHF"}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getLMUsd * usdToGbp | currency: "GBP"}}</span>
             </span>
           </div>
         </h3>

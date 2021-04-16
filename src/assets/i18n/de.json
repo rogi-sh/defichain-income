@@ -60,9 +60,7 @@
     "title": "Dein aktueller Wert",
     "cur": "Wähle deine Währung aus",
     "dist": "Verteilung deines Bestands",
-    "hold": "Wert des Bestands",
-    "open-details": "Details anzeigen",
-    "hide-details": "Details schließen"
+    "hold": "Wert des Bestands"
   },
   "income": {
     "all": "Gesamt",

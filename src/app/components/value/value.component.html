@@ -5,7 +5,7 @@
   <div class="mb-4 lg:mb-0 order-2 lg:order-1" *ngIf="!hideHoldings">
     <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
@@ -47,13 +47,9 @@
       ></apx-chart>
     </div>
 
-    <a class="hover:underline text-pink-500 cursor-pointer" (click)="handleDetails()">
-      <span *ngIf="!detailsOpen">{{ 'value.open-details' | translate }}</span>
-      <span *ngIf="detailsOpen">{{ 'value.hide-details' | translate }}</span>
-    </a>
-    <div *ngIf="detailsOpen">
+    <div>
       <h2 class="mb-2">
-        <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           {{getDfiCount() | number: '1.2-2' }} DFI -
           <span *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
           <span *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
@@ -62,80 +58,79 @@
         </span>
       </h2>
       <h3 class="mb-2">
-        <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           {{getDfiCountLM() | number: '1.2-2'}} LM - {{dfiInStaking| number: '1.2-2'}} Staking - {{wallet?.dfi| number: '1.2-2'}} Wallet 
         </span>
       </h3>
 
-      <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="mb-2">
-        <h2 class="mb-2">
-          <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-            {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}} BTC -
-            <span *ngIf="fiat === 'USD'">{{getBtcValueUsd() | currency:'USD'}}</span>
-            <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
-            <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
-            <span *ngIf="fiat === 'GBP'"> {{getBtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
-          </span>
-        </h2>
+      <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 gap-1">
+        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}} BTC -
+              <span *ngIf="fiat === 'USD'">{{getBtcValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'"> {{getBtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.eth + wallet?.ethInEthPool | number: '1.3-3'}} ETH -
+              <span *ngIf="fiat === 'USD'">{{getEthValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getEthValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.3-3'}} USDT -
+              <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.3-3'}} LTC -
+              <span *ngIf="fiat === 'USD'">{{getLtcValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getLtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="wallet?.doge > 0 ||wallet.dogeInDogePool">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.doge + wallet?.dogeInDogePool | number: '1.3-3'}} DOGE -
+              <span *ngIf="fiat === 'USD'">{{getDogeValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getDogeValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="wallet?.bch > 0 || wallet.bchInBchPool">
+          <h2 class="mb-2">
+            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+              {{wallet?.bch + wallet?.bchInBchPool | number: '1.3-3'}} BCH -
+              <span *ngIf="fiat === 'USD'">{{getBchValueUsd() | currency:'USD'}}</span>
+              <span *ngIf="fiat === 'EUR'">{{getBchValueUsd() * usdToEur | currency:'EUR'}}</span>
+              <span *ngIf="fiat === 'CHF'">{{getBchValueUsd() * usdToChf | currency:'CHF'}}</span>
+              <span *ngIf="fiat === 'GBP'">{{getBchValueUsd() * usdToGbp | currency:'GBP'}}</span>
+            </span>
+          </h2>
+        </div>
       </div>
-      <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool" class="mb-2">
-        <h2 class="mb-2">
-          <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-            {{wallet?.eth + wallet?.ethInEthPool | number: '1.3-3'}} ETH -
-            <span *ngIf="fiat === 'USD'">{{getEthValueUsd() | currency:'USD'}}</span>
-            <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
-            <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
-            <span *ngIf="fiat === 'GBP'">{{getEthValueUsd() * usdToGbp | currency:'GBP'}}</span>
-          </span>
-        </h2>
-      </div>
-
-      <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool" class="mb-2">
-        <h2 class="mb-2">
-          <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-            {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.3-3'}} USDT -
-            <span *ngIf="fiat === 'USD'">{{getUsdtValueUsd() | currency:'USD'}}</span>
-            <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
-            <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
-            <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
-          </span>
-        </h2>
-      </div>
-      <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool" class="mb-2">
-        <h2 class="mb-2">
-          <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-            {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.3-3'}} LTC -
-            <span *ngIf="fiat === 'USD'">{{getLtcValueUsd() | currency:'USD'}}</span>
-            <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
-            <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
-            <span *ngIf="fiat === 'GBP'">{{getLtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
-          </span>
-        </h2>
-      </div>
-    </div>
-
-    <div *ngIf="wallet?.doge > 0 ||wallet.dogeInDogePool" class="mb-2">
-      <h2 class="mb-2">
-        <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          {{wallet?.doge + wallet?.dogeInDogePool | number: '1.3-3'}} DOGE -
-          <span *ngIf="fiat === 'USD'">{{getDogeValueUsd() | currency:'USD'}}</span>
-          <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
-          <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>
-          <span *ngIf="fiat === 'GBP'">{{getDogeValueUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span>
-      </h2>
-    </div>
-
-    <div *ngIf="wallet?.bch > 0 || wallet.bchInBchPool" class="mb-2">
-      <h2 class="mb-2">
-        <span class="rounded-full bg-gray-800 hover:bg-pink-500 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          {{wallet?.bch + wallet?.bchInBchPool | number: '1.3-3'}} BCH -
-          <span *ngIf="fiat === 'USD'">{{getBchValueUsd() | currency:'USD'}}</span>
-          <span *ngIf="fiat === 'EUR'">{{getBchValueUsd() * usdToEur | currency:'EUR'}}</span>
-          <span *ngIf="fiat === 'CHF'">{{getBchValueUsd() * usdToChf | currency:'CHF'}}</span>
-          <span *ngIf="fiat === 'GBP'">{{getBchValueUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span>
-      </h2>
     </div>
   </div>
 </div>

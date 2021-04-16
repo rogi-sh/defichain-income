@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Outcome, Pool} from '../../../interface/Dex';
+import {Outcome, Pool} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-earning',

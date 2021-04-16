@@ -54,7 +54,7 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   hideHoldings: boolean;
 
-  detailsOpen: boolean = false;
+  detailsOpen = false;
 
   ngOnInit(): void {
     this.buildDataForChart();
@@ -491,7 +491,7 @@ export class ValueComponent implements OnInit, OnChanges {
     return +(data.value / allValue * 100).toFixed(5);
   }
 
-  handleDetails() {
+  handleDetails(): void {
     this.detailsOpen = !this.detailsOpen;
   }
 }
