@@ -1,0 +1,124 @@
+<div class="col-sm bg-light margin-col">
+  <h2 class="text-lg my-4">
+    {{ 'target-reward-title' | translate }}
+  </h2>
+  <span>Staking Apy <span class="bg-pink-500 px-2 rounded-full text-white">{{stakingApy}} %</span></span>
+
+  <div class="mt-5 grid grid-cols-2 grid-rows-4 gap-4 lg:w-1/2">
+    <div 
+      class="relative h-14 input-component w-auto inline-block mr-2 "
+      [ngClass]="!aimReturnMin ? 'empty' : ''"
+      title="DFI per {{ 'Min' | translate }}"
+    >
+      <label for="aimReturnMin" class="absolute left-2 transition-all px-1 pointer-events-none">
+        DFI per {{ 'Min' | translate }}
+      </label>
+      <input
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+        required
+        [(ngModel)]="aimReturnMin"
+        (ngModelChange)="onChangeAimReturnMin($event)"
+        type="number"
+        id="aimReturnMin"
+        placeholder="Enter dfi amount"
+      >
+    </div>
+    <div>
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }}
+        </div>
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnMin | number: '1.0-0' }}
+        </div>
+      </div>
+    </div>
+
+    <div 
+      class="relative h-14 input-component w-auto inline-block mr-2"
+      [ngClass]="!aimReturnHour ? 'empty' : ''"
+      title="DFI per {{ 'hour' | translate }}"
+    >
+      <label for="aimReturnHour" class="absolute left-2 transition-all px-1 pointer-events-none">
+        DFI per {{ 'Hour' | translate }}
+      </label>
+      <input
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+        required
+        [(ngModel)]="aimReturnHour"
+        (ngModelChange)="onChangeAimReturnHour($event)"
+        type="number"
+        id="aimReturnHour"
+        placeholder="Enter dfi amount"
+      >
+    </div>
+    <div>
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnHour | number: '1.0-0' }}
+        </div>
+      </div>
+    </div>
+    
+    <div 
+      class="relative h-14 input-component w-auto inline-block mr-2"
+      [ngClass]="!aimReturnDay ? 'empty' : ''"
+      title="DFI per {{ 'day' | translate }}"
+    >
+      <label for="aimReturnDay" class="absolute left-2 transition-all px-1 pointer-events-none">
+        DFI per {{ 'day' | translate }}
+      </label>
+      <input
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+        required
+        [(ngModel)]="aimReturnDay"
+        (ngModelChange)="onChangeAimReturnDay($event)"
+        type="number"
+        id="aimReturnDay"
+        placeholder="Enter dfi amount"
+      >
+    </div>
+    <div>
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnDay | number: '1.0-0' }}
+        </div>
+      </div>
+    </div>
+    
+    <div
+      class="relative h-14 input-component w-auto inline-block mr-2"
+      [ngClass]="!aimReturnMonth ? 'empty' : ''"
+      title="DFI per {{ 'month' | translate }}"
+    >
+      <label for="aimReturnMonth" class="absolute left-2 transition-all px-1 pointer-events-none">
+        DFI per {{ 'month' | translate }}
+      </label>
+      <input
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+        required
+        [(ngModel)]="aimReturnMonth"
+        (ngModelChange)="onChangeAimReturnMonth($event)"
+        type="number"
+        id="aimReturnMonth"
+        placeholder="Enter dfi amount"
+      >
+    </div>
+    <div>
+      <div class="text-lg mb-2 h-full items-center content-center">
+        <div class="font-semibold">
+          {{ 'invest-needed' | translate }} 
+        </div>
+        <div class="inline-block text-lg text-pink-500">
+          {{stakingNeededForAimReturnMonth | number: '1.0-0' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

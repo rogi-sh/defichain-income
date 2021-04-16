@@ -1,9 +1,58 @@
-.margin-col {
-  margin-top: 10px;
-  margin-right: 5px;
+@media (min-width: 640px) {
+  .dashboard-height {
+    height: calc(100vh - 6rem);
+  }
 }
 
-.left {
-  margin-left: 5px;
+.input-component label {
+  top: 5px;
+  left: 8px;
+  transform: translateY(1%);
+  font-size: 11px;
+  color: rgba(70, 70, 70, 1);
 }
 
+.input-component label::after {
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 15px;
+}
+
+.empty input:not(:focus) + label {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+input:not(:focus) + label {
+  color: rgba(70, 70, 70, 1);
+}
+
+input {
+  border-width: 1px;
+}
+
+input::placeholder {
+  display: none;
+  color: transparent;
+}
+
+input:focus {
+  outline: none;
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked,
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked + .toggle-label,
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #FF00AF;
+}

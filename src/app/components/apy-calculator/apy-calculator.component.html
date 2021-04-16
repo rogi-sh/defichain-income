@@ -1,0 +1,91 @@
+<div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 select-none mt-4">
+  <div class="pr-4 lg:border-r-2">
+    <p class="mb-4">{{ 'income.calcText' | translate }}</p>
+    <div class="flex w-full flex-wrap">
+      <div 
+        class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
+        [ngClass]="!stakingCalcOut.dfiAmount ? 'empty' : ''"
+        title="DFI per {{ 'Min' | translate }}"
+      >
+        <label for="stakingCalcOur" class="absolute left-2 transition-all px-1 pointer-events-none">
+          DFI Amount
+        </label>
+        <input
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+          required
+          [(ngModel)]="stakingCalcOut.dfiAmount"
+          (ngModelChange)="calcStakingOutCome()"
+          type="number"
+          id="stakingCalcOur"
+        >
+      </div>
+      
+      <div
+        class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
+        [ngClass]="!stakingCalcOut.apy ? 'empty' : ''"
+        title="DFI per {{ 'Min' | translate }}"
+      >
+        <label for="stakingCalcOutApy" class="absolute left-2 transition-all px-1 pointer-events-none">
+          APY
+        </label>
+        <input
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+          required
+          [(ngModel)]="stakingCalcOut.apy"
+          (ngModelChange)="calcStakingOutCome()"
+          type="number"
+          id="stakingCalcOutApy"
+        >
+      </div>
+    </div>
+    <div class="mt-4">
+      <app-earning
+      [out]="stakingCalcOut"
+      [pool]="poolBtc"
+      [fiat]="fiat"
+      [usdToEur]="usdToEur"
+      [usdToChf]="usdToChf"
+      [usdToGbp]="usdToGbp"
+      ></app-earning>
+    </div>
+  </div>
+
+  <div class="lg:pl-4">
+    <select
+      class="bg-gray-100 px-3 py-2 rounded-md w-40"
+      (change)="buildDataForChartCalcStaking($event.target.value)"
+    >
+      <option value="Min">
+        {{ 'min' | translate }}
+      </option>
+      <option value="Hour">
+        {{ 'hour' | translate }}
+      </option>
+      <option value="Day">
+        {{ 'day' | translate }}
+      </option>
+      <option value="Week">
+        {{ 'week' | translate }}
+      </option>
+      <option value="Month" selected="selected">
+        {{ 'month' | translate }}
+      </option>
+      <option value="Year">
+        {{ 'year' | translate }}
+      </option>
+    </select>
+
+    <div id="chart4">
+      <apx-chart 
+        *ngIf="chartOptions4"
+        [series]="chartOptions4?.series"
+        [chart]="chartOptions4?.chart"
+        [plotOptions]="chartOptions4?.plotOptions"
+        [labels]="chartOptions4?.labels"
+        [legend]="chartOptions4?.legend"
+        [colors]="chartOptions4?.colors"
+        [responsive]="chartOptions4?.responsive"
+      ></apx-chart>
+    </div>
+  </div>
+</div>

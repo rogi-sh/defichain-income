@@ -1,21 +1,21 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Dex} from '../service/dex.service';
+import {Dex} from '@services/dex.service';
 import {
   DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
   PoolUsdtOut, Stats
-} from '../interface/Dex';
-import {Balance, Wallet, WalletDto} from '../interface/Data';
-import {environment} from '../environments/environment';
+} from '@interfaces/Dex';
+import {Balance, Wallet, WalletDto} from '@interfaces/Data';
+import {environment} from '@environments/environment';
 import {forkJoin} from 'rxjs';
 import {CountdownComponent} from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
-import {IncomeComponent} from './income/income.component';
-import {ValueComponent} from './value/value.component';
+import {IncomeComponent} from '@components/income/income.component';
+import {ValueComponent} from '@components/value/value.component';
 import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
 import {Apollo} from 'apollo-angular';
-import {LOGIN, REGISTER, UPDATE} from '../interface/Graphql';
+import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 
 
 @Component({
@@ -37,6 +37,8 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
+  currentPage = 'dashboard';
+  currentPageKey = 'currentPageKey';
 
   wallet: Wallet;
   walletDTO: WalletDto;
@@ -123,8 +125,13 @@ export class AppComponent implements OnInit {
   loggedInKey = 'loggedInKey';
   errorBackend = null;
   successBackend = null;
+  menu = false;
 
-  dataLoaded = false;
+  dataLoaded = true;
+
+  dialogOpen = false;
+  isInfoOpen = false;
+  selectedTab = 'manual';
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
@@ -132,7 +139,8 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+    this.lang = browserLang.match(/en|de/) ? browserLang : 'en';
+    translate.use(this.lang);
 
     // setze matomo URL
     this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
@@ -145,8 +153,11 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Lang', language);
   }
 
-  ngOnInit(): void {
+  isLangSet(lang: string): boolean {
+    return this.lang === lang;
+  }
 
+  ngOnInit(): void {
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
@@ -172,6 +183,12 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
+  }
+
+  handlePage(pageTag: string): void {
+    this.currentPage = pageTag;
+    this.menu = false;
+    localStorage.setItem(this.currentPageKey, this.currentPage);
   }
 
   loadAddressesAndDexData(): void {
@@ -220,6 +237,9 @@ export class AppComponent implements OnInit {
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
+    }
+    if (localStorage.getItem(this.currentPageKey) !== null) {
+      this.currentPage = localStorage.getItem(this.currentPageKey);
     }
   }
 
@@ -350,8 +370,11 @@ export class AppComponent implements OnInit {
     this.adresses = [];
   }
 
-  loadDataFromServerAndLoadAllStuff(): void {
+  toggleMenu(): void {
+    this.menu = !this.menu;
+  }
 
+  loadDataFromServerAndLoadAllStuff(): void {
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
         query: LOGIN,
@@ -561,12 +584,6 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidityPool;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
-    console.log('computed btc' + this.dfiProBlockBtc);
-    console.log('computed eth' + this.dfiProBlockEth);
-    console.log('computed usdt' + this.dfiProBlockUsdt);
-    console.log('computed ltc' + this.dfiProBlockLtc);
-    console.log('computed bch' + this.dfiProBlockBch);
-    console.log('computed doge' + this.dfiProBlockDoge);
   }
 
   private getCustomRewards(rewards: string []): number {
@@ -1372,4 +1389,15 @@ export class AppComponent implements OnInit {
     return walletFinal;
   }
 
+  handleSettingsDialog(): void {
+    this.dialogOpen = !this.dialogOpen;
+  }
+
+  handleTab(selectedTab: string): void {
+    this.selectedTab = selectedTab;
+  }
+
+  openInfoMenu(): void {
+    this.isInfoOpen = !this.isInfoOpen;
+  }
 }

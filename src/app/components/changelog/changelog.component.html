@@ -1,0 +1,23 @@
+<button class="btn btn-sm btn-secondary" (click)="handleOpen()">{{env.version}}</button>
+
+<div *ngIf="isOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80 z-50">
+  <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
+    <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleOpen()">
+      <object
+        type="image/svg+xml"
+        data="../assets/icons/close.svg"
+        class="pointer-events-none select-none"
+      ></object>
+    </div>
+
+    <div class="w-full h-full pt-8 relative overflow-hidden">
+      <div class="text-xl font-semibold mb-2">Changelog</div>
+      <div class="overflow-y-auto h-full">
+        <div *ngFor="let l of logs.logs">
+          <h2><span class="font-bold text-pink-500">{{l.version}}</span></h2>
+          <p class="mb-2">{{l.comment}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

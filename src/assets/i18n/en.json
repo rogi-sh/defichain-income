@@ -19,7 +19,8 @@
   "load5": "Toggle to use automatically load your funds.",
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
-  "price": "price",
+  "price": "Price",
+  "currency": "Currency",
   "save": "Login ",
   "login": "Login",
   "register": "Register",
@@ -42,7 +43,9 @@
     "add": "Add your wallet addresses to track.",
     "added": "Your tracked addresses.",
     "button-add": "add",
-    "button-remove": "remove"
+    "button-remove": "remove",
+    "show-information": "Show more Information",
+    "hide-information": "Show less Information"
   },
   "holdings": {
     "title": "Your crypto holdings",
@@ -59,8 +62,10 @@
     "hold": "Value of holdings"
   },
   "income": {
+    "all": "All",
     "title": "Your total income",
     "word": "Income",
+    "share": "Share",
     "distribution": "Distribution of your monthly income",
     "calc": "Calculator",
     "calcVis": "Calculator Visualization Comparison",

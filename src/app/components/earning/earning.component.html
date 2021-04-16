@@ -1,0 +1,66 @@
+  <div class="grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+    <div>
+      <h2>Min</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out.dfiPerMin | number: '1.2-2'}} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerMinUsd(out) | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToGbp | currency:'GBP'}}</span>
+     </span>
+    </div>
+
+    <div>
+      <h2>{{ 'hour' | translate }}</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out.dfiPerHour| number: '1.2-2'}} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerHourUsd(out) | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToGbp | currency:'GBP'}}</span>
+      </span>
+    </div>
+
+    <div>
+      <h2>{{ 'day' | translate }}</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out.dfiPerDay| number: '1.2-2'}} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerDayUsd(out) | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToGbp | currency:'GBP'}}</span>
+      </span>
+    </div>
+
+    <div>
+      <h2>{{ 'month' | translate }}</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out.dfiPerMonth| number: '1.2-2'}} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerMonthUsd(out) | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToGbp | currency:'GBP'}}</span>
+      </span>
+    </div>
+
+    <div>
+      <h2>{{ 'year' | translate }}</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out.dfiPerYear| number: '1.2-2'}} DFI -
+        <span *ngIf="fiat === 'USD'">{{getOutcomeOfPoolPerYearUsd(out) | currency:'USD'}}</span>
+        <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToEur | currency:'EUR'}}</span>
+        <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToChf | currency:'CHF'}}</span>
+        <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToGbp | currency:'GBP'}}</span>
+      </span>
+    </div>
+  </div>

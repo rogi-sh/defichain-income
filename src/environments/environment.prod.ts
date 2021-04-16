@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming?network=mainnet',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
   listpoolpairs: 'https://api.defichain.io/v1/listpoolpairs',
@@ -7,7 +7,7 @@ export const environment = {
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
-  version: '3.3.2',
+  version: '4.0.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

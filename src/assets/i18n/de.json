@@ -21,6 +21,7 @@
   "showInput1": "Zeige Eingabe oder Adressen meiner Bestände an",
   "stats": "Statistiken",
   "price": "Preis",
+  "currency": "Währung",
   "save": "Login ",
   "login": "Login",
   "register": "Registrieren",
@@ -43,7 +44,9 @@
     "add": "Füge deine DFI Adressen für das Tracking hinzu",
     "added": "Diese Adressen werden aktuell abgefragt",
     "button-add": "hinzufügen",
-    "button-remove": "entfernen"
+    "button-remove": "entfernen",
+    "show-information": "Informationen öffnen",
+    "hide-information": "Informationen schließen"
   },
   "holdings": {
     "title": "Deine Kryptobestände",
@@ -60,8 +63,10 @@
     "hold": "Wert des Bestands"
   },
   "income": {
+    "all": "Gesamt",
     "title": "Dein gesamtes Einkommen",
     "word": "Einkommen",
+    "share": "Anteil",
     "distribution": "Verteilung deines monatlichen Einkommens",
     "calc": "Rechner",
     "calcVis": "Rechner Visualisierung im Vergleich",

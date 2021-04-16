@@ -1,0 +1,63 @@
+<div>
+   <h1 class="text-3xl mb-4 text-pink-500">{{ "income.calc" | translate }}</h1>
+  <div class="w-full lg:w-1/2">
+    <div class="grid grid-flow-col grid-cols-3 select-none">
+      <a
+        (click)="onChangeDetails('Staking')"
+        class="text-center cursor-pointer uppercase border-r-2 self-center"
+        [ngClass]="{ 'text-pink-500': details === 'Staking' }"
+      >
+        Staking
+      </a>
+      <a
+        (click)="onChangeDetails('LM')"
+        class="text-center cursor-pointer uppercase border-r-2 self-center"
+        [ngClass]="{ 'text-pink-500': details === 'LM' }"
+      >
+        Liquidity Mining
+      </a>
+      <a
+        (click)="onChangeDetails('Calc')"
+        class="text-center cursor-pointer uppercase self-center"
+        [ngClass]="{ 'text-pink-500': details === 'Calc' }"
+      >
+        {{ "details-calc" | translate }}
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div *ngIf="details === 'Calc'">
+      <app-apy-calculator
+        [stakingApyMN]="stakingApyMN"
+        [stakingApyCake]="stakingApyCake"
+        [poolBtc]="poolBtc"
+        [usdToGbp]="usdToGbp"
+        [usdToChf]="usdToChf"
+        [usdToEur]="usdToEur"
+        [fiat]="fiat"
+      ></app-apy-calculator>
+    </div>
+    <div *ngIf="details === 'Staking'">
+      <app-staking-target-calculator [stakingApy]="stakingApy"></app-staking-target-calculator>
+    </div>
+    <div *ngIf="details === 'LM'">
+      <app-lm-target-calculator
+        [poolBtc]="poolBtc"
+        [poolBch]="poolBch"
+        [poolDoge]="poolDoge"
+        [poolLtc]="poolLtc"
+        [poolUsdt]="poolUsdt"
+        [poolEth]="poolEth"
+        [blocktimeInS]="blocktimeInS"
+        [dfiProBlockBch]="dfiProBlockBch"
+        [dfiProBlockBtc]="dfiProBlockBtc"
+        [dfiProBlockDoge]="dfiProBlockDoge"
+        [dfiProBlockEth]="dfiProBlockEth"
+        [dfiProBlockLtc]="dfiProBlockLtc"
+        [dfiProBlockUsdt]="dfiProBlockUsdt"
+      >
+      </app-lm-target-calculator>
+    </div>
+  </div>
+</div>
