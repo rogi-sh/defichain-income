@@ -30,7 +30,7 @@
     </div>
 
     <div class="flex absolute right-6 self-center">
-      <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center flex">
+      <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center">
       <span
         class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
@@ -182,7 +182,7 @@
       <div class="absolute bottom-5">
         <select
           class="bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
-          (change)="useLanguage($event.target.value)"
+          (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
           <option value="de">DE</option>
@@ -286,7 +286,7 @@
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div
         class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl p-3 bg-white mx-auto sm:mb-5">
-        <div class="sm:overflow-auto relative h-full">
+        <div class="sm:overflow-auto relative h-full pr-1">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
@@ -343,10 +343,10 @@
                                   [(ngModel)]="wallet.btc"
                                   (ngModelChange)="onChangeBtcWallet()"
                                   type="number"
-                                  id="inputBTCWallet"
+                                  id="inputBTCWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputBTCWallet"
+                                <label for="inputBTCWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   BTC
                                 </label>
@@ -363,10 +363,10 @@
                                   [(ngModel)]="wallet.eth"
                                   (ngModelChange)="onChangeEthWallet()"
                                   type="number"
-                                  id="inputETHWallet"
+                                  id="inputETHWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputETHWallet"
+                                <label for="inputETHWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   ETH
                                 </label>
@@ -383,10 +383,10 @@
                                   [(ngModel)]="wallet.ltc"
                                   (ngModelChange)="onChangeLtcWallet()"
                                   type="number"
-                                  id="inputLTCWallet"
+                                  id="inputLTCWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputLTCWallet"
+                                <label for="inputLTCWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   LTC
                                 </label>
@@ -403,10 +403,10 @@
                                   [(ngModel)]="wallet.usdt"
                                   (ngModelChange)="onChangeUsdtWallet()"
                                   type="number"
-                                  id="inputUsdtWallet"
+                                  id="inputUsdtWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputUsdtWallet"
+                                <label for="inputUsdtWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   USDT
                                 </label>
@@ -423,10 +423,10 @@
                                   [(ngModel)]="wallet.doge"
                                   (ngModelChange)="onChangeDogeWallet()"
                                   type="number"
-                                  id="inputDOGEWallet"
+                                  id="inputDOGEWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputDOGEWallet"
+                                <label for="inputDOGEWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DOGE
                                 </label>
@@ -443,10 +443,10 @@
                                   [(ngModel)]="wallet.bch"
                                   (ngModelChange)="onChangeBchWallet()"
                                   type="number"
-                                  id="inputBchWallet"
+                                  id="inputBchWallet-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputBchWallet"
+                                <label for="inputBchWallet-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   BCH
                                 </label>
@@ -459,7 +459,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass!]="stakingApy ? 'empty' : ''"
+                                [ngClass]="stakingApy ? 'empty' : ''"
                                 title="Staking APY"
                               >
                                 <input
@@ -467,10 +467,10 @@
                                   [(ngModel)]="stakingApy"
                                   (ngModelChange)="saveInputStaking()"
                                   type="number"
-                                  id="saveInputStaking"
+                                  id="saveInputStaking-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="saveInputStaking"
+                                <label for="saveInputStaking-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   Staking APY
                                 </label>
@@ -479,7 +479,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass!]="dfiInStaking ? 'empty' : ''"
+                                [ngClass]="dfiInStaking ? 'empty' : ''"
                                 title="DFI"
                               >
                                 <input
@@ -487,10 +487,10 @@
                                   [(ngModel)]="dfiInStaking"
                                   (ngModelChange)="onChangeDfiStaking()"
                                   type="number"
-                                  id="dfiInStaking"
+                                  id="dfiInStaking-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="dfiInStaking"
+                                <label for="dfiInStaking-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -511,10 +511,10 @@
                                   [(ngModel)]="wallet.btcInBtcPool"
                                   (ngModelChange)="onChangeBtcBtcPool()"
                                   type="number"
-                                  id="onChangeBtcBtcPool"
+                                  id="onChangeBtcBtcPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeBtcBtcPool"
+                                <label for="onChangeBtcBtcPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   BTC
                                 </label>
@@ -531,10 +531,10 @@
                                   [(ngModel)]="wallet.dfiInBtcPool"
                                   (ngModelChange)="onChangeDfiBtcPool()"
                                   type="number"
-                                  id="onChangeDfiBtcPool"
+                                  id="onChangeDfiBtcPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiBtcPool"
+                                <label for="onChangeDfiBtcPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -551,10 +551,10 @@
                                   [(ngModel)]="wallet.ethInEthPool"
                                   (ngModelChange)="onChangeEthEthPool()"
                                   type="number"
-                                  id="onChangeEthEthPool"
+                                  id="onChangeEthEthPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeEthEthPool"
+                                <label for="onChangeEthEthPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   ETH
                                 </label>
@@ -571,10 +571,10 @@
                                   [(ngModel)]="wallet.dfiInEthPool"
                                   (ngModelChange)="onChangeDfiEthPool()"
                                   type="number"
-                                  id="onChangeDfiEthPool"
+                                  id="onChangeDfiEthPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiEthPool"
+                                <label for="onChangeDfiEthPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -591,10 +591,10 @@
                                   [(ngModel)]="wallet.usdtInUsdtPool"
                                   (ngModelChange)="onChangeUsdtUsdtPool()"
                                   type="number"
-                                  id="onChangeUsdtUsdtPool"
+                                  id="onChangeUsdtUsdtPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeUsdtUsdtPool"
+                                <label for="onChangeUsdtUsdtPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   USDT
                                 </label>
@@ -611,10 +611,10 @@
                                   [(ngModel)]="wallet.dfiInUsdtPool"
                                   (ngModelChange)="onChangeDfiUsdtPool()"
                                   type="number"
-                                  id="onChangeDfiUsdtPool"
+                                  id="onChangeDfiUsdtPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiUsdtPool"
+                                <label for="onChangeDfiUsdtPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -631,10 +631,10 @@
                                   [(ngModel)]="wallet.ltcInLtcPool"
                                   (ngModelChange)="onChangeLtcLtcPool()"
                                   type="number"
-                                  id="onChangeLtcLtcPool"
+                                  id="onChangeLtcLtcPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeLtcLtcPool"
+                                <label for="onChangeLtcLtcPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   LTC
                                 </label>
@@ -651,10 +651,10 @@
                                   [(ngModel)]="wallet.dfiInLtcPool"
                                   (ngModelChange)="onChangeDfiLtcPool()"
                                   type="number"
-                                  id="onChangeDfiLtcPool"
+                                  id="onChangeDfiLtcPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiLtcPool"
+                                <label for="onChangeDfiLtcPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -671,10 +671,10 @@
                                   [(ngModel)]="wallet.dogeInDogePool"
                                   (ngModelChange)="onChangeDogeDogePool()"
                                   type="number"
-                                  id="onChangeDogeDogePool"
+                                  id="onChangeDogeDogePool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDogeDogePool"
+                                <label for="onChangeDogeDogePool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   Doge
                                 </label>
@@ -691,10 +691,10 @@
                                   [(ngModel)]="wallet.dfiInDogePool"
                                   (ngModelChange)="onChangeDfiDogePool()"
                                   type="number"
-                                  id="onChangeDfiDogePool"
+                                  id="onChangeDfiDogePool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiDogePool"
+                                <label for="onChangeDfiDogePool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -711,10 +711,10 @@
                                   [(ngModel)]="wallet.bchInBchPool"
                                   (ngModelChange)="onChangeBchBchPool()"
                                   type="number"
-                                  id="onChangeBchBchPool"
+                                  id="onChangeBchBchPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeBchBchPool"
+                                <label for="onChangeBchBchPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   BCH
                                 </label>
@@ -732,10 +732,10 @@
                                   [(ngModel)]="wallet.dfiInBchPool"
                                   (ngModelChange)="onChangeDfiBchPool()"
                                   type="number"
-                                  id="onChangeDfiBchPool"
+                                  id="onChangeDfiBchPool-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="onChangeDfiBchPool"
+                                <label for="onChangeDfiBchPool-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -749,7 +749,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="!dfiInStaking ? 'empty' : ''"
+                                [ngClass]="(!dfiInStaking || dfiInStaking !== 0) ? 'empty' : ''"
                                 title="DFI"
                               >
                                 <input
@@ -757,10 +757,10 @@
                                   [(ngModel)]="dfiInStaking"
                                   (ngModelChange)="onChangeDfiStaking()"
                                   type="number"
-                                  id="inputDFIStakingAuto"
+                                  id="inputDFIStakingAuto-1"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputDFIStakingAuto"
+                                <label for="inputDFIStakingAuto-1"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   DFI
                                 </label>
@@ -769,7 +769,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="!dfiInStaking ? 'empty' : ''"
+                                [ngClass]="(!stakingApy || stakingApy !== 0) ? 'empty' : ''"
                                 title="Staking APY"
                               >
                                 <input
@@ -780,7 +780,7 @@
                                   id="inputApyStaking2"
                                   class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                 >
-                                <label [for]="inputApyStaking2"
+                                <label for="inputApyStaking2"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                   Staking APY
                                 </label>
@@ -843,10 +843,10 @@
                                   <input
                                     required
                                     [(ngModel)]="adress"
-                                    id="inputAddress"
+                                    id="inputAddress2"
                                     class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                                   >
-                                  <label [for]="inputAddress"
+                                  <label for="inputAddress2"
                                         class="absolute left-2 transition-all px-1 pointer-events-none">
                                     DFI Address
                                   </label>
@@ -1052,13 +1052,18 @@
                     <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} %</span>
                   </h3>
 
-                  <app-earning [out]="poolBtcOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
+                  <app-earning
+                    [out]="poolBtcOut"
+                    [pool]="poolBtc"
+                    [fiat]="fiat"
+                    [usdToEur]="usdToEur"
+                    [usdToChf]="usdToChf"
+                    [usdToGbp]="usdToGbp"
+                  ></app-earning>
                 </div>
 
                 <div
-                  *ngIf="wallet?.ethInEthPool > 0 ||wallet?.dfiInEthPool"
+                  *ngIf="wallet?.ethInEthPool > 0 || wallet?.dfiInEthPool"
                   class="bg-gray-100 rounded-md p-2"
                 >
                   <h2>
@@ -1071,10 +1076,14 @@
                     <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span>
                   </h3>
 
-                  <app-earning [out]="poolEthOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
-
+                  <app-earning
+                    [out]="poolEthOut"
+                    [pool]="poolBtc"
+                    [fiat]="fiat"
+                    [usdToEur]="usdToEur"
+                    [usdToChf]="usdToChf"
+                    [usdToGbp]="usdToGbp"
+                  ></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0"
@@ -1090,9 +1099,14 @@
                     <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
                   </h3>
 
-                  <app-earning [out]="poolUsdtOut" [pool]="poolBtc" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
+                  <app-earning
+                    [out]="poolUsdtOut"
+                    [pool]="poolBtc"
+                    [fiat]="fiat"
+                    [usdToEur]="usdToEur"
+                    [usdToChf]="usdToChf"
+                    [usdToGbp]="usdToGbp"
+                  ></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
@@ -1181,15 +1195,10 @@
                 [stakingApy]="stakingApy"
                 [stakingApyMN]="stakingApyMN"
                 [stakingApyCake]="stakingApyCake"
-                [poolBtc]="poolBtc"
-                [pool]="poolBtc"
                 [usdToGbp]="usdToGbp"
                 [usdToChf]="usdToChf"
                 [usdToEur]="usdToEur"
                 [fiat]="fiat"
-                [out]="poolOut"
-                [wallet]="wallet"
-                [balance]="balance"
                 [poolBtc]="poolBtc"
                 [poolBch]="poolBch"
                 [poolDoge]="poolDoge"
@@ -1263,7 +1272,6 @@
                           id="autoLoadData"
                           [(ngModel)]="autoLoadData"
                           (ngModelChange)="saveToggleAutoLoad()"
-                          type="checkbox"
                           [ngClass]="{ 'isChecked': autoLoadData }"
                           class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
                         />
@@ -1382,7 +1390,7 @@
                               id="inputBTCWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputBTCWallet"
+                            <label for="inputBTCWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               BTC
                             </label>
@@ -1402,7 +1410,7 @@
                               id="inputETHWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputETHWallet"
+                            <label for="inputETHWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               ETH
                             </label>
@@ -1422,7 +1430,7 @@
                               id="inputLTCWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputLTCWallet"
+                            <label for="inputLTCWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               LTC
                             </label>
@@ -1442,7 +1450,7 @@
                               id="inputUsdtWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputUsdtWallet"
+                            <label for="inputUsdtWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               USDT
                             </label>
@@ -1462,7 +1470,7 @@
                               id="inputDOGEWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputDOGEWallet"
+                            <label for="inputDOGEWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DOGE
                             </label>
@@ -1482,7 +1490,7 @@
                               id="inputBchWallet"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputBchWallet"
+                            <label for="inputBchWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               BCH
                             </label>
@@ -1495,7 +1503,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass!]="stakingApy ? 'empty' : ''"
+                            [ngClass]="stakingApy ? 'empty' : ''"
                             title="Staking APY"
                           >
                             <input
@@ -1506,7 +1514,7 @@
                               id="saveInputStaking"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="saveInputStaking"
+                            <label for="saveInputStaking"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               Staking APY
                             </label>
@@ -1515,7 +1523,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass!]="dfiInStaking ? 'empty' : ''"
+                            [ngClass]="dfiInStaking ? 'empty' : ''"
                             title="DFI"
                           >
                             <input
@@ -1526,7 +1534,7 @@
                               id="dfiInStaking"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="dfiInStaking"
+                            <label for="dfiInStaking"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1550,7 +1558,7 @@
                               id="onChangeBtcBtcPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeBtcBtcPool"
+                            <label for="onChangeBtcBtcPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               BTC
                             </label>
@@ -1570,7 +1578,7 @@
                               id="onChangeDfiBtcPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiBtcPool"
+                            <label for="onChangeDfiBtcPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1590,7 +1598,7 @@
                               id="onChangeEthEthPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeEthEthPool"
+                            <label for="onChangeEthEthPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               ETH
                             </label>
@@ -1610,7 +1618,7 @@
                               id="onChangeDfiEthPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiEthPool"
+                            <label for="onChangeDfiEthPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1630,7 +1638,7 @@
                               id="onChangeUsdtUsdtPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeUsdtUsdtPool"
+                            <label for="onChangeUsdtUsdtPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               USDT
                             </label>
@@ -1650,7 +1658,7 @@
                               id="onChangeDfiUsdtPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiUsdtPool"
+                            <label for="onChangeDfiUsdtPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1670,7 +1678,7 @@
                               id="onChangeLtcLtcPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeLtcLtcPool"
+                            <label for="onChangeLtcLtcPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               LTC
                             </label>
@@ -1690,7 +1698,7 @@
                               id="onChangeDfiLtcPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiLtcPool"
+                            <label for="onChangeDfiLtcPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1710,7 +1718,7 @@
                               id="onChangeDogeDogePool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDogeDogePool"
+                            <label for="onChangeDogeDogePool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               Doge
                             </label>
@@ -1730,7 +1738,7 @@
                               id="onChangeDfiDogePool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiDogePool"
+                            <label for="onChangeDfiDogePool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1750,7 +1758,7 @@
                               id="onChangeBchBchPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeBchBchPool"
+                            <label for="onChangeBchBchPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               BCH
                             </label>
@@ -1771,7 +1779,7 @@
                               id="onChangeDfiBchPool"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="onChangeDfiBchPool"
+                            <label for="onChangeDfiBchPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1796,7 +1804,7 @@
                               id="inputDFIStakingAuto"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputDFIStakingAuto"
+                            <label for="inputDFIStakingAuto"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               DFI
                             </label>
@@ -1805,7 +1813,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass]="!dfiInStaking ? 'empty' : ''"
+                            [ngClass]="!stakingApy ? 'empty' : ''"
                             title="Staking APY"
                           >
                             <input
@@ -1813,10 +1821,10 @@
                               [(ngModel)]="stakingApy"
                               (ngModelChange)="saveInputStaking()"
                               type="number"
-                              id="inputApyStaking2"
+                              id="inputApyStaking"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                             >
-                            <label [for]="inputApyStaking2"
+                            <label for="inputApyStaking"
                                     class="absolute left-2 transition-all px-1 pointer-events-none">
                               Staking APY
                             </label>
@@ -1882,7 +1890,7 @@
                                 id="inputAddress"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
                               >
-                              <label [for]="inputAddress"
+                              <label for="inputAddress"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
                                 DFI Address
                               </label>
