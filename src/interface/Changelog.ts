@@ -13,6 +13,20 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '3.3.2 - 12.4.2021';
+    this.log.comment = 'add telegram group';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '3.3.1 - 12.4.2021';
+    this.log.comment = 'mirror to github';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.3.0 - 5.4.2021';
     this.log.comment = 'rewards from api, show rewards';
 
