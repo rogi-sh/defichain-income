@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.0.0 - 16.4.2021';
+    this.log.comment = 'Complete makeover and new UX';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '3.3.2 - 12.4.2021';
     this.log.comment = 'add telegram group';
 

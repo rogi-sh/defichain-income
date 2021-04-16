@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
   lang = 'en';
   env = environment;
   currentPage = 'dashboard';
+  currentPageKey = 'currentPageKey';
 
   wallet: Wallet;
   walletDTO: WalletDto;
@@ -187,6 +188,7 @@ export class AppComponent implements OnInit {
   handlePage(pageTag: string): void {
     this.currentPage = pageTag;
     this.menu = false;
+    localStorage.setItem(this.currentPageKey, this.currentPage);
   }
 
   loadAddressesAndDexData(): void {
@@ -235,6 +237,9 @@ export class AppComponent implements OnInit {
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
+    }
+    if (localStorage.getItem(this.currentPageKey) !== null) {
+      this.currentPage = localStorage.getItem(this.currentPageKey);
     }
   }
 
