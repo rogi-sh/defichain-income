@@ -7,7 +7,7 @@ export const environment = {
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
-  version: '4.0.1',
+  version: '4.1.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

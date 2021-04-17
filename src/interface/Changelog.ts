@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.1.0 - 17.4.2021';
+    this.log.comment = 'Show DFI price in header';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.0.1 - 16.4.2021';
     this.log.comment = 'DFI Charts renaming';
 

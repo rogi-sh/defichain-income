@@ -30,6 +30,17 @@
     </div>
 
     <div class="flex absolute right-6 self-center">
+
+      <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center flex">
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        *ngIf="fiat === 'USD'"> {{poolBtc?.priceB | currency:'USD'}} DFI</span>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        *ngIf="fiat === 'EUR'"> {{poolBtc?.priceB * usdToEur | currency:'EUR'}} DFI</span>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        *ngIf="fiat === 'CHF'"> {{poolBtc?.priceB * usdToChf | currency:'CHF'}} DFI</span>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        *ngIf="fiat === 'GBP'"> {{poolBtc?.priceB * usdToGbp | currency:'GBP'}} DFI</span>
+      </div>
       <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center flex">
       <span
         class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
