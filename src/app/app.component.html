@@ -88,110 +88,116 @@
   </header>
 
   <div
-    class="fixed top-0 h-full sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100"
+    class="fixed top-0 h-screen max-h-screen sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100"
     [ngClass]="menu ? 'w-full' : ''"
     *ngIf="menu"
   >
-    <a
-      (click)="handlePage('dashboard')"
-      class="absolute w-28 h-12 py-1 left-1/2 transform -translate-x-1/2"
-    >
-      <img
-        src="../assets/img/Defi-income.svg"
-        alt="DefiChain-Income Logo"
-        class="h-full mx-auto"
-      />
-    </a>
-    <div
-      class="absolute right-5 top-5 z-10 cursor-pointer"
-      (click)="toggleMenu()"
-    >
-      <object
-        type="image/svg+xml"
-        data="../assets/icons/close.svg"
-        class="pointer-events-none"
-      ></object>
-    </div>
-
-    <div class="mt-20 mx-8">
-      <a
-        (click)="handlePage('dashboard')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'dashboard' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="home"></app-icon>
-        <div class="inline self-center ml-2 text-xl">Dashboard</div>
-      </a>
-
-      <a
-        (click)="handlePage('holdings')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'holdings' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="doughnut-chart"></app-icon>
-        <div class="inline self-center ml-2 text-xl">{{ 'holdings.title' | translate }}</div>
-      </a>
-
-      <a
-        (click)="handlePage('income')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'income' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="income"></app-icon>
-        <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
-      </a>
-
-      <a
-        (click)="handlePage('dex')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="line-chart"></app-icon>
-        <div class="inline self-center ml-2 text-xl">DEX</div>
-      </a>
-
-      <a
-        (click)="handlePage('defi')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="bar-chart"></app-icon>
-        <div class="inline self-center ml-2 text-xl">DFI</div>
-      </a>
-
-      <a
-        (click)="handlePage('calculator')"
-        [ngClass]="{ 'text-pink-500': currentPage === 'calculator' }"
-        class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-      >
-        <app-icon name="calculator"></app-icon>
-        <div class="inline self-center ml-2 text-xl">{{ 'income.calc' | translate }}</div>
-      </a>
-
-      <div class="pt-3 mt-3 border-t border-gray-500">
+    <div class="relative h-full">
+      <div class="absolute top-0 h-14 w-full">
         <a
-          (click)="handlePage('info')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
-          class="hover:text-pink-400 text-center cursor-pointer flex"
+          (click)="handlePage('dashboard')"
+          class="absolute w-28 h-12 py-1 left-1/2 transform -translate-x-1/2"
         >
-          <app-icon name="info"></app-icon>
-          <div class="inline self-center ml-2 text-xl">Info</div>
+          <img
+            src="../assets/img/Defi-income.svg"
+            alt="DefiChain-Income Logo"
+            class="h-full mx-auto"
+          />
         </a>
-        <a
-          (click)="handlePage('settings')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
-          class="hover:text-pink-400 text-center cursor-pointer flex"
+        <div
+          class="absolute right-5 top-5 z-10 cursor-pointer"
+          (click)="toggleMenu()"
         >
-          <div class="w-10 h-10">
-            <app-icon name="settings"></app-icon>
-          </div>
-          <div class="inline self-center ml-2 text-xl">{{ 'setting' | translate }}</div>
-        </a>
+          <object
+            type="image/svg+xml"
+            data="../assets/icons/close.svg"
+            class="pointer-events-none"
+          ></object>
+        </div>
       </div>
 
-      <div class="absolute bottom-5">
+      <div class="absolute top-14 w-full bottom-14 overflow-auto px-8">
+        <div class="h-full w-full">
+          <a
+            (click)="handlePage('dashboard')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'dashboard' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="home"></app-icon>
+            <div class="inline self-center ml-2 text-xl">Dashboard</div>
+          </a>
+
+          <a
+            (click)="handlePage('holdings')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'holdings' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="doughnut-chart"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'holdings.title' | translate }}</div>
+          </a>
+
+          <a
+            (click)="handlePage('income')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'income' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="income"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
+          </a>
+
+          <a
+            (click)="handlePage('dex')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="line-chart"></app-icon>
+            <div class="inline self-center ml-2 text-xl">DEX</div>
+          </a>
+
+          <a
+            (click)="handlePage('defi')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="bar-chart"></app-icon>
+            <div class="inline self-center ml-2 text-xl">DFI</div>
+          </a>
+
+          <a
+            (click)="handlePage('calculator')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'calculator' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="calculator"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'income.calc' | translate }}</div>
+          </a>
+
+          <div class="pt-3 mt-3 border-t border-gray-500">
+            <a
+              (click)="handlePage('info')"
+              [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
+              class="hover:text-pink-400 text-center cursor-pointer flex"
+            >
+              <app-icon name="info"></app-icon>
+              <div class="inline self-center ml-2 text-xl">Info</div>
+            </a>
+            <a
+              (click)="handlePage('settings')"
+              [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
+              class="hover:text-pink-400 text-center cursor-pointer flex"
+            >
+              <div class="w-10 h-10">
+                <app-icon name="settings"></app-icon>
+              </div>
+              <div class="inline self-center ml-2 text-xl">{{ 'setting' | translate }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute mx-8 bottom-5">
         <select
-          class="bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
+          class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none"
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
@@ -215,9 +221,7 @@
   </div>
 
   <div class="flex items-stretch dashboard-height">
-    <div
-      class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24"
-    >
+    <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
       <div class="flex flex-col text-center h-full relative">
         <a
           (click)="handlePage('dashboard')"
@@ -269,9 +273,10 @@
         >
           <app-icon name="calculator"></app-icon>
         </a>
-        <div
-          class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full"
-        >
+      </div>
+
+      <div class="mx-8 h-">
+        <div class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full">
           <a
             (click)="handlePage('info')"
             [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
