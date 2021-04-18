@@ -764,7 +764,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!dfiInStaking || dfiInStaking !== 0) ? 'empty' : ''"
+                                [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
                                 title="DFI"
                               >
                                 <input
@@ -784,7 +784,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!stakingApy || stakingApy !== 0) ? 'empty' : ''"
+                                [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
                                 title="Staking APY"
                               >
                                 <input
@@ -1808,7 +1808,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass]="!dfiInStaking ? 'empty' : ''"
+                            [ngClass]="!dfiInStaking && dfiInStaking !== 0 ? 'empty' : ''"
                             title="DFI"
                           >
                             <input
@@ -1828,7 +1828,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass]="!stakingApy ? 'empty' : ''"
+                            [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
                             title="Staking APY"
                           >
                             <input
