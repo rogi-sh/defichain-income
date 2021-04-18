@@ -5,11 +5,11 @@
   <div class="mb-4 lg:mb-0 order-2 lg:order-1" *ngIf="!hideHoldings">
     <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
-      </span>
+      </div>
     </h2>
     <div class="w-full max-w-lg mx-auto" *ngIf="chartOptions3 && chartOptions3.series.length > 0">
       <apx-chart
@@ -34,7 +34,7 @@
         <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
       </span>
     </h2>
-    <div class="w-full max-w-lg mx-auto" *ngIf="chartOptions && chartOptions.series.length > 0">
+    <div class="w-full max-w-lg mx-auto mb-2" *ngIf="chartOptions && chartOptions.series.length > 0">
       <apx-chart *ngIf="chartOptions && chartOptions.series.length > 0"
         class="w-full"
         [series]="chartOptions?.series"
@@ -49,18 +49,18 @@
 
     <div>
       <h2 class="mb-2">
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center inline-block">
           {{getDfiCount() | number: '1.2-2' }} DFI -
           <span *ngIf="fiat === 'USD'">{{getDfiValueUsd() | currency:'USD'}}</span>
           <span *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
           <span *ngIf="fiat === 'CHF'">{{getDfiValueUsd() * usdToChf | currency:'CHF'}}</span>
           <span *ngIf="fiat === 'GBP'">{{getDfiValueUsd() * usdToGbp | currency:'GBP'}}</span>
-        </span>
+        </div>
       </h2>
       <h3 class="mb-2">
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center inline-block">
           {{getDfiCountLM() | number: '1.2-2'}} LM - {{dfiInStaking| number: '1.2-2'}} Staking - {{wallet?.dfi| number: '1.2-2'}} Wallet 
-        </span>
+        </div>
       </h3>
 
       <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 gap-1">
