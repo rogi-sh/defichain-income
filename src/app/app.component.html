@@ -1930,9 +1930,9 @@
                               <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</span>
                               <div class="my-2 -mx-1">
                                 <div *ngIf= "getAddressBalance(a)?.dfiCoins > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
-                                  DFI Coins: {{getAddressBalance(a)?.dfiCoins}} </div>
+                                  DFI: {{getAddressBalance(a)?.dfiCoins}} </div>
                                 <div *ngIf= "getAddressBalance(a)?.dfiTokens > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
-                                  DFI Tokens: {{getAddressBalance(a)?.dfiTokens}}</div>
+                                  DFI Token: {{getAddressBalance(a)?.dfiTokens}}</div>
                                 <div *ngIf= "getAddressBalance(a)?.btcToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
                                   BTC: {{ getAddressBalance(a)?.btcToken }} </div>
                                 <div *ngIf= "getAddressBalance(a)?.ethToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
