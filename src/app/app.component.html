@@ -1929,9 +1929,39 @@
                             class="relative lg:px-2"
                             [ngClass]="{'bg-gray-200': i % 2 === 1}"
                           >
-                            <div class="w-3/4 overflow-hidden overflow-ellipsis">
-                              {{ a }}
+                            <div class="w-3/4 overflow-hidden overflow-ellipsis my-2">
+                              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</span>
+                              <p class="my-2"><span *ngIf= "getAddressBalance(a)?.dfiCoins > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                DFI Coins: {{getAddressBalance(a)?.dfiCoins}} </span>
+                              <span *ngIf= "getAddressBalance(a)?.dfiTokens > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                DFI Tokens: {{getAddressBalance(a)?.dfiTokens}}</span>
+                              <span *ngIf= "getAddressBalance(a)?.btcToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                BTC: {{ getAddressBalance(a)?.btcToken }} </span>
+                              <span *ngIf= "getAddressBalance(a)?.ethToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                ETH: {{ getAddressBalance(a)?.ethToken }} </span>
+                              <span *ngIf= "getAddressBalance(a)?.ltcToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                LTC: {{ getAddressBalance(a)?.ltcToken > 0}}</span>
+                              <span *ngIf= "getAddressBalance(a)?.bchToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                BCH: {{ getAddressBalance(a)?.bchToken  }}</span>
+                              <span *ngIf= "getAddressBalance(a)?.dogeToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                DOGE: {{ getAddressBalance(a)?.dogeToken }}</span>
+                                <span *ngIf= "getAddressBalance(a)?.usdtToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                USDT: {{ getAddressBalance(a)?.usdtToken }}</span>
+
+                              <span *ngIf= "getAddressBalance(a)?.btcdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                BTCDFI: {{ getAddressBalance(a)?.btcdfiToken }} </span>
+                              <span *ngIf= "getAddressBalance(a)?.ethdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                ETHDFI: {{ getAddressBalance(a)?.ethdfiToken }} </span>
+                              <span *ngIf= "getAddressBalance(a)?.ltcdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                LTCDFI: {{ getAddressBalance(a)?.ltcdfiToken > 0}}</span>
+                              <span *ngIf= "getAddressBalance(a)?.bchdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                BCHDFI: {{ getAddressBalance(a)?.bchdfiToken  }}</span>
+                              <span *ngIf= "getAddressBalance(a)?.dogedfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                DOGEDFI: {{ getAddressBalance(a)?.dogedfiToken }}</span>
+                                <span *ngIf= "getAddressBalance(a)?.usdtdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                USDTDFI: {{ getAddressBalance(a)?.usdtdfiToken }}</span></p>
                             </div>
+
                             <a
                               class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer w-3 h-3"
                               (click)="deleteAdress(a)"
