@@ -58,6 +58,28 @@ export interface Rewards {
 }
 
 
+export class AddressBalance {
+  address: string;
+
+  dfiCoins: number;
+  dfiTokens: number;
+
+  btcToken: number;
+  ltcToken: number;
+  ethToken: number;
+  dogeToken: number;
+  bchToken: number;
+  usdtToken: number;
+
+  btcdfiToken: number;
+  ltcdfiToken: number;
+  ethdfiToken: number;
+  dogedfiToken: number;
+  bchdfiToken: number;
+  usdtdfiToken: number;
+
+}
+
 export class Outcome {
   dfiPerMin: number;
   dfiPerHour: number;

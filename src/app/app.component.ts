@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '@services/dex.service';
 import {
+  AddressBalance,
   DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
   PoolUsdtOut, Stats
 } from '@interfaces/Dex';
@@ -70,6 +71,7 @@ export class AppComponent implements OnInit {
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
+  adressBalances = new Array<AddressBalance>();
   addressesDto;
   adress = '';
   adressesKey = 'adressesKey';
@@ -614,6 +616,7 @@ export class AppComponent implements OnInit {
   }
 
   loadAllAccounts(): void {
+    this.adressBalances = new Array<AddressBalance>();
     const requestArray = [];
     for (const ad of this.adresses) {
       requestArray.push(this.dexService.getAdressDetail(ad));
@@ -624,9 +627,9 @@ export class AppComponent implements OnInit {
         results.forEach((value, i) => {
           if (i % 2 === 0) {
             const balances = value as [string];
-            balances.forEach(value2 => this.addTokensToWallet(value2));
+            balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
           } else {
-            this.addCoinsToWallet(value as Balance);
+            this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i));
           }
         });
 
@@ -644,71 +647,112 @@ export class AppComponent implements OnInit {
       });
   }
 
-  addCoinsToWallet(balance: Balance): void {
+  getAddressForIteration(i: number): string {
+    if (i === 0 || i === 1) {
+      return this.adresses[0];
+    } else {
+      return this.adresses[i % 2 === 0 ? i / 2 : (i - 1) / 2];
+    }
+  }
+
+  addCoinsToWallet(balance: Balance, address: string): void {
 
     // Balance is in Satoshi
     this.wallet.dfi += balance.balance * 0.00000001;
+
+    if (!this.getAddressBalance(address)) {
+      const aB = new AddressBalance();
+      aB.address = address;
+      this.adressBalances.push(aB);
+    }
+
+    this.getAddressBalance(address).dfiCoins = balance.balance * 0.00000001;
+
   }
 
-  addTokensToWallet(walletItem: string): void {
+  addTokensToWallet(walletItem: string, address: string): void {
+
+    if (!this.getAddressBalance(address)) {
+      const aB = new AddressBalance();
+      aB.address = address;
+      this.adressBalances.push(aB);
+    }
+
     const splitted = walletItem.split('@');
     switch (splitted[1]) {
       case 'DFI': {
         this.wallet.dfi += +splitted[0];
+        this.getAddressBalance(address).dfiTokens = +splitted[0];
         break;
       }
       case 'BTC': {
         this.wallet.btc += +splitted[0];
+        this.getAddressBalance(address).btcToken = +splitted[0];
         break;
       }
       case 'BCH': {
         this.wallet.bch += +splitted[0];
+        this.getAddressBalance(address).bchToken = +splitted[0];
         break;
       }
       case 'ETH': {
         this.wallet.eth += +splitted[0];
+        this.getAddressBalance(address).ethToken = +splitted[0];
         break;
       }
       case 'LTC': {
         this.wallet.ltc += +splitted[0];
+        this.getAddressBalance(address).ltcToken = +splitted[0];
         break;
       }
       case 'DOGE': {
         this.wallet.doge += +splitted[0];
+        this.getAddressBalance(address).dogeToken = +splitted[0];
         break;
       }
       case 'USDT': {
         this.wallet.usdt += +splitted[0];
+        this.getAddressBalance(address).usdtToken = +splitted[0];
         break;
       }
       case 'BTC-DFI': {
         this.wallet.btcdfi += +splitted[0];
+        this.getAddressBalance(address).btcdfiToken = +splitted[0];
         break;
       }
       case 'BCH-DFI': {
         this.wallet.bchdfi += +splitted[0];
+        this.getAddressBalance(address).bchdfiToken = +splitted[0];
         break;
       }
       case 'ETH-DFI': {
         this.wallet.ethdfi += +splitted[0];
+        this.getAddressBalance(address).ethdfiToken = +splitted[0];
         break;
       }
       case 'LTC-DFI': {
         this.wallet.ltcdfi += +splitted[0];
+        this.getAddressBalance(address).ltcdfiToken = +splitted[0];
         break;
       }
       case 'DOGE-DFI': {
         this.wallet.dogedfi += +splitted[0];
+        this.getAddressBalance(address).dogedfiToken = +splitted[0];
         break;
       }
       case 'USDT-DFI': {
         this.wallet.usdtdfi += +splitted[0];
+        this.getAddressBalance(address).usdtdfiToken = +splitted[0];
         break;
       }
       default: {
         break;
       }
     }
+  }
+
+  getAddressBalance(address: string): AddressBalance {
+    return this.adressBalances.find(a => a.address === address);
   }
 
   getPool(id: string): Pool {

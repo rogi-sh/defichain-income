@@ -280,7 +280,7 @@
           <a
             (click)="handlePage('info')"
             [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
-            class="hover:text-pink-400 my-2 block cursor-pointer"
+            class="hover:text-pink-400 my-2 block cursor-pointer text-center"
             title="Info"
           >
             <app-icon name="info"></app-icon>
@@ -764,7 +764,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
+                                [ngClass]="(!dfiInStaking || dfiInStaking !== 0) ? 'empty' : ''"
                                 title="DFI"
                               >
                                 <input
@@ -784,7 +784,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
+                                [ngClass]="(!stakingApy || stakingApy !== 0) ? 'empty' : ''"
                                 title="Staking APY"
                               >
                                 <input
@@ -882,8 +882,8 @@
                             <div class="block mt-2 h-auto w-full">
                               <div
                                 *ngFor="let a of adresses; index as i;"
-                                class="relative lg:px-2"
-                                [ngClass]="{'bg-gray-200': i % 2 === 1}"
+                                class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
+                                [ngClass]="{'bg-gray-100': i % 2 === 1}"
                               >
                                 <div class="w-3/4 overflow-hidden overflow-ellipsis">
                                   {{ a }}
@@ -1357,13 +1357,10 @@
                     </div>
                     <h2 *ngIf="loggedIn">
                       {{ 'login3' | translate }}
-                      <br/>
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-                      >
-                        {{loggedInAuth}}
-                      </span>
                     </h2>
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block mt-1">
+                      {{loggedInAuth}}
+                    </div>
 
                     <div *ngIf="loggedIn" class="mt-4">
                       <button
@@ -1808,7 +1805,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass]="!dfiInStaking && dfiInStaking !== 0 ? 'empty' : ''"
+                            [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
                             title="DFI"
                           >
                             <input
@@ -1926,17 +1923,51 @@
                         <div class="block mt-2 h-auto w-full">
                           <div
                             *ngFor="let a of adresses; index as i;"
-                            class="relative lg:px-2"
-                            [ngClass]="{'bg-gray-200': i % 2 === 1}"
+                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
+                            [ngClass]="{'bg-gray-100': i % 2 === 1}"
                           >
-                            <div class="w-3/4 overflow-hidden overflow-ellipsis">
-                              {{ a }}
+                            <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">
+                              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</span>
+                              <div class="my-2 -mx-1">
+                                <div *ngIf= "getAddressBalance(a)?.dfiCoins > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  DFI: {{getAddressBalance(a)?.dfiCoins}} </div>
+                                <div *ngIf= "getAddressBalance(a)?.dfiTokens > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  DFI Token: {{getAddressBalance(a)?.dfiTokens}}</div>
+                                <div *ngIf= "getAddressBalance(a)?.btcToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  BTC: {{ getAddressBalance(a)?.btcToken }} </div>
+                                <div *ngIf= "getAddressBalance(a)?.ethToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  ETH: {{ getAddressBalance(a)?.ethToken }} </div>
+                                <div *ngIf= "getAddressBalance(a)?.ltcToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  LTC: {{ getAddressBalance(a)?.ltcToken > 0}}</div>
+                                <div *ngIf= "getAddressBalance(a)?.bchToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  BCH: {{ getAddressBalance(a)?.bchToken  }}</div>
+                                <div *ngIf= "getAddressBalance(a)?.dogeToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  DOGE: {{ getAddressBalance(a)?.dogeToken }}</div>
+                                  <div *ngIf= "getAddressBalance(a)?.usdtToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  USDT: {{ getAddressBalance(a)?.usdtToken }}</div>
+
+                                <div *ngIf= "getAddressBalance(a)?.btcdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  BTCDFI: {{ getAddressBalance(a)?.btcdfiToken }} </div>
+                                <div *ngIf= "getAddressBalance(a)?.ethdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  ETHDFI: {{ getAddressBalance(a)?.ethdfiToken }} </div>
+                                <div *ngIf= "getAddressBalance(a)?.ltcdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  LTCDFI: {{ getAddressBalance(a)?.ltcdfiToken > 0}}</div>
+                                <div *ngIf= "getAddressBalance(a)?.bchdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  BCHDFI: {{ getAddressBalance(a)?.bchdfiToken  }}</div>
+                                <div *ngIf= "getAddressBalance(a)?.dogedfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  DOGEDFI: {{ getAddressBalance(a)?.dogedfiToken }}</div>
+                                  <div *ngIf= "getAddressBalance(a)?.usdtdfiToken > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
+                                  USDTDFI: {{ getAddressBalance(a)?.usdtdfiToken }}</div>
+                              </div>
                             </div>
+
                             <a
-                              class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer w-3 h-3"
+                              class="absolute top-1/2 right-3 transform -translate-y-1/2 hover:text-pink-500 cursor-pointer"
                               (click)="deleteAdress(a)"
                             >
-                              <app-icon name="close"></app-icon>
+                              <div class="w-3 h-3 flex items-center">
+                                <app-icon name="close"></app-icon>
+                              </div>
                             </a>
                           </div>
                         </div>
