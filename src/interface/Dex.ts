@@ -57,6 +57,11 @@ export interface Rewards {
 
 }
 
+export class PoolPair {
+  dfi: number;
+  poolPairToken: number;
+}
+
 
 export class AddressBalance {
   address: string;

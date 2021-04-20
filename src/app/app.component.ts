@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '@services/dex.service';
 import {
   AddressBalance,
-  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut,
+  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolPair,
   PoolUsdtOut, Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
@@ -138,11 +138,11 @@ export class AppComponent implements OnInit {
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
-    translate.addLangs(['en', 'de']);
+    translate.addLangs(['en', 'de', 'es']);
     translate.setDefaultLang('de');
 
     const browserLang = translate.getBrowserLang();
-    this.lang = browserLang.match(/en|de/) ? browserLang : 'en';
+    this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';
     translate.use(this.lang);
 
     // setze matomo URL
@@ -872,6 +872,14 @@ export class AppComponent implements OnInit {
 
   private getDfiPerMin(dfiProBlock: number): number {
     return dfiProBlock / this.blocktimeInS * 60;
+  }
+
+  getPoolPairFromShare(share: number, pool: Pool): PoolPair {
+    const pair = new PoolPair();
+    pair.dfi = +pool.reserveB * share / 100;
+    pair.poolPairToken = +pool.reserveA * share / 100;
+
+    return pair;
   }
 
   berechnePoolOut(): void {

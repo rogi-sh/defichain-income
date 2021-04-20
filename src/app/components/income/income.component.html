@@ -213,32 +213,39 @@
           {{ "noStakingAvailable" | translate }}
         </div>
         <div *ngIf="dfiInStaking > 0">
-          <h3 class="mb-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
-            <div>
-              {{ "balance" | translate }}
-            </div>
-            <div>
-              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                {{dfiInStaking}} DFI
-              </span>
-            </div>
 
+          <h3 class="text-lg font-semibold mt-4 mb-1">
+            {{ "balance" | translate }}
           </h3>
-          <h3 class="mb-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+
+          <div class="grid grid-flow-col grid-cols-2 md:gap-2">
+          <span
+            class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-3 gap-6 border-b pb-2 col-span-2"
+          >
+            <span class="text-xl">
+              <span class="text-pink-500 font-semibold">
+                {{dfiInStaking | number: "1.2-2"}}
+              </span>
+              DFI
+            </span>
+          </span>
+          </div>
+
+          <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
             <div>
               {{ "balance" | translate}} in Fiat
             </div>
             <div>
-              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                <span *ngIf="fiat === 'USD'">{{getDfiCountStakingCalcUsd() | currency: "USD"}}</span>
-                <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency: "EUR"}}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency: "CHF"}}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency: "GBP"}}</span>
-                <span *ngIf="fiat === 'AUD'">{{getDfiCountStakingCalcUsd() * usdToAud | currency: "AUD"}}</span>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+                <span *ngIf="fiat === 'USD'">{{getDfiCountStakingUsd() | currency: "USD"}}</span>
+                <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingUsd() * usdToEur | currency: "EUR"}}</span>
+                <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingUsd() * usdToChf | currency: "CHF"}}</span>
+                <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingUsd() * usdToGbp | currency: "GBP"}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiCountStakingUsd() * usdToAud | currency: "AUD"}}</span>
               </span>
             </div>
           </h3>
-
+          <br>
           <div class="mt-2">
             <app-earning
               [out]="stakingOut"
@@ -365,6 +372,7 @@
             </span>
           </div>
         </h3>
+        <br>
         <app-earning
           [out]="poolOut"
           [pool]="poolBtc"

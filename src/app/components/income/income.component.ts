@@ -184,9 +184,11 @@ export class IncomeComponent implements OnInit, OnChanges {
 
     return incomeNumbers;
   }
-  getDfiCountStakingCalcUsd(): number {
-    return this.stakingCalcOut.dfiAmount * this.poolBtc?.priceB;
+
+  getDfiCountStakingUsd(): number {
+    return this.dfiInStaking * this.poolBtc?.priceB;
   }
+
   getColorsIncome(): Array<string> {
 
     const incomeNumbers = new Array<string>();

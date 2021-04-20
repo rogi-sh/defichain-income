@@ -74,6 +74,7 @@
       >
         <option value="de" [selected]="isLangSet('de')">DE</option>
         <option value="en" [selected]="isLangSet('en')">EN</option>
+        <option value="es" [selected]="isLangSet('es')">ES</option>
       </select>
 
       <select
@@ -1068,11 +1069,17 @@
                       BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBtc}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolBtc| number: '1.4-4' }} %</span>
-                  </h3>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolBtc| number: '1.4-4' }} % </span>
+                     <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC </span>
 
+                  </h3>
+                  <br>
                   <app-earning
                     [out]="poolBtcOut"
                     [pool]="poolBtc"
@@ -1093,11 +1100,16 @@
                       ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APY - {{dfiProBlockEth}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolEth| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolEth| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </span>
                   </h3>
-
+                  <br>
                   <app-earning
                     [out]="poolEthOut"
                     [pool]="poolBtc"
@@ -1117,11 +1129,16 @@
                       USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APY - {{dfiProBlockUsdt}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </span>
                   </h3>
-
+                  <br>
                   <app-earning
                     [out]="poolUsdtOut"
                     [pool]="poolBtc"
@@ -1141,11 +1158,16 @@
                       LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockLtc}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolLtc | number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolLtc| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </span>
                   </h3>
-
+                  <br>
                   <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
                               [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
@@ -1159,11 +1181,16 @@
                       DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APY - {{dfiProBlockDoge}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolDoge | number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolDoge| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </span>
                   </h3>
-
+                  <br>
                   <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
                               [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
@@ -1177,11 +1204,16 @@
                       BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBch}} DFI/Block
                     </span>
                   </h2>
+                  <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="badge badge-pill badge-info">{{anteilAmPoolBch | number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolBch| number: '1.4-4' }} %</span>
+                    <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                       {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
+                       / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </span>
                   </h3>
-
+                  <br>
                   <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
                               [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
