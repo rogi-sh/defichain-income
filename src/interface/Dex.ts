@@ -108,4 +108,6 @@ export class PoolDogeOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 
+export class PoolAllOut extends Outcome {}
+
 

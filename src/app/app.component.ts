@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '@services/dex.service';
 import {
   AddressBalance,
-  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolPair,
+  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolAllOut, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolPair,
   PoolUsdtOut, Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
@@ -105,6 +105,7 @@ export class AppComponent implements OnInit {
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
+  poolAllOut: PoolAllOut = new PoolAllOut();
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -453,6 +454,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
+    this.berechneAllOut();
     this.buildDataForChartIncome();
 
   }
@@ -554,6 +556,7 @@ export class AppComponent implements OnInit {
 
     this.berechneStakingOut();
     this.berechnePoolOut();
+    this.berechneAllOut();
     this.dataLoaded = true;
   }
 
@@ -906,6 +909,15 @@ export class AppComponent implements OnInit {
     this.stakingOut.dfiPerYear = this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking;
   }
 
+  berechneAllOut(): void {
+    this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay;
+    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour;
+    this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin;
+    this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
+    this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
+    this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
+  }
+
   isLocalStorageNotEmpty(key: string): boolean {
     return localStorage.getItem(key) !== null;
   }
@@ -1020,6 +1032,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking));
     this.berechneStakingOut();
     this.berechnePoolOut();
+    this.berechneAllOut();
     this.buildDataForChart();
     this.buildDataForChartIncome();
     this.buildDataForChartValue();
@@ -1219,6 +1232,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.btcInBtcPoolKey, JSON.stringify(this.wallet.btcInBtcPool));
       this.berechnePoolOutBtc();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1239,6 +1253,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.ethInEthPoolKey, JSON.stringify(this.wallet.ethInEthPool));
       this.berechnePoolOutEth();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1259,6 +1274,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.usdtInUsdtPoolKey, JSON.stringify(this.wallet.usdtInUsdtPool));
       this.berechnePoolOutUsdt();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1279,6 +1295,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.ltcInLtcPoolKey, JSON.stringify(this.wallet.ltcInLtcPool));
       this.berechnePoolOutLtc();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1299,6 +1316,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dogeInDogePoolKey, JSON.stringify(this.wallet.dogeInDogePool));
       this.berechnePoolOutDoge();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1319,6 +1337,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.bchInBchPoolKey, JSON.stringify(this.wallet.bchInBchPool));
       this.berechnePoolOutBch();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1340,6 +1359,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInBtcPoolKey, JSON.stringify(this.wallet.dfiInBtcPool));
       this.berechnePoolOutBtc();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1351,6 +1371,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInEthPoolKey, JSON.stringify(this.wallet.dfiInEthPool));
       this.berechnePoolOutEth();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1362,6 +1383,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInUsdtPoolKey, JSON.stringify(this.wallet.dfiInUsdtPool));
       this.berechnePoolOutUsdt();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1373,6 +1395,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInLtcPoolKey, JSON.stringify(this.wallet.dfiInLtcPool));
       this.berechnePoolOutLtc();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1384,6 +1407,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInDogePoolKey, JSON.stringify(this.wallet.dfiInDogePool));
       this.berechnePoolOutDoge();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1395,6 +1419,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem(this.wallet.dfiInBchPoolKey, JSON.stringify(this.wallet.dfiInBchPool));
       this.berechnePoolOutBch();
       this.berechnePoolOut();
+      this.berechneAllOut();
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();

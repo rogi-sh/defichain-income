@@ -21,6 +21,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolOut!: Outcome;
 
   @Input()
+  poolAllOut!: Outcome;
+
+  @Input()
   poolBtcOut!: Outcome;
 
   @Input()
