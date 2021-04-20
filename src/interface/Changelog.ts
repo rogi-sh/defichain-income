@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.2.1 - 20.4.2021';
+    this.log.comment = 'Fix income chart size, better income overviews all, staking and lm';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.2.0 - 19.4.2021';
     this.log.comment = 'Show every address balance, add staking/lm % of total, ';
 
