@@ -26,23 +26,23 @@
       <div class="grid grid-flow-col grid-cols-3 select-none mb-4">
         <a
           (click)="handleTab('All')"
-          class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
+          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
           [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'All' }"
         >
           {{ 'income.all' | translate }}
         </a>
         <a
           (click)="handleTab('Staking')"
-          class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
+          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
           [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'Staking' }"
         >
           Staking
         </a>
         <a
           (click)="handleTab('LM')"
-          class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
+          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
           [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'LM' }"
-          >
+        >
           Liquidity Mining
         </a>
       </div>

@@ -156,8 +156,14 @@ export class ApyCalculatorComponent implements OnInit {
         {
           breakpoint: 480,
           options: {
+            chart: {
+              width: '100%',
+            },
             legend: {
-              show: true
+              floating: false,
+              offsetX: 0,
+              show: true,
+              position: 'bottom'
             }
           }
         }
