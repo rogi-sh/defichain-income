@@ -54,10 +54,10 @@ export class AppComponent implements OnInit {
   rewards: Stats;
 
   blocktimeInS = 37;
-  usdToEur = 0.82;
-  usdToChf = 0.89;
+  usdToEur = 0.83;
+  usdToChf = 0.91;
   usdToGbp = 0.72;
-  usdToAud = 0.65;
+  usdToAud = 1.28;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
