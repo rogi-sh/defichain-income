@@ -24,6 +24,9 @@ export class EarningComponent implements OnInit {
   usdToGbp: number;
 
   @Input()
+  usdToAud: number;
+
+  @Input()
   fiat: string;
 
   constructor() {

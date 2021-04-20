@@ -39,6 +39,9 @@ export class ApyCalculatorComponent implements OnInit {
   @Input()
   usdToGbp: number;
 
+  @Input()
+  usdToAud: number;
+
   constructor() { }
 
   ngOnInit(): void {

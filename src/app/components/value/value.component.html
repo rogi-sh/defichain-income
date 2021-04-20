@@ -32,6 +32,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
         <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
         <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
+        <span *ngIf="fiat === 'AUD'"> {{getAllValuesUsdPrice() * usdToAud | currency:'AUD' }}</span>
       </span>
     </h2>
     <div class="w-full max-w-lg mx-auto mb-2" *ngIf="chartOptions && chartOptions.series.length > 0">
@@ -55,11 +56,12 @@
           <span *ngIf="fiat === 'EUR'">{{getDfiValueUsd() * usdToEur | currency:'EUR'}}</span>
           <span *ngIf="fiat === 'CHF'">{{getDfiValueUsd() * usdToChf | currency:'CHF'}}</span>
           <span *ngIf="fiat === 'GBP'">{{getDfiValueUsd() * usdToGbp | currency:'GBP'}}</span>
+          <span *ngIf="fiat === 'AUD'">{{getDfiValueUsd() * usdToAud | currency:'AUD'}}</span>
         </div>
       </h2>
       <h3 class="mb-2">
         <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center inline-block">
-          {{getDfiCountLM() | number: '1.2-2'}} LM - {{dfiInStaking| number: '1.2-2'}} Staking - {{wallet?.dfi| number: '1.2-2'}} Wallet 
+          {{getDfiCountLM() | number: '1.2-2'}} LM - {{dfiInStaking| number: '1.2-2'}} Staking - {{wallet?.dfi| number: '1.2-2'}} Wallet
         </div>
       </h3>
 
@@ -72,6 +74,7 @@
               <span *ngIf="fiat === 'EUR'">{{getBtcValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'"> {{getBtcValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'"> {{getBtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
+               <span *ngIf="fiat === 'AUD'"> {{getBtcValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>
@@ -83,6 +86,7 @@
               <span *ngIf="fiat === 'EUR'">{{getEthValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'">{{getEthValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'">{{getEthValueUsd() * usdToGbp | currency:'GBP'}}</span>
+              <span *ngIf="fiat === 'AUD'">{{getEthValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>
@@ -94,6 +98,7 @@
               <span *ngIf="fiat === 'EUR'">{{getUsdtValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'">{{getUsdtValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'">{{getUsdtValueUsd() * usdToGbp | currency:'GBP'}}</span>
+              <span *ngIf="fiat === 'AUD'">{{getUsdtValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>
@@ -105,6 +110,7 @@
               <span *ngIf="fiat === 'EUR'">{{getLtcValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'">{{getLtcValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'">{{getLtcValueUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getLtcValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>
@@ -116,6 +122,7 @@
               <span *ngIf="fiat === 'EUR'">{{getDogeValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'">{{getDogeValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'">{{getDogeValueUsd() * usdToGbp | currency:'GBP'}}</span>
+               <span *ngIf="fiat === 'AUD'">{{getDogeValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>
@@ -127,6 +134,7 @@
               <span *ngIf="fiat === 'EUR'">{{getBchValueUsd() * usdToEur | currency:'EUR'}}</span>
               <span *ngIf="fiat === 'CHF'">{{getBchValueUsd() * usdToChf | currency:'CHF'}}</span>
               <span *ngIf="fiat === 'GBP'">{{getBchValueUsd() * usdToGbp | currency:'GBP'}}</span>
+              <span *ngIf="fiat === 'AUD'">{{getBchValueUsd() * usdToAud | currency:'AUD'}}</span>
             </span>
           </h2>
         </div>

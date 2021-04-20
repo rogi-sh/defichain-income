@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.3.0 - 20.4.2021';
+    this.log.comment = 'Added AUD as currency';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.2.1 - 20.4.2021';
     this.log.comment = 'Fix income chart size, better income overviews all, staking and lm';
 

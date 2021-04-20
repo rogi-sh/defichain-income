@@ -2,7 +2,7 @@
   <div class="pr-4 lg:border-r-2">
     <p class="mb-4">{{ 'income.calcText' | translate }}</p>
     <div class="flex w-full flex-wrap">
-      <div 
+      <div
         class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
         [ngClass]="!stakingCalcOut.dfiAmount ? 'empty' : ''"
         title="DFI per {{ 'Min' | translate }}"
@@ -19,7 +19,7 @@
           id="stakingCalcOur"
         >
       </div>
-      
+
       <div
         class="relative h-14 input-component w-full sm:w-1/2 sm:pr-2"
         [ngClass]="!stakingCalcOut.apy ? 'empty' : ''"
@@ -46,6 +46,7 @@
       [usdToEur]="usdToEur"
       [usdToChf]="usdToChf"
       [usdToGbp]="usdToGbp"
+      [usdToAud]="usdToAud"
       ></app-earning>
     </div>
   </div>
@@ -76,7 +77,7 @@
     </select>
 
     <div id="chart4">
-      <apx-chart 
+      <apx-chart
         *ngIf="chartOptions4"
         [series]="chartOptions4?.series"
         [chart]="chartOptions4?.chart"

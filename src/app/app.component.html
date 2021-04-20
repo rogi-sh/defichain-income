@@ -39,6 +39,8 @@
         *ngIf="fiat === 'CHF'"> {{poolBtc?.priceB * usdToChf | currency:'CHF'}} DFI</span>
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
         *ngIf="fiat === 'GBP'"> {{poolBtc?.priceB * usdToGbp | currency:'GBP'}} DFI</span>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        *ngIf="fiat === 'AUD'"> {{poolBtc?.priceB * usdToAud | currency:'AUD'}} DFI</span>
       </div>
       <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center">
         <span
@@ -47,6 +49,7 @@
           <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
           <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
           <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
+          <span *ngIf="fiat === 'AUD'"> {{getAllValuesUsdPrice() * usdToAud | currency:'AUD' }}</span>
         </span>
       </div>
 
@@ -83,6 +86,7 @@
         <option class="text-center" value="EUR">€</option>
         <option class="text-center" value="GBP">£</option>
         <option class="text-center" value="CHF">CHF</option>
+        <option class="text-center" value="AUD">A$</option>
       </select>
     </div>
   </header>
@@ -321,6 +325,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
                     [poolLtc]="poolLtc"
@@ -1029,6 +1034,7 @@
                 [usdToEur]="usdToEur"
                 [usdToChf]="usdToChf"
                 [usdToGbp]="usdToGbp"
+                [usdToAud]="usdToAud"
                 [poolBchOut]="poolBchOut"
                 [poolBtcOut]="poolBtcOut"
                 [poolDogeOut]="poolDogeOut"
@@ -1074,6 +1080,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
 
@@ -1098,6 +1105,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
                 <div
@@ -1121,6 +1129,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
                 <div
@@ -1139,7 +1148,7 @@
 
                   <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
+                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
@@ -1157,7 +1166,7 @@
 
                   <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
+                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
@@ -1175,7 +1184,7 @@
 
                   <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
                               [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"></app-earning>
+                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
                 </div>
               </div>
             </div>
@@ -1189,6 +1198,7 @@
                   [usdToEur]="usdToEur"
                   [usdToChf]="usdToChf"
                   [usdToGbp]="usdToGbp"
+                  [usdToAud]="usdToAud"
                   [poolBtc]="poolBtc"
                   [poolEth]="poolEth"
                   [poolUsdt]="poolUsdt"
@@ -1213,6 +1223,7 @@
                 [usdToGbp]="usdToGbp"
                 [usdToChf]="usdToChf"
                 [usdToEur]="usdToEur"
+                [usdToAud]="usdToAud"
                 [fiat]="fiat"
                 [poolBtc]="poolBtc"
                 [poolBch]="poolBch"
@@ -1989,6 +2000,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                     [poolBchOut]="poolBchOut"
                     [poolBtcOut]="poolBtcOut"
                     [poolDogeOut]="poolDogeOut"
@@ -2017,6 +2029,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
                     [poolLtc]="poolLtc"
@@ -2033,6 +2046,7 @@
                     [usdToEur]="usdToEur"
                     [usdToChf]="usdToChf"
                     [usdToGbp]="usdToGbp"
+                    [usdToAud]="usdToAud"
                     [poolBtc]="poolBtc"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"

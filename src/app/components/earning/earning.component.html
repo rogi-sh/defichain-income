@@ -9,6 +9,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToChf | currency:'CHF'}}</span>
         <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToGbp | currency:'GBP'}}</span>
+        <span *ngIf="fiat === 'AUD'"> {{getOutcomeOfPoolPerMinUsd(out) * usdToAud | currency:'AUD'}}</span>
      </span>
     </div>
 
@@ -22,6 +23,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToChf | currency:'CHF'}}</span>
         <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToGbp | currency:'GBP'}}</span>
+         <span *ngIf="fiat === 'AUD'"> {{getOutcomeOfPoolPerHourUsd(out) * usdToAud | currency:'AUD'}}</span>
       </span>
     </div>
 
@@ -35,6 +37,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToChf | currency:'CHF'}}</span>
         <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToGbp | currency:'GBP'}}</span>
+        <span *ngIf="fiat === 'AUD'"> {{getOutcomeOfPoolPerDayUsd(out) * usdToAud | currency:'AUD'}}</span>
       </span>
     </div>
 
@@ -48,6 +51,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToChf | currency:'CHF'}}</span>
         <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToGbp | currency:'GBP'}}</span>
+        <span *ngIf="fiat === 'AUD'"> {{getOutcomeOfPoolPerMonthUsd(out) * usdToAud | currency:'AUD'}}</span>
       </span>
     </div>
 
@@ -61,6 +65,7 @@
         <span *ngIf="fiat === 'EUR'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToEur | currency:'EUR'}}</span>
         <span *ngIf="fiat === 'CHF'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToChf | currency:'CHF'}}</span>
         <span *ngIf="fiat === 'GBP'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToGbp | currency:'GBP'}}</span>
+        <span *ngIf="fiat === 'AUD'"> {{getOutcomeOfPoolPerYearUsd(out) * usdToAud | currency:'AUD'}}</span>
       </span>
     </div>
   </div>

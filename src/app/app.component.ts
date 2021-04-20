@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
   usdToEur = 0.82;
   usdToChf = 0.89;
   usdToGbp = 0.72;
+  usdToAud = 0.65;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';

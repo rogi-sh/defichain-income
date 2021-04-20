@@ -22,6 +22,9 @@ export class DexStatisticsComponent implements OnInit {
   usdToGbp: number;
 
   @Input()
+  usdToAud: number;
+
+  @Input()
   poolBtc: Pool;
 
   @Input()

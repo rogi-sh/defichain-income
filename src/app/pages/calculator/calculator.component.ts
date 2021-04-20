@@ -32,6 +32,9 @@ export class CalculatorComponent implements OnInit {
   usdToGbp: number;
 
   @Input()
+  usdToAud: number;
+
+  @Input()
   poolEth: Pool;
 
   @Input()

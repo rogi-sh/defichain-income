@@ -31,6 +31,9 @@ export class ValueComponent implements OnInit, OnChanges {
   usdToGbp!: number;
 
   @Input()
+  usdToAud!: number;
+
+  @Input()
   fiat!: string;
 
   @Input()

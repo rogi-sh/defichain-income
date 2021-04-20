@@ -93,6 +93,7 @@
                 <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMinUsd() * usdToEur | currency:'EUR'}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMinUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMinUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiIncomeValuePerMinUsd() * usdToAud | currency:'AUD'}}</span>
               </div>
             </div>
           </div>
@@ -119,6 +120,7 @@
                 <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerHourUsd() * usdToEur | currency:'EUR'}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerHourUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerHourUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiIncomeValuePerHourUsd() * usdToAud | currency:'AUD'}}</span>
               </div>
             </div>
           </div>
@@ -145,6 +147,7 @@
                 <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerDayUsd() * usdToEur | currency:'EUR'}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerDayUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerDayUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiIncomeValuePerDayUsd() * usdToAud | currency:'AUD'}}</span>
               </div>
             </div>
           </div>
@@ -171,6 +174,7 @@
                 <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerMonthUsd() * usdToEur | currency:'EUR'}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerMonthUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerMonthUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiIncomeValuePerMonthUsd() * usdToAud | currency:'AUD'}}</span>
               </div>
             </div>
           </div>
@@ -197,6 +201,7 @@
                 <span *ngIf="fiat === 'EUR'"> {{getDfiIncomeValuePerYearUsd() * usdToEur | currency:'EUR'}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiIncomeValuePerYearUsd() * usdToChf | currency:'CHF'}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiIncomeValuePerYearUsd() * usdToGbp | currency:'GBP'}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiIncomeValuePerYearUsd() * usdToAud | currency:'AUD'}}</span>
               </div>
             </div>
           </div>
@@ -229,6 +234,7 @@
                 <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingCalcUsd() * usdToEur | currency: "EUR"}}</span>
                 <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingCalcUsd() * usdToChf | currency: "CHF"}}</span>
                 <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingCalcUsd() * usdToGbp | currency: "GBP"}}</span>
+                <span *ngIf="fiat === 'AUD'">{{getDfiCountStakingCalcUsd() * usdToAud | currency: "AUD"}}</span>
               </span>
             </div>
           </h3>
@@ -241,6 +247,7 @@
               [usdToEur]="usdToEur"
               [usdToChf]="usdToChf"
               [usdToGbp]="usdToGbp"
+              [usdToAud]="usdToAud"
               >
             </app-earning>
           </div>
@@ -354,6 +361,7 @@
               <span *ngIf="fiat === 'EUR'">{{getLMUsd * usdToEur | currency: "EUR"}}</span>
               <span *ngIf="fiat === 'CHF'">{{getLMUsd * usdToChf | currency: "CHF"}}</span>
               <span *ngIf="fiat === 'GBP'">{{getLMUsd * usdToGbp | currency: "GBP"}}</span>
+              <span *ngIf="fiat === 'AUD'">{{getLMUsd * usdToAud | currency: "AUD"}}</span>
             </span>
           </div>
         </h3>
@@ -364,6 +372,7 @@
           [usdToEur]="usdToEur"
           [usdToChf]="usdToChf"
           [usdToGbp]="usdToGbp"
+          [usdToAud]="usdToAud"
         ></app-earning>
       </div>
     </div>
