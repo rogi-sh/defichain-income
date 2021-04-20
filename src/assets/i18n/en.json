@@ -15,7 +15,7 @@
   "load1": "Please decide how your data will be loaded",
   "load2" : "you add your addresses from defichain app and everything will be loaded automatically",
   "load3": "you enter your values manually",
-  "load4": "Toggle to use manuel enter your funds.",
+  "load4": "Toggle to use manual enter your funds.",
   "load5": "Toggle to use automatically load your funds.",
   "showInput1": "Show input of my funds or addresses",
   "stats": "Statistics",
