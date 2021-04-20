@@ -764,7 +764,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!dfiInStaking || dfiInStaking !== 0) ? 'empty' : ''"
+                                [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
                                 title="DFI"
                               >
                                 <input
@@ -784,7 +784,7 @@
                             <div>
                               <div
                                 class="relative h-14 input-component"
-                                [ngClass]="(!stakingApy || stakingApy !== 0) ? 'empty' : ''"
+                                [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
                                 title="Staking APY"
                               >
                                 <input
@@ -852,7 +852,7 @@
                               <div class="inline-block w-3/4">
                                 <div
                                   class="relative h-14 input-component"
-                                  [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
+                                  [ngClass]="!adress ? 'empty' : ''"
                                   title="DFI Address"
                                 >
                                   <input
@@ -1893,7 +1893,7 @@
                           <div class="inline-block w-3/4">
                             <div
                               class="relative h-14 input-component"
-                              [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
+                              [ngClass]="!adress ? 'empty' : ''"
                               title="DFI Address"
                             >
                               <input

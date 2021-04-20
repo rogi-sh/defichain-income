@@ -382,7 +382,6 @@ export class ValueComponent implements OnInit, OnChanges {
         // tslint:disable-next-line:only-arrow-functions typedef
         formatter(val, opts) {
           return '55';
-
         }
       },
       responsive: [

@@ -249,6 +249,8 @@ export class IncomeComponent implements OnInit, OnChanges {
       series: this.getSeriesIncome(),
       colors: this.getColorsIncome(),
       chart: {
+        width: '100%',
+        height: '400px',
         type: 'polarArea'
       },
       stroke: {
