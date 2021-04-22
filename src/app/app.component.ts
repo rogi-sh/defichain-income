@@ -1092,6 +1092,7 @@ export class AppComponent implements OnInit {
     return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
   }
 
+
   getLtcValueUsd(): number {
     return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.poolLtc?.priceA;
   }
@@ -1193,6 +1194,11 @@ export class AppComponent implements OnInit {
   }
 
   addAdress(): void {
+    if (this.adresses.indexOf(this.adress) > -1) {
+      this.adress = '';
+      return;
+    }
+
     this.adresses.push(this.adress);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
