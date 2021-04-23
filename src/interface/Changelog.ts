@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.5.0 - 24.4.2021';
+    this.log.comment = 'more currencies, auto load currency';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.4.0 - 20.4.2021';
     this.log.comment = 'Staking in Fiat bug fixed, show pool share as tokens like btc and dfi, es lang added';
 

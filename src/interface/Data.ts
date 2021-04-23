@@ -181,3 +181,19 @@ export class StakingCalcNormal extends Outcome {
 
 export class StakingCalcMN extends Outcome {
 }
+
+export class Currencies {
+  usd: USD;
+}
+
+export class USD {
+  eur: number;
+  chf: number;
+  gbp: number;
+  aud: number;
+  rub: number;
+  jpy: number;
+  cad: number;
+  cny: number;
+  sgd: number;
+}

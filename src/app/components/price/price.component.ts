@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DataService} from '@services/data.service';
+import {USD} from '@interfaces/Data';
 
 @Component({
   selector: 'app-price',
@@ -12,19 +14,16 @@ export class PriceComponent implements OnInit {
   @Input()
   fiat!: string;
 
-  usdToEur = 0.832245;
-  usdToChf = 0.9171;
-  usdToGbp = 0.722715;
-  usdToAud = 1.29799;
-  usdToRub = 75.5359;
-  usdToJpy = 107.939;
-  usdToCad = 1.25031;
-  usdToCny = 6.4913;
-  usdToSgd = 1.3296;
+  usd: USD;
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+
+    this.usd = this.dataService.getUsdCur();
+
+  }
 
   ngOnInit(): void {
+
   }
 
 }

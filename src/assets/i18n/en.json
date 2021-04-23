@@ -4,6 +4,7 @@
   "lang": "Choose your lang",
   "powered": "All data and prices powered by: ",
   "history" : "Historical pool and farming data can be accessed via GraphQL here starting 3/21/2021.",
+  "currency-info" : "Api for currency data ",
   "opensource": "Sourcecode is OpenSource in: ",
   "setting": "Settings",
   "refresh1": "Set your refresh time: ",

@@ -4,6 +4,7 @@
   "lang": "Elija su idioma",
   "powered": "Todos los datos y precios obtenidos con: ",
   "history" : "Puede acceder a los datos históricos de liquidez y rendimiento mediante GraphQL aquí, desde 21/03/2021.",
+  "currency-info" : "Api para datos de divisas",
   "opensource": "El código es OpenSource disponible en: ",
   "setting": "Ajustes",
   "refresh1": "Establezca su tiempo de actualización: ",
@@ -53,7 +54,7 @@
     "stake-add": "Añada la cantidad de su depósito en DFI.",
     "no-stake": "Indique 0 si no está en depósito.",
     "set-zero" : "Si no tiene activos en un monedero, depósito o en pools de liquidez, es importante introducir 0 en el campo correspondiente."
-      },
+  },
   "value": {
     "title": "Valor actual",
     "cur": "Elija su moneda",
@@ -68,8 +69,8 @@
     "distribution": "Distribución de ingresos mensuales",
     "calc": "Calculadora",
     "calcVis": "Calculadora Visualización Comparación",
-    "calcText": "Calcule cuánto retorno puede obtener, por ejemplo, en el freezer en CakeDefi. El resultado se compara automáticamente con la TAE actual y con los depósitos en un masternode."
-      },
+    "calcText": "Calcule cuánto retorno puede obtener, por ejemplo, en el congelador (freezer) en CakeDefi. El resultado se compara automáticamente con la TAE actual y con los depósitos en un masternode."
+  },
   "hour": "Hora",
   "day": "Día",
   "week": "Semana",
