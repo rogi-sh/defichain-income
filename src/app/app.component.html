@@ -31,25 +31,14 @@
 
     <div class="flex absolute right-6 self-center">
       <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center">
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        *ngIf="fiat === 'USD'"> {{poolBtc?.priceB | currency:'USD'}} DFI</span>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        *ngIf="fiat === 'EUR'"> {{poolBtc?.priceB * usdToEur | currency:'EUR'}} DFI</span>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        *ngIf="fiat === 'CHF'"> {{poolBtc?.priceB * usdToChf | currency:'CHF'}} DFI</span>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        *ngIf="fiat === 'GBP'"> {{poolBtc?.priceB * usdToGbp | currency:'GBP'}} DFI</span>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        *ngIf="fiat === 'AUD'"> {{poolBtc?.priceB * usdToAud | currency:'AUD'}} DFI</span>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
+          DFI</span>
       </div>
       <div class="hidden md:inline-block h-full mr-2 sm:mr-5 items-center">
         <span
           class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <span *ngIf="fiat === 'USD'"> {{getAllValuesUsdPrice() | currency:'USD'}} </span>
-          <span *ngIf="fiat === 'EUR'"> {{getAllValuesUsdPrice() * usdToEur | currency:'EUR' }}</span>
-          <span *ngIf="fiat === 'CHF'"> {{getAllValuesUsdPrice() * usdToChf | currency:'CHF' }}</span>
-          <span *ngIf="fiat === 'GBP'"> {{getAllValuesUsdPrice() * usdToGbp | currency:'GBP' }}</span>
-          <span *ngIf="fiat === 'AUD'"> {{getAllValuesUsdPrice() * usdToAud | currency:'AUD' }}</span>
+          <app-price [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
         </span>
       </div>
 
@@ -88,6 +77,12 @@
         <option class="text-center" value="GBP">£</option>
         <option class="text-center" value="CHF">CHF</option>
         <option class="text-center" value="AUD">A$</option>
+        <option class="text-center" value="RUB">&#8381;</option>
+        <option class="text-center" value="JPY">&#165;</option>
+        <option class="text-center" value="CAD">C$</option>
+        <option class="text-center" value="CNY">&#20803;</option>
+        <option class="text-center" value="SGD">S$</option>
+
       </select>
     </div>
   </header>
@@ -324,10 +319,6 @@
                   <app-value
                     [poolBtc]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
                     [poolLtc]="poolLtc"
@@ -1033,10 +1024,6 @@
               <app-income
                 [poolBtc]="poolBtc"
                 [fiat]="fiat"
-                [usdToEur]="usdToEur"
-                [usdToChf]="usdToChf"
-                [usdToGbp]="usdToGbp"
-                [usdToAud]="usdToAud"
                 [poolBchOut]="poolBchOut"
                 [poolBtcOut]="poolBtcOut"
                 [poolDogeOut]="poolDogeOut"
@@ -1087,10 +1074,6 @@
                     [out]="poolBtcOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
 
@@ -1117,10 +1100,6 @@
                     [out]="poolEthOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
                 <div
@@ -1146,10 +1125,6 @@
                     [out]="poolUsdtOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                   ></app-earning>
                 </div>
                 <div
@@ -1171,9 +1146,7 @@
                        / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </span>
                   </h3>
                   <br>
-                  <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
+                  <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
@@ -1194,9 +1167,7 @@
                        / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </span>
                   </h3>
                   <br>
-                  <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
+                  <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
@@ -1217,9 +1188,7 @@
                        / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </span>
                   </h3>
                   <br>
-                  <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat" [usdToEur]="usdToEur"
-                              [usdToChf]="usdToChf"
-                              [usdToGbp]="usdToGbp"  [usdToAud]="usdToAud"></app-earning>
+                  <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
                 </div>
               </div>
             </div>
@@ -1230,10 +1199,6 @@
                 <app-dex-statistics
                   [fiat]="fiat"
                   [dex]="dex"
-                  [usdToEur]="usdToEur"
-                  [usdToChf]="usdToChf"
-                  [usdToGbp]="usdToGbp"
-                  [usdToAud]="usdToAud"
                   [poolBtc]="poolBtc"
                   [poolEth]="poolEth"
                   [poolUsdt]="poolUsdt"
@@ -1255,10 +1220,6 @@
                 [stakingApy]="stakingApy"
                 [stakingApyMN]="stakingApyMN"
                 [stakingApyCake]="stakingApyCake"
-                [usdToGbp]="usdToGbp"
-                [usdToChf]="usdToChf"
-                [usdToEur]="usdToEur"
-                [usdToAud]="usdToAud"
                 [fiat]="fiat"
                 [poolBtc]="poolBtc"
                 [poolBch]="poolBch"
@@ -2032,10 +1993,6 @@
                     [showOnlyGraph]="true"
                     [poolBtc]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                     [poolBchOut]="poolBchOut"
                     [poolBtcOut]="poolBtcOut"
                     [poolDogeOut]="poolDogeOut"
@@ -2063,10 +2020,6 @@
                     [hideHoldings]="true"
                     [poolBtc]="poolBtc"
                     [fiat]="fiat"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
                     [poolLtc]="poolLtc"
@@ -2080,10 +2033,6 @@
                   <app-dex-statistics
                     [fiat]="fiat"
                     [dex]="dex"
-                    [usdToEur]="usdToEur"
-                    [usdToChf]="usdToChf"
-                    [usdToGbp]="usdToGbp"
-                    [usdToAud]="usdToAud"
                     [poolBtc]="poolBtc"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"

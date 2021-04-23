@@ -23,18 +23,6 @@ export class CalculatorComponent implements OnInit {
   fiat: string;
 
   @Input()
-  usdToEur: number;
-
-  @Input()
-  usdToChf: number;
-
-  @Input()
-  usdToGbp: number;
-
-  @Input()
-  usdToAud: number;
-
-  @Input()
   poolEth: Pool;
 
   @Input()

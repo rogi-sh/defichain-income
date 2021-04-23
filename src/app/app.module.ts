@@ -31,6 +31,7 @@ import { IconComponent } from '@components/icon/icon.component';
 import { DefiComponent } from '@pages/defi/defi.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
+import { PriceComponent } from './components/price/price.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { InfoComponent } from '@pages/info/info.component';
     DefiComponent,
     CalculatorComponent,
     InfoComponent,
+    PriceComponent,
   ],
   imports: [
     BrowserModule,

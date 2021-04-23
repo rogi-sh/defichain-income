@@ -54,10 +54,6 @@ export class AppComponent implements OnInit {
   rewards: Stats;
 
   blocktimeInS = 37;
-  usdToEur = 0.83;
-  usdToChf = 0.91;
-  usdToGbp = 0.72;
-  usdToAud = 1.28;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
@@ -67,8 +63,8 @@ export class AppComponent implements OnInit {
   dfiInStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
   stakingApy = 37;
-  stakingApyCake = 37;
-  stakingApyMN = 42.5;
+  stakingApyCake = 64;
+  stakingApyMN = 77.6;
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();

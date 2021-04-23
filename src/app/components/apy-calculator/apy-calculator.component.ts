@@ -30,18 +30,6 @@ export class ApyCalculatorComponent implements OnInit {
   @Input()
   fiat: string;
 
-  @Input()
-  usdToEur: number;
-
-  @Input()
-  usdToChf: number;
-
-  @Input()
-  usdToGbp: number;
-
-  @Input()
-  usdToAud: number;
-
   constructor() { }
 
   ngOnInit(): void {

@@ -15,18 +15,6 @@ export class EarningComponent implements OnInit {
   pool: Pool;
 
   @Input()
-  usdToEur: number;
-
-  @Input()
-  usdToChf: number;
-
-  @Input()
-  usdToGbp: number;
-
-  @Input()
-  usdToAud: number;
-
-  @Input()
   fiat: string;
 
   constructor() {

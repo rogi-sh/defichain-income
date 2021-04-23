@@ -40,21 +40,7 @@
       <div class="mt-2 mr-2">
         <span class="mr-2">TVL:</span>
         <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <span *ngIf="fiat === 'USD'">
-            {{dex?.tvl | currency:'USD'}}
-          </span>
-          <span *ngIf="fiat === 'EUR'">
-            {{dex?.tvl * usdToEur | currency:'EUR'}}
-          </span>
-          <span *ngIf="fiat === 'CHF'">
-            {{dex?.tvl * usdToChf | currency:'CHF'}}
-          </span>
-          <span *ngIf="fiat === 'GBP'">
-            {{dex?.tvl * usdToGbp | currency:'GBP'}}
-          </span>
-          <span *ngIf="fiat === 'AUD'">
-            {{dex?.tvl * usdToAud | currency:'AUD'}}
-          </span>
+          <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
         </div>
       </div>
 
@@ -82,18 +68,10 @@
           <tr class="bg-gray-100 hover:bg-gray-200">
             <td class="p-2">BTC</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolBtc?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolBtc?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolBtc?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolBtc?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolBtc?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolBtc?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolBtc?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolBtc?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolBtc?.totalStaked * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked "></app-price>
             </td>
             <td class="text-right p-2">
               {{poolBtc?.apy | number: '1.2-2' }}%
@@ -103,18 +81,10 @@
           <tr class="hover:bg-gray-200">
             <td class="p-2">ETH</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolEth?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolEth?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolEth?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolEth?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolEth?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolEth?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolEth?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolEth?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolEth?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolEth?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolEth?.totalStaked * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolEth?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
               {{poolEth?.apy | number: '1.2-2' }}%
@@ -124,18 +94,10 @@
           <tr class="bg-gray-100 hover:bg-gray-200">
             <td class="p-2">USDT</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolUsdt?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolUsdt?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolUsdt?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolUsdt?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolUsdt?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.priceA "></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolUsdt?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolUsdt?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolUsdt?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolUsdt?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolUsdt?.totalStaked * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.totalStaked "></app-price>
             </td>
             <td class="text-right p-2">
               {{poolUsdt?.apy | number: '1.2-2' }}%
@@ -145,18 +107,10 @@
           <tr class="hover:bg-gray-200">
             <td class="p-2">LTC</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolLtc?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolLtc?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolLtc?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolLtc?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolLtc?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolLtc?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolLtc?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolLtc?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolLtc?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolLtc?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolLtc?.totalStaked * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolLtc?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
               {{poolLtc?.apy | number: '1.2-2' }}%
@@ -166,18 +120,10 @@
           <tr class="bg-gray-100 hover:bg-gray-200">
             <td class="p-2">DOGE</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolDoge?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolDoge?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolDoge?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolDoge?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolDoge?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolDoge?.priceA "></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolDoge?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolDoge?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolDoge?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolDoge?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolDoge?.totalStaked * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolDoge?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
               {{poolDoge?.apy | number: '1.2-2' }}%
@@ -187,18 +133,10 @@
           <tr class="hover:bg-gray-200">
             <td class="p-2">BCH</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolBch?.priceA | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolBch?.priceA * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolBch?.priceA * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolBch?.priceA * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolBch?.priceA * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolBch?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolBch?.totalStaked| currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolBch?.totalStaked * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolBch?.totalStaked * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolBch?.totalStaked * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolBch?.totalStaked * usdToGbp | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolBch?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
               {{poolBch?.apy | number: '1.2-2' }}%
@@ -208,11 +146,7 @@
           <tr class="bg-gray-100 hover:bg-gray-200">
             <td class="p-2">DFI</td>
             <td class="text-right p-2">
-              <span *ngIf="fiat === 'USD'"> {{poolBtc?.priceB | currency:'USD'}} </span>
-              <span *ngIf="fiat === 'EUR'"> {{poolBtc?.priceB * usdToEur | currency:'EUR'}} </span>
-              <span *ngIf="fiat === 'CHF'"> {{poolBtc?.priceB * usdToChf | currency:'CHF'}} </span>
-              <span *ngIf="fiat === 'GBP'"> {{poolBtc?.priceB * usdToGbp | currency:'GBP'}} </span>
-              <span *ngIf="fiat === 'AUD'"> {{poolBtc?.priceB * usdToAud | currency:'AUD'}} </span>
+              <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
             </td>
             <td class="text-right p-2"></td>
             <td class="text-right p-2"></td>

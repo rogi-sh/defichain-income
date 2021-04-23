@@ -76,10 +76,6 @@
           [out]="poolAllOut"
           [pool]="poolBtc"
           [fiat]="fiat"
-          [usdToEur]="usdToEur"
-          [usdToChf]="usdToChf"
-          [usdToGbp]="usdToGbp"
-          [usdToAud]="usdToAud"
         ></app-earning>
       </div>
 
@@ -116,11 +112,7 @@
             </div>
             <div>
               <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-                <span *ngIf="fiat === 'USD'">{{getDfiCountStakingUsd() | currency: "USD"}}</span>
-                <span *ngIf="fiat === 'EUR'">{{getDfiCountStakingUsd() * usdToEur | currency: "EUR"}}</span>
-                <span *ngIf="fiat === 'CHF'">{{getDfiCountStakingUsd() * usdToChf | currency: "CHF"}}</span>
-                <span *ngIf="fiat === 'GBP'">{{getDfiCountStakingUsd() * usdToGbp | currency: "GBP"}}</span>
-                <span *ngIf="fiat === 'AUD'">{{getDfiCountStakingUsd() * usdToAud | currency: "AUD"}}</span>
+                <app-price [fiat]="fiat" [usdPrice]="getDfiCountStakingUsd()"></app-price>
               </span>
             </div>
           </h3>
@@ -130,10 +122,6 @@
               [out]="stakingOut"
               [pool]="poolBtc"
               [fiat]="fiat"
-              [usdToEur]="usdToEur"
-              [usdToChf]="usdToChf"
-              [usdToGbp]="usdToGbp"
-              [usdToAud]="usdToAud"
               >
             </app-earning>
           </div>
@@ -243,11 +231,7 @@
           </span>
           <div>
             <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-              <span *ngIf="fiat === 'USD'">{{getLMUsd | currency: "USD"}}</span>
-              <span *ngIf="fiat === 'EUR'">{{getLMUsd * usdToEur | currency: "EUR"}}</span>
-              <span *ngIf="fiat === 'CHF'">{{getLMUsd * usdToChf | currency: "CHF"}}</span>
-              <span *ngIf="fiat === 'GBP'">{{getLMUsd * usdToGbp | currency: "GBP"}}</span>
-              <span *ngIf="fiat === 'AUD'">{{getLMUsd * usdToAud | currency: "AUD"}}</span>
+              <app-price [fiat]="fiat" [usdPrice]="getLMUsd"></app-price>
             </span>
           </div>
         </h3>
@@ -256,10 +240,6 @@
           [out]="poolOut"
           [pool]="poolBtc"
           [fiat]="fiat"
-          [usdToEur]="usdToEur"
-          [usdToChf]="usdToChf"
-          [usdToGbp]="usdToGbp"
-          [usdToAud]="usdToAud"
         ></app-earning>
       </div>
     </div>

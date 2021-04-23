@@ -13,18 +13,6 @@ export class DexStatisticsComponent implements OnInit {
   dex: DexInfo;
 
   @Input()
-  usdToEur: number;
-
-  @Input()
-  usdToChf: number;
-
-  @Input()
-  usdToGbp: number;
-
-  @Input()
-  usdToAud: number;
-
-  @Input()
   poolBtc: Pool;
 
   @Input()
