@@ -1,0 +1,10 @@
+<span *ngIf="fiat === 'USD'">{{usdPrice | currency: "USD"}}</span>
+<span *ngIf="fiat === 'EUR'">{{usdPrice * usdToEur | currency: "EUR"}}</span>
+<span *ngIf="fiat === 'CHF'">{{usdPrice * usdToChf | currency: "CHF"}}</span>
+<span *ngIf="fiat === 'GBP'">{{usdPrice * usdToGbp | currency: "GBP"}}</span>
+<span *ngIf="fiat === 'AUD'">{{usdPrice * usdToAud | currency: "AUD"}}</span>
+<span *ngIf="fiat === 'RUB'">{{usdPrice * usdToRub | currency: "RUB"}}</span>
+<span *ngIf="fiat === 'JPY'">{{usdPrice * usdToJpy | currency: "JPY"}}</span>
+<span *ngIf="fiat === 'CAD'">{{usdPrice * usdToCad | currency: "CAD"}}</span>
+<span *ngIf="fiat === 'CNY'">{{usdPrice * usdToCad | currency: "CNY"}}</span>
+<span *ngIf="fiat === 'SGD'">{{usdPrice * usdToSgd | currency: "SGD"}}</span>
