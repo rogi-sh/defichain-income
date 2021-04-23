@@ -63,6 +63,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   dfiInStaking!: number;
 
   @Input()
+  stakingApy!: number;
+
+  @Input()
   getAnteilBTCPoolAnGesamtLM: number;
 
   @Input()
