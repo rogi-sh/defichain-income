@@ -47,7 +47,7 @@
     <div>
 
       <h3 class="text-lg font-semibold mt-4 mb-1">
-        {{ "value.hold" | translate }}
+        {{ "balance" | translate }} DFI
       </h3>
 
       <div class="grid grid-flow-col grid-cols-2 md:gap-2">
@@ -87,7 +87,7 @@
       </div>
 
       <h3 class="text-lg font-semibold mt-4 mb-1">
-        {{ "currency" | translate }}
+        {{ "balance" | translate }}
       </h3>
 
       <div class="grid grid-flow-row auto-rows-max grid-cols-2 sm:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
@@ -114,7 +114,7 @@
             </div>
           </div>
         </div>
-        
+
         <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             USDT
