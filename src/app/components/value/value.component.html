@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool" class="text-lg">
+        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             ETH
           </div>
@@ -115,7 +115,7 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool" class="text-lg">
+        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             USDT
           </div>
@@ -127,7 +127,7 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool" class="text-lg">
+        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             LTC
           </div>
@@ -139,7 +139,7 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool" class="text-lg">
+        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             DOGE
           </div>
@@ -151,7 +151,7 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool" class="text-lg">
+        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg">
           <div class="inline-block h-full align-middle pr-3">
             BCH
           </div>
