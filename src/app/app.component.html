@@ -908,68 +908,69 @@
                 <div class="bg-gray-100 rounded-md p-2">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.wallet' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
-                    <div>DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.dfi > 0">DFI</div>
+                    <div *ngIf="wallet?.dfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dfi | number: '1.3-3'}}</span>
                     </div>
-                    <div>DFI in Staking</div>
-                    <div>
+
+                    <div *ngIf="wallet?.dfiInStaking > 0">DFI in Staking</div>
+                    <div *ngIf="wallet?.dfiInStaking > 0">
                       <div
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
                         {{dfiInStaking | number: '1.3-3'}} / {{stakingApy}} APY %
                       </div>
                     </div>
 
-                    <div>
+                    <div *ngIf="wallet?.btc > 0">
                       BTC
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.btc > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.btc | number: '1.5-5'}}
                       </span>
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.eth > 0">
                       ETH
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.eth > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.eth | number: '1.5-5'}}
                       </span>
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.ltc > 0">
                       LTC
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.ltc > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.ltc | number: '1.5-5'}}
                       </span>
                     </div>
-                    <div>
-                      USD
+                    <div *ngIf="wallet?.usdt > 0">
+                      USDT
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.usdt > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.usdt | number: '1.5-5'}}
                       </span>
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.doge > 0">
                       DOGE
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.doge > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.doge | number: '1.5-5'}}
                       </span>
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.bch > 0">
                       BCH
                     </div>
-                    <div>
+                    <div *ngIf="wallet?.bch > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.bch | number: '1.5-5'}}
@@ -980,38 +981,38 @@
                 <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.lp' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
-                    <div>BTC-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
+                    <div *ngIf="wallet?.btcdfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.btcdfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div>ETH-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.ethdfi > 0">ETH-DFI</div>
+                    <div *ngIf="wallet?.ethdfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.ethdfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div>LTC-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.ltcdfi > 0">LTC-DFI</div>
+                    <div *ngIf="wallet?.ltcdfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.ltcdfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div>USDT-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.usdtdfi > 0">USDT-DFI</div>
+                    <div *ngIf="wallet?.usdtdfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.usdtdfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div>DOGE-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
+                    <div *ngIf="wallet?.dogedfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dogedfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div>BCH-DFI</div>
-                    <div>
+                    <div *ngIf="wallet?.bchdfi > 0">BCH-DFI</div>
+                    <div *ngIf="wallet?.bchdfi > 0">
                       <span
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.bchdfi | number: '1.3-3'}}</span>
                     </div>
@@ -1056,7 +1057,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBtc}} DFI/Block
+                      BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APR - {{dfiProBlockBtc}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1083,7 +1084,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APY - {{dfiProBlockEth}} DFI/Block
+                      ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APR - {{dfiProBlockEth}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1108,7 +1109,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APY - {{dfiProBlockUsdt}} DFI/Block
+                      USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsdt}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1133,7 +1134,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APY - {{dfiProBlockLtc}} DFI/Block
+                      LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APR - {{dfiProBlockLtc}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1154,7 +1155,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APY - {{dfiProBlockDoge}} DFI/Block
+                      DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APR - {{dfiProBlockDoge}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1175,7 +1176,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APY - {{dfiProBlockBch}} DFI/Block
+                      BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APR - {{dfiProBlockBch}} DFI/Block
                     </span>
                   </h2>
                   <br>
