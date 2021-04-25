@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.6.1 - 25.4.2021';
+    this.log.comment = 'add more text auto/manuall load';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.6.0 - 25.4.2021';
     this.log.comment = 'better view for holdings';
 

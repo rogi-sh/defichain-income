@@ -301,8 +301,8 @@
     </div>
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div
-        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl p-1 md:p-3 bg-white mx-auto sm:mb-5">
-        <div class="sm:overflow-auto relative h-full sm:pr-1">
+        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white mx-auto sm:mb-5">
+        <div class="sm:overflow-auto relative h-full px-3">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
@@ -803,7 +803,7 @@
                           <div>
                             <div class="block my-2 relative">
                               <a
-                                class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer"
+                                class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
                                 (click)="openInfoMenu()"
                               >
                                 <span *ngIf="!isInfoOpen">
@@ -1285,31 +1285,6 @@
                       <countdown class="text-pink-400" #cd
                                 [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
                     </div>
-
-
-                    <div class="w-full mt-5">
-                      <div
-                        class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input
-                          type="checkbox"
-                          id="autoLoadData"
-                          [(ngModel)]="autoLoadData"
-                          (ngModelChange)="saveToggleAutoLoad()"
-                          [ngClass]="{ 'isChecked': autoLoadData }"
-                          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                        />
-                        <label
-                          for="autoLoadData"
-                          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                        ></label>
-                      </div>
-                      <label *ngIf="!autoLoadData" for="autoLoadData" class="text-xs">
-                        {{ 'load3' | translate }}
-                      </label>
-                      <label *ngIf="autoLoadData" for="autoLoadData" class="text-xs">
-                        {{ 'load4' | translate }}
-                      </label>
-                    </div>
                   </div>
                   <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3">
                     <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
@@ -1391,7 +1366,43 @@
                 </div>
 
 
-                <div class="w-full h-full pt-8 relative">
+                <div class="w-full lg:w-1/2 h-full pt-8 relative">
+                  <div class="w-full mb-5">
+                    <h3 class="text-2xl mb-2 text-pink-500">
+                      {{ 'showInput1' | translate }}
+                    </h3>
+                    <div class="font-bold">
+                      {{ 'load1' | translate }}
+                    </div>
+                    <div class="text-sm mb-2">
+                      On -> {{ 'load2' | translate }}
+                      <br/>
+                      Off -> {{ 'load3' | translate }}
+                    </div>
+                    <div
+                      class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+                    >
+                      <input
+                        type="checkbox"
+                        id="autoLoadData"
+                        [(ngModel)]="autoLoadData"
+                        (ngModelChange)="saveToggleAutoLoad()"
+                        [ngClass]="{ 'isChecked': autoLoadData }"
+                        class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                      />
+                      <label
+                        for="autoLoadData"
+                        class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                      ></label>
+                    </div>
+                    <label *ngIf="!autoLoadData" for="autoLoadData" class="text-xs">
+                      {{ 'load5' | translate }}
+                    </label>
+                    <label *ngIf="autoLoadData" for="autoLoadData" class="text-xs">
+                      {{ 'load4' | translate }}
+                    </label>
+                  </div>
+
                   <div class="py-3 h-full">
                     <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2">
                       <div class="text-sm">Wallet</div>
@@ -1543,7 +1554,7 @@
                         <div>
                           <div
                             class="relative h-14 input-component"
-                            [ngClass]="dfiInStaking ? 'empty' : ''"
+                            [ngClass]="dfiInStaking === null || dfiInStaking === undefined ? 'empty' : ''"
                             title="DFI"
                           >
                             <input
@@ -1854,7 +1865,7 @@
                       <div>
                         <div class="block my-2 relative">
                           <a
-                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer"
+                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
                             (click)="openInfoMenu()"
                           >
                             <span *ngIf="!isInfoOpen">
@@ -1935,7 +1946,7 @@
                             [ngClass]="{'bg-gray-100': i % 2 === 1}"
                           >
                             <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">
-                              <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</span>
+                              <div class="inline rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</div>
                               <div class="my-2 -mx-1">
                                 <div *ngIf= "getAddressBalance(a)?.dfiCoins > 0" class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1">
                                   DFI: {{getAddressBalance(a)?.dfiCoins}} </div>
@@ -1973,7 +1984,7 @@
                               class="absolute top-1/2 right-3 transform -translate-y-1/2 hover:text-pink-500 cursor-pointer"
                               (click)="deleteAdress(a)"
                             >
-                              <div class="w-3 h-3 flex items-center">
+                              <div class="w-3 h-3 flex items-center hover:text-pink-500">
                                 <app-icon name="close"></app-icon>
                               </div>
                             </a>

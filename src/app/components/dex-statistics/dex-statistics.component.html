@@ -1,42 +1,5 @@
 <div>
-  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2">
-    <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
-      <div>
-        Rewards DFI/Block:
-      </div>
-      <div>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          Total {{rewards?.rewards?.total }}
-        </span>
-      </div>
-      <div>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          LM {{rewards?.rewards?.liquidityPool }} / Mining {{rewards?.rewards?.minter }}
-        </span>
-      </div>
-      <div>
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          Anchor {{rewards?.rewards?.anchorReward }} / Community {{rewards?.rewards?.community }}
-        </span>
-      </div>
-    </div>
 
-    <div>
-      <div class="mt-2 mr-2">
-        <span class="mr-2">TVL:</span>
-        <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
-        </div>
-      </div>
-
-      <div class="mt-2 mb-2">
-        <span class="mr-2">Block:</span>
-        <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          {{ rewards?.blockHeight }}
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="grid grid-flow-row grid-cols-1 auto-rows-max mt-2">
     <div class="overflow-x-auto rounded-md">
@@ -138,6 +101,45 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2">
+    <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
+      <div>
+        Rewards DFI/Block:
+      </div>
+      <div>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          Total {{rewards?.rewards?.total }}
+        </span>
+      </div>
+      <div>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          LM {{rewards?.rewards?.liquidityPool }} / Mining {{rewards?.rewards?.minter }}
+        </span>
+      </div>
+      <div>
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          Anchor {{rewards?.rewards?.anchorReward }} / Community {{rewards?.rewards?.community }}
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <div class="mt-2 mr-2">
+        <span class="mr-2">TVL:</span>
+        <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
+        </div>
+      </div>
+
+      <div class="mt-2 mb-2">
+        <span class="mr-2">Block:</span>
+        <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          {{ rewards?.blockHeight }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
