@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
     return this.lang === lang;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
@@ -167,9 +167,9 @@ export class AppComponent implements OnInit {
       this.testApi();
     }, 2000000);
 
-    this.getRewards();
-    setInterval(() => {
-      this.getRewards();
+    await this.getRewards();
+    setInterval(async () => {
+      await this.getRewards();
     }, 3600000);
 
     if (this.loggedIn) {
@@ -477,20 +477,13 @@ export class AppComponent implements OnInit {
 
   }
 
-  getRewards(): void {
-    this.dexService.getStats().subscribe(
-      dex => {
-        this.rewards = dex;
-        console.log('Rewards loaded!');
-      },
-      err => {
-        console.error(err);
-        setTimeout(() => {
-            this.getRewards();
-            console.error('Try again ...');
-          },
-          5000);
-      });
+  async getRewards(): Promise<void> {
+    const promise = await this.dexService.getStats().toPromise();
+    this.rewards = promise;
+  }
+
+  sleep(milliseconds): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
 
   loadDex(): void {
