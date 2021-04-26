@@ -590,6 +590,11 @@ export class AppComponent implements OnInit {
 
   private getCustomRewards(rewards: string []): number {
       let reward = 0;
+
+      if (rewards === undefined || rewards === null) {
+        return reward;
+      }
+
       rewards.forEach(r => {
         reward += +r.split('@') [0];
       });
