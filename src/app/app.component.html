@@ -1374,10 +1374,10 @@
                     <div class="font-bold">
                       {{ 'load1' | translate }}
                     </div>
-                    <div class="text-sm mb-2">
-                      On -> {{ 'load2' | translate }}
+                    <div class="text-sm mb-2 ">
+                      <span class="font-bold">ON</span> => {{ 'load2' | translate }}
                       <br/>
-                      Off -> {{ 'load3' | translate }}
+                      <span class="font-bold">OFF</span>  => {{ 'load3' | translate }}
                     </div>
                     <div
                       class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1820,6 +1820,9 @@
                     </div>
 
                     <div *ngIf="autoLoadData">
+                      <h3 class="text-2xl mb-2 text-pink-500">
+                        Staking
+                      </h3>
                       <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
                         <div>
                           <div
@@ -1862,6 +1865,9 @@
                           </div>
                         </div>
                       </div>
+                      <h3 class="text-2xl mb-2 text-pink-500">
+                        {{ 'address.title' | translate }}
+                      </h3>
                       <div>
                         <div class="block my-2 relative">
                           <a

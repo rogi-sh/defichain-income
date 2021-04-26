@@ -18,7 +18,7 @@
   "load3": "you enter your values manually",
   "load4": "Toggle to use manual enter your funds.",
   "load5": "Toggle to use automatically load your funds.",
-  "showInput1": "Show input of my funds or addresses",
+  "showInput1": "Manual or automatic loading of your funds",
   "stats": "Statistics",
   "price": "Price",
   "currency": "Currency",
@@ -34,7 +34,7 @@
 
   "address": {
     "label": "address",
-    "title": "Your dfi addresses",
+    "title": "Your DFI addresses",
     "title2": "Please add all your defichain app addresses.",
     "imp": "IMPORTANT",
     "exc": "You have to execute in your defichain app to get all your addresses.",
