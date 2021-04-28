@@ -14,7 +14,7 @@ export class Changelog {
     this.log = new Log();
 
     this.log.version = '4.6.5 - 28.4.2021';
-    this.log.comment = 'youtube tutoriual added, info text better wording, matomo update to v9';
+    this.log.comment = 'youtube tutorial added, info text better wording, matomo update to v9';
 
     this.logs.push(this.log);
 
