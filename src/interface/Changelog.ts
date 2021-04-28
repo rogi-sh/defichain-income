@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.7.0 - 28.4.2021';
+    this.log.comment = 'add btc and eth as currency';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.6.5 - 28.4.2021';
     this.log.comment = 'youtube tutorial added, info text better wording, matomo update to v9';
 

@@ -14,16 +14,16 @@ export class PriceComponent implements OnInit {
   @Input()
   fiat!: string;
 
+  service: DataService;
+
   usd: USD;
 
   constructor(private dataService: DataService) {
-
-    this.usd = this.dataService.getUsdCur();
-
+      this.service = dataService;
   }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    this.usd = await this.dataService.getUsdCur();
   }
 
 }

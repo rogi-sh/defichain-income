@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
 import {Currencies, USD} from '@interfaces/Data';
@@ -10,7 +10,11 @@ export class DataService {
 
   usd: USD;
 
+  poolBtcPrice: number;
+  poolEthPrice: number;
+
   constructor(private http: HttpClient) {
+
     this.usd = new USD();
     this.usd.eur = 0.832245;
     this.usd.chf = 0.9171;
@@ -22,15 +26,31 @@ export class DataService {
     this.usd.cny = 6.4913;
     this.usd.sgd = 1.3296;
 
-    this.getCurrencies();
     setInterval(() => {
       this.getCurrencies();
-    }, 21600000);
+    }, 3600000);
+
 
   }
 
   public getUsdCur(): USD {
     return this.usd;
+  }
+
+  public getBtcUsd(): number {
+    return this.poolBtcPrice;
+  }
+
+  public setBtcUsd(price: number): void {
+    this.poolBtcPrice = price;
+  }
+
+  public setEthUsd(price: number): void {
+    this.poolEthPrice = price;
+  }
+
+  public getEthUsd(): number {
+    return this.poolEthPrice;
   }
 
   async getCurrencies(): Promise<void> {

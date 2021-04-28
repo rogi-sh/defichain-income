@@ -17,6 +17,7 @@ import {ValueComponent} from '@components/value/value.component';
 import {MatomoInjector, MatomoTracker} from 'ngx-matomo-v9';
 import {Apollo} from 'apollo-angular';
 import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
+import {DataService} from '@services/data.service';
 
 
 @Component({
@@ -134,7 +135,7 @@ export class AppComponent implements OnInit {
   selectedTab = 'manual';
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
-              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker) {
+              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService) {
     translate.addLangs(['en', 'de', 'es']);
     translate.setDefaultLang('de');
 
@@ -546,6 +547,8 @@ export class AppComponent implements OnInit {
     this.berechneStakingOut();
     this.berechnePoolOut();
     this.berechneAllOut();
+    this.dataService.setBtcUsd(this.poolBtc.priceA);
+    this.dataService.setEthUsd(this.poolEth.priceA);
     this.dataLoaded = true;
   }
 

@@ -32,6 +32,7 @@ import { DefiComponent } from '@pages/defi/defi.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
 import { PriceComponent } from '@components/price/price.component';
+import {DataService} from '@services/data.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { PriceComponent } from '@components/price/price.component';
     }),
     GraphQLModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
