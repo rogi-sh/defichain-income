@@ -33,7 +33,7 @@
     "graphql": "^15.5.0",
     "ng-apexcharts": "^1.5.9",
     "ngx-countdown": "^11.0.3",
-    "ngx-matomo": "^0.1.4",
+    "ngx-matomo-v9": "^0.3.0",
     "postcss": "^8.2.10",
     "rxjs": "~6.6.7",
     "tslib": "^2.2.0",

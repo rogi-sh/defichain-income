@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatomoTracker} from 'ngx-matomo';
+import {MatomoTracker} from 'ngx-matomo-v9';
 declare const TradingView: any;
 
 @Component({

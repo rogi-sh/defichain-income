@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pool } from '@interfaces/Dex';
-import { MatomoTracker } from 'ngx-matomo';
+import { MatomoTracker } from 'ngx-matomo-v9';
 
 @Component({
   selector: 'app-calculator-page',

@@ -14,7 +14,7 @@ import Timer = NodeJS.Timer;
 import {TranslateService} from '@ngx-translate/core';
 import {IncomeComponent} from '@components/income/income.component';
 import {ValueComponent} from '@components/value/value.component';
-import {MatomoInjector, MatomoTracker} from 'ngx-matomo';
+import {MatomoInjector, MatomoTracker} from 'ngx-matomo-v9';
 import {Apollo} from 'apollo-angular';
 import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 

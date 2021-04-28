@@ -11,7 +11,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatomoModule } from 'ngx-matomo';
+import { MatomoModule } from 'ngx-matomo-v9';
 
 import { GraphQLModule } from './graphql.module';
 
