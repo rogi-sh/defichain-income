@@ -662,7 +662,11 @@ export class AppComponent implements OnInit {
         },
         err => {
           console.error(err);
-
+          setTimeout(() => {
+              this.loadStackingCake();
+              console.error('Try again ...');
+            },
+            5000);
         });
   }
 
