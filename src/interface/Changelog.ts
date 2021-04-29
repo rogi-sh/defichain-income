@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.8.0 - 29.4.2021';
+    this.log.comment = 'cake apy ver api, mn count and apr over api, add currencies for mobile, add langs for mobile, small fixes';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.7.0 - 28.4.2021';
     this.log.comment = 'add btc and eth as currency';
 

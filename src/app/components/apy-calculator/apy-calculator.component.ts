@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 
 import { Pool } from '@interfaces/Dex';
-import { ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal } from '@interfaces/Data';
+import { ChartOptions4, StakingCalc, StakingCalcMN, StakingCake } from '@interfaces/Data';
 
 @Component({
   selector: 'app-apy-calculator',
@@ -12,7 +12,7 @@ import { ChartOptions4, StakingCalc, StakingCalcMN, StakingCalcNormal } from '@i
 export class ApyCalculatorComponent implements OnInit {
 
   stakingCalcOut: StakingCalc = new StakingCalc();
-  stakingCalcNormal: StakingCalcNormal = new StakingCalcNormal();
+  stakingCake: StakingCake = new StakingCake();
   stakingCalcMN: StakingCalcMN = new StakingCalcMN();
 
   @ViewChild('chart4') chart4: ChartComponent;
@@ -52,18 +52,18 @@ export class ApyCalculatorComponent implements OnInit {
       - this.stakingCalcOut.dfiAmount;
     this.stakingCalcOut.dfiPerYear = this.stakingCalcOut.dfiAmount * (1 + this.stakingCalcOut.apy / 100) - this.stakingCalcOut.dfiAmount;
 
-    // normal
-    this.stakingCalcNormal.dfiPerDay = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 365)
+    // cake
+    this.stakingCake.dfiPerDay = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 365)
       - this.stakingCalcOut.dfiAmount;
-    this.stakingCalcNormal.dfiPerHour = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 8760)
+    this.stakingCake.dfiPerHour = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 8760)
       - this.stakingCalcOut.dfiAmount;
-    this.stakingCalcNormal.dfiPerMin = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 525600)
+    this.stakingCake.dfiPerMin = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 525600)
       - this.stakingCalcOut.dfiAmount;
-    this.stakingCalcNormal.dfiPerWeek = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 52.1429)
+    this.stakingCake.dfiPerWeek = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 52.1429)
       - this.stakingCalcOut.dfiAmount;
-    this.stakingCalcNormal.dfiPerMonth = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 12)
+    this.stakingCake.dfiPerMonth = this.stakingCalcOut.dfiAmount * Math.pow(1 + this.stakingApyCake / 100, 1 / 12)
       - this.stakingCalcOut.dfiAmount;
-    this.stakingCalcNormal.dfiPerYear = this.stakingCalcOut.dfiAmount * (1 + this.stakingApyCake / 100) - this.stakingCalcOut.dfiAmount;
+    this.stakingCake.dfiPerYear = this.stakingCalcOut.dfiAmount * (1 + this.stakingApyCake / 100) - this.stakingCalcOut.dfiAmount;
 
 
     // mn
@@ -88,7 +88,7 @@ export class ApyCalculatorComponent implements OnInit {
 
   buildDataForChartCalcStaking(type: string): void {
     const key = `dfiPer${ type }`;
-    const normal = this.stakingCalcNormal[key];
+    const normal = this.stakingCake[key];
     const mn = this.stakingCalcMN[key];
     const calc = this.stakingCalcOut[key];
 
@@ -124,7 +124,7 @@ export class ApyCalculatorComponent implements OnInit {
         }
       },
       colors: ['#FF00AF', '#BD1087', '#1AB7EA'],
-      labels: ['Normal', 'Masternode', 'Calc'],
+      labels: ['Cake ', 'MN ', 'Input'],
       legend: {
         show: true,
         floating: true,

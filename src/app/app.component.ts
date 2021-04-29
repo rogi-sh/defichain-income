@@ -18,6 +18,8 @@ import {MatomoInjector, MatomoTracker} from 'ngx-matomo-v9';
 import {Apollo} from 'apollo-angular';
 import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 import {DataService} from '@services/data.service';
+import {StakingService} from '@services/staking.service';
+import {CakeStaking, Masternode} from '@interfaces/Staking';
 
 
 @Component({
@@ -63,9 +65,11 @@ export class AppComponent implements OnInit {
   // Staking infos
   dfiInStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
-  stakingApy = 37;
-  stakingApyCake = 64;
+
+  stakingApyCake = 98;
+  stakingApy = this.stakingApyCake;
   stakingApyMN = 77.6;
+  masternodeCount = 7000;
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
@@ -135,7 +139,8 @@ export class AppComponent implements OnInit {
   selectedTab = 'manual';
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
-              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService) {
+              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
+              private stakingService: StakingService) {
     translate.addLangs(['en', 'de', 'es']);
     translate.setDefaultLang('de');
 
@@ -159,6 +164,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
     this.wallet = new Wallet();
 
     this.loadFromLocalStorage();
@@ -172,6 +178,8 @@ export class AppComponent implements OnInit {
     setInterval(async () => {
       await this.getRewards();
     }, 3600000);
+
+    this.loadStacking();
 
     if (this.loggedIn) {
       this.loadDataFromServerAndLoadAllStuff();
@@ -235,9 +243,6 @@ export class AppComponent implements OnInit {
     // Staking special
     if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
       this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
-    }
-    if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
-      this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
     }
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
@@ -448,7 +453,6 @@ export class AppComponent implements OnInit {
   }
 
   saveInputStaking(): void {
-    localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
     this.berechneAllOut();
@@ -645,6 +649,23 @@ export class AppComponent implements OnInit {
           },
           5000);
 
+      });
+  }
+
+  loadStacking(): void {
+    forkJoin([
+      this.stakingService.getStaking(),
+      this.stakingService.getMasternode()]
+    ).subscribe((([cake, masternode]: [CakeStaking, Masternode]) => {
+
+          this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
+          this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
+          this.masternodeCount = masternode.ENABLED;
+          this.berechneMNApr();
+        }
+      ),
+      err => {
+        console.error(err);
       });
   }
 
@@ -913,6 +934,10 @@ export class AppComponent implements OnInit {
     this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
     this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
     this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
+  }
+
+  berechneMNApr(): void {
+   this.stakingApyMN =  60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
   }
 
   isLocalStorageNotEmpty(key: string): boolean {

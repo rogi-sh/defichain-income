@@ -12,7 +12,9 @@ export const environment = {
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
-  version: '4.7.0',
+  cake: 'https://poolapi.cakedefi.com/staking',
+  defichainnode: 'http://defichain-node.de/api/v1/listmasternodes/?count=True',
+  version: '4.8.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

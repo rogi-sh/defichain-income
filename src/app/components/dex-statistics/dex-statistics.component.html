@@ -103,7 +103,28 @@
       </table>
     </div>
   </div>
+  <div class="flex my-2 w-full flex-wrap">
+    <div class="mb-1 w-full sm:w-auto sm:mr-4">
+      Staking Cake:
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{ this.stakingApyCake | number: '1.1-1' }}% APY
+      </span>
+    </div>
+    <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4">
+      Staking Masternode:
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{ this.stakingApyMN | number: '1.1-1' }}% APR
+      </span>
+    </div>
 
+
+    <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4">
+      Masternodes:
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{ this.MNCount}}
+      </span>
+    </div>
+  </div>
   <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2">
     <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
       <div>

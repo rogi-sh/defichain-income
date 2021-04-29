@@ -203,8 +203,9 @@
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
-          <option value="de">DE</option>
-          <option value="en" selected>EN</option>
+          <option value="de" [selected]="isLangSet('de')">DE</option>
+          <option value="en" [selected]="isLangSet('en')">EN</option>
+          <option value="es" [selected]="isLangSet('es')">ES</option>
         </select>
 
         <select
@@ -213,11 +214,18 @@
           [value]="fiat"
           style="text-align-last: center;"
         >
+          <option class="text-center" value="BTC">&#x20BF;</option>
+          <option class="text-center" value="ETH">ETH</option>
           <option class="text-center" value="USD" selected>$</option>
           <option class="text-center" value="EUR">€</option>
           <option class="text-center" value="GBP">£</option>
           <option class="text-center" value="CHF">CHF</option>
           <option class="text-center" value="AUD">A$</option>
+          <option class="text-center" value="RUB">&#8381;</option>
+          <option class="text-center" value="JPY">&#165;</option>
+          <option class="text-center" value="CAD">C$</option>
+          <option class="text-center" value="CNY">&#20803;</option>
+          <option class="text-center" value="SGD">S$</option>
         </select>
       </div>
     </div>
@@ -1210,6 +1218,7 @@
                   [poolBch]="poolBch"
                   [stakingApyCake]="stakingApyCake"
                   [stakingApyMN]="stakingApyMN"
+                  [MNCount]="masternodeCount"
                   [rewards]="rewards"
                 >
                 </app-dex-statistics>
@@ -1543,6 +1552,7 @@
                               required
                               [(ngModel)]="stakingApy"
                               (ngModelChange)="saveInputStaking()"
+                              step="0.1"
                               type="number"
                               id="saveInputStaking"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -2061,6 +2071,7 @@
                     [poolBch]="poolBch"
                     [stakingApyCake]="stakingApyCake"
                     [stakingApyMN]="stakingApyMN"
+                    [MNCount]="masternodeCount"
                     [rewards]="rewards"
                   >
                   </app-dex-statistics>

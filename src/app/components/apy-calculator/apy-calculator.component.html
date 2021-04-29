@@ -8,7 +8,7 @@
         title="DFI per {{ 'Min' | translate }}"
       >
         <label for="stakingCalcOur" class="absolute left-2 transition-all px-1 pointer-events-none">
-          DFI Amount
+          DFI
         </label>
         <input
           class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
@@ -71,7 +71,14 @@
         {{ 'year' | translate }}
       </option>
     </select>
-
+    <br>
+    <br>
+    <p>Cake  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingApyCake | number: '1.2-2'}} % APY</span></p>
+    <br>
+    <p>Masternode  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingApyMN | number: '1.2-2'}} % APR</span></p>
+    <br>
+    <p>Input <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingCalcOut.apy | number: '1.2-2'}} % APY</span></p>
+    <br>
     <div id="chart4">
       <apx-chart
         *ngIf="chartOptions4"

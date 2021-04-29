@@ -37,6 +37,9 @@ export class DexStatisticsComponent implements OnInit {
   stakingApyCake: number;
 
   @Input()
+  MNCount: number;
+
+  @Input()
   rewards: Stats;
 
   constructor() { }

@@ -176,7 +176,7 @@ export class StakingCalc extends Outcome {
   apy = 38;
 }
 
-export class StakingCalcNormal extends Outcome {
+export class StakingCake extends Outcome {
 }
 
 export class StakingCalcMN extends Outcome {
