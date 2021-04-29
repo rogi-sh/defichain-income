@@ -179,7 +179,8 @@ export class AppComponent implements OnInit {
       await this.getRewards();
     }, 3600000);
 
-    this.loadStacking();
+    this.loadStackingCake();
+    this.loadStackingMasternode();
 
     if (this.loggedIn) {
       this.loadDataFromServerAndLoadAllStuff();
@@ -652,20 +653,29 @@ export class AppComponent implements OnInit {
       });
   }
 
-  loadStacking(): void {
-    forkJoin([
-      this.stakingService.getStaking(),
-      this.stakingService.getMasternode()]
-    ).subscribe((([cake, masternode]: [CakeStaking, Masternode]) => {
+  loadStackingCake(): void {
+    this.stakingService
+      .getStaking().subscribe(
+      cake => {
+        this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
+        this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
+        },
+        err => {
+          console.error(err);
 
-          this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
-          this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
-          this.masternodeCount = masternode.ENABLED;
-          this.berechneMNApr();
-        }
-      ),
+        });
+  }
+
+  loadStackingMasternode(): void {
+    this.stakingService
+      .getMasternode().subscribe(
+      masternode => {
+        this.masternodeCount = masternode.ENABLED;
+        this.berechneMNApr();
+      },
       err => {
         console.error(err);
+
       });
   }
 

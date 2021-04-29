@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.8.1 - 29.4.2021';
+    this.log.comment = 'cake apy per api and mn count separated because of canceled calls';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.8.0 - 29.4.2021';
     this.log.comment = 'cake apy ver api, mn count and apr over api, add currencies for mobile, add langs for mobile, small fixes';
 
