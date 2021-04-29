@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
   stakingApyCake = 98;
   stakingApy = this.stakingApyCake;
   stakingApyMN = 77.6;
-  masternodeCount = 7000;
+  masternodeCount = 7438;
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
