@@ -15,22 +15,11 @@ export class StakingService {
 
   public getStaking(): Observable<CakeStaking> {
 
-    // tslint:disable-next-line:ban-types
-    const requestOptions: Object = {
-      /* other options here */
-      headers: {'access-control-allow-origin': '*'}
-    };
-    return this.http.get<CakeStaking>(environment.cake, requestOptions);
+    return this.http.get<CakeStaking>(environment.cake);
   }
 
   public getMasternode(): Observable<Masternode> {
 
-    // tslint:disable-next-line:ban-types
-    const requestOptions: Object = {
-      /* other options here */
-      headers: {'access-control-allow-origin': '*'}
-    };
-
-    return this.http.get<Masternode>(environment.defichainnode, requestOptions);
+    return this.http.get<Masternode>(environment.defichainnode);
   }
 }

@@ -12,7 +12,7 @@ export const environment = {
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
-  cake: 'https://poolapi.cakedefi.com/staking',
+  cake: 'https://api.cakedefi.com/staking',
   defichainnode: 'http://defichain-node.de/api/v1/listmasternodes/?count=True',
   version: '4.8.0',
   graphql: 'https://graphql.defichain-income.com/graphql',

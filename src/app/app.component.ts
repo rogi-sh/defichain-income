@@ -244,9 +244,6 @@ export class AppComponent implements OnInit {
     if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
       this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
     }
-    if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
-      this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
-    }
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
     }
@@ -456,7 +453,6 @@ export class AppComponent implements OnInit {
   }
 
   saveInputStaking(): void {
-    localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();
     this.berechnePoolOut();
     this.berechneAllOut();
