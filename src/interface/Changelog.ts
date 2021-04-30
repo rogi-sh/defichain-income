@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.8.2 - 30.4.2021';
+    this.log.comment = 'change to https mn call';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.8.1 - 29.4.2021';
     this.log.comment = 'cake apy per api and mn count separated because of canceled calls';
 
