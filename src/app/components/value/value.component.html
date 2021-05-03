@@ -82,7 +82,7 @@
               {{getDfiCountLM() | number: '1.2-2' }}
               <br/>
               <div class="text-xs text-gray-400">
-                <app-price [fiat]="fiat" [usdPrice]="getLMUsd()"></app-price>
+                <app-price [fiat]="fiat" [usdPrice]="getDfiCountLMUsd()"></app-price>
               </div>
             </div>
             <div class="inline-block h-full align-middle">
@@ -95,7 +95,7 @@
               {{wallet?.dfi | number: '1.2-2' }}
               <br/>
               <div class="text-xs text-gray-400">
-                <app-price [fiat]="fiat" [usdPrice]="getWalletValueUsd()"></app-price>
+                <app-price [fiat]="fiat" [usdPrice]="getDfiCountWalletUsd()"></app-price>
               </div>
             </div>
             <div class="inline-block h-full align-middle">
