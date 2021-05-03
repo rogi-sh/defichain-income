@@ -64,25 +64,44 @@
               DFI
             </div>
           </div>
-          <span class="text-xl flex self-center">
+          <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{dfiInStaking| number: '1.2-2'}}
+              {{dfiInStaking | number: '1.2-2' }}
+              <br/>
+              <div class="text-xs text-gray-400">
+                <app-price [fiat]="fiat" [usdPrice]="getStakingValueUsd()"></app-price>
+              </div>
             </div>
-            Staking
-          </span>
-          <span class="text-xl flex self-center">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{getDfiCountLM() | number: '1.2-2'}}
+            <div class="inline-block h-full align-middle">
+              Staking
             </div>
-            LM
-          </span>
+          </div>
 
-          <span class="text-xl flex self-center">
+          <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{wallet?.dfi | number: '1.2-2'}}
+              {{getDfiCountLM() | number: '1.2-2' }}
+              <br/>
+              <div class="text-xs text-gray-400">
+                <app-price [fiat]="fiat" [usdPrice]="getLMUsd()"></app-price>
+              </div>
             </div>
-            Wallet
-          </span>
+            <div class="inline-block h-full align-middle">
+              LM
+            </div>
+          </div>
+
+          <div class="text-xl relative">
+            <div class="text-pink-500 font-semibold inline-block pr-2">
+              {{wallet?.dfi | number: '1.2-2' }}
+              <br/>
+              <div class="text-xs text-gray-400">
+                <app-price [fiat]="fiat" [usdPrice]="getWalletValueUsd()"></app-price>
+              </div>
+            </div>
+            <div class="inline-block h-full align-middle">
+              Wallet
+            </div>
+          </div>
         </span>
       </div>
 
