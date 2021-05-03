@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.9.0 - 3.5.2021';
+    this.log.comment = 'prices under all dfi parts';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.8.2 - 30.4.2021';
     this.log.comment = 'change to https mn call';
 
