@@ -1,5 +1,5 @@
 <div
-  class="h-screen sm:max-h-screen bg-gray-100"
+  class="h-screen sm:max-h-screen bg-gray-100 dark:bg-gray-800"
   xmlns="http://www.w3.org/1999/html"
 >
   <header
@@ -24,7 +24,7 @@
       />
     </a>
 
-    <div *ngIf="loggedIn" class="hidden sm:inline ml-4 h-full py-3 text-sm">
+    <div *ngIf="loggedIn" class="hidden sm:inline ml-4 h-full py-3 text-sm dark:text-gray-100">
       <strong>{{ 'login3' | translate }}</strong>
       <div>{{loggedInAuth}}</div>
     </div>
@@ -46,13 +46,13 @@
         <app-changelog></app-changelog>
       </div>
 
-      <div class="hidden md:inline-block" *ngIf="apiOnline">
+      <div class="hidden md:inline-block dark:text-gray-100" *ngIf="apiOnline">
         <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
         Online
       </div>
 
       <div 
-        class="fixed md:relative left-0 right-0 top-0 bg-red-600 md:bg-transparent z-50 text-white md:text-current text-center md:text-center md:inline-block"
+        class="fixed md:relative left-0 right-0 top-0 bg-red-600 md:bg-transparent z-50 text-white md:text-current text-center md:text-center md:inline-block dark:text-gray-100"
         *ngIf="!apiOnline"
       >
         <div class="hidden md:inline-block rounded bg-red-600 h-2 w-2"></div>
@@ -60,7 +60,7 @@
       </div>
       
       <select
-        class="hidden sm:inline ml-4 bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
+        class="hidden sm:inline ml-4 bg-gray-100 dark:bg-gray-800 dark:text-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
         (change)="useLanguage($event.target.value)"
         [value]="lang"
       >
@@ -70,7 +70,7 @@
       </select>
 
       <select
-        class="hidden sm:inline  bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
+        class="hidden sm:inline bg-gray-100 dark:bg-gray-800 dark:text-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
         (change)="onChangeFiat($event.target.value)"
         [value]="fiat"
         style="text-align-last: center;"
@@ -239,15 +239,15 @@
       <div class="flex flex-col text-center h-full relative">
         <a
           (click)="handlePage('dashboard')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'dashboard' }"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer≈"
           title="Dashboard"
         >
           <app-icon name="home"></app-icon>
         </a>
         <a
           (click)="handlePage('holdings')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'holdings' }"
+          [ngClass]="currentPage === 'holdings' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'holdings.title' | translate }}"
         >
@@ -255,7 +255,7 @@
         </a>
         <a
           (click)="handlePage('income')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'income' }"
+          [ngClass]="currentPage === 'income' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'income.word' | translate }}"
         >
@@ -264,7 +264,7 @@
 
         <a
           (click)="handlePage('dex')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
+          [ngClass]="currentPage === 'dex' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEX"
         >
@@ -273,7 +273,7 @@
 
         <a
           (click)="handlePage('defi')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
+          [ngClass]="currentPage === 'defi' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEFI"
         >
@@ -281,7 +281,7 @@
         </a>
         <a
           (click)="handlePage('calculator')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'calculator' }"
+          [ngClass]="currentPage === 'calculator' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'income.calc' | translate }}"
         >
@@ -293,7 +293,7 @@
         <div class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full">
           <a
             (click)="handlePage('info')"
-            [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
+            [ngClass]="currentPage === 'info' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 my-2 block cursor-pointer text-center"
             title="Info"
           >
@@ -301,7 +301,7 @@
           </a>
           <a
             (click)="handlePage('settings')"
-            [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
+            [ngClass]="currentPage === 'settings' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 my-2 block cursor-pointer"
             title="{{ 'setting' | translate }}"
           >
@@ -314,14 +314,14 @@
     </div>
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div
-        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white mx-auto sm:mb-5">
+        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
         <div class="sm:overflow-auto relative h-full px-3">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'holdings.title' | translate }}</h1>
 
-                <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500"
+                <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500 dark:text-gray-100"
                   (click)="handleSettingsDialog()">
                   <div class="pointer-events-none w-8 h-8">
                     <app-icon name="settings"></app-icon>
@@ -918,13 +918,14 @@
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
               >
-                <div class="bg-gray-100 rounded-md p-2">
+                <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-800 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.wallet' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.dfi > 0">DFI</div>
                     <div *ngIf="wallet?.dfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        {{wallet?.dfi | number: '1.3-3'}}
+                      </span>
                     </div>
 
                     <div *ngIf="wallet?.dfiInStaking > 0">DFI in Staking</div>
@@ -991,7 +992,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2">
+                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.lp' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
@@ -1066,7 +1067,7 @@
               <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
                 <div
                   *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1093,7 +1094,7 @@
 
                 <div
                   *ngIf="wallet?.ethInEthPool > 0 || wallet?.dfiInEthPool"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1118,7 +1119,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1143,7 +1144,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1164,7 +1165,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1185,7 +1186,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
