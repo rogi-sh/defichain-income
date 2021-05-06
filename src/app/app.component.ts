@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
-  currentPage = 'dashboard';
+  currentPage = 'info';
   currentPageKey = 'currentPageKey';
 
   wallet: Wallet;

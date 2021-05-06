@@ -1,6 +1,7 @@
 {
   "title": "Cuandro de control DeFiChain Income",
-  "welcome": "Bienvenido, en esta web puede auditar los ingresos de sus cryptos en sus depósitos de DFI o en minería de liquidez en su app DeFiChain.",
+  "welcome": "Bienvenido, en este sitio web puede seguir sus ingresos de la DeFiChain.",
+  "welcome2":  "Para ello, rellene toda la información necesaria en el entorno y conozca sus ingresos.",
   "lang": "Elija su idioma",
   "powered": "Todos los datos y precios obtenidos con: ",
   "history" : "Puede acceder a los datos históricos de liquidez y rendimiento mediante GraphQL aquí, desde 21/03/2021.",
