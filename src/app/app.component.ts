@@ -19,7 +19,7 @@ import {Apollo} from 'apollo-angular';
 import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
-import {CakeStaking, Masternode} from '@interfaces/Staking';
+import {Meta} from '@angular/platform-browser';
 
 
 @Component({
@@ -140,7 +140,7 @@ export class AppComponent implements OnInit {
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService) {
+              private stakingService: StakingService, private meta: Meta) {
     translate.addLangs(['en', 'de', 'es']);
     translate.setDefaultLang('de');
 
@@ -151,6 +151,12 @@ export class AppComponent implements OnInit {
     // setze matomo URL
     this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
 
+  }
+
+  updateDescription(description: string): void {
+    this.translate.stream(description).subscribe((res: string) => {
+      this.meta.updateTag({ name: 'description', content: res });
+    });
   }
 
   useLanguage(language: string): void {
@@ -164,6 +170,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.updateDescription('meta-data.description');
 
     this.wallet = new Wallet();
 
