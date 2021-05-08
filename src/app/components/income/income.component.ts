@@ -250,7 +250,8 @@ export class IncomeComponent implements OnInit, OnChanges {
       chart: {
         width: '100%',
         height: '400px',
-        type: 'polarArea'
+        type: 'polarArea',
+        background: 'transparent'
       },
       stroke: {
         colors: ['#fff']
@@ -277,5 +278,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   handleTab(selectedTab: string): void {
     this.selectedTab = selectedTab;
+  }
+
+  getTheme(): string {
+    return localStorage.theme
   }
 }

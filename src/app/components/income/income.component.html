@@ -1,5 +1,5 @@
 <div>
-  <h1 [ngClass]="{'text-3xl text-pink-500': !showOnlyGraph, 'text-lg': showOnlyGraph}">
+  <h1 [ngClass]="{'text-3xl text-pink-500': !showOnlyGraph, 'text-lg dark:text-gray-100': showOnlyGraph}">
     {{ "income.title" | translate }}
   </h1>
   <h2 class="text-lg mt-2 mb-4 dark:text-gray-100">
@@ -19,6 +19,7 @@
         [fill]="chartOptions2?.fill"
         [stroke]="chartOptions2?.stroke"
         [responsive]="chartOptions2?.responsive"
+        [theme]="{ mode: getTheme() }"
       ></apx-chart>
     </div>
 

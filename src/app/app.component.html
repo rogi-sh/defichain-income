@@ -6,14 +6,10 @@
     class="h-12 py-1 px-2 flex sm:h-24 sm:py-3 sm:justify-start"
   >
     <a
-      class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500"
+      class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500 dark:text-gray-100"
       (click)="toggleMenu()"
     >
-      <object
-        type="image/svg+xml"
-        data="../assets/icons/menu.svg"
-        class="pointer-events-none"
-      ></object>
+      <app-icon name="menu"></app-icon>
     </a>
 
     <a (click)="handlePage('dashboard')" class="ml-10 sm:ml-0 w-28">
@@ -234,7 +230,7 @@
     </div>
   </div>
 
-  <div class="flex items-stretch dashboard-height">
+  <div class="flex items-stretch dashboard-height dark:bg-gray-800">
     <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
       <div class="flex flex-col text-center h-full relative">
         <a
@@ -342,15 +338,11 @@
                   ></app-value>
                 </div>
 
-                <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
+                <div *ngIf="dialogOpen" class="bg-fixed bg-white dark:bg-black fixed inset-0 bg-opacity-80">
                   <div
-                    class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
-                    <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
-                      <object
-                        type="image/svg+xml"
-                        data="../assets/icons/close.svg"
-                        class="pointer-events-none select-none"
-                      ></object>
+                    class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden dark:bg-gray-800">
+                    <div class="absolute right-5 top-5 z-10 cursor-pointer dark:text-gray-100" (click)="handleSettingsDialog()">
+                      <app-icon class="w-5 h-5 block hover:text-pink-500" name="close"></app-icon>
                     </div>
 
                     <div class="w-full h-full pt-8 relative">
@@ -370,10 +362,10 @@
                                   (ngModelChange)="onChangeBtcWallet()"
                                   type="number"
                                   id="inputBTCWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputBTCWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   BTC
                                 </label>
                               </div>
@@ -390,10 +382,10 @@
                                   (ngModelChange)="onChangeEthWallet()"
                                   type="number"
                                   id="inputETHWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputETHWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   ETH
                                 </label>
                               </div>
@@ -410,10 +402,10 @@
                                   (ngModelChange)="onChangeLtcWallet()"
                                   type="number"
                                   id="inputLTCWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputLTCWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   LTC
                                 </label>
                               </div>
@@ -430,10 +422,10 @@
                                   (ngModelChange)="onChangeUsdtWallet()"
                                   type="number"
                                   id="inputUsdtWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputUsdtWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   USDT
                                 </label>
                               </div>
@@ -450,10 +442,10 @@
                                   (ngModelChange)="onChangeDogeWallet()"
                                   type="number"
                                   id="inputDOGEWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputDOGEWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DOGE
                                 </label>
                               </div>
@@ -470,10 +462,10 @@
                                   (ngModelChange)="onChangeBchWallet()"
                                   type="number"
                                   id="inputBchWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputBchWallet-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   BCH
                                 </label>
                               </div>
@@ -494,10 +486,10 @@
                                   (ngModelChange)="saveInputStaking()"
                                   type="number"
                                   id="saveInputStaking-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="saveInputStaking-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   Staking APY
                                 </label>
                               </div>
@@ -514,10 +506,10 @@
                                   (ngModelChange)="onChangeDfiStaking()"
                                   type="number"
                                   id="dfiInStaking-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="dfiInStaking-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -538,10 +530,10 @@
                                   (ngModelChange)="onChangeBtcBtcPool()"
                                   type="number"
                                   id="onChangeBtcBtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeBtcBtcPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   BTC
                                 </label>
                               </div>
@@ -558,10 +550,10 @@
                                   (ngModelChange)="onChangeDfiBtcPool()"
                                   type="number"
                                   id="onChangeDfiBtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiBtcPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -578,10 +570,10 @@
                                   (ngModelChange)="onChangeEthEthPool()"
                                   type="number"
                                   id="onChangeEthEthPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeEthEthPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   ETH
                                 </label>
                               </div>
@@ -598,10 +590,10 @@
                                   (ngModelChange)="onChangeDfiEthPool()"
                                   type="number"
                                   id="onChangeDfiEthPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiEthPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -618,10 +610,10 @@
                                   (ngModelChange)="onChangeUsdtUsdtPool()"
                                   type="number"
                                   id="onChangeUsdtUsdtPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeUsdtUsdtPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   USDT
                                 </label>
                               </div>
@@ -638,10 +630,10 @@
                                   (ngModelChange)="onChangeDfiUsdtPool()"
                                   type="number"
                                   id="onChangeDfiUsdtPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiUsdtPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -658,10 +650,10 @@
                                   (ngModelChange)="onChangeLtcLtcPool()"
                                   type="number"
                                   id="onChangeLtcLtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeLtcLtcPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   LTC
                                 </label>
                               </div>
@@ -678,10 +670,10 @@
                                   (ngModelChange)="onChangeDfiLtcPool()"
                                   type="number"
                                   id="onChangeDfiLtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiLtcPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -698,10 +690,10 @@
                                   (ngModelChange)="onChangeDogeDogePool()"
                                   type="number"
                                   id="onChangeDogeDogePool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDogeDogePool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   Doge
                                 </label>
                               </div>
@@ -718,10 +710,10 @@
                                   (ngModelChange)="onChangeDfiDogePool()"
                                   type="number"
                                   id="onChangeDfiDogePool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiDogePool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -738,10 +730,10 @@
                                   (ngModelChange)="onChangeBchBchPool()"
                                   type="number"
                                   id="onChangeBchBchPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeBchBchPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   BCH
                                 </label>
                               </div>
@@ -759,10 +751,10 @@
                                   (ngModelChange)="onChangeDfiBchPool()"
                                   type="number"
                                   id="onChangeDfiBchPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="onChangeDfiBchPool-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -784,10 +776,10 @@
                                   (ngModelChange)="onChangeDfiStaking()"
                                   type="number"
                                   id="inputDFIStakingAuto-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputDFIStakingAuto-1"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   DFI
                                 </label>
                               </div>
@@ -804,10 +796,10 @@
                                   (ngModelChange)="saveInputStaking()"
                                   type="number"
                                   id="inputApyStaking2"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                 >
                                 <label for="inputApyStaking2"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                   Staking APY
                                 </label>
                               </div>
@@ -816,7 +808,7 @@
                           <div>
                             <div class="block my-2 relative">
                               <a
-                                class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
+                                class="border border-pink-500 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
                                 (click)="openInfoMenu()"
                               >
                                 <span *ngIf="!isInfoOpen">
@@ -870,10 +862,10 @@
                                     required
                                     [(ngModel)]="adress"
                                     id="inputAddress2"
-                                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                                   >
                                   <label for="inputAddress2"
-                                        class="absolute left-2 transition-all px-1 pointer-events-none">
+                                        class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                     DFI Address
                                   </label>
                                 </div>
@@ -893,14 +885,14 @@
                             <div class="block mt-2 h-auto w-full">
                               <div
                                 *ngFor="let a of adresses; index as i;"
-                                class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
-                                [ngClass]="{'bg-gray-100': i % 2 === 1}"
+                                class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-700"
+                                [ngClass]="{'bg-gray-100 dark:bg-gray-900': i % 2 === 1}"
                               >
-                                <div class="w-3/4 overflow-hidden overflow-ellipsis">
+                                <div class="w-3/4 overflow-hidden overflow-ellipsis dark:text-gray-100">
                                   {{ a }}
                                 </div>
                                 <a
-                                  class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer w-3 h-3"
+                                  class="absolute top-1/2 transform -translate-y-1/2 right-3 hover:text-pink-500 cursor-pointer w-3 h-3 dark:text-gray-100"
                                   (click)="deleteAdress(a)"
                                 >
                                   <app-icon name="close"></app-icon>
@@ -1258,6 +1250,8 @@
                 [trackGit]="trackGit.bind(this)"
               ></app-info-page>
             </div>
+
+            <!-- Settings Page -->
             <div *ngSwitchCase="'settings'">
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'setting' | translate }}</h1>
@@ -1277,9 +1271,9 @@
                             step="1"
                             min="10"
                             id="sCountdown"
-                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                           >
-                          <label for="sCountdown" class="absolute left-2 transition-all px-1 pointer-events-none">
+                          <label for="sCountdown" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'refresh6' | translate }}
                           </label>
                         </div>
@@ -1297,11 +1291,31 @@
 
                     <div class="w-full text-xs text-gray-400 mt-1">
                       {{ 'refresh3' | translate }}
-                      <countdown class="text-pink-400" #cd
-                                [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
+                      <countdown class="text-pink-400" [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
+                    </div>
+
+
+                    <div class="mt-5 flex">
+                      <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input
+                          type="checkbox"
+                          id="darkmode"
+                          [(ngModel)]="isDarkModeOn"
+                          (ngModelChange)="toggleDarkMode()"
+                          [ngClass]="{ 'isChecked': isDarkModeOn }"
+                          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                        />
+                        <label
+                          for="darkmode"
+                          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                        ></label>
+                      </div>
+                      <div class="dark:text-gray-100">
+                        Toggle Darkmode
+                      </div>
                     </div>
                   </div>
-                  <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3">
+                  <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3 dark:text-gray-100">
                     <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
                     <p *ngIf="!loggedIn" class="my-3">
                       <button
@@ -1338,9 +1352,9 @@
                             [(ngModel)]="loggedInAuthInput"
                             type="text"
                             id="loggedInAuthInput"
-                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                           >
-                          <label for="loggedInAuthInput" class="absolute left-2 transition-all px-1 pointer-events-none">
+                          <label for="loggedInAuthInput" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'login21' | translate }}
                           </label>
                         </div>
@@ -1364,7 +1378,7 @@
                       <button
                         (click)="logout()"
                         type="button"
-                        class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-14 text-pink-500 align-top mr-2"
+                        class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-14 text-pink-500 align-top mr-2 dark:hover:bg-gray-700"
                       >
                         Logout
                       </button>
@@ -1381,7 +1395,7 @@
                 </div>
 
 
-                <div class="w-full lg:w-1/2 h-full pt-8 relative">
+                <div class="w-full lg:w-1/2 h-full pt-8 relative dark:text-gray-100">
                   <div class="w-full mb-5">
                     <h3 class="text-2xl mb-2 text-pink-500">
                       {{ 'showInput1' | translate }}
@@ -1434,10 +1448,10 @@
                               (ngModelChange)="onChangeBtcWallet()"
                               type="number"
                               id="inputBTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputBTCWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1454,10 +1468,10 @@
                               (ngModelChange)="onChangeEthWallet()"
                               type="number"
                               id="inputETHWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputETHWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1474,10 +1488,10 @@
                               (ngModelChange)="onChangeLtcWallet()"
                               type="number"
                               id="inputLTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputLTCWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1494,10 +1508,10 @@
                               (ngModelChange)="onChangeUsdtWallet()"
                               type="number"
                               id="inputUsdtWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputUsdtWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1514,10 +1528,10 @@
                               (ngModelChange)="onChangeDogeWallet()"
                               type="number"
                               id="inputDOGEWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputDOGEWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DOGE
                             </label>
                           </div>
@@ -1534,10 +1548,10 @@
                               (ngModelChange)="onChangeBchWallet()"
                               type="number"
                               id="inputBchWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputBchWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1559,10 +1573,10 @@
                               step="0.1"
                               type="number"
                               id="saveInputStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="saveInputStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1579,10 +1593,10 @@
                               (ngModelChange)="onChangeDfiStaking()"
                               type="number"
                               id="dfiInStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="dfiInStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1603,10 +1617,10 @@
                               (ngModelChange)="onChangeBtcBtcPool()"
                               type="number"
                               id="onChangeBtcBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeBtcBtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1623,10 +1637,10 @@
                               (ngModelChange)="onChangeDfiBtcPool()"
                               type="number"
                               id="onChangeDfiBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiBtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1643,10 +1657,10 @@
                               (ngModelChange)="onChangeEthEthPool()"
                               type="number"
                               id="onChangeEthEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeEthEthPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1663,10 +1677,10 @@
                               (ngModelChange)="onChangeDfiEthPool()"
                               type="number"
                               id="onChangeDfiEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiEthPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1683,10 +1697,10 @@
                               (ngModelChange)="onChangeUsdtUsdtPool()"
                               type="number"
                               id="onChangeUsdtUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeUsdtUsdtPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1703,10 +1717,10 @@
                               (ngModelChange)="onChangeDfiUsdtPool()"
                               type="number"
                               id="onChangeDfiUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiUsdtPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1723,10 +1737,10 @@
                               (ngModelChange)="onChangeLtcLtcPool()"
                               type="number"
                               id="onChangeLtcLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeLtcLtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1743,10 +1757,10 @@
                               (ngModelChange)="onChangeDfiLtcPool()"
                               type="number"
                               id="onChangeDfiLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiLtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1763,10 +1777,10 @@
                               (ngModelChange)="onChangeDogeDogePool()"
                               type="number"
                               id="onChangeDogeDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDogeDogePool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Doge
                             </label>
                           </div>
@@ -1783,10 +1797,10 @@
                               (ngModelChange)="onChangeDfiDogePool()"
                               type="number"
                               id="onChangeDfiDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiDogePool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1803,10 +1817,10 @@
                               (ngModelChange)="onChangeBchBchPool()"
                               type="number"
                               id="onChangeBchBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeBchBchPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1824,10 +1838,10 @@
                               (ngModelChange)="onChangeDfiBchPool()"
                               type="number"
                               id="onChangeDfiBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="onChangeDfiBchPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1852,10 +1866,9 @@
                               (ngModelChange)="onChangeDfiStaking()"
                               type="number"
                               id="inputDFIStakingAuto"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
-                            <label for="inputDFIStakingAuto"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                            <label for="inputDFIStakingAuto" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1872,10 +1885,10 @@
                               (ngModelChange)="saveInputStaking()"
                               type="number"
                               id="inputApyStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                             >
                             <label for="inputApyStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1887,7 +1900,7 @@
                       <div>
                         <div class="block my-2 relative">
                           <a
-                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
+                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none dark:hover:bg-gray-700"
                             (click)="openInfoMenu()"
                           >
                             <span *ngIf="!isInfoOpen">
@@ -1941,10 +1954,10 @@
                                 required
                                 [(ngModel)]="adress"
                                 id="inputAddress"
-                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-800 dark:text-gray-100"
                               >
                               <label for="inputAddress"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DFI Address
                               </label>
                             </div>
@@ -1964,7 +1977,7 @@
                         <div class="block mt-2 h-auto w-full">
                           <div
                             *ngFor="let a of adresses; index as i;"
-                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
+                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-700"
                             [ngClass]="{'bg-gray-100': i % 2 === 1}"
                           >
                             <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">

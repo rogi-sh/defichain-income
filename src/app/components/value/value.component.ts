@@ -167,7 +167,8 @@ export class ValueComponent implements OnInit, OnChanges {
       colors: this.getColorsValue(),
       chart: {
         width: '100%',
-        type: 'donut'
+        type: 'donut',
+        background: 'transparent'
       },
       dataLabels: {
         enabled: true
@@ -361,7 +362,8 @@ export class ValueComponent implements OnInit, OnChanges {
       labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataLtc, dataDoge, dataBch, dataDfi),
       chart: {
         width: '100%',
-        type: 'donut'
+        type: 'donut',
+        background: 'transparent'
       },
       dataLabels: {
         enabled: true
@@ -483,5 +485,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
   handleDetails(): void {
     this.detailsOpen = !this.detailsOpen;
+  }
+
+  getTheme(): string {
+    return localStorage.theme
   }
 }
