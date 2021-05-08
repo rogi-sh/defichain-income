@@ -1113,6 +1113,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  trackHelper(): void {
+    this.matomoTracker.trackEvent('Klick', 'Adresses Helper');
+  }
+
   onChangeDetails(newValue: string): void {
     this.details = newValue;
     localStorage.setItem(this.detailsKey, newValue);

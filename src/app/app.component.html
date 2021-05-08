@@ -829,15 +829,23 @@
                             </div>
                             <div class="h-full transition duration-300 ease-in-out transform mt-4"
                                 [ngClass]="{'hidden': !isInfoOpen}">
-                              <h1>
-                                <span
-                                  class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  {{ 'address.title' | translate }}
-                                </span>
-                              </h1>
-                              <h3 class="text-gray-500">{{ 'address.title2' | translate }}</h3>
+                              <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
                               <p class="mb-2">
-                                <span class="text-bold">{{ 'address.imp' | translate }}</span>
+                                <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
+                              </p>
+                              <p class="mb-2">
+                                {{ 'address.exc0' | translate }}
+                              </p>
+                              <p class="mb-2">
+                                <a class="text-pink-500 hover:underline"
+                                   (click)="trackHelper()"
+                                   target="_blank"
+                                   href="https://github.com/Shelkovenkov/defichain-income-address-helper/releases">
+                                  https://github.com/Shelkovenkov/defichain-income-address-helper/releases
+                                </a>
+                              </p>
+                              <p class="mb-2">
+                                <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
                               </p>
                               <p class="mb-2">
                                 {{ 'address.exc' | translate }}
@@ -1899,33 +1907,44 @@
                         </div>
                         <div class="h-full transition duration-300 ease-in-out transform mt-4"
                               [ngClass]="{'hidden': !isInfoOpen}">
-                          <h1>
-                            <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                              {{ 'address.title' | translate }}
-                            </span>
-                          </h1>
-                          <h3 class="text-gray-500">{{ 'address.title2' | translate }}</h3>
+                          <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
                           <p class="mb-2">
-                            <span class="text-bold">{{ 'address.imp' | translate }}</span>
+                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
+                          </p>
+                          <p class="mb-2">
+                            {{ 'address.exc0' | translate }}
+                          </p>
+                          <p class="mb-2">
+                            <a class="text-pink-500 hover:underline"
+                               (click)="trackHelper()"
+                               target="_blank"
+                               href="https://github.com/Shelkovenkov/defichain-income-address-helper/releases">
+                              https://github.com/Shelkovenkov/defichain-income-address-helper/releases
+                            </a>
+                          </p>
+
+                          <p class="mb-2">
+                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
                           </p>
                           <p class="mb-2">
                             {{ 'address.exc' | translate }}
                           </p>
                           <p class="mb-2">
                             <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                              class="rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                               listaccounts {{'{}'}} false false true
                             </span>
-                            <span> ->{{ 'address.exc2' | translate }}</span>
-                          </p>
 
+                          </p>
+                          <p>{{ 'address.exc2' | translate }}</p>
+                          <br>
                           <p class="mb-2">
                             <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
-                            <span> ->{{ 'address.exc21' | translate }}</span>
-                          </p>
+                              class="rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
 
+                          </p>
+                          <p>{{ 'address.exc21' | translate }}</p>
+                          <br>
                           <p>{{ 'address.exc3' | translate }}</p>
                         </div>
 
