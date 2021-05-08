@@ -1269,7 +1269,7 @@ export class AppComponent implements OnInit {
   }
 
   allAddresses(): string [] {
-    return [...this.adresses, ...this.adressesMasternodes];
+    return [...this.adressesMasternodes, ...this.adresses];
   }
 
   addAdress(): void {
