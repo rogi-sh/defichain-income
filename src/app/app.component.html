@@ -51,14 +51,14 @@
         Online
       </div>
 
-      <div 
+      <div
         class="fixed md:relative left-0 right-0 top-0 bg-red-600 md:bg-transparent z-50 text-white md:text-current text-center md:text-center md:inline-block"
         *ngIf="!apiOnline"
       >
         <div class="hidden md:inline-block rounded bg-red-600 h-2 w-2"></div>
         Offline
       </div>
-      
+
       <select
         class="hidden sm:inline ml-4 bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
         (change)="useLanguage($event.target.value)"
@@ -874,7 +874,7 @@
                                   >
                                   <label for="inputAddress2"
                                         class="absolute left-2 transition-all px-1 pointer-events-none">
-                                    DFI Address
+                                    DFI Addresses
                                   </label>
                                 </div>
                               </div>
@@ -1944,7 +1944,7 @@
                               >
                               <label for="inputAddress"
                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                DFI Address
+                                DFI Addresses
                               </label>
                             </div>
                           </div>

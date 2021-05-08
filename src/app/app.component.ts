@@ -1238,12 +1238,21 @@ export class AppComponent implements OnInit {
   }
 
   addAdress(): void {
-    if (this.adresses.indexOf(this.adress) > -1) {
-      this.adress = '';
+
+    let newAddressesAdded = false;
+
+    this.adress.split(',').forEach(a => {
+      if (this.adresses.indexOf(a) < 0) {
+        this.adresses.push(a);
+        newAddressesAdded = true;
+      }
+
+    });
+
+    if (!newAddressesAdded) {
       return;
     }
 
-    this.adresses.push(this.adress);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();
