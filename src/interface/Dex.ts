@@ -65,6 +65,7 @@ export class PoolPair {
 
 export class AddressBalance {
   address: string;
+  masternode: boolean;
 
   dfiCoins: number;
   dfiTokens: number;

@@ -71,6 +71,10 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.wallet?.dfi * this.poolBtc?.priceB;
   }
 
+  getMasternodeDfiUsd(): number {
+    return this.wallet?.dfiInMasternodes * this.poolBtc?.priceB;
+  }
+
   getAllValuesUsdPrice(): number {
     return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();
@@ -131,7 +135,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
   }
 
   getAnteilStakingOfAllValue(): number {

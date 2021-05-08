@@ -73,10 +73,13 @@ export class AppComponent implements OnInit {
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
+  adressesMasternodes = new Array<string>();
   adressBalances = new Array<AddressBalance>();
   addressesDto;
   adress = '';
   adressesKey = 'adressesKey';
+  adressesMasternodesKey = 'adressesMasternodesKey';
+  masternodeAdress = false;
 
   dex: DexInfo;
 
@@ -155,7 +158,7 @@ export class AppComponent implements OnInit {
 
   updateDescription(description: string): void {
     this.translate.stream(description).subscribe((res: string) => {
-      this.meta.updateTag({ name: 'description', content: res });
+      this.meta.updateTag({name: 'description', content: res});
     });
   }
 
@@ -235,6 +238,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.adressesKey) !== null) {
       this.adresses = JSON.parse(localStorage.getItem(this.adressesKey));
+    }
+    if (localStorage.getItem(this.adressesMasternodesKey) !== null) {
+      this.adressesMasternodes = JSON.parse(localStorage.getItem(this.adressesMasternodesKey));
     }
     if (localStorage.getItem(this.sCountdownKey) !== null) {
       this.sCountdown = JSON.parse(localStorage.getItem(this.sCountdownKey));
@@ -598,17 +604,17 @@ export class AppComponent implements OnInit {
   }
 
   private getCustomRewards(rewards: string []): number {
-      let reward = 0;
+    let reward = 0;
 
-      if (rewards === undefined || rewards === null) {
-        return reward;
-      }
-
-      rewards.forEach(r => {
-        reward += +r.split('@') [0];
-      });
-
+    if (rewards === undefined || rewards === null) {
       return reward;
+    }
+
+    rewards.forEach(r => {
+      reward += +r.split('@') [0];
+    });
+
+    return reward;
   }
 
   loadDexManual(): void {
@@ -632,18 +638,30 @@ export class AppComponent implements OnInit {
   loadAllAccounts(): void {
     this.adressBalances = new Array<AddressBalance>();
     const requestArray = [];
+
+    // normal addresses
     for (const ad of this.adresses) {
       requestArray.push(this.dexService.getAdressDetail(ad));
       requestArray.push(this.dexService.getAdressBalance(ad));
     }
 
+    // masternode addresses
+    for (const adM of this.adressesMasternodes) {
+      requestArray.push(this.dexService.getAdressBalance(adM));
+    }
+
     forkJoin(requestArray).subscribe(results => {
         results.forEach((value, i) => {
-          if (i % 2 === 0) {
-            const balances = value as [string];
-            balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
+          // masternode address
+          if (i > this.adresses?.length * 2 - 1) {
+            this.addCoinsToWallet(value as Balance, this.getMasternodeAddressForIteration(i), true);
           } else {
-            this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i));
+            if (i % 2 === 0) {
+              const balances = value as [string];
+              balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
+            } else {
+              this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i), false);
+            }
           }
         });
 
@@ -667,15 +685,15 @@ export class AppComponent implements OnInit {
       cake => {
         this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
         this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
-        },
-        err => {
-          console.error(err);
-          setTimeout(() => {
-              this.loadStackingCake();
-              console.error('Try again ...');
-            },
-            5000);
-        });
+      },
+      err => {
+        console.error(err);
+        setTimeout(() => {
+            this.loadStackingCake();
+            console.error('Try again ...');
+          },
+          5000);
+      });
   }
 
   loadStackingMasternode(): void {
@@ -699,14 +717,23 @@ export class AppComponent implements OnInit {
     }
   }
 
-  addCoinsToWallet(balance: Balance, address: string): void {
+  getMasternodeAddressForIteration(i: number): string {
+      return this.adressesMasternodes[i - this.adresses?.length * 2];
+  }
+
+  addCoinsToWallet(balance: Balance, address: string, masternode: boolean): void {
 
     // Balance is in Satoshi
-    this.wallet.dfi += balance.balance * 0.00000001;
+    if (!masternode) {
+      this.wallet.dfi += balance.balance * 0.00000001;
+    } else {
+      this.wallet.dfiInMasternodes += balance.balance * 0.00000001;
+    }
 
     if (!this.getAddressBalance(address)) {
       const aB = new AddressBalance();
       aB.address = address;
+      aB.masternode = masternode;
       this.adressBalances.push(aB);
     }
 
@@ -959,7 +986,7 @@ export class AppComponent implements OnInit {
   }
 
   berechneMNApr(): void {
-   this.stakingApyMN =  60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
+    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
   }
 
   isLocalStorageNotEmpty(key: string): boolean {
@@ -1241,14 +1268,26 @@ export class AppComponent implements OnInit {
     return this.poolBchOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
 
+  allAddresses(): string [] {
+    return [...this.adresses, ...this.adressesMasternodes];
+  }
+
   addAdress(): void {
 
     let newAddressesAdded = false;
 
     this.adress.split(',').forEach(a => {
-      if (this.adresses.indexOf(a) < 0) {
-        this.adresses.push(a);
-        newAddressesAdded = true;
+
+      if (!this.masternodeAdress) {
+        if (this.adresses.indexOf(a) < 0) {
+          this.adresses.push(a);
+          newAddressesAdded = true;
+        }
+      } else {
+        if (this.adressesMasternodes.indexOf(a) < 0) {
+          this.adressesMasternodes.push(a);
+          newAddressesAdded = true;
+        }
       }
 
     });
@@ -1258,16 +1297,26 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+    localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
     this.adress = '';
+    this.masternodeAdress = false;
     this.clearWallet();
     this.loadAddressesAndDexData();
   }
 
   deleteAdress(adress: string): void {
     const index = this.adresses.indexOf(adress, 0);
+    const indexMn = this.adressesMasternodes.indexOf(adress, 0);
     if (index > -1) {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+      this.clearWallet();
+      this.loadAddressesAndDexData();
+    }
+
+    if (indexMn > -1) {
+      this.adressesMasternodes.splice(indexMn, 1);
+      localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
       this.clearWallet();
       this.loadAddressesAndDexData();
     }

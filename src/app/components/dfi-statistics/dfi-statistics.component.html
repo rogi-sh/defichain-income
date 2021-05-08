@@ -4,16 +4,16 @@
     (change)="onChangeCPCurrency($event.target.value)"
     value="coinpaprikaCurrency"
   >
-    <option value="BTC">BTC</option>
-    <option value="BCH">BCH</option>
-    <option value="ETH">ETH</option>
-    <option value="LTC">LTC</option>
-    <option value="DOGE">DOGE</option>
-    <option value="USDT">USDT</option>
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="CHF">CHF</option>
-    <option value="GBP">GBP</option>
+    <option [selected]="coinpaprikaCurrency === 'BTC'" value="BTC">BTC</option>
+    <option [selected]="coinpaprikaCurrency === 'BCH'" value="BCH">BCH</option>
+    <option [selected]="coinpaprikaCurrency === 'ETH'" value="ETH">ETH</option>
+    <option [selected]="coinpaprikaCurrency === 'LTC'" value="LTC">LTC</option>
+    <option [selected]="coinpaprikaCurrency === 'DOGE'" value="DOGE">DOGE</option>
+    <option [selected]="coinpaprikaCurrency === 'USDT'" value="USDT">USDT</option>
+    <option [selected]="coinpaprikaCurrency === 'USD'" value="USD">USD</option>
+    <option [selected]="coinpaprikaCurrency === 'EUR'" value="EUR">EUR</option>
+    <option [selected]="coinpaprikaCurrency === 'CHF'" value="CHF">CHF</option>
+    <option [selected]="coinpaprikaCurrency === 'GBP'" value="GBP">GBP</option>
   </select>
 
 </div>
