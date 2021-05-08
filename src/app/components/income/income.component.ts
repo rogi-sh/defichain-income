@@ -54,6 +54,12 @@ export class IncomeComponent implements OnInit, OnChanges {
   stakingApy!: number;
 
   @Input()
+  masternodesApr!: number;
+
+  @Input()
+  masternodesCount!: number;
+
+  @Input()
   getAnteilBTCPoolAnGesamtLM: number;
 
   @Input()
@@ -181,6 +187,14 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   getDfiCountStakingUsd(): number {
     return this.dfiInStaking * this.poolBtc?.priceB;
+  }
+
+  getDfiCountMasternodesUsd(): number {
+    return this.wallet.dfiInMasternodes * this.poolBtc?.priceB;
+  }
+
+  getBalanceMasternode(): number {
+    return this.wallet.dfiInMasternodes - 20000 * this.masternodesCount;
   }
 
   getColorsIncome(): Array<string> {
