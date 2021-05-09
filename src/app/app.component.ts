@@ -134,7 +134,6 @@ export class AppComponent implements OnInit {
 
   dataLoaded = true;
 
-  dialogOpen = false;
   isInfoOpen = false;
   selectedTab = 'manual';
   isDarkModeOn = false;
@@ -1538,10 +1537,6 @@ export class AppComponent implements OnInit {
     walletFinal.bch = wallet.bch;
 
     return walletFinal;
-  }
-
-  handleSettingsDialog(): void {
-    this.dialogOpen = !this.dialogOpen;
   }
 
   handleTab(selectedTab: string): void {
