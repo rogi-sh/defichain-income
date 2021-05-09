@@ -202,8 +202,10 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      this.isDarkModeOn = true
       document.documentElement.classList.add('dark')
+      this.toggleDarkMode()
     } else {
       document.documentElement.classList.remove('dark')
     }
@@ -263,8 +265,8 @@ export class AppComponent implements OnInit {
       this.currentPage = localStorage.getItem(this.currentPageKey);
     }
 
-    if (localStorage.theme !== null) {
-      this.isDarkModeOn = localStorage.theme === 'dark';
+    if (localStorage.getItem('theme') !== null) {
+      this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
     }
   }
 

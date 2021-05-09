@@ -488,6 +488,6 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getTheme(): string {
-    return localStorage.theme
+    return localStorage.getItem('theme')
   }
 }
