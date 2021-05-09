@@ -13,6 +13,27 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '4.10.0 - 8.5.2021';
+    this.log.comment = 'address helper added';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '4.9.2 - 6.5.2021';
+    this.log.comment = 'some piece of seo';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '4.9.1 - 5.5.2021';
+    this.log.comment = 'mobile optimizations, price dfi and total in mobile header';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.9.0 - 3.5.2021';
     this.log.comment = 'prices under all dfi parts';
 

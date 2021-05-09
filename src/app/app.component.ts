@@ -19,7 +19,7 @@ import {Apollo} from 'apollo-angular';
 import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
-import {CakeStaking, Masternode} from '@interfaces/Staking';
+import {Meta} from '@angular/platform-browser';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   title = 'defichain-income';
   lang = 'en';
   env = environment;
-  currentPage = 'dashboard';
+  currentPage = 'info';
   currentPageKey = 'currentPageKey';
 
   wallet: Wallet;
@@ -141,7 +141,7 @@ export class AppComponent implements OnInit {
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService) {
+              private stakingService: StakingService, private meta: Meta) {
     translate.addLangs(['en', 'de', 'es']);
     translate.setDefaultLang('de');
 
@@ -152,6 +152,12 @@ export class AppComponent implements OnInit {
     // setze matomo URL
     this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
 
+  }
+
+  updateDescription(description: string): void {
+    this.translate.stream(description).subscribe((res: string) => {
+      this.meta.updateTag({ name: 'description', content: res });
+    });
   }
 
   useLanguage(language: string): void {
@@ -165,6 +171,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.updateDescription('meta-data.description');
 
     this.wallet = new Wallet();
 
@@ -1117,6 +1125,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  trackHelper(): void {
+    this.matomoTracker.trackEvent('Klick', 'Adresses Helper');
+  }
+
   onChangeDetails(newValue: string): void {
     this.details = newValue;
     localStorage.setItem(this.detailsKey, newValue);
@@ -1242,12 +1254,21 @@ export class AppComponent implements OnInit {
   }
 
   addAdress(): void {
-    if (this.adresses.indexOf(this.adress) > -1) {
-      this.adress = '';
+
+    let newAddressesAdded = false;
+
+    this.adress.split(',').forEach(a => {
+      if (this.adresses.indexOf(a) < 0) {
+        this.adresses.push(a);
+        newAddressesAdded = true;
+      }
+
+    });
+
+    if (!newAddressesAdded) {
       return;
     }
 
-    this.adresses.push(this.adress);
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     this.adress = '';
     this.clearWallet();
