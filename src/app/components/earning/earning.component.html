@@ -4,7 +4,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{out.dfiPerMin | number: '1.2-2'}} DFI -
+        {{out?.dfiPerMin | number: '1.2-2'}} DFI -
         <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerMinUsd(out)"></app-price>
      </span>
     </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{out.dfiPerHour| number: '1.2-2'}} DFI -
+        {{out?.dfiPerHour| number: '1.2-2'}} DFI -
         <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerHourUsd(out) "></app-price>
       </span>
     </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{out.dfiPerDay| number: '1.2-2'}} DFI -
+        {{out?.dfiPerDay| number: '1.2-2'}} DFI -
         <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerDayUsd(out)"></app-price>
       </span>
     </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{out.dfiPerMonth| number: '1.2-2'}} DFI -
+        {{out?.dfiPerMonth| number: '1.2-2'}} DFI -
         <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerMonthUsd(out)"></app-price>
       </span>
     </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{out.dfiPerYear| number: '1.2-2'}} DFI -
+        {{out?.dfiPerYear| number: '1.2-2'}} DFI -
        <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerYearUsd(out) "></app-price>
       </span>
     </div>

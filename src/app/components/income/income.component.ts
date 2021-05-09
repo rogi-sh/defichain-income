@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
 import {ChartOptions2, StakingCalc, Wallet} from '@interfaces/Data';
-import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
+import {MasternodeOutcome, Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-income',
@@ -16,6 +16,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   stakingOut!: OutcomeStaking;
+
+  @Input()
+  masternodeOut!: MasternodeOutcome;
 
   @Input()
   poolOut!: Outcome;

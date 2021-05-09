@@ -2,8 +2,21 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '@services/dex.service';
 import {
   AddressBalance,
-  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolAllOut, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolPair,
-  PoolUsdtOut, Stats
+  DexInfo,
+  DexPoolPair,
+  MasternodeOutcome,
+  Outcome,
+  OutcomeStaking,
+  Pool,
+  PoolAllOut,
+  PoolBchOut,
+  PoolBtcOut,
+  PoolDogeOut,
+  PoolEthOut,
+  PoolLtcOut,
+  PoolPair,
+  PoolUsdtOut,
+  Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
 import {environment} from '@environments/environment';
@@ -110,6 +123,7 @@ export class AppComponent implements OnInit {
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
   poolAllOut: PoolAllOut = new PoolAllOut();
+  poolMasternodeOut: MasternodeOutcome = new MasternodeOutcome();
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -205,10 +219,10 @@ export class AppComponent implements OnInit {
     }, this.sCountdown * 1000);
 
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      this.isDarkModeOn = true
+      this.isDarkModeOn = true;
     }
-    
-    this.toggleDarkMode()
+
+    this.toggleDarkMode();
   }
 
   handlePage(pageTag: string): void {
@@ -675,6 +689,7 @@ export class AppComponent implements OnInit {
         });
 
         this.loadDex();
+        this.loadStackingMasternode();
 
       },
       err => {
@@ -710,7 +725,8 @@ export class AppComponent implements OnInit {
       .getMasternode().subscribe(
       masternode => {
         this.masternodeCount = masternode.ENABLED;
-        this.berechneMNApr();
+        this.berechneMNOut();
+        this.berechneAllOut();
       },
       err => {
         console.error(err);
@@ -986,17 +1002,24 @@ export class AppComponent implements OnInit {
   }
 
   berechneAllOut(): void {
-    this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay;
-    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour;
-    this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin;
-    this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
-    this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
-    this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
+    this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay + this.poolMasternodeOut.dfiPerDay;
+    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour + this.poolMasternodeOut.dfiPerHour ;
+    this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin + this.poolMasternodeOut.dfiPerMin;
+    this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek + this.poolMasternodeOut.dfiPerWeek;
+    this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth + this.poolMasternodeOut.dfiPerMonth;
+    this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear + this.poolMasternodeOut.dfiPerYear;
   }
 
-  berechneMNApr(): void {
+  berechneMNOut(): void {
     this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
+    this.poolMasternodeOut.dfiPerYear = this.adressesMasternodes.length * 20000 * this.stakingApyMN / 100;
+    this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
+    this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
+    this.poolMasternodeOut.dfiPerDay = this.poolMasternodeOut.dfiPerMonth / 30;
+    this.poolMasternodeOut.dfiPerHour = this.poolMasternodeOut.dfiPerDay / 24;
+    this.poolMasternodeOut.dfiPerMin = this.poolMasternodeOut.dfiPerHour / 60;
   }
+
 
   isLocalStorageNotEmpty(key: string): boolean {
     return localStorage.getItem(key) !== null;

@@ -111,4 +111,6 @@ export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}
 
+export class MasternodeOutcome extends Outcome {}
+
 
