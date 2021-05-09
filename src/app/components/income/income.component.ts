@@ -165,6 +165,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.stakingOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.stakingOut.dfiPerMonth * 100) / 100);
     }
+    if (this.masternodeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.masternodeOut.dfiPerMonth * 100) / 100);
+    }
     if (this.poolBtcOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolBtcOut.dfiPerMonth * 100) / 100);
     }
@@ -207,6 +210,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.stakingOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#ff00af');
     }
+    if (this.masternodeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#ff00af');
+    }
     if (this.poolBtcOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#ff9900');
     }
@@ -236,6 +242,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
     if (this.stakingOut.dfiPerMonth > 0) {
       incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2) + ' DFI');
+    }
+    if (this.masternodeOut.dfiPerMonth > 0) {
+      incomeNumbers.push('Masternode - ' + this.masternodeOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolBtcOut.dfiPerMonth > 0) {
       incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2) + ' DFI');
