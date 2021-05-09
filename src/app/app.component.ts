@@ -204,11 +204,9 @@ export class AppComponent implements OnInit {
 
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       this.isDarkModeOn = true
-      document.documentElement.classList.add('dark')
-      this.toggleDarkMode()
-    } else {
-      document.documentElement.classList.remove('dark')
     }
+    
+    this.toggleDarkMode()
   }
 
   handlePage(pageTag: string): void {
