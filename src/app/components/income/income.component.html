@@ -45,7 +45,7 @@
         >
           Liquidity Mining
         </a>
-        <a
+        <a *ngIf="wallet.dfiInMasternodes > 0"
           (click)="handleTab('MN')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
           [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'MN' }"

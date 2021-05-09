@@ -951,11 +951,11 @@
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dfi | number: '1.3-3'}}</span>
                     </div>
 
-                    <div *ngIf="wallet?.dfiInStaking > 0">DFI in Staking</div>
-                    <div *ngIf="wallet?.dfiInStaking > 0">
+                    <div *ngIf="dfiInStaking > 0">DFI in Staking</div>
+                    <div *ngIf="dfiInStaking > 0">
                       <div
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
-                        {{dfiInStaking | number: '1.3-3'}} / {{stakingApy}} APY %
+                        {{dfiInStaking | number: '1.1-1'}}
                       </div>
                     </div>
 
