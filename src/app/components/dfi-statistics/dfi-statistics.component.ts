@@ -82,7 +82,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
         symbol: this.getPair(),
         interval: '30',
         timezone: 'Europe/Berlin',
-        theme: 'light',
+        theme: localStorage.getItem('theme') || 'light',
         style: '1',
         locale: 'de_DE',
         toolbar_bg: '#f1f3f6',

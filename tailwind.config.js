@@ -18,11 +18,12 @@ module.exports = {
       },
       height: {
         '97%': '97%',
-      }
+      },
     },
   },
   variants: {
     extend: {
+      borderStyle: ['dark'],
       textColor: ['active, focus, hover'],
     },
   },

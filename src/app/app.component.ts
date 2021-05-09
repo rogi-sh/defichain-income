@@ -137,6 +137,7 @@ export class AppComponent implements OnInit {
   dialogOpen = false;
   isInfoOpen = false;
   selectedTab = 'manual';
+  isDarkModeOn = false;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
@@ -201,6 +202,11 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      this.isDarkModeOn = true
+    }
+    
+    this.toggleDarkMode()
   }
 
   handlePage(pageTag: string): void {
@@ -255,6 +261,10 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
+    }
+
+    if (localStorage.getItem('theme') !== null) {
+      this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
     }
   }
 
@@ -1540,5 +1550,15 @@ export class AppComponent implements OnInit {
 
   openInfoMenu(): void {
     this.isInfoOpen = !this.isInfoOpen;
+  }
+
+  toggleDarkMode() : void {
+    if (this.isDarkModeOn) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+    localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light')
   }
 }

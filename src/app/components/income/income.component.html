@@ -1,8 +1,8 @@
 <div>
-  <h1 [ngClass]="{'text-3xl text-pink-500': !showOnlyGraph, 'text-lg': showOnlyGraph}">
+  <h1 [ngClass]="{'text-3xl text-pink-500': !showOnlyGraph, 'text-lg dark:text-gray-100': showOnlyGraph}">
     {{ "income.title" | translate }}
   </h1>
-  <h2 class="text-lg mt-2 mb-4">
+  <h2 class="text-lg mt-2 mb-4 dark:text-gray-100">
     {{ "income.distribution" | translate }}
   </h2>
 
@@ -19,6 +19,7 @@
         [fill]="chartOptions2?.fill"
         [stroke]="chartOptions2?.stroke"
         [responsive]="chartOptions2?.responsive"
+        [theme]="{ mode: getTheme() }"
       ></apx-chart>
     </div>
 
@@ -27,21 +28,21 @@
         <a
           (click)="handleTab('All')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
-          [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'All' }"
+          [ngClass]="selectedTab === 'All' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
           {{ 'income.all' | translate }}
         </a>
         <a
           (click)="handleTab('Staking')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
-          [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'Staking' }"
+          [ngClass]="selectedTab === 'Staking' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
           Staking
         </a>
         <a
           (click)="handleTab('LM')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
-          [ngClass]="{ 'text-pink-500 border-pink-500': selectedTab === 'LM' }"
+          [ngClass]="selectedTab === 'LM' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
           Liquidity Mining
         </a>
@@ -49,7 +50,7 @@
 
       <div *ngIf="selectedTab === 'All'">
 
-        <h3 class="text-lg font-semibold mt-4 mb-1">
+        <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
           {{ "income.share" | translate }}
         </h3>
 
@@ -57,13 +58,13 @@
           <span
             class="grid grid-flow-row auto-rows-max  grid-cols-2 lg:grid-cols-3 lg:gap-3 gap-6 border-b pb-2 col-span-2 mb-2"
           >
-            <span class="text-xl">
+            <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilStakingOfIncome() | number: "1.3-3"}} %
               </span>
               Staking
             </span>
-            <span class="text-xl">
+            <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilLMOfIncome() | number: "1.3-3"}} %
               </span>
@@ -85,7 +86,7 @@
         </div>
         <div *ngIf="dfiInStaking > 0">
 
-          <h3 class="text-lg font-semibold mt-4 mb-1">
+          <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
             {{ "balance" | translate }}
           </h3>
 
@@ -93,7 +94,7 @@
           <span
             class="grid grid-flow-row auto-rows-max grid-cols-1 lg:grid-cols-3 lg:gap-3 gap-6 border-b pb-2 col-span-2"
           >
-            <span class="text-xl">
+            <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
                 {{dfiInStaking | number: "1.2-2"}}
               </span>
@@ -106,7 +107,7 @@
           </span>
           </div>
 
-          <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+          <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2 dark:text-gray-100">
             <div>
               {{ "balance" | translate}} in Fiat
             </div>
@@ -129,7 +130,7 @@
       </div>
 
       <div *ngIf="selectedTab === 'LM'">
-        <h3 class="text-lg font-semibold mt-4 mb-1">
+        <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
           {{ "income.share" | translate }}
         </h3>
 
@@ -137,37 +138,37 @@
           <span
             class="grid grid-flow-row auto-rows-max grid-cols-2 md:grid-cols-3 lg:gap-3 gap-6 border-b pb-2 col-span-2"
           >
-            <span class="text-xl" *ngIf="wallet?.btcInBtcPool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.btcInBtcPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilBTCPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               BTC
             </span>
-            <span class="text-xl" *ngIf="wallet?.ethInEthPool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ethInEthPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilETHPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               ETH
             </span>
-            <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ltcInLtcPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilLTCPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               LTC
             </span>
-            <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdtInUsdtPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilUSDTPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               USDT
             </span>
-            <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.dogeInDogePool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilDogePoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               DOGE
             </span>
-            <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.bchInBchPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilBchPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
@@ -176,48 +177,48 @@
           </span>
         </div>
 
-        <h3 class="text-lg font-semibold mt-4 mb-1">
+        <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
           {{ "balance" | translate }}
         </h3>
 
         <span class="grid grid-flow-row auto-rows-max grid-cols-2 md:grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
-          <span class="text-xl">
+          <span class="text-xl dark:text-gray-100">
             <span class="text-pink-500 font-semibold">
               {{wallet?.btcInBtcPool | number: "1.5-5"}}
             </span>
             BTC
           </span>
-          <span class="text-xl">
+          <span class="text-xl dark:text-gray-100">
             <span class="text-pink-500 font-semibold">
               {{wallet?.ethInEthPool | number: "1.3-3"}}
             </span>
             ETH
           </span>
-          <span class="text-xl" *ngIf="wallet?.usdtInUsdtPool > 0">
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdtInUsdtPool > 0">
             <span class="text-pink-500 font-semibold">
               {{wallet?.usdtInUsdtPool | number: "1.3-3"}}
             </span>
             USDT
           </span>
-          <span class="text-xl" *ngIf="wallet?.ltcInLtcPool > 0">
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ltcInLtcPool > 0">
             <span class="text-pink-500 font-semibold">
               {{wallet?.ltcInLtcPool | number: "1.3-3"}}
             </span>
             LTC
           </span>
-          <span class="text-xl" *ngIf="wallet?.dogeInDogePool > 0">
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.dogeInDogePool > 0">
             <span class="text-pink-500 font-semibold">
               {{wallet?.dogeInDogePool | number: "1.3-3"}}
             </span>
             DOGE
           </span>
-          <span class="text-xl" *ngIf="wallet?.bchInBchPool > 0">
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.bchInBchPool > 0">
             <span class="text-pink-500 font-semibold">
               {{wallet?.bchInBchPool | number: "1.3-3"}}
             </span>
             BCH
           </span>
-          <span class="text-xl">
+          <span class="text-xl dark:text-gray-100">
             <span class="text-pink-500 font-semibold">
               {{getDfiCountInLM | number: "1.3-3"}}
             </span>
@@ -225,7 +226,7 @@
           </span>
         </span>
 
-        <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2">
+        <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2 dark:text-gray-100">
           <span>
             {{ "balance" | translate}} in Fiat
           </span>

@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '5.0.0 - 9.5.2021';
+    this.log.comment = 'darkmode';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '4.10.0 - 8.5.2021';
     this.log.comment = 'address helper added';
 

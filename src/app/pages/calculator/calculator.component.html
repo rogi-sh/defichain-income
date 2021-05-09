@@ -5,21 +5,22 @@
       <a
         (click)="onChangeDetails('Staking')"
         class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2 self-center"
-        [ngClass]="{ 'text-pink-500 border-pink-500': details === 'Staking' }"
+        [ngClass]="details === 'Staking' ? 'text-pink-500 border-pink-500': 'dark:text-gray-100'"
       >
         Staking
       </a>
       <a
         (click)="onChangeDetails('LM')"
         class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2 self-center"
-        [ngClass]="{ 'text-pink-500 border-pink-500': details === 'LM' }"
+        [ngClass]="details === 'LM' ? 'text-pink-500 border-pink-500': 'dark:text-gray-100'"
+
       >
         Liquidity Mining
       </a>
       <a
         (click)="onChangeDetails('Calc')"
         class="text-center cursor-pointer border-b-2 border-transparent uppercase pb-2 self-center"
-        [ngClass]="{ 'text-pink-500 border-pink-500': details === 'Calc' }"
+        [ngClass]="details === 'Calc' ? 'text-pink-500 border-pink-500': 'dark:text-gray-100'"
       >
         {{ "details-calc" | translate }}
       </a>
