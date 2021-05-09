@@ -1,9 +1,9 @@
 <div
-  class="grid grid-flow-col grid-cols-1 lg:grid-rows-1"
-  [ngClass]="{ 'grid-rows-2 lg:grid-cols-2': !hideHoldings }"
->
-  <div class="mb-4 lg:mb-0 order-2 lg:order-1" *ngIf="!hideHoldings">
-    <h2 class="text-lg">{{ 'value.dist' | translate }}</h2>
+  class="flex flex-col lg:flex-row lg:flex-auto"
+  >
+  <!-- [ngClass]="{ 'grid-rows-2 lg:grid-cols""-2': !hideHoldings }" -->
+  <div class="mb-4 lg:mb-0 order-2 lg:order-1 flex-1" *ngIf="!hideHoldings">
+    <h2 class="text-lg dark:text-gray-100">{{ 'value.dist' | translate }}</h2>
     <h2>
       <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
@@ -21,14 +21,15 @@
         [fill]="chartOptions3?.fill"
         [dataLabels]="chartOptions3?.dataLabels"
         [responsive]="chartOptions3?.responsive"
+        [theme]="{ mode: getTheme() }"
       ></apx-chart>
     </div>
   </div>
-  <div class="order-1 lg:order-2">
-    <h2 class="text-lg">{{ 'value.hold' | translate }}</h2>
+  <div class="order-1 lg:order-2 flex-1">
+    <h2 class="text-lg dark:text-gray-100">{{ 'value.hold' | translate }}</h2>
     <h2>
       <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-           <app-price [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
+        <app-price [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
       </span>
     </h2>
     <div class="w-full max-w-lg mx-auto mb-2" *ngIf="chartOptions && chartOptions.series.length > 0">
@@ -41,12 +42,13 @@
         [fill]="chartOptions?.fill"
         [dataLabels]="chartOptions?.dataLabels"
         [responsive]="chartOptions?.responsive"
+        [theme]="{ mode: getTheme() }"
       ></apx-chart>
     </div>
 
     <div>
 
-      <h3 class="text-lg font-semibold mt-4 mb-1">
+      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         {{ "balance" | translate }} DFI
       </h3>
 
@@ -56,11 +58,11 @@
             <div class="text-pink-500 font-semibold inline-block pr-2">
               {{getDfiCount() | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400">
+              <div class="text-xs text-gray-400 dark:text-gray-300">
                 <app-price [fiat]="fiat" [usdPrice]="getDfiValueUsd()"></app-price>
               </div>
             </div>
-            <div class="inline-block h-full align-middle">
+            <div class="inline-block h-full align-middle dark:text-gray-100">
               DFI
             </div>
           </div>
@@ -68,11 +70,11 @@
             <div class="text-pink-500 font-semibold inline-block pr-2">
               {{dfiInStaking | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400">
+              <div class="text-xs text-gray-400 dark:text-gray-300">
                 <app-price [fiat]="fiat" [usdPrice]="getStakingValueUsd()"></app-price>
               </div>
             </div>
-            <div class="inline-block h-full align-middle">
+            <div class="inline-block h-full align-middle dark:text-gray-100">
               Staking
             </div>
           </div>
@@ -81,11 +83,11 @@
             <div class="text-pink-500 font-semibold inline-block pr-2">
               {{getDfiCountLM() | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400">
+              <div class="text-xs text-gray-400 dark:text-gray-300">
                 <app-price [fiat]="fiat" [usdPrice]="getDfiCountLMUsd()"></app-price>
               </div>
             </div>
-            <div class="inline-block h-full align-middle">
+            <div class="inline-block h-full align-middle dark:text-gray-100">
               LM
             </div>
           </div>
@@ -94,11 +96,11 @@
             <div class="text-pink-500 font-semibold inline-block pr-2">
               {{wallet?.dfi | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400">
+              <div class="text-xs text-gray-400 dark:text-gray-300">
                 <app-price [fiat]="fiat" [usdPrice]="getDfiCountWalletUsd()"></app-price>
               </div>
             </div>
-            <div class="inline-block h-full align-middle">
+            <div class="inline-block h-full align-middle dark:text-gray-100">
               Wallet
             </div>
           </div>
@@ -118,61 +120,61 @@
         </span>
       </div>
 
-      <h3 class="text-lg font-semibold mt-4 mb-1">
+      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         {{ "balance" | translate }}
       </h3>
 
-      <div class="grid grid-flow-row auto-rows-max grid-cols-2 sm:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
-        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+      <div class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
+        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             BTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
             {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
+            <div class="text-xs text-gray-400 dark:text-gray-300">
               <app-price [fiat]="fiat" [usdPrice]="getBtcValueUsd()"></app-price>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             ETH
           </div>
           <div class="text-pink-500 font-semibold inline-block">
             {{wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
+            <div class="text-xs text-gray-400 dark:text-gray-300">
               <app-price [fiat]="fiat" [usdPrice]="getEthValueUsd()"></app-price>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             USDT
           </div>
           <div class="text-pink-500 font-semibold inline-block">
             {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
+            <div class="text-xs text-gray-400 dark:text-gray-300">
               <app-price [fiat]="fiat" [usdPrice]="getUsdtValueUsd()"></app-price>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             LTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
             {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
+            <div class="text-xs text-gray-400 dark:text-gray-300">
               <app-price [fiat]="fiat" [usdPrice]="getLtcValueUsd()"></app-price>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             DOGE
           </div>
           <div class="text-pink-500 font-semibold inline-block">
@@ -183,8 +185,8 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg">
-          <div class="inline-block h-full align-middle pr-3">
+        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg dark:text-gray-100">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             BCH
           </div>
           <div class="text-pink-500 font-semibold inline-block">

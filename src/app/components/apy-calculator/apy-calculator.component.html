@@ -1,4 +1,4 @@
-<div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 select-none mt-4">
+<div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 select-none mt-4 dark:text-gray-100">
   <div class="pr-4 lg:border-r-2">
     <p class="mb-4">{{ 'income.calcText' | translate }}</p>
     <div class="flex w-full flex-wrap">
@@ -11,7 +11,7 @@
           DFI
         </label>
         <input
-          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           required
           [(ngModel)]="stakingCalcOut.dfiAmount"
           (ngModelChange)="calcStakingOutCome()"
@@ -29,7 +29,7 @@
           APY
         </label>
         <input
-          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+          class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           required
           [(ngModel)]="stakingCalcOut.apy"
           (ngModelChange)="calcStakingOutCome()"
@@ -49,7 +49,7 @@
 
   <div class="pt-4 lg:pt-0 lg:pl-4">
     <select
-      class="bg-gray-100 px-3 py-2 rounded-md w-40"
+      class="bg-gray-100 px-3 py-2 rounded-md w-40 dark:bg-gray-700 dark:text-gray-100"
       (change)="buildDataForChartCalcStaking($event.target.value)"
     >
       <option value="Min">

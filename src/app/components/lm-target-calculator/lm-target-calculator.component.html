@@ -1,5 +1,5 @@
 <div class="col-sm bg-light margin-col">
-  <h2 class="text-lg my-4">
+  <h2 class="text-lg my-4 dark:text-gray-100">
     {{ 'target-reward-title-lm' | translate }}
   </h2>
 
@@ -7,7 +7,7 @@
     <div class="lg:pr-4 lg:border-r-2">
       <div class="flex">
         <select
-          class="bg-gray-100 h-14 px-3 py-2 rounded-md w-40 mr-2"
+          class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2"
           (change)="onChangeLmCalculationTargetPool($event.target.value)"
         >
           <option selected>BTC</option>
@@ -19,7 +19,7 @@
         </select>
       </div>
 
-      <p class="text-xs mt-1 text-gray-600">
+      <p class="text-xs mt-1 text-gray-600 dark:text-gray-300">
         {{ 'target-reward-sub-lm' | translate }} pool {{poolLmCalculationTargetReturn}}
       </p>
 
@@ -36,9 +36,9 @@
             placeholder="Enter dfi amount"
             [(ngModel)]="aimReturnMinPool"
             (ngModelChange)="onChangeAimReturnMinPool($event)"
-            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           />
-          <label for="aimReturnMinPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+          <label for="aimReturnMinPool" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
             DFI per {{ 'Min' | translate }}
           </label>
         </div>
@@ -55,15 +55,15 @@
             placeholder="Enter dfi amount"
             [(ngModel)]="aimReturnHourPool"
             (ngModelChange)="onChangeAimReturnHourPool($event)"
-            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           />
-          <label for="aimReturnHourPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+          <label for="aimReturnHourPool" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
             DFI per {{ 'hour' | translate }}
           </label>
         </div>
 
         <div
-          class="relative h-14 input-component w-auto inline-block mr-2"
+          class="relative h-14 input-component w-auto inline-block mr-2 dark:text-gray-100"
           [ngClass]="!aimReturnDayPool ? 'empty' : ''"
           title="DFI per {{ 'day' | translate }}"
         >
@@ -74,9 +74,9 @@
             placeholder="Enter dfi amount"
             [(ngModel)]="aimReturnDayPool"
             (ngModelChange)="onChangeAimReturnDayPool($event)"
-            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           />
-          <label for="aimReturnDayPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+          <label for="aimReturnDayPool" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
             DFI per {{ 'day' | translate }}
           </label>
         </div>
@@ -93,16 +93,16 @@
             placeholder="Enter dfi amount"
             [(ngModel)]="aimReturnMonthPool"
             (ngModelChange)="onChangeAimReturnMonthPool($event)"
-            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
           />
-          <label for="aimReturnMonthPool" class="absolute left-2 transition-all px-1 pointer-events-none">
+          <label for="aimReturnMonthPool" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
             DFI per {{ 'month' | translate }}
           </label>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 lg:mt-0 lg:pl-4">
+    <div class="mt-4 lg:mt-0 lg:pl-4 dark:text-gray-100">
       <h1 class="text-2xl font-bold mb-4 w-full text-center">{{ 'income.calc' | translate }}</h1>
       <div class="py-2 grid grid-flow-col grid-cols-4 select-none border-b">
         <div class="text-xl font-semibold">

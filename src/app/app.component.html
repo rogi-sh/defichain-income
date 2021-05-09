@@ -1,22 +1,18 @@
 <div
-  class="h-screen sm:max-h-screen bg-gray-100"
+  class="h-screen sm:max-h-screen bg-gray-100 dark:bg-gray-800"
   xmlns="http://www.w3.org/1999/html"
 >
   <header
     class="h-12 py-1 px-2 flex sm:h-24 sm:py-3 sm:justify-start"
   >
     <a
-      class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500"
+      class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500 dark:text-gray-100"
       (click)="toggleMenu()"
     >
-      <object
-        type="image/svg+xml"
-        data="../assets/icons/menu.svg"
-        class="pointer-events-none"
-      ></object>
+      <app-icon name="menu"></app-icon>
     </a>
 
-    <a (click)="handlePage('dashboard')" class="ml-10 sm:ml-0 w-28">
+    <a (click)="handlePage('dashboard')" class="ml-10 sm:ml-0 w-28 cursor-pointer">
       <img
         src="../assets/img/Defi-income.svg"
         class="h-full mx-auto"
@@ -24,15 +20,14 @@
       />
     </a>
 
-    <div *ngIf="loggedIn" class="hidden sm:inline ml-4 h-full py-3 text-sm">
+    <div *ngIf="loggedIn" class="hidden sm:inline ml-4 h-full py-3 text-sm dark:text-gray-100">
       <strong>{{ 'login3' | translate }}</strong>
       <div>{{loggedInAuth}}</div>
     </div>
 
     <div class="flex absolute right-6 self-center">
       <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
-        <span
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
           DFI</span>
       </div>
@@ -47,13 +42,13 @@
         <app-changelog></app-changelog>
       </div>
 
-      <div class="hidden md:inline-block" *ngIf="apiOnline">
+      <div class="hidden md:inline-block dark:text-gray-100" *ngIf="apiOnline">
         <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
         Online
       </div>
 
       <div
-        class="fixed md:relative left-0 right-0 top-0 bg-red-600 md:bg-transparent z-50 text-white md:text-current text-center md:text-center md:inline-block"
+        class="fixed md:relative left-0 right-0 top-0 bg-red-600 md:bg-transparent z-50 text-white md:text-current text-center md:text-center md:inline-block dark:text-gray-100"
         *ngIf="!apiOnline"
       >
         <div class="hidden md:inline-block rounded bg-red-600 h-2 w-2"></div>
@@ -61,7 +56,7 @@
       </div>
 
       <select
-        class="hidden sm:inline ml-4 bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
+        class="hidden sm:inline ml-4 bg-gray-100 dark:bg-gray-800 dark:text-gray-100 border-none px-2 uppercase text-lg focus:outline-none"
         (change)="useLanguage($event.target.value)"
         [value]="lang"
       >
@@ -71,7 +66,7 @@
       </select>
 
       <select
-        class="hidden sm:inline  bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
+        class="hidden sm:inline bg-gray-100 dark:bg-gray-800 dark:text-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
         (change)="onChangeFiat($event.target.value)"
         [value]="fiat"
         style="text-align-last: center;"
@@ -94,7 +89,7 @@
   </header>
 
   <div
-    class="fixed top-0 h-screen max-h-screen sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100"
+    class="fixed top-0 h-screen max-h-screen sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100 dark:bg-gray-800 dark:text-gray-100"
     [ngClass]="menu ? 'w-full' : ''"
     *ngIf="menu"
   >
@@ -114,11 +109,7 @@
           class="absolute right-5 top-5 z-10 cursor-pointer"
           (click)="toggleMenu()"
         >
-          <object
-            type="image/svg+xml"
-            data="../assets/icons/close.svg"
-            class="pointer-events-none"
-          ></object>
+          <app-icon class="w-5 h-5 block" name="close"></app-icon>
         </div>
       </div>
 
@@ -203,7 +194,7 @@
 
       <div class="absolute mx-8 bottom-16">
         <select
-          class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none"
+          class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none h-10 mr-2 px-2 dark:bg-gray-700"
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
@@ -213,7 +204,7 @@
         </select>
 
         <select
-          class="bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center"
+          class="bg-gray-100 border-none px-2 uppercase text-lg focus:outline-none text-center h-10 dark:bg-gray-700"
           (change)="onChangeFiat($event.target.value)"
           [value]="fiat"
           style="text-align-last: center;"
@@ -235,20 +226,20 @@
     </div>
   </div>
 
-  <div class="flex items-stretch dashboard-height">
+  <div class="flex items-stretch dashboard-height dark:bg-gray-800">
     <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
       <div class="flex flex-col text-center h-full relative">
         <a
           (click)="handlePage('dashboard')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'dashboard' }"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer≈"
           title="Dashboard"
         >
           <app-icon name="home"></app-icon>
         </a>
         <a
           (click)="handlePage('holdings')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'holdings' }"
+          [ngClass]="currentPage === 'holdings' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'holdings.title' | translate }}"
         >
@@ -256,7 +247,7 @@
         </a>
         <a
           (click)="handlePage('income')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'income' }"
+          [ngClass]="currentPage === 'income' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'income.word' | translate }}"
         >
@@ -265,7 +256,7 @@
 
         <a
           (click)="handlePage('dex')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
+          [ngClass]="currentPage === 'dex' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEX"
         >
@@ -274,7 +265,7 @@
 
         <a
           (click)="handlePage('defi')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
+          [ngClass]="currentPage === 'defi' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEFI"
         >
@@ -282,7 +273,7 @@
         </a>
         <a
           (click)="handlePage('calculator')"
-          [ngClass]="{ 'text-pink-500': currentPage === 'calculator' }"
+          [ngClass]="currentPage === 'calculator' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'income.calc' | translate }}"
         >
@@ -294,7 +285,7 @@
         <div class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full">
           <a
             (click)="handlePage('info')"
-            [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
+            [ngClass]="currentPage === 'info' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 my-2 block cursor-pointer text-center"
             title="Info"
           >
@@ -302,7 +293,7 @@
           </a>
           <a
             (click)="handlePage('settings')"
-            [ngClass]="{ 'text-pink-500': currentPage === 'settings' }"
+            [ngClass]="currentPage === 'settings' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 my-2 block cursor-pointer"
             title="{{ 'setting' | translate }}"
           >
@@ -315,19 +306,12 @@
     </div>
     <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
       <div
-        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white mx-auto sm:mb-5">
+        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
         <div class="sm:overflow-auto relative h-full px-3">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'holdings.title' | translate }}</h1>
-
-                <a class="absolute right-3 top-3 flex cursor-pointer hover:text-pink-500"
-                   (click)="handleSettingsDialog()">
-                  <div class="pointer-events-none w-8 h-8">
-                    <app-icon name="settings"></app-icon>
-                  </div>
-                </a>
 
                 <div *ngIf="wallet && poolBtc">
                   <app-value
@@ -342,613 +326,19 @@
                     [wallet]="wallet"
                   ></app-value>
                 </div>
-
-                <div *ngIf="dialogOpen" class="bg-fixed bg-white fixed inset-0 bg-opacity-80">
-                  <div
-                    class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
-                    <div class="absolute right-5 top-5 z-10 cursor-pointer" (click)="handleSettingsDialog()">
-                      <object
-                        type="image/svg+xml"
-                        data="../assets/icons/close.svg"
-                        class="pointer-events-none select-none"
-                      ></object>
-                    </div>
-
-                    <div class="w-full h-full pt-8 relative">
-                      <div class="py-3 h-full">
-                        <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2">
-                          <div class="text-sm">Wallet</div>
-                          <div class="grid grid-flow-row grid-rows-2 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.btc === null || wallet.btc === undefined  ? 'empty' : ''"
-                                title="BTC"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.btc"
-                                  (ngModelChange)="onChangeBtcWallet()"
-                                  type="number"
-                                  id="inputBTCWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputBTCWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  BTC
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.eth === null || wallet.eth === undefined  ? 'empty' : ''"
-                                title="ETH"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.eth"
-                                  (ngModelChange)="onChangeEthWallet()"
-                                  type="number"
-                                  id="inputETHWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputETHWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  ETH
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.ltc === null || wallet.ltc === undefined  ? 'empty' : ''"
-                                title="LTC"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.ltc"
-                                  (ngModelChange)="onChangeLtcWallet()"
-                                  type="number"
-                                  id="inputLTCWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputLTCWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  LTC
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.usdt === null || wallet.usdt === undefined  ? 'empty' : ''"
-                                title="USDT"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.usdt"
-                                  (ngModelChange)="onChangeUsdtWallet()"
-                                  type="number"
-                                  id="inputUsdtWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputUsdtWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  USDT
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.doge === null || wallet.doge === undefined  ? 'empty' : ''"
-                                title="DOGE"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.doge"
-                                  (ngModelChange)="onChangeDogeWallet()"
-                                  type="number"
-                                  id="inputDOGEWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputDOGEWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DOGE
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.bch === null || wallet.bch === undefined  ? 'empty' : ''"
-                                title="BCH"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.bch"
-                                  (ngModelChange)="onChangeBchWallet()"
-                                  type="number"
-                                  id="inputBchWallet-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputBchWallet-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  BCH
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="text-sm">Staking</div>
-                          <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="stakingApy ? 'empty' : ''"
-                                title="Staking APY"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="stakingApy"
-                                  (ngModelChange)="saveInputStaking()"
-                                  type="number"
-                                  id="saveInputStaking-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="saveInputStaking-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  Staking APY
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="dfiInStaking ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="dfiInStaking"
-                                  (ngModelChange)="onChangeDfiStaking()"
-                                  type="number"
-                                  id="dfiInStaking-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="dfiInStaking-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="text-sm">Liquidity Mining</div>
-                          <div class="grid grid-flow-row grid-rows-6 grid-cols-2 md:grid-cols-3 gap-3 pb-4">
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.btcInBtcPool === null || wallet.btcInBtcPool === undefined  ? 'empty' : ''"
-                                title="BTC"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.btcInBtcPool"
-                                  (ngModelChange)="onChangeBtcBtcPool()"
-                                  type="number"
-                                  id="onChangeBtcBtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeBtcBtcPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  BTC
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInBtcPool === null || wallet.dfiInBtcPool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInBtcPool"
-                                  (ngModelChange)="onChangeDfiBtcPool()"
-                                  type="number"
-                                  id="onChangeDfiBtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiBtcPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div class="md:col-start-1">
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.ethInEthPool === null || wallet.ethInEthPool === undefined  ? 'empty' : ''"
-                                title="ETH"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.ethInEthPool"
-                                  (ngModelChange)="onChangeEthEthPool()"
-                                  type="number"
-                                  id="onChangeEthEthPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeEthEthPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  ETH
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInEthPool === null || wallet.dfiInEthPool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInEthPool"
-                                  (ngModelChange)="onChangeDfiEthPool()"
-                                  type="number"
-                                  id="onChangeDfiEthPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiEthPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div class="md:col-start-1">
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.usdtInUsdtPool === null || wallet.usdtInUsdtPool === undefined  ? 'empty' : ''"
-                                title="USDT"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.usdtInUsdtPool"
-                                  (ngModelChange)="onChangeUsdtUsdtPool()"
-                                  type="number"
-                                  id="onChangeUsdtUsdtPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeUsdtUsdtPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  USDT
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInUsdtPool === null || wallet.dfiInUsdtPool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInUsdtPool"
-                                  (ngModelChange)="onChangeDfiUsdtPool()"
-                                  type="number"
-                                  id="onChangeDfiUsdtPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiUsdtPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div class="md:col-start-1">
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.ltcInLtcPool === null || wallet.ltcInLtcPool === undefined  ? 'empty' : ''"
-                                title="LTC"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.ltcInLtcPool"
-                                  (ngModelChange)="onChangeLtcLtcPool()"
-                                  type="number"
-                                  id="onChangeLtcLtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeLtcLtcPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  LTC
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInLtcPool === null || wallet.dfiInLtcPool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInLtcPool"
-                                  (ngModelChange)="onChangeDfiLtcPool()"
-                                  type="number"
-                                  id="onChangeDfiLtcPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiLtcPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div class="md:col-start-1">
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dogeInDogePool === null || wallet.dogeInDogePool === undefined  ? 'empty' : ''"
-                                title="Doge"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dogeInDogePool"
-                                  (ngModelChange)="onChangeDogeDogePool()"
-                                  type="number"
-                                  id="onChangeDogeDogePool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDogeDogePool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  Doge
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInDogePool === null || wallet.dfiInDogePool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInDogePool"
-                                  (ngModelChange)="onChangeDfiDogePool()"
-                                  type="number"
-                                  id="onChangeDfiDogePool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiDogePool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div class="md:col-start-1">
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
-                                title="BCH"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.bchInBchPool"
-                                  (ngModelChange)="onChangeBchBchPool()"
-                                  type="number"
-                                  id="onChangeBchBchPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeBchBchPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  BCH
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="wallet.dfiInBchPool"
-                                  (ngModelChange)="onChangeDfiBchPool()"
-                                  type="number"
-                                  id="onChangeDfiBchPool-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="onChangeDfiBchPool-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div *ngIf="autoLoadData">
-                          <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
-                                title="DFI"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="dfiInStaking"
-                                  (ngModelChange)="onChangeDfiStaking()"
-                                  type="number"
-                                  id="inputDFIStakingAuto-1"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputDFIStakingAuto-1"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  DFI
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <div
-                                class="relative h-14 input-component"
-                                [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
-                                title="Staking APY"
-                              >
-                                <input
-                                  required
-                                  [(ngModel)]="stakingApy"
-                                  (ngModelChange)="saveInputStaking()"
-                                  type="number"
-                                  id="inputApyStaking2"
-                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                >
-                                <label for="inputApyStaking2"
-                                       class="absolute left-2 transition-all px-1 pointer-events-none">
-                                  Staking APY
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <h3 class="text-2xl mb-2 text-pink-500">
-                            {{ 'address.title' | translate }}
-                          </h3>
-                          <div>
-                            <div class="block my-2 relative">
-                              <a
-                                class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
-                                (click)="openInfoMenu()"
-                              >
-                                <span *ngIf="!isInfoOpen">
-                                  {{ 'address.show-information' | translate }}
-                                </span>
-                                <span *ngIf="isInfoOpen">
-                                  {{ 'address.hide-information' | translate }}
-                                </span>
-                              </a>
-                            </div>
-                            <div class="h-full transition duration-300 ease-in-out transform mt-4"
-                                 [ngClass]="{'hidden': !isInfoOpen}">
-                              <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
-                              <br>
-                              <p class="mb-2">
-                                <span
-                                  class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
-                              </p>
-                              <p class="mb-2">
-                                {{ 'address.exc0' | translate }}
-                              </p>
-                              <p class="mb-2">
-                                <a class="text-pink-500 hover:underline"
-                                   (click)="trackHelper()"
-                                   target="_blank"
-                                   href="https://github.com/Shelkovenkov/defichain-income-address-helper/releases">
-                                  https://github.com/Shelkovenkov/defichain-income-address-helper/releases
-                                </a>
-                              </p>
-                              <p class="mb-2">
-                                <span
-                                  class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
-                              </p>
-                              <p class="mb-2">
-                                {{ 'address.exc' | translate }}
-                              </p>
-                              <p class="mb-2">
-                                <span
-                                  class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  listaccounts {{'{}'}} false false true
-                                </span>
-                                <span> ->{{ 'address.exc2' | translate }}</span>
-                              </p>
-
-                              <p class="mb-2">
-                                <span
-                                  class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
-                                <span> ->{{ 'address.exc21' | translate }}</span>
-                              </p>
-
-                              <p>{{ 'address.exc3' | translate }}</p>
-                            </div>
-
-                            <div class="mt-4">
-                              <div class="inline-block w-4/6">
-                                <div
-                                  class="relative h-14 input-component"
-                                  [ngClass]="!adress ? 'empty' : ''"
-                                  title="DFI Address"
-                                >
-                                  <input
-                                    required
-                                    [(ngModel)]="adress"
-                                    id="inputAddress2"
-                                    class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
-                                  >
-                                  <label for="inputAddress2"
-                                         class="absolute left-2 transition-all px-1 pointer-events-none">
-                                    DFI Addresses
-                                  </label>
-                                </div>
-                              </div>
-                              <div class="inline-block w-2/6 pl-2 align-top">
-                                <button
-                                  class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none"
-                                  (click)="addAdress()"
-                                >
-                                  {{ 'address.button-add' | translate }}
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="flex items-center">
-                            <input [(ngModel)]="masternodeAdress" type="checkbox" id="checkbox-large" class="h-6 w-6 text-gray-700 border rounded mr-2">
-                            <label for="checkbox-large">Masternode  {{ 'address.label' | translate }}</label>
-                          </div>
-                          <br>
-                          <h3 class="text-2xl mb-2 text-pink-500">
-                            {{ 'address.titleList' | translate }}
-                          </h3>
-
-                          <div class="flex">
-                            <div class="block mt-2 h-auto w-full">
-                              <div
-                                *ngFor="let a of adresses; index as i;"
-                                class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
-                                [ngClass]="{'bg-gray-100': i % 2 === 1}"
-                              >
-                                <div class="w-3/4 overflow-hidden overflow-ellipsis">
-                                  {{ a }}
-                                </div>
-                                <a
-                                  class="absolute top-0 right-3 hover:text-pink-500 cursor-pointer w-3 h-3"
-                                  (click)="deleteAdress(a)"
-                                >
-                                  <app-icon name="close"></app-icon>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
               >
-                <div class="bg-gray-100 rounded-md p-2">
+                <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-800 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.wallet' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.dfi > 0">DFI</div>
                     <div *ngIf="wallet?.dfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        {{wallet?.dfi | number: '1.3-3'}}
+                      </span>
                     </div>
 
                     <div *ngIf="dfiInStaking > 0">DFI in Staking</div>
@@ -1015,7 +405,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2">
+                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.lp' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
@@ -1092,7 +482,7 @@
               <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
                 <div
                   *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1102,13 +492,11 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span
-                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBtc| number: '1.4-4' }} % </span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC </span>
+                       / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC </div>
 
                   </h3>
                   <br>
@@ -1121,7 +509,7 @@
 
                 <div
                   *ngIf="wallet?.ethInEthPool > 0 || wallet?.dfiInEthPool"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1134,10 +522,9 @@
                     <span
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolEth| number: '1.4-4' }} %</span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </span>
+                       / {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </div>
                   </h3>
                   <br>
                   <app-earning
@@ -1148,7 +535,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1158,14 +545,11 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span
-                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}}
-                      USDT </span>
+                       / {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </div>
                   </h3>
                   <br>
                   <app-earning
@@ -1176,7 +560,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1186,20 +570,18 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span
-                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolLtc| number: '1.4-4' }} %</span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </span>
+                       / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1209,21 +591,18 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span
-                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolDoge| number: '1.4-4' }} %</span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}}
-                      DOGE </span>
+                       / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
-                  class="bg-gray-100 rounded-md p-2"
+                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -1233,13 +612,11 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span
-                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBch| number: '1.4-4' }} %</span>
-                    <span
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
                        {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </span>
+                       / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
@@ -1297,6 +674,8 @@
                 [trackGit]="trackGit.bind(this)"
               ></app-info-page>
             </div>
+
+            <!-- Settings Page -->
             <div *ngSwitchCase="'settings'">
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'setting' | translate }}</h1>
@@ -1316,9 +695,9 @@
                             step="1"
                             min="10"
                             id="sCountdown"
-                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                           >
-                          <label for="sCountdown" class="absolute left-2 transition-all px-1 pointer-events-none">
+                          <label for="sCountdown" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'refresh6' | translate }}
                           </label>
                         </div>
@@ -1336,11 +715,31 @@
 
                     <div class="w-full text-xs text-gray-400 mt-1">
                       {{ 'refresh3' | translate }}
-                      <countdown class="text-pink-400" #cd
-                                 [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
+                      <countdown class="text-pink-400" [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
+                    </div>
+
+
+                    <div class="mt-5">
+                      <div class="dark:text-gray-100">
+                        Darkmode:
+                      </div>
+                      <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input
+                          type="checkbox"
+                          id="darkmode"
+                          [(ngModel)]="isDarkModeOn"
+                          (ngModelChange)="toggleDarkMode()"
+                          [ngClass]="{ 'isChecked': isDarkModeOn }"
+                          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                        />
+                        <label
+                          for="darkmode"
+                          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                        ></label>
+                      </div>
                     </div>
                   </div>
-                  <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3">
+                  <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3 dark:text-gray-100">
                     <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
                     <p *ngIf="!loggedIn" class="my-3">
                       <button
@@ -1352,8 +751,7 @@
                       </button>
                     </p>
 
-                    <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
-                         role="alert">
+                    <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2" role="alert">
                       {{errorBackend}}
                     </div>
                     <div
@@ -1378,10 +776,9 @@
                             [(ngModel)]="loggedInAuthInput"
                             type="text"
                             id="loggedInAuthInput"
-                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                            class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                           >
-                          <label for="loggedInAuthInput"
-                                 class="absolute left-2 transition-all px-1 pointer-events-none">
+                          <label for="loggedInAuthInput" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'login21' | translate }}
                           </label>
                         </div>
@@ -1406,7 +803,7 @@
                       <button
                         (click)="logout()"
                         type="button"
-                        class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-14 text-pink-500 align-top mr-2"
+                        class="border border-pink-500 hover:bg-gray-200 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 h-14 text-pink-500 align-top mr-2 dark:hover:bg-gray-700"
                       >
                         Logout
                       </button>
@@ -1423,7 +820,7 @@
                 </div>
 
 
-                <div class="w-full lg:w-1/2 h-full pt-8 relative">
+                <div class="w-full lg:w-1/2 h-full pt-8 relative dark:text-gray-100">
                   <div class="w-full mb-5">
                     <h3 class="text-2xl mb-2 text-pink-500">
                       {{ 'showInput1' | translate }}
@@ -1476,10 +873,10 @@
                               (ngModelChange)="onChangeBtcWallet()"
                               type="number"
                               id="inputBTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputBTCWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1496,10 +893,10 @@
                               (ngModelChange)="onChangeEthWallet()"
                               type="number"
                               id="inputETHWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputETHWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1516,10 +913,10 @@
                               (ngModelChange)="onChangeLtcWallet()"
                               type="number"
                               id="inputLTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputLTCWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1536,10 +933,10 @@
                               (ngModelChange)="onChangeUsdtWallet()"
                               type="number"
                               id="inputUsdtWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputUsdtWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1556,10 +953,10 @@
                               (ngModelChange)="onChangeDogeWallet()"
                               type="number"
                               id="inputDOGEWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputDOGEWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DOGE
                             </label>
                           </div>
@@ -1576,10 +973,10 @@
                               (ngModelChange)="onChangeBchWallet()"
                               type="number"
                               id="inputBchWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputBchWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1601,10 +998,10 @@
                               step="0.1"
                               type="number"
                               id="saveInputStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="saveInputStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1621,10 +1018,10 @@
                               (ngModelChange)="onChangeDfiStaking()"
                               type="number"
                               id="dfiInStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="dfiInStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1645,10 +1042,10 @@
                               (ngModelChange)="onChangeBtcBtcPool()"
                               type="number"
                               id="onChangeBtcBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeBtcBtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1665,10 +1062,10 @@
                               (ngModelChange)="onChangeDfiBtcPool()"
                               type="number"
                               id="onChangeDfiBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiBtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1685,10 +1082,10 @@
                               (ngModelChange)="onChangeEthEthPool()"
                               type="number"
                               id="onChangeEthEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeEthEthPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1705,10 +1102,10 @@
                               (ngModelChange)="onChangeDfiEthPool()"
                               type="number"
                               id="onChangeDfiEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiEthPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1725,10 +1122,10 @@
                               (ngModelChange)="onChangeUsdtUsdtPool()"
                               type="number"
                               id="onChangeUsdtUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeUsdtUsdtPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1745,10 +1142,10 @@
                               (ngModelChange)="onChangeDfiUsdtPool()"
                               type="number"
                               id="onChangeDfiUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiUsdtPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1765,10 +1162,10 @@
                               (ngModelChange)="onChangeLtcLtcPool()"
                               type="number"
                               id="onChangeLtcLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeLtcLtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1785,10 +1182,10 @@
                               (ngModelChange)="onChangeDfiLtcPool()"
                               type="number"
                               id="onChangeDfiLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiLtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1805,10 +1202,10 @@
                               (ngModelChange)="onChangeDogeDogePool()"
                               type="number"
                               id="onChangeDogeDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDogeDogePool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Doge
                             </label>
                           </div>
@@ -1825,10 +1222,10 @@
                               (ngModelChange)="onChangeDfiDogePool()"
                               type="number"
                               id="onChangeDfiDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiDogePool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1845,10 +1242,10 @@
                               (ngModelChange)="onChangeBchBchPool()"
                               type="number"
                               id="onChangeBchBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeBchBchPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1866,10 +1263,10 @@
                               (ngModelChange)="onChangeDfiBchPool()"
                               type="number"
                               id="onChangeDfiBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiBchPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1894,10 +1291,9 @@
                               (ngModelChange)="onChangeDfiStaking()"
                               type="number"
                               id="inputDFIStakingAuto"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
-                            <label for="inputDFIStakingAuto"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                            <label for="inputDFIStakingAuto" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1914,10 +1310,10 @@
                               (ngModelChange)="saveInputStaking()"
                               type="number"
                               id="inputApyStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputApyStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none">
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1930,7 +1326,7 @@
                       <div>
                         <div class="block my-2 relative">
                           <a
-                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none"
+                            class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none dark:hover:bg-gray-700"
                             (click)="openInfoMenu()"
                           >
                             <span *ngIf="!isInfoOpen">
@@ -1945,8 +1341,7 @@
                              [ngClass]="{'hidden': !isInfoOpen}">
                           <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
                           <p class="mb-2">
-                            <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
+                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
                           </p>
                           <p class="mb-2">
                             {{ 'address.exc0' | translate }}
@@ -1961,8 +1356,7 @@
                           </p>
 
                           <p class="mb-2">
-                            <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
+                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
                           </p>
                           <p class="mb-2">
                             {{ 'address.exc' | translate }}
@@ -1997,10 +1391,10 @@
                                 required
                                 [(ngModel)]="adress"
                                 id="inputAddress"
-                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all border-blue rounded"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                               >
                               <label for="inputAddress"
-                                     class="absolute left-2 transition-all px-1 pointer-events-none">
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DFI Addresses
                               </label>
                             </div>
@@ -2029,8 +1423,8 @@
                         <div class="block mt-2 h-auto w-full">
                           <div
                             *ngFor="let a of allAddresses(); index as i;"
-                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2"
-                            [ngClass]="{'bg-gray-100': i % 2 === 1}"
+                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-600"
+                            [ngClass]="{'bg-gray-100 dark:bg-gray-700': i % 2 === 1}"
                           >
                             <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">
                               <div *ngIf="getAddressBalance(a)?.masternode"

@@ -4,7 +4,7 @@
   <div class="grid grid-flow-row grid-cols-1 auto-rows-max mt-2">
     <div class="overflow-x-auto rounded-md">
       <table class="max-w-full w-full rounded-md">
-        <thead class="bg-gray-200">
+        <thead class="bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b">
           <tr>
             <th class="text-left p-2">{{ 'currency' | translate }}</th>
             <th class="text-right p-2">{{ 'price' | translate }}</th>
@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="bg-gray-100 hover:bg-gray-200">
+          <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">BTC</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceA"></app-price>
@@ -26,7 +26,7 @@
             </td>
           </tr>
 
-          <tr class="hover:bg-gray-200">
+          <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">ETH</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolEth?.priceA"></app-price>
@@ -39,7 +39,7 @@
             </td>
           </tr>
 
-          <tr class="bg-gray-100 hover:bg-gray-200">
+          <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">USDT</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.priceA "></app-price>
@@ -52,7 +52,7 @@
             </td>
           </tr>
 
-          <tr class="hover:bg-gray-200">
+          <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">LTC</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolLtc?.priceA"></app-price>
@@ -65,7 +65,7 @@
             </td>
           </tr>
 
-          <tr class="bg-gray-100 hover:bg-gray-200">
+          <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">DOGE</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolDoge?.priceA "></app-price>
@@ -78,7 +78,7 @@
             </td>
           </tr>
 
-          <tr class="hover:bg-gray-200">
+          <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">BCH</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBch?.priceA"></app-price>
@@ -91,7 +91,7 @@
             </td>
           </tr>
 
-          <tr class="bg-gray-100 hover:bg-gray-200">
+          <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">DFI</td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
@@ -103,7 +103,7 @@
       </table>
     </div>
   </div>
-  <div class="flex my-2 w-full flex-wrap">
+  <div class="flex my-2 w-full flex-wrap dark:text-gray-100">
     <div class="mb-1 w-full sm:w-auto sm:mr-4">
       Staking Cake:
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
@@ -118,14 +118,14 @@
     </div>
 
 
-    <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4">
+    <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
       Masternodes:
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.MNCount}}
       </span>
     </div>
   </div>
-  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2">
+  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
     <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
       <div>
         Rewards DFI/Block:
@@ -148,14 +148,14 @@
     </div>
 
     <div>
-      <div class="mt-2 mr-2">
+      <div class="mt-2 mr-2 dark:text-gray-100">
         <span class="mr-2">TVL:</span>
         <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
         </div>
       </div>
 
-      <div class="mt-2 mb-2">
+      <div class="mt-2 mb-2 dark:text-gray-100">
         <span class="mr-2">Block:</span>
         <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           {{ rewards?.blockHeight }}
