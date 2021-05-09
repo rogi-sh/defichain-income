@@ -1992,8 +1992,8 @@
                         <div class="block mt-2 h-auto w-full">
                           <div
                             *ngFor="let a of adresses; index as i;"
-                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-700"
-                            [ngClass]="{'bg-gray-100': i % 2 === 1}"
+                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-600"
+                            [ngClass]="{'bg-gray-100 dark:bg-gray-700': i % 2 === 1}"
                           >
                             <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">
                               <div class="inline rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ a }}</div>
