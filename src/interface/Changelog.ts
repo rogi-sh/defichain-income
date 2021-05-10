@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.0.0 - 10.5.2021';
+    this.log.comment = 'add masternode addresses, show in value undd income of masternode addresses';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '5.0.1 - 9.5.2021';
     this.log.comment = 'full income tabs on dashboard, input addresses from value view';
 

@@ -89,6 +89,7 @@ export class AppComponent implements OnInit {
   adressesMasternodes = new Array<string>();
   adressBalances = new Array<AddressBalance>();
   addressesDto;
+  addressesMasternodesDto;
   adress = '';
   adressesKey = 'adressesKey';
   adressesMasternodesKey = 'adressesMasternodesKey';
@@ -309,6 +310,7 @@ export class AppComponent implements OnInit {
       mutation: REGISTER,
       variables: {
         addresses: this.adresses,
+        addressesMasternodes: this.adressesMasternodes,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -362,6 +364,7 @@ export class AppComponent implements OnInit {
       variables: {
         key: this.loggedInAuth,
         addresses: this.adresses,
+        addressesMasternodes: this.adressesMasternodes,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -438,6 +441,9 @@ export class AppComponent implements OnInit {
 
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
+
+          this.addressesMasternodesDto = new Array(...result?.data?.userByKey?.addressesMasternodes);
+          this.adressesMasternodes = this.addressesMasternodesDto.slice();
 
           this.loadAddressesAndDexData();
 
@@ -1214,7 +1220,7 @@ export class AppComponent implements OnInit {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
   }
 
   getDfiCountLM(): number {
