@@ -37,6 +37,7 @@
   "address": {
     "label": "dirección",
     "title": "Su dirección dfi",
+    "titleList": "Sus direcciones DFI rastreadas",
     "title2": "Para el seguimiento se necesitan sus direcciones DeFiChain. Para encontrar las direcciones tiene dos opciones.",
     "imp": "Opción 2 - Lectura manual desde la aplicación Defichain",
     "imp2": "Opción 1 - Lectura automática con la ayuda del ayudante de dirección",

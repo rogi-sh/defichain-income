@@ -65,6 +65,7 @@ export class PoolPair {
 
 export class AddressBalance {
   address: string;
+  masternode: boolean;
 
   dfiCoins: number;
   dfiTokens: number;
@@ -109,5 +110,7 @@ export class PoolDogeOut extends Outcome {}
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}
+
+export class MasternodeOutcome extends Outcome {}
 
 

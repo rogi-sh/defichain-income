@@ -2,8 +2,21 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Dex} from '@services/dex.service';
 import {
   AddressBalance,
-  DexInfo, DexPoolPair, Outcome, OutcomeStaking, Pool, PoolAllOut, PoolBchOut, PoolBtcOut, PoolDogeOut, PoolEthOut, PoolLtcOut, PoolPair,
-  PoolUsdtOut, Stats
+  DexInfo,
+  DexPoolPair,
+  MasternodeOutcome,
+  Outcome,
+  OutcomeStaking,
+  Pool,
+  PoolAllOut,
+  PoolBchOut,
+  PoolBtcOut,
+  PoolDogeOut,
+  PoolEthOut,
+  PoolLtcOut,
+  PoolPair,
+  PoolUsdtOut,
+  Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
 import {environment} from '@environments/environment';
@@ -73,10 +86,14 @@ export class AppComponent implements OnInit {
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
+  adressesMasternodes = new Array<string>();
   adressBalances = new Array<AddressBalance>();
   addressesDto;
+  addressesMasternodesDto;
   adress = '';
   adressesKey = 'adressesKey';
+  adressesMasternodesKey = 'adressesMasternodesKey';
+  masternodeAdress = false;
 
   dex: DexInfo;
 
@@ -107,6 +124,7 @@ export class AppComponent implements OnInit {
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
   poolAllOut: PoolAllOut = new PoolAllOut();
+  poolMasternodeOut: MasternodeOutcome = new MasternodeOutcome();
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -155,7 +173,7 @@ export class AppComponent implements OnInit {
 
   updateDescription(description: string): void {
     this.translate.stream(description).subscribe((res: string) => {
-      this.meta.updateTag({ name: 'description', content: res });
+      this.meta.updateTag({name: 'description', content: res});
     });
   }
 
@@ -202,10 +220,10 @@ export class AppComponent implements OnInit {
     }, this.sCountdown * 1000);
 
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      this.isDarkModeOn = true
+      this.isDarkModeOn = true;
     }
-    
-    this.toggleDarkMode()
+
+    this.toggleDarkMode();
   }
 
   handlePage(pageTag: string): void {
@@ -240,6 +258,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.adressesKey) !== null) {
       this.adresses = JSON.parse(localStorage.getItem(this.adressesKey));
+    }
+    if (localStorage.getItem(this.adressesMasternodesKey) !== null) {
+      this.adressesMasternodes = JSON.parse(localStorage.getItem(this.adressesMasternodesKey));
     }
     if (localStorage.getItem(this.sCountdownKey) !== null) {
       this.sCountdown = JSON.parse(localStorage.getItem(this.sCountdownKey));
@@ -289,6 +310,7 @@ export class AppComponent implements OnInit {
       mutation: REGISTER,
       variables: {
         addresses: this.adresses,
+        addressesMasternodes: this.adressesMasternodes,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -342,6 +364,7 @@ export class AppComponent implements OnInit {
       variables: {
         key: this.loggedInAuth,
         addresses: this.adresses,
+        addressesMasternodes: this.adressesMasternodes,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -418,6 +441,9 @@ export class AppComponent implements OnInit {
 
           this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
           this.adresses = this.addressesDto.slice();
+
+          this.addressesMasternodesDto = new Array(...result?.data?.userByKey?.addressesMasternodes);
+          this.adressesMasternodes = this.addressesMasternodesDto.slice();
 
           this.loadAddressesAndDexData();
 
@@ -607,17 +633,17 @@ export class AppComponent implements OnInit {
   }
 
   private getCustomRewards(rewards: string []): number {
-      let reward = 0;
+    let reward = 0;
 
-      if (rewards === undefined || rewards === null) {
-        return reward;
-      }
-
-      rewards.forEach(r => {
-        reward += +r.split('@') [0];
-      });
-
+    if (rewards === undefined || rewards === null) {
       return reward;
+    }
+
+    rewards.forEach(r => {
+      reward += +r.split('@') [0];
+    });
+
+    return reward;
   }
 
   loadDexManual(): void {
@@ -641,22 +667,35 @@ export class AppComponent implements OnInit {
   loadAllAccounts(): void {
     this.adressBalances = new Array<AddressBalance>();
     const requestArray = [];
+
+    // normal addresses
     for (const ad of this.adresses) {
       requestArray.push(this.dexService.getAdressDetail(ad));
       requestArray.push(this.dexService.getAdressBalance(ad));
     }
 
+    // masternode addresses
+    for (const adM of this.adressesMasternodes) {
+      requestArray.push(this.dexService.getAdressBalance(adM));
+    }
+
     forkJoin(requestArray).subscribe(results => {
         results.forEach((value, i) => {
-          if (i % 2 === 0) {
-            const balances = value as [string];
-            balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
+          // masternode address
+          if (i > this.adresses?.length * 2 - 1) {
+            this.addCoinsToWallet(value as Balance, this.getMasternodeAddressForIteration(i), true);
           } else {
-            this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i));
+            if (i % 2 === 0) {
+              const balances = value as [string];
+              balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
+            } else {
+              this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i), false);
+            }
           }
         });
 
         this.loadDex();
+        this.loadStackingMasternode();
 
       },
       err => {
@@ -676,15 +715,15 @@ export class AppComponent implements OnInit {
       cake => {
         this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
         this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
-        },
-        err => {
-          console.error(err);
-          setTimeout(() => {
-              this.loadStackingCake();
-              console.error('Try again ...');
-            },
-            5000);
-        });
+      },
+      err => {
+        console.error(err);
+        setTimeout(() => {
+            this.loadStackingCake();
+            console.error('Try again ...');
+          },
+          5000);
+      });
   }
 
   loadStackingMasternode(): void {
@@ -692,7 +731,8 @@ export class AppComponent implements OnInit {
       .getMasternode().subscribe(
       masternode => {
         this.masternodeCount = masternode.ENABLED;
-        this.berechneMNApr();
+        this.berechneMNOut();
+        this.berechneAllOut();
       },
       err => {
         console.error(err);
@@ -708,14 +748,23 @@ export class AppComponent implements OnInit {
     }
   }
 
-  addCoinsToWallet(balance: Balance, address: string): void {
+  getMasternodeAddressForIteration(i: number): string {
+      return this.adressesMasternodes[i - this.adresses?.length * 2];
+  }
+
+  addCoinsToWallet(balance: Balance, address: string, masternode: boolean): void {
 
     // Balance is in Satoshi
-    this.wallet.dfi += balance.balance * 0.00000001;
+    if (!masternode) {
+      this.wallet.dfi += balance.balance * 0.00000001;
+    } else {
+      this.wallet.dfiInMasternodes += balance.balance * 0.00000001;
+    }
 
     if (!this.getAddressBalance(address)) {
       const aB = new AddressBalance();
       aB.address = address;
+      aB.masternode = masternode;
       this.adressBalances.push(aB);
     }
 
@@ -959,17 +1008,24 @@ export class AppComponent implements OnInit {
   }
 
   berechneAllOut(): void {
-    this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay;
-    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour;
-    this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin;
-    this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
-    this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
-    this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
+    this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay + this.poolMasternodeOut.dfiPerDay;
+    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour + this.poolMasternodeOut.dfiPerHour ;
+    this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin + this.poolMasternodeOut.dfiPerMin;
+    this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek + this.poolMasternodeOut.dfiPerWeek;
+    this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth + this.poolMasternodeOut.dfiPerMonth;
+    this.poolAllOut.dfiPerYear = this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear + this.poolMasternodeOut.dfiPerYear;
   }
 
-  berechneMNApr(): void {
-   this.stakingApyMN =  60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
+  berechneMNOut(): void {
+    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
+    this.poolMasternodeOut.dfiPerYear = this.adressesMasternodes.length * 20000 * this.stakingApyMN / 100;
+    this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
+    this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
+    this.poolMasternodeOut.dfiPerDay = this.poolMasternodeOut.dfiPerMonth / 30;
+    this.poolMasternodeOut.dfiPerHour = this.poolMasternodeOut.dfiPerDay / 24;
+    this.poolMasternodeOut.dfiPerMin = this.poolMasternodeOut.dfiPerHour / 60;
   }
+
 
   isLocalStorageNotEmpty(key: string): boolean {
     return localStorage.getItem(key) !== null;
@@ -1164,7 +1220,7 @@ export class AppComponent implements OnInit {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
   }
 
   getDfiCountLM(): number {
@@ -1250,14 +1306,26 @@ export class AppComponent implements OnInit {
     return this.poolBchOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
 
+  allAddresses(): string [] {
+    return [...this.adressesMasternodes, ...this.adresses];
+  }
+
   addAdress(): void {
 
     let newAddressesAdded = false;
 
     this.adress.split(',').forEach(a => {
-      if (this.adresses.indexOf(a) < 0) {
-        this.adresses.push(a);
-        newAddressesAdded = true;
+
+      if (!this.masternodeAdress) {
+        if (this.adresses.indexOf(a) < 0) {
+          this.adresses.push(a);
+          newAddressesAdded = true;
+        }
+      } else {
+        if (this.adressesMasternodes.indexOf(a) < 0) {
+          this.adressesMasternodes.push(a);
+          newAddressesAdded = true;
+        }
       }
 
     });
@@ -1267,16 +1335,26 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+    localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
     this.adress = '';
+    this.masternodeAdress = false;
     this.clearWallet();
     this.loadAddressesAndDexData();
   }
 
   deleteAdress(adress: string): void {
     const index = this.adresses.indexOf(adress, 0);
+    const indexMn = this.adressesMasternodes.indexOf(adress, 0);
     if (index > -1) {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
+      this.clearWallet();
+      this.loadAddressesAndDexData();
+    }
+
+    if (indexMn > -1) {
+      this.adressesMasternodes.splice(indexMn, 1);
+      localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
       this.clearWallet();
       this.loadAddressesAndDexData();
     }

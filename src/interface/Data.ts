@@ -113,6 +113,8 @@ export class Wallet {
   dfiInStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
 
+  dfiInMasternodes = 0;
+
   btcdfi = 0;
   bchdfi = 0;
   ethdfi = 0;

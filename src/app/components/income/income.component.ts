@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
 import {ChartOptions2, StakingCalc, Wallet} from '@interfaces/Data';
-import {Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
+import {MasternodeOutcome, Outcome, OutcomeStaking, Pool} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-income',
@@ -16,6 +16,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   stakingOut!: OutcomeStaking;
+
+  @Input()
+  masternodeOut!: MasternodeOutcome;
 
   @Input()
   poolOut!: Outcome;
@@ -52,6 +55,12 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   stakingApy!: number;
+
+  @Input()
+  masternodesApr!: number;
+
+  @Input()
+  masternodesCount!: number;
 
   @Input()
   getAnteilBTCPoolAnGesamtLM: number;
@@ -156,6 +165,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.stakingOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.stakingOut.dfiPerMonth * 100) / 100);
     }
+    if (this.masternodeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.masternodeOut.dfiPerMonth * 100) / 100);
+    }
     if (this.poolBtcOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolBtcOut.dfiPerMonth * 100) / 100);
     }
@@ -183,11 +195,22 @@ export class IncomeComponent implements OnInit, OnChanges {
     return this.dfiInStaking * this.poolBtc?.priceB;
   }
 
+  getDfiCountMasternodesUsd(): number {
+    return this.wallet.dfiInMasternodes * this.poolBtc?.priceB;
+  }
+
+  getBalanceMasternode(): number {
+    return this.wallet.dfiInMasternodes - 20000 * this.masternodesCount;
+  }
+
   getColorsIncome(): Array<string> {
 
     const incomeNumbers = new Array<string>();
 
     if (this.stakingOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#ff00af');
+    }
+    if (this.masternodeOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#ff00af');
     }
     if (this.poolBtcOut?.dfiPerMonth > 0) {
@@ -219,6 +242,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
     if (this.stakingOut.dfiPerMonth > 0) {
       incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2) + ' DFI');
+    }
+    if (this.masternodeOut.dfiPerMonth > 0) {
+      incomeNumbers.push('Masternode - ' + this.masternodeOut.dfiPerMonth.toFixed(2) + ' DFI');
     }
     if (this.poolBtcOut.dfiPerMonth > 0) {
       incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2) + ' DFI');

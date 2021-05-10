@@ -24,7 +24,7 @@
     </div>
 
     <div class="order-1 lg:order-2">
-      <div class="grid grid-flow-col grid-cols-3 select-none mb-4">
+      <div class="grid grid-flow-col grid-cols-4 select-none mb-4">
         <a
           (click)="handleTab('All')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
@@ -45,6 +45,13 @@
           [ngClass]="selectedTab === 'LM' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
           Liquidity Mining
+        </a>
+        <a *ngIf="wallet.dfiInMasternodes > 0"
+          (click)="handleTab('MN')"
+          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
+          [ngClass]="selectedTab === 'MN' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
+        >
+          Masternode
         </a>
       </div>
 
@@ -98,7 +105,9 @@
               <span class="text-pink-500 font-semibold">
                 {{dfiInStaking | number: "1.2-2"}}
               </span>
-              DFI -
+              DFI
+            </span>
+            <span class="text-xl dark:text-gray-100">
                <span class="text-pink-500 font-semibold">
                 {{stakingApy | number: "1.1-1"}}
               </span>
@@ -242,6 +251,62 @@
           [pool]="poolBtc"
           [fiat]="fiat"
         ></app-earning>
+      </div>
+
+      <div *ngIf="selectedTab === 'MN'">
+        <div *ngIf="wallet?.dfiInMasternodes < 1">
+          {{ "noStakingAvailable" | translate }}
+        </div>
+        <div *ngIf="wallet?.dfiInMasternodes > 0">
+
+          <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+            {{ "balance" | translate }}
+          </h3>
+
+          <div class="grid grid-flow-col md:gap-2">
+          <span
+            class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-2 gap-6 border-b pb-2">
+            <span class="text-xl dark:text-gray-100">
+              <span class="text-pink-500 font-semibold">
+                {{wallet?.dfiInMasternodes | number: "1.2-2"}}
+              </span>
+              Total
+            </span>
+             <span class="text-xl dark:text-gray-100">
+              <span class="text-pink-500 font-semibold">
+                {{getBalanceMasternode() | number: "1.2-2"}}
+              </span>
+              Balance
+            </span>
+            <span class="text-xl dark:text-gray-100">
+               <span class="text-pink-500 font-semibold">
+                {{masternodesApr | number: "1.1-1"}}
+              </span>
+              % APR
+            </span>
+          </span>
+          </div>
+
+          <h3 class="my-2 grid grid-flow-row grid-cols-3 lg:grid-cols-4 auto-rows-max auto-cols-fr gap-2 dark:text-gray-100">
+            <div>
+              {{ "balance" | translate}} in Fiat
+            </div>
+            <div>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+                <app-price [fiat]="fiat" [usdPrice]="getDfiCountMasternodesUsd()"></app-price>
+              </span>
+            </div>
+          </h3>
+          <br>
+          <div class="mt-2">
+            <app-earning
+              [out]="masternodeOut"
+              [pool]="poolBtc"
+              [fiat]="fiat"
+            >
+            </app-earning>
+          </div>
+        </div>
       </div>
     </div>
   </div>

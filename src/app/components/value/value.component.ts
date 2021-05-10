@@ -71,6 +71,10 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.wallet?.dfi * this.poolBtc?.priceB;
   }
 
+  getMasternodeDfiUsd(): number {
+    return this.wallet?.dfiInMasternodes * this.poolBtc?.priceB;
+  }
+
   getAllValuesUsdPrice(): number {
     return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();
@@ -131,11 +135,15 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking;
+      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
   }
 
   getAnteilStakingOfAllValue(): number {
     return this.getStakingValueUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getAnteilMasternodesOfAllValue(): number {
+    return this.getMasternodeDfiUsd() / this.getAllValuesUsdPrice() * 100;
   }
 
   getStakingValueUsd(): number {
@@ -210,6 +218,9 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
     }
+    if (this.getMasternodeDfiUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getMasternodeDfiUsd() * 100) / 100);
+    }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
       incomeNumbers.push(Math.round(this.getAnteilLMOfBtcPoolValue() * 100) / 100);
     }
@@ -270,6 +281,9 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilStakingOfAllValue() > 0) {
       incomeNumbers.push('Staking ');
     }
+    if (this.getAnteilMasternodesOfAllValue() > 0) {
+      incomeNumbers.push('Masternode ');
+    }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
       incomeNumbers.push('BTC-Pool ');
     }
@@ -300,6 +314,9 @@ export class ValueComponent implements OnInit, OnChanges {
       incomeNumbers.push('#1ab7ea');
     }
     if (this.getAnteilStakingOfAllValue() > 0) {
+      incomeNumbers.push('#ff00af');
+    }
+    if (this.getAnteilMasternodesOfAllValue() > 0) {
       incomeNumbers.push('#ff00af');
     }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
