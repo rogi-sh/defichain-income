@@ -24,7 +24,8 @@
     </div>
 
     <div class="order-1 lg:order-2">
-      <div class="grid grid-flow-col grid-cols-4 select-none mb-4">
+      <div class="grid grid-flow-col select-none mb-4"
+           [ngClass]="wallet.dfiInMasternodes > 0 ? 'grid-cols-4 ':  'grid-cols-3'">
         <a
           (click)="handleTab('All')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"

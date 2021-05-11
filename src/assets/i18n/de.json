@@ -56,7 +56,7 @@
     "hide-information": "Informationen schließen"
   },
   "holdings": {
-    "title": "Deine Kryptobestände",
+    "title": "Dein Vermögen",
     "wallet": "Dein Wallet Bestand",
     "lp": "Dein LP Token Bestand",
     "stake-add": "Trage dein DFI Staking Bestand ein.",
@@ -66,7 +66,7 @@
   "value": {
     "title": "Dein aktueller Wert",
     "cur": "Wähle deine Währung aus",
-    "dist": "Verteilung deines Bestands",
+    "dist": "Verteilung deines Vermögens",
     "hold": "Wert des Bestands"
   },
   "income": {
