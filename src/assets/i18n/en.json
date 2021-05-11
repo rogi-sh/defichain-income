@@ -25,7 +25,7 @@
   "stats": "Statistics",
   "price": "Price",
   "currency": "Currency",
-  "save": "Login ",
+  "save": "Save",
   "login": "Login",
   "register": "Register",
   "loginExplain": "Log in to enter your data only once. For registration you don't have to enter any login data. You get your private auth key and save it. This is your key for login on all other devices. All the data and addresses you have entered so far will be saved. After that you are automatically logged in. With the Auth Key you can access your data directly on other devices. If your data changes, please save it by clicking Update.",

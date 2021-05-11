@@ -25,7 +25,7 @@
   "stats": "Estadísticas",
   "price": "Precio",
   "currency": "Moneda",
-  "save": "grabar",
+  "save": "Guardar",
   "login": "Identificación",
   "register": "Registrar",
   "loginExplain": "Conéctese para introducir sus datos sólo una vez. Para registrarse no necesita introducir ningún dato de identificación. Mangenga su clave de autenticación segura. Ésta es su clave de indentificación en todos los dispositivos. Todos los datos y direcciones que ha introducido se mantendrán guardadas. Así se conectará automáticamente la próxima vez. Con la clave de autenticación podrá acceder a sus datos en otros dispositivos. Si sus datos cambian, por favor pulse Actualizar.",

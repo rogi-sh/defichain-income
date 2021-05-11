@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.0.2 - 11.5.2021';
+    this.log.comment = 'better wording for update button';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.0.1 - 11.5.2021';
     this.log.comment = 'reduce columns when no masternode addresses added in income';
 
