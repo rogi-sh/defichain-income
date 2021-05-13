@@ -1331,6 +1331,7 @@ export class AppComponent implements OnInit {
     });
 
     if (!newAddressesAdded) {
+      this.adress = '';
       return;
     }
 
