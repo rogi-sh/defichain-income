@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.1.0 - 16.5.2021';
+    this.log.comment = 'add russian language';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.0.2 - 11.5.2021';
     this.log.comment = 'better wording for update button';
 
