@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.2.0 - 18.5.2021';
+    this.log.comment = 'add french language, mn calculations errors';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.1.0 - 16.5.2021';
     this.log.comment = 'add russian language';
 
