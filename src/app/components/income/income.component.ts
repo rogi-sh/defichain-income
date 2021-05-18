@@ -103,11 +103,19 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getAnteilStakingOfIncome(): number {
-    return this.stakingOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
+    return this.stakingOut.dfiPerYear / this.getAllIncome() * 100;
   }
 
   getAnteilLMOfIncome(): number {
-    return this.poolOut.dfiPerYear / (this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear) * 100;
+    return this.poolOut.dfiPerYear / this.getAllIncome() * 100;
+  }
+
+  getAnteilMasternodeOfIncome(): number {
+    return this.masternodeOut.dfiPerYear / this.getAllIncome() * 100;
+  }
+
+  getAllIncome(): number {
+    return this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear + this.masternodeOut.dfiPerYear;
   }
 
   getDfiIncomePerMin(): number {

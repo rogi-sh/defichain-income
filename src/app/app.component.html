@@ -351,6 +351,14 @@
                       </div>
                     </div>
 
+                    <div *ngIf="wallet?.dfiInMasternodes > 0">DFI in Masternodes</div>
+                    <div *ngIf="wallet?.dfiInMasternodes > 0">
+                      <div
+                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
+                        {{wallet?.dfiInMasternodes | number: '1.1-1'}}
+                      </div>
+                    </div>
+
                     <div *ngIf="wallet?.btc > 0">
                       BTC
                     </div>

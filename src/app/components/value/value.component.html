@@ -9,6 +9,7 @@
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
+        <span *ngIf="wallet?.dfiInMasternodes">- {{getAnteilMasternodesOfAllValue()| number: '1.2-2'}} % Masternode</span>
       </div>
     </h2>
     <div class="w-full max-w-lg mx-auto" *ngIf="chartOptions3 && chartOptions3.series.length > 0">
