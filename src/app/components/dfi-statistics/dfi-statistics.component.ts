@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {MatomoTracker} from 'ngx-matomo-v9';
 declare const TradingView: any;
 
@@ -8,6 +8,8 @@ declare const TradingView: any;
   styleUrls: ['./dfi-statistics.component.css']
 })
 export class DfiStatisticsComponent implements OnInit, AfterViewInit {
+  @Input()
+  lang: string
 
   coinpaprikaCurrency = 'USD';
   coinpaprikaCurrencyKey = 'coinpaprikaCurrencyKey';
@@ -65,10 +67,6 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private width(): number {
-    return window.innerWidth / 1024 * 600;
-  }
-
   ngAfterViewInit(): void {
     this.generateChart();
   }
@@ -77,14 +75,14 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line:no-unused-expression
     new TradingView.widget(
       {
-        width: this.width(),
-        height: '500',
+        width: '100%',
+        height: '100%',
         symbol: this.getPair(),
         interval: '30',
         timezone: 'Europe/Berlin',
         theme: localStorage.getItem('theme') || 'light',
         style: '1',
-        locale: 'de_DE',
+        locale: this.lang,
         toolbar_bg: '#f1f3f6',
         enable_publishing: false,
         withdateranges: true,

@@ -159,8 +159,8 @@ export class AppComponent implements OnInit {
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta) {
-    translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
-    translate.setDefaultLang('de');
+    translate.addLangs(['en', 'de_DE', 'ru', 'es', 'fr']);
+    translate.setDefaultLang('de_DE');
 
     const browserLang = translate.getBrowserLang();
     this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';

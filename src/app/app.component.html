@@ -60,7 +60,7 @@
         (change)="useLanguage($event.target.value)"
         [value]="lang"
       >
-        <option value="de" [selected]="isLangSet('de')">DE</option>
+        <option value="de_DE" [selected]="isLangSet('de_DE')">DE</option>
         <option value="en" [selected]="isLangSet('en')">EN</option>
         <option value="ru" [selected]="isLangSet('ru')">RU</option>
         <option value="es" [selected]="isLangSet('es')">ES</option>
@@ -200,7 +200,7 @@
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
-          <option value="de" [selected]="isLangSet('de')">DE</option>
+          <option value="de_DE" [selected]="isLangSet('de_DE')">DE</option>
           <option value="en" [selected]="isLangSet('en')">EN</option>
           <option value="es" [selected]="isLangSet('es')">ES</option>
           <option value="ru" [selected]="isLangSet('ru')">RU</option>
@@ -657,8 +657,10 @@
                 </app-dex-statistics>
               </div>
             </div>
-            <div *ngSwitchCase="'defi'">
-              <app-defi-page></app-defi-page>
+            <div *ngSwitchCase="'defi'" class="h-full">
+              <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
+
+              <app-dfi-statistics [lang]="lang"></app-dfi-statistics>
             </div>
             <div *ngSwitchCase="'calculator'">
               <app-calculator-page
