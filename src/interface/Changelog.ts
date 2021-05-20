@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.2.1 - 20.5.2021';
+    this.log.comment = 'fix staking apy, manual use if apy fo cake not working';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.2.0 - 18.5.2021';
     this.log.comment = 'add french language, mn calculations errors';
 
