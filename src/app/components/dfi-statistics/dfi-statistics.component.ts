@@ -45,7 +45,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
         return 'BITTREX:DFIUSD/GBPUSD';
       }
       case 'BTC':  {
-        return 'BITTREX:DFIUSDT/BTCUSDT';
+        return 'BITTREX:DFIBTC';
       }
       case 'USDT':  {
         return 'BITTREX:DFIUSDT';
