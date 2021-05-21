@@ -177,7 +177,7 @@
               [ngClass]="{ 'text-pink-500': currentPage === 'info' }"
               class="hover:text-pink-400 text-center cursor-pointer flex"
             >
-              <app-icon class="bg-pink-500" name="info"></app-icon>
+              <app-icon name="info"></app-icon>
               <div class="inline self-center ml-2 text-xl">Info</div>
             </a>
             <a
@@ -657,7 +657,7 @@
                 </app-dex-statistics>
               </div>
             </div>
-            <div *ngSwitchCase="'defi'" class="h-full">
+            <div *ngSwitchCase="'defi'" class="h-screen max-h-screen sm:h-full">
               <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
 
               <app-dfi-statistics [lang]="lang"></app-dfi-statistics>
