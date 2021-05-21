@@ -28,7 +28,6 @@ import { StakingTargetCalculatorComponent } from '@components/staking-target-cal
 import { ValueComponent } from '@components/value/value.component';
 import { IconComponent } from '@components/icon/icon.component';
 
-import { DefiComponent } from '@pages/defi/defi.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
 import { PriceComponent } from '@components/price/price.component';
@@ -47,7 +46,6 @@ import {DataService} from '@services/data.service';
     StakingTargetCalculatorComponent,
     ValueComponent,
     IconComponent,
-    DefiComponent,
     CalculatorComponent,
     InfoComponent,
     PriceComponent,
