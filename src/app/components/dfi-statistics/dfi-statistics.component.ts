@@ -5,7 +5,6 @@ declare const TradingView: any;
 @Component({
   selector: 'app-dfi-statistics',
   templateUrl: './dfi-statistics.component.html',
-  styleUrls: ['./dfi-statistics.component.css']
 })
 export class DfiStatisticsComponent implements OnInit, AfterViewInit {
   @Input()
@@ -71,6 +70,15 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
     this.generateChart();
   }
 
+  getSelectedLanguage(): string {
+    switch(this.lang) {
+      case 'de':
+        return 'de_DE'
+      default:
+        return this.lang
+    }
+  }
+
   private generateChart(): void {
     // tslint:disable-next-line:no-unused-expression
     new TradingView.widget(
@@ -82,7 +90,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
         timezone: 'Europe/Berlin',
         theme: localStorage.getItem('theme') || 'light',
         style: '1',
-        locale: this.lang,
+        locale: this.getSelectedLanguage(),
         toolbar_bg: '#f1f3f6',
         enable_publishing: false,
         withdateranges: true,

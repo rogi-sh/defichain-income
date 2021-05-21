@@ -60,7 +60,7 @@
         (change)="useLanguage($event.target.value)"
         [value]="lang"
       >
-        <option value="de_DE" [selected]="isLangSet('de_DE')">DE</option>
+        <option value="de" [selected]="isLangSet('de')">DE</option>
         <option value="en" [selected]="isLangSet('en')">EN</option>
         <option value="ru" [selected]="isLangSet('ru')">RU</option>
         <option value="es" [selected]="isLangSet('es')">ES</option>
@@ -200,7 +200,7 @@
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
-          <option value="de_DE" [selected]="isLangSet('de_DE')">DE</option>
+          <option value="de" [selected]="isLangSet('de')">DE</option>
           <option value="en" [selected]="isLangSet('en')">EN</option>
           <option value="es" [selected]="isLangSet('es')">ES</option>
           <option value="ru" [selected]="isLangSet('ru')">RU</option>
