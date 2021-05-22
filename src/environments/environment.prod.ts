@@ -9,7 +9,7 @@ export const environment = {
   stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/staking',
-  defichainnode: 'http://api.mydeficha.in/v1/listmasternodes/?count=True',
+  defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   version: '6.2.4',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
