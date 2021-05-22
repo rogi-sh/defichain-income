@@ -727,9 +727,9 @@ export class AppComponent implements OnInit {
         console.error(err);
         setTimeout(() => {
             this.loadStackingCake();
-            console.error('Try again ...');
+            console.error('Try again loadStackingCake ...');
           },
-          5000);
+          600000);
       });
   }
 
@@ -743,7 +743,11 @@ export class AppComponent implements OnInit {
       },
       err => {
         console.error(err);
-
+        setTimeout(() => {
+            this.loadStackingCake();
+            console.error('Try again loadStackingMasternode ...');
+          },
+          600000);
       });
   }
 

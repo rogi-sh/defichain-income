@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.2.5 - 22.5.2021';
+    this.log.comment = 'reload mn and cake after 10 min if error';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.2.4 - 22.5.2021';
     this.log.comment = 'api call for masternodes info fto new domain, fixed masternode computation';
 
