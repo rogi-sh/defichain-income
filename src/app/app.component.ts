@@ -597,6 +597,7 @@ export class AppComponent implements OnInit {
     this.berechnePoolOutDoge();
 
     this.berechneStakingOut();
+    this.berechneMNOut();
     this.berechnePoolOut();
     this.berechneAllOut();
     this.dataService.setBtcUsd(this.poolBtc.priceA);
@@ -719,6 +720,8 @@ export class AppComponent implements OnInit {
       cake => {
         this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
         this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
+        this.berechneStakingOut();
+        this.berechneAllOut();
       },
       err => {
         console.error(err);

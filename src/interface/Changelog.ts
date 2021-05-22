@@ -14,7 +14,7 @@ export class Changelog {
     this.log = new Log();
 
     this.log.version = '6.2.4 - 22.5.2021';
-    this.log.comment = 'api call for masternodes info fixed';
+    this.log.comment = 'api call for masternodes info fto new domain, fixed masternode computation';
 
     this.logs.push(this.log);
 
