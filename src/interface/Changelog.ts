@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.2.4 - 22.5.2021';
+    this.log.comment = 'api call for masternodes info fixed';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.2.3 - 21.5.2021';
     this.log.comment = 'tradeview widget fixes: language and height';
 
