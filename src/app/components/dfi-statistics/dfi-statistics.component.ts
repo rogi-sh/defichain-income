@@ -93,6 +93,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
         locale: this.getSelectedLanguage(),
         toolbar_bg: '#f1f3f6',
         enable_publishing: false,
+        hide_side_toolbar: false,
         withdateranges: true,
         allow_symbol_change: true,
         container_id: 'tradingview_59a11'
