@@ -32,6 +32,7 @@ import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
 import { PriceComponent } from '@components/price/price.component';
 import {DataService} from '@services/data.service';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {DataService} from '@services/data.service';
     CountdownModule,
     // ngx-translate and the loader module
     HttpClientModule,
+    NgxSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

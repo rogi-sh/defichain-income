@@ -33,6 +33,7 @@ import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
 import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
 import {Meta} from '@angular/platform-browser';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 
 @Component({
@@ -158,7 +159,7 @@ export class AppComponent implements OnInit {
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService, private meta: Meta) {
+              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
@@ -188,6 +189,13 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 15 seconds */
+      this.spinner.hide();
+    }, 15000);
 
     this.updateDescription('meta-data.description');
 
@@ -219,7 +227,8 @@ export class AppComponent implements OnInit {
       this.refresh();
     }, this.sCountdown * 1000);
 
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.getItem('theme') === 'dark'
+      || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       this.isDarkModeOn = true;
     }
 
@@ -603,6 +612,7 @@ export class AppComponent implements OnInit {
     this.dataService.setBtcUsd(this.poolBtc.priceA);
     this.dataService.setEthUsd(this.poolEth.priceA);
     this.dataLoaded = true;
+    this.spinner.hide();
   }
 
   private extractPools(dex: DexInfo): void {
@@ -1637,13 +1647,13 @@ export class AppComponent implements OnInit {
     this.isInfoOpen = !this.isInfoOpen;
   }
 
-  toggleDarkMode() : void {
+  toggleDarkMode(): void {
     if (this.isDarkModeOn) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
 
-    localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light')
+    localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light');
   }
 }

@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.2.7 - 23.5.2021';
+    this.log.comment = 'pacmaaaaaan spinner';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.2.6 - 23.5.2021';
     this.log.comment = 'draw tools for tv widget';
 

@@ -34,6 +34,7 @@
     "ng-apexcharts": "^1.5.9",
     "ngx-countdown": "^11.0.3",
     "ngx-matomo-v9": "^0.3.0",
+    "ngx-spinner": "^11.0.1",
     "postcss": "^8.2.10",
     "rxjs": "~6.6.7",
     "tslib": "^2.2.0",
