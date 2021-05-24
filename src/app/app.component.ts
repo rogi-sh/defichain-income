@@ -290,6 +290,7 @@ export class AppComponent implements OnInit {
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
+      this.stakingApyCake = this.stakingApy;
     }
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
