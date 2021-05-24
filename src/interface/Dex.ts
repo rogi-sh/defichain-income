@@ -114,3 +114,19 @@ export class PoolAllOut extends Outcome {}
 export class MasternodeOutcome extends Outcome {}
 
 
+export class Correlation {
+  btcPool: number;
+  ethPool: number;
+  ltcPool: number;
+  dogePool: number;
+  bchPool: number;
+  usdtPool: number;
+
+  btcPricesDex: [number];
+  ethPricesDex: [number];
+  ltcPricesDex: [number];
+  dogePricesDex: [number];
+  bchPricesDex: [number];
+  usdtPricesDex: [number];
+  dfiPricesDex: [number];
+}

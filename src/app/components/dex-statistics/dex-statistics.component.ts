@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DexInfo, Pool, Stats} from '@interfaces/Dex';
+import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
+import {Apollo} from 'apollo-angular';
+import {CORRELATION} from '@interfaces/Graphql';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -42,10 +44,28 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   rewards: Stats;
 
-  constructor() { }
+  corr: Correlation;
+
+  constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
-
+    this.loadCor();
   }
+
+  loadCor(): void {
+      this.apollo.query({
+        query: CORRELATION
+      }).subscribe((result: any) => {
+        if (result?.data?.getCorrelation) {
+          this.corr = result?.data?.getCorrelation;
+          console.log(JSON.stringify(this.corr));
+        } else {
+          console.log('No Date for Corr');
+        }
+      }, (error) => {
+        console.log(error);
+      });
+    }
+
 
 }

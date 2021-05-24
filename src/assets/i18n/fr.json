@@ -25,6 +25,7 @@
   "stats": "Statistiques",
   "price": "Prix",
   "currency": "Devise",
+  "correlation": "Corrélation dernière 60d/heure",
   "save": "Sauvegarder",
   "login": "Connexion",
   "register": "Enregistrement",

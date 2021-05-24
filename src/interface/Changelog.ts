@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.3.0 - 25.5.2021';
+    this.log.comment = 'correlation of pools in dex view';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.2.7 - 23.5.2021';
     this.log.comment = 'pacmaaaaaan spinner';
 

@@ -9,6 +9,7 @@
             <th class="text-left p-2">{{ 'currency' | translate }}</th>
             <th class="text-right p-2">{{ 'price' | translate }}</th>
             <th class="text-right p-2">{{ 'Pool TVL' | translate }}</th>
+            <th class="text-right p-2">Pool {{ 'correlation' | translate}}</th>
             <th class="text-right p-2">{{ 'APR' | translate }}</th>
           </tr>
         </thead>
@@ -20,6 +21,11 @@
             </td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked "></app-price>
+            </td>
+            <td class="text-right p-2">
+              {{
+              corr?.btcPool
+              }}
             </td>
             <td class="text-right p-2">
               {{poolBtc?.apy | number: '1.2-2' }}%
@@ -35,6 +41,11 @@
               <app-price [fiat]="fiat" [usdPrice]="poolEth?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
+              {{
+              corr?.ethPool
+              }}
+            </td>
+            <td class="text-right p-2">
               {{poolEth?.apy | number: '1.2-2' }}%
             </td>
           </tr>
@@ -46,6 +57,11 @@
             </td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.totalStaked "></app-price>
+            </td>
+            <td class="text-right p-2">
+              {{
+              corr?.usdtPool
+              }}
             </td>
             <td class="text-right p-2">
               {{poolUsdt?.apy | number: '1.2-2' }}%
@@ -61,6 +77,11 @@
               <app-price [fiat]="fiat" [usdPrice]="poolLtc?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
+              {{
+              corr?.ltcPool
+              }}
+            </td>
+            <td class="text-right p-2">
               {{poolLtc?.apy | number: '1.2-2' }}%
             </td>
           </tr>
@@ -72,6 +93,11 @@
             </td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolDoge?.totalStaked"></app-price>
+            </td>
+            <td class="text-right p-2">
+              {{
+              corr?.dogePool
+              }}
             </td>
             <td class="text-right p-2">
               {{poolDoge?.apy | number: '1.2-2' }}%
@@ -87,6 +113,11 @@
               <app-price [fiat]="fiat" [usdPrice]="poolBch?.totalStaked"></app-price>
             </td>
             <td class="text-right p-2">
+              {{
+              corr?.bchPool
+              }}
+            </td>
+            <td class="text-right p-2">
               {{poolBch?.apy | number: '1.2-2' }}%
             </td>
           </tr>
@@ -96,6 +127,7 @@
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
             </td>
+            <td class="text-right p-2"></td>
             <td class="text-right p-2"></td>
             <td class="text-right p-2"></td>
           </tr>

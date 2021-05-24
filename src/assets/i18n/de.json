@@ -26,6 +26,7 @@
   "stats": "Statistiken",
   "price": "Preis",
   "currency": "Währung",
+  "correlation": "Korrelation letzte 60T/stündlich",
   "login": "Login",
   "register": "Registrieren",
   "save": "Speichern",
