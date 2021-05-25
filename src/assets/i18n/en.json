@@ -25,7 +25,7 @@
   "stats": "Statistics",
   "price": "Price",
   "currency": "Currency",
-  "correlation": "Correlation last 60d/hourly",
+  "correlation": "Correlation",
   "save": "Save",
   "login": "Login",
   "register": "Register",
