@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.3.2 - 25.5.2021';
+    this.log.comment = 'lib updates';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.3.1 - 25.5.2021';
     this.log.comment = 'correlation info and link';
 
