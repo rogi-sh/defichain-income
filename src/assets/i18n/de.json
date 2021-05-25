@@ -27,6 +27,7 @@
   "price": "Preis",
   "currency": "Währung",
   "correlation": "Korrelation",
+  "since": "seit dem ",
   "login": "Login",
   "register": "Registrieren",
   "save": "Speichern",

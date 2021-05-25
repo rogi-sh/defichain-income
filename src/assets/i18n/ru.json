@@ -27,6 +27,7 @@
   "price": "Цена",
   "currency": "Валюта",
   "correlation": "Корреляция",
+  "since": "после",
   "login": "Вход",
   "register": "Регестрация",
   "save": "Сохранить",
