@@ -1,5 +1,5 @@
 variables:
-  CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_BUILD_REF_NAME}_${CI_BUILD_REF}
+  CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_SLUG}_${CI_BUILD_REF}
   CONTAINER_IMAGE_LATEST: ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest
 
 image: docker:latest
@@ -39,10 +39,10 @@ dockerize:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - echo $BUILD_CODE_IMAGE
-    - docker build -t ${CONTAINER_IMAGE} .
-    - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE_LATEST}
-    - docker push ${CONTAINER_IMAGE}
-    - docker push ${CONTAINER_IMAGE_LATEST}
+    - docker build -t $CONTAINER_IMAGE -t $CONTAINER_IMAGE_LATEST .
+    - docker tag $CONTAINER_IMAGE $CONTAINER_IMAGE_LATEST
+    - docker push $CONTAINER_IMAGE
+    - docker push $CONTAINER_IMAGE_LATEST
   only:
     - tags
 
