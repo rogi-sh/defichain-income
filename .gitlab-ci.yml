@@ -36,7 +36,7 @@ dockerize:
   services:
     - docker:dind
   before_script:
-    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - echo $BUILD_CODE_IMAGE
     - docker build -t ${CONTAINER_IMAGE} .
