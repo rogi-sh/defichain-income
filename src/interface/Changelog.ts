@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '6.3.3 - 26.5.2021';
+    this.log.comment = 'icons switch between dex and tradeview charts';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '6.3.2 - 25.5.2021';
     this.log.comment = 'lib updates';
 

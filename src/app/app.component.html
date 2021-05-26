@@ -149,7 +149,7 @@
             [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
           >
-            <app-icon name="line-chart"></app-icon>
+            <app-icon name="bar-chart"></app-icon>
             <div class="inline self-center ml-2 text-xl">DEX</div>
           </a>
 
@@ -158,7 +158,7 @@
             [ngClass]="{ 'text-pink-500': currentPage === 'defi' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
           >
-            <app-icon name="bar-chart"></app-icon>
+            <app-icon name="line-chart"></app-icon>
             <div class="inline self-center ml-2 text-xl">DFI</div>
           </a>
 
@@ -264,7 +264,7 @@
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEX"
         >
-          <app-icon name="line-chart"></app-icon>
+          <app-icon name="bar-chart"></app-icon>
         </a>
 
         <a
@@ -273,7 +273,7 @@
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="DEFI"
         >
-          <app-icon name="bar-chart"></app-icon>
+          <app-icon name="line-chart"></app-icon>
         </a>
         <a
           (click)="handlePage('calculator')"
