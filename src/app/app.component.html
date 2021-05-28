@@ -145,6 +145,15 @@
           </a>
 
           <a
+            (click)="handlePage('forecast')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'forecast' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="income"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
+          </a>
+
+          <a
             (click)="handlePage('dex')"
             [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
@@ -252,6 +261,15 @@
         <a
           (click)="handlePage('income')"
           [ngClass]="currentPage === 'income' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'income.word' | translate }}"
+        >
+          <app-icon name="income"></app-icon>
+        </a>
+
+        <a
+          (click)="handlePage('forecast')"
+          [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="{{ 'income.word' | translate }}"
         >
@@ -644,6 +662,16 @@
                   <br>
                   <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
                 </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'forecast'">
+              <h1 class="text-3xl mb-4 text-pink-500">Forecast</h1>
+              <div class="overflow-x-auto sm:overflow-visible max-w-full">
+                <app-forecast *ngIf="wallet && poolBtc && poolAllOut"
+                              [poolOut]="poolAllOut"
+                              [stakingOut]="stakingOut"
+                              [poolMasternodeOut]="poolMasternodeOut"
+                              [lmOut]="poolOut" [bs]="blocktimeInS"> </app-forecast>
               </div>
             </div>
             <div *ngSwitchCase="'dex'">

@@ -5,7 +5,10 @@ import {
   ApexLegend,
   ApexNonAxisChartSeries,
   ApexResponsive,
-  ApexStroke, ApexPlotOptions
+  ApexStroke, ApexPlotOptions,
+  ApexAxisChartSeries,
+  ApexXAxis,
+  ApexTooltip,
 } from 'ng-apexcharts';
 import {Outcome} from './Dex';
 
@@ -59,6 +62,15 @@ export type ChartOptions4 = {
   legend: ApexLegend;
   plotOptions: ApexPlotOptions;
   responsive: ApexResponsive | ApexResponsive[];
+};
+
+export type ChartOptions5 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
 };
 
 export interface WalletDto {

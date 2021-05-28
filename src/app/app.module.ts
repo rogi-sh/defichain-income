@@ -33,6 +33,7 @@ import { InfoComponent } from '@pages/info/info.component';
 import { PriceComponent } from '@components/price/price.component';
 import {DataService} from '@services/data.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { ForecastComponent } from './pages/forecast/forecast.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     CalculatorComponent,
     InfoComponent,
     PriceComponent,
+    ForecastComponent,
   ],
   imports: [
     BrowserModule,
