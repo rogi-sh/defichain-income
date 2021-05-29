@@ -359,7 +359,6 @@
                   ></app-value>
                 </div>
               </div>
-
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
               >
@@ -664,12 +663,16 @@
                 </div>
               </div>
             </div>
-            <div *ngSwitchCase="'forecast'" class="h-screen max-h-screen sm:h-full">
-                <app-forecast *ngIf="wallet && poolBtc && poolAllOut"
-                              [poolOut]="poolAllOut"
-                              [stakingOut]="stakingOut"
-                              [poolMasternodeOut]="poolMasternodeOut"
-                              [lmOut]="poolOut" [bs]="blocktimeInS"> </app-forecast>
+            <div *ngSwitchCase="'forecast'">
+              <app-forecast 
+                *ngIf="wallet && poolBtc && poolAllOut"
+                [poolOut]="poolAllOut"
+                [stakingOut]="stakingOut"
+                [poolMasternodeOut]="poolMasternodeOut"
+                [lmOut]="poolOut"
+                [bs]="blocktimeInS"
+              >
+              </app-forecast>
             </div>
             <div *ngSwitchCase="'dex'">
               <h1 class="text-3xl mb-4 text-pink-500">DEX</h1>
