@@ -15,6 +15,8 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   reducePercent = (100 - 1.658) / 100;
 
+  timeHorizonCycles = 24;
+
   @Input()
   poolOut!: Outcome;
 
@@ -53,13 +55,17 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   computeMasternodesReduce(): void {
 
-    console.log('Forecast start ' + JSON.stringify(this.poolOut));
-
     if (this.poolOut === undefined || this.poolOut.dfiPerDay === undefined) {
       return;
     }
 
-    for (let i = 0; i <= 360; i++) {
+    // clean
+    this.poolOuts =  new Array<PoolAllOut>();
+    this.poolLmOuts =  new Array<PoolAllOut>();
+    this.poolStakingOuts =  new Array<PoolAllOut>();
+    this.poolMnOuts =  new Array<PoolAllOut>();
+
+    for (let i = 0; i <= this.timeHorizonCycles; i++) {
 
       let poolAllOut = new PoolAllOut();
       let poolStakingOut = new PoolAllOut();
@@ -111,8 +117,8 @@ export class ForecastComponent implements OnInit, OnChanges {
         }
       ],
       chart: {
-        height: 350,
-        type: 'area'
+        type: 'area',
+        height: 600
       },
       dataLabels: {
         enabled: false
@@ -128,36 +134,44 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   }
 
+  onChangeLmCalculatIncome(value: number) {
+    this.timeHorizonCycles = value * 2;
+    this.computeMasternodesReduce();
+    this.buildChart();
+  }
+
   getStakingData(): Array<number> {
     let result = new Array<number>();
-    this.poolStakingOuts.forEach(p => result.push(p.dfiPerMonth));
+    this.poolStakingOuts.forEach(p => result.push(Math.round(p.dfiPerMonth * 100) / 100));
     return result;
   }
 
   getLMData(): Array<number> {
     let result = new Array<number>();
-    this.poolLmOuts.forEach(p => result.push(p.dfiPerMonth));
+    this.poolLmOuts.forEach(p => result.push(Math.round(p.dfiPerMonth * 100) / 100));
     return result;
   }
 
   getMNData(): Array<number> {
     let result = new Array<number>();
-    this.poolMnOuts.forEach(p => result.push(p.dfiPerMonth));
+    this.poolMnOuts.forEach(p => result.push(Math.round(p.dfiPerMonth * 100) / 100));
     return result;
   }
 
   getAllData(): Array<number> {
     let result = new Array<number>();
-    this.poolOuts.forEach(p => result.push(p.dfiPerMonth));
+    this.poolOuts.forEach(p => result.push(Math.round(p.dfiPerMonth * 100) / 100));
     return result;
   }
 
   getCat(): Array<string> {
     let result = new Array<string>();
-    let data = new Date(2021, 6, 3);
-    for (let i = 0; i <= 360; i++) {
-      result.push(i + ' : ' + data);
-      data = new Date(data.getTime() + this.blocksPerCycle * this.bs * 1000);
+    const options = {year: 'numeric', month: 'long', day: 'numeric' };
+    let date = new Date(2021, 5, 3) > new Date() ? new Date(2021, 5, 3) : new Date();
+
+    for (let i = 0; i <= this.timeHorizonCycles; i++) {
+      result.push(i + ' : ' + date.toLocaleDateString('de-DE', options));
+      date = new Date(date.getTime() + this.blocksPerCycle * this.bs * 1000);
     }
     return result;
   }
@@ -178,5 +192,8 @@ export class ForecastComponent implements OnInit, OnChanges {
     poolAllOut.dfiPerYear = inputPool[i - 1].dfiPerYear * this.reducePercent;
   }
 
+  getTheme(): string {
+    return localStorage.getItem('theme');
+  }
 
 }

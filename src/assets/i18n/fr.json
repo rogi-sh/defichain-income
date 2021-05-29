@@ -80,6 +80,11 @@
     "calcVis": "Calculatrice Visuelle Comparative",
     "calcText": "Calculer quel rendement vous pouvez obtenir, ex : dans le freezer de Cake. Le résultat est automatiquement comparé et visualisé avec le rendement APY actuel et avec le rendement APY de d'un masternode."
   },
+  "forecast": {
+    "title": "Forecast",
+    "subtitle": "Votre revenu mensuel prévisionnel en DFI pour les prochains mois",
+    "drop": "Choisissez votre période de temps en mois"
+  },
   "hour": "Heure",
   "day": "Jour",
   "week": "Semaine",

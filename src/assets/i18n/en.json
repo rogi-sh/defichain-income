@@ -80,6 +80,11 @@
     "calcVis": "Calculator Visualization Comparison",
     "calcText": "Calculate how much return you can get e.g. in the freezer at Cake. The result is automatically compared and visualized with the current APY and with Staking Apy of a masternode."
   },
+  "forecast": {
+    "title": "Forecast",
+    "subtitle": "Your forecast monthly income in DFI for the next few months",
+    "drop": "Choose your time period in months"
+  },
   "hour": "Hour",
   "day": "Day",
   "week": "Week",

@@ -315,6 +315,6 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getTheme(): string {
-    return localStorage.getItem('theme')
+    return localStorage.getItem('theme');
   }
 }

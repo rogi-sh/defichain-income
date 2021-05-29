@@ -81,6 +81,11 @@
     "calcVis": "Rechner Visualisierung im Vergleich",
     "calcText": "Berechnne wie viel Rendite du bekommen kannst z.B. im Freezer bei Cake. Das Ergebnis wird automatisch mit dem aktuellen APY und mit Staking Apy einer Masternode verglichen und visualisiert."
   },
+  "forecast": {
+    "title": "Prognose",
+    "subtitle": "Dein prognostiziertes monatliches Einkommen in DFI für die nächsten Monate.",
+    "drop": "Wähle deinen Zeitraum in Monaten"
+  },
   "hour": "Stunde",
   "day": "Tag",
   "week": "Woche",

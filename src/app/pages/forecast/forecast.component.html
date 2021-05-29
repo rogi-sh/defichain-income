@@ -1,11 +1,35 @@
-<p>forecast works!</p>
+<h1 class="text-3xl text-pink-500">
+  {{ "forecast.title" | translate }}
+</h1>
+<h2 class="text-lg mt-2 mb-4 dark:text-gray-100">
+  {{ "forecast.subtitle" | translate }}
+
+</h2>
+<h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">{{ "forecast.drop" | translate }}</h3>
+<div class="flex">
+  <select
+    class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2"
+    (change)="onChangeLmCalculatIncome($event.target.value)"
+  >
+    <option>3</option>
+    <option>6</option>
+    <option selected>12</option>
+    <option>18</option>
+    <option>24</option>
+    <option>36</option>
+    Monaten
+  </select>
+</div>
+
+
 <div *ngIf="chartOptions && chartOptions.series.length > 0">
   <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [stroke]="chartOptions.stroke"
-    [tooltip]="chartOptions.tooltip"
-    [dataLabels]="chartOptions.dataLabels"
+    [series]="chartOptions?.series"
+    [chart]="chartOptions?.chart"
+    [xaxis]="chartOptions?.xaxis"
+    [stroke]="chartOptions?.stroke"
+    [tooltip]="chartOptions?.tooltip"
+    [dataLabels]="chartOptions?.dataLabels"
+    [theme]="{ mode: getTheme() }"
   ></apx-chart>
 </div>

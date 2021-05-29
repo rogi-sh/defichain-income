@@ -79,6 +79,11 @@
     "calcVis": "Calculadora Visualización Comparación",
     "calcText": "Calcule cuánto retorno puede obtener, por ejemplo, en el congelador (freezer) en CakeDefi. El resultado se compara automáticamente con la TAE actual y con los depósitos en un masternode."
   },
+  "forecast": {
+    "title": "Previsión",
+    "subtitle": "Sus ingresos mensuales previstos en DFI para los próximos meses",
+    "drop": "Elige tu periodo de tiempo en meses"
+  },
   "hour": "Hora",
   "day": "Día",
   "week": "Semana",
