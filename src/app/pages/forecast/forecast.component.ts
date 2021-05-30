@@ -13,7 +13,7 @@ import {
   PoolAllOut,
 } from '@interfaces/Dex';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartOptions5 } from '@interfaces/Data';
+import {ChartOptions5, Series} from '@interfaces/Data';
 
 @Component({
   selector: 'app-forecast',
@@ -101,24 +101,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   buildChart(): void {
     this.chartOptions = {
-      series: [
-        {
-          name: 'Staking',
-          data: this.getStakingData(),
-        },
-        {
-          name: 'LM',
-          data: this.getLMData(),
-        },
-        {
-          name: 'Masternode',
-          data: this.getMNData(),
-        },
-        {
-          name: 'All',
-          data: this.getAllData(),
-        },
-      ],
+      series: this.getSeries(),
       chart: {
         type: 'area',
         height: 600,
@@ -137,7 +120,37 @@ export class ForecastComponent implements OnInit, OnChanges {
     };
   }
 
-  onChangeLmCalculatIncome(value: number) {
+  getSeries(): Array<Series> {
+    const series = new Array<Series>();
+    if (this.stakingOut?.dfiPerMonth > 0) {
+      const staking = new Series();
+      staking.name = 'Staking';
+      staking.data = this.getStakingData();
+      series.push(staking);
+    }
+    if (this.lmOut?.dfiPerMonth > 0) {
+      const lm = new Series();
+      lm.name = 'LM';
+      lm.data = this.getLMData();
+      series.push(lm);
+    }
+    if (this.poolMasternodeOut?.dfiPerMonth > 0) {
+      const mn = new Series();
+      mn.name = 'Masternode';
+      mn.data = this.getMNData();
+      series.push(mn);
+    }
+
+    const all = new Series();
+    all.name = 'All';
+    all.data = this.getAllData();
+    series.push(all);
+
+    return series;
+
+  }
+
+  onChangeLmCalculatIncome(value: number): void {
     this.timeHorizonCycles = value * 2;
     this.computeMasternodesReduce();
     this.buildChart();

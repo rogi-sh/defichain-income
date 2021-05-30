@@ -73,6 +73,11 @@ export type ChartOptions5 = {
   dataLabels: ApexDataLabels;
 };
 
+export class Series {
+  data: Array<number>;
+  name: string;
+};
+
 export interface WalletDto {
   dfi: number;
 
