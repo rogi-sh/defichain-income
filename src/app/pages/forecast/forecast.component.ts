@@ -104,7 +104,6 @@ export class ForecastComponent implements OnInit, OnChanges {
       series: this.getSeries(),
       chart: {
         type: 'area',
-        height: 600,
         background: 'transparent',
       },
       dataLabels: {

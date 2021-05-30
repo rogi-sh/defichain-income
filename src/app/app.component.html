@@ -663,7 +663,7 @@
                 </div>
               </div>
             </div>
-            <div *ngSwitchCase="'forecast'">
+            <div *ngSwitchCase="'forecast'" class="h-screen max-h-screen sm:h-full">
               <app-forecast 
                 *ngIf="wallet && poolBtc && poolAllOut"
                 [poolOut]="poolAllOut"
@@ -695,7 +695,7 @@
                 </app-dex-statistics>
               </div>
             </div>
-            <div *ngSwitchCase="'defi'">
+            <div *ngSwitchCase="'defi'" class="h-screen max-h-screen sm:h-full">
               <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
 
               <app-dfi-statistics [lang]="lang"></app-dfi-statistics>
