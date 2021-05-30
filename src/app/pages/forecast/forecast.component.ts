@@ -105,6 +105,7 @@ export class ForecastComponent implements OnInit, OnChanges {
       chart: {
         type: 'area',
         background: 'transparent',
+        height: 600,
       },
       dataLabels: {
         enabled: false,
@@ -115,7 +116,7 @@ export class ForecastComponent implements OnInit, OnChanges {
       xaxis: {
         type: 'category',
         categories: this.getCat(),
-      },
+      }
     };
   }
 
