@@ -145,6 +145,15 @@
           </a>
 
           <a
+            (click)="handlePage('forecast')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'forecast' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="world"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
+          </a>
+
+          <a
             (click)="handlePage('dex')"
             [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
@@ -259,6 +268,15 @@
         </a>
 
         <a
+          (click)="handlePage('forecast')"
+          [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'income.word' | translate }}"
+        >
+          <app-icon name="world"></app-icon>
+        </a>
+
+        <a
           (click)="handlePage('dex')"
           [ngClass]="currentPage === 'dex' ? 'text-pink-500' : 'dark:text-gray-100'"
           class="hover:text-pink-400 py-3 text-center cursor-pointer"
@@ -308,7 +326,7 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 items-center m-2 sm:mt-0 sm:pl-0 sm:pr-4">
+    <div class="flex-1 items-center sm:mt-0 sm:pl-0 sm:pr-4">
 
       <ngx-spinner
         bdColor="rgba(51,51,51,0.8)"
@@ -321,7 +339,7 @@
 
       <div
         class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
-        <div class="sm:overflow-auto relative h-full px-3">
+        <div class="sm:overflow-auto relative h-full px-3 max-w-full" style="width: 99%;">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
@@ -341,7 +359,6 @@
                   ></app-value>
                 </div>
               </div>
-
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
               >
@@ -646,6 +663,19 @@
                 </div>
               </div>
             </div>
+            <div *ngSwitchCase="'forecast'">
+              <div class="contents w-full max-h-screen h-full overflow-visible">
+                <app-forecast 
+                  *ngIf="wallet && poolBtc && poolAllOut"
+                  [poolOut]="poolAllOut"
+                  [stakingOut]="stakingOut"
+                  [poolMasternodeOut]="poolMasternodeOut"
+                  [lmOut]="poolOut"
+                  [bs]="blocktimeInS"
+                >
+                </app-forecast>
+              </div>
+            </div>
             <div *ngSwitchCase="'dex'">
               <h1 class="text-3xl mb-4 text-pink-500">DEX</h1>
 
@@ -667,7 +697,7 @@
                 </app-dex-statistics>
               </div>
             </div>
-            <div *ngSwitchCase="'defi'" class="h-screen max-h-screen sm:h-full">
+            <div *ngSwitchCase="'defi'" class="max-h-screen h-full contents">
               <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
 
               <app-dfi-statistics [lang]="lang"></app-dfi-statistics>

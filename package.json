@@ -1,6 +1,6 @@
 {
   "name": "defichain-income",
-  "version": "6.3.3",
+  "version": "7.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
