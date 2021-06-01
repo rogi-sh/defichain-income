@@ -45,4 +45,51 @@
       [theme]="{ mode: getTheme() }"
     ></apx-chart>
   </div>
+
+  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-4 lg:gap-3 gap-4">
+    <div>
+      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        {{ 'income.all' | translate }}
+      </h3>
+      <app-earning
+        [out]="poolOutcomeChartPos"
+        [pool]="poolBtc"
+        [fiat]="fiat"
+      ></app-earning>
+    </div>
+    <div>
+      <h3 *ngIf="stakingOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        Staking
+      </h3>
+      <app-earning *ngIf="stakingOut?.dfiPerMonth > 0"
+                   [out]="poolStakingChartPos"
+                   [pool]="poolBtc"
+                   [fiat]="fiat"
+      >
+      </app-earning>
+    </div>
+    <div>
+      <h3 *ngIf="lmOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        LM
+      </h3>
+      <app-earning *ngIf="lmOut?.dfiPerMonth > 0"
+                   [out]="poolLMChartPos"
+                   [pool]="poolBtc"
+                   [fiat]="fiat"
+      ></app-earning>
+    </div>
+    <div>
+
+      <h3 *ngIf="poolMasternodeOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        Masternode
+      </h3>
+      <app-earning *ngIf="poolMasternodeOut?.dfiPerMonth > 0"
+                   [out]="poolMnChartPos"
+                   [pool]="poolBtc"
+                   [fiat]="fiat"
+      >
+      </app-earning>
+    </div>
+  </div>
+
 </div>

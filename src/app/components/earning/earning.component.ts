@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Outcome, Pool} from '@interfaces/Dex';
 
 @Component({
@@ -6,7 +6,7 @@ import {Outcome, Pool} from '@interfaces/Dex';
   templateUrl: './earning.component.html',
   styleUrls: ['./earning.component.css']
 })
-export class EarningComponent implements OnInit {
+export class EarningComponent implements OnInit, OnChanges {
 
   @Input()
   out: Outcome;
@@ -21,6 +21,10 @@ export class EarningComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
   }
 
   // get income of pool
