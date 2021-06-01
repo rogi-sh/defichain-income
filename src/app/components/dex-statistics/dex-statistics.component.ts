@@ -44,6 +44,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   rewards: Stats;
 
+  @Input()
+  blockTime: number;
+
   corr: Correlation;
 
   constructor(private apollo: Apollo) { }
