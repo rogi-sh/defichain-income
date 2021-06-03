@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.2.1 - 3.6.2021';
+    this.log.comment = 'fix view rewards of pools, temporarily fix of wrong lm rewards from api';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.2.0 - 1.6.2021';
     this.log.comment = 'blocktime added to dex view';
 
