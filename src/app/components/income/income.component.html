@@ -45,11 +45,12 @@
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
           [ngClass]="selectedTab === 'LM' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
-          Liquidity Mining
+          <span class="sm:hidden">LM</span>
+          <span class="hidden sm:block">Liquidity Mining</span>
         </a>
         <a *ngIf="wallet.dfiInMasternodes > 0"
           (click)="handleTab('MN')"
-          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
+          class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2 overflow-hidden overflow-ellipsis flow-root"
           [ngClass]="selectedTab === 'MN' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
         >
           Masternode
