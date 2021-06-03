@@ -14,7 +14,7 @@ export const environment = {
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/staking',
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
-  version: '7.0.0',
+  version: '7.2.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

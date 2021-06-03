@@ -9,7 +9,7 @@ import {
 import {
   MasternodeOutcome,
   Outcome,
-  OutcomeStaking,
+  OutcomeStaking, Pool,
   PoolAllOut,
 } from '@interfaces/Dex';
 import { ChartComponent } from 'ng-apexcharts';
@@ -42,6 +42,12 @@ export class ForecastComponent implements OnInit, OnChanges {
   @Input()
   bs!: number;
 
+  @Input()
+  fiat!: string;
+
+  @Input()
+  poolBtc!: Pool;
+
   poolOuts = new Array<PoolAllOut>();
 
   poolLmOuts = new Array<PoolAllOut>();
@@ -52,6 +58,12 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   blocksPerCycle = 32690;
 
+  poolOutcomeChartPos: Outcome;
+  poolStakingChartPos: Outcome;
+  poolLMChartPos: Outcome;
+  poolMnChartPos: Outcome;
+  actualPoolIndex = 0;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -60,7 +72,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //this.computeMasternodesReduce();
+    // this.computeMasternodesReduce();
   }
 
   computeMasternodesReduce(): void {
@@ -75,10 +87,10 @@ export class ForecastComponent implements OnInit, OnChanges {
     this.poolMnOuts = new Array<PoolAllOut>();
 
     for (let i = 0; i <= this.timeHorizonCycles; i++) {
-      let poolAllOut = new PoolAllOut();
-      let poolStakingOut = new PoolAllOut();
-      let poolLmOut = new PoolAllOut();
-      let poolMnOut = new PoolAllOut();
+      const poolAllOut = new PoolAllOut();
+      const poolStakingOut = new PoolAllOut();
+      const poolLmOut = new PoolAllOut();
+      const poolMnOut = new PoolAllOut();
 
       if (i === 0) {
         this.transformPool(poolAllOut, this.poolOut);
@@ -97,6 +109,11 @@ export class ForecastComponent implements OnInit, OnChanges {
       this.poolMnOuts.push(poolMnOut);
       this.poolStakingOuts.push(poolStakingOut);
     }
+
+    this.poolOutcomeChartPos = this.poolOuts[0];
+    this.poolStakingChartPos = this.poolStakingOuts[0];
+    this.poolLMChartPos = this.poolLmOuts[0];
+    this.poolMnChartPos = this.poolMnOuts[0];
   }
 
   buildChart(): void {
@@ -105,7 +122,17 @@ export class ForecastComponent implements OnInit, OnChanges {
       chart: {
         type: 'area',
         background: 'transparent',
-        height: 600,
+        height: 450,
+        events: {
+          mouseMove: (function(event, chartContext, config): void {
+            if (this.poolOuts?.length > 0 && config?.dataPointIndex  > -1 && this.actualPoolIndex !== config?.dataPointIndex ) {
+              this.poolOutcomeChartPos = this.poolOuts[config.dataPointIndex];
+              this.poolStakingChartPos = this.poolStakingOuts[config.dataPointIndex];
+              this.poolLMChartPos = this.poolLmOuts[config.dataPointIndex];
+              this.poolMnChartPos = this.poolMnOuts[config.dataPointIndex];
+            }
+          }).bind(this)
+        }
       },
       dataLabels: {
         enabled: false,
@@ -157,7 +184,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   getStakingData(): Array<number> {
-    let result = new Array<number>();
+    const result = new Array<number>();
     this.poolStakingOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
@@ -165,7 +192,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   getLMData(): Array<number> {
-    let result = new Array<number>();
+    const result = new Array<number>();
     this.poolLmOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
@@ -173,7 +200,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   getMNData(): Array<number> {
-    let result = new Array<number>();
+    const result = new Array<number>();
     this.poolMnOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
@@ -181,7 +208,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   getAllData(): Array<number> {
-    let result = new Array<number>();
+    const result = new Array<number>();
     this.poolOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
@@ -189,7 +216,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   getCat(): Array<string> {
-    let result = new Array<string>();
+    const result = new Array<string>();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     let date =
       new Date(2021, 5, 3) > new Date() ? new Date(2021, 5, 3) : new Date();
