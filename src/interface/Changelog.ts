@@ -13,34 +13,6 @@ export class Changelog {
 
     this.log = new Log();
 
-    this.log.version = '7.3.1 - 5.6.2021';
-    this.log.comment = 'sort blocks because not always correct';
-
-    this.logs.push(this.log);
-
-    this.log = new Log();
-
-    this.log.version = '7.3.0 - 5.6.2021';
-    this.log.comment = 'calculate blocktime on last 2000 blocks';
-
-    this.logs.push(this.log);
-
-    this.log = new Log();
-
-    this.log.version = '7.2.3 - 5.6.2021';
-    this.log.comment = 'better offline request';
-
-    this.logs.push(this.log);
-
-    this.log = new Log();
-
-    this.log.version = '7.2.2 - 4.6.2021';
-    this.log.comment = 'fix tradview on mobile, blocktimee to 30s';
-
-    this.logs.push(this.log);
-
-    this.log = new Log();
-
     this.log.version = '7.2.1 - 3.6.2021';
     this.log.comment = 'fix view rewards of pools, temporarily fix of wrong lm rewards from api';
 

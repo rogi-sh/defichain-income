@@ -543,53 +543,11 @@ export class AppComponent implements OnInit {
 
   }
 
-  async computeMeta(): Promise<void> {
-
-    // Stats
-    this.rewards = new Stats();
-    this.rewards.rewards = new Rewards();
+  async getRewards(): Promise<void> {
+    const promise = await this.dexService.getStats().toPromise();
+    this.rewards = promise;
     this.rewards.rewards.liquidityPool = 103.1;
-    this.rewards.rewards.minter = 135;
-    this.rewards.rewards.community = 19.9;
-    this.rewards.rewards.anchorReward = 0.1;
     this.rewards.rewards.total = 405.04;
-
-    try {
-      // const promiseStats = await this.dexService.getStats().toPromise();
-      const promiseBlocks = await this.dexService.getLastBlocks().toPromise();
-
-      this.rewards.blockHeight = promiseBlocks [0].height;
-
-      promiseBlocks.sort( (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
-
-      const diffS = new Array<number>();
-
-      for (let i = 0; i < promiseBlocks.length - 2; i++) {
-        const date = new Date(promiseBlocks [i].time);
-        const date2 = new Date(promiseBlocks [i + 1].time);
-        const diff = Math.abs((date.getTime() - date2.getTime()) / 1000);
-        diffS.push(diff);
-      }
-
-      // avg
-      const sum = diffS.reduce((previous, current) => current += previous);
-      const avg = Math.round(sum / diffS.length);
-
-      // median
-      diffS.sort((a, b) => a - b);
-      const lowMiddle = Math.floor((diffS.length - 1) / 2);
-      const highMiddle = Math.ceil((diffS.length - 1) / 2);
-      const median = Math.round((diffS[lowMiddle] + diffS[highMiddle]) / 2);
-
-      this.blocktimeInS = avg;
-      this.blocktimeInSSecond = median;
-
-
-    } catch (err) {
-      console.error('Api down?' + err.message);
-      this.apiOnline = false;
-    }
-
   }
 
   sleep(milliseconds): Promise<void> {
