@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.2.2 - 4.6.2021';
+    this.log.comment = 'fix tradview on mobile, blocktimee to 30s';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.2.1 - 3.6.2021';
     this.log.comment = 'fix view rewards of pools, temporarily fix of wrong lm rewards from api';
 
