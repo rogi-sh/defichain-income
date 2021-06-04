@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   dfiProBlockBch = 1;
   rewards: Stats;
 
-  blocktimeInS = 37;
+  blocktimeInS = 30;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
