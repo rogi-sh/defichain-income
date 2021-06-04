@@ -71,7 +71,6 @@ export class AppComponent implements OnInit {
   rewards: Stats;
 
   blocktimeInS = 30;
-  blocktimeInSSecond = 30;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
