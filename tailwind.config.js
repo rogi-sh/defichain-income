@@ -16,6 +16,9 @@ module.exports = {
           600: '#CC008B',
         }
       },
+      minHeight: {
+        '96vh': '96vh',
+      },
       height: {
         '97%': '97%',
       },

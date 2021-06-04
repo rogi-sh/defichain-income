@@ -338,7 +338,7 @@
       </ngx-spinner>
 
       <div
-        class="sm:max-w-full overflow-hidden w-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
+        class="sm:max-w-full overflow-hidden w-full min-h-screen sm:min-h-0 h-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
         <div class="sm:overflow-auto relative h-full px-3 max-w-full" style="width: 99%;">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
@@ -700,7 +700,7 @@
                 </app-dex-statistics>
               </div>
             </div>
-            <div *ngSwitchCase="'defi'" class="max-h-screen h-full contents">
+            <div *ngSwitchCase="'defi'" class="max-h-screen h-full contents min-h-screen">
               <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
 
               <app-dfi-statistics [lang]="lang"></app-dfi-statistics>
