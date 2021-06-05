@@ -205,7 +205,7 @@ export class AppComponent implements OnInit {
 
     this.testApi();
 
-    await this.computeMeta();
+    await this.getRewards();
 
     this.loadStackingCake();
     this.loadStackingMasternode();
@@ -304,7 +304,7 @@ export class AppComponent implements OnInit {
 
   async refresh(): Promise<void> {
     this.dataLoaded = false;
-    await this.computeMeta();
+    await this.getRewards();
     if (this.autoLoadData) {
       // only clear when not manual
       this.clearWallet();
@@ -543,10 +543,17 @@ export class AppComponent implements OnInit {
   }
 
   async getRewards(): Promise<void> {
-    const promise = await this.dexService.getStats().toPromise();
-    this.rewards = promise;
-    this.rewards.rewards.liquidityPool = 103.1;
-    this.rewards.rewards.total = 405.04;
+
+    try {
+      const promise = await this.dexService.getStats().toPromise();
+      this.rewards = promise;
+      this.rewards.rewards.liquidityPool = 103.1;
+      this.rewards.rewards.total = 405.04;
+
+    } catch (ex) {
+      console.error('Api down?' + ex.message);
+      this.apiOnline = false;
+    }
   }
 
   sleep(milliseconds): Promise<void> {
