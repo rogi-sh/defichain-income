@@ -17,6 +17,13 @@ export class Data {
   value: number;
 }
 
+export class Block {
+  hash: string;
+  height: number;
+  time: Date;
+
+}
+
 export class Balance {
   confirmed: number;
   balance: number;

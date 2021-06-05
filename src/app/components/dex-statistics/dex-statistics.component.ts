@@ -45,7 +45,10 @@ export class DexStatisticsComponent implements OnInit {
   rewards: Stats;
 
   @Input()
-  blockTime: number;
+  blockTimeUsed: number;
+
+  @Input()
+  blockTimeSecond: number;
 
   corr: Correlation;
 

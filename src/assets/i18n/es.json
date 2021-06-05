@@ -102,6 +102,7 @@
   "amount": "cantidad",
   "add-amount": "Añade su ",
   "share": "Compartir",
-  "your": "Su"
+  "your": "Su",
+  "blocktime": "últimos 2000 bloques"
 
 }
