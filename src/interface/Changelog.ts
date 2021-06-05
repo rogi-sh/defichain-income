@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.2.3 - 5.6.2021';
+    this.log.comment = 'better offline request';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.2.2 - 4.6.2021';
     this.log.comment = 'fix tradview on mobile, blocktimee to 30s';
 
