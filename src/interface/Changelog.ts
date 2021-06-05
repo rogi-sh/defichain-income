@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.3.1 - 5.6.2021';
+    this.log.comment = 'sort blocks because not always correct';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.3.0 - 5.6.2021';
     this.log.comment = 'calculate blocktime on last 2000 blocks';
 
