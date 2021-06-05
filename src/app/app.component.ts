@@ -560,6 +560,8 @@ export class AppComponent implements OnInit {
 
       this.rewards.blockHeight = promiseBlocks [0].height;
 
+      promiseBlocks.sort( (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
+
       const diffS = new Array<number>();
 
       for (let i = 0; i < promiseBlocks.length - 2; i++) {
