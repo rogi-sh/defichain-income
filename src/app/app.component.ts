@@ -15,7 +15,7 @@ import {
   PoolEthOut,
   PoolLtcOut,
   PoolPair,
-  PoolUsdtOut,
+  PoolUsdtOut, Rewards,
   Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
@@ -71,6 +71,7 @@ export class AppComponent implements OnInit {
   rewards: Stats;
 
   blocktimeInS = 30;
+  blocktimeInSSecond = 30;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
@@ -205,7 +206,7 @@ export class AppComponent implements OnInit {
 
     this.testApi();
 
-    await this.getRewards();
+    await this.computeMeta();
 
     this.loadStackingCake();
     this.loadStackingMasternode();
@@ -302,7 +303,7 @@ export class AppComponent implements OnInit {
 
   async refresh(): Promise<void> {
     this.dataLoaded = false;
-    await this.getRewards();
+    await this.computeMeta();
     if (this.autoLoadData) {
       // only clear when not manual
       this.clearWallet();
@@ -540,18 +541,51 @@ export class AppComponent implements OnInit {
 
   }
 
-  async getRewards(): Promise<void> {
+  async computeMeta(): Promise<void> {
+
+    // Stats
+    this.rewards = new Stats();
+    this.rewards.rewards = new Rewards();
+    this.rewards.rewards.liquidityPool = 103.1;
+    this.rewards.rewards.minter = 135;
+    this.rewards.rewards.community = 19.9;
+    this.rewards.rewards.anchorReward = 0.1;
+    this.rewards.rewards.total = 405.04;
 
     try {
-      const promise = await this.dexService.getStats().toPromise();
-      this.rewards = promise;
-      this.rewards.rewards.liquidityPool = 103.1;
-      this.rewards.rewards.total = 405.04;
+      // const promiseStats = await this.dexService.getStats().toPromise();
+      const promiseBlocks = await this.dexService.getLastBlocks().toPromise();
 
-    } catch (ex) {
-      console.error('Api down?' + ex.message);
+      this.rewards.blockHeight = promiseBlocks [0].height;
+
+      const diffS = new Array<number>();
+
+      for (let i = 0; i < promiseBlocks.length - 2; i++) {
+        const date = new Date(promiseBlocks [i].time);
+        const date2 = new Date(promiseBlocks [i + 1].time);
+        const diff = Math.abs((date.getTime() - date2.getTime()) / 1000);
+        diffS.push(diff);
+      }
+
+      // avg
+      const sum = diffS.reduce((previous, current) => current += previous);
+      const avg = Math.round(sum / diffS.length);
+
+      // median
+      diffS.sort((a, b) => a - b);
+      const lowMiddle = Math.floor((diffS.length - 1) / 2);
+      const highMiddle = Math.ceil((diffS.length - 1) / 2);
+      const median = Math.round((diffS[lowMiddle] + diffS[highMiddle]) / 2);
+
+      this.blocktimeInS = avg;
+      this.blocktimeInSSecond = median;
+
+
+    } catch (err) {
+      console.error('Api down?' + err.message);
       this.apiOnline = false;
     }
+
   }
 
   sleep(milliseconds): Promise<void> {

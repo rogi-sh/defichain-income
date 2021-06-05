@@ -40,12 +40,12 @@ export interface Pool {
   totalLiquidity: number;
 }
 
-export interface Stats {
+export class Stats {
   blockHeight: number;
   rewards: Rewards;
 }
 
-export interface Rewards {
+export class Rewards {
     anchorPercent: number;
     liquidityPoolPercent: number;
     communityPercent: number;
