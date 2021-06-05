@@ -204,14 +204,8 @@ export class AppComponent implements OnInit {
     this.loadFromLocalStorage();
 
     this.testApi();
-    setInterval(() => {
-      this.testApi();
-    }, 2000000);
 
     await this.getRewards();
-    setInterval(async () => {
-      await this.getRewards();
-    }, 3600000);
 
     this.loadStackingCake();
     this.loadStackingMasternode();
@@ -306,8 +300,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  refresh(): void {
+  async refresh(): Promise<void> {
     this.dataLoaded = false;
+    await this.getRewards();
     if (this.autoLoadData) {
       // only clear when not manual
       this.clearWallet();
@@ -546,10 +541,17 @@ export class AppComponent implements OnInit {
   }
 
   async getRewards(): Promise<void> {
-    const promise = await this.dexService.getStats().toPromise();
-    this.rewards = promise;
-    this.rewards.rewards.liquidityPool = 103.1;
-    this.rewards.rewards.total = 405.04;
+
+    try {
+      const promise = await this.dexService.getStats().toPromise();
+      this.rewards = promise;
+      this.rewards.rewards.liquidityPool = 103.1;
+      this.rewards.rewards.total = 405.04;
+
+    } catch (ex) {
+      console.error('Api down?' + ex.message);
+      this.apiOnline = false;
+    }
   }
 
   sleep(milliseconds): Promise<void> {
@@ -778,7 +780,7 @@ export class AppComponent implements OnInit {
   }
 
   getMasternodeAddressForIteration(i: number): string {
-      return this.adressesMasternodes[i - this.adresses?.length * 2];
+    return this.adressesMasternodes[i - this.adresses?.length * 2];
   }
 
   addCoinsToWallet(balance: Balance, address: string, masternode: boolean): void {
@@ -1038,7 +1040,7 @@ export class AppComponent implements OnInit {
 
   berechneAllOut(): void {
     this.poolAllOut.dfiPerDay = this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay + this.poolMasternodeOut.dfiPerDay;
-    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour + this.poolMasternodeOut.dfiPerHour ;
+    this.poolAllOut.dfiPerHour = this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour + this.poolMasternodeOut.dfiPerHour;
     this.poolAllOut.dfiPerMin = this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin + this.poolMasternodeOut.dfiPerMin;
     this.poolAllOut.dfiPerWeek = this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek + this.poolMasternodeOut.dfiPerWeek;
     this.poolAllOut.dfiPerMonth = this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth + this.poolMasternodeOut.dfiPerMonth;
