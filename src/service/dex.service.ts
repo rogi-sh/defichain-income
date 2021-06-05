@@ -28,8 +28,8 @@ export class Dex {
     return this.http.get<[string]>(environment.accountDetails + address);
   }
 
-  public getLastBlocks(): Observable<[Block]> {
-    return this.http.get<[Block]>(environment.blocks);
+  public getLastBlocks(): Observable<Array<Block>> {
+    return this.http.get<Array<Block>>(environment.blocks);
   }
 
   public getHealthCheck(): Observable<any>  {
