@@ -105,6 +105,8 @@
   "share": "share",
   "your": "Your",
   "blocktime": "{{ count }} Blocks",
-  "blocktimeHeadline": "Last blocks for the calculation of the block time"
+  "blocktimeHeadline": "Last blocks for the calculation of the block time",
+  "blocksTillCycle": "Blocks till next cycle (rewards decrease 1,1658%)",
+  "blocksTillDiff": "Blocks till next difficulty change"
 
 }

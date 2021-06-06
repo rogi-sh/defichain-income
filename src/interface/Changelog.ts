@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.0 - 6.6.2021';
+    this.log.comment = 'blocks till cycle and difficulty chage';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.4.0 - 6.6.2021';
     this.log.comment = 'last blocks for calc of blocktime configurable';
 

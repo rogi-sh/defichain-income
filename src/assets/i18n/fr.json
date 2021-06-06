@@ -105,7 +105,8 @@
   "share": "part",
   "your": "votre",
   "blocktime": "les {{ count }} derniers blocs",
-  "blocktimeHeadline": "Derniers blocs pour le calcul du temps de bloc"
-
+  "blocktimeHeadline": "Derniers blocs pour le calcul du temps de bloc",
+  "blocksTillCycle": "Blocs jusqu'au prochain cycle (diminution des récompenses de 1,1658%)",
+  "blocksTillDiff": "Blocs jusqu'au prochain changement de difficulté"
 
 }
