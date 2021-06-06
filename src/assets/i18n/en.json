@@ -104,6 +104,7 @@
   "add-amount": "Add your ",
   "share": "share",
   "your": "Your",
-  "blocktime": "2000 Blocks"
+  "blocktime": "{{ count }} Blocks",
+  "blocktimeHeadline": "Last blocks for the calculation of the block time"
 
 }

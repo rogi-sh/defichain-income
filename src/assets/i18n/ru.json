@@ -105,5 +105,6 @@
   "add-amount": "Напиши свое ",
   "share": " Часть",
   "your": "Твое",
-  "blocktime": "2000 блоков"
+  "blocktime": "{{ count }} блоков",
+  "blocktimeHeadline": "Последние блоки для расчета времени блока"
 }

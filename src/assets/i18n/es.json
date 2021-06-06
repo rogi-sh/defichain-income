@@ -103,6 +103,7 @@
   "add-amount": "Añade su ",
   "share": "Compartir",
   "your": "Su",
-  "blocktime": "últimos 2000 bloques"
+  "blocktime": "últimos {{ count }} bloques",
+  "blocktimeHeadline": "Últimos bloques para el cálculo del tiempo del bloque"
 
 }

@@ -194,7 +194,7 @@
         </div>
       </div>
       <div class="mt-2 mb-2 dark:text-gray-100">
-        <span class="mr-2">Blocktime ({{ 'blocktime' | translate }}):</span>
+        <span class="mr-2">Blocktime ({{ 'blocktime' | translate: { count: blockCountForCalc} }}):</span>
         <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           Avg {{blockTimeUsed}} s (Median {{ blockTimeSecond }} s)
         </div>

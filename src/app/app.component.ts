@@ -142,6 +142,9 @@ export class AppComponent implements OnInit {
   showSettingsArea = true;
   showSettingsAreaKey = 'showSettingsAreaKey';
 
+  lastBlocksForCompute = 2000;
+  lastBlocksForComputeKey = 'lastBlocksForComputeKey';
+
   apiOnline = true;
 
   loggedIn = false;
@@ -290,10 +293,13 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
     }
-
+    if (localStorage.getItem(this.lastBlocksForComputeKey) !== null) {
+      this.lastBlocksForCompute = +localStorage.getItem(this.lastBlocksForComputeKey);
+    }
     if (localStorage.getItem('theme') !== null) {
       this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
     }
+
   }
 
   async refresh(): Promise<void> {
@@ -549,7 +555,7 @@ export class AppComponent implements OnInit {
 
     try {
       // const promiseStats = await this.dexService.getStats().toPromise();
-      const promiseBlocks = await this.dexService.getLastBlocks().toPromise();
+      const promiseBlocks = await this.dexService.getLastBlocks(this.lastBlocksForCompute).toPromise();
 
       this.rewards.blockHeight = promiseBlocks [0].height;
 
@@ -1696,5 +1702,11 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light');
+  }
+
+  onChangeLastBlocksForCalc(value: number): void {
+    this.lastBlocksForCompute = value;
+    localStorage.setItem(this.lastBlocksForComputeKey, String(value));
+    this.refresh();
   }
 }

@@ -50,6 +50,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   blockTimeSecond: number;
 
+  @Input()
+  blockCountForCalc: number;
+
   corr: Correlation;
 
   constructor(private apollo: Apollo) { }
