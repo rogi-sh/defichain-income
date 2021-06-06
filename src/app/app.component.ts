@@ -233,6 +233,11 @@ export class AppComponent implements OnInit {
     }
 
     this.toggleDarkMode();
+
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
   }
 
   handlePage(pageTag: string): void {
