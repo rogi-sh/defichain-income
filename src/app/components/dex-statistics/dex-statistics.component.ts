@@ -78,12 +78,16 @@ export class DexStatisticsComponent implements OnInit {
       });
     }
 
-  getBlockToNextCycle() {
-    return 32690 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 32690;
+  getBlockToNextCycle(): string {
+    const blocks = 32690 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 32690;
+    const time = blocks * this.blockTimeUsed / 60 / 60 / 24;
+    return String(blocks) + ' ~ ' + Math.round(time ) + ' d';
   }
 
-  getBlockToNextDiffChange() {
-    return 1008 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 1008;
+  getBlockToNextDiffChange(): string {
+    const blocks = 1008 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 1008;
+    const time = blocks * this.blockTimeUsed / 60 / 60;
+    return String(blocks) + ' ~ ' + Math.round(time) + ' h';
   }
 
 }
