@@ -105,7 +105,7 @@
   "your": "Su",
   "blocktime": "últimos {{ count }} bloques",
   "blocktimeHeadline": "Últimos bloques para el cálculo del tiempo del bloque",
-  "blocksTillCycle": "Bloques hasta el próximo ciclo (las recompensas disminuyen un 1,1658%)",
+  "blocksTillCycle": "Bloques hasta el próximo ciclo (las recompensas disminuyen un 1,658%)",
   "blocksTillDiff": "Bloques hasta el próximo cambio de dificultad"
 
 }
