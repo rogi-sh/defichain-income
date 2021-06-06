@@ -55,6 +55,8 @@ export class DexStatisticsComponent implements OnInit {
 
   corr: Correlation;
 
+  euonsHardforkeBlock = 894000;
+
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
@@ -76,5 +78,12 @@ export class DexStatisticsComponent implements OnInit {
       });
     }
 
+  getBlockToNextCycle() {
+    return 32690 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 32690;
+  }
+
+  getBlockToNextDiffChange() {
+    return 1008 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 1008;
+  }
 
 }

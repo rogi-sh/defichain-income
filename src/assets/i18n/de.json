@@ -106,6 +106,8 @@
   "share": " Anteil",
   "your": "Deine",
   "blocktime": "{{ count }} Blöcke",
-  "blocktimeHeadline": "Letzte Blöcke für die Berechnung der Blockzeit"
+  "blocktimeHeadline": "Letzte Blöcke für die Berechnung der Blockzeit",
+  "blocksTillCycle": "Blöcke bis zum nächsten Zyklus (Belohnungen verringern sich um 1,1658%)",
+  "blocksTillDiff": "Blöcke bis zur nächsten Schwierigkeitsänderung"
 
 }
