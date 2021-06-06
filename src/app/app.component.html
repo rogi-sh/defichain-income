@@ -697,6 +697,7 @@
                   [rewards]="rewards"
                   [blockTimeUsed]="blocktimeInS"
                   [blockTimeSecond]="blocktimeInSSecond"
+                  [blockCountForCalc]="lastBlocksForCompute"
                 >
                 </app-dex-statistics>
               </div>
@@ -797,6 +798,26 @@
                         ></label>
                       </div>
                     </div>
+                    <br>
+                    <div class="dark:text-gray-100">
+                      {{ 'blocktimeHeadline' | translate }}
+                    </div>
+                    <div class="flex">
+                      <select class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
+                       dark:text-gray-100 mb-2" (change)="onChangeLastBlocksForCalc($event.target.value)">
+                        <option [selected]="lastBlocksForCompute === 100" value="100">100</option>
+                        <option [selected]="lastBlocksForCompute === 500" value="500">500</option>
+                        <option [selected]="lastBlocksForCompute === 1000" value="1000">1000</option>
+                        <option [selected]="lastBlocksForCompute === 2000" value="2000">2000</option>
+                        <option [selected]="lastBlocksForCompute === 3000" value="3000">3000</option>
+                        <option [selected]="lastBlocksForCompute === 4000" value="4000">4000</option>
+                      </select>
+
+                    </div>
+                    <div class="dark:text-gray-100">
+                      Avg {{blocktimeInS}} s (Median {{ blocktimeInSSecond }} s)
+                    </div>
+
                   </div>
                   <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3 dark:text-gray-100">
                     <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
@@ -1621,6 +1642,7 @@
                     [rewards]="rewards"
                     [blockTimeUsed]="blocktimeInS"
                     [blockTimeSecond]="blocktimeInSSecond"
+                    [blockCountForCalc]="lastBlocksForCompute"
                   >
                   </app-dex-statistics>
                 </div>

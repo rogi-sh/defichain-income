@@ -28,8 +28,9 @@ export class Dex {
     return this.http.get<[string]>(environment.accountDetails + address);
   }
 
-  public getLastBlocks(): Observable<Array<Block>> {
-    return this.http.get<Array<Block>>(environment.blocks);
+  public getLastBlocks(blocks: number): Observable<Array<Block>> {
+    const url = environment.blocks.replace('2000', String(blocks));
+    return this.http.get<Array<Block>>(url);
   }
 
   public getHealthCheck(): Observable<any>  {
