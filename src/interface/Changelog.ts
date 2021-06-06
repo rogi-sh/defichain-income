@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.1 - 6.6.2021';
+    this.log.comment = 'add time to block till cycle or difficulty';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.0 - 6.6.2021';
     this.log.comment = 'blocks till cycle and difficulty chage';
 
