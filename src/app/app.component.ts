@@ -621,6 +621,9 @@ export class AppComponent implements OnInit {
   private parsePoolsAndComputeOutcome(dex: DexInfo, poolPairs: DexPoolPair): void {
     this.extractPools(dex);
 
+    // compute correct price of dfi
+    this.poolBtc.priceB = this.poolBtc.priceA / (+this.poolBtc.reserveB / +this.poolBtc.reserveA);
+
     this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
     this.poolBtc.customRewards = poolPairs['5'].customRewards;
     this.poolBtc.rewardPct = poolPairs['5'].rewardPct;
