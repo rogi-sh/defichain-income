@@ -46,14 +46,14 @@ export class Stats {
 }
 
 export class Rewards {
-    anchorPercent: number;
-    liquidityPoolPercent: number;
-    communityPercent: number;
     total: number;
     community: number;
-    minter: number;
-    anchorReward: number;
-    liquidityPool: number;
+    masternode: number;
+    anchor: number;
+    liquidity: number;
+    swap: number;
+    futures: number;
+    options: number;
 
 }
 

@@ -10,6 +10,14 @@ export class Changelog {
   constructor() {
 
     this.logs = new Array<Log>();
+
+    this.log = new Log();
+
+    this.log.version = '7.5.3 - 7.6.2021';
+    this.log.comment = 'rewards from api';
+
+    this.logs.push(this.log);
+
     this.log = new Log();
 
     this.log.version = '7.5.2 - 6.6.2021';
