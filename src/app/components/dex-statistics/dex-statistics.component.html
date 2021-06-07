@@ -164,17 +164,17 @@
       </div>
       <div>
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          Total {{rewards?.rewards?.total }}
+          Total {{rewards?.rewards?.total |  number: '1.2-2'  }}
         </span>
       </div>
       <div>
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          LM {{rewards?.rewards?.liquidityPool }} / Mining {{rewards?.rewards?.minter }}
+          LM {{rewards?.rewards?.liquidity |  number: '1.2-2' }} / Masternode {{rewards?.rewards?.masternode |  number: '1.2-2'  }}
         </span>
       </div>
       <div>
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          Anchor {{rewards?.rewards?.anchorReward }} / Community {{rewards?.rewards?.community }}
+          Anchor {{rewards?.rewards?.anchor |  number: '1.2-2'  }} / Community {{rewards?.rewards?.community |  number: '1.2-2'  }}
         </span>
       </div>
     </div>
