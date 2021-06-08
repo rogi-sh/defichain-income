@@ -211,7 +211,7 @@ export class AppComponent implements OnInit {
 
     await this.computeMeta();
 
-    this.loadStackingCake();
+    // this.loadStackingCake();
     this.loadStackingMasternode();
 
     if (this.loggedIn) {
