@@ -229,6 +229,8 @@ export class AppComponent implements OnInit {
 
     this.toggleDarkMode();
 
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`)
+    
     window.addEventListener('resize', () => {
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
