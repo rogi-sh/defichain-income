@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.5 - 8.6.2021';
+    this.log.comment = 'api offline only when stats and transactions down';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.4 - 7.6.2021';
     this.log.comment = 'dfi price from btc pool on dex';
 
