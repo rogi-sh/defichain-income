@@ -48,7 +48,7 @@ export class Stats {
 export class Rewards {
     total: number;
     community: number;
-    masternode: number;
+    minter: number;
     anchor: number;
     liquidity: number;
     swap: number;

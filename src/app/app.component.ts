@@ -735,14 +735,14 @@ export class AppComponent implements OnInit {
       requestArray.push(this.dexService.getAdressBalance(ad));
     }
 
-    // masternode addresses
+    // minter addresses
     for (const adM of this.adressesMasternodes) {
       requestArray.push(this.dexService.getAdressBalance(adM));
     }
 
     forkJoin(requestArray).subscribe(results => {
         results.forEach((value, i) => {
-          // masternode address
+          // minter address
           if (i > this.adresses?.length * 2 - 1) {
             this.addCoinsToWallet(value as Balance, this.getMasternodeAddressForIteration(i), true);
           } else {
@@ -1084,7 +1084,7 @@ export class AppComponent implements OnInit {
   }
 
   berechneMNOut(): void {
-    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.masternode / this.masternodeCount * 525600 / 20000 * 100;
+    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
     this.poolMasternodeOut.dfiPerYear = this.adressesMasternodes.length * 20000 * this.stakingApyMN / 100;
     this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
     this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
