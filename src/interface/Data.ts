@@ -8,6 +8,7 @@ import {
   ApexStroke, ApexPlotOptions,
   ApexAxisChartSeries,
   ApexXAxis,
+  ApexYAxis,
   ApexTooltip,
 } from 'ng-apexcharts';
 import {Outcome} from './Dex';
@@ -75,9 +76,11 @@ export type ChartOptions5 = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
+  legend: ApexLegend;
 };
 
 export class Series {
