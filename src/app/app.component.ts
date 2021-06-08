@@ -557,6 +557,7 @@ export class AppComponent implements OnInit {
     try {
       const promiseStats = await this.dexService.getStats().toPromise();
       const promiseBlocks = await this.dexService.getLastBlocks(this.lastBlocksForCompute).toPromise();
+      this.apiOnline = true;
 
       this.rewards = promiseStats;
       this.rewards.blockHeight = promiseBlocks [0].height;
