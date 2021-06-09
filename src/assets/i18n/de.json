@@ -83,7 +83,7 @@
   },
   "forecast": {
     "title": "Prognose",
-    "subtitle": "Dein prognostiziertes monatliches Einkommen in DFI für die nächsten Monate.",
+    "subtitle": "Dein prognostiziertes monatliches Einkommen (alle Zahlen ohne Gewähr) in DFI für die nächsten Monate unter Berücksichtigung der Reduzierug der Rewards alle 32690 Blöcke (Datum-Achse).",
     "drop": "Wähle deinen Zeitraum in Monaten"
   },
   "hour": "Stunde",

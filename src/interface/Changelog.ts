@@ -13,6 +13,20 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.7 - 9.6.2021';
+    this.log.comment = 'forecast without guarantee';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '7.5.6 - 8.6.2021';
+    this.log.comment = 'forecast chart fix next cycle date up from today, visual optimizations';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.5 - 8.6.2021';
     this.log.comment = 'api offline only when stats and transactions down';
 

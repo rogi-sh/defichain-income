@@ -48,6 +48,11 @@ export class ForecastComponent implements OnInit, OnChanges {
   @Input()
   poolBtc!: Pool;
 
+  @Input()
+  blockHeight!: number;
+
+  euonsHardforkeBlock = 894000;
+
   poolOuts = new Array<PoolAllOut>();
 
   poolLmOuts = new Array<PoolAllOut>();
@@ -137,12 +142,38 @@ export class ForecastComponent implements OnInit, OnChanges {
       dataLabels: {
         enabled: false,
       },
+      legend: {
+        fontSize: '16px',
+        fontWeight: 600,
+      },
       stroke: {
         curve: 'smooth',
       },
       xaxis: {
         type: 'category',
         categories: this.getCat(),
+        labels: {
+          style: {
+            fontSize: '16px',
+            fontWeight: 600,
+          }
+        }
+      },
+      yaxis: {
+        labels: {
+          style: {
+            fontSize: '16px',
+            fontWeight: 600,
+          }
+        },
+        title: {
+          text: 'DFI',
+          style: {
+            color: '#ff00af',
+            fontSize: '17px',
+            fontWeight: 600,
+          }
+        },
       }
     };
   }
@@ -217,13 +248,19 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   getCat(): Array<string> {
     const result = new Array<string>();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     let date =
       new Date(2021, 5, 3) > new Date() ? new Date(2021, 5, 3) : new Date();
 
     for (let i = 0; i <= this.timeHorizonCycles; i++) {
-      result.push(i + ' : ' + date.toLocaleDateString('de-DE', options));
-      date = new Date(date.getTime() + this.blocksPerCycle * this.bs * 1000);
+
+      result.push(date.toLocaleDateString('de-DE', options));
+      if (i === 0) {
+        const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
+        date = new Date(date.getTime() + blocks * this.bs * 1000);
+      } else {
+        date = new Date(date.getTime() + this.blocksPerCycle * this.bs * 1000);
+      }
     }
     return result;
   }
