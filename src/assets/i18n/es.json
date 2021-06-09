@@ -81,7 +81,7 @@
   },
   "forecast": {
     "title": "Previsión",
-    "subtitle": "Sus ingresos mensuales previstos en DFI para los próximos meses teniendo en cuenta la reducción de las recompensas todos los 32690 bloques (Eje de fechas)",
+    "subtitle": "Sus ingresos mensuales previstos (todas las cifras sin garantía) en DFI para los próximos meses teniendo en cuenta la reducción de las recompensas todos los 32690 bloques (Eje de fechas)",
     "drop": "Elige tu periodo de tiempo en meses"
   },
   "hour": "Hora",

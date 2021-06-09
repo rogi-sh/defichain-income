@@ -82,7 +82,7 @@
   },
   "forecast": {
     "title": "Forecast",
-    "subtitle": "Votre revenu mensuel prévisionnel en DFI pour les prochains mois en tenant compte de la réduction des récompenses tous les 32690 blocs (Axe des dates)",
+    "subtitle": "Votre revenu mensuel prévisionnel (tous les chiffres sont sans garantie) en DFI pour les prochains mois en tenant compte de la réduction des récompenses tous les 32690 blocs (Axe des dates)",
     "drop": "Choisissez votre période de temps en mois"
   },
   "hour": "Heure",
