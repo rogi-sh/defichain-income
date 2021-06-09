@@ -231,6 +231,7 @@ export class AppComponent implements OnInit {
     }
 
     this.toggleDarkMode();
+    this.handlePageHeight();
   }
 
   handlePage(pageTag: string): void {
@@ -1707,5 +1708,14 @@ export class AppComponent implements OnInit {
     this.lastBlocksForCompute = value;
     localStorage.setItem(this.lastBlocksForComputeKey, String(value));
     this.refresh();
+  }
+
+  handlePageHeight(): void {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`)
+    
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
   }
 }

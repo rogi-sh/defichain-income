@@ -95,7 +95,7 @@
     [ngClass]="menu ? 'w-full' : ''"
     *ngIf="menu"
   >
-    <div class="relative h-full">
+    <div class="relative custom-height">
       <div class="absolute top-0 h-14 w-full">
         <a
           (click)="handlePage('dashboard')"
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      <div class="absolute top-14 w-full bottom-14 overflow-auto px-8">
+      <div class="absolute top-14 w-full h-auto bottom-20 overflow-auto px-8">
         <div class="h-full w-full">
           <a
             (click)="handlePage('dashboard')"
@@ -203,7 +203,7 @@
         </div>
       </div>
 
-      <div class="absolute mx-8 bottom-16">
+      <div class="absolute mx-8 bottom-5">
         <select
           class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none h-10 mr-2 px-2 dark:bg-gray-700"
           (change)="useLanguage($event.target['value'])"
