@@ -28,7 +28,10 @@
     <div class="flex absolute right-6 self-center">
       <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
+          DEX
+          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+          CEX
+          <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           DFI</span>
       </div>
       <div class="inline-block h-full sm:mr-5 items-center">
