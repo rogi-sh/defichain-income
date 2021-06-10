@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.8 - 10.6.2021';
+    this.log.comment = 'show dex and cex price in header';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.7 - 9.6.2021';
     this.log.comment = 'forecast without guarantee';
 

@@ -77,6 +77,8 @@ export class AppComponent implements OnInit {
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
 
+  priceDFICEX: number;
+
   // Staking infos
   dfiInStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
@@ -617,6 +619,7 @@ export class AppComponent implements OnInit {
     this.extractPools(dex);
 
     // compute correct price of dfi
+    this.priceDFICEX = this.poolBtc.priceB;
     this.poolBtc.priceB = this.poolBtc.priceA / (+this.poolBtc.reserveB / +this.poolBtc.reserveA);
 
     this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
