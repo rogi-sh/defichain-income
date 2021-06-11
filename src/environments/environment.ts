@@ -10,12 +10,12 @@ export const environment = {
   accountDetails: 'https://api.defichain.io/v1/getaccount?start=0&including_start=true&owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
-  stats: 'https://api.defichain.io/v1/stats',
+  stats: 'hhttps://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/staking',
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
-  version: '7.5.8',
+  version: '7.5.9',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

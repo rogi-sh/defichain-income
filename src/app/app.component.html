@@ -809,16 +809,20 @@
                     <div class="flex">
                       <select class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
                        dark:text-gray-100 mb-2" (change)="onChangeLastBlocksForCalc($event.target.value)">
+                        <option [selected]="lastBlocksForCompute === -1" value="-1">Fix 30s</option>
                         <option [selected]="lastBlocksForCompute === 100" value="100">100</option>
                         <option [selected]="lastBlocksForCompute === 500" value="500">500</option>
                         <option [selected]="lastBlocksForCompute === 1000" value="1000">1000</option>
                         <option [selected]="lastBlocksForCompute === 2000" value="2000">2000</option>
                         <option [selected]="lastBlocksForCompute === 3000" value="3000">3000</option>
                         <option [selected]="lastBlocksForCompute === 4000" value="4000">4000</option>
+                        <option [selected]="lastBlocksForCompute === 6000" value="6000">6000</option>
+                        <option [selected]="lastBlocksForCompute === 10000" value="10000">10000</option>
+                        <option [selected]="lastBlocksForCompute === 20000" value="20000">20000</option>
                       </select>
 
                     </div>
-                    <div class="dark:text-gray-100">
+                    <div *ngIf="lastBlocksForCompute > -1" class="dark:text-gray-100">
                       Avg {{blocktimeInS}} s (Median {{ blocktimeInSSecond }} s)
                     </div>
 

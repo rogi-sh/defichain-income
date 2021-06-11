@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.5.9 - 10.6.2021';
+    this.log.comment = 'set fixed blocktime of 30s in settings';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.8 - 10.6.2021';
     this.log.comment = 'show dex and cex price in header';
 
