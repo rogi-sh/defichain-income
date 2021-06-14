@@ -685,22 +685,22 @@ export class AppComponent implements OnInit {
 
   private computeRewardsPerBlockInPools(): void {
 
-    this.dfiProBlockBtc = this.poolBtc.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockBtc = this.poolBtc.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBtc += this.getCustomRewards(this.poolBtc.customRewards);
 
-    this.dfiProBlockEth = this.poolEth.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockEth = this.poolEth.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockEth += this.getCustomRewards(this.poolEth.customRewards);
 
-    this.dfiProBlockLtc = this.poolLtc.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockLtc = this.poolLtc.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockLtc += this.getCustomRewards(this.poolLtc.customRewards);
 
-    this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockUsdt += this.getCustomRewards(this.poolUsdt.customRewards);
 
-    this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockDoge += this.getCustomRewards(this.poolDoge.customRewards);
 
-    this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards.rewards.liquidity;
+    this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
   }
@@ -1096,7 +1096,7 @@ export class AppComponent implements OnInit {
   }
 
   berechneMNOut(): void {
-    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards.rewards.minter / this.masternodeCount * 525600 / 20000 * 100;
+    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards?.rewards?.minter / this.masternodeCount * 525600 / 20000 * 100;
     this.poolMasternodeOut.dfiPerYear = this.adressesMasternodes.length * 20000 * this.stakingApyMN / 100;
     this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
     this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
