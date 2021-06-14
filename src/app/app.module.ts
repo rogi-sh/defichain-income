@@ -1,4 +1,4 @@
-import { enableProdMode, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -14,8 +14,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatomoModule } from 'ngx-matomo-v9';
 
 import { GraphQLModule } from './graphql.module';
-
-import { environment } from '@environments/environment';
 
 import { ApyCalculatorComponent } from '@components/apy-calculator/apy-calculator.component';
 import { ChangelogComponent } from '@components/changelog/changelog.component';
@@ -79,15 +77,6 @@ import { ForecastComponent } from './pages/forecast/forecast.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .then(success => console.log(`Bootstrap success`))
-  .catch(err => console.error(err));
 
 // required for AOT compilation
 // tslint:disable-next-line:typedef
