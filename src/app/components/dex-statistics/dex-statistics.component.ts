@@ -69,7 +69,6 @@ export class DexStatisticsComponent implements OnInit {
       }).subscribe((result: any) => {
         if (result?.data?.getCorrelation) {
           this.corr = result?.data?.getCorrelation;
-          console.log(JSON.stringify(this.corr));
         } else {
           console.log('No Date for Corr');
         }
