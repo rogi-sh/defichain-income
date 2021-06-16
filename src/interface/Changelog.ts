@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.6.0 - 16.6.2021';
+    this.log.comment = 'add addresses with output of the two commands ( "listaccounts {} false false true" and "listaddressgroupings" ) from the defichain app. No more search of addresses. Just the output in the inputfield and add.';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.5.10 - 14.6.2021';
     this.log.comment = 'fix charts error because of double bootstraping';
 

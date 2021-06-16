@@ -48,7 +48,7 @@
     "exc": "Vous devez executer la commande suivante dans votre application defichain afin d'obtenir toutes vos adresses.",
     "exc2": "Avec ceci, vous obtenez les adresses où les JETONS (BTC, DFI, BTC-DFI ...) sont localisés.",
     "exc21": "Avec ceci, vous obtenez les adresses où vos pièces DFI sont localisées.",
-    "exc3": "Entrez touts vos adresses (pas deux fois ! ) avec une balance > 0. Dès que vous recevez ou envoyez des pièces DFI, vous devez éditer vos adresses à nouveau (UTXO).",
+    "exc3": "Saisissez la sortie complète des commandes, l'une après l'autre, dans le champ de saisie et appuyez sur Ajouter. Économisez. Entrez les masternodes un par un. Dès que vous recevez ou envoyez des DFI Coins, vous devez entrer à nouveau la sortie de la deuxième commande (UTXO)",
     "add": "Ajoutez l'adresse de votre portefeuille pour suivre.",
     "added": "Vos adresses suivies.",
     "button-add": "ajouter",

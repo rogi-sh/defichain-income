@@ -1471,16 +1471,17 @@
                         <div class="mt-4">
                           <div class="inline-block w-4/6">
                             <div
-                              class="relative h-14 input-component"
+                              class="relative h-16 input-component"
                               [ngClass]="!adress ? 'empty' : ''"
                               title="DFI Address"
                             >
-                              <input
+                              <textarea
                                 required
+                                rows="6"
                                 [(ngModel)]="adress"
                                 id="inputAddress"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                              >
+                              ></textarea>
                               <label for="inputAddress"
                                       class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DFI Addresses
@@ -1495,6 +1496,14 @@
                               {{ 'address.button-add' | translate }}
                             </button>
                           </div>
+                        </div>
+                        <div
+                          *ngIf="newAddressesAdded?.length > 0"
+                          class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
+                          role="alert"
+                        >
+                          Addresses ->
+                          <p *ngFor="let a of newAddressesAdded">{{a}} </p>
                         </div>
                       </div>
                       <br>

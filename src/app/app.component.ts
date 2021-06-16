@@ -92,6 +92,7 @@ export class AppComponent implements OnInit {
   adresses = new Array<string>();
   adressesMasternodes = new Array<string>();
   adressBalances = new Array<AddressBalance>();
+  newAddressesAdded = new Array<string>();
   addressesDto;
   addressesMasternodesDto;
   adress = '';
@@ -1391,28 +1392,80 @@ export class AppComponent implements OnInit {
 
   addAdress(): void {
 
-    let newAddressesAdded = false;
+    this.newAddressesAdded = new Array<string>();
 
-    this.adress.split(',').forEach(a => {
+    let inputAsArray = false;
+    let inputTokens = false;
 
-      if (!this.masternodeAdress) {
-        if (this.adresses.indexOf(a) < 0) {
-          this.adresses.push(a);
-          newAddressesAdded = true;
-        }
-      } else {
-        if (this.adressesMasternodes.indexOf(a) < 0) {
-          this.adressesMasternodes.push(a);
-          newAddressesAdded = true;
-        }
+    // test if import from output of console
+    try {
+      const obj = JSON.parse(this.adress);
+
+      if (Array.isArray(obj)) {
+        inputAsArray = true;
+        inputTokens = obj [0].key !== undefined && obj [0].key !== null;
       }
 
-    });
+    } catch (e) {
+      // nothing to do normal address import
+    }
 
-    if (!newAddressesAdded) {
+    // input from concole of app
+    if (inputAsArray) {
+
+      const obj = JSON.parse(this.adress);
+
+      // if output from listaccounts {} false false true
+      if (!inputTokens) {
+        obj.forEach(l1 => {
+          l1.forEach(l2 => {
+            if (l2 [1] > 0) {
+              if (this.adresses.indexOf(l2 [0]) < 0 && this.newAddressesAdded.indexOf(l2 [0]) < 0) {
+                this.adresses.push(l2 [0]);
+                this.newAddressesAdded.push(l2 [0]);
+              }
+            }
+          });
+        });
+
+        // if output from listaddressgroupings
+      } else {
+        obj.forEach(l1 => {
+          if (this.adresses.indexOf(l1.owner) < 0 && this.newAddressesAdded.indexOf(l1.owner) < 0) {
+            this.adresses.push(l1.owner);
+            this.newAddressesAdded.push(l1.owner);
+          }
+        });
+      }
+
+    } else {
+
+      this.adress.split(',').forEach(a => {
+
+        if (!this.masternodeAdress) {
+          if (this.adresses.indexOf(a) < 0) {
+            this.adresses.push(a);
+            this.newAddressesAdded.push(a);
+          }
+        } else {
+          if (this.adressesMasternodes.indexOf(a) < 0) {
+            this.adressesMasternodes.push(a);
+            this.newAddressesAdded.push(a);
+          }
+        }
+
+      });
+    }
+
+    if (this.newAddressesAdded?.length === 0) {
       this.adress = '';
       return;
     }
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.newAddressesAdded = new Array<string>();
+    }, 5000);
 
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));

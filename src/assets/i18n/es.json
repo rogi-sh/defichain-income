@@ -47,7 +47,7 @@
     "exc": "Debe ejecutar en su aplicación defichain para obtener todas sus direcciones.",
     "exc2": " Aquí están las direcciones donde se encuentran sus TOKENS (BTC, DFI, BTC-DFI ...).",
     "exc21": " Aquí están las direcciones donde se encuentran sus monedas DFI.",
-    "exc3": "Introduzca todas las direcciones (¡no repetidas!) con balance > 0. en cuanto reciba o envíe monedas DFI debe actualizar las direcciones de nuevo (UTXO).",
+    "exc3": "Introduzca la salida completa de los comandos uno tras otro en el campo de entrada y pulse añadir. Ahorra. Introduzca los nodos principales uno por uno. En cuanto reciba o envíe monedas DFI, deberá introducir de nuevo la salida del segundo comando (UTXO)",
     "add": "Añada las direcciones de su monedero para auditar.",
     "added": "Sus direcciones auditadas.",
     "button-add": "añadir",

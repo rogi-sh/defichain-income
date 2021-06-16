@@ -49,7 +49,7 @@
     "exc": "Führe 2 Befehle in der Konsole deiner DeFiChain App aus um alle deine Adressen zu ermitteln.",
     "exc2": " Hiermit bekommst du Adressen mit deinen TOKENS (BTC, DFI, BTC-DFI ...).",
     "exc21": " Hiermit bekommst du Adressen mit deinen DFI COINS.",
-    "exc3": "Trage alle Adressen (nicht doppelt!) mit einer Balance > 0 ein. Sobald du DFI Coins empfängst oder sendest musst du die neuen Adressen nochmal anpassen (UTXO).",
+    "exc3": "Trage die komplette Ausgabe der Befehle nacheinander in das Eingabefeld ein und drücke hinzufügen. Speichern! Masternodes einzeln eintragen. Sobald du DFI Coins empfängst oder sendest musst du die Ausgabe des zweiten Befehls nochmal eintragen.",
     "add": "Füge deine DFI Adressen für das Tracking hinzu",
     "added": "Diese Adressen werden aktuell abgefragt",
     "button-add": "hinzufügen",
