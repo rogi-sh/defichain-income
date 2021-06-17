@@ -1420,7 +1420,9 @@ export class AppComponent implements OnInit {
         obj.forEach(l1 => {
           l1.forEach(l2 => {
             if (l2 [1] > 0) {
-              if (this.adresses.indexOf(l2 [0]) < 0 && this.newAddressesAdded.indexOf(l2 [0]) < 0) {
+              if (this.adresses.indexOf(l2 [0]) < 0 && this.newAddressesAdded.indexOf(l2 [0]) < 0 &&
+                this.adressesMasternodes.indexOf(l2 [0]) < 0) {
+
                 this.adresses.push(l2 [0]);
                 this.newAddressesAdded.push(l2 [0]);
               }
@@ -1431,7 +1433,8 @@ export class AppComponent implements OnInit {
         // if output from listaddressgroupings
       } else {
         obj.forEach(l1 => {
-          if (this.adresses.indexOf(l1.owner) < 0 && this.newAddressesAdded.indexOf(l1.owner) < 0) {
+          if (this.adresses.indexOf(l1.owner) < 0 && this.newAddressesAdded.indexOf(l1.owner) < 0 &&
+            this.adressesMasternodes.indexOf(l1.owner) < 0) {
             this.adresses.push(l1.owner);
             this.newAddressesAdded.push(l1.owner);
           }
