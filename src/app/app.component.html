@@ -1498,11 +1498,11 @@
                           </div>
                         </div>
                         <div
-                          *ngIf="newAddressesAdded?.length > 0"
+                          *ngIf="showDialogAddressesAdded"
                           class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
                           role="alert"
                         >
-                          Addresses ->
+                          + {{newAddressesAdded?.length}} Addresses
                           <p *ngFor="let a of newAddressesAdded">{{a}} </p>
                         </div>
                       </div>

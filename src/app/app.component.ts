@@ -93,6 +93,7 @@ export class AppComponent implements OnInit {
   adressesMasternodes = new Array<string>();
   adressBalances = new Array<AddressBalance>();
   newAddressesAdded = new Array<string>();
+  showDialogAddressesAdded = false;
   addressesDto;
   addressesMasternodesDto;
   adress = '';
@@ -1394,6 +1395,8 @@ export class AppComponent implements OnInit {
 
     this.newAddressesAdded = new Array<string>();
 
+    this.showDialogAddressesAdded = false;
+
     let inputAsArray = false;
     let inputTokens = false;
 
@@ -1460,6 +1463,8 @@ export class AppComponent implements OnInit {
       });
     }
 
+    this.showDialogAddressesAdded = true;
+
     if (this.newAddressesAdded?.length === 0) {
       this.adress = '';
       return;
@@ -1467,7 +1472,7 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       /** spinner ends after 5 seconds */
-      this.newAddressesAdded = new Array<string>();
+      this.showDialogAddressesAdded = false;
     }, 5000);
 
     localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
