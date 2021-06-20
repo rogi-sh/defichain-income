@@ -1451,7 +1451,8 @@
                           </p>
                           <p class="mb-2">
                             <span
-                              class="rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                              (click)="copyToClipBoard($event.target.innerText)"
+                              class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                               listaccounts {{'{}'}} false false true
                             </span>
 
@@ -1460,7 +1461,8 @@
                           <br>
                           <p class="mb-2">
                             <span
-                              class="rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
+                              (click)="copyToClipBoard($event.target.innerText)"
+                              class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
 
                           </p>
                           <p>{{ 'address.exc21' | translate }}</p>
