@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.7.0 - 21.6.2021';
+    this.log.comment = 'autocopy of address commands, last updated time added';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.6.2 - 17.6.2021';
     this.log.comment = 'better success message after add addresses';
 

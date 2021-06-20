@@ -238,7 +238,7 @@ export class AppComponent implements OnInit {
     this.toggleDarkMode();
     this.handlePageHeight();
 
-    this.timestamp = new Date().toLocaleTimeString()
+    this.timestamp = new Date().toLocaleTimeString();
   }
 
   handlePage(pageTag: string): void {
@@ -326,6 +326,8 @@ export class AppComponent implements OnInit {
 
     }
     this.countdown?.restart();
+
+    this.timestamp = new Date().toLocaleTimeString();
   }
 
   register(): void {
