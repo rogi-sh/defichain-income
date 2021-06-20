@@ -164,6 +164,7 @@ export class AppComponent implements OnInit {
   isInfoOpen = false;
   selectedTab = 'manual';
   isDarkModeOn = false;
+  timestamp = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
@@ -236,6 +237,8 @@ export class AppComponent implements OnInit {
 
     this.toggleDarkMode();
     this.handlePageHeight();
+
+    this.timestamp = new Date().toLocaleTimeString()
   }
 
   handlePage(pageTag: string): void {

@@ -104,6 +104,7 @@
   "add-amount": "Add your ",
   "share": "share",
   "your": "Your",
+  "lastUpdate": "Last update:",
   "blocktime": "{{ count }} Blocks",
   "blocktimeHeadline": "Last blocks for the calculation of the block time",
   "blocksTillCycle": "Blocks till next cycle (rewards decrease 1,658%)",

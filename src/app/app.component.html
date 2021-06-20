@@ -242,6 +242,11 @@
     </div>
   </div>
 
+  <div *ngIf="timestamp" class="hidden lg:inline dark:text-gray-400 fixed right-8 bottom-2 text-xs">
+    {{ 'lastUpdate' | translate }}
+    {{ timestamp }}
+  </div>
+
   <div class="flex items-stretch dashboard-height dark:bg-gray-800">
     <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
       <div class="flex flex-col text-center h-full relative">

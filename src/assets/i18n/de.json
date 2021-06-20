@@ -105,6 +105,7 @@
   "add-amount": "Trage deinen ",
   "share": " Anteil",
   "your": "Deine",
+  "lastUpdate": "Letztes Update:",
   "blocktime": "{{ count }} Blöcke",
   "blocktimeHeadline": "Letzte Blöcke für die Berechnung der Blockzeit",
   "blocksTillCycle": "Blöcke bis zum nächsten Zyklus (Belohnungen verringern sich um 1,658%)",
