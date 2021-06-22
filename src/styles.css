@@ -1,3 +1,4 @@
+
 /* You can add global styles to this file, and also import other style files */
 
 @tailwind base;
@@ -45,4 +46,9 @@
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+.toast-success {
+  background: #11b981!important;
+  box-shadow: none!important;
 }

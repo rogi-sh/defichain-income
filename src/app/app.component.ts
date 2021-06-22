@@ -34,7 +34,7 @@ import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
 import {Meta} from '@angular/platform-browser';
 import {NgxSpinnerService} from 'ngx-spinner';
-
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-root',
@@ -168,13 +168,15 @@ export class AppComponent implements OnInit {
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService) {
+              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService, private toastr: ToastrService) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
-    const browserLang = translate.getBrowserLang();
-    this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';
-    translate.use(this.lang);
+    this.translate = translate
+    const browserLang = translate.getBrowserLang()
+    this.lang =
+      translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en'
+    translate.use(this.lang)
 
     // setze matomo URL
     this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
@@ -1803,5 +1805,9 @@ export class AppComponent implements OnInit {
     elem.select()
     document.execCommand('copy')
     document.body.removeChild(elem)
+
+    this.toastr.success(this.translate.instant('copy'), '', {
+      closeButton: true,
+    })
   }
 }

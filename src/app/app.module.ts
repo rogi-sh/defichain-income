@@ -28,6 +28,7 @@ import { PriceComponent } from '@components/price/price.component';
 import {DataService} from '@services/data.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { ForecastComponent } from '@pages/forecast/forecast.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,12 @@ import { ForecastComponent } from '@pages/forecast/forecast.component';
     CountdownModule,
     HttpClientModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      maxOpened: 3,
+      positionClass: 'toast-bottom-center',
+
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

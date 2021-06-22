@@ -104,6 +104,7 @@
   "share": "Compartir",
   "your": "Su",
   "lastUpdate": "última actualización:",
+  "copy": "Copiar al portapapeles",
   "blocktime": "últimos {{ count }} bloques",
   "blocktimeHeadline": "Últimos bloques para el cálculo del tiempo del bloque",
   "blocksTillCycle": "Bloques hasta el próximo ciclo (las recompensas disminuyen un 1,658%)",
