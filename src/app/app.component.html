@@ -23,6 +23,11 @@
     <div *ngIf="loggedIn" class="hidden lg:inline ml-4 h-full py-3 text-sm dark:text-gray-100">
       <strong>{{ 'login3' | translate }}</strong>
       <div>{{loggedInAuth}}</div>
+
+      <div *ngIf="timestamp" class="hidden lg:inline dark:text-gray-400 text-xs">
+        {{ 'lastUpdate' | translate }}
+        {{ timestamp }}
+      </div>
     </div>
 
     <div class="flex mt-2 sm:absolute sm:right-6 whitespace-nowrap self-center justify-center">
@@ -102,7 +107,7 @@
       <div class="absolute top-0 h-14 w-full">
         <a
           (click)="handlePage('dashboard')"
-          class="absolute w-28 h-20 py-1 left-1/2 transform -translate-x-1/2"
+          class="absolute w-28 h-14 py-1 left-1/2 transform -translate-x-1/2"
         >
           <img
             src="../assets/img/Defi-income.svg"
@@ -208,7 +213,7 @@
 
       <div class="absolute mx-8 bottom-5">
         <select
-          class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none h-10 mr-2 px-2 dark:bg-gray-700"
+          class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none h-10 mr-2 dark:bg-gray-700"
           (change)="useLanguage($event.target['value'])"
           [value]="lang"
         >
@@ -238,14 +243,20 @@
           <option class="text-center" value="CNY">&#20803;</option>
           <option class="text-center" value="SGD">S$</option>
         </select>
+
+        <div *ngIf="timestamp" class="dark:text-gray-400 text-xs">
+          {{ 'lastUpdate' | translate }}
+          {{ timestamp }}
+        </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="timestamp" class="hidden lg:inline dark:text-gray-400 fixed right-8 bottom-2 text-xs">
+  <div *ngIf="timestamp" class="hidden sm:inline lg:hidden dark:text-gray-400 fixed right-8 bottom-2 text-xs">
     {{ 'lastUpdate' | translate }}
     {{ timestamp }}
   </div>
+
 
   <div class="flex items-stretch dashboard-height dark:bg-gray-800">
     <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
