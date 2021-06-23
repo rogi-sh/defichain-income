@@ -15,7 +15,7 @@ import {
   PoolEthOut,
   PoolLtcOut,
   PoolPair,
-  PoolUsdtOut, Rewards,
+  PoolUsdtOut,
   Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
@@ -34,7 +34,7 @@ import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
 import {Meta} from '@angular/platform-browser';
 import {NgxSpinnerService} from 'ngx-spinner';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -164,13 +164,16 @@ export class AppComponent implements OnInit {
   isInfoOpen = false;
   selectedTab = 'manual';
   isDarkModeOn = false;
+  timestamp = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService) {
+              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
+              private toastr: ToastrService) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
+    this.translate = translate;
     const browserLang = translate.getBrowserLang();
     this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';
     translate.use(this.lang);
@@ -236,6 +239,8 @@ export class AppComponent implements OnInit {
 
     this.toggleDarkMode();
     this.handlePageHeight();
+
+    this.timestamp = new Date().toLocaleTimeString();
   }
 
   handlePage(pageTag: string): void {
@@ -323,6 +328,8 @@ export class AppComponent implements OnInit {
 
     }
     this.countdown?.restart();
+
+    this.timestamp = new Date().toLocaleTimeString();
   }
 
   register(): void {
@@ -598,10 +605,6 @@ export class AppComponent implements OnInit {
       this.apiOnline = false;
     }
 
-  }
-
-  sleep(milliseconds): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
   }
 
   loadDex(): void {
@@ -1788,6 +1791,19 @@ export class AppComponent implements OnInit {
     window.addEventListener('resize', () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }
+
+  copyToClipBoard(text: string): void {
+    const elem = document.createElement('textarea');
+    elem.value = text;
+    document.body.appendChild(elem);
+    elem.select();
+    document.execCommand('copy');
+    document.body.removeChild(elem);
+
+    this.toastr.success(this.translate.instant('copy'), '', {
+      closeButton: true,
     });
   }
 }
