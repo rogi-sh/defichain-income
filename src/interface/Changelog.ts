@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.7.1 - 1.7.2021';
+    this.log.comment = 'cake staking apy auto';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.7.0 - 21.6.2021';
     this.log.comment = 'autocopy of address commands, last updated time added';
 

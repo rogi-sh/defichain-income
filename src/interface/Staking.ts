@@ -1,16 +1,10 @@
 export class CakeStaking {
-  shares: Share [];
+  staking: Share [];
 }
 
 export class Share {
   id: string;
-  name: string;
-  returnPerAnnum: string;
-  payoutFreq: number;
-  withdrawalFee: string;
-  availability: string;
-  total: string;
-  coinsOnSale: string;
+  apy: number;
 }
 
 export class Masternode {

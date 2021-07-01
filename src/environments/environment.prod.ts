@@ -8,10 +8,10 @@ export const environment = {
   health: 'https://api.defichain.io/ok',
   stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
-  cake: 'https://api.cakedefi.com/staking',
+  cake: 'https://api.cakedefi.com/coins/apy',
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
-  version: '7.7.0',
+  version: '7.7.1',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

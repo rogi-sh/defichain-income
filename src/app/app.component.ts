@@ -218,7 +218,7 @@ export class AppComponent implements OnInit {
 
     await this.computeMeta();
 
-    // this.loadStackingCake();
+    this.loadStackingCake();
     this.loadStackingMasternode();
 
     if (this.loggedIn) {
@@ -791,7 +791,7 @@ export class AppComponent implements OnInit {
     this.stakingService
       .getStaking().subscribe(
       cake => {
-        this.stakingApyCake = +cake.shares.find(s => s.id === 'DFI').returnPerAnnum * 100;
+        this.stakingApyCake = +cake.staking.find(s => s.id === 'DFI').apy * 100;
         this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
         this.berechneStakingOut();
         this.berechneAllOut();
@@ -802,7 +802,7 @@ export class AppComponent implements OnInit {
             this.loadStackingCake();
             console.error('Try again loadStackingCake ...');
           },
-          600000);
+          60000);
       });
   }
 
