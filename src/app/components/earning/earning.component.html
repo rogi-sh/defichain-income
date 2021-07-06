@@ -28,7 +28,15 @@
         <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerDayUsd(out)"></app-price>
       </span>
     </div>
-
+    <div>
+      <h2>{{ 'week' | translate }}</h2>
+    </div>
+    <div class="col-span-2 lg:col-span-3">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{out?.dfiPerWeek| number: '1.2-2'}} DFI -
+        <app-price [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerWeekUsd(out)"></app-price>
+      </span>
+    </div>
     <div>
       <h2>{{ 'month' | translate }}</h2>
     </div>
