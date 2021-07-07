@@ -79,7 +79,7 @@
     "distribution": "Verteilung deines monatlichen Einkommens",
     "calc": "Rechner",
     "calcVis": "Rechner Visualisierung im Vergleich",
-    "calcText": "Berechnne wie viel Rendite du bekommen kannst z.B. im Freezer bei Cake. Das Ergebnis wird automatisch mit dem aktuellen APY und mit Staking Apy einer Masternode verglichen und visualisiert."
+    "calcText": "Berechne, wieviel Rendite du bekommen kannst z.B. im Freezer bei Cake. Das Ergebnis wird automatisch mit dem aktuellen APY und mit Staking Apy einer Masternode verglichen und visualisiert."
   },
   "forecast": {
     "title": "Prognose",
@@ -96,8 +96,8 @@
   "details-calc": "Berechnungen",
   "invest-needed": "Notwendiges DFI Invest ist ",
   "target-reward-input": "Trage deine Ziel-DFI-Belohnung pro ",
-  "target-reward-title": "Berechne wie viel DFI du einsetzen musst, um deine Zielrendite zu erreichen",
-  "target-reward-title-lm": "Berechnen wie viel Du in LM investieren musst, um deine Zielrendite zu erreichen",
+  "target-reward-title": "Berechne, wieviel DFI du einsetzen musst, um deine Zielrendite zu erreichen",
+  "target-reward-title-lm": "Berechne, wieviel Du in LM investieren musst, um deine Zielrendite zu erreichen",
   "target-reward-sub-lm": "Basierend auf 50/50 Aufteilung für Paare - aktueller ",
   "imprint": "IMPRESSUM",
   "support": "Wenn Dir der Inhalt hier gefällt und Du mich/dieses Projekt unterstützen willst mit",
