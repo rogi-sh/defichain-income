@@ -270,6 +270,7 @@ export class ForecastComponent implements OnInit, OnChanges {
     poolAllOut.dfiPerMin = poolInput.dfiPerMin;
     poolAllOut.dfiPerHour = poolInput.dfiPerHour;
     poolAllOut.dfiPerMonth = poolInput.dfiPerMonth;
+    poolAllOut.dfiPerWeek = poolInput.dfiPerWeek;
     poolAllOut.dfiPerYear = poolInput.dfiPerYear;
   }
 
@@ -282,6 +283,7 @@ export class ForecastComponent implements OnInit, OnChanges {
     poolAllOut.dfiPerMin = inputPool[i - 1].dfiPerMin * this.reducePercent;
     poolAllOut.dfiPerHour = inputPool[i - 1].dfiPerHour * this.reducePercent;
     poolAllOut.dfiPerMonth = inputPool[i - 1].dfiPerMonth * this.reducePercent;
+    poolAllOut.dfiPerWeek = inputPool[i - 1].dfiPerWeek * this.reducePercent;
     poolAllOut.dfiPerYear = inputPool[i - 1].dfiPerYear * this.reducePercent;
   }
 

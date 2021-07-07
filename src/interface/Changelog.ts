@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.7.3 - 7.7.2021';
+    this.log.comment = 'week earnings fix in forecast';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.7.2 - 6.7.2021';
     this.log.comment = 'week earnings back';
 
