@@ -21,6 +21,7 @@
     "@angular/material": "^11.2.4",
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
+    "@angular/service-worker": "~11.2.14",
     "@apollo/client": "^3.3.19",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "@ngneat/tailwind": "^6.0.3",

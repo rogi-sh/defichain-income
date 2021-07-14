@@ -1,4 +1,4 @@
-<button class="btn btn-sm btn-secondary dark:text-gray-100" (click)="handleOpen()">{{env.version}}</button>
+<button class="dark:text-gray-100 hover:text-pink-500" (click)="handleOpen()">{{env.version}}</button>
 
 <div *ngIf="isOpen" class="bg-fixed bg-white dark:bg-black fixed inset-0 bg-opacity-80 z-50">
   <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
