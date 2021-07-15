@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
 
-    this.log.version = '7.7.4 - 7.7.2021';
+    this.log.version = '7.7.4 - 15.7.2021';
     this.log.comment = 'pwa fixes';
 
     this.logs.push(this.log);
