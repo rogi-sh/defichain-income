@@ -92,6 +92,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   @Input()
   showOnlyGraph: boolean;
 
+  @Input()
+  isIncognitoModeOn: boolean;
+
   constructor()  { }
 
   ngOnInit(): void {
