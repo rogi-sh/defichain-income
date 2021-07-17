@@ -16,16 +16,14 @@
         <tbody>
           <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">BTC</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked "></app-price>
             </td>
             <td class="text-right p-2">
-              {{
-              corr?.btcPool
-              }}
+              {{corr?.btcPool}}
             </td>
             <td class="text-right p-2">
               {{poolBtc?.apy | number: '1.2-2' }}%
@@ -34,7 +32,7 @@
 
           <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">ETH</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolEth?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
@@ -52,7 +50,7 @@
 
           <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">USDT</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.priceA "></app-price>
             </td>
             <td class="text-right p-2">
@@ -70,7 +68,7 @@
 
           <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">LTC</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolLtc?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
@@ -88,7 +86,7 @@
 
           <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">DOGE</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolDoge?.priceA "></app-price>
             </td>
             <td class="text-right p-2">
@@ -106,7 +104,7 @@
 
           <tr class="dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">BCH</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBch?.priceA"></app-price>
             </td>
             <td class="text-right p-2">
@@ -124,7 +122,7 @@
 
           <tr class="dark:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
             <td class="p-2">DFI</td>
-            <td class="text-right p-2">
+            <td [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-right p-2">
               <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price>
             </td>
             <td class="text-right p-2"></td>

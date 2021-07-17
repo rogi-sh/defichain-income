@@ -52,3 +52,12 @@
   background: #11b981!important;
   box-shadow: none!important;
 }
+
+.hide-content {
+  font-size: 0px;
+}
+
+.hide-content::after {
+  content: '*****';
+  font-size: 12px;
+}
