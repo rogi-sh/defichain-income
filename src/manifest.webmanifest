@@ -1,7 +1,7 @@
 {
   "name": "Defichain income",
   "short_name": "DEFI-Income",
-  "theme_color": "#1976d2",
+  "theme_color": "#FF00AF",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
