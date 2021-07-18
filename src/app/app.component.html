@@ -32,16 +32,15 @@
       </div>
     </div>
 
-    <div class="hidden lg:inline-block dark:text-gray-100 py-4 pl-5 cursor-pointer">
+    <div class="hidden lg:inline-block dark:text-gray-100 py-4 pl-5">
       <input
         type="checkbox"
         id="incognito-eye"
         [(ngModel)]="isIncognitoModeOn"
-        (ngModelChange)="toggleIncognitoMode()"
         [ngClass]="{ 'isChecked': isIncognitoModeOn }"
         class="hidden"
       />
-      <label for="incognito-eye" class="cursor-pointer">
+      <label for="incognito-eye" class="cursor-pointer inline-block">
         <app-icon class="pointer-events-none" *ngIf="!isIncognitoModeOn" name="eye"></app-icon>
         <app-icon class="pointer-events-none" *ngIf="isIncognitoModeOn" name="eye-close"></app-icon>
       </label>
@@ -878,7 +877,6 @@
                           type="checkbox"
                           id="incognito"
                           [(ngModel)]="isIncognitoModeOn"
-                          (ngModelChange)="toggleIncognitoMode()"
                           [ngClass]="{ 'isChecked': isIncognitoModeOn }"
                           class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
                         />
