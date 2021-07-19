@@ -78,7 +78,7 @@ import { environment } from '../environments/environment';
     GraphQLModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      registrationStrategy: 'registeregisterImmediately'
+      registrationStrategy: 'registerImmediately'
     }),
   ],
   providers: [DataService],
