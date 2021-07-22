@@ -32,7 +32,8 @@
 
     <div class="flex mt-2 sm:absolute sm:right-6 whitespace-nowrap self-center justify-center">
       <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
-        <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <span
+          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           DEX
           <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
           CEX
@@ -386,7 +387,8 @@
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.dfi > 0">DFI</div>
                     <div *ngIf="wallet?.dfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                      <span
+                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         {{wallet?.dfi | number: '1.3-3'}}
                       </span>
                     </div>
@@ -551,11 +553,14 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBtc| number: '1.4-4' }} % </span>
-                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC
+                    </div>
 
                   </h3>
                   <br>
@@ -581,9 +586,11 @@
                     <span
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolEth| number: '1.4-4' }} %</span>
-                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH
+                    </div>
                   </h3>
                   <br>
                   <app-earning
@@ -598,17 +605,21 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsdt | number: '1.2-2'}} DFI/Block
+                      USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsdt | number: '1.2-2'}}
+                      DFI/Block
                     </span>
                   </h2>
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
-                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT
+                    </div>
                   </h3>
                   <br>
                   <app-earning
@@ -629,11 +640,14 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolLtc| number: '1.4-4' }} %</span>
-                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC
+                    </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolLtcOut" [pool]="poolLtc" [fiat]="fiat"></app-earning>
@@ -644,17 +658,21 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APR - {{dfiProBlockDoge | number: '1.2-2'}} DFI/Block
+                      DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APR - {{dfiProBlockDoge | number: '1.2-2'}}
+                      DFI/Block
                     </span>
                   </h2>
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolDoge| number: '1.4-4' }} %</span>
-                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE
+                    </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat"></app-earning>
@@ -671,11 +689,14 @@
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
-                    <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBch| number: '1.4-4' }} %</span>
-                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
+                    <div
+                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH
+                    </div>
                   </h3>
                   <br>
                   <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
@@ -777,7 +798,8 @@
                             id="sCountdown"
                             class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                           >
-                          <label for="sCountdown" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                          <label for="sCountdown"
+                                 class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'refresh6' | translate }}
                           </label>
                         </div>
@@ -795,7 +817,8 @@
 
                     <div class="w-full text-xs text-gray-400 mt-1">
                       {{ 'refresh3' | translate }}
-                      <countdown class="text-pink-400" [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
+                      <countdown class="text-pink-400"
+                                 [config]="{ leftTime: sCountdownShow, format: 'mm:ss' }"></countdown>
                     </div>
 
 
@@ -803,7 +826,8 @@
                       <div class="dark:text-gray-100">
                         Darkmode:
                       </div>
-                      <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                      <div
+                        class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                         <input
                           type="checkbox"
                           id="darkmode"
@@ -855,7 +879,8 @@
                       </button>
                     </p>
 
-                    <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2" role="alert">
+                    <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+                         role="alert">
                       {{errorBackend}}
                     </div>
                     <div
@@ -882,7 +907,8 @@
                             id="loggedInAuthInput"
                             class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                           >
-                          <label for="loggedInAuthInput" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                          <label for="loggedInAuthInput"
+                                 class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                             {{ 'login21' | translate }}
                           </label>
                         </div>
@@ -980,7 +1006,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputBTCWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1000,7 +1026,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputETHWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1020,7 +1046,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputLTCWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1040,7 +1066,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputUsdtWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1060,7 +1086,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputDOGEWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DOGE
                             </label>
                           </div>
@@ -1080,7 +1106,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputBchWallet"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1105,7 +1131,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="saveInputStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1125,7 +1151,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="dfiInStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1149,7 +1175,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeBtcBtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BTC
                             </label>
                           </div>
@@ -1169,7 +1195,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiBtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1189,7 +1215,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeEthEthPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               ETH
                             </label>
                           </div>
@@ -1209,7 +1235,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiEthPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1229,7 +1255,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeUsdtUsdtPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               USDT
                             </label>
                           </div>
@@ -1249,7 +1275,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiUsdtPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1269,7 +1295,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeLtcLtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               LTC
                             </label>
                           </div>
@@ -1289,7 +1315,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiLtcPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1309,7 +1335,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDogeDogePool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Doge
                             </label>
                           </div>
@@ -1329,7 +1355,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiDogePool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1349,7 +1375,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeBchBchPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               BCH
                             </label>
                           </div>
@@ -1370,7 +1396,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="onChangeDfiBchPool"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1397,7 +1423,8 @@
                               id="inputDFIStakingAuto"
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
-                            <label for="inputDFIStakingAuto" class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                            <label for="inputDFIStakingAuto"
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               DFI
                             </label>
                           </div>
@@ -1417,7 +1444,7 @@
                               class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                             >
                             <label for="inputApyStaking"
-                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                               Staking APY
                             </label>
                           </div>
@@ -1445,7 +1472,8 @@
                              [ngClass]="{'hidden': !isInfoOpen}">
                           <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
                           <p class="mb-2">
-                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
+                            <span
+                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
                           </p>
                           <p class="mb-2">
                             {{ 'address.exc0' | translate }}
@@ -1460,7 +1488,8 @@
                           </p>
 
                           <p class="mb-2">
-                            <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
+                            <span
+                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
                           </p>
                           <p class="mb-2">
                             {{ 'address.exc' | translate }}
@@ -1501,7 +1530,7 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                               ></textarea>
                               <label for="inputAddress"
-                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DFI Addresses
                               </label>
                             </div>
@@ -1523,11 +1552,32 @@
                           + {{newAddressesAdded?.length}} Addresses
                           <p *ngFor="let a of newAddressesAdded">{{a}} </p>
                         </div>
+                        <div
+                          *ngIf="showDialogAddressesNotAdded"
+                          class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+                          role="alert"
+                        >
+                          Ne geht nicht da beide Checkobox an
+                        </div>
                       </div>
                       <br>
                       <div class="flex items-center">
-                        <input [(ngModel)]="masternodeAdress" type="checkbox" id="checkbox-large-example" class="h-6 w-6 text-gray-700 border rounded mr-2">
+                        <input [(ngModel)]="masternodeAdress" type="checkbox" id="checkbox-large-example"
+                               class="h-6 w-6 text-gray-700 border rounded mr-2">
                         <label for="checkbox-large-example">Masternode  {{ 'address.label' | translate }}</label>
+                      </div>
+                      <div *ngIf="masternodeAdress">
+                        <div class="flex items-center">
+                          <input [(ngModel)]="masternodeFreezer5" type="checkbox" id="checkbox-mn-freezer5"
+                                 class="h-6 w-6 text-gray-700 border rounded mr-2">
+                          <label for="checkbox-mn-freezer5">Freezer 5 Years - 1,5X</label>
+                        </div>
+
+                        <div class="flex items-center">
+                          <input [(ngModel)]="masternodeFreezer10" type="checkbox" id="checkbox-mn-freezer10"
+                                 class="h-6 w-6 text-gray-700 border rounded mr-2">
+                          <label for="checkbox-mn-freezer10">Freezer 10 Years - 2X</label>
+                        </div>
                       </div>
                       <br>
                       <h3 class="text-2xl mb-2 text-pink-500">
@@ -1545,6 +1595,14 @@
                               <div *ngIf="getAddressBalance(a)?.masternode"
                                    class="inline rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                 <span class="font-bold">Masternode</span>
+                              </div>
+                              <div *ngIf="getAddressBalance(a)?.freezed5"
+                                   class="inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                <span class="font-bold">Freezer 5 Years - 1,5X</span>
+                              </div>
+                              <div *ngIf="getAddressBalance(a)?.freezed10"
+                                   class="inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                <span class="font-bold">Freezer 10 Years - 2X</span>
                               </div>
                               <div
                                 class="inline rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">

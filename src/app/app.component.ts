@@ -91,15 +91,20 @@ export class AppComponent implements OnInit {
 
   adresses = new Array<string>();
   adressesMasternodes = new Array<string>();
+  adressesMasternodesFreezer5 = new Array<string>();
+  adressesMasternodesFreezer10 = new Array<string>();
   adressBalances = new Array<AddressBalance>();
   newAddressesAdded = new Array<string>();
   showDialogAddressesAdded = false;
+  showDialogAddressesNotAdded = false;
   addressesDto;
   addressesMasternodesDto;
   adress = '';
   adressesKey = 'adressesKey';
   adressesMasternodesKey = 'adressesMasternodesKey';
   masternodeAdress = false;
+  masternodeFreezer5 = false;
+  masternodeFreezer10 = false;
 
   dex: DexInfo;
 
@@ -761,13 +766,14 @@ export class AppComponent implements OnInit {
         results.forEach((value, i) => {
           // minter address
           if (i > this.adresses?.length * 2 - 1) {
-            this.addCoinsToWallet(value as Balance, this.getMasternodeAddressForIteration(i), true);
+            const adress = this.getMasternodeAddressForIteration(i);
+            this.addCoinsToWallet(value as Balance, adress, true, this.isFrozen5(adress), this.isFrozen10(adress));
           } else {
             if (i % 2 === 0) {
               const balances = value as [string];
               balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
             } else {
-              this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i), false);
+              this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i), false, false, false);
             }
           }
         });
@@ -785,6 +791,14 @@ export class AppComponent implements OnInit {
           5000);
 
       });
+  }
+
+  isFrozen5(adress): boolean {
+    return this.adressesMasternodesFreezer5.indexOf(adress) > -1;
+  }
+
+  isFrozen10(adress): boolean {
+    return this.adressesMasternodesFreezer10.indexOf(adress) > -1;
   }
 
   loadStackingCake(): void {
@@ -836,7 +850,7 @@ export class AppComponent implements OnInit {
     return this.adressesMasternodes[i - this.adresses?.length * 2];
   }
 
-  addCoinsToWallet(balance: Balance, address: string, masternode: boolean): void {
+  addCoinsToWallet(balance: Balance, address: string, masternode: boolean, freezed5: boolean, freezed10: boolean): void {
 
     // Balance is in Satoshi
     if (!masternode) {
@@ -849,6 +863,8 @@ export class AppComponent implements OnInit {
       const aB = new AddressBalance();
       aB.address = address;
       aB.masternode = masternode;
+      aB.freezed5 = freezed5;
+      aB.freezed10 = freezed10;
       this.adressBalances.push(aB);
     }
 
@@ -1102,12 +1118,25 @@ export class AppComponent implements OnInit {
 
   berechneMNOut(): void {
     this.stakingApyMN = 60 / this.blocktimeInS * this.rewards?.rewards?.minter / this.masternodeCount * 525600 / 20000 * 100;
-    this.poolMasternodeOut.dfiPerYear = this.adressesMasternodes.length * 20000 * this.stakingApyMN / 100;
+    this.poolMasternodeOut.dfiPerYear = this.getRewardMnForYear();
     this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
     this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
     this.poolMasternodeOut.dfiPerDay = this.poolMasternodeOut.dfiPerMonth / 30;
     this.poolMasternodeOut.dfiPerHour = this.poolMasternodeOut.dfiPerDay / 24;
     this.poolMasternodeOut.dfiPerMin = this.poolMasternodeOut.dfiPerHour / 60;
+  }
+
+  getRewardMnForYear(): number {
+    let reward = 0;
+    const countFreezer5 = this.adressesMasternodesFreezer5.length;
+    const countFreezer10 = this.adressesMasternodesFreezer10.length;
+    const countNormal = this.adressesMasternodes.length - countFreezer5 - countFreezer10;
+
+    reward += countNormal * 20000 * this.stakingApyMN / 100;
+    reward += countFreezer5 * 20000 * this.stakingApyMN / 100 * 1.5;
+    reward += countFreezer10 * 20000 * this.stakingApyMN / 100 * 2;
+
+    return reward;
   }
 
 
@@ -1396,6 +1425,24 @@ export class AppComponent implements OnInit {
 
   addAdress(): void {
 
+    // checkCheckboxes
+    this.showDialogAddressesAdded = false;
+    if (this.masternodeFreezer5 && this.masternodeFreezer10) {
+      this.showDialogAddressesNotAdded = true;
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.showDialogAddressesNotAdded = false;
+      }, 5000);
+      return;
+    } else if ((this.masternodeFreezer5 && !this.masternodeAdress) || (this.masternodeFreezer10 && !this.masternodeAdress)) {
+      this.showDialogAddressesNotAdded = true;
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.showDialogAddressesNotAdded = false;
+      }, 5000);
+      return;
+    }
+
     this.newAddressesAdded = new Array<string>();
 
     this.showDialogAddressesAdded = false;
@@ -1459,6 +1506,12 @@ export class AppComponent implements OnInit {
         } else {
           if (this.adressesMasternodes.indexOf(a) < 0) {
             this.adressesMasternodes.push(a);
+            if (this.masternodeFreezer5) {
+              this.adressesMasternodesFreezer5.push(a);
+            }
+            if (this.masternodeFreezer10) {
+              this.adressesMasternodesFreezer10.push(a);
+            }
             this.newAddressesAdded.push(a);
           }
         }
@@ -1482,6 +1535,8 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
     this.adress = '';
     this.masternodeAdress = false;
+    this.masternodeFreezer5 = false;
+    this.masternodeFreezer10 = false;
     this.clearWallet();
     this.loadAddressesAndDexData();
   }
