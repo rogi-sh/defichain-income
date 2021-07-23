@@ -1,6 +1,6 @@
 {
-  "name": "Defichain income",
-  "short_name": "DEFI-Income",
+  "name": "defichain-income",
+  "short_name": "defi-Income",
   "theme_color": "#FF00AF",
   "background_color": "#fafafa",
   "display": "standalone",
