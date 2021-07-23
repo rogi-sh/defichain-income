@@ -129,8 +129,9 @@
               {{ "balance" | translate}} in Fiat
             </div>
             <div>
-              <span [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountStakingUsd()"></app-price>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountStakingUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </span>
             </div>
           </h3>
@@ -200,47 +201,44 @@
 
         <span *ngIf="isIncognitoModeOn" class="grid grid-flow-row auto-rows-max grid-cols-2 md:grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
           <span class="text-xl dark:text-gray-100">
-            <div 
-              [ngClass]="isIncognitoModeOn && 'hide-content'"
-              class="text-pink-500 font-semibold inline-block"
-            >
-              {{wallet?.btcInBtcPool | number: "1.5-5"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.btcInBtcPool | number: "1.5-5"}}
             </div>
             BTC
           </span>
           <span class="text-xl dark:text-gray-100">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{wallet?.ethInEthPool | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.ethInEthPool | number: "1.3-3"}}
             </div>
             ETH
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdtInUsdtPool > 0">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{wallet?.usdtInUsdtPool | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.usdtInUsdtPool | number: "1.3-3"}}
             </div>
             USDT
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ltcInLtcPool > 0">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{wallet?.ltcInLtcPool | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.ltcInLtcPool | number: "1.3-3"}}
             </div>
             LTC
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.dogeInDogePool > 0">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{wallet?.dogeInDogePool | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.dogeInDogePool | number: "1.3-3"}}
             </div>
             DOGE
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.bchInBchPool > 0">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{wallet?.bchInBchPool | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.bchInBchPool | number: "1.3-3"}}
             </div>
             BCH
           </span>
           <span class="text-xl dark:text-gray-100">
-            <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="text-pink-500 font-semibold inline-block">
-              {{getDfiCountInLM | number: "1.3-3"}}
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : getDfiCountInLM | number: "1.3-3"}}
             </div>
             DFI
           </span>
@@ -251,8 +249,9 @@
             {{ "balance" | translate}} in Fiat
           </span>
           <div>
-            <span [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-              <app-price [fiat]="fiat" [usdPrice]="getLMUsd"></app-price>
+            <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+              <app-pric *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLMUsd"></app-pric>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </span>
           </div>
         </h3>
@@ -303,8 +302,9 @@
               {{ "balance" | translate}} in Fiat
             </div>
             <div>
-              <span [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountMasternodesUsd()"></app-price>
+              <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountMasternodesUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </span>
             </div>
           </h3>
