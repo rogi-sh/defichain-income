@@ -2,7 +2,7 @@
   "name": "DefiChain-Income",
   "short_name": "DEFI Income",
   "theme_color": "#FF00AF",
-  "background_color": "#ffffff",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
   "start_url": "https://defichain-income.com",
