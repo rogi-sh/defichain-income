@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="hidden lg:inline-block dark:text-gray-100 py-4 pl-5">
+    <div class="hidden md:inline-block dark:text-gray-100 py-4 pl-5">
       <input
         type="checkbox"
         id="incognito-eye"
@@ -50,9 +50,11 @@
       <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           DEX
-          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+          <div class="inline-block" *ngIf="isIncognitoModeOn">*****</div>
+          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
           CEX
-          <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
+          <div class="inline-block" *ngIf="isIncognitoModeOn">*****</div>
+          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           DFI
         </span>
       </div>
@@ -285,7 +287,7 @@
         <a
           (click)="handlePage('dashboard')"
           [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer≈"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer"
           title="Dashboard"
         >
           <app-icon name="home"></app-icon>
@@ -466,7 +468,7 @@
                     </div>
                     <div *ngIf="wallet?.usdt > 0">
                       <div
-                        class="inline-block ounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         <div *ngIf="!isIncognitoModeOn">{{wallet?.usdt | number: '1.5-5'}}</div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
@@ -498,38 +500,32 @@
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
                     <div *ngIf="wallet?.btcdfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.btcdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.btcdfi | number: '1.3-3'}}</span>
                     </div>
 
                     <div *ngIf="wallet?.ethdfi > 0">ETH-DFI</div>
                     <div *ngIf="wallet?.ethdfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.ethdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ethdfi | number: '1.3-3'}}</span>
                     </div>
 
                     <div *ngIf="wallet?.ltcdfi > 0">LTC-DFI</div>
                     <div *ngIf="wallet?.ltcdfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.ltcdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ltcdfi | number: '1.3-3'}}</span>
                     </div>
 
                     <div *ngIf="wallet?.usdtdfi > 0">USDT-DFI</div>
                     <div *ngIf="wallet?.usdtdfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.usdtdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdtdfi | number: '1.3-3'}}</span>
                     </div>
 
                     <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
                     <div *ngIf="wallet?.dogedfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.dogedfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.dogedfi | number: '1.3-3'}}</span>
                     </div>
 
                     <div *ngIf="wallet?.bchdfi > 0">BCH-DFI</div>
                     <div *ngIf="wallet?.bchdfi > 0">
-                      <span
-                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{wallet?.bchdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.bchdfi | number: '1.3-3'}}</span>
                     </div>
                   </div>
                 </div>
@@ -576,27 +572,27 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      BTC/DFI {{poolBtc?.apy | number: '1.2-2' }}% APR - {{dfiProBlockBtc | number: '1.2-2'}} DFI/Block
+                      BTC/DFI {{isIncognitoModeOn ? '****' : poolBtc?.apy | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockBtc | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
                   <h3>
                     Pool {{ 'share' | translate }}
                     <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
-                      {{anteilAmPoolBtc| number: '1.4-4' }} %
+                      {{isIncognitoModeOn ? '****' : anteilAmPoolBtc| number: '1.4-4' }} %
                     </span>
                     <div
                       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block"
                     >
-                      <div *ngIf="!isIncognitoModeOn">
-                        {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
-                        / {{getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC
+                      <div>
+                        {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
+                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC
                       </div>
-                      <div *ngIf="isIncognitoModeOn">**** DFI / **** BTC</div>
                     </div>
                   </h3>
                   <br>
                   <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn"
                     [out]="poolBtcOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
@@ -609,7 +605,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      ETH/DFI {{poolEth?.apy | number: '1.2-2' }}% APR - {{dfiProBlockEth | number: '1.2-2'}} DFI/Block
+                      ETH/DFI {{isIncognitoModeOn ? '****' : poolEth?.apy | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockEth | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -617,7 +613,7 @@
                     Pool {{ 'share' | translate }}
                     <span
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
-                      {{anteilAmPoolEth| number: '1.4-4' }} %
+                      {{isIncognitoModeOn ? '****' : anteilAmPoolEth| number: '1.4-4' }} %
                     </span>
                     <div
                       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block"
@@ -627,6 +623,7 @@
                   </h3>
                   <br>
                   <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn"
                     [out]="poolEthOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
@@ -652,6 +649,7 @@
                   </h3>
                   <br>
                   <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn"
                     [out]="poolUsdtOut"
                     [pool]="poolBtc"
                     [fiat]="fiat"
@@ -676,7 +674,8 @@
                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
                   </h3>
                   <br>
-                  <app-earning 
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" 
                     [out]="poolLtcOut"
                     [pool]="poolLtc"
                     [fiat]="fiat"
@@ -701,7 +700,8 @@
                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
                   </h3>
                   <br>
-                  <app-earning [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat"></app-earning>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolDogeOut" [pool]="poolDoge" [fiat]="fiat"></app-earning>
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
@@ -722,7 +722,8 @@
                        / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
                   </h3>
                   <br>
-                  <app-earning [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
                 </div>
               </div>
             </div>

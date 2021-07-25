@@ -40,6 +40,7 @@
     </div>
     <div class="mt-4">
       <app-earning
+        [isIncognitoModeOn]="isIncognitoModeOn"
         [out]="stakingCalcOut"
         [pool]="poolBtc"
         [fiat]="fiat"
@@ -73,11 +74,11 @@
     </select>
     <br>
     <br>
-    <p>Cake  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingApyCake | number: '1.2-2'}} % APY</span></p>
+    <p>Cake  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : stakingApyCake | number: '1.2-2'}} % APY</span></p>
     <br>
-    <p>Masternode  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingApyMN | number: '1.2-2'}} % APR</span></p>
+    <p>Masternode  <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : stakingApyMN | number: '1.2-2'}} % APR</span></p>
     <br>
-    <p>Input <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{stakingCalcOut.apy | number: '1.2-2'}} % APY</span></p>
+    <p>Input <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : stakingCalcOut.apy | number: '1.2-2'}} % APY</span></p>
     <br>
     <div id="chart4">
       <apx-chart
