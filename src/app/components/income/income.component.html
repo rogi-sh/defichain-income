@@ -89,6 +89,7 @@
         </div>
 
         <app-earning
+          [isIncognitoModeOn]="isIncognitoModeOn"
           [out]="poolAllOut"
           [pool]="poolBtc"
           [fiat]="fiat"
@@ -138,10 +139,11 @@
           <br>
           <div class="mt-2">
             <app-earning
+              [isIncognitoModeOn]="isIncognitoModeOn"
               [out]="stakingOut"
               [pool]="poolBtc"
               [fiat]="fiat"
-              >
+            >
             </app-earning>
           </div>
         </div>
@@ -257,6 +259,7 @@
         </h3>
         <br>
         <app-earning
+          [isIncognitoModeOn]="isIncognitoModeOn"
           [out]="poolOut"
           [pool]="poolBtc"
           [fiat]="fiat"
@@ -311,6 +314,7 @@
           <br>
           <div class="mt-2">
             <app-earning
+              [isIncognitoModeOn]="isIncognitoModeOn"
               [out]="masternodeOut"
               [pool]="poolBtc"
               [fiat]="fiat"

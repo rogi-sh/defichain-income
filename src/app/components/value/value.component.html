@@ -58,7 +58,7 @@
         <span class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 border-b pb-2 col-span-2 mb-2">
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{getDfiCount() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getDfiCount() | number: '1.2-2' }}
               <br/>
               <div 
                 class="text-xs text-gray-400 dark:text-gray-300"
@@ -73,7 +73,7 @@
           </div>
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{dfiInStaking | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
               <br/>
               <div 
                 class="text-xs text-gray-400 dark:text-gray-300"
@@ -89,7 +89,7 @@
 
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{getDfiCountLM() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getDfiCountLM() | number: '1.2-2' }}
               <br/>
               <div 
                 class="text-xs text-gray-400 dark:text-gray-300"
@@ -105,7 +105,7 @@
 
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{wallet?.dfi | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : wallet?.dfi | number: '1.2-2' }}
               <br/>
               <div 
                 class="text-xs text-gray-400 dark:text-gray-300"
@@ -121,7 +121,7 @@
 
            <div *ngIf="wallet?.dfiInMasternodes > 0" class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{ wallet?.dfiInMasternodes | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes | number: '1.2-2' }}
               <br/>
               <div 
                 class="text-xs text-gray-400"

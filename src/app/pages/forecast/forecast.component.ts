@@ -51,6 +51,9 @@ export class ForecastComponent implements OnInit, OnChanges {
   @Input()
   blockHeight!: number;
 
+  @Input()
+  isIncognitoModeOn: boolean;
+
   euonsHardforkeBlock = 894000;
 
   poolOuts = new Array<PoolAllOut>();
