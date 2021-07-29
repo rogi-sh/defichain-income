@@ -15,7 +15,7 @@ export const environment = {
   cake: 'https://api.cakedefi.com/coins/apy',
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
-  version: '7.7.6',
+  version: '7.7.7',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

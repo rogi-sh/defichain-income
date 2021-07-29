@@ -59,7 +59,7 @@
   },
   "holdings": {
     "title": "Твой капитал",
-    "wallet": "Твой Wallet активов",
+    "wallet": "Bаш запас",
     "lp": "Твои LP Token Активы",
     "stake-add": "Запиши свои DFI Staking Активы.",
     "no-stake": "Напиши 0 если у тебя нет DFI Staking .",

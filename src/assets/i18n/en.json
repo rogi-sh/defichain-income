@@ -58,7 +58,7 @@
   },
   "holdings": {
     "title": "Your crypto holdings",
-    "wallet": "Your Wallet Coins",
+    "wallet": "Your holdings",
     "lp": "Your LP Token",
     "stake-add": "Add your stake DFI amount.",
     "no-stake": "Set 0 if you not stake.",

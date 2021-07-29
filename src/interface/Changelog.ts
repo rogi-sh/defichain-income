@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.7.7 - 29.7.2021';
+    this.log.comment = 'Better texts (Lord Mark himself feedback :) ) ';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.7.6 - 24.7.2021';
     this.log.comment = 'fix pwa for ios';
 

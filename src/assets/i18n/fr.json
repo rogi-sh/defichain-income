@@ -58,7 +58,7 @@
   },
   "holdings": {
     "title": "Vos possessions crypto",
-    "wallet": "Vos pièces de portefeuille",
+    "wallet": "Vos stocks",
     "lp": "Vos jetons LP",
     "stake-add": "Ajoutez votre montant de DFI stacké.",
     "no-stake": "Indiquez 0 si vous ne stackez pas.",
