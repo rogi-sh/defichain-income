@@ -147,7 +147,7 @@
             BTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
             <div 
               class="text-xs text-gray-400 dark:text-gray-300"
             >
@@ -162,7 +162,7 @@
             ETH
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
             <div 
               class="text-xs text-gray-400 dark:text-gray-300"
             >
@@ -177,7 +177,7 @@
             USDT
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
             <div 
               class="text-xs text-gray-400 dark:text-gray-300"
             >
@@ -192,7 +192,7 @@
             LTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
             <div 
               class="text-xs text-gray-400 dark:text-gray-300"
             >
@@ -207,7 +207,7 @@
             DOGE
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
               <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDogeValueUsd()"></app-price>
               <div *ngIf="isIncognitoModeOn" >*****</div>
@@ -220,7 +220,7 @@
             BCH
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
               <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
               <div *ngIf="isIncognitoModeOn" >*****</div>
