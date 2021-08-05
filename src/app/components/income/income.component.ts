@@ -252,28 +252,28 @@ export class IncomeComponent implements OnInit, OnChanges {
     const incomeNumbers = new Array<string>();
 
     if (this.stakingOut.dfiPerMonth > 0) {
-      incomeNumbers.push('Staking - ' + this.stakingOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`Staking - ${this.isIncognitoModeOn ? '****' : this.stakingOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.masternodeOut.dfiPerMonth > 0) {
-      incomeNumbers.push('Masternode - ' + this.masternodeOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`Masternode - ${this.isIncognitoModeOn ? '****' : this.masternodeOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolBtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('BTC-Pool - ' + this.poolBtcOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`BTC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolBtcOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolEthOut.dfiPerMonth > 0) {
-      incomeNumbers.push('ETH-Pool - ' + this.poolEthOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`ETH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolEthOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolLtcOut.dfiPerMonth > 0) {
-      incomeNumbers.push('LTC-Pool - ' + this.poolLtcOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`LTC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolLtcOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolUsdtOut.dfiPerMonth > 0) {
-      incomeNumbers.push('USDT-Pool - ' + this.poolUsdtOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`USDT-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdtOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolDogeOut.dfiPerMonth > 0) {
-      incomeNumbers.push('DOGE-Pool - ' + this.poolDogeOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`DOGE-Pool - ${this.isIncognitoModeOn ? '****' : this.poolDogeOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolBchOut.dfiPerMonth > 0) {
-      incomeNumbers.push('BCH-Pool - ' + this.poolBchOut.dfiPerMonth.toFixed(2) + ' DFI');
+      incomeNumbers.push(`BCH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolBchOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }
