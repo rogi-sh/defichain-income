@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.8.0 - 5.8.2021';
+    this.log.comment = 'Inkognito Mode';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.7.7 - 29.7.2021';
     this.log.comment = 'Better texts (Lord Mark himself feedback :) ) ';
 
