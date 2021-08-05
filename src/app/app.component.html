@@ -50,15 +50,13 @@
       <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
         <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           DEX
-          <div class="inline-block" *ngIf="isIncognitoModeOn">*****</div>
-          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
           CEX
-          <div class="inline-block" *ngIf="isIncognitoModeOn">*****</div>
-          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
+          <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           DFI
         </span>
       </div>
-      <div 
+      <div
         *ngIf="!!getAllValuesUsdPrice()"
         class="inline-block h-full sm:mr-5 items-center"
       >
@@ -675,7 +673,7 @@
                   </h3>
                   <br>
                   <app-earning
-                    [isIncognitoModeOn]="isIncognitoModeOn" 
+                    [isIncognitoModeOn]="isIncognitoModeOn"
                     [out]="poolLtcOut"
                     [pool]="poolLtc"
                     [fiat]="fiat"
