@@ -45,8 +45,11 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   hideHoldings: boolean;
 
-  detailsOpen = false;
+  @Input()
+  isIncognitoModeOn: boolean;
 
+  detailsOpen = false;
+  
   ngOnInit(): void {
     this.buildDataForChart();
     this.buildDataForChartValue();

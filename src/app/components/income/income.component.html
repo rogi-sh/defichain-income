@@ -89,6 +89,7 @@
         </div>
 
         <app-earning
+          [isIncognitoModeOn]="isIncognitoModeOn"
           [out]="poolAllOut"
           [pool]="poolBtc"
           [fiat]="fiat"
@@ -96,7 +97,7 @@
       </div>
 
       <div *ngIf="selectedTab === 'Staking'">
-        <div *ngIf="dfiInStaking < 1">
+        <div *ngIf="dfiInStaking < 1" class="dark:text-gray-100">
           {{ "noStakingAvailable" | translate }}
         </div>
         <div *ngIf="dfiInStaking > 0">
@@ -111,7 +112,7 @@
           >
             <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
-                {{dfiInStaking | number: "1.2-2"}}
+                {{isIncognitoModeOn ? '****' : dfiInStaking | number: "1.2-2"}}
               </span>
               DFI
             </span>
@@ -130,17 +131,19 @@
             </div>
             <div>
               <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountStakingUsd()"></app-price>
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountStakingUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </span>
             </div>
           </h3>
           <br>
           <div class="mt-2">
             <app-earning
+              [isIncognitoModeOn]="isIncognitoModeOn"
               [out]="stakingOut"
               [pool]="poolBtc"
               [fiat]="fiat"
-              >
+            >
             </app-earning>
           </div>
         </div>
@@ -198,47 +201,47 @@
           {{ "balance" | translate }}
         </h3>
 
-        <span class="grid grid-flow-row auto-rows-max grid-cols-2 md:grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
+        <span *ngIf="isIncognitoModeOn" class="grid grid-flow-row auto-rows-max grid-cols-2 md:grid-cols-3 lg:gap-3 gap-6 border-b pb-2">
           <span class="text-xl dark:text-gray-100">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.btcInBtcPool | number: "1.5-5"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.btcInBtcPool | number: "1.5-5"}}
+            </div>
             BTC
           </span>
           <span class="text-xl dark:text-gray-100">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.ethInEthPool | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.ethInEthPool | number: "1.3-3"}}
+            </div>
             ETH
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdtInUsdtPool > 0">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.usdtInUsdtPool | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.usdtInUsdtPool | number: "1.3-3"}}
+            </div>
             USDT
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ltcInLtcPool > 0">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.ltcInLtcPool | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.ltcInLtcPool | number: "1.3-3"}}
+            </div>
             LTC
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.dogeInDogePool > 0">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.dogeInDogePool | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.dogeInDogePool | number: "1.3-3"}}
+            </div>
             DOGE
           </span>
           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.bchInBchPool > 0">
-            <span class="text-pink-500 font-semibold">
-              {{wallet?.bchInBchPool | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.bchInBchPool | number: "1.3-3"}}
+            </div>
             BCH
           </span>
           <span class="text-xl dark:text-gray-100">
-            <span class="text-pink-500 font-semibold">
-              {{getDfiCountInLM | number: "1.3-3"}}
-            </span>
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : getDfiCountInLM | number: "1.3-3"}}
+            </div>
             DFI
           </span>
         </span>
@@ -249,12 +252,14 @@
           </span>
           <div>
             <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-              <app-price [fiat]="fiat" [usdPrice]="getLMUsd"></app-price>
+              <app-pric *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLMUsd"></app-pric>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </span>
           </div>
         </h3>
         <br>
         <app-earning
+          [isIncognitoModeOn]="isIncognitoModeOn"
           [out]="poolOut"
           [pool]="poolBtc"
           [fiat]="fiat"
@@ -276,13 +281,13 @@
             class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-2 gap-6 border-b pb-2">
             <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
-                {{wallet?.dfiInMasternodes | number: "1.2-2"}}
+                {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes | number: "1.2-2"}}
               </span>
               Total
             </span>
              <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
-                {{getBalanceMasternode() | number: "1.2-2"}}
+                {{isIncognitoModeOn ? '****' : getBalanceMasternode() | number: "1.2-2"}}
               </span>
               Balance
             </span>
@@ -301,13 +306,15 @@
             </div>
             <div>
               <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountMasternodesUsd()"></app-price>
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountMasternodesUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </span>
             </div>
           </h3>
           <br>
           <div class="mt-2">
             <app-earning
+              [isIncognitoModeOn]="isIncognitoModeOn"
               [out]="masternodeOut"
               [pool]="poolBtc"
               [fiat]="fiat"
