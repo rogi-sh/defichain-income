@@ -218,6 +218,7 @@ export class AppComponent implements OnInit {
     this.testApi();
 
     await this.computeMeta();
+    await this.loadDex();
 
     this.loadStackingCake();
     this.loadStackingMasternode();
@@ -258,7 +259,6 @@ export class AppComponent implements OnInit {
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
       }
-      this.loadDexManual();
       this.dataLoaded = true;
     }
   }
@@ -325,7 +325,8 @@ export class AppComponent implements OnInit {
       if (!this.loggedIn) {
         this.loadLocalStorageForManuel();
       }
-      this.loadDexManual();
+      this.computeOutcome();
+      this.loadStackingMasternode();
 
     }
     this.countdown?.restart();
@@ -604,16 +605,22 @@ export class AppComponent implements OnInit {
     } catch (err) {
       console.error('Api down?' + err.message);
       this.apiOnline = false;
+      setTimeout(() => {
+          this.computeMeta();
+          console.error('Try again ...');
+        },
+        5000);
+
     }
 
   }
 
-  loadDex(): void {
+  async loadDex(): Promise<void> {
     forkJoin([
       this.dexService.getListyieldfarming(),
       this.dexService.getListpoolpairs()]
     ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
-          this.parsePoolsAndComputeOutcome(dex, poolPairs);
+          this.parsePools(dex, poolPairs);
 
         }
       ),
@@ -629,7 +636,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  private parsePoolsAndComputeOutcome(dex: DexInfo, poolPairs: DexPoolPair): void {
+  private parsePools(dex: DexInfo, poolPairs: DexPoolPair): void {
     this.extractPools(dex);
 
     // compute correct price of dfi
@@ -662,6 +669,9 @@ export class AppComponent implements OnInit {
 
     this.computeRewardsPerBlockInPools();
 
+  }
+
+  private computeOutcome(): void {
     this.berechnePoolOutBtc();
     this.berechnePoolOutEth();
     this.berechnePoolOutBch();
@@ -725,24 +735,6 @@ export class AppComponent implements OnInit {
     return reward;
   }
 
-  loadDexManual(): void {
-    forkJoin([
-      this.dexService.getListyieldfarming(),
-      this.dexService.getListpoolpairs()]
-    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
-          this.parsePoolsAndComputeOutcome(dex, poolPairs);
-        }
-      ),
-      err => {
-        console.error(err);
-        setTimeout(() => {
-            this.loadDexManual();
-            console.error('Try again ...');
-          },
-          5000);
-      });
-  }
-
   loadAllAccounts(): void {
     this.adressBalances = new Array<AddressBalance>();
     const requestArray = [];
@@ -773,14 +765,15 @@ export class AppComponent implements OnInit {
           }
         });
 
-        this.loadDex();
+        this.computeOutcome();
         this.loadStackingMasternode();
 
       },
       err => {
         console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
         setTimeout(() => {
-            this.loadDex();
+            this.computeOutcome();
+            this.loadStackingMasternode();
             console.error('Try again ...');
           },
           5000);
@@ -1809,6 +1802,6 @@ export class AppComponent implements OnInit {
   }
 
   toggleIncognitoMode(): void {
-    this.isIncognitoModeOn = !this.isIncognitoModeOn
+    this.isIncognitoModeOn = !this.isIncognitoModeOn;
   }
 }
