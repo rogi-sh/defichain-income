@@ -13,6 +13,41 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.8.1 - 5.8.2021';
+    this.log.comment = 'Inkognito Fixes and typos';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '7.8.0 - 5.8.2021';
+    this.log.comment = 'Inkognito Mode';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '7.7.7 - 29.7.2021';
+    this.log.comment = 'Better texts (Lord Mark himself feedback :) ) ';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '7.7.6 - 24.7.2021';
+    this.log.comment = 'fix pwa for ios';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
+    this.log.version = '7.7.5 - 23.7.2021';
+    this.log.comment = 'activate pwa and icons for app icon';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.7.4 - 15.7.2021';
     this.log.comment = 'pwa fixes';
 

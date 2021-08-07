@@ -103,6 +103,7 @@ export class AppComponent implements OnInit {
   adressesKey = 'adressesKey';
   adressesMasternodesKey = 'adressesMasternodesKey';
   masternodeAdress = false;
+  isIncognitoModeOn = false;
   masternodeFreezer5 = false;
   masternodeFreezer10 = false;
 
@@ -1860,5 +1861,9 @@ export class AppComponent implements OnInit {
     this.toastr.success(this.translate.instant('copy'), '', {
       closeButton: true,
     });
+  }
+
+  toggleIncognitoMode(): void {
+    this.isIncognitoModeOn = !this.isIncognitoModeOn
   }
 }

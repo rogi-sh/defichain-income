@@ -59,7 +59,7 @@
   },
   "holdings": {
     "title": "Dein Vermögen",
-    "wallet": "Dein Wallet Bestand",
+    "wallet": "Dein Bestand",
     "lp": "Dein LP Token Bestand",
     "stake-add": "Trage dein DFI Staking Bestand ein.",
     "no-stake": "Setz 0 wenn du keine DFI im Staking hast.",

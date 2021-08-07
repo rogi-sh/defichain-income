@@ -53,6 +53,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   blockCountForCalc: number;
 
+  @Input()
+  isIncognitoModeOn: boolean;
+
   corr: Correlation;
 
   euonsHardforkeBlock = 894000;

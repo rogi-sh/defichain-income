@@ -29,9 +29,10 @@
   <div class="order-1 lg:order-2 flex-1">
     <h2 class="text-lg dark:text-gray-100">{{ 'value.hold' | translate }}</h2>
     <h2>
-      <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        <app-price [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
-      </span>
+      <div class="min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
+        <div *ngIf="isIncognitoModeOn">****</div>
+      </div>
     </h2>
     <div class="w-full max-w-lg mx-auto mb-2" *ngIf="chartOptions && chartOptions.series.length > 0">
       <apx-chart *ngIf="chartOptions && chartOptions.series.length > 0"
@@ -57,10 +58,13 @@
         <span class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 border-b pb-2 col-span-2 mb-2">
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{getDfiCount() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getDfiCount() | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400 dark:text-gray-300">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiValueUsd()"></app-price>
+              <div 
+                class="text-xs text-gray-400 dark:text-gray-300"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiValueUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </div>
             </div>
             <div class="inline-block h-full align-middle dark:text-gray-100">
@@ -69,10 +73,13 @@
           </div>
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{dfiInStaking | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400 dark:text-gray-300">
-                <app-price [fiat]="fiat" [usdPrice]="getStakingValueUsd()"></app-price>
+              <div 
+                class="text-xs text-gray-400 dark:text-gray-300"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getStakingValueUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </div>
             </div>
             <div class="inline-block h-full align-middle dark:text-gray-100">
@@ -82,10 +89,13 @@
 
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{getDfiCountLM() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getDfiCountLM() | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400 dark:text-gray-300">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountLMUsd()"></app-price>
+              <div 
+                class="text-xs text-gray-400 dark:text-gray-300"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountLMUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </div>
             </div>
             <div class="inline-block h-full align-middle dark:text-gray-100">
@@ -95,10 +105,13 @@
 
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{wallet?.dfi | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : wallet?.dfi | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400 dark:text-gray-300">
-                <app-price [fiat]="fiat" [usdPrice]="getDfiCountWalletUsd()"></app-price>
+              <div 
+                class="text-xs text-gray-400 dark:text-gray-300"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountWalletUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </div>
             </div>
             <div class="inline-block h-full align-middle dark:text-gray-100">
@@ -108,10 +121,13 @@
 
            <div *ngIf="wallet?.dfiInMasternodes > 0" class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{ wallet?.dfiInMasternodes | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes | number: '1.2-2' }}
               <br/>
-              <div class="text-xs text-gray-400">
-                <app-price [fiat]="fiat" [usdPrice]="getMasternodeDfiUsd()"></app-price>
+              <div 
+                class="text-xs text-gray-400"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getMasternodeDfiUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
               </div>
             </div>
             <div class="inline-block h-full align-middle dark:text-gray-100">
@@ -131,9 +147,12 @@
             BTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400 dark:text-gray-300">
-              <app-price [fiat]="fiat" [usdPrice]="getBtcValueUsd()"></app-price>
+            {{isIncognitoModeOn ? '****' : wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
+            <div 
+              class="text-xs text-gray-400 dark:text-gray-300"
+            >
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBtcValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </div>
           </div>
         </div>
@@ -143,9 +162,12 @@
             ETH
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400 dark:text-gray-300">
-              <app-price [fiat]="fiat" [usdPrice]="getEthValueUsd()"></app-price>
+            {{isIncognitoModeOn ? '****' : wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
+            <div 
+              class="text-xs text-gray-400 dark:text-gray-300"
+            >
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getEthValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </div>
           </div>
         </div>
@@ -155,9 +177,12 @@
             USDT
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400 dark:text-gray-300">
-              <app-price [fiat]="fiat" [usdPrice]="getUsdtValueUsd()"></app-price>
+            {{isIncognitoModeOn ? '****' : wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
+            <div 
+              class="text-xs text-gray-400 dark:text-gray-300"
+            >
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdtValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </div>
           </div>
         </div>
@@ -167,9 +192,12 @@
             LTC
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400 dark:text-gray-300">
-              <app-price [fiat]="fiat" [usdPrice]="getLtcValueUsd()"></app-price>
+            {{isIncognitoModeOn ? '****' : wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
+            <div 
+              class="text-xs text-gray-400 dark:text-gray-300"
+            >
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLtcValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn">****</div>
             </div>
           </div>
         </div>
@@ -179,9 +207,10 @@
             DOGE
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
-              <app-price [fiat]="fiat" [usdPrice]="getDogeValueUsd()"></app-price>
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDogeValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn" >*****</div>
             </div>
           </div>
         </div>
@@ -191,9 +220,10 @@
             BCH
           </div>
           <div class="text-pink-500 font-semibold inline-block">
-            {{wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
+            {{isIncognitoModeOn ? '****' : wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
-              <app-price [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn" >*****</div>
             </div>
           </div>
         </div>

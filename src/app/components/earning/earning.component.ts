@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Outcome, Pool} from '@interfaces/Dex';
 
 @Component({
@@ -16,6 +16,9 @@ export class EarningComponent implements OnInit {
 
   @Input()
   fiat: string;
+
+  @Input()
+  isIncognitoModeOn: boolean;
 
   constructor() {
   }

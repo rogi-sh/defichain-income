@@ -57,7 +57,7 @@
   },
   "holdings": {
     "title": "Sus activos crypto",
-    "wallet": "Monedas en su monedero",
+    "wallet": "Su stock",
     "lp": "Su Token LP (Minería de Liquidez)",
     "stake-add": "Añada la cantidad de su depósito en DFI.",
     "no-stake": "Indique 0 si no está en depósito.",
