@@ -851,11 +851,7 @@ export class AppComponent implements OnInit {
   }
 
   getAddressForIteration(i: number): string {
-    if (i === 0 || i === 1) {
-      return this.adresses[0];
-    } else {
-      return this.adresses[i % 2 === 0 ? i / 2 : (i - 1) / 2];
-    }
+    return this.adresses[i];
   }
 
   getMasternodeAddressForIteration(i: number): string {
@@ -1523,10 +1519,10 @@ export class AppComponent implements OnInit {
         } else {
           if (this.adressesMasternodes.indexOf(a) < 0) {
             this.adressesMasternodes.push(a);
-            if (this.masternodeFreezer5) {
+            if (this.masternodeFreezer5 && this.adressesMasternodesFreezer5.indexOf(a) === -1) {
               this.adressesMasternodesFreezer5.push(a);
             }
-            if (this.masternodeFreezer10) {
+            if (this.masternodeFreezer10 && this.adressesMasternodesFreezer10.indexOf(a) === -1) {
               this.adressesMasternodesFreezer10.push(a);
             }
             this.newAddressesAdded.push(a);
@@ -1561,16 +1557,26 @@ export class AppComponent implements OnInit {
   deleteAdress(adress: string): void {
     const index = this.adresses.indexOf(adress, 0);
     const indexMn = this.adressesMasternodes.indexOf(adress, 0);
+    const indexMnF5 = this.adressesMasternodesFreezer5.indexOf(adress, 0);
+    const indexMnF10 = this.adressesMasternodesFreezer10.indexOf(adress, 0);
     if (index > -1) {
       this.adresses.splice(index, 1);
       localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
-      this.clearWallet();
-      this.loadAddressesAndDexData();
     }
 
     if (indexMn > -1) {
       this.adressesMasternodes.splice(indexMn, 1);
       localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
+    }
+
+    if (indexMnF5 > -1) {
+      this.adressesMasternodesFreezer5.splice(indexMnF5, 1);
+    }
+    if (indexMnF10 > -1) {
+      this.adressesMasternodesFreezer10.splice(indexMnF5, 1);
+    }
+
+    if (index > -1 || indexMn > -1) {
       this.clearWallet();
       this.loadAddressesAndDexData();
     }

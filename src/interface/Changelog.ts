@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.9.2 - 8.8.2021';
+    this.log.comment = 'Fix wrong adresses balance requested';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.9.1 - 8.8.2021';
     this.log.comment = 'Dfi Amount view fix in settings';
 
