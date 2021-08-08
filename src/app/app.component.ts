@@ -35,6 +35,7 @@ import {StakingService} from '@services/staking.service';
 import {Meta} from '@angular/platform-browser';
 import {NgxSpinnerService} from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import {SupernodeAccount} from '@interfaces/Supernode';
 
 @Component({
   selector: 'app-root',
@@ -99,6 +100,8 @@ export class AppComponent implements OnInit {
   showDialogAddressesNotAdded = false;
   addressesDto;
   addressesMasternodesDto;
+  adressesMasternodesFreezer5Dto;
+  adressesMasternodesFreezer10Dto;
   adress = '';
   adressesKey = 'adressesKey';
   adressesMasternodesKey = 'adressesMasternodesKey';
@@ -344,6 +347,8 @@ export class AppComponent implements OnInit {
       variables: {
         addresses: this.adresses,
         addressesMasternodes: this.adressesMasternodes,
+        adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
+        adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -398,6 +403,8 @@ export class AppComponent implements OnInit {
         key: this.loggedInAuth,
         addresses: this.adresses,
         addressesMasternodes: this.adressesMasternodes,
+        adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
+        adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
@@ -477,6 +484,12 @@ export class AppComponent implements OnInit {
 
           this.addressesMasternodesDto = new Array(...result?.data?.userByKey?.addressesMasternodes);
           this.adressesMasternodes = this.addressesMasternodesDto.slice();
+
+          this.adressesMasternodesFreezer5Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer5);
+          this.adressesMasternodesFreezer5 = this.adressesMasternodesFreezer5Dto.slice();
+
+          this.adressesMasternodesFreezer10Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer10);
+          this.adressesMasternodesFreezer10 = this.adressesMasternodesFreezer10Dto.slice();
 
           this.loadAddressesAndDexData();
 
@@ -628,7 +641,7 @@ export class AppComponent implements OnInit {
             this.loadDex();
             console.error('Try again ...');
           },
-          5000);
+          10000);
 
       });
 
@@ -754,28 +767,22 @@ export class AppComponent implements OnInit {
 
     // normal addresses
     for (const ad of this.adresses) {
-      requestArray.push(this.dexService.getAdressDetail(ad));
-      requestArray.push(this.dexService.getAdressBalance(ad));
+      requestArray.push(this.dataService.getAdressAccount(ad));
     }
 
     // minter addresses
     for (const adM of this.adressesMasternodes) {
-      requestArray.push(this.dexService.getAdressBalance(adM));
+      requestArray.push(this.dataService.getAdressAccount(adM));
     }
 
     forkJoin(requestArray).subscribe(results => {
         results.forEach((value, i) => {
           // minter address
-          if (i > this.adresses?.length * 2 - 1) {
+          if (i > this.adresses?.length - 1) {
             const adress = this.getMasternodeAddressForIteration(i);
-            this.addCoinsToWallet(value as Balance, adress, true, this.isFrozen5(adress), this.isFrozen10(adress));
+            this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress), this.isFrozen10(adress));
           } else {
-            if (i % 2 === 0) {
-              const balances = value as [string];
-              balances.forEach(value2 => this.addTokensToWallet(value2, this.getAddressForIteration(i)));
-            } else {
-              this.addCoinsToWallet(value as Balance, this.getAddressForIteration(i), false, false, false);
-            }
+            this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false, false, false);
           }
         });
 
@@ -800,6 +807,10 @@ export class AppComponent implements OnInit {
 
   isFrozen10(adress): boolean {
     return this.adressesMasternodesFreezer10.indexOf(adress) > -1;
+  }
+
+  isMasternode(adress): boolean {
+    return this.adressesMasternodes.indexOf(adress) > -1;
   }
 
   loadStackingCake(): void {
@@ -848,17 +859,11 @@ export class AppComponent implements OnInit {
   }
 
   getMasternodeAddressForIteration(i: number): string {
-    return this.adressesMasternodes[i - this.adresses?.length * 2];
+    return this.adressesMasternodes[i - this.adresses?.length];
   }
 
-  addCoinsToWallet(balance: Balance, address: string, masternode: boolean, freezed5: boolean, freezed10: boolean): void {
-
-    // Balance is in Satoshi
-    if (!masternode) {
-      this.wallet.dfi += balance.balance * 0.00000001;
-    } else {
-      this.wallet.dfiInMasternodes += balance.balance * 0.00000001;
-    }
+  addCoinsAndTokensToWallet(accounts: Array<SupernodeAccount>, address: string, masternode: boolean, freezed5: boolean,
+                            freezed10: boolean): void {
 
     if (!this.getAddressBalance(address)) {
       const aB = new AddressBalance();
@@ -869,89 +874,90 @@ export class AppComponent implements OnInit {
       this.adressBalances.push(aB);
     }
 
-    this.getAddressBalance(address).dfiCoins = balance.balance * 0.00000001;
+    accounts.forEach(account => {
+      const splitted = account.raw.split('@');
+      switch (splitted[1]) {
+        case '$DFI': {
+          if (!masternode) {
+            this.wallet.dfi += +splitted[0] * 0.00000001;
+          } else {
+            this.wallet.dfiInMasternodes += +splitted[0] * 0.00000001;
+          }
+          this.getAddressBalance(address).dfiCoins = +splitted[0];
+          break;
+        }
+        case 'DFI': {
+          this.wallet.dfi += +splitted[0];
+          this.getAddressBalance(address).dfiTokens = +splitted[0];
+          break;
+        }
+        case 'BTC': {
+          this.wallet.btc += +splitted[0];
+          this.getAddressBalance(address).btcToken = +splitted[0];
+          break;
+        }
+        case 'BCH': {
+          this.wallet.bch += +splitted[0];
+          this.getAddressBalance(address).bchToken = +splitted[0];
+          break;
+        }
+        case 'ETH': {
+          this.wallet.eth += +splitted[0];
+          this.getAddressBalance(address).ethToken = +splitted[0];
+          break;
+        }
+        case 'LTC': {
+          this.wallet.ltc += +splitted[0];
+          this.getAddressBalance(address).ltcToken = +splitted[0];
+          break;
+        }
+        case 'DOGE': {
+          this.wallet.doge += +splitted[0];
+          this.getAddressBalance(address).dogeToken = +splitted[0];
+          break;
+        }
+        case 'USDT': {
+          this.wallet.usdt += +splitted[0];
+          this.getAddressBalance(address).usdtToken = +splitted[0];
+          break;
+        }
+        case 'BTC-DFI': {
+          this.wallet.btcdfi += +splitted[0];
+          this.getAddressBalance(address).btcdfiToken = +splitted[0];
+          break;
+        }
+        case 'BCH-DFI': {
+          this.wallet.bchdfi += +splitted[0];
+          this.getAddressBalance(address).bchdfiToken = +splitted[0];
+          break;
+        }
+        case 'ETH-DFI': {
+          this.wallet.ethdfi += +splitted[0];
+          this.getAddressBalance(address).ethdfiToken = +splitted[0];
+          break;
+        }
+        case 'LTC-DFI': {
+          this.wallet.ltcdfi += +splitted[0];
+          this.getAddressBalance(address).ltcdfiToken = +splitted[0];
+          break;
+        }
+        case 'DOGE-DFI': {
+          this.wallet.dogedfi += +splitted[0];
+          this.getAddressBalance(address).dogedfiToken = +splitted[0];
+          break;
+        }
+        case 'USDT-DFI': {
+          this.wallet.usdtdfi += +splitted[0];
+          this.getAddressBalance(address).usdtdfiToken = +splitted[0];
+          break;
+        }
+        default: {
+          break;
+        }
+      }});
 
-  }
 
-  addTokensToWallet(walletItem: string, address: string): void {
 
-    if (!this.getAddressBalance(address)) {
-      const aB = new AddressBalance();
-      aB.address = address;
-      this.adressBalances.push(aB);
-    }
-
-    const splitted = walletItem.split('@');
-    switch (splitted[1]) {
-      case 'DFI': {
-        this.wallet.dfi += +splitted[0];
-        this.getAddressBalance(address).dfiTokens = +splitted[0];
-        break;
-      }
-      case 'BTC': {
-        this.wallet.btc += +splitted[0];
-        this.getAddressBalance(address).btcToken = +splitted[0];
-        break;
-      }
-      case 'BCH': {
-        this.wallet.bch += +splitted[0];
-        this.getAddressBalance(address).bchToken = +splitted[0];
-        break;
-      }
-      case 'ETH': {
-        this.wallet.eth += +splitted[0];
-        this.getAddressBalance(address).ethToken = +splitted[0];
-        break;
-      }
-      case 'LTC': {
-        this.wallet.ltc += +splitted[0];
-        this.getAddressBalance(address).ltcToken = +splitted[0];
-        break;
-      }
-      case 'DOGE': {
-        this.wallet.doge += +splitted[0];
-        this.getAddressBalance(address).dogeToken = +splitted[0];
-        break;
-      }
-      case 'USDT': {
-        this.wallet.usdt += +splitted[0];
-        this.getAddressBalance(address).usdtToken = +splitted[0];
-        break;
-      }
-      case 'BTC-DFI': {
-        this.wallet.btcdfi += +splitted[0];
-        this.getAddressBalance(address).btcdfiToken = +splitted[0];
-        break;
-      }
-      case 'BCH-DFI': {
-        this.wallet.bchdfi += +splitted[0];
-        this.getAddressBalance(address).bchdfiToken = +splitted[0];
-        break;
-      }
-      case 'ETH-DFI': {
-        this.wallet.ethdfi += +splitted[0];
-        this.getAddressBalance(address).ethdfiToken = +splitted[0];
-        break;
-      }
-      case 'LTC-DFI': {
-        this.wallet.ltcdfi += +splitted[0];
-        this.getAddressBalance(address).ltcdfiToken = +splitted[0];
-        break;
-      }
-      case 'DOGE-DFI': {
-        this.wallet.dogedfi += +splitted[0];
-        this.getAddressBalance(address).dogedfiToken = +splitted[0];
-        break;
-      }
-      case 'USDT-DFI': {
-        this.wallet.usdtdfi += +splitted[0];
-        this.getAddressBalance(address).usdtdfiToken = +splitted[0];
-        break;
-      }
-      default: {
-        break;
-      }
-    }
   }
 
   getAddressBalance(address: string): AddressBalance {
@@ -1428,6 +1434,16 @@ export class AppComponent implements OnInit {
 
     // checkCheckboxes
     this.showDialogAddressesAdded = false;
+
+    if (!this.adress) {
+      this.showDialogAddressesNotAdded = true;
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.showDialogAddressesNotAdded = false;
+      }, 5000);
+      return;
+    }
+
     if (this.masternodeFreezer5 && this.masternodeFreezer10) {
       this.showDialogAddressesNotAdded = true;
       setTimeout(() => {
@@ -1864,6 +1880,6 @@ export class AppComponent implements OnInit {
   }
 
   toggleIncognitoMode(): void {
-    this.isIncognitoModeOn = !this.isIncognitoModeOn
+    this.isIncognitoModeOn = !this.isIncognitoModeOn;
   }
 }

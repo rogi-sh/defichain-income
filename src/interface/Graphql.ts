@@ -1,7 +1,7 @@
 import {gql} from 'apollo-angular';
 
 export const REGISTER = gql`
-  mutation ($addresses: [String], $addressesMasternodes: [String], $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
+  mutation ($addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String], $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float, $bchdfi: Float, $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float,
     $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float, $bchInBchPool: Float, $dfiInBchPool: Float ){
@@ -9,6 +9,8 @@ export const REGISTER = gql`
       user : {
         addresses : $addresses
         addressesMasternodes: $addressesMasternodes
+        adressesMasternodesFreezer5: $adressesMasternodesFreezer5
+        adressesMasternodesFreezer10: $adressesMasternodesFreezer10
         wallet : {
           btcdfi :$btcdfi
           ethdfi: $ethdfi
@@ -39,7 +41,7 @@ export const REGISTER = gql`
         }
       }
     )
-    {id, key, addresses, addressesMasternodes, wallet {
+    {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
       dfi, dfiInStaking, btc, bch, eth, doge, usdt, ltc,
       btcdfi , ethdfi,dogedfi, ltcdfi,usdtdfi, bchdfi,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
@@ -51,7 +53,7 @@ export const REGISTER = gql`
 `;
 
 export const UPDATE = gql`
-  mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String],  $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
+  mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],  $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float, $bchdfi: Float,  $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $ltc: Float
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float,
     $dfiInUsdtPool: Float,$ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float,
@@ -61,6 +63,8 @@ export const UPDATE = gql`
         key: $key
         addresses : $addresses
         addressesMasternodes: $addressesMasternodes
+        adressesMasternodesFreezer5: $adressesMasternodesFreezer5
+        adressesMasternodesFreezer10: $adressesMasternodesFreezer10
         wallet : {
           btcdfi :$btcdfi
           ethdfi: $ethdfi
@@ -91,7 +95,7 @@ export const UPDATE = gql`
         }
       }
     )
-    {id, key, addresses, addressesMasternodes, wallet {
+    {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
       dfi, dfiInStaking, btc,eth, doge, usdt, ltc, bch
       btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi, bchdfi,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,
@@ -105,7 +109,7 @@ export const UPDATE = gql`
 export const LOGIN = gql`
   query ($key: String) {
     userByKey(key: $key) {
-      id, key, addresses, addressesMasternodes,  wallet {
+      id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
         dfi, dfiInStaking, btc,eth, doge, usdt, ltc, bch,
         btcdfi , ethdfi,dogedfi, ltcdfi, usdtdfi, bchdfi,
         btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,

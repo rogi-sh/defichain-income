@@ -1596,7 +1596,7 @@
                           </div>
                         </div>
                         <div
-                          *ngIf="showDialogAddressesAdded"
+                          *ngIf="showDialogAddressesAdded && adress"
                           class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
                           role="alert"
                         >
@@ -1604,11 +1604,18 @@
                           <p *ngFor="let a of newAddressesAdded">{{a}} </p>
                         </div>
                         <div
-                          *ngIf="showDialogAddressesNotAdded"
+                          *ngIf="showDialogAddressesNotAdded && adress"
                           class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
                           role="alert"
                         >
-                          Ne geht nicht da beide Checkobox an
+                          {{ 'address.freezer-error' | translate }}
+                        </div>
+                        <div
+                          *ngIf="showDialogAddressesNotAdded && !adress"
+                          class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+                          role="alert"
+                        >
+                          {{ 'address.empty' | translate }}
                         </div>
                       </div>
                       <br>

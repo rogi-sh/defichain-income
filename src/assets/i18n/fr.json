@@ -54,7 +54,9 @@
     "button-add": "ajouter",
     "button-remove": "supprimer",
     "show-information": "Afficher plus d'informations",
-    "hide-information": "Afficher moins d'informations"
+    "hide-information": "Afficher moins d'informations",
+    "freezer-error": "Seulement 5 OU 10 ans Freezer possible",
+    "empty": "L'adresse est vide"
   },
   "holdings": {
     "title": "Vos possessions crypto",

@@ -54,7 +54,9 @@
     "button-add": "add",
     "button-remove": "remove",
     "show-information": "Show more Information",
-    "hide-information": "Show less Information"
+    "hide-information": "Show less Information",
+    "freezer-error": "Only 5 OR 10 Year Freezer possible",
+    "empty": "Adress is empty"
   },
   "holdings": {
     "title": "Your crypto holdings",
