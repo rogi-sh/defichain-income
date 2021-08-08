@@ -883,7 +883,7 @@ export class AppComponent implements OnInit {
           } else {
             this.wallet.dfiInMasternodes += +splitted[0] * 0.00000001;
           }
-          this.getAddressBalance(address).dfiCoins = +splitted[0];
+          this.getAddressBalance(address).dfiCoins = +splitted[0] * 0.00000001;
           break;
         }
         case 'DFI': {

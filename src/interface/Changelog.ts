@@ -11,6 +11,12 @@ export class Changelog {
 
     this.logs = new Array<Log>();
 
+    this.log = new Log();
+
+    this.log.version = '7.9.1 - 8.8.2021';
+    this.log.comment = 'Dfi Amount view fix in settings';
+
+    this.logs.push(this.log);
 
     this.log = new Log();
 
