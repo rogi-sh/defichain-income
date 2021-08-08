@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
 import {Currencies, USD} from '@interfaces/Data';
+import {Observable} from 'rxjs/dist/types';
+import {SupernodeAccount} from '@interfaces/Supernode';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +58,9 @@ export class DataService {
   async getCurrencies(): Promise<void> {
      const promise = await this.http.get<Currencies>(environment.cur).toPromise();
      this.usd = promise.usd;
+  }
+
+  public getAdressAccount(address: string): Observable<Array<SupernodeAccount>>  {
+    return this.http.get<Array<SupernodeAccount>>(environment.supernode_account + address);
   }
 }

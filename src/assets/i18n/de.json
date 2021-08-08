@@ -55,7 +55,9 @@
     "button-add": "hinzufügen",
     "button-remove": "entfernen",
     "show-information": "Informationen öffnen",
-    "hide-information": "Informationen schließen"
+    "hide-information": "Informationen schließen",
+    "freezer-error": "Nur 5 ODER 10 Jahres Freezer erlaubt",
+    "empty": "Adresse ist leer"
   },
   "holdings": {
     "title": "Dein Vermögen",

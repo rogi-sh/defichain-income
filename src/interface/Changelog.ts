@@ -11,6 +11,14 @@ export class Changelog {
 
     this.logs = new Array<Log>();
 
+
+    this.log = new Log();
+
+    this.log.version = '7.9.0 - 8.8.2021';
+    this.log.comment = 'Freezer Masternodes, Supernode for Accounts';
+
+    this.logs.push(this.log);
+
     this.log = new Log();
 
     this.log.version = '7.8.1 - 5.8.2021';

@@ -53,7 +53,9 @@
     "button-add": "añadir",
     "button-remove": "eliminar",
     "show-information": "Mostrar más información",
-    "hide-information": "Mostrar menos información"
+    "hide-information": "Mostrar menos información",
+    "freezer-error": "Sólo son posibles 5 ó 10 años Freezer",
+    "empty": "La dirección está vacía"
   },
   "holdings": {
     "title": "Sus activos crypto",

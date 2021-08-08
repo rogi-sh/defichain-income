@@ -55,7 +55,9 @@
     "button-add": "Добавить",
     "button-remove": "Удалить",
     "show-information": "Открыть информацию",
-    "hide-information": "Закрыть информацию"
+    "hide-information": "Закрыть информацию",
+    "freezer-error": "Возможны только 5 или 10-летние Freezer",
+    "empty": "Адрес пуст"
   },
   "holdings": {
     "title": "Твой капитал",
