@@ -16,6 +16,7 @@ import {
   PoolLtcOut,
   PoolPair,
   PoolUsdtOut,
+  PoolUsdcOut,
   Stats
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
@@ -66,6 +67,7 @@ export class AppComponent implements OnInit {
   dfiProBlockBtc = 80;
   dfiProBlockEth = 15;
   dfiProBlockUsdt = 5;
+  dfiProBlockUsdc = 1;
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
   dfiProBlockBch = 1;
@@ -123,6 +125,10 @@ export class AppComponent implements OnInit {
   poolUsdtOut: PoolUsdtOut = new PoolUsdtOut();
   poolUsdt: Pool;
   anteilAmPoolUsdt: number;
+
+  poolUsdcOut: PoolUsdcOut = new PoolUsdcOut();
+  poolUsdc: Pool;
+  anteilAmPoolUsdc: number;
 
   poolLtcOut: PoolLtcOut = new PoolLtcOut();
   poolLtc: Pool;
@@ -356,11 +362,13 @@ export class AppComponent implements OnInit {
         doge: this.wallet.doge,
         ltc: this.wallet.ltc,
         usdt: this.wallet.usdt,
+        usdc: this.wallet.usdc,
         bch: this.wallet.bch,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
         usdtdfi: this.wallet.usdtdfi,
+        usdcdfi: this.wallet.usdcdfi,
         dogedfi: this.wallet.dogedfi,
         bchdfi: this.wallet.bchdfi,
         btcInBtcPool: this.wallet.btcInBtcPool,
@@ -369,6 +377,8 @@ export class AppComponent implements OnInit {
         dfiInEthPool: this.wallet.dfiInEthPool,
         usdtInUsdtPool: this.wallet.usdtInUsdtPool,
         dfiInUsdtPool: this.wallet.dfiInUsdtPool,
+        usdcInUsdcPool: this.wallet.usdcInUsdcPool,
+        dfiInUsdcPool: this.wallet.dfiInUsdcPool,
         ltcInLtcPool: this.wallet.ltcInLtcPool,
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
@@ -412,11 +422,13 @@ export class AppComponent implements OnInit {
         doge: this.wallet.doge,
         ltc: this.wallet.ltc,
         usdt: this.wallet.usdt,
+        usdc: this.wallet.usdc,
         bch: this.wallet.bch,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
         usdtdfi: this.wallet.usdtdfi,
+        usdcdfi: this.wallet.usdcdfi,
         dogedfi: this.wallet.dogedfi,
         bchdfi: this.wallet.bchdfi,
         btcInBtcPool: this.wallet.btcInBtcPool,
@@ -425,6 +437,8 @@ export class AppComponent implements OnInit {
         dfiInEthPool: this.wallet.dfiInEthPool,
         usdtInUsdtPool: this.wallet.usdtInUsdtPool,
         dfiInUsdtPool: this.wallet.dfiInUsdtPool,
+        usdcInUsdcPool: this.wallet.usdcInUsdcPool,
+        dfiInUsdcPool: this.wallet.dfiInUsdcPool,
         ltcInLtcPool: this.wallet.ltcInLtcPool,
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
@@ -666,6 +680,10 @@ export class AppComponent implements OnInit {
     this.poolUsdt.customRewards = poolPairs['6'].customRewards;
     this.poolUsdt.rewardPct = poolPairs['6'].rewardPct;
 
+    this.poolUsdc.totalLiquidityLpToken = poolPairs['14'].totalLiquidity;
+    this.poolUsdc.customRewards = poolPairs['14'].customRewards;
+    this.poolUsdc.rewardPct = poolPairs['14'].rewardPct;
+
     this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
     this.poolLtc.customRewards = poolPairs['10'].customRewards;
     this.poolLtc.rewardPct = poolPairs['10'].rewardPct;
@@ -685,6 +703,7 @@ export class AppComponent implements OnInit {
     this.berechnePoolOutBch();
     this.berechnePoolOutLtc();
     this.berechnePoolOutUsdt();
+    this.berechnePoolOutUsdc();
     this.berechnePoolOutDoge();
 
     this.berechneStakingOut();
@@ -702,6 +721,7 @@ export class AppComponent implements OnInit {
     this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
     this.poolEth = dex.pools.find(x => x.poolPairId === '4');
     this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
+    this.poolUsdc = dex.pools.find(x => x.poolPairId === '14');
     this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
     this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
     this.poolBch = dex.pools.find(x => x.poolPairId === '12');
@@ -720,6 +740,9 @@ export class AppComponent implements OnInit {
 
     this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockUsdt += this.getCustomRewards(this.poolUsdt.customRewards);
+
+    this.dfiProBlockUsdc = this.poolUsdc.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockUsdc += this.getCustomRewards(this.poolUsdc.customRewards);
 
     this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockDoge += this.getCustomRewards(this.poolDoge.customRewards);
@@ -917,6 +940,11 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).usdtToken = +splitted[0];
           break;
         }
+        case 'USDC': {
+          this.wallet.usdc += +splitted[0];
+          this.getAddressBalance(address).usdcToken = +splitted[0];
+          break;
+        }
         case 'BTC-DFI': {
           this.wallet.btcdfi += +splitted[0];
           this.getAddressBalance(address).btcdfiToken = +splitted[0];
@@ -947,6 +975,11 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).usdtdfiToken = +splitted[0];
           break;
         }
+        case 'USDC-DFI': {
+          this.wallet.usdcdfi += +splitted[0];
+          this.getAddressBalance(address).usdcdfiToken = +splitted[0];
+          break;
+        }
         default: {
           break;
         }
@@ -974,6 +1007,10 @@ export class AppComponent implements OnInit {
 
   berechnePoolOutUsdt(): void {
     this.berechnePool('USDT', this.poolUsdt, this.poolUsdtOut, this.dfiProBlockUsdt);
+  }
+
+  berechnePoolOutUsdc(): void {
+    this.berechnePool('USDC', this.poolUsdc, this.poolUsdcOut, this.dfiProBlockUsdc);
   }
 
   berechnePoolOutLtc(): void {
@@ -1018,6 +1055,16 @@ export class AppComponent implements OnInit {
       } else {
         this.anteilAmPoolUsdt =
           this.berechneAnteilAmPoolManuel(this.wallet.usdtInUsdtPool, this.wallet.dfiInUsdtPool, pool, outcome, dfiProBlock);
+      }
+    }
+    if (poolName === 'USDC') {
+      if (this.autoLoadData) {
+        this.anteilAmPoolUsdc = this.berechneAnteilAmPool(this.wallet.usdcdfi, pool, outcome, dfiProBlock);
+        this.wallet.usdcInUsdcPool = this.anteilAmPoolUsdc * +pool.reserveA / 100;
+        this.wallet.dfiInUsdcPool = this.anteilAmPoolUsdc * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolUsdc =
+          this.berechneAnteilAmPoolManuel(this.wallet.usdcInUsdcPool, this.wallet.dfiInUsdcPool, pool, outcome, dfiProBlock);
       }
     }
     if (poolName === 'LTC') {
@@ -1088,17 +1135,23 @@ export class AppComponent implements OnInit {
 
   berechnePoolOut(): void {
     this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin
-      + this.poolUsdtOut.dfiPerMin + this.poolLtcOut.dfiPerMin + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin;
+      + this.poolUsdtOut.dfiPerMin + this.poolUsdcOut.dfiPerMin + this.poolLtcOut.dfiPerMin
+      + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin;
     this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
-      + this.poolUsdtOut.dfiPerHour + this.poolLtcOut.dfiPerHour + this.poolDogeOut.dfiPerHour + this.poolBchOut.dfiPerHour;
+      + this.poolUsdtOut.dfiPerHour + this.poolUsdcOut.dfiPerHour + this.poolLtcOut.dfiPerHour
+      + this.poolDogeOut.dfiPerHour + this.poolBchOut.dfiPerHour;
     this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay
-      + this.poolUsdtOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
+      + this.poolUsdtOut.dfiPerDay + this.poolUsdcOut.dfiPerDay + this.poolLtcOut.dfiPerDay
+      + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
     this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek
-      + this.poolUsdtOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek + this.poolDogeOut.dfiPerWeek + this.poolBchOut.dfiPerWeek;
+      + this.poolUsdtOut.dfiPerWeek + this.poolUsdcOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek
+      + this.poolDogeOut.dfiPerWeek + this.poolBchOut.dfiPerWeek;
     this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth
-      + this.poolUsdtOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth + this.poolDogeOut.dfiPerMonth + this.poolBchOut.dfiPerMonth;
+      + this.poolUsdtOut.dfiPerMonth + this.poolUsdcOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth
+      + this.poolDogeOut.dfiPerMonth + this.poolBchOut.dfiPerMonth;
     this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear
-      + this.poolUsdtOut.dfiPerYear + this.poolLtcOut.dfiPerYear + this.poolDogeOut.dfiPerYear + this.poolBchOut.dfiPerYear;
+      + this.poolUsdtOut.dfiPerYear + this.poolUsdcOut.dfiPerYear + this.poolLtcOut.dfiPerYear
+      + this.poolDogeOut.dfiPerYear + this.poolBchOut.dfiPerYear;
   }
 
   berechneStakingOut(): void {
@@ -1195,6 +1248,22 @@ export class AppComponent implements OnInit {
       this.wallet.dfiInUsdtPool = +localStorage.getItem(this.wallet.dfiInUsdtPoolKey);
     } else {
       this.wallet.dfiInUsdtPool = 0;
+    }
+    // USDC POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.usdcInUsdcPoolKey)) {
+      this.wallet.usdcInUsdcPool = +localStorage.getItem(this.wallet.usdcInUsdcPoolKey);
+    } else {
+      this.wallet.usdcInUsdcPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.usdcKey)) {
+      this.wallet.usdc = +localStorage.getItem(this.wallet.usdcKey);
+    } else {
+      this.wallet.usdc = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInUsdcPoolKey)) {
+      this.wallet.dfiInUsdcPool = +localStorage.getItem(this.wallet.dfiInUsdcPoolKey);
+    } else {
+      this.wallet.dfiInUsdcPool = 0;
     }
     // LTC POOL
     if (this.isLocalStorageNotEmpty(this.wallet.ltcInLtcPoolKey)) {
@@ -1305,7 +1374,7 @@ export class AppComponent implements OnInit {
   }
 
   getAllValuesUsdPrice(): number {
-    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd()
+    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();
   }
 
@@ -1319,6 +1388,13 @@ export class AppComponent implements OnInit {
 
   getUsdtValueUsd(): number {
     return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
+  }
+
+  /*
+   * USDC Price from usdt pool because not in usdc pool
+   */
+  getUsdcValueUsd(): number {
+    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdt?.priceA;
   }
 
 
@@ -1335,13 +1411,13 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCount(): number {
-    return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
+    return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
+      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
   }
 
   getDfiCountLM(): number {
-    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool;
+    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
+      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool;
   }
 
   getDfiCountLMUsd(): number {
@@ -1354,7 +1430,7 @@ export class AppComponent implements OnInit {
 
   getAnteilLMOfAllValue(): number {
     return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-      + this.getUsdtValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
+      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
@@ -1363,13 +1439,17 @@ export class AppComponent implements OnInit {
     return ((this.wallet.dfiInUsdtPool * this.poolUsdt?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
   }
 
+  getAnteilLMOfUsdcPoolValue(): number {
+    return ((this.wallet.dfiInUsdcPool * this.poolUsdc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdc?.priceA));
+  }
+
   getAnteilLMOfDogePoolValue(): number {
     return ((this.wallet.dfiInDogePool * this.poolDoge?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
   }
 
   getLMUsd(): number {
     return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-      + this.getUsdtValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd();
+      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd();
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -1381,8 +1461,8 @@ export class AppComponent implements OnInit {
   }
 
   getDfiCountInLM(): number {
-    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInLtcPool
-      + this.wallet.dfiInDogePool;
+    return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
+      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool;
   }
 
   getDfiValueUsd(): number {
@@ -1395,7 +1475,7 @@ export class AppComponent implements OnInit {
 
   getAllPoolDfIncome(): number {
     return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay
-      + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
+      + this.poolUsdcOut.dfiPerDay + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
   }
 
   getAnteilBTCPoolAnGesamtLM(): number {
@@ -1412,6 +1492,10 @@ export class AppComponent implements OnInit {
 
   getAnteilUSDTPoolAnGesamtLM(): number {
     return this.poolUsdtOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilUSDCPoolAnGesamtLM(): number {
+    return this.poolUsdcOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
 
   getAnteilDogePoolAnGesamtLM(): number {
@@ -1653,9 +1737,30 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onChangeUsdcUsdcPool(): void {
+    if (this.checkInputNumber(this.wallet.usdcInUsdcPool)) {
+      localStorage.setItem(this.wallet.usdcInUsdcPoolKey, JSON.stringify(this.wallet.usdcInUsdcPool));
+      this.berechnePoolOutUsdc();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
   onChangeUsdtWallet(): void {
     if (this.checkInputNumber(this.wallet.usdt)) {
       localStorage.setItem(this.wallet.usdtKey, JSON.stringify(this.wallet.usdt));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
+  onChangeUsdcWallet(): void {
+    if (this.checkInputNumber(this.wallet.usdc)) {
+      localStorage.setItem(this.wallet.usdcKey, JSON.stringify(this.wallet.usdc));
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -1762,6 +1867,18 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onChangeDfiUsdcPool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInUsdcPool)) {
+      localStorage.setItem(this.wallet.dfiInUsdcPoolKey, JSON.stringify(this.wallet.dfiInUsdcPool));
+      this.berechnePoolOutUsdc();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
   onChangeDfiLtcPool(): void {
     if (this.checkInputNumber(this.wallet.dfiInLtcPool)) {
       localStorage.setItem(this.wallet.dfiInLtcPoolKey, JSON.stringify(this.wallet.dfiInLtcPool));
@@ -1813,6 +1930,7 @@ export class AppComponent implements OnInit {
     walletFinal.ltcdfi = wallet.ltcdfi;
     walletFinal.dogedfi = wallet.dogedfi;
     walletFinal.usdtdfi = wallet.usdtdfi;
+    walletFinal.usdcdfi = wallet.usdcdfi;
     walletFinal.bchdfi = wallet.bchdfi;
 
     walletFinal.btcInBtcPool = wallet.btcInBtcPool;
@@ -1821,6 +1939,8 @@ export class AppComponent implements OnInit {
     walletFinal.dfiInEthPool = wallet.dfiInEthPool;
     walletFinal.usdtInUsdtPool = wallet.usdtInUsdtPool;
     walletFinal.dfiInUsdtPool = wallet.dfiInUsdtPool;
+    walletFinal.usdcInUsdcPool = wallet.usdcInUsdcPool;
+    walletFinal.dfiInUsdcPool = wallet.dfiInUsdcPool;
     walletFinal.ltcInLtcPool = wallet.ltcInLtcPool;
     walletFinal.dfiInLtcPool = wallet.dfiInLtcPool;
     walletFinal.dogeInDogePool = wallet.dogeInDogePool;
@@ -1834,6 +1954,7 @@ export class AppComponent implements OnInit {
     walletFinal.ltc = wallet.ltc;
     walletFinal.doge = wallet.doge;
     walletFinal.usdt = wallet.usdt;
+    walletFinal.usdc = wallet.usdc;
     walletFinal.bch = wallet.bch;
 
     return walletFinal;
