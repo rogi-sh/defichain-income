@@ -123,7 +123,7 @@ export const LOGIN = gql`
 export const CORRELATION = gql`
   query {
     getCorrelation {
-      btcPool, ethPool, ltcPool, dogePool, bchPool, dogePool, usdtPool
+      btcPool, ethPool, ltcPool, dogePool, bchPool, dogePool, usdtPool, usdcPool
     }
   }
 `;

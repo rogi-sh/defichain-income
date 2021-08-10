@@ -36,6 +36,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolUsdtOut!: Outcome;
 
   @Input()
+  poolUsdcOut!: Outcome;
+
+  @Input()
   poolLtcOut!: Outcome;
 
   @Input()
@@ -73,6 +76,9 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   getAnteilUSDTPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilUSDCPoolAnGesamtLM: number;
 
   @Input()
   getAnteilDogePoolAnGesamtLM: number;
@@ -191,6 +197,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolUsdtOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolUsdtOut.dfiPerMonth * 100) / 100);
     }
+    if (this.poolUsdcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolUsdcOut.dfiPerMonth * 100) / 100);
+    }
     if (this.poolDogeOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolDogeOut.dfiPerMonth * 100) / 100);
     }
@@ -236,6 +245,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolUsdtOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#26a17b');
     }
+    if (this.poolUsdcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#2875C9');
+    }
     if (this.poolDogeOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#cb9800');
     }
@@ -268,6 +280,9 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolUsdtOut.dfiPerMonth > 0) {
       incomeNumbers.push(`USDT-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdtOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolUsdcOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`USDC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdcOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolDogeOut.dfiPerMonth > 0) {
       incomeNumbers.push(`DOGE-Pool - ${this.isIncognitoModeOn ? '****' : this.poolDogeOut.dfiPerMonth.toFixed(2)} DFI`);

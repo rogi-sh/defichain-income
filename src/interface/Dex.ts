@@ -11,6 +11,7 @@ export interface DexPoolPair {
   '8': Pool;
   '10': Pool;
   '12': Pool;
+  '14': Pool;
 }
 
 
@@ -78,6 +79,7 @@ export class AddressBalance {
   dogeToken: number;
   bchToken: number;
   usdtToken: number;
+  usdcToken: number;
 
   btcdfiToken: number;
   ltcdfiToken: number;
@@ -85,6 +87,7 @@ export class AddressBalance {
   dogedfiToken: number;
   bchdfiToken: number;
   usdtdfiToken: number;
+  usdcdfiToken: number;
 
 }
 
@@ -105,6 +108,8 @@ export class PoolEthOut extends Outcome {}
 
 export class PoolUsdtOut extends Outcome {}
 
+export class PoolUsdcOut extends Outcome {}
+
 export class PoolLtcOut extends Outcome {}
 
 export class PoolDogeOut extends Outcome {}
@@ -123,6 +128,7 @@ export class Correlation {
   dogePool: number;
   bchPool: number;
   usdtPool: number;
+  usdcPool: number;
 
   btcPricesDex: [number];
   ethPricesDex: [number];
@@ -130,5 +136,6 @@ export class Correlation {
   dogePricesDex: [number];
   bchPricesDex: [number];
   usdtPricesDex: [number];
+  usdcPricesDex: [number];
   dfiPricesDex: [number];
 }

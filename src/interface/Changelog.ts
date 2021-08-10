@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.10.0 - 10.8.2021';
+    this.log.comment = 'USDC Pool Support';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.9.3 - 8.8.2021';
     this.log.comment = 'Fix show added address success message';
 

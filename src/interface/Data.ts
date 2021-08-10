@@ -86,7 +86,7 @@ export type ChartOptions5 = {
 export class Series {
   data: Array<number>;
   name: string;
-};
+}
 
 export interface WalletDto {
   dfi: number;
@@ -98,6 +98,7 @@ export interface WalletDto {
   ltcdfi: number;
   dogedfi: number;
   usdtdfi: number;
+  usdcdfi: number;
   bchdfi: number;
 
   // User Infos
@@ -115,6 +116,11 @@ export interface WalletDto {
   usdtInUsdtPool: number;
   usdt: number;
   dfiInUsdtPool: number;
+
+  // USDC Pool
+  usdcInUsdcPool: number;
+  usdc: number;
+  dfiInUsdcPool: number;
 
   // LTC Pool
   ltcInLtcPool: number;
@@ -148,6 +154,7 @@ export class Wallet {
   ltcdfi = 0;
   dogedfi = 0;
   usdtdfi = 0;
+  usdcdfi = 0;
 
   // User Infos
   // BTC Pool
@@ -173,6 +180,14 @@ export class Wallet {
   usdtKey = 'usdtKey';
   dfiInUsdtPool = 0;
   dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
+
+  // USDC Pool
+  usdcInUsdcPool = 0;
+  usdcInUsdcPoolKey = 'usdcInUsdcPoolKey';
+  usdc = 0;
+  usdcKey = 'usdcKey';
+  dfiInUsdcPool = 0;
+  dfiInUsdcPoolKey = 'dfiInUsdcPoolKey';
 
   // LTC Pool
   ltcInLtcPool = 0;

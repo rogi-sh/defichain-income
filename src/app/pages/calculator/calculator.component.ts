@@ -29,6 +29,9 @@ export class CalculatorComponent implements OnInit {
   poolUsdt: Pool;
 
   @Input()
+  poolUsdc: Pool;
+
+  @Input()
   poolLtc: Pool;
 
   @Input()
@@ -45,6 +48,9 @@ export class CalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockUsdt;
+
+  @Input()
+  dfiProBlockUsdc;
 
   @Input()
   dfiProBlockLtc;

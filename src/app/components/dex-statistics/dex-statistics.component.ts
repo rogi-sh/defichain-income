@@ -24,6 +24,9 @@ export class DexStatisticsComponent implements OnInit {
   poolUsdt: Pool;
 
   @Input()
+  poolUsdc: Pool;
+
+  @Input()
   poolLtc: Pool;
 
   @Input()
