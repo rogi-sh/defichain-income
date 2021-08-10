@@ -30,9 +30,6 @@ export class ApyCalculatorComponent implements OnInit {
   @Input()
   fiat: string;
 
-  @Input()
-  isIncognitoModeOn: boolean;
-
   constructor() { }
 
   ngOnInit(): void {
