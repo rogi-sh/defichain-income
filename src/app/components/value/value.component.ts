@@ -82,7 +82,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAllValuesUsdPrice(): number {
-    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getLtcValueUsd()
+    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();
   }
 
