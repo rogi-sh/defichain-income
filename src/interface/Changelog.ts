@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.10.1 - 10.8.2021';
+    this.log.comment = 'USDC LP Token value fix';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.10.0 - 10.8.2021';
     this.log.comment = 'USDC Pool Support';
 
