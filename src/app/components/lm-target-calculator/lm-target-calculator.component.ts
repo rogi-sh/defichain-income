@@ -18,6 +18,9 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolUsdt: Pool;
 
   @Input()
+  poolUsdc: Pool;
+
+  @Input()
   poolLtc: Pool;
 
   @Input()
@@ -34,6 +37,9 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockUsdt;
+
+  @Input()
+  dfiProBlockUsdc;
 
   @Input()
   dfiProBlockLtc;
@@ -136,9 +142,13 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'BCH') {
       pool = this.poolBch;
       dfiPerBlock = this.dfiProBlockBch;
-    } else {
+    } else if (this.poolLmCalculationTargetReturn === 'USDT'){
       pool = this.poolUsdt;
       dfiPerBlock = this.dfiProBlockUsdt;
+
+    } else {
+      pool = this.poolUsdc;
+      dfiPerBlock = this.dfiProBlockUsdc;
 
     }
     return {pool, dfiPerBlock};
