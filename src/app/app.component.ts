@@ -1394,7 +1394,7 @@ export class AppComponent implements OnInit {
    * USDC Price from usdt pool because not in usdc pool
    */
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdt?.priceA;
+    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdc?.priceA;
   }
 
 

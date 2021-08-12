@@ -108,7 +108,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdt?.priceA;
+    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdc?.priceA;
   }
 
   getUsdtWalletValueUsd(): number {
@@ -116,7 +116,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdcWalletValueUsd(): number {
-    return this.wallet.usdc * this.poolUsdt?.priceA;
+    return this.wallet.usdc * this.poolUsdc?.priceA;
   }
 
   getLtcValueUsd(): number {
@@ -276,7 +276,7 @@ export class ValueComponent implements OnInit, OnChanges {
     return ((this.wallet.dfiInUsdtPool * this.poolUsdt?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
   }
   getAnteilLMOfUsdcPoolValue(): number {
-    return ((this.wallet.dfiInUsdcPool * this.poolUsdc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdt?.priceA));
+    return ((this.wallet.dfiInUsdcPool * this.poolUsdc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdc?.priceA));
   }
   getAnteilLMOfDogePoolValue(): number {
     return ((this.wallet.dfiInDogePool * this.poolDoge?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));

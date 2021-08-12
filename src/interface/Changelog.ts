@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.10.2 - 10.8.2021';
+    this.log.comment = 'USDC have a price feed now';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.10.1 - 10.8.2021';
     this.log.comment = 'USDC LP Token value fix';
 
