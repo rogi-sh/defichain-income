@@ -215,7 +215,20 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.refreshData()
 
+    this.toggleDarkMode();
+    this.handlePageHeight();
+
+    if (
+      localStorage.getItem('theme') === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      this.isDarkModeOn = true;
+    }
+  }
+
+  async refreshData(): Promise<void> {
     this.spinner.show();
 
     setTimeout(() => {
@@ -246,14 +259,6 @@ export class AppComponent implements OnInit {
     this.timer = setInterval(() => {
       this.refresh();
     }, this.sCountdown * 1000);
-
-    if (localStorage.getItem('theme') === 'dark'
-      || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      this.isDarkModeOn = true;
-    }
-
-    this.toggleDarkMode();
-    this.handlePageHeight();
 
     this.timestamp = new Date().toLocaleTimeString();
   }
