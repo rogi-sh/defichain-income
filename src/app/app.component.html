@@ -65,11 +65,11 @@
         *ngIf="!!getAllValuesUsdPrice()"
         class="inline-block h-full md:mr-5 items-center"
       >
-        <div
-          class="h-7 rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <span
+          class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
           <div *ngIf="isIncognitoModeOn">****</div>
-        </div>
+        </span>
       </div>
 
       <div class="hidden md:inline-block h-full mr-2 lg:mr-5 items-center flex">
