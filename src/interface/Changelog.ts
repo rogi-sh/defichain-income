@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.11.0 - 16.8.2021';
+    this.log.comment = 'Refresh Button';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.10.2 - 10.8.2021';
     this.log.comment = 'USDC have a price feed now';
 
@@ -973,4 +980,3 @@ export class Changelog {
     this.logs.push(this.log);
   }
 }
-
