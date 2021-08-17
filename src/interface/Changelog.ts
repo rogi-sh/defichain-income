@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.11.2 - 17.8.2021';
+    this.log.comment = 'Change to product of topiet gmbh - masternode freezer';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.11.1 - 17.8.2021';
     this.log.comment = 'Better view for Freezer';
 
