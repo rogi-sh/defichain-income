@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Pool} from '@interfaces/Dex';
+import {AddressBalance, Pool} from '@interfaces/Dex';
 import {ChartOptions, ChartOptions3, Data, Wallet} from '@interfaces/Data';
 import {ChartComponent} from 'ng-apexcharts';
 
@@ -51,6 +51,15 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   isIncognitoModeOn: boolean;
 
+  @Input()
+  adressBalances!: AddressBalance [];
+
+  @Input()
+  freezer5!: string [];
+
+  @Input()
+  freezer10!: string [];
+
   detailsOpen = false;
 
   ngOnInit(): void {
@@ -78,7 +87,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getMasternodeDfiUsd(): number {
-    return this.wallet?.dfiInMasternodes * this.poolBtc?.priceB;
+    return (this.wallet?.dfiInMasternodes - this.getFreezerDfiCount()) * this.poolBtc?.priceB;
   }
 
   getAllValuesUsdPrice(): number {
@@ -177,6 +186,23 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCountLM(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool;
+  }
+
+  getFreezerDfiCount(): number {
+    let dfi = 0;
+    this.freezer5?.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    this.freezer10?.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    return dfi;
+  }
+
+  getFreezerDfiUsd(): number {
+    return this.getFreezerDfiCount() * this.poolBtc?.priceB;
   }
 
   buildDataForChartValue(): void {

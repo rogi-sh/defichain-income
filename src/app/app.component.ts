@@ -1378,6 +1378,23 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Details', newValue);
   }
 
+  getFreezerDfiCount(): number {
+    let dfi = 0;
+    this.adressesMasternodesFreezer5.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    this.adressesMasternodesFreezer10.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    return dfi;
+  }
+
+  getFreezerDfiUsd(): number {
+    return this.getFreezerDfiCount() * this.poolBtc?.priceB;
+  }
+
   getAllValuesUsdPrice(): number {
     return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();

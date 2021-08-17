@@ -403,6 +403,9 @@
                     [poolBch]="poolBch"
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
+                    [adressBalances]="adressBalances"
+                    [freezer5]="adressesMasternodesFreezer5"
+                    [freezer10]="adressesMasternodesFreezer10"
                   ></app-value>
                 </div>
               </div>
@@ -433,7 +436,16 @@
                     <div *ngIf="wallet?.dfiInMasternodes > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfiInMasternodes | number: '1.1-1'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfiInMasternodes  | number: '1.1-1'}}</div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="adressesMasternodesFreezer5?.length > 0 || adressesMasternodesFreezer10?.length > 0">DFI in Freezer</div>
+                    <div *ngIf="adressesMasternodesFreezer5?.length > 0 || adressesMasternodesFreezer10?.length > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+                        <div *ngIf="!isIncognitoModeOn">{{getFreezerDfiCount() | number: '1.1-1'}}</div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -1901,6 +1913,9 @@
                     [poolBch]="poolBch"
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
+                    [adressBalances]="adressBalances"
+                    [freezer5]="adressesMasternodesFreezer5"
+                    [freezer10]="adressesMasternodesFreezer10"
                   ></app-value>
                 </div>
                 <div class="lg:col-span-2 overflow-x-auto">

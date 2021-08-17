@@ -121,7 +121,7 @@
 
            <div *ngIf="wallet?.dfiInMasternodes > 0" class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block pr-2">
-              {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes - getFreezerDfiCount() | number: '1.2-2' }}
               <br/>
               <div
                 class="text-xs text-gray-400"
@@ -134,6 +134,23 @@
               Masternodes
             </div>
           </div>
+
+           <div *ngIf="getFreezerDfiCount()> 0" class="text-xl relative">
+            <div class="text-pink-500 font-semibold inline-block pr-2">
+              {{isIncognitoModeOn ? '****' : getFreezerDfiCount() | number: '1.2-2' }}
+              <br/>
+              <div
+                class="text-xs text-gray-400"
+              >
+                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getFreezerDfiUsd()"></app-price>
+                <div *ngIf="isIncognitoModeOn">****</div>
+              </div>
+            </div>
+            <div class="inline-block h-full align-middle dark:text-gray-100">
+              Freezer
+            </div>
+          </div>
+
         </span>
       </div>
 

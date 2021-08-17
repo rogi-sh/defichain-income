@@ -12,7 +12,7 @@ export const environment = {
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/dfi/account/',
-  version: '7.11.0',
+  version: '7.11.1',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,
