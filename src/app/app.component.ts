@@ -215,7 +215,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.refreshData()
+    this.loadData();
 
     this.toggleDarkMode();
     this.handlePageHeight();
@@ -228,7 +228,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async refreshData(): Promise<void> {
+  async loadData(): Promise<void> {
     this.spinner.show();
 
     setTimeout(() => {
@@ -238,7 +238,7 @@ export class AppComponent implements OnInit {
 
     this.updateDescription('meta-data.description');
 
-    this.wallet = new Wallet();
+    this.clearWallet();
 
     this.loadFromLocalStorage();
 
@@ -347,6 +347,7 @@ export class AppComponent implements OnInit {
       this.loadDexManual();
 
     }
+    this.sCountdownShow = this.sCountdown;
     this.countdown?.restart();
 
     this.timestamp = new Date().toLocaleTimeString();
@@ -900,7 +901,7 @@ export class AppComponent implements OnInit {
 
     accounts.forEach(account => {
       const splitted = account.raw.split('@');
-      switch (splitted[1]) {
+      switch (account.token) {
         case '$DFI': {
           if (!masternode) {
             this.wallet.dfi += +splitted[0] * 0.00000001;
