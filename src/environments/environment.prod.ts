@@ -12,6 +12,8 @@ export const environment = {
   defichainnode: 'https://api.mydeficha.in/v1/listmasternodes/?count=True',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/dfi/account/',
+  mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
+  mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   version: '7.11.3',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo

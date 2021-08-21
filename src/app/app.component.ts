@@ -111,6 +111,7 @@ export class AppComponent implements OnInit {
   isIncognitoModeOn = false;
   masternodeFreezer5 = false;
   masternodeFreezer10 = false;
+  mamonKey: string;
 
   dex: DexInfo;
 
@@ -1531,6 +1532,70 @@ export class AppComponent implements OnInit {
 
   allAddresses(): string [] {
     return [...this.adressesMasternodes, ...this.adresses];
+  }
+
+  importMamon(): void {
+    this.loadMamon();
+  }
+
+  loadMamon(): void {
+    this.dataService
+      .getMamonAccount(this.mamonKey).subscribe(
+      account => {
+        if (account) {
+          this.mamonKey = '';
+          for (const key of Object.keys(account)) {
+            if (this.adressesMasternodes.indexOf(key) < 0) {
+              this.adressesMasternodes.push(key);
+              this.newAddressesAdded.push(key);
+            }
+
+            if (this.newAddressesAdded?.length === 0) {
+              this.adress = '';
+              return;
+            }
+
+            this.showDialogAddressesAdded = true;
+
+            this.clearWallet();
+            this.loadAddressesAndDexData();
+
+            setTimeout(() => {
+              /** spinner ends after 5 seconds */
+              this.showDialogAddressesAdded = false;
+            }, 5000);
+
+            // tslint:disable-next-line:no-shadowed-variable
+            for (const key of Object.keys(account)) {
+              this.dataService
+                .getMamonAccountNode(key).subscribe(
+                node => {
+                  if (this.newAddressesAdded.indexOf(key) > -1) {
+                    if (node.targetMultipliers && node.targetMultipliers.length === 3
+                      && this.adressesMasternodesFreezer5.indexOf(key) === -1) {
+                      this.adressesMasternodesFreezer5.push(key);
+                    }
+                    if (node.targetMultipliers && node.targetMultipliers.length === 4
+                      && this.adressesMasternodesFreezer10.indexOf(key) === -1) {
+                      this.adressesMasternodesFreezer10.push(key);
+                    }
+                  }
+                },
+                err => {
+                  console.error(err);
+
+                });
+            }
+
+
+          }
+        }
+
+      },
+      err => {
+        console.error(err);
+
+      });
   }
 
   addAdress(): void {

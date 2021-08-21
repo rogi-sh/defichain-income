@@ -112,6 +112,7 @@
   "blocktime": "{{ count }} Blöcke",
   "blocktimeHeadline": "Letzte Blöcke für die Berechnung der Blockzeit",
   "blocksTillCycle": "Blöcke bis zum nächsten Zyklus (Belohnungen verringern sich um 1,658%)",
-  "blocksTillDiff": "Blöcke bis zur nächsten Schwierigkeitsänderung"
+  "blocksTillDiff": "Blöcke bis zur nächsten Schwierigkeitsänderung",
+  "mamon-info": "Importiere deine Masternodes aus dem Masternode Monitor mit deinem Key"
 
 }

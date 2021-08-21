@@ -1767,6 +1767,39 @@
                       </div>
                       <br>
                       <h3 class="text-2xl mb-2 text-pink-500">
+                        Masternode Monitor Import
+                      </h3>
+                      <div class="dark:text-gray-100">
+                        {{ 'mamon-info' | translate }}
+                      </div>
+                      <div class="flex">
+                        <div class="w-3/4">
+                          <div class="relative h-14 input-component">
+                            <input
+                              required
+                              [(ngModel)]="mamonKey"
+                              type="text"
+                              id="mamon"
+                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                            >
+                            <label for="mamon"
+                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                              Masternode Monitor Key
+                            </label>
+                          </div>
+                        </div>
+                        <div class="inline-block w-1/4 pl-2 align-top">
+                          <button
+                            type="button"
+                            (click)="importMamon()"
+                            class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
+                          >
+                            Import
+                          </button>
+                        </div>
+                      </div>
+                      <br>
+                      <h3 class="text-2xl mb-2 text-pink-500">
                         {{ 'address.titleList' | translate }}
                       </h3>
 

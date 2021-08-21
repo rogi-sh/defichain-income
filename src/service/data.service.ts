@@ -4,6 +4,7 @@ import {environment} from '@environments/environment';
 import {Currencies, USD} from '@interfaces/Data';
 import {Observable} from 'rxjs/dist/types';
 import {SupernodeAccount} from '@interfaces/Supernode';
+import {MamonAccountNode} from '@interfaces/Mamon';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,14 @@ export class DataService {
 
   public getAdressAccount(address: string): Observable<Array<SupernodeAccount>>  {
     return this.http.get<Array<SupernodeAccount>>(environment.supernode_account + address);
+  }
+
+  public getMamonAccount(key: string): Observable<any>  {
+    const url = environment.mamon_account.replace('KEY', key);
+    return this.http.get<any>(url);
+  }
+
+  public getMamonAccountNode(key: string): Observable<MamonAccountNode> {
+    return this.http.get<MamonAccountNode>(environment.mamon_account_node + key);
   }
 }
