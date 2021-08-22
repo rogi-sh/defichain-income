@@ -14,7 +14,7 @@ export const environment = {
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/dfi/account/',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '7.11.3',
+  version: '7.12.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

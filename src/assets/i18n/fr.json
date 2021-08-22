@@ -111,6 +111,7 @@
   "blocktime": "les {{ count }} derniers blocs",
   "blocktimeHeadline": "Derniers blocs pour le calcul du temps de bloc",
   "blocksTillCycle": "Blocs jusqu'au prochain cycle (diminution des récompenses de 1,658%)",
-  "blocksTillDiff": "Blocs jusqu'au prochain changement de difficulté"
+  "blocksTillDiff": "Blocs jusqu'au prochain changement de difficulté",
+  "mamon-info": "Importez vos Masternodes depuis Masternode Monitor avec Auth Key"
 
 }

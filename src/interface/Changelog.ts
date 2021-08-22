@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.12.0 - 22.8.2021';
+    this.log.comment = 'Integration of Masternode Monitor for Masternode Import';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.11.3 - 20.8.2021';
     this.log.comment = 'Fix dfi coins extraction from endpoint, fix sum after reload';
 
