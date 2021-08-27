@@ -13,6 +13,13 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.12.2 - 27.8.2021';
+    this.log.comment = 'TVL of masternodes added';
+
+    this.logs.push(this.log);
+
+    this.log = new Log();
+
     this.log.version = '7.12.1 - 22.8.2021';
     this.log.comment = 'Fix call order of mamon calls';
 
