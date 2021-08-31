@@ -13,6 +13,9 @@ export class Changelog {
 
     this.log = new Log();
 
+    this.log.version = '7.12.3 - 31.8.2021';
+    this.log.comment = 'Improve styles';
+
     this.log.version = '7.12.2 - 27.8.2021';
     this.log.comment = 'TVL of masternodes added';
 

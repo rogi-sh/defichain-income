@@ -1,6 +1,7 @@
 <div
   class="h-screen sm:max-h-screen bg-gray-100 dark:bg-gray-800"
   xmlns="http://www.w3.org/1999/html"
+  [ngClass]="menu ? 'overflow-hidden' : ''"
 >
   <header
     class="h-auto py-1 px-2 sm:flex sm:h-24 sm:py-3 sm:justify-start"
@@ -133,7 +134,7 @@
       <div class="absolute top-0 h-14 w-full">
         <a
           (click)="handlePage('dashboard')"
-          class="absolute w-28 h-14 py-1 left-1/2 transform -translate-x-1/2"
+          class="absolute w-28 h-12 py-1 left-1/2 transform -translate-x-1/2"
         >
           <img
             src="../assets/img/Defi-income.svg"
@@ -284,8 +285,8 @@
   </div>
 
 
-  <div class="flex items-stretch dashboard-height dark:bg-gray-800">
-    <div class="hidden sm:inline transition duration-300 ease-in-out transform sm:w-24">
+  <div class="dashboard-height dark:bg-gray-800 sm:flex w-full">
+    <div class="hidden sm:inline-block transition duration-300 ease-in-out transform sm:w-24">
       <div class="flex flex-col text-center h-full relative">
         <a
           (click)="handlePage('dashboard')"
@@ -348,7 +349,7 @@
         </a>
       </div>
 
-      <div class="mx-8 h-">
+      <div class="mx-8">
         <div class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full">
           <a
             (click)="handlePage('info')"
@@ -371,8 +372,7 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 items-center sm:mt-0 sm:pl-0 sm:pr-4">
-
+    <div class="sm:flex-grow items-center sm:mt-0 sm:pl-0 sm:pr-4">
       <ngx-spinner
         bdColor="rgba(51,51,51,0.8)"
         size="large"
@@ -383,8 +383,8 @@
       </ngx-spinner>
 
       <div
-        class="sm:max-w-full overflow-hidden w-full min-h-screen sm:min-h-0 h-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
-        <div class="sm:overflow-auto relative h-full px-3 max-w-full" style="width: 99%;">
+        class="overflow-hidden w-full min-h-screen sm:min-h-0 h-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
+        <div class="sm:overflow-auto h-full max-w-full px-3 min-h-96vh">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
@@ -1695,7 +1695,7 @@
                         </div>
 
                         <div class="mt-4">
-                          <div class="inline-block w-4/6">
+                          <div class="inline-block w-full md:w-4/6">
                             <div
                               class="relative h-16 input-component"
                               [ngClass]="!adress ? 'empty' : ''"
@@ -1714,7 +1714,7 @@
                               </label>
                             </div>
                           </div>
-                          <div class="inline-block w-2/6 pl-2 align-top">
+                          <div class="inline-block w-full md:w-2/6 md:pl-2 align-top">
                             <button
                               class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none"
                               (click)="addAdress()"
@@ -1810,21 +1810,21 @@
                             class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-600"
                             [ngClass]="{'bg-gray-100 dark:bg-gray-700': i % 2 === 1}"
                           >
-                            <div class="w-3/4 overflow-hidden overflow-ellipsis my-2 text-white">
+                            <div class="mr-7 my-2 text-white flex flex-col">
                               <div *ngIf="getAddressBalance(a)?.masternode"
-                                   class="inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer mb-1">
-                                <span class="font-bold">Masternode</span>
+                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                  Masternode
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed5"
-                                   class="inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                <span class="font-bold">Freezer 5 Years - 1,5X</span>
+                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                  Freezer 5 Years - 1,5X
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed10"
-                                   class="inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                <span class="font-bold">Freezer 10 Years - 2X</span>
+                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                  Freezer 10 Years - 2X
                               </div>
                               <div
-                                class="min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer mb-1">
+                                class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                 {{ isIncognitoModeOn ? '****' : a }}
                               </div>
                               <div class="my-2 -mx-1">
