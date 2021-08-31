@@ -1812,19 +1812,19 @@
                           >
                             <div class="mr-7 my-2 text-white flex flex-col">
                               <div *ngIf="getAddressBalance(a)?.masternode"
-                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                   Masternode
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed5"
-                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                   Freezer 5 Years - 1,5X
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed10"
-                                   class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                   Freezer 10 Years - 2X
                               </div>
                               <div
-                                class="my-1 font-bold w-fit-content overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                 {{ isIncognitoModeOn ? '****' : a }}
                               </div>
                               <div class="my-2 -mx-1">
