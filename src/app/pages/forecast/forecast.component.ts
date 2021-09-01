@@ -25,7 +25,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   reducePercent = (100 - 1.658) / 100;
 
-  timeHorizonCycles = 24;
+  timeHorizonCycles = 12 * 2.72;
 
   @Input()
   poolOut!: Outcome;
@@ -212,7 +212,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   onChangeLmCalculatIncome(value: number): void {
-    this.timeHorizonCycles = value * 2;
+    this.timeHorizonCycles = value * 2.72;
     this.computeMasternodesReduce();
     this.buildChart();
   }

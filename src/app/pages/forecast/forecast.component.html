@@ -30,6 +30,12 @@
       <option>18</option>
       <option>24</option>
       <option>36</option>
+      <option>48</option>
+      <option>60</option>
+      <option>72</option>
+      <option>84</option>
+      <option>96</option>
+      <option>108</option>
       Monaten
     </select>
   </div>
@@ -64,7 +70,7 @@
       <h3 *ngIf="stakingOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         Staking
       </h3>
-      <app-earning 
+      <app-earning
         *ngIf="stakingOut?.dfiPerMonth > 0"
         [out]="poolStakingChartPos"
         [pool]="poolBtc"
@@ -77,7 +83,7 @@
       <h3 *ngIf="lmOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         LM
       </h3>
-      <app-earning 
+      <app-earning
         *ngIf="lmOut?.dfiPerMonth > 0"
         [out]="poolLMChartPos"
         [pool]="poolBtc"
@@ -90,7 +96,7 @@
       <h3 *ngIf="poolMasternodeOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         Masternode
       </h3>
-      <app-earning 
+      <app-earning
         *ngIf="poolMasternodeOut?.dfiPerMonth > 0"
         [out]="poolMnChartPos"
         [pool]="poolBtc"
