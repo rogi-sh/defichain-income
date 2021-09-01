@@ -6,6 +6,7 @@ module.exports = {
       './src/**/*.{html,ts}',
     ]
   },
+  mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
@@ -21,6 +22,9 @@ module.exports = {
       },
       height: {
         '97%': '97%',
+      },
+      width: {
+        'fit-content': 'fit-content',
       },
     },
   },
