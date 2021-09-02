@@ -236,7 +236,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 15 seconds */
       this.spinner.hide();
-    }, 15000);
+    }, 5000);
 
     this.updateDescription('meta-data.description');
 
@@ -1373,6 +1373,10 @@ export class AppComponent implements OnInit {
 
   trackHelper(): void {
     this.matomoTracker.trackEvent('Klick', 'Adresses Helper');
+  }
+
+  trackDFX(): void {
+    this.matomoTracker.trackEvent('Klick', 'DFX Buy');
   }
 
   onChangeDetails(newValue: string): void {
