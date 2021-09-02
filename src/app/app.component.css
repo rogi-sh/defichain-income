@@ -1,6 +1,24 @@
 @media (min-width: 640px) {
   .dashboard-height {
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 6rem - 24px);
+  }
+}
+
+@media (max-width: 400px) {
+  .sitemessage {
+    white-space: nowrap;
+    animation: floatText 15s infinite linear;
+    padding-left: 100%; /*Initial offset*/
+  }
+
+  .sitemessage:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes floatText {
+    to {
+      transform: translateX(-100%);
+    }
   }
 }
 

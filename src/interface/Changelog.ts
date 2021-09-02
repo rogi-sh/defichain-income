@@ -10,8 +10,13 @@ export class Changelog {
   constructor() {
 
     this.logs = new Array<Log>();
+    
     this.log = new Log();
-
+    this.log.version = '7.13.0 - 2.9.2021';
+    this.log.comment = 'Buy DFI button added\n, Styles improved';
+    this.logs.push(this.log);
+  
+    this.log = new Log();
     this.log.version = '7.12.3 - 1.9.2021';
     this.log.comment = 'Month added in forecast, period fix';
 
