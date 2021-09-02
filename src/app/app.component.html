@@ -3,9 +3,27 @@
   xmlns="http://www.w3.org/1999/html"
   [ngClass]="menu ? 'overflow-hidden' : ''"
 >
-  <header
-    class="h-auto py-1 px-2 sm:flex sm:h-24 sm:py-3 sm:justify-start"
-  >
+  <div class="xl:hidden w-full bg-pink-500 text-white">
+    <div class="flex items-center justify-center whitespace-nowrap sitemessage">
+      <div class="mr-4">
+        DEX
+        <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+        CEX
+        <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
+        DFI
+      </div>
+
+      <div
+      *ngIf="!!getAllValuesUsdPrice()"
+      class="inline-block h-full items-center border-l pl-4"
+      >
+        {{ 'balance' | translate }}:
+        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
+        <div *ngIf="isIncognitoModeOn">****</div>
+      </div>
+    </div>
+  </div>
+  <header class="h-auto py-1 px-2 sm:flex sm:h-24 sm:py-3 sm:justify-start relative">
     <a
       class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500 dark:text-gray-100"
       (click)="toggleMenu()"
@@ -33,7 +51,7 @@
       </div>
     </div>
 
-    <div *ngIf="loggedIn" class="hidden md:inline-block dark:text-gray-100 py-4 pl-5">
+    <div *ngIf="loggedIn" class="hidden md:flex dark:text-gray-100 pl-5 justify-center items-center">
       <input
         type="checkbox"
         id="incognito-eye"
@@ -41,18 +59,32 @@
         [ngClass]="{ 'isChecked': isIncognitoModeOn }"
         class="hidden"
       />
-      <label for="incognito-eye" class="cursor-pointer inline-block">
+      <label for="incognito-eye" class="cursor-pointer inline-block pt-1">
         <app-icon class="pointer-events-none" *ngIf="!isIncognitoModeOn" name="eye"></app-icon>
         <app-icon class="pointer-events-none" *ngIf="isIncognitoModeOn" name="eye-close"></app-icon>
       </label>
     </div>
 
-    <div (click)="refresh()" class="absolute sm:relative right-2 top-2 flex cursor-pointer hover:text-pink-500 dark:text-gray-100 w-10 h-10 sm:w-6 sm:h-6 sm:ml-5 sm:pt-2">
-      <app-icon class="pointer-events-none" name="refresh"></app-icon>
+    <div class="flex justify-center items-center">
+      <div (click)="refresh()" class="absolute sm:relative right-2 top-2 sm:top-auto cursor-pointer hover:text-pink-500 dark:text-gray-100 w-10 h-10 sm:w-6 sm:h-6 sm:ml-5">
+        <app-icon class="pointer-events-none" name="refresh"></app-icon>
+      </div>
     </div>
 
-    <div class="flex mt-2 sm:absolute sm:right-6 whitespace-nowrap self-center justify-center">
-      <div class="md:inline-block h-full mr-2 sm:mr-5 items-center">
+    <div class="flex items-center justify-center mt-2 md:mt-0">
+      <button (click)="trackDFX()" class="bg-pink-500 rounded-md w-full p-2 sm:pl-5 sm:pr-12 text-white focus:outline-none relative">
+        <div>
+          Buy DFI
+          <div class="text-xs text-gray-200">
+            001-107
+          </div>
+        </div>
+        <app-icon class="pointer-events-none" name="cart" class="text-white w-8 h-8 inline-block absolute right-5 sm:right-2 top-1/2 transform -translate-y-1/2"></app-icon>
+      </button>
+    </div>
+
+    <div class="flex mt-2 sm:absolute sm:right-6 whitespace-nowrap self-center justify-center items-center">
+      <div class="hidden xl:inline-block h-full mr-2 sm:mr-5 items-center">
         <span
           class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           DEX
@@ -64,7 +96,7 @@
       </div>
       <div
         *ngIf="!!getAllValuesUsdPrice()"
-        class="inline-block h-full md:mr-5 items-center"
+        class="hidden xl:inline-block h-full md:mr-5 items-center"
       >
         <span
           class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
@@ -73,11 +105,11 @@
         </span>
       </div>
 
-      <div class="hidden md:inline-block h-full mr-2 lg:mr-5 items-center flex">
+      <div class="hidden md:inline-block h-full mr-2 lg:mr-5 items-center">
         <app-changelog></app-changelog>
       </div>
 
-      <div class="hidden md:inline-block dark:text-gray-100" *ngIf="apiOnline">
+      <div class="hidden md:inline-block dark:text-gray-100 sm:mx-2" *ngIf="apiOnline">
         <div class="inline-block rounded bg-green-400 h-2 w-2"></div>
         Online
       </div>
@@ -287,7 +319,7 @@
 
   <div class="dashboard-height dark:bg-gray-800 sm:flex w-full">
     <div class="hidden sm:inline-block transition duration-300 ease-in-out transform sm:w-24">
-      <div class="flex flex-col text-center h-full relative">
+      <div class="flex flex-col text-center h-full relative sm:w-24">
         <a
           (click)="handlePage('dashboard')"
           [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
@@ -384,7 +416,7 @@
 
       <div
         class="overflow-hidden w-full min-h-screen sm:min-h-0 h-full sm:h-97% rounded-xl py-3 bg-white dark:bg-gray-800 mx-auto sm:mb-5">
-        <div class="sm:overflow-auto h-full max-w-full px-3 min-h-96vh">
+        <div class="sm:overflow-auto h-full max-w-full px-3 relative">
           <container-element [ngSwitch]="currentPage">
             <div *ngSwitchCase="'holdings'">
               <div>
@@ -1060,7 +1092,7 @@
                       <button
                         (click)="update()"
                         type="button"
-                        class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-1/4 h-14 text-white align-top"
+                        class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-1/4 h-14 text-white align-top uppercase"
                       >
                         {{ 'save' | translate }}
                       </button>
@@ -1716,7 +1748,7 @@
                           </div>
                           <div class="inline-block w-full md:w-2/6 md:pl-2 align-top">
                             <button
-                              class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none"
+                              class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none uppercase"
                               (click)="addAdress()"
                             >
                               {{ 'address.button-add' | translate }}
