@@ -104,11 +104,11 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getMasternodeTVL(): number {
-    return this.MNCount * 20000 * this.poolUsdc.priceB;
+    return this.MNCount * 20000 * this.poolUsdc?.priceB;
   }
 
   getTotalTVL(): number {
-    return this.dex.tvl + this.getMasternodeTVL();
+    return this.dex?.tvl + this.getMasternodeTVL();
   }
 
 }
