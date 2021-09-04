@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.13.2 - 4.9.2021';
+    this.log.comment = 'Fix register issue';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.13.1 - 3.9.2021';
     this.log.comment = 'Fix manual tracking input issues';
     this.logs.push(this.log);
