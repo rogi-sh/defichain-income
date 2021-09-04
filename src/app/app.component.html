@@ -19,7 +19,7 @@
       >
         {{ 'balance' | translate }}:
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
-        <div *ngIf="isIncognitoModeOn">****</div>
+        <div class="inline-block" *ngIf="isIncognitoModeOn">****</div>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
         <span
           class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
-          <div *ngIf="isIncognitoModeOn">****</div>
+          <div class="inline-block" *ngIf="isIncognitoModeOn">****</div>
         </span>
       </div>
 
