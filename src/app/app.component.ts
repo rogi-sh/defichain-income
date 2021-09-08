@@ -38,6 +38,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {SupernodeAccount} from '@interfaces/Supernode';
 import {firstValueFrom} from 'rxjs';
+import {MamonAccountNode} from '@interfaces/Mamon';
 
 @Component({
   selector: 'app-root',
@@ -1566,7 +1567,7 @@ export class AppComponent implements OnInit {
           this.newAddressesAdded.push(key);
         }
 
-        const node = await firstValueFrom(this.dataService.getMamonAccountNode(key));
+        const node = await firstValueFrom(this.dataService.getMamonAccountNode(key)) as MamonAccountNode;
 
         if (this.newAddressesAdded.indexOf(key) > -1) {
           if (node.targetMultipliers && node.targetMultipliers.length === 3
