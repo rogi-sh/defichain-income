@@ -30,6 +30,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { ForecastComponent } from '@pages/forecast/forecast.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '@environments/environment';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     }),
     GraphQLModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: true,
+      enabled: environment.production,
       registrationStrategy: 'registerImmediately'
     }),
   ],

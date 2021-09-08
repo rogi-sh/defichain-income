@@ -251,7 +251,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   getCat(): Array<string> {
     const result = new Array<string>();
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' } as const;
     let date =
       new Date(2021, 5, 3) > new Date() ? new Date(2021, 5, 3) : new Date();
 
