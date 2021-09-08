@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.14.0 - 8.9.2021';
+    this.log.comment = 'Override Cake standard staking Apy for freezer calculations';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.13.3 - 4.9.2021';
     this.log.comment = 'Fix incognito style issue';
     this.logs.push(this.log);

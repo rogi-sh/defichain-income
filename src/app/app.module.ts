@@ -30,7 +30,6 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { ForecastComponent } from '@pages/forecast/forecast.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [

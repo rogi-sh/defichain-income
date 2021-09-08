@@ -1285,6 +1285,26 @@
                       </div>
 
                       <div class="text-sm">Staking Cake</div>
+                      <div class="mt-5">
+                        <div class="dark:text-gray-100">
+                          Auto APY load from Cake:
+                        </div>
+                        <div
+                          class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="cakeApyLoadAuto"
+                            [(ngModel)]="cakeApyLoadAuto"
+                            (ngModelChange)="toggleAutoCake()"
+                            [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="cakeApyLoadAuto"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
+                      </div>
                       <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                         <div>
                           <div
@@ -1619,6 +1639,27 @@
                       <h3 class="text-2xl mb-2 text-pink-500">
                         Staking Cake
                       </h3>
+                      <div class="mt-5">
+                        <div class="dark:text-gray-100">
+                          Auto APY load from Cake:
+                        </div>
+                        <div
+                          class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="cakeApyLoadAutoAuto"
+                            [(ngModel)]="cakeApyLoadAuto"
+                            (ngModelChange)="toggleAutoCake()"
+                            [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="cakeApyLoadAutoAuto"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
+                      </div>
+                      <br>
                       <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
                         <div>
                           <div

@@ -181,6 +181,8 @@ export class AppComponent implements OnInit {
   isInfoOpen = false;
   selectedTab = 'manual';
   isDarkModeOn = false;
+  cakeApyLoadAuto = true;
+  cakeApyLoadAutoKey = 'cakeApyLoadAutoKey';
   timestamp = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
@@ -330,6 +332,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem('theme') !== null) {
       this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
+    }
+    if (localStorage.getItem(this.cakeApyLoadAutoKey) !== null) {
+      this.cakeApyLoadAuto = JSON.parse(localStorage.getItem(this.cakeApyLoadAutoKey));
     }
 
   }
@@ -845,6 +850,11 @@ export class AppComponent implements OnInit {
   }
 
   loadStackingCake(): void {
+
+    if (!this.cakeApyLoadAuto) {
+      return;
+    }
+
     this.stakingService
       .getStaking().subscribe(
       cake => {
@@ -2053,6 +2063,11 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light');
+  }
+
+  toggleAutoCake(): void {
+
+    localStorage.setItem(this.cakeApyLoadAutoKey, String(this.cakeApyLoadAuto));
   }
 
   onChangeLastBlocksForCalc(value: number): void {
