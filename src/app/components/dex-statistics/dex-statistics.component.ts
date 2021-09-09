@@ -72,10 +72,12 @@ export class DexStatisticsComponent implements OnInit {
 
   euonsHardforkeBlock = 894000;
 
+
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
     this.loadCor();
+
   }
 
   loadCor(): void {
@@ -118,6 +120,11 @@ export class DexStatisticsComponent implements OnInit {
 
   getTotalTVL(): number {
     return this.dex?.tvl + this.getMasternodeTVL();
+  }
+
+  getDexDFI(): number {
+    return +this.poolBtc?.reserveB + +this.poolEth?.reserveB + +this.poolLtc?.reserveB + +this.poolUsdt?.reserveB +
+      +this.poolUsdc?.reserveB + +this.poolDoge?.reserveB;
   }
 
 }

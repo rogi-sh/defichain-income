@@ -1,7 +1,31 @@
 <div>
-
-
   <div class="grid grid-flow-row grid-cols-1 auto-rows-max mt-2">
+
+    <div class="mt-2 mr-2 dark:text-gray-100">
+      <span class="mr-2">TVL Total:</span>
+      <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
+      </div>
+    </div>
+    <div class="mt-2 mr-2 dark:text-gray-100">
+      <span class="mr-2">DFI DEX:</span>
+      <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{getDexDFI()  |  number: '1.2-2'}} -
+        <app-price [fiat]="fiat" [usdPrice]="getDexDFI() * this.poolUsdc?.priceB"></app-price>
+      </div>
+    </div>
+    <div class="mt-2 mr-2 dark:text-gray-100">
+      <span class="mr-2">TVL DEX:</span>
+      <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
+      </div>
+    </div>
+
+
+
     <div class="overflow-x-auto rounded-md">
       <table class="max-w-full w-full rounded-md">
         <thead class="bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b">
@@ -20,8 +44,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceA"></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked"></app-price><br>
-            <span class="text-xs">{{poolBtc?.reserveA | number: '1.2-2'}} BTC - {{poolBtc?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked"></app-price>
+            <br>
+            <span class="text-xs">{{poolBtc?.reserveA | number: '1.2-2'}} BTC - {{poolBtc?.reserveB | number: '1.2-2'}}
+              DFI</span>
           </td>
           <td class="text-right p-2">
             {{corr?.btcPool}}
@@ -37,8 +63,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolEth?.priceA"></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolEth?.totalStaked"></app-price><br>
-            <span class="text-xs">{{poolEth?.reserveA | number: '1.2-2'}} ETH - {{poolEth?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolEth?.totalStaked"></app-price>
+            <br>
+            <span class="text-xs">{{poolEth?.reserveA | number: '1.2-2'}} ETH - {{poolEth?.reserveB | number: '1.2-2'}}
+              DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -56,8 +84,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.priceA "></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.totalStaked "></app-price><br>
-            <span class="text-xs">{{poolUsdt?.reserveA | number: '1.2-2'}} USDT - {{poolUsdt?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.totalStaked "></app-price>
+            <br>
+            <span class="text-xs">{{poolUsdt?.reserveA | number: '1.2-2'}}
+              USDT - {{poolUsdt?.reserveB | number: '1.2-2'}} DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -74,8 +104,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolUsdc?.priceA "></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolUsdc?.totalStaked "></app-price><br>
-            <span class="text-xs">{{poolUsdc?.reserveA | number: '1.2-2'}} USDC - {{poolUsdc?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolUsdc?.totalStaked "></app-price>
+            <br>
+            <span class="text-xs">{{poolUsdc?.reserveA | number: '1.2-2'}}
+              USDC - {{poolUsdc?.reserveB | number: '1.2-2'}} DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -93,8 +125,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolLtc?.priceA"></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolLtc?.totalStaked"></app-price><br>
-            <span class="text-xs">{{poolLtc?.reserveA | number: '1.2-2'}} LTC - {{poolLtc?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolLtc?.totalStaked"></app-price>
+            <br>
+            <span class="text-xs">{{poolLtc?.reserveA | number: '1.2-2'}} LTC - {{poolLtc?.reserveB | number: '1.2-2'}}
+              DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -112,8 +146,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolDoge?.priceA "></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolDoge?.totalStaked"></app-price><br>
-            <span class="text-xs">{{poolDoge?.reserveA | number: '1.2-2'}} DOGE - {{poolDoge?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolDoge?.totalStaked"></app-price>
+            <br>
+            <span class="text-xs">{{poolDoge?.reserveA | number: '1.2-2'}}
+              DOGE - {{poolDoge?.reserveB | number: '1.2-2'}} DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -131,8 +167,10 @@
             <app-price [fiat]="fiat" [usdPrice]="poolBch?.priceA"></app-price>
           </td>
           <td class="text-right p-2">
-            <app-price [fiat]="fiat" [usdPrice]="poolBch?.totalStaked"></app-price><br>
-            <span class="text-xs">{{poolBch?.reserveA | number: '1.2-2'}} BCH - {{poolBch?.reserveB | number: '1.2-2'}} DFI</span>
+            <app-price [fiat]="fiat" [usdPrice]="poolBch?.totalStaked"></app-price>
+            <br>
+            <span class="text-xs">{{poolBch?.reserveA | number: '1.2-2'}} BCH - {{poolBch?.reserveB | number: '1.2-2'}}
+              DFI</span>
           </td>
           <td class="text-right p-2">
             {{
@@ -181,7 +219,7 @@
     <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
       <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
         <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          Masternodes
+          Masternodes:
         </div>
         <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
           Total:
@@ -210,6 +248,13 @@
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.MNCount0Freezer}} /  {{ this.MNCount0Freezer * 20000 / 1000000}} Mio. DFI
       </span>
+        </div>
+        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
+          <span class="mr-2">TVL</span>
+          <span
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
+        </span>
         </div>
       </div>
     </div>
@@ -242,29 +287,6 @@
     </div>
 
     <div>
-      <div class="mt-2 mr-2 dark:text-gray-100">
-        <span class="mr-2">TVL DEX:</span>
-        <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
-        </div>
-      </div>
-
-      <div class="mt-2 mr-2 dark:text-gray-100">
-        <span class="mr-2">TVL Masternodes:</span>
-        <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
-        </div>
-      </div>
-
-      <div class="mt-2 mr-2 dark:text-gray-100">
-        <span class="mr-2">TVL Total:</span>
-        <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
-        </div>
-      </div>
 
       <div class="mt-2 mb-2 dark:text-gray-100">
         <span class="mr-2">Block:</span>
