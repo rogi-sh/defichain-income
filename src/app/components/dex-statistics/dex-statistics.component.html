@@ -8,6 +8,17 @@
         <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
       </div>
     </div>
+
+    <div class="mt-2 mr-2 dark:text-gray-100">
+      <span class="mr-2">Total DFI Locked:</span>
+      <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{getTotalDFILocked() |  number: '1.2-2'}} /
+        <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
+      </div>
+    </div>
+    <br>
+    <br>
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">DFI DEX:</span>
       <div

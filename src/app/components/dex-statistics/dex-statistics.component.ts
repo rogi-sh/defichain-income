@@ -127,4 +127,8 @@ export class DexStatisticsComponent implements OnInit {
       +this.poolUsdc?.reserveB + +this.poolDoge?.reserveB;
   }
 
+  getTotalDFILocked(): number {
+    return this.getDexDFI() + this.MNCount * 20000;
+  }
+
 }
