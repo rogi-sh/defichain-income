@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.14.2 - 9.9.2021';
+    this.log.comment = 'Masternodes infos extended in DEX Tab';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.14.1 - 8.9.2021';
     this.log.comment = 'Angular 12 Update and dependencies';
     this.logs.push(this.log);

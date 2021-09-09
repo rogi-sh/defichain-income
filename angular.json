@@ -35,6 +35,7 @@
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
+          "defaultConfiguration": "development",
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -62,7 +63,17 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
+            },
+            "development": {
+            "optimization": false,
+            "outputHashing": "all",
+            "sourceMap": true,
+            "namedChunks": true,
+            "extractLicenses": false,
+            "vendorChunk": true,
+            "buildOptimizer": false,
+            "budgets": []
+          }
           }
         },
         "serve": {

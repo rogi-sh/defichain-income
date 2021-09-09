@@ -45,6 +45,15 @@ export class DexStatisticsComponent implements OnInit {
   MNCount: number;
 
   @Input()
+  MNCount5Freezer: number;
+
+  @Input()
+  MNCount10Freezer: number;
+
+  @Input()
+  MNCount0Freezer: number;
+
+  @Input()
   rewards: Stats;
 
   @Input()

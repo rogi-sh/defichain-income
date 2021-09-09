@@ -7,10 +7,21 @@ export class Share {
   apy: number;
 }
 
-export class Masternode {
-  ENABLED: number;
-  PRE_ENABLED: number;
-  RESIGNED: number;
-  PRE_RESIGNED: number;
+export class Stats {
+  data: StatsData;
+
 }
 
+export class StatsData {
+  masternodes: Masternodes;
+}
+
+export class Masternodes {
+  locked: LockedMasternodes [];
+}
+
+export class LockedMasternodes {
+  weeks: number;
+  count: number;
+  tvl: number;
+}

@@ -92,6 +92,9 @@ export class AppComponent implements OnInit {
   stakingApy = this.stakingApyCake;
   stakingApyMN = 77.6;
   masternodeCount = 7960;
+  masternodeCount5Freezer = 0;
+  masternodeCount10Freezer = 0;
+  masternodeCount0Freezer = 0;
   stakingApyKey = 'stakingApyKey';
 
   adresses = new Array<string>();
@@ -878,7 +881,10 @@ export class AppComponent implements OnInit {
     this.stakingService
       .getMasternode().subscribe(
       masternode => {
-        this.masternodeCount = masternode.ENABLED;
+        this.masternodeCount5Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 260).count;
+        this.masternodeCount10Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 520).count;
+        this.masternodeCount0Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 0).count;
+        this.masternodeCount =   this.masternodeCount5Freezer +  this.masternodeCount10Freezer + this.masternodeCount0Freezer;
         this.berechneMNOut();
         this.berechneAllOut();
       },
