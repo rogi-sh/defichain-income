@@ -97,6 +97,8 @@ export class AppComponent implements OnInit {
   masternodeCount0Freezer = 0;
   stakingApyKey = 'stakingApyKey';
 
+  dfiBurned = 0;
+
   adresses = new Array<string>();
   adressesMasternodes = new Array<string>();
   adressesMasternodesFreezer5 = new Array<string>();
@@ -885,6 +887,7 @@ export class AppComponent implements OnInit {
         this.masternodeCount10Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 520).count;
         this.masternodeCount0Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 0).count;
         this.masternodeCount =   this.masternodeCount5Freezer +  this.masternodeCount10Freezer + this.masternodeCount0Freezer;
+        this.dfiBurned = masternode.data.burned.total;
         this.berechneMNOut();
         this.berechneAllOut();
       },

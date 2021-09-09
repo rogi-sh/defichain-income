@@ -68,6 +68,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   isIncognitoModeOn: boolean;
 
+  @Input()
+  burnedDfi: number;
+
   corr: Correlation;
 
   euonsHardforkeBlock = 894000;

@@ -14,6 +14,11 @@ export class Stats {
 
 export class StatsData {
   masternodes: Masternodes;
+  burned: Burned;
+}
+
+export class Burned {
+  total: number;
 }
 
 export class Masternodes {

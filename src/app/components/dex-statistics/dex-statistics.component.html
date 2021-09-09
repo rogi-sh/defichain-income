@@ -17,6 +17,15 @@
         <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
       </div>
     </div>
+
+    <div class="mt-2 mr-2 dark:text-gray-100">
+      <span class="mr-2">Total DFI Burned:</span>
+      <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        {{burnedDfi |  number: '1.2-2'}} /
+        <app-price [fiat]="fiat" [usdPrice]="burnedDfi * this.poolUsdc?.priceB"></app-price>
+      </div>
+    </div>
     <br>
     <br>
     <div class="mt-2 mr-2 dark:text-gray-100">
@@ -236,7 +245,7 @@
           Total:
           <span
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.MNCount}} / {{ this.MNCount * 20000 / 1000000}} Mio. DFI
+        {{ this.MNCount}} / {{ this.MNCount * 20000 / 1000000}} Mio. DFI / <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
       </span>
         </div>
         <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
@@ -244,6 +253,7 @@
           <span
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.MNCount5Freezer}} /  {{ this.MNCount5Freezer * 20000 / 1000000}} Mio. DFI
+            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount5Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
       </span>
         </div>
         <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
@@ -251,6 +261,7 @@
           <span
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.MNCount10Freezer}} /  {{ this.MNCount10Freezer * 20000 / 1000000}} Mio.  DFI
+            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount10Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
       </span>
         </div>
         <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
@@ -258,16 +269,10 @@
           <span
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{ this.MNCount0Freezer}} /  {{ this.MNCount0Freezer * 20000 / 1000000}} Mio. DFI
+               / <app-price [fiat]="fiat" [usdPrice]="this.MNCount0Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
       </span>
         </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          <span class="mr-2">TVL</span>
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
-        </span>
-        </div>
-      </div>
+       </div>
     </div>
   </div>
   <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
