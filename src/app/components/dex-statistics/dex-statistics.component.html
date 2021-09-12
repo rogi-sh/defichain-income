@@ -4,7 +4,7 @@
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">TVL Total:</span>
       <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
         <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">Total DFI Locked:</span>
       <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
         {{getTotalDFILocked() |  number: '1.2-2'}} /
         <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
       </div>
@@ -21,17 +21,16 @@
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">Total DFI Burned:</span>
       <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
         {{burnedDfi |  number: '1.2-2'}} /
         <app-price [fiat]="fiat" [usdPrice]="burnedDfi * this.poolUsdc?.priceB"></app-price>
       </div>
     </div>
     <br>
-    <br>
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">DFI DEX:</span>
       <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
         {{getDexDFI()  |  number: '1.2-2'}} -
         <app-price [fiat]="fiat" [usdPrice]="getDexDFI() * this.poolUsdc?.priceB"></app-price>
       </div>
@@ -39,14 +38,12 @@
     <div class="mt-2 mr-2 dark:text-gray-100">
       <span class="mr-2">TVL DEX:</span>
       <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
         <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
       </div>
     </div>
 
-
-
-    <div class="overflow-x-auto rounded-md">
+    <div class="overflow-x-auto rounded-md mt-2">
       <table class="max-w-full w-full rounded-md">
         <thead class="bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b">
         <tr>
@@ -215,122 +212,125 @@
       </table>
     </div>
   </div>
-  <div class="flex my-2 w-full flex-wrap dark:text-gray-100">
-
-
-    <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
-      <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
-        <div class="mb-1 w-full sm:w-auto sm:mr-4">
-          Staking Cake:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.stakingApyCake | number: '1.1-1' }}% APY
-      </span>
-        </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4">
-          Staking Masternode:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.stakingApyMN | number: '1.1-1' }}% APR
-      </span>
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
-      <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          Masternodes:
-        </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          Total:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.MNCount}} / {{ this.MNCount * 20000 / 1000000}} Mio. DFI / <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
-      </span>
-        </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          5Y Freezer:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.MNCount5Freezer}} /  {{ this.MNCount5Freezer * 20000 / 1000000}} Mio. DFI
-            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount5Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
-      </span>
-        </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          10Y Freezer:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.MNCount10Freezer}} /  {{ this.MNCount10Freezer * 20000 / 1000000}} Mio.  DFI
-            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount10Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
-      </span>
-        </div>
-        <div class="mb-1 mt-2 w-full sm:w-auto sm:mt-0 sm:mr-4 dark:text-gray-100">
-          0Y Freezer:
-          <span
-            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        {{ this.MNCount0Freezer}} /  {{ this.MNCount0Freezer * 20000 / 1000000}} Mio. DFI
-               / <app-price [fiat]="fiat" [usdPrice]="this.MNCount0Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
-      </span>
-        </div>
-       </div>
-    </div>
-  </div>
-  <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 dark:text-gray-100">
-    <div class="mb-1 w-full sm:w-auto grid gap-2 auto-rows-max">
-      <div>
-        Rewards DFI/Block:
-      </div>
-      <div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-4 gap-4">
+    <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">Staking:</h1>
+      <div class="mb-1 w-full sm:mr-4">
+        Staking Cake:
         <span
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          Total {{rewards?.rewards?.total |  number: '1.2-2'  }}
+          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+        >
+          {{ this.stakingApyCake | number: '1.1-1' }}% APY
         </span>
       </div>
-      <div>
-        <span
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <div class="w-full">
+        Staking Masternode:
+        <div
+          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block"
+        >
+          {{ this.stakingApyMN | number: '1.1-1' }}% APR
+        </div>
+      </div>
+
+    </div>
+    <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">Masternodes:</h1>
+
+      <div class="mb-1 w-full grid gap-2 auto-rows-max">
+        <div class="w-full dark:text-gray-100">
+          Total:
+          <div
+            class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+          >
+            {{ MNCount }} / {{ MNCount * 20000 / 1000000 }} Mio. DFI / <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
+          </div>
+        </div>
+        <div class="w-full dark:text-gray-100">
+          5Y Freezer:
+          <div
+            class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+          >
+            {{ MNCount5Freezer }} /  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
+            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount5Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+          </div>
+        </div>
+        <div class="w-full dark:text-gray-100">
+          10Y Freezer:
+          <div
+            class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+          >
+            {{ MNCount10Freezer }} /  {{ MNCount10Freezer * 20000 / 1000000 }} Mio.  DFI
+            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount10Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+          </div>
+        </div>
+        <div class="w-full dark:text-gray-100">
+          0Y Freezer:
+          <div
+            class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+          >
+            {{ MNCount0Freezer }} /  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
+            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount0Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">Rewards DFI:</h1>
+      <div class="mb-2">
+        Total:
+        <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+        >
+           {{rewards?.rewards?.total |  number: '1.2-2'  }}
+        </div>
+      </div>
+      <div class="mb-2">
+        <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+        >
           LM {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
           / Masternode {{rewards?.rewards?.minter |  number: '1.2-2'  }}
-        </span>
+        </div>
       </div>
       <div>
-        <span
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+        <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+        >
           Anchor {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
           / Community {{rewards?.rewards?.community |  number: '1.2-2'  }}
-        </span>
+        </div>
       </div>
     </div>
+    <div class="inline-lg-block rounded bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">Block:</h1>
 
-    <div>
-
-      <div class="mt-2 mb-2 dark:text-gray-100">
+      <div class="my-2 dark:text-gray-100">
         <span class="mr-2">Block:</span>
         <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           {{ rewards?.blockHeight }}
         </div>
       </div>
-      <div class="mt-2 mb-2 dark:text-gray-100">
+      <div class="my-2 dark:text-gray-100">
           <span
             class="mr-2">Blocktime ({{ 'blocktime' | translate: {count: blockCountForCalc === -1 ? 'Fix 30s' : blockCountForCalc} }}
             ):</span>
         <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           Avg {{blockTimeUsed ? blockTimeUsed : 0}} s (Median {{ blockTimeSecond ? blockTimeSecond : 0}} s)
         </div>
       </div>
-      <div class="mt-2 mb-2 dark:text-gray-100">
+      <div class="my-2 dark:text-gray-100">
         <span class="mr-2">{{ 'blocksTillCycle' | translate }}</span>
         <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           {{getBlockToNextCycle()}}
         </div>
       </div>
-      <div class="mt-2 mb-2 dark:text-gray-100">
+      <div class="my-2 dark:text-gray-100">
         <span class="mr-2">{{ 'blocksTillDiff' | translate }}</span>
         <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           {{getBlockToNextDiffChange()}}
         </div>
       </div>
