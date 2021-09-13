@@ -1,49 +1,59 @@
 <div>
-  <div class="grid grid-flow-row grid-cols-1 auto-rows-max mt-2">
+  <div class="mt-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="inline-lg-block rounded bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+        <h1 class="text-lg font-bold">TVL</h1>
+        <div class="grid gap-2">
+          <div>
+            <span class="mr-2">TVL Total:</span>
+            <div
+              class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+              <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
+            </div>
+          </div>
+          
+          <div>
+            <span class="mr-2">Total DFI Locked:</span>
+            <div
+              class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+              {{getTotalDFILocked() |  number: '1.2-2'}} /
+              <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
+            </div>
+          </div>
+          
+          <div>
+            <span class="mr-2">Total DFI Burned:</span>
+            <div
+              class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+              {{burnedDfi |  number: '1.2-2'}} /
+              <app-price [fiat]="fiat" [usdPrice]="burnedDfi * this.poolUsdc?.priceB"></app-price>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inline-lg-block rounded bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+        <h1 class="text-lg font-bold">DEX</h1>
 
-    <div class="mt-2 mr-2 dark:text-gray-100">
-      <span class="mr-2">TVL Total:</span>
-      <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
+        <div class="grid gap-2">
+          <div>
+            <span class="mr-2">DFI DEX:</span>
+            <div
+              class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+              {{getDexDFI()  |  number: '1.2-2'}} -
+              <app-price [fiat]="fiat" [usdPrice]="getDexDFI() * this.poolUsdc?.priceB"></app-price>
+            </div>
+          </div>
+          <div>
+            <span class="mr-2">TVL DEX:</span>
+            <div
+              class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+              <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="mt-2 mr-2 dark:text-gray-100">
-      <span class="mr-2">Total DFI Locked:</span>
-      <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        {{getTotalDFILocked() |  number: '1.2-2'}} /
-        <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
-      </div>
-    </div>
-
-    <div class="mt-2 mr-2 dark:text-gray-100">
-      <span class="mr-2">Total DFI Burned:</span>
-      <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        {{burnedDfi |  number: '1.2-2'}} /
-        <app-price [fiat]="fiat" [usdPrice]="burnedDfi * this.poolUsdc?.priceB"></app-price>
-      </div>
-    </div>
-    <br>
-    <div class="mt-2 mr-2 dark:text-gray-100">
-      <span class="mr-2">DFI DEX:</span>
-      <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        {{getDexDFI()  |  number: '1.2-2'}} -
-        <app-price [fiat]="fiat" [usdPrice]="getDexDFI() * this.poolUsdc?.priceB"></app-price>
-      </div>
-    </div>
-    <div class="mt-2 mr-2 dark:text-gray-100">
-      <span class="mr-2">TVL DEX:</span>
-      <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        <app-price [fiat]="fiat" [usdPrice]="dex?.tvl"></app-price>
-      </div>
-    </div>
-
-    <div class="overflow-x-auto rounded-md mt-2">
+    <div class="overflow-x-auto rounded-md my-4">
       <table class="max-w-full w-full rounded-md">
         <thead class="bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b">
         <tr>
@@ -212,7 +222,7 @@
       </table>
     </div>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4gap-4">
     <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
       <h1 class="text-lg font-bold">Staking:</h1>
       <div class="mb-1 w-full sm:mr-4">
