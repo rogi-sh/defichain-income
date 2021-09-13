@@ -285,20 +285,25 @@
         </div>
       </div>
       <div class="mb-2">
-        <div
-          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
-        >
-          LM {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
-          / Masternode {{rewards?.rewards?.minter |  number: '1.2-2'  }}
+        LM:  <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+          {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
         </div>
+        Masternode:  <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+        {{rewards?.rewards?.minter |  number: '1.2-2'  }} </div>
       </div>
       <div>
-        <div
+        Anchor: <div
           class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
         >
-          Anchor {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
-          / Community {{rewards?.rewards?.community |  number: '1.2-2'  }}
+           {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
         </div>
+        Community: <div
+        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+      >
+        {{rewards?.rewards?.community |  number: '1.2-2'  }}</div>
+
       </div>
     </div>
     <div class="inline-lg-block rounded bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
