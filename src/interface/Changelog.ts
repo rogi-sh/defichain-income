@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.14.5 - 20.9.2021';
+    this.log.comment = 'Ref Link hidden';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.14.4 - 12.9.2021';
     this.log.comment = 'Improve Styles';
     this.logs.push(this.log);
