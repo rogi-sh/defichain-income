@@ -382,15 +382,26 @@
       </div>
     </div>
     <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
-      <h1 class="text-lg font-bold">Node:</h1>
+      <h1 class="text-lg font-bold">Node</h1>
       <span
         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-            {{ getLatestRelease()?.name }}
+            {{ getLatestReleaseNode()?.name }}
           </span>
       <br>
-      <span class="text-sm">{{ getLatestRelease()?.published_at | date}}</span>
+      <span class="text-sm">{{ getLatestReleaseNode()?.published_at | date}}</span>
       <br>
-      <div [innerHTML]="getReleaseText(getLatestRelease()?.body)"></div>
+      <div [innerHTML]="getReleaseText(getLatestReleaseNode()?.body)"></div>
+    </div>
+    <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">App</h1>
+      <span
+        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+            {{ getLatestReleaseApp()?.name }}
+          </span>
+      <br>
+      <span class="text-sm">{{ getLatestReleaseApp()?.published_at | date}}</span>
+      <br>
+      <div [innerHTML]="getReleaseTextApp(getLatestReleaseApp()?.body)"></div>
     </div>
   </div>
 </div>
