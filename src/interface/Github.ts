@@ -7,3 +7,11 @@ export class Milestone {
   updated_at: Date;
 
 }
+
+export class Release {
+  tag_name: string;
+  prerelease: boolean;
+  body: string;
+  published_at: Date;
+  name: string;
+}

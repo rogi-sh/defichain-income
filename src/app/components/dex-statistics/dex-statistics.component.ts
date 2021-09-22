@@ -3,7 +3,7 @@ import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
 import { Octokit } from '@octokit/rest';
-import {Milestone} from '@interfaces/Github';
+import {Milestone, Release} from '@interfaces/Github';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -81,11 +81,14 @@ export class DexStatisticsComponent implements OnInit {
 
   milestones = new Array<Milestone>();
 
+  releases = new Array<Release>();
+
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
     this.loadCor();
     this.loadMilestones();
+    this.loadNodeRelease();
 
   }
 
@@ -99,6 +102,32 @@ export class DexStatisticsComponent implements OnInit {
         this.milestones  = data as unknown as Milestone [];
 
       });
+  }
+
+  loadNodeRelease(): void {
+    this.octokit.rest.repos.listReleases({
+      owner: 'DeFiCh',
+      repo: 'ain',
+    })
+      .then(({ data }) => {
+        // handle data
+        this.releases  = data as unknown as Release [];
+        this.releases.filter(a => a.prerelease === false);
+        this.releases.sort((a: Release, b: Release) => {
+          return new Date(a.published_at).getTime() - new Date(b.published_at).getTime();
+        });
+        this.releases.reverse();
+
+      });
+  }
+
+  getLatestRelease(): Release {
+    return this.releases[0];
+  }
+
+  getReleaseText(body: string): string {
+    const sub: string = body?.substr(0, body.indexOf('How to run?'));
+    return sub?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
   }
 
   loadCor(): void {
