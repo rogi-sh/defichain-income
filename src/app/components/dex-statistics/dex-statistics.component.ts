@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
+import { Octokit } from '@octokit/rest';
+import {Milestone, Release} from '@interfaces/Github';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -75,12 +77,85 @@ export class DexStatisticsComponent implements OnInit {
 
   euonsHardforkeBlock = 894000;
 
+  octokit = new Octokit({auth: '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'});
+
+  milestones = new Array<Milestone>();
+
+  releasesNode = new Array<Release>();
+
+  releasesApp = new Array<Release>();
 
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
     this.loadCor();
+    this.loadMilestones();
+    this.loadNodeRelease();
+    this.loadAppRelease();
+  }
 
+  loadMilestones(): void {
+    this.octokit.rest.issues.listMilestones({
+        owner: 'DeFiCh',
+        repo: 'ain',
+      })
+      .then(({ data }) => {
+        // handle data
+        this.milestones  = data as unknown as Milestone [];
+
+      });
+  }
+
+  loadNodeRelease(): void {
+    this.octokit.rest.repos.listReleases({
+      owner: 'DeFiCh',
+      repo: 'ain',
+    })
+      .then(({ data }) => {
+        // handle data
+        this.releasesNode  = data as unknown as Release [];
+        this.releasesNode = this.filterReleases(this.releasesNode);
+
+      });
+  }
+
+  getLatestReleaseNode(): Release {
+    return this.releasesNode[0];
+  }
+
+  loadAppRelease(): void {
+    this.octokit.rest.repos.listReleases({
+      owner: 'DeFiCh',
+      repo: 'app',
+    })
+      .then(({ data }) => {
+        // handle data
+        this.releasesApp  = data as unknown as Release [];
+        this.releasesApp = this.filterReleases(this.releasesApp );
+
+      });
+  }
+
+  private filterReleases(releases: Release []): Release [] {
+    releases = releases.filter(a => a.prerelease === false);
+    releases = releases.sort((a: Release, b: Release) => {
+      return new Date(a.published_at).getTime() - new Date(b.published_at).getTime();
+    });
+    return releases.reverse();
+  }
+
+  getLatestReleaseApp(): Release {
+    return this.releasesApp[0];
+  }
+
+  getReleaseText(body: string): string {
+    const sub: string = body?.substr(0, body.indexOf('How to run?'));
+    return sub?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
+  }
+
+  getReleaseTextApp(body: string): string {
+
+    return body?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
   }
 
   loadCor(): void {
