@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.15.0 - 23.9.2021';
+    this.log.comment = 'Github Data in DEX';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.14.5 - 20.9.2021';
     this.log.comment = 'Ref Link hidden';
     this.logs.push(this.log);
