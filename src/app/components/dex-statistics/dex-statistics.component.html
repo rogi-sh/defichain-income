@@ -11,7 +11,7 @@
               <app-price [fiat]="fiat" [usdPrice]="getTotalTVL()"></app-price>
             </div>
           </div>
-          
+
           <div>
             <span class="mr-2">Total DFI Locked:</span>
             <div
@@ -20,7 +20,7 @@
               <app-price [fiat]="fiat" [usdPrice]="getTotalDFILocked() * this.poolUsdc?.priceB"></app-price>
             </div>
           </div>
-          
+
           <div>
             <span class="mr-2">Total DFI Burned:</span>
             <div
@@ -252,7 +252,8 @@
           <div
             class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
           >
-            {{ MNCount }} / {{ MNCount * 20000 / 1000000 }} Mio. DFI / <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
+            {{ MNCount }} / {{ MNCount * 20000 / 1000000 }} Mio. DFI /
+            <app-price [fiat]="fiat" [usdPrice]="getMasternodeTVL()"></app-price>
           </div>
         </div>
         <div class="w-full dark:text-gray-100">
@@ -261,7 +262,8 @@
             class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
           >
             {{ MNCount5Freezer }} /  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
-            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount5Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+            /
+            <app-price [fiat]="fiat" [usdPrice]="this.MNCount5Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
           </div>
         </div>
         <div class="w-full dark:text-gray-100">
@@ -269,8 +271,9 @@
           <div
             class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
           >
-            {{ MNCount10Freezer }} /  {{ MNCount10Freezer * 20000 / 1000000 }} Mio.  DFI
-            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount10Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+            {{ MNCount10Freezer }} /  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
+            /
+            <app-price [fiat]="fiat" [usdPrice]="this.MNCount10Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
           </div>
         </div>
         <div class="w-full dark:text-gray-100">
@@ -279,7 +282,8 @@
             class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
           >
             {{ MNCount0Freezer }} /  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
-            / <app-price [fiat]="fiat" [usdPrice]="this.MNCount0Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
+            /
+            <app-price [fiat]="fiat" [usdPrice]="this.MNCount0Freezer * 20000  * this.poolUsdc?.priceB"></app-price>
           </div>
         </div>
       </div>
@@ -291,28 +295,32 @@
         <div
           class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
         >
-           {{rewards?.rewards?.total |  number: '1.2-2'  }}
+          {{rewards?.rewards?.total |  number: '1.2-2'  }}
         </div>
       </div>
       <div class="mb-2">
-        LM:  <div
+        LM:
+        <div
           class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
         </div>
-        Masternode:  <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-        {{rewards?.rewards?.minter |  number: '1.2-2'  }} </div>
+        Masternode:
+        <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
+          {{rewards?.rewards?.minter |  number: '1.2-2'  }} </div>
       </div>
       <div>
-        Anchor: <div
+        Anchor:
+        <div
           class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
         >
-           {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
+          {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
         </div>
-        Community: <div
-        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
-      >
-        {{rewards?.rewards?.community |  number: '1.2-2'  }}</div>
+        Community:
+        <div
+          class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center"
+        >
+          {{rewards?.rewards?.community |  number: '1.2-2'  }}</div>
 
       </div>
     </div>
@@ -347,6 +355,29 @@
         <div
           class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
           {{getBlockToNextDiffChange()}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+    <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
+      <h1 class="text-lg font-bold">Upgrades:</h1>
+      <div *ngFor="let m of milestones">
+        <br>
+        <div class="mb-1 w-full sm:mr-4">
+          <span
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+            {{ m.title }} -
+            <span>{{m.closed_issues / (m.closed_issues + m.open_issues) * 100 | number: '1.0-0' }} %</span>
+          </span>
+          <br>
+
+          <br>
+          <span class="text-sm">{{ m.description}}</span>
+          <br>
+          <span class="text-sm">{{ m.updated_at | date}} last update</span>
+
         </div>
       </div>
     </div>

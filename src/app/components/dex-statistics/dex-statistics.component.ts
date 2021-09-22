@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
+import { Octokit } from '@octokit/rest';
+import {Milestone} from '@interfaces/Github';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -75,12 +77,28 @@ export class DexStatisticsComponent implements OnInit {
 
   euonsHardforkeBlock = 894000;
 
+  octokit = new Octokit();
+
+  milestones = new Array<Milestone>();
 
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
     this.loadCor();
+    this.loadMilestones();
 
+  }
+
+  loadMilestones(): void {
+    this.octokit.rest.issues.listMilestones({
+        owner: 'DeFiCh',
+        repo: 'ain',
+      })
+      .then(({ data }) => {
+        // handle data
+        this.milestones  = data as unknown as Milestone [];
+
+      });
   }
 
   loadCor(): void {
