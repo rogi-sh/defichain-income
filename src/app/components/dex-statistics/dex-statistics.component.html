@@ -370,9 +370,10 @@
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
             {{ m.title }} -
             <span>{{m.closed_issues / (m.closed_issues + m.open_issues) * 100 | number: '1.0-0' }} %</span>
+
           </span>
           <br>
-
+          <span>{{m.closed_issues}} &#9989; - {{m.open_issues}} &#9203;</span>
           <br>
           <span class="text-sm">{{ m.description}}</span>
           <br>
