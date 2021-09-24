@@ -52,3 +52,7 @@
   background: #11b981!important;
   box-shadow: none!important;
 }
+
+.prose-sm a {
+  @apply underline
+}

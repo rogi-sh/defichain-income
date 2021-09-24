@@ -10,6 +10,17 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      typography: {
+        'sm': {
+          css: {
+            a: {
+              '&:hover': {
+                color: '#FF00AF',
+              },
+            },
+          },
+        },
+      },
       colors: {
         pink: {
           400: '#FF4DC6',
@@ -34,5 +45,7 @@ module.exports = {
       textColor: ['active, focus, hover'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };

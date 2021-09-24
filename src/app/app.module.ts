@@ -31,6 +31,7 @@ import { ForecastComponent } from '@pages/forecast/forecast.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { environment } from '@environments/environment';
     ForecastComponent,
   ],
   imports: [
+    MarkdownModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
