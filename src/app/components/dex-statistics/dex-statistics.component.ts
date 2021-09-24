@@ -85,6 +85,8 @@ export class DexStatisticsComponent implements OnInit {
 
   releasesApp = new Array<Release>();
 
+  releasesWallet = new Array<Release>();
+
   constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
@@ -92,6 +94,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadMilestones();
     this.loadNodeRelease();
     this.loadAppRelease();
+    this.loadWalletRelease();
   }
 
   loadMilestones(): void {
@@ -136,6 +139,19 @@ export class DexStatisticsComponent implements OnInit {
       });
   }
 
+  loadWalletRelease(): void {
+    this.octokit.rest.repos.listReleases({
+      owner: 'DeFiCh',
+      repo: 'wallet',
+    })
+      .then(({ data }) => {
+        // handle data
+        this.releasesWallet  = data as unknown as Release [];
+        this.releasesWallet = this.filterReleases(this.releasesWallet );
+
+      });
+  }
+
   private filterReleases(releases: Release []): Release [] {
     releases = releases.filter(a => a.prerelease === false);
     releases = releases.sort((a: Release, b: Release) => {
@@ -148,6 +164,10 @@ export class DexStatisticsComponent implements OnInit {
     return this.releasesApp[0];
   }
 
+  getLatestReleaseWallet(): Release {
+    return this.releasesWallet[0];
+  }
+
   getReleaseText(body: string): string {
     const sub: string = body?.substr(0, body.indexOf('How to run?'));
     return sub?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
@@ -156,6 +176,12 @@ export class DexStatisticsComponent implements OnInit {
   getReleaseTextApp(body: string): string {
 
     return body?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
+  }
+
+  getReleaseTextWallet(body: string): string {
+
+    const first =  body?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
+    return first?.substring(0, first?.indexOf('Dependencies'));
   }
 
   loadCor(): void {
