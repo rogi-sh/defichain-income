@@ -45,7 +45,7 @@
     "imp2": "Opción 1 - Lectura automática con la ayuda del ayudante de dirección",
     "exc0": "Descargue el ayudante, ejecútelo y simplemente copie las direcciones extraídas en el campo de entrada. La descripción detallada y el ayudante están aquí:",
     "exc": "Debe ejecutar en su aplicación defichain para obtener todas sus direcciones.",
-    "exc2": " Aquí están las direcciones donde se encuentran sus TOKENS (BTC, DFI, BTC-DFI ...).",
+    "exc2": " Aquí están las direcciones donde se encuentran sus TOKENS (dBTC, dETh, dDFI, dBTC-DFI ...).",
     "exc21": " Aquí están las direcciones donde se encuentran sus monedas DFI.",
     "exc3": "Introduzca la salida completa de los comandos uno tras otro en el campo de entrada y pulse añadir. Ahorra. Introduzca los nodos principales uno por uno. En cuanto reciba o envíe monedas DFI, deberá introducir de nuevo la salida del segundo comando (UTXO)",
     "add": "Añada las direcciones de su monedero para auditar.",

@@ -46,7 +46,7 @@
     "imp2": "Option 1 - Automatic readout with the help of the address helper",
     "exc0": "Download the helper, run it and simply copy the extracted addresses into the input field. Detailed description and the helper are here:",
     "exc": "You have to execute in your defichain app to get all your addresses.",
-    "exc2": " Herewith you get addresses where your TOKENS (BTC, DFI, BTC-DFI ...) are located.",
+    "exc2": " Herewith you get addresses where your TOKENS (dBTC, dETH, dDFI, dBTC-DFI ...) are located.",
     "exc21": " Herewith you get addresses where your DFI COINS are located.",
     "exc3": "Enter the complete output of the commands one after the other into the input field and press add. Save! Enter the masternodes one by one. As soon as you receive or send DFI Coins you have to enter the output of the second command again (UTXO)",
     "add": "Add your wallet addresses to track.",

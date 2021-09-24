@@ -47,7 +47,7 @@
     "imp2": "Option 1 - Automatisches Auslesen mit Hilfe des Adressen Helpers",
     "exc0": "Lade Dir den Helper herunter, führe ihn aus und kopiere die extrahierten Adressen einfach in das Eingabefeld. Detaillierte Beschreibung und der Helper sind hier:",
     "exc": "Führe 2 Befehle in der Konsole deiner DeFiChain App aus um alle deine Adressen zu ermitteln.",
-    "exc2": " Hiermit bekommst du Adressen mit deinen TOKENS (BTC, DFI, BTC-DFI ...).",
+    "exc2": " Hiermit bekommst du Adressen mit deinen TOKENS (dBTC, dETH, dDFI, dBTC-DFI ...).",
     "exc21": " Hiermit bekommst du Adressen mit deinen DFI COINS.",
     "exc3": "Trage die komplette Ausgabe der Befehle nacheinander in das Eingabefeld ein und drücke hinzufügen. Speichern! Masternodes einzeln eintragen. Sobald du DFI Coins empfängst oder sendest musst du die Ausgabe des zweiten Befehls nochmal eintragen.",
     "add": "Füge deine DFI Adressen für das Tracking hinzu",

@@ -46,7 +46,7 @@
     "imp2": "Option 1 - Lecture automatique avec l'aide de l'assistant d'adresse",
     "exc0": "Télécharger l'assistant, lancez-le et copiez simplement les adresses extraites dans le champ de saisie. Une description détaillée de l'assistant est trouvable ici :",
     "exc": "Vous devez executer la commande suivante dans votre application defichain afin d'obtenir toutes vos adresses.",
-    "exc2": "Avec ceci, vous obtenez les adresses où les JETONS (BTC, DFI, BTC-DFI ...) sont localisés.",
+    "exc2": "Avec ceci, vous obtenez les adresses où les JETONS (dBTC, dETH, dDFI, dBTC-DFI ...) sont localisés.",
     "exc21": "Avec ceci, vous obtenez les adresses où vos pièces DFI sont localisées.",
     "exc3": "Saisissez la sortie complète des commandes, l'une après l'autre, dans le champ de saisie et appuyez sur Ajouter. Économisez. Entrez les masternodes un par un. Dès que vous recevez ou envoyez des DFI Coins, vous devez entrer à nouveau la sortie de la deuxième commande (UTXO)",
     "add": "Ajoutez l'adresse de votre portefeuille pour suivre.",
