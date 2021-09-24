@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.15.2 - 24.9.2021';
+    this.log.comment = 'Impove style for infos from github';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.15.1 - 24.9.2021';
     this.log.comment = 'Add wallet infos from github';
     this.logs.push(this.log);
