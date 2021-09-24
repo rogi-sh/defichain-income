@@ -169,19 +169,11 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getReleaseText(body: string): string {
-    const sub: string = body?.substr(0, body.indexOf('How to run?'));
-    return sub?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
-  }
-
-  getReleaseTextApp(body: string): string {
-
-    return body?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
+    return body?.substring(0, body.indexOf('How to run?'));
   }
 
   getReleaseTextWallet(body: string): string {
-
-    const first =  body?.replace(/##/g, '<br>')?.replace(/-/g, '<br>');
-    return first?.substring(0, first?.indexOf('Dependencies'));
+    return body?.substring(0, body?.indexOf('Dependencies'));
   }
 
   loadCor(): void {
