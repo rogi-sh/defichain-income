@@ -77,7 +77,7 @@ export class DexStatisticsComponent implements OnInit {
 
   euonsHardforkeBlock = 894000;
 
-  octokit = new Octokit({auth: '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'});
+  octokit = new Octokit({auth: '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'});
 
   milestones = new Array<Milestone>();
 
