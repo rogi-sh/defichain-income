@@ -364,7 +364,6 @@
     <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
       <h1 class="text-lg font-bold">Upgrades</h1>
       <div *ngFor="let m of milestones">
-        <br>
         <div class="mb-1 w-full sm:mr-4">
           <span
             class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
@@ -382,8 +381,8 @@
           <span class="text-sm">{{ m.description}}</span>
           <br>
           <span class="text-sm">{{ m.updated_at | date}} last update</span>
-
         </div>
+        <br>
       </div>
     </div>
     <div class="rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white p-2">
