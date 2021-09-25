@@ -373,6 +373,10 @@
 
           </span>
           <br>
+          <a    class="text-pink-500 hover:underline"
+                target="_blank"
+                href="{{m?.html_url}}">Link in github</a>
+          <br>
           <span>{{m.closed_issues}} &#9989; - {{m.open_issues}} &#9203;</span>
           <br>
           <span class="text-sm">{{ m.description}}</span>
@@ -389,6 +393,10 @@
             {{ getLatestReleaseNode()?.name }}
           </span>
       <br>
+      <a    class="text-pink-500 hover:underline"
+            target="_blank"
+            href="{{getLatestReleaseNode()?.html_url}}">Link in github</a>
+      <br>
       <span class="text-sm">{{ getLatestReleaseNode()?.published_at | date}}</span>
       <br>
       <markdown class="prose-sm dark:prose-white" [data]="getReleaseText(getLatestReleaseNode()?.body)" ></markdown>
@@ -400,6 +408,10 @@
             {{ getLatestReleaseApp()?.name }}
           </span>
       <br>
+      <a    class="text-pink-500 hover:underline"
+            target="_blank"
+            href="{{getLatestReleaseNode()?.html_url}}">Link in github</a>
+      <br>
       <span class="text-sm">{{ getLatestReleaseApp()?.published_at | date}}</span>
       <br>
       <markdown class="prose-sm dark:prose-white" [data]="getLatestReleaseApp()?.body" ></markdown>
@@ -410,6 +422,10 @@
         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
             {{ getLatestReleaseWallet()?.name }}
           </span>
+      <br>
+      <a    class="text-pink-500 hover:underline"
+            target="_blank"
+            href="{{getLatestReleaseNode()?.html_url}}">Link in github</a>
       <br>
       <span class="text-sm">{{ getLatestReleaseWallet()?.published_at | date}}</span>
       <br>

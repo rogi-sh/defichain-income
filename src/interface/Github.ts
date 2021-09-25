@@ -5,7 +5,7 @@ export class Milestone {
   title: string;
   created_at: Date;
   updated_at: Date;
-
+  html_url: string;
 }
 
 export class Release {
@@ -14,4 +14,5 @@ export class Release {
   body: string;
   published_at: Date;
   name: string;
+  html_url: string;
 }
