@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.15.5 - 26.9.2021';
+    this.log.comment = 'Fix load dex data if no adresses';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.15.4 - 25.9.2021';
     this.log.comment = 'No auth key for github';
     this.logs.push(this.log);

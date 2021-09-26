@@ -807,40 +807,48 @@ export class AppComponent implements OnInit {
     this.adressBalances = new Array<AddressBalance>();
     const requestArray = [];
 
-    // normal addresses
+    // normal adresses
     for (const ad of this.adresses) {
       requestArray.push(this.dataService.getAdressAccount(ad));
     }
 
-    // minter addresses
+    // minter adresses
     for (const adM of this.adressesMasternodes) {
       requestArray.push(this.dataService.getAdressAccount(adM));
     }
 
-    forkJoin(requestArray).subscribe(results => {
-        results.forEach((value, i) => {
-          // minter address
-          if (i > this.adresses?.length - 1) {
-            const adress = this.getMasternodeAddressForIteration(i);
-            this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress), this.isFrozen10(adress));
-          } else {
-            this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false, false, false);
-          }
+    // if adresses exist
+    if (requestArray.length > 0) {
+      forkJoin(requestArray).subscribe(results => {
+          results.forEach((value, i) => {
+            // minter address
+            if (i > this.adresses?.length - 1) {
+              const adress = this.getMasternodeAddressForIteration(i);
+              this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress),
+                this.isFrozen10(adress));
+            } else {
+              this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false,
+                false, false);
+            }
+          });
+
+          this.loadDex();
+          this.loadStackingMasternode();
+
+        },
+        err => {
+          console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
+          setTimeout(() => {
+              this.loadDex();
+              console.error('Try again ...');
+            },
+            5000);
+
         });
-
-        this.loadDex();
-        this.loadStackingMasternode();
-
-      },
-      err => {
-        console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
-        setTimeout(() => {
-            this.loadDex();
-            console.error('Try again ...');
-          },
-          5000);
-
-      });
+    } else {
+      this.loadDex();
+      this.loadStackingMasternode();
+    }
   }
 
   isFrozen5(adress): boolean {
