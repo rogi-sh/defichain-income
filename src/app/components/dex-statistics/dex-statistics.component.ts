@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
-import { Octokit } from '@octokit/rest';
+import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 
 @Component({
@@ -87,7 +87,8 @@ export class DexStatisticsComponent implements OnInit {
 
   releasesWallet = new Array<Release>();
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {
+  }
 
   ngOnInit(): void {
     this.loadCor();
@@ -99,12 +100,12 @@ export class DexStatisticsComponent implements OnInit {
 
   loadMilestones(): void {
     this.octokit.rest.issues.listMilestones({
-        owner: 'DeFiCh',
-        repo: 'ain',
-      })
-      .then(({ data }) => {
+      owner: 'DeFiCh',
+      repo: 'ain',
+    })
+      .then(({data}) => {
         // handle data
-        this.milestones  = data as unknown as Milestone [];
+        this.milestones = data as unknown as Milestone [];
 
       });
   }
@@ -114,9 +115,9 @@ export class DexStatisticsComponent implements OnInit {
       owner: 'DeFiCh',
       repo: 'ain',
     })
-      .then(({ data }) => {
+      .then(({data}) => {
         // handle data
-        this.releasesNode  = data as unknown as Release [];
+        this.releasesNode = data as unknown as Release [];
         this.releasesNode = this.filterReleases(this.releasesNode);
 
       });
@@ -131,10 +132,10 @@ export class DexStatisticsComponent implements OnInit {
       owner: 'DeFiCh',
       repo: 'app',
     })
-      .then(({ data }) => {
+      .then(({data}) => {
         // handle data
-        this.releasesApp  = data as unknown as Release [];
-        this.releasesApp = this.filterReleases(this.releasesApp );
+        this.releasesApp = data as unknown as Release [];
+        this.releasesApp = this.filterReleases(this.releasesApp);
 
       });
   }
@@ -144,10 +145,10 @@ export class DexStatisticsComponent implements OnInit {
       owner: 'DeFiCh',
       repo: 'wallet',
     })
-      .then(({ data }) => {
+      .then(({data}) => {
         // handle data
-        this.releasesWallet  = data as unknown as Release [];
-        this.releasesWallet = this.filterReleases(this.releasesWallet );
+        this.releasesWallet = data as unknown as Release [];
+        this.releasesWallet = this.filterReleases(this.releasesWallet);
 
       });
   }
@@ -169,35 +170,41 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getReleaseText(body: string): string {
-    return body?.substring(0, body.indexOf('How to run?'));
+    if (body?.indexOf('How to run?') > -1) {
+      return body?.substring(0, body?.indexOf('How to run?'));
+    }
+    return body;
   }
 
   getReleaseTextWallet(body: string): string {
-    return body?.substring(0, body?.indexOf('Dependencies'));
+    if (body?.indexOf('Dependencies') > -1) {
+      return body?.substring(0, body?.indexOf('Dependencies'));
+    }
+    return body;
   }
 
   loadCor(): void {
-      this.apollo.query({
-        query: CORRELATION
-      }).subscribe((result: any) => {
-        if (result?.data?.getCorrelation) {
-          this.corr = result?.data?.getCorrelation;
-        } else {
-          console.log('No Date for Corr');
-        }
-      }, (error) => {
-        console.log(error);
-      });
-    }
+    this.apollo.query({
+      query: CORRELATION
+    }).subscribe((result: any) => {
+      if (result?.data?.getCorrelation) {
+        this.corr = result?.data?.getCorrelation;
+      } else {
+        console.log('No Date for Corr');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
 
-  getBlockToNextCycle(): string  {
+  getBlockToNextCycle(): string {
     if (!this.rewards || !this.blockTimeUsed) {
       return '0';
     }
 
     const blocks = 32690 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 32690;
     const time = blocks * this.blockTimeUsed / 60 / 60 / 24;
-    return String(blocks) + ' ~ ' + Math.round(time ) + ' d';
+    return String(blocks) + ' ~ ' + Math.round(time) + ' d';
   }
 
   getBlockToNextDiffChange(): string {

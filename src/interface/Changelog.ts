@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.15.7 - 30.9.2021';
+    this.log.comment = 'Fix Release text from github if structure not like normal';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.15.6 - 29.9.2021';
     this.log.comment = 'Fix link to github';
     this.logs.push(this.log);
