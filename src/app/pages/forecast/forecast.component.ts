@@ -30,6 +30,8 @@ export class ForecastComponent implements OnInit, OnChanges {
   @Input()
   poolOut!: Outcome;
 
+  poolCompoundOut: Outcome;
+
   @Input()
   stakingOut!: OutcomeStaking;
 
@@ -38,6 +40,8 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   @Input()
   lmOut!: Outcome;
+
+  lmCompoundOut: Outcome;
 
   @Input()
   bs!: number;
@@ -58,7 +62,11 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   poolOuts = new Array<PoolAllOut>();
 
+  poolCompoundOuts = new Array<PoolAllOut>();
+
   poolLmOuts = new Array<PoolAllOut>();
+
+  poolLmCompoundOuts = new Array<PoolAllOut>();
 
   poolStakingOuts = new Array<PoolAllOut>();
 
@@ -67,8 +75,10 @@ export class ForecastComponent implements OnInit, OnChanges {
   blocksPerCycle = 32690;
 
   poolOutcomeChartPos: Outcome;
+  poolOutcomeCompoundChartPos: Outcome;
   poolStakingChartPos: Outcome;
   poolLMChartPos: Outcome;
+  poolLMCompoundChartPos: Outcome;
   poolMnChartPos: Outcome;
   actualPoolIndex = 0;
 
@@ -90,37 +100,49 @@ export class ForecastComponent implements OnInit, OnChanges {
 
     // clean
     this.poolOuts = new Array<PoolAllOut>();
+    this.poolCompoundOuts = new Array<PoolAllOut>();
     this.poolLmOuts = new Array<PoolAllOut>();
+    this.poolLmCompoundOuts = new Array<PoolAllOut>();
     this.poolStakingOuts = new Array<PoolAllOut>();
     this.poolMnOuts = new Array<PoolAllOut>();
 
     for (let i = 0; i <= this.timeHorizonCycles; i++) {
       const poolAllOut = new PoolAllOut();
+      const poolCompoundAllOut = new PoolAllOut();
       const poolStakingOut = new PoolAllOut();
       const poolLmOut = new PoolAllOut();
+      const poolLmCompoundOut = new PoolAllOut();
       const poolMnOut = new PoolAllOut();
 
       if (i === 0) {
         this.transformPool(poolAllOut, this.poolOut);
+        this.transformPool(poolCompoundAllOut, this.poolCompoundOut);
         this.transformPool(poolStakingOut, this.stakingOut);
         this.transformPool(poolLmOut, this.lmOut);
+        this.transformPool(poolLmCompoundOut, this.lmCompoundOut);
         this.transformPool(poolMnOut, this.poolMasternodeOut);
       } else {
         this.transformPoolReduced(poolAllOut, this.poolOuts, i);
+        this.transformPoolReduced(poolCompoundAllOut, this.poolCompoundOuts, i);
         this.transformPoolReduced(poolStakingOut, this.poolStakingOuts, i);
         this.transformPoolReduced(poolLmOut, this.poolLmOuts, i);
+        this.transformPoolReduced(poolLmCompoundOut, this.poolLmCompoundOuts, i);
         this.transformPoolReduced(poolMnOut, this.poolMnOuts, i);
       }
 
       this.poolOuts.push(poolAllOut);
+      this.poolCompoundOuts.push(poolCompoundAllOut);
       this.poolLmOuts.push(poolLmOut);
+      this.poolLmCompoundOuts.push(poolLmCompoundOut);
       this.poolMnOuts.push(poolMnOut);
       this.poolStakingOuts.push(poolStakingOut);
     }
 
     this.poolOutcomeChartPos = this.poolOuts[0];
+    this.poolOutcomeCompoundChartPos = this.poolCompoundOuts[0];
     this.poolStakingChartPos = this.poolStakingOuts[0];
     this.poolLMChartPos = this.poolLmOuts[0];
+    this.poolLMCompoundChartPos = this.poolLmCompoundOuts[0];
     this.poolMnChartPos = this.poolMnOuts[0];
   }
 
