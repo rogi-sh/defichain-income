@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.16.1 - 7.10.2021';
+    this.log.comment = 'Fix stats endpoint in ocean';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.16.0 - 6.10.2021';
     this.log.comment = 'LP Token Value added to dex statistics table';
     this.logs.push(this.log);

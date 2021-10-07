@@ -13,12 +13,12 @@ export const environment = {
   stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/coins/apy',
-  oceanstats: 'https://ocean.defichain.com/v0.9/mainnet/stats',
+  oceanstats: 'https://ocean.defichain.com/v0.10/mainnet/stats',
   blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/dfi/account/',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '7.16.0',
+  version: '7.16.1',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
