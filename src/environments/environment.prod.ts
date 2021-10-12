@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming',
   poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
-  listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/dfi/listpoolpairs',
+  listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/DFI/listpoolpairs',
   accountDetails: 'https://api.defichain.io/v1/getaccount?including_start=true&owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
@@ -14,7 +14,7 @@ export const environment = {
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/dfi/account/',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '7.16.1',
+  version: '7.16.2',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,
