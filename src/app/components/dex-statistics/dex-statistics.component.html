@@ -60,6 +60,7 @@
           <th class="text-left p-2">{{ 'currency' | translate }}</th>
           <th class="text-right p-2">{{ 'price' | translate }}</th>
           <th class="text-right p-2">{{ 'Pool TVL' | translate }}</th>
+          <th class="text-right p-2">{{ 'LP Token' | translate }}</th>
           <th class="text-right p-2">Pool {{ 'correlation' | translate}}</th>
           <th class="text-right p-2">{{ 'APR' | translate }}</th>
         </tr>
@@ -75,6 +76,9 @@
             <br>
             <span class="text-xs">{{poolBtc?.reserveA | number: '1.2-2'}} BTC - {{poolBtc?.reserveB | number: '1.2-2'}}
               DFI</span>
+          </td>
+          <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolBtc?.totalStaked/poolBtc?.totalLiquidityLpToken"></app-price>
           </td>
           <td class="text-right p-2">
             {{corr?.btcPool}}
@@ -94,6 +98,9 @@
             <br>
             <span class="text-xs">{{poolEth?.reserveA | number: '1.2-2'}} ETH - {{poolEth?.reserveB | number: '1.2-2'}}
               DFI</span>
+          </td>
+          <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolEth?.totalStaked/poolEth?.totalLiquidityLpToken"></app-price>
           </td>
           <td class="text-right p-2">
             {{
@@ -117,6 +124,9 @@
               USDT - {{poolUsdt?.reserveB | number: '1.2-2'}} DFI</span>
           </td>
           <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolUsdt?.totalStaked/poolUsdt?.totalLiquidityLpToken"></app-price>
+          </td>
+          <td class="text-right p-2">
             {{
             corr?.usdtPool
             }}
@@ -135,6 +145,9 @@
             <br>
             <span class="text-xs">{{poolUsdc?.reserveA | number: '1.2-2'}}
               USDC - {{poolUsdc?.reserveB | number: '1.2-2'}} DFI</span>
+          </td>
+          <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolUsdc?.totalStaked/poolUsdc?.totalLiquidityLpToken"></app-price>
           </td>
           <td class="text-right p-2">
             {{
@@ -158,6 +171,9 @@
               DFI</span>
           </td>
           <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolLtc?.totalStaked/poolLtc?.totalLiquidityLpToken"></app-price>
+          </td>
+          <td class="text-right p-2">
             {{
             corr?.ltcPool
             }}
@@ -179,6 +195,9 @@
               DOGE - {{poolDoge?.reserveB | number: '1.2-2'}} DFI</span>
           </td>
           <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolDoge?.totalStaked/poolDoge?.totalLiquidityLpToken"></app-price>
+          </td>
+          <td class="text-right p-2">
             {{
             corr?.dogePool
             }}
@@ -198,6 +217,9 @@
             <br>
             <span class="text-xs">{{poolBch?.reserveA | number: '1.2-2'}} BCH - {{poolBch?.reserveB | number: '1.2-2'}}
               DFI</span>
+          </td>
+          <td class="text-right p-2">
+            <app-price [fiat]="fiat" [usdPrice]="poolBch?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price>
           </td>
           <td class="text-right p-2">
             {{
