@@ -28,27 +28,27 @@ export class EarningComponent implements OnInit {
 
   // get income of pool
   getOutcomeOfPoolPerMinUsd(out: Outcome): number {
-    return out.dfiPerMin * this.pool?.priceB;
+    return out?.dfiPerMin * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerHourUsd(out: Outcome): number {
-    return out.dfiPerHour * this.pool?.priceB;
+    return out?.dfiPerHour * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerDayUsd(out: Outcome): number {
-    return out.dfiPerDay * this.pool?.priceB;
+    return out?.dfiPerDay * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerWeekUsd(out: Outcome): number {
-    return out.dfiPerWeek * this.pool?.priceB;
+    return out?.dfiPerWeek * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerMonthUsd(out: Outcome): number {
-    return out.dfiPerMonth * this.pool?.priceB;
+    return out?.dfiPerMonth * this.pool?.priceB;
   }
 
   getOutcomeOfPoolPerYearUsd(out: Outcome): number {
-    return out.dfiPerYear * this.pool?.priceB;
+    return out?.dfiPerYear * this.pool?.priceB;
   }
 
 }

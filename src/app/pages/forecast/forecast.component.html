@@ -92,6 +92,18 @@
       ></app-earning>
     </div>
     <div>
+      <h3 *ngIf="lmCompoundOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        LM Compound
+      </h3>
+      <app-earning
+        *ngIf="lmCompoundOut?.dfiPerMonth > 0"
+        [out]="poolLMCompoundChartPos"
+        [pool]="poolBtc"
+        [fiat]="fiat"
+        [isIncognitoModeOn]="isIncognitoModeOn"
+      ></app-earning>
+    </div>
+    <div>
 
       <h3 *ngIf="poolMasternodeOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         Masternode

@@ -13,7 +13,7 @@ import {
   PoolAllOut,
 } from '@interfaces/Dex';
 import { ChartComponent } from 'ng-apexcharts';
-import {ChartOptions5, Series} from '@interfaces/Data';
+import {ChartOptions5, Series, Wallet} from '@interfaces/Data';
 
 @Component({
   selector: 'app-forecast',
@@ -53,10 +53,30 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolBtc!: Pool;
 
   @Input()
+  poolEth!: Pool;
+
+  @Input()
+  poolUsdc!: Pool;
+
+  @Input()
+  poolBch!: Pool;
+
+  @Input()
+  poolUsdt!: Pool;
+
+  @Input()
+  poolDoge!: Pool;
+
+  @Input()
   blockHeight!: number;
 
   @Input()
   isIncognitoModeOn: boolean;
+
+  @Input()
+  wallet!: Wallet;
+
+  average: number;
 
   euonsHardforkeBlock = 894000;
 
@@ -85,6 +105,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
+    this.average = this.getAPRAverage();
     this.computeMasternodesReduce();
     this.buildChart();
   }
@@ -126,7 +147,7 @@ export class ForecastComponent implements OnInit, OnChanges {
         this.transformPoolReduced(poolCompoundAllOut, this.poolCompoundOuts, i);
         this.transformPoolReduced(poolStakingOut, this.poolStakingOuts, i);
         this.transformPoolReduced(poolLmOut, this.poolLmOuts, i);
-        this.transformPoolReduced(poolLmCompoundOut, this.poolLmCompoundOuts, i);
+        this.transformPoolReducedCompound(poolLmCompoundOut, this.poolLmCompoundOuts, i);
         this.transformPoolReduced(poolMnOut, this.poolMnOuts, i);
       }
 
@@ -157,8 +178,10 @@ export class ForecastComponent implements OnInit, OnChanges {
           mouseMove: (function(event, chartContext, config): void {
             if (this.poolOuts?.length > 0 && config?.dataPointIndex  > -1 && this.actualPoolIndex !== config?.dataPointIndex ) {
               this.poolOutcomeChartPos = this.poolOuts[config.dataPointIndex];
+              this.poolOutcomeCompoundChartPos = this.poolCompoundOuts[config.dataPointIndex];
               this.poolStakingChartPos = this.poolStakingOuts[config.dataPointIndex];
               this.poolLMChartPos = this.poolLmOuts[config.dataPointIndex];
+              this.poolLMCompoundChartPos = this.poolLmCompoundOuts[config.dataPointIndex];
               this.poolMnChartPos = this.poolMnOuts[config.dataPointIndex];
             }
           }).bind(this)
@@ -217,6 +240,12 @@ export class ForecastComponent implements OnInit, OnChanges {
       lm.data = this.getLMData();
       series.push(lm);
     }
+    if (this.lmCompoundOut?.dfiPerMonth > 0) {
+      const lmC = new Series();
+      lmC.name = 'LM Compound';
+      lmC.data = this.getLMCompoundData();
+      series.push(lmC);
+    }
     if (this.poolMasternodeOut?.dfiPerMonth > 0) {
       const mn = new Series();
       mn.name = 'Masternode';
@@ -228,6 +257,11 @@ export class ForecastComponent implements OnInit, OnChanges {
     all.name = 'All';
     all.data = this.getAllData();
     series.push(all);
+
+    const allC = new Series();
+    allC.name = 'All Compound';
+    allC.data = this.getAllCompoundData();
+    series.push(allC);
 
     return series;
 
@@ -255,6 +289,14 @@ export class ForecastComponent implements OnInit, OnChanges {
     return result;
   }
 
+  getLMCompoundData(): Array<number> {
+    const result = new Array<number>();
+    this.poolLmCompoundOuts.forEach((p) =>
+      result.push(Math.round(p.dfiPerMonth * 100) / 100)
+    );
+    return result;
+  }
+
   getMNData(): Array<number> {
     const result = new Array<number>();
     this.poolMnOuts.forEach((p) =>
@@ -266,6 +308,14 @@ export class ForecastComponent implements OnInit, OnChanges {
   getAllData(): Array<number> {
     const result = new Array<number>();
     this.poolOuts.forEach((p) =>
+      result.push(Math.round(p.dfiPerMonth * 100) / 100)
+    );
+    return result;
+  }
+
+  getAllCompoundData(): Array<number> {
+    const result = new Array<number>();
+    this.poolCompoundOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
     return result;
@@ -291,12 +341,12 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   transformPool(poolAllOut: PoolAllOut, poolInput: Outcome): void {
-    poolAllOut.dfiPerDay = poolInput.dfiPerDay;
-    poolAllOut.dfiPerMin = poolInput.dfiPerMin;
-    poolAllOut.dfiPerHour = poolInput.dfiPerHour;
-    poolAllOut.dfiPerMonth = poolInput.dfiPerMonth;
-    poolAllOut.dfiPerWeek = poolInput.dfiPerWeek;
-    poolAllOut.dfiPerYear = poolInput.dfiPerYear;
+    poolAllOut.dfiPerDay = poolInput?.dfiPerDay;
+    poolAllOut.dfiPerMin = poolInput?.dfiPerMin;
+    poolAllOut.dfiPerHour = poolInput?.dfiPerHour;
+    poolAllOut.dfiPerMonth = poolInput?.dfiPerMonth;
+    poolAllOut.dfiPerWeek = poolInput?.dfiPerWeek;
+    poolAllOut.dfiPerYear = poolInput?.dfiPerYear;
   }
 
   transformPoolReduced(
@@ -304,15 +354,74 @@ export class ForecastComponent implements OnInit, OnChanges {
     inputPool: Array<PoolAllOut>,
     i: number
   ): void {
-    poolAllOut.dfiPerDay = inputPool[i - 1].dfiPerDay * this.reducePercent;
-    poolAllOut.dfiPerMin = inputPool[i - 1].dfiPerMin * this.reducePercent;
-    poolAllOut.dfiPerHour = inputPool[i - 1].dfiPerHour * this.reducePercent;
-    poolAllOut.dfiPerMonth = inputPool[i - 1].dfiPerMonth * this.reducePercent;
-    poolAllOut.dfiPerWeek = inputPool[i - 1].dfiPerWeek * this.reducePercent;
-    poolAllOut.dfiPerYear = inputPool[i - 1].dfiPerYear * this.reducePercent;
+    poolAllOut.dfiPerDay = inputPool[i - 1]?.dfiPerDay * this.reducePercent;
+    poolAllOut.dfiPerMin = inputPool[i - 1]?.dfiPerMin * this.reducePercent;
+    poolAllOut.dfiPerHour = inputPool[i - 1]?.dfiPerHour * this.reducePercent;
+    poolAllOut.dfiPerMonth = inputPool[i - 1]?.dfiPerMonth * this.reducePercent;
+    poolAllOut.dfiPerWeek = inputPool[i - 1]?.dfiPerWeek * this.reducePercent;
+    poolAllOut.dfiPerYear = inputPool[i - 1]?.dfiPerYear * this.reducePercent;
+  }
+
+  transformPoolReducedCompound(
+    poolAllOut: PoolAllOut,
+    inputPool: Array<PoolAllOut>,
+    i: number
+  ): void {
+    poolAllOut.dfiPerDay = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100 / 356), 356) - 1) * this.getReduction(i);
+    poolAllOut.dfiPerMin = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100 / 525600), 525600) - 1) * this.getReduction(i);
+    poolAllOut.dfiPerHour = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100 / 8760), 8760) - 1) * this.getReduction(i);
+    poolAllOut.dfiPerMonth = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100 / 12), 12) - 1) * this.getReduction(i);
+    poolAllOut.dfiPerWeek = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100 / 52), 52) - 1) * this.getReduction(i);
+    poolAllOut.dfiPerYear = this.getDfiCountLM() * 2 * (Math.pow(1 + (this.average / 100), 1) - 1) * this.getReduction(i);
+  }
+
+  getReduction(iteration: number): number {
+    let percent = 100;
+    for (let i = 1; i <= iteration; i++) {
+      percent = this.reducePercent;
+    }
+
+    return percent;
   }
 
   getTheme(): string {
     return localStorage.getItem('theme');
+  }
+
+  getAPRAverage(): number {
+
+    const dfiInLm = this.getDfiCountLM();
+    const dfiBtcPart = this.wallet?.dfiInBtcPool / dfiInLm;
+    const dfiEthPart = this.wallet?.dfiInEthPool / dfiInLm;
+    const dfiUsdcPart = this.wallet?.dfiInUsdcPool / dfiInLm;
+    const dfiUsdtPart = this.wallet?.dfiInUsdtPool / dfiInLm;
+    const dfiDogePart = this.wallet?.dfiInDogePool / dfiInLm;
+    const dfiBchPart = this.wallet?.dfiInBchPool / dfiInLm;
+
+    console.log('btc part ' + dfiBtcPart);
+    console.log('eth part ' + dfiEthPart);
+    console.log('usdc part ' + dfiUsdcPart);
+
+    console.log('bch part ' + dfiBchPart);
+    console.log('usdt part ' + dfiUsdtPart);
+    console.log('doge part ' + dfiDogePart);
+
+    const average =
+      ((dfiBtcPart * 100 * this.poolBtc?.apy) +
+        (dfiEthPart * 100 * this.poolEth?.apy) +
+        (dfiUsdcPart * 100 * this.poolUsdc?.apy) +
+        (dfiBchPart * 100 * this.poolBch?.apy) +
+        (dfiDogePart * 100 * this.poolDoge?.apy) +
+        (dfiUsdtPart * 100 * this.poolUsdt?.apy)) / 100;
+
+    const apyToApr =  Math.pow(1 + (average / 100 / 52), 52) - 1;
+    console.log('apy weekly ' + apyToApr);
+
+    return Math.round(average * 100) / 100;
+  }
+
+  getDfiCountLM(): number {
+    return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
+      + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool;
   }
 }

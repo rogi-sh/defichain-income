@@ -35,7 +35,7 @@ import {DataService} from '@services/data.service';
 import {StakingService} from '@services/staking.service';
 import {Meta} from '@angular/platform-browser';
 import {NgxSpinnerService} from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {SupernodeAccount} from '@interfaces/Supernode';
 import {firstValueFrom} from 'rxjs';
 import {MamonAccountNode} from '@interfaces/Mamon';
@@ -236,6 +236,7 @@ export class AppComponent implements OnInit {
     ) {
       this.isDarkModeOn = true;
     }
+
   }
 
   async loadData(): Promise<void> {
@@ -627,7 +628,7 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      promiseBlocks.sort( (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
+      promiseBlocks.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
 
       const diffS = new Array<number>();
 
@@ -894,7 +895,7 @@ export class AppComponent implements OnInit {
         this.masternodeCount5Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 260).count;
         this.masternodeCount10Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 520).count;
         this.masternodeCount0Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 0).count;
-        this.masternodeCount =   this.masternodeCount5Freezer +  this.masternodeCount10Freezer + this.masternodeCount0Freezer;
+        this.masternodeCount = this.masternodeCount5Freezer + this.masternodeCount10Freezer + this.masternodeCount0Freezer;
         this.dfiBurned = masternode.data.burned.total;
         this.berechneMNOut();
         this.berechneAllOut();
@@ -1019,8 +1020,8 @@ export class AppComponent implements OnInit {
         default: {
           break;
         }
-      }});
-
+      }
+    });
 
 
   }
@@ -1230,7 +1231,6 @@ export class AppComponent implements OnInit {
 
     return reward;
   }
-
 
   isLocalStorageNotEmpty(key: string): boolean {
     return localStorage.getItem(key) !== null;
@@ -1487,7 +1487,7 @@ export class AppComponent implements OnInit {
 
   getAnteilLMOfAllValue(): number {
     return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
+        + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
