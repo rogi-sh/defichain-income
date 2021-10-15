@@ -279,6 +279,12 @@ export class ForecastComponent implements OnInit, OnChanges {
     this.buildChart();
   }
 
+  onChangeReinvestIncome(value: number): void {
+    this.reinvestPeriod = value;
+    this.computeMasternodesReduce();
+    this.buildChart();
+  }
+
   getStakingData(): Array<number> {
     const result = new Array<number>();
     this.poolStakingOuts.forEach((p) =>
@@ -380,7 +386,6 @@ export class ForecastComponent implements OnInit, OnChanges {
     const apy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
     const yearYield = dfiiInLm * apy * reduction;
 
-    console.log('WEEKLY ' + yearYield / 52);
     poolAllOut.dfiPerDay = yearYield / 356;
     poolAllOut.dfiPerMin = yearYield / 525600;
     poolAllOut.dfiPerHour = yearYield / 8760;
@@ -437,10 +442,6 @@ export class ForecastComponent implements OnInit, OnChanges {
         (dfiDogePart * 100 * this.poolDoge?.apy) +
         (dfiUsdtPart * 100 * this.poolUsdt?.apy) +
         (dfiLtcPart * 100 * this.poolLtc?.apy)) / 100;
-
-    const apyToApr =  Math.pow(1 + (average / 100 / 52), 52) - 1;
-    console.log('apy weekly ' + apyToApr);
-    console.log('average apr ' + Math.round(average * 100) / 100);
 
     return Math.round(average * 100) / 100;
   }

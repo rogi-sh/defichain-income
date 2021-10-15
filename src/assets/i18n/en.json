@@ -86,7 +86,8 @@
   "forecast": {
     "title": "Forecast",
     "subtitle": "Your forecast monthly income (all figures without guarantee) in DFI for the next few months taking into account the reduction of rewards all 32690 blocks (Date-Axis)",
-    "drop": "Choose your time period in months"
+    "drop": "Choose your time period in months",
+    "reinvest": "Choose your lm compounding period"
   },
   "hour": "Hour",
   "day": "Day",
