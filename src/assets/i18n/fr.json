@@ -73,7 +73,8 @@
     "hold": "Valorisation de la possession"
   },
   "income": {
-    "all": "Tout",
+    "all": "Total",
+    "all-compound": "Total avec LM réinvesti",
     "title": "Votre revenu total",
     "word": "Revenu",
     "share": "Part",

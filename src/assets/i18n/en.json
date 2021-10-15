@@ -74,6 +74,7 @@
   },
   "income": {
     "all": "All",
+    "all-compound": "All with lm reinvest",
     "title": "Your total income",
     "word": "Income",
     "share": "Share",

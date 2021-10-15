@@ -67,6 +67,17 @@
       ></app-earning>
     </div>
     <div>
+      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+        {{ 'income.all-compound' | translate }}
+      </h3>
+      <app-earning
+        [isIncognitoModeOn]="isIncognitoModeOn"
+        [out]="poolOutcomeCompoundChartPos"
+        [pool]="poolBtc"
+        [fiat]="fiat"
+      ></app-earning>
+    </div>
+    <div>
       <h3 *ngIf="stakingOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         Staking
       </h3>
@@ -92,11 +103,11 @@
       ></app-earning>
     </div>
     <div>
-      <h3 *ngIf="lmCompoundOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+      <h3 *ngIf="lmOut?.dfiPerMonth > 0" class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
         LM Compound
       </h3>
       <app-earning
-        *ngIf="lmCompoundOut?.dfiPerMonth > 0"
+        *ngIf="lmOut?.dfiPerMonth > 0"
         [out]="poolLMCompoundChartPos"
         [pool]="poolBtc"
         [fiat]="fiat"

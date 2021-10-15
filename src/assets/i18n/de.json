@@ -75,6 +75,7 @@
   },
   "income": {
     "all": "Gesamt",
+    "all-compound": "Gesamt mit LM Reinvest",
     "title": "Dein gesamtes Einkommen",
     "word": "Einkommen",
     "share": "Anteil",

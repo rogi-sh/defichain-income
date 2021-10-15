@@ -85,7 +85,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   poolOuts = new Array<PoolAllOut>();
 
-  poolCompoundOuts = new Array<PoolAllOut>();
+  poolCompoundAllOuts = new Array<PoolAllOut>();
 
   poolLmOuts = new Array<PoolAllOut>();
 
@@ -104,6 +104,8 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolLMCompoundChartPos: Outcome;
   poolMnChartPos: Outcome;
   actualPoolIndex = 0;
+
+  reinvestPeriod = 52;
 
   constructor() {}
 
@@ -124,7 +126,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
     // clean
     this.poolOuts = new Array<PoolAllOut>();
-    this.poolCompoundOuts = new Array<PoolAllOut>();
+    this.poolCompoundAllOuts = new Array<PoolAllOut>();
     this.poolLmOuts = new Array<PoolAllOut>();
     this.poolLmCompoundOuts = new Array<PoolAllOut>();
     this.poolStakingOuts = new Array<PoolAllOut>();
@@ -140,22 +142,23 @@ export class ForecastComponent implements OnInit, OnChanges {
 
       if (i === 0) {
         this.transformPool(poolAllOut, this.poolOut);
-        this.transformPool(poolCompoundAllOut, this.poolCompoundOut);
+        this.transformPool(poolCompoundAllOut, poolAllOut);
         this.transformPool(poolStakingOut, this.stakingOut);
         this.transformPool(poolLmOut, this.lmOut);
-        this.transformPool(poolLmCompoundOut, this.lmCompoundOut);
+        // Compound ist gleich mit dem LM zu Beginn
+        this.transformPool(poolLmCompoundOut, poolLmOut);
         this.transformPool(poolMnOut, this.poolMasternodeOut);
       } else {
         this.transformPoolReduced(poolAllOut, this.poolOuts, i);
-        this.transformPoolReduced(poolCompoundAllOut, this.poolCompoundOuts, i);
         this.transformPoolReduced(poolStakingOut, this.poolStakingOuts, i);
         this.transformPoolReduced(poolLmOut, this.poolLmOuts, i);
         this.transformPoolReducedCompound(poolLmCompoundOut, this.poolLmCompoundOuts, i);
         this.transformPoolReduced(poolMnOut, this.poolMnOuts, i);
+        this.transformPoolAllReducedCompound(poolCompoundAllOut, poolStakingOut, poolLmCompoundOut, poolMnOut);
       }
 
       this.poolOuts.push(poolAllOut);
-      this.poolCompoundOuts.push(poolCompoundAllOut);
+      this.poolCompoundAllOuts.push(poolCompoundAllOut);
       this.poolLmOuts.push(poolLmOut);
       this.poolLmCompoundOuts.push(poolLmCompoundOut);
       this.poolMnOuts.push(poolMnOut);
@@ -163,7 +166,7 @@ export class ForecastComponent implements OnInit, OnChanges {
     }
 
     this.poolOutcomeChartPos = this.poolOuts[0];
-    this.poolOutcomeCompoundChartPos = this.poolCompoundOuts[0];
+    this.poolOutcomeCompoundChartPos = this.poolCompoundAllOuts[0];
     this.poolStakingChartPos = this.poolStakingOuts[0];
     this.poolLMChartPos = this.poolLmOuts[0];
     this.poolLMCompoundChartPos = this.poolLmCompoundOuts[0];
@@ -181,7 +184,7 @@ export class ForecastComponent implements OnInit, OnChanges {
           mouseMove: (function(event, chartContext, config): void {
             if (this.poolOuts?.length > 0 && config?.dataPointIndex  > -1 && this.actualPoolIndex !== config?.dataPointIndex ) {
               this.poolOutcomeChartPos = this.poolOuts[config.dataPointIndex];
-              this.poolOutcomeCompoundChartPos = this.poolCompoundOuts[config.dataPointIndex];
+              this.poolOutcomeCompoundChartPos = this.poolCompoundAllOuts[config.dataPointIndex];
               this.poolStakingChartPos = this.poolStakingOuts[config.dataPointIndex];
               this.poolLMChartPos = this.poolLmOuts[config.dataPointIndex];
               this.poolLMCompoundChartPos = this.poolLmCompoundOuts[config.dataPointIndex];
@@ -243,7 +246,7 @@ export class ForecastComponent implements OnInit, OnChanges {
       lm.data = this.getLMData();
       series.push(lm);
     }
-    if (this.lmCompoundOut?.dfiPerMonth > 0) {
+    if (this.lmOut?.dfiPerMonth > 0) {
       const lmC = new Series();
       lmC.name = 'LM Compound';
       lmC.data = this.getLMCompoundData();
@@ -318,7 +321,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   getAllCompoundData(): Array<number> {
     const result = new Array<number>();
-    this.poolCompoundOuts.forEach((p) =>
+    this.poolCompoundAllOuts.forEach((p) =>
       result.push(Math.round(p.dfiPerMonth * 100) / 100)
     );
     return result;
@@ -373,13 +376,32 @@ export class ForecastComponent implements OnInit, OnChanges {
 
     const dfiiInLm = this.getDfiCountLM() * 2;
 
-    console.log("WEEKLY "  + (dfiiInLm * (Math.pow(1 + (this.average / 100 / 52), 52) - 1) * this.getReduction(i) - dfiiInLm ));
-    poolAllOut.dfiPerDay = dfiiInLm * (Math.pow(1 + (this.average / 100 / 356), 356) - 1) * this.getReduction(i) - dfiiInLm;
-    poolAllOut.dfiPerMin = dfiiInLm * (Math.pow(1 + (this.average / 100 / 525600), 525600) - 1) * this.getReduction(i) - dfiiInLm;
-    poolAllOut.dfiPerHour = dfiiInLm * (Math.pow(1 + (this.average / 100 / 8760), 8760) - 1) * this.getReduction(i) - dfiiInLm;
-    poolAllOut.dfiPerMonth = dfiiInLm * (Math.pow(1 + (this.average / 100 / 12), 12) - 1) * this.getReduction(i) - dfiiInLm;
-    poolAllOut.dfiPerWeek = dfiiInLm * (Math.pow(1 + (this.average / 100 / 52), 52) - 1) * this.getReduction(i) - dfiiInLm;
-    poolAllOut.dfiPerYear = dfiiInLm * (Math.pow(1 + (this.average / 100), 1) - 1) * this.getReduction(i) - dfiiInLm;
+    const reduction = this.getReduction(i);
+    const apy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
+    const yearYield = dfiiInLm * apy * reduction;
+
+    console.log('WEEKLY ' + yearYield / 52);
+    poolAllOut.dfiPerDay = yearYield / 356;
+    poolAllOut.dfiPerMin = yearYield / 525600;
+    poolAllOut.dfiPerHour = yearYield / 8760;
+    poolAllOut.dfiPerMonth = yearYield / 12;
+    poolAllOut.dfiPerWeek = yearYield / 52;
+    poolAllOut.dfiPerYear = yearYield;
+  }
+
+  transformPoolAllReducedCompound(
+    poolAllOut: PoolAllOut,
+    stakingPool: PoolAllOut,
+    lmCompundPool: PoolAllOut,
+    mnPool: PoolAllOut
+  ): void {
+
+    poolAllOut.dfiPerDay = stakingPool.dfiPerDay + lmCompundPool.dfiPerDay + mnPool.dfiPerDay;
+    poolAllOut.dfiPerMin = stakingPool.dfiPerMin + lmCompundPool.dfiPerMin + mnPool.dfiPerMin;
+    poolAllOut.dfiPerHour = stakingPool.dfiPerHour + lmCompundPool.dfiPerHour + mnPool.dfiPerHour;
+    poolAllOut.dfiPerMonth = stakingPool.dfiPerMonth + lmCompundPool.dfiPerMonth + mnPool.dfiPerMonth;
+    poolAllOut.dfiPerWeek = stakingPool.dfiPerWeek + lmCompundPool.dfiPerWeek + mnPool.dfiPerWeek;
+    poolAllOut.dfiPerYear = stakingPool.dfiPerYear + lmCompundPool.dfiPerYear + mnPool.dfiPerYear;
   }
 
   getReduction(iteration: number): number {
