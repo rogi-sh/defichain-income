@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.16.3 - 14.10.2021';
+    this.log.comment = 'Fix usd prices pairs';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.16.2 - 12.10.2021';
     this.log.comment = 'Fix saiive endpoint';
     this.logs.push(this.log);
