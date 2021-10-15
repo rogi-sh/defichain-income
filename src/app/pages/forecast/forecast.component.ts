@@ -105,7 +105,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolMnChartPos: Outcome;
   actualPoolIndex = 0;
 
-  reinvestPeriod = 52;
+  reinvestPeriod = 356;
 
   constructor() {}
 
@@ -280,7 +280,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   onChangeReinvestIncome(value: number): void {
-    this.reinvestPeriod = value;
+    this.reinvestPeriod = +value;
     this.computeMasternodesReduce();
     this.buildChart();
   }
@@ -379,8 +379,8 @@ export class ForecastComponent implements OnInit, OnChanges {
     inputPool: Array<PoolAllOut>,
     i: number
   ): void {
-
-    const dfiiInLm = this.getDfiCountLM() * 2;
+    const reinvestDFI = this.getReinvestDFI(inputPool[i - 1], i);
+    const dfiiInLm = this.getDfiCountLM() * 2 + reinvestDFI;
 
     const reduction = this.getReduction(i);
     const apy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
@@ -392,6 +392,37 @@ export class ForecastComponent implements OnInit, OnChanges {
     poolAllOut.dfiPerMonth = yearYield / 12;
     poolAllOut.dfiPerWeek = yearYield / 52;
     poolAllOut.dfiPerYear = yearYield;
+  }
+
+  getReinvestDFI(inputPool: PoolAllOut, i: number): number {
+    if (inputPool && this.reinvestPeriod === 356) {
+      if (i === 1) {
+        const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
+        const daysForReinvest = Math.round(blocks * this.bs / 86400);
+        return inputPool.dfiPerDay * daysForReinvest;
+      } else {
+          const daysForReinvest = Math.round(this.blocksPerCycle * this.bs / 86400);
+          return inputPool.dfiPerDay * daysForReinvest;
+        }
+    } else if (inputPool && this.reinvestPeriod === 52) {
+      if (i === 1) {
+        const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
+        const weeksForInvest =  Math.round(blocks * this.bs / 604800 * 10) / 10;
+        return inputPool.dfiPerWeek * weeksForInvest;
+      } else {
+        const weeksForInvest = Math.round(this.blocksPerCycle * this.bs / 604800 * 10) / 10;
+        return inputPool.dfiPerWeek * weeksForInvest;
+      }
+    } else if (inputPool && this.reinvestPeriod === 12) {
+      if (i === 1) {
+        const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
+        const monthForInvest = Math.round(blocks * this.bs / 2628000 * 10) / 10;
+        return inputPool.dfiPerMonth * monthForInvest;
+      } else {
+        const monthForInvest = Math.round(this.blocksPerCycle * this.bs / 2628000 * 10) / 10;
+        return inputPool.dfiPerMonth * monthForInvest;
+      }
+    }
   }
 
   transformPoolAllReducedCompound(
