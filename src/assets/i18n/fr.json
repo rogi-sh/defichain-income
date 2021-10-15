@@ -73,7 +73,8 @@
     "hold": "Valorisation de la possession"
   },
   "income": {
-    "all": "Tout",
+    "all": "Total",
+    "all-compound": "Total avec LM réinvesti",
     "title": "Votre revenu total",
     "word": "Revenu",
     "share": "Part",
@@ -85,7 +86,8 @@
   "forecast": {
     "title": "Forecast",
     "subtitle": "Votre revenu mensuel prévisionnel (tous les chiffres sont sans garantie) en DFI pour les prochains mois en tenant compte de la réduction des récompenses tous les 32690 blocs (Axe des dates)",
-    "drop": "Choisissez votre période de temps en mois"
+    "drop": "Choisissez votre période de temps en mois",
+    "reinvest": "Choisissez votre période de capitalisation lm"
   },
   "hour": "Heure",
   "day": "Jour",

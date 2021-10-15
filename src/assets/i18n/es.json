@@ -72,7 +72,8 @@
     "hold": "Valor de los activos"
   },
   "income": {
-    "all": "Todo",
+    "all": "Total",
+    "all-compound": "Total con LM reinvertida",
     "title": "Sus ingresos totales",
     "word": "Ingresos",
     "share": "Share",
@@ -84,7 +85,8 @@
   "forecast": {
     "title": "Previsión",
     "subtitle": "Sus ingresos mensuales previstos (todas las cifras sin garantía) en DFI para los próximos meses teniendo en cuenta la reducción de las recompensas todos los 32690 bloques (Eje de fechas)",
-    "drop": "Elige tu periodo de tiempo en meses"
+    "drop": "Elige tu periodo de tiempo en meses",
+    "reinvest": "Elija su período de capitalización lm"
   },
   "hour": "Hora",
   "day": "Día",
