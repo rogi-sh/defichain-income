@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.17.2 - 16.10.2021';
+    this.log.comment = 'Correct compound interest calculation';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.17.1 - 15.10.2021';
     this.log.comment = 'DFI Rewards from reinvest period added to lm reinvest calculation';
     this.logs.push(this.log);

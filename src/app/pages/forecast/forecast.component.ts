@@ -107,6 +107,8 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   reinvestPeriod = 356;
 
+  lmApy = 0;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -383,15 +385,14 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiiInLm = this.getDfiCountLM() * 2 + reinvestDFI;
 
     const reduction = this.getReduction(i);
-    const apy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
-    const yearYield = dfiiInLm * apy * reduction;
+    this.lmApy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
 
-    poolAllOut.dfiPerDay = yearYield / 356;
-    poolAllOut.dfiPerMin = yearYield / 525600;
-    poolAllOut.dfiPerHour = yearYield / 8760;
-    poolAllOut.dfiPerMonth = yearYield / 12;
-    poolAllOut.dfiPerWeek = yearYield / 52;
-    poolAllOut.dfiPerYear = yearYield;
+    poolAllOut.dfiPerDay = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 365) - dfiiInLm) * reduction;
+    poolAllOut.dfiPerMin =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 525600) - dfiiInLm) * reduction;
+    poolAllOut.dfiPerHour =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 8760) - dfiiInLm) * reduction;
+    poolAllOut.dfiPerMonth = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 12) - dfiiInLm) * reduction;
+    poolAllOut.dfiPerWeek =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 52) - dfiiInLm) * reduction;
+    poolAllOut.dfiPerYear = dfiiInLm * this.lmApy * reduction;
   }
 
   getReinvestDFI(inputPool: PoolAllOut, i: number): number {
