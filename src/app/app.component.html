@@ -14,8 +14,8 @@
       </div>
 
       <div
-      *ngIf="!!getAllValuesUsdPrice()"
-      class="inline-block h-full items-center border-l pl-4"
+        *ngIf="!!getAllValuesUsdPrice()"
+        class="inline-block h-full items-center border-l pl-4"
       >
         {{ 'balance' | translate }}:
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
@@ -680,8 +680,8 @@
                     <div
                       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block"
                     >
-                    {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
-                    / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </div>
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
+                      / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </div>
                   </h3>
                   <br>
                   <app-earning
@@ -708,8 +708,8 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
-                       / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </div>
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
+                      / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </div>
                   </h3>
                   <br>
                   <app-earning
@@ -763,8 +763,8 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolLtc| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
-                       / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
+                      / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
                   </h3>
                   <br>
                   <app-earning
@@ -791,8 +791,8 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolDoge| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
-                       / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
+                      / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
                   </h3>
                   <br>
                   <app-earning
@@ -814,8 +814,8 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBch| number: '1.4-4' }} %</span>
                     <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
-                       / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
+                      {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
                   </h3>
                   <br>
                   <app-earning
@@ -843,6 +843,11 @@
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
+                  [apyCake]="stakingApy"
+                  [aprMn]="stakingApyMN"
+                  [adressesMasternodes]="adressesMasternodes"
+                  [adressesMasternodesFreezer5]="adressesMasternodesFreezer5"
+                  [adressesMasternodesFreezer10]="adressesMasternodesFreezer10"
                 >
                 </app-forecast>
               </div>
@@ -1894,15 +1899,15 @@
                             <div class="mr-7 my-2 text-white flex flex-col">
                               <div *ngIf="getAddressBalance(a)?.masternode"
                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Masternode
+                                Masternode
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed5"
                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Freezer 5 Years - 1,5X
+                                Freezer 5 Years - 1,5X
                               </div>
                               <div *ngIf="getAddressBalance(a)?.freezed10"
                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Freezer 10 Years - 2X
+                                Freezer 10 Years - 2X
                               </div>
                               <div
                                 class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
@@ -1910,19 +1915,19 @@
                               </div>
                               <div class="my-2 -mx-1">
                                 <div *ngIf="getAddressBalance(a)?.dfiCoins > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   DFI: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiCoins}} </div>
                                 <div *ngIf="getAddressBalance(a)?.dfiTokens > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   DFI Token: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiTokens}}</div>
                                 <div *ngIf="getAddressBalance(a)?.btcToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   BTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcToken }} </div>
                                 <div *ngIf="getAddressBalance(a)?.ethToken > 0"
                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   ETH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethToken }} </div>
                                 <div *ngIf="getAddressBalance(a)?.ltcToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   LTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcToken }}</div>
                                 <div *ngIf="getAddressBalance(a)?.bchToken > 0"
                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
@@ -1937,13 +1942,13 @@
                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   USDC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcToken }}</div>
                                 <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
                                 <div *ngIf="getAddressBalance(a)?.ethdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   ETHDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethdfiToken }} </div>
                                 <div *ngIf="getAddressBalance(a)?.ltcdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                   LTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcdfiToken }}</div>
                                 <div *ngIf="getAddressBalance(a)?.bchdfiToken > 0"
                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
