@@ -41,6 +41,7 @@
     "label": "address",
     "title": "Your DFI addresses",
     "titleList": "Your tracked DFI addresses",
+    "noAddresses": "No Addresses found",
     "title2": "For tracking you need your DeFiChain addresses. To find the addresses you have 2 options",
     "imp": "Option 2 - Manual readout from the Defichain App",
     "imp2": "Option 1 - Automatic readout with the help of the address helper",
