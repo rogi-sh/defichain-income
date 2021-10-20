@@ -439,9 +439,9 @@
                 </div>
               </div>
               <div
-                class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6"
+                class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-4 gap-6"
               >
-                <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-800 dark:text-gray-100">
+                <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.wallet' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.dfi > 0">DFI</div>
@@ -550,7 +550,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100">
+                <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
                   <h3 class="text-lg font-bold mb-2">{{ 'holdings.lp' | translate }}</h3>
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
@@ -627,10 +627,10 @@
               <h1 class="text-xl font-semibold text-pink-500 mt-3 mb-2">
                 {{ 'your' | translate }} pools
               </h1>
-              <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
+              <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-4 gap-6">
                 <div
                   *ngIf="wallet?.btcInBtcPool > 0 || wallet?.dfiInBtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -663,7 +663,7 @@
 
                 <div
                   *ngIf="wallet?.ethInEthPool > 0 || wallet?.dfiInEthPool"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -693,7 +693,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.usdtInUsdtPool > 0 || wallet?.dfiInUsdtPool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -721,7 +721,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.usdcInUsdcPool > 0 || wallet?.dfiInUsdcPool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -749,7 +749,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -776,7 +776,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.dogeInDogePool > 0 || wallet?.dfiInDogePool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -800,7 +800,7 @@
                 </div>
                 <div
                   *ngIf=" wallet?.bchInBchPool > 0 || wallet?.dfiInBchPool > 0"
-                  class="bg-gray-100 rounded-md p-2  dark:bg-gray-800 dark:text-gray-100"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
@@ -916,8 +916,8 @@
             <div *ngSwitchCase="'settings'">
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'setting' | translate }}</h1>
-                <div class="grid grid-flow-col grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-3 gap-6">
-                  <div>
+                <div class="lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:gap-4">
+                  <div class="mb-4 lg:mb-0 dark:text-gray-100 dark:bg-gray-600 rounded p-2 bg-gray-100">
                     <div class="dark:text-gray-100">
                       Refresh Period in seconds:
                     </div>
@@ -961,43 +961,45 @@
                     </div>
 
 
-                    <div class="mt-5">
-                      <div class="dark:text-gray-100">
-                        Darkmode:
+                    <div class="grid grid-cols-2 mt-4">
+                      <div class="flex flex-row gap-2">
+                        <div class="dark:text-gray-100">
+                          Darkmode:
+                        </div>
+                        <div
+                          class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="darkmode"
+                            [(ngModel)]="isDarkModeOn"
+                            (ngModelChange)="toggleDarkMode()"
+                            [ngClass]="{ 'isChecked': isDarkModeOn }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="darkmode"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
                       </div>
-                      <div
-                        class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input
-                          type="checkbox"
-                          id="darkmode"
-                          [(ngModel)]="isDarkModeOn"
-                          (ngModelChange)="toggleDarkMode()"
-                          [ngClass]="{ 'isChecked': isDarkModeOn }"
-                          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                        />
-                        <label
-                          for="darkmode"
-                          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                        ></label>
-                      </div>
-                    </div>
 
-                    <div class="mt-5">
-                      <div class="dark:text-gray-100">
-                        Incognito:
-                      </div>
-                      <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input
-                          type="checkbox"
-                          id="incognito"
-                          [(ngModel)]="isIncognitoModeOn"
-                          [ngClass]="{ 'isChecked': isIncognitoModeOn }"
-                          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                        />
-                        <label
-                          for="incognito"
-                          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                        ></label>
+                      <div class="flex flex-row gap-2">
+                        <div class="dark:text-gray-100">
+                          Incognito:
+                        </div>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="incognito"
+                            [(ngModel)]="isIncognitoModeOn"
+                            [ngClass]="{ 'isChecked': isIncognitoModeOn }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="incognito"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
                       </div>
                     </div>
                     <br>
@@ -1005,7 +1007,7 @@
                       {{ 'blocktimeHeadline' | translate }}
                     </div>
                     <div class="flex">
-                      <select class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
+                      <select class="border dark:border-none bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
                        dark:text-gray-100 mb-2" (change)="onChangeLastBlocksForCalc($event.target.value)">
                         <option [selected]="lastBlocksForCompute === -1" value="-1">Fix 30s</option>
                         <option [selected]="lastBlocksForCompute === 100" value="100">100</option>
@@ -1025,7 +1027,7 @@
                     </div>
 
                   </div>
-                  <div class="border-t pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-3 dark:text-gray-100">
+                  <div class="dark:text-gray-100 dark:bg-gray-600 rounded p-2 bg-gray-100 relative">
                     <p *ngIf="!loggedIn">{{ 'loginExplain' | translate }}</p>
                     <p *ngIf="!loggedIn" class="my-3">
                       <button
@@ -1079,16 +1081,18 @@
                         {{ 'login' | translate }}
                       </button>
                     </div>
-                    <h2 *ngIf="loggedIn">
-                      {{ 'login3' | translate }}
-                    </h2>
-                    <div
-                      *ngIf="loggedInAuth"
-                      class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block mt-1">
-                      {{isIncognitoModeOn ? '****' : loggedInAuth}}
+                    <div class="flex flex-row gap-2 items-center align-middle">
+                      <h2 *ngIf="loggedIn">
+                        {{ 'login3' | translate }}
+                      </h2>
+                      <div
+                        *ngIf="loggedInAuth"
+                        class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block mt-1">
+                        {{isIncognitoModeOn ? '****' : loggedInAuth}}
+                      </div>
                     </div>
 
-                    <div *ngIf="loggedIn" class="mt-4">
+                    <div *ngIf="loggedIn" class="absolute bottom-2 w-full">
                       <button
                         (click)="logout()"
                         type="button"
@@ -1109,7 +1113,7 @@
                 </div>
 
 
-                <div class="w-full lg:w-1/2 h-full pt-8 relative dark:text-gray-100">
+                <div class="w-full h-full pt-8 relative dark:text-gray-100">
                   <div class="w-full mb-5">
                     <h3 class="text-2xl mb-2 text-pink-500">
                       {{ 'showInput1' | translate }}
@@ -1117,7 +1121,7 @@
                     <div class="font-bold">
                       {{ 'load1' | translate }}
                     </div>
-                    <div class="text-sm mb-2 ">
+                    <div class="text-sm mb-2">
                       <span class="font-bold">ON</span> => {{ 'load2' | translate }}
                       <br/>
                       <span class="font-bold">OFF</span> => {{ 'load3' | translate }}
@@ -1147,575 +1151,579 @@
                   </div>
 
                   <div class="py-3 h-full">
-                    <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2">
-                      <div class="text-sm">Wallet</div>
-                      <div class="grid grid-flow-row grid-rows-2 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.btc === null || wallet.btc === undefined  ? 'empty' : ''"
-                            title="BTC"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.btc"
-                              (ngModelChange)="onChangeBtcWallet()"
-                              type="number"
-                              id="inputBTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                    <div *ngIf="!autoLoadData" class="overflow-y-auto h-full pr-2 flex gap-4">
+                      <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded w-full md:w-1/2 h-auto">
+                        <div class="text-lg mb-5">Wallet</div>
+                        <div class="grid grid-flow-row grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.btc === null || wallet.btc === undefined  ? 'empty' : ''"
+                              title="BTC"
                             >
-                            <label for="inputBTCWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              BTC
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.btc"
+                                (ngModelChange)="onChangeBtcWallet()"
+                                type="number"
+                                id="inputBTCWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputBTCWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BTC
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.eth === null || wallet.eth === undefined  ? 'empty' : ''"
-                            title="ETH"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.eth"
-                              (ngModelChange)="onChangeEthWallet()"
-                              type="number"
-                              id="inputETHWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.eth === null || wallet.eth === undefined  ? 'empty' : ''"
+                              title="ETH"
                             >
-                            <label for="inputETHWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              ETH
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.eth"
+                                (ngModelChange)="onChangeEthWallet()"
+                                type="number"
+                                id="inputETHWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputETHWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                ETH
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.ltc === null || wallet.ltc === undefined  ? 'empty' : ''"
-                            title="LTC"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.ltc"
-                              (ngModelChange)="onChangeLtcWallet()"
-                              type="number"
-                              id="inputLTCWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.ltc === null || wallet.ltc === undefined  ? 'empty' : ''"
+                              title="LTC"
                             >
-                            <label for="inputLTCWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              LTC
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.ltc"
+                                (ngModelChange)="onChangeLtcWallet()"
+                                type="number"
+                                id="inputLTCWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputLTCWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                LTC
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.usdt === null || wallet.usdt === undefined  ? 'empty' : ''"
-                            title="USDT"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.usdt"
-                              (ngModelChange)="onChangeUsdtWallet()"
-                              type="number"
-                              id="inputUsdtWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdt === null || wallet.usdt === undefined  ? 'empty' : ''"
+                              title="USDT"
                             >
-                            <label for="inputUsdtWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              USDT
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdt"
+                                (ngModelChange)="onChangeUsdtWallet()"
+                                type="number"
+                                id="inputUsdtWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputUsdtWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USDT
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.usdc === null || wallet.usdc === undefined  ? 'empty' : ''"
-                            title="USDC"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.usdc"
-                              (ngModelChange)="onChangeUsdcWallet()"
-                              type="number"
-                              id="inputUsdcWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdc === null || wallet.usdc === undefined  ? 'empty' : ''"
+                              title="USDC"
                             >
-                            <label for="inputUsdcWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              USDC
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdc"
+                                (ngModelChange)="onChangeUsdcWallet()"
+                                type="number"
+                                id="inputUsdcWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputUsdcWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USDC
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.doge === null || wallet.doge === undefined  ? 'empty' : ''"
-                            title="DOGE"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.doge"
-                              (ngModelChange)="onChangeDogeWallet()"
-                              type="number"
-                              id="inputDOGEWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.doge === null || wallet.doge === undefined  ? 'empty' : ''"
+                              title="DOGE"
                             >
-                            <label for="inputDOGEWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DOGE
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.doge"
+                                (ngModelChange)="onChangeDogeWallet()"
+                                type="number"
+                                id="inputDOGEWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputDOGEWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DOGE
+                              </label>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.bch === null || wallet.bch === undefined  ? 'empty' : ''"
-                            title="BCH"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.bch"
-                              (ngModelChange)="onChangeBchWallet()"
-                              type="number"
-                              id="inputBchWallet"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.bch === null || wallet.bch === undefined  ? 'empty' : ''"
+                              title="BCH"
                             >
-                            <label for="inputBchWallet"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              BCH
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="text-sm">Staking Cake</div>
-                      <div class="mt-5">
-                        <div class="dark:text-gray-100">
-                          Auto APY load from Cake:
-                        </div>
-                        <div
-                          class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                          <input
-                            type="checkbox"
-                            id="cakeApyLoadAuto"
-                            [(ngModel)]="cakeApyLoadAuto"
-                            (ngModelChange)="toggleAutoCake()"
-                            [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
-                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                          />
-                          <label
-                            for="cakeApyLoadAuto"
-                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                          ></label>
-                        </div>
-                      </div>
-                      <div class="grid grid-flow-row grid-rows-1 grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
-                            title="Staking APY"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="stakingApy"
-                              (ngModelChange)="saveInputStaking()"
-                              step="0.1"
-                              type="number"
-                              id="saveInputStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="saveInputStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              Staking APY
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="dfiInStaking === null || dfiInStaking === undefined ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="dfiInStaking"
-                              (ngModelChange)="onChangeDfiStaking()"
-                              type="number"
-                              id="dfiInStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="dfiInStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.bch"
+                                (ngModelChange)="onChangeBchWallet()"
+                                type="number"
+                                id="inputBchWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputBchWallet"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BCH
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
 
-                      <div class="text-sm">Liquidity Mining</div>
-                      <div class="grid grid-flow-row grid-rows-6 grid-cols-2 md:grid-cols-3 gap-3 pb-4">
-                        <div>
+                      <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded w-full md:w-1/2">
+                        <div class="text-lg mb-5">Staking Cake</div>
+                        <div class="flex gap-2 flex-row mb-2">
+                          <div class="dark:text-gray-100">
+                            Auto APY load from Cake:
+                          </div>
                           <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.btcInBtcPool === null || wallet.btcInBtcPool === undefined  ? 'empty' : ''"
-                            title="BTC"
-                          >
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                             <input
-                              required
-                              [(ngModel)]="wallet.btcInBtcPool"
-                              (ngModelChange)="onChangeBtcBtcPool()"
-                              type="number"
-                              id="onChangeBtcBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeBtcBtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              BTC
-                            </label>
+                              type="checkbox"
+                              id="cakeApyLoadAuto"
+                              [(ngModel)]="cakeApyLoadAuto"
+                              (ngModelChange)="toggleAutoCake()"
+                              [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
+                              class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                            />
+                            <label
+                              for="cakeApyLoadAuto"
+                              class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                            ></label>
                           </div>
                         </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInBtcPool === null || wallet.dfiInBtcPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInBtcPool"
-                              (ngModelChange)="onChangeDfiBtcPool()"
-                              type="number"
-                              id="onChangeDfiBtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                        <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-6">
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
+                              title="Staking APY"
                             >
-                            <label for="onChangeDfiBtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="stakingApy"
+                                (ngModelChange)="saveInputStaking()"
+                                step="0.1"
+                                type="number"
+                                id="saveInputStaking"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="saveInputStaking"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                Staking APY
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="dfiInStaking === null || dfiInStaking === undefined ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="dfiInStaking"
+                                (ngModelChange)="onChangeDfiStaking()"
+                                type="number"
+                                id="dfiInStaking"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="dfiInStaking"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
                           </div>
                         </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.ethInEthPool === null || wallet.ethInEthPool === undefined  ? 'empty' : ''"
-                            title="ETH"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.ethInEthPool"
-                              (ngModelChange)="onChangeEthEthPool()"
-                              type="number"
-                              id="onChangeEthEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeEthEthPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              ETH
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInEthPool === null || wallet.dfiInEthPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInEthPool"
-                              (ngModelChange)="onChangeDfiEthPool()"
-                              type="number"
-                              id="onChangeDfiEthPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDfiEthPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
-                          </div>
-                        </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.usdtInUsdtPool === null || wallet.usdtInUsdtPool === undefined  ? 'empty' : ''"
-                            title="USDT"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.usdtInUsdtPool"
-                              (ngModelChange)="onChangeUsdtUsdtPool()"
-                              type="number"
-                              id="onChangeUsdtUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeUsdtUsdtPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              USDT
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInUsdtPool === null || wallet.dfiInUsdtPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInUsdtPool"
-                              (ngModelChange)="onChangeDfiUsdtPool()"
-                              type="number"
-                              id="onChangeDfiUsdtPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDfiUsdtPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
-                          </div>
-                        </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.usdcInUsdcPool === null || wallet.usdcInUsdcPool === undefined  ? 'empty' : ''"
-                            title="USDC"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.usdcInUsdcPool"
-                              (ngModelChange)="onChangeUsdcUsdcPool()"
-                              type="number"
-                              id="onChangeUsdcUsdcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeUsdcUsdcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              USDC
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInUsdcPool === null || wallet.dfiInUsdcPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInUsdcPool"
-                              (ngModelChange)="onChangeDfiUsdcPool()"
-                              type="number"
-                              id="onChangeDfiUsdcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDfiUsdcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
-                          </div>
-                        </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.ltcInLtcPool === null || wallet.ltcInLtcPool === undefined  ? 'empty' : ''"
-                            title="LTC"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.ltcInLtcPool"
-                              (ngModelChange)="onChangeLtcLtcPool()"
-                              type="number"
-                              id="onChangeLtcLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeLtcLtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              LTC
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInLtcPool === null || wallet.dfiInLtcPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInLtcPool"
-                              (ngModelChange)="onChangeDfiLtcPool()"
-                              type="number"
-                              id="onChangeDfiLtcPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDfiLtcPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
-                          </div>
-                        </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dogeInDogePool === null || wallet.dogeInDogePool === undefined  ? 'empty' : ''"
-                            title="Doge"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dogeInDogePool"
-                              (ngModelChange)="onChangeDogeDogePool()"
-                              type="number"
-                              id="onChangeDogeDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDogeDogePool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              Doge
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInDogePool === null || wallet.dfiInDogePool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInDogePool"
-                              (ngModelChange)="onChangeDfiDogePool()"
-                              type="number"
-                              id="onChangeDfiDogePool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeDfiDogePool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
-                          </div>
-                        </div>
-                        <div class="md:col-start-1">
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
-                            title="BCH"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.bchInBchPool"
-                              (ngModelChange)="onChangeBchBchPool()"
-                              type="number"
-                              id="onChangeBchBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="onChangeBchBchPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              BCH
-                            </label>
-                          </div>
-                        </div>
-                        <div>
 
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
-                            title="DFI"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="wallet.dfiInBchPool"
-                              (ngModelChange)="onChangeDfiBchPool()"
-                              type="number"
-                              id="onChangeDfiBchPool"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                        <div class="text-lg mb-5">Liquidity Mining</div>
+                        <div class="grid grid-flow-row grid-rows-6 grid-cols-2 gap-3 pb-4">
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.btcInBtcPool === null || wallet.btcInBtcPool === undefined  ? 'empty' : ''"
+                              title="BTC"
                             >
-                            <label for="onChangeDfiBchPool"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="wallet.btcInBtcPool"
+                                (ngModelChange)="onChangeBtcBtcPool()"
+                                type="number"
+                                id="onChangeBtcBtcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeBtcBtcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BTC
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInBtcPool === null || wallet.dfiInBtcPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInBtcPool"
+                                (ngModelChange)="onChangeDfiBtcPool()"
+                                type="number"
+                                id="onChangeDfiBtcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiBtcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.ethInEthPool === null || wallet.ethInEthPool === undefined  ? 'empty' : ''"
+                              title="ETH"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.ethInEthPool"
+                                (ngModelChange)="onChangeEthEthPool()"
+                                type="number"
+                                id="onChangeEthEthPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeEthEthPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                ETH
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInEthPool === null || wallet.dfiInEthPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInEthPool"
+                                (ngModelChange)="onChangeDfiEthPool()"
+                                type="number"
+                                id="onChangeDfiEthPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiEthPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdtInUsdtPool === null || wallet.usdtInUsdtPool === undefined  ? 'empty' : ''"
+                              title="USDT"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdtInUsdtPool"
+                                (ngModelChange)="onChangeUsdtUsdtPool()"
+                                type="number"
+                                id="onChangeUsdtUsdtPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdtUsdtPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USDT
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInUsdtPool === null || wallet.dfiInUsdtPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInUsdtPool"
+                                (ngModelChange)="onChangeDfiUsdtPool()"
+                                type="number"
+                                id="onChangeDfiUsdtPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiUsdtPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdcInUsdcPool === null || wallet.usdcInUsdcPool === undefined  ? 'empty' : ''"
+                              title="USDC"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdcInUsdcPool"
+                                (ngModelChange)="onChangeUsdcUsdcPool()"
+                                type="number"
+                                id="onChangeUsdcUsdcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdcUsdcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USDC
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInUsdcPool === null || wallet.dfiInUsdcPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInUsdcPool"
+                                (ngModelChange)="onChangeDfiUsdcPool()"
+                                type="number"
+                                id="onChangeDfiUsdcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiUsdcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.ltcInLtcPool === null || wallet.ltcInLtcPool === undefined  ? 'empty' : ''"
+                              title="LTC"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.ltcInLtcPool"
+                                (ngModelChange)="onChangeLtcLtcPool()"
+                                type="number"
+                                id="onChangeLtcLtcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeLtcLtcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                LTC
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInLtcPool === null || wallet.dfiInLtcPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInLtcPool"
+                                (ngModelChange)="onChangeDfiLtcPool()"
+                                type="number"
+                                id="onChangeDfiLtcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiLtcPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dogeInDogePool === null || wallet.dogeInDogePool === undefined  ? 'empty' : ''"
+                              title="Doge"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dogeInDogePool"
+                                (ngModelChange)="onChangeDogeDogePool()"
+                                type="number"
+                                id="onChangeDogeDogePool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDogeDogePool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                Doge
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInDogePool === null || wallet.dfiInDogePool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInDogePool"
+                                (ngModelChange)="onChangeDfiDogePool()"
+                                type="number"
+                                id="onChangeDfiDogePool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiDogePool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.bchInBchPool === null || wallet.bchInBchPool === undefined  ? 'empty' : ''"
+                              title="BCH"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.bchInBchPool"
+                                (ngModelChange)="onChangeBchBchPool()"
+                                type="number"
+                                id="onChangeBchBchPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeBchBchPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BCH
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInBchPool === null || wallet.dfiInBchPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInBchPool"
+                                (ngModelChange)="onChangeDfiBchPool()"
+                                type="number"
+                                id="onChangeDfiBchPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiBchPool"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div *ngIf="autoLoadData">
-                      <h3 class="text-2xl mb-2 text-pink-500">
-                        Staking Cake
-                      </h3>
-                      <div class="mt-5">
-                        <div class="dark:text-gray-100">
-                          Auto APY load from Cake:
-                        </div>
-                        <div
-                          class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                          <input
-                            type="checkbox"
-                            id="cakeApyLoadAutoAuto"
-                            [(ngModel)]="cakeApyLoadAuto"
-                            (ngModelChange)="toggleAutoCake()"
-                            [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
-                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                          />
-                          <label
-                            for="cakeApyLoadAutoAuto"
-                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                          ></label>
-                        </div>
-                      </div>
-                      <br>
-                      <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
-                        <div>
+                    <div *ngIf="autoLoadData" class="flex flex-col lg:flex-row gap-4">
+                      <div class="w-full lg:w-1/2 rounded p-2 dark:bg-gray-600 bg-gray-100">
+                        <h3 class="text-2xl mb-2 text-pink-500">
+                          Staking Cake
+                        </h3>
+                        <div class="flex gap-2">
+                          <div class="dark:text-gray-100">
+                            Auto APY load from Cake:
+                          </div>
                           <div
-                            class="relative h-14 input-component"
-                            [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
-                            title="DFI"
-                          >
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                             <input
-                              required
-                              [(ngModel)]="dfiInStaking"
-                              (ngModelChange)="onChangeDfiStaking()"
-                              type="number"
-                              id="inputDFIStakingAuto"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              type="checkbox"
+                              id="cakeApyLoadAutoAuto"
+                              [(ngModel)]="cakeApyLoadAuto"
+                              (ngModelChange)="toggleAutoCake()"
+                              [ngClass]="{ 'isChecked': cakeApyLoadAuto }"
+                              class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                            />
+                            <label
+                              for="cakeApyLoadAutoAuto"
+                              class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                            ></label>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="grid grid-flow-row grid-rows-1 grid-cols-2 gap-3 mb-3">
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="(!dfiInStaking && dfiInStaking !== 0) ? 'empty' : ''"
+                              title="DFI"
                             >
-                            <label for="inputDFIStakingAuto"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              DFI
-                            </label>
+                              <input
+                                required
+                                [(ngModel)]="dfiInStaking"
+                                (ngModelChange)="onChangeDfiStaking()"
+                                type="number"
+                                id="inputDFIStakingAuto"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputDFIStakingAuto"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
+                              title="Staking APY"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="stakingApy"
+                                (ngModelChange)="saveInputStaking()"
+                                type="number"
+                                id="inputApyStaking"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputApyStaking"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                Staking APY
+                              </label>
+                            </div>
                           </div>
                         </div>
                         <div>
-                          <div
-                            class="relative h-14 input-component"
-                            [ngClass]="(!stakingApy && stakingApy !== 0) ? 'empty' : ''"
-                            title="Staking APY"
-                          >
-                            <input
-                              required
-                              [(ngModel)]="stakingApy"
-                              (ngModelChange)="saveInputStaking()"
-                              type="number"
-                              id="inputApyStaking"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                            >
-                            <label for="inputApyStaking"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              Staking APY
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <h3 class="text-2xl mb-2 text-pink-500 border-pink-500">
-                        {{ 'address.title' | translate }}
-                      </h3>
-                      <br>
-                      <div>
-                        <div class="block my-2 relative">
+                        <div class="flex justify-between mt-4 items-center">
+                          <h3 class="text-2xl text-pink-500 border-pink-500">
+                            {{ 'address.title' | translate }}
+                          </h3>
                           <a
                             class="border border-pink-500 rounded hover:bg-gray-100 text-pink-500 duration-300 ease-in-out transform p-2 cursor-pointer select-none dark:hover:bg-gray-700"
                             (click)="openInfoMenu()"
@@ -1728,246 +1736,298 @@
                             </span>
                           </a>
                         </div>
-                        <div class="h-full transition duration-300 ease-in-out transform mt-4"
-                             [ngClass]="{'hidden': !isInfoOpen}">
-                          <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
-                          <p class="mb-2">
-                            <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
-                          </p>
-                          <p class="mb-2">
-                            {{ 'address.exc0' | translate }}
-                          </p>
-                          <p class="mb-2">
-                            <a class="text-pink-500 hover:underline"
-                               (click)="trackHelper()"
-                               target="_blank"
-                               href="https://github.com/Shelkovenkov/defichain-income-address-helper/releases">
-                              https://github.com/Shelkovenkov/defichain-income-address-helper/releases
-                            </a>
-                          </p>
 
-                          <p class="mb-2">
-                            <span
-                              class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
-                          </p>
-                          <p class="mb-2">
-                            {{ 'address.exc' | translate }}
-                          </p>
-                          <p class="mb-2">
-                            <span
-                              (click)="copyToClipBoard($event.target.innerText)"
-                              class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                              listaccounts {{'{}'}} false false true
-                            </span>
+                        <div>
+                          <div class="transition-all duration-300 ease-in-out transform mt-4 overflow-hidden border bg-gray-200 dark:border-none p-2 rounded dark:bg-gray-700"
+                              [ngClass]="{'hidden': !isInfoOpen}">
+                            <h3 class="text-xl mb-2 text-pink-500">{{ 'address.title2' | translate }}</h3>
+                            <p class="mb-2">
+                              <span
+                                class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp2' | translate }}</span>
+                            </p>
+                            <p class="mb-2">
+                              {{ 'address.exc0' | translate }}
+                            </p>
+                            <p class="mb-2">
+                              <a class="text-pink-500 hover:underline"
+                                (click)="trackHelper()"
+                                target="_blank"
+                                href="https://github.com/Shelkovenkov/defichain-income-address-helper/releases">
+                                https://github.com/Shelkovenkov/defichain-income-address-helper/releases
+                              </a>
+                            </p>
 
-                          </p>
-                          <p>{{ 'address.exc2' | translate }}</p>
-                          <br>
-                          <p class="mb-2">
-                            <span
-                              (click)="copyToClipBoard($event.target.innerText)"
-                              class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
+                            <p class="mb-2">
+                              <span
+                                class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{ 'address.imp' | translate }}</span>
+                            </p>
+                            <p class="mb-2">
+                              {{ 'address.exc' | translate }}
+                            </p>
+                            <p class="mb-2">
+                              <span
+                                (click)="copyToClipBoard($event.target.innerText)"
+                                class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                listaccounts {{'{}'}} false false true
+                              </span>
 
-                          </p>
-                          <p>{{ 'address.exc21' | translate }}</p>
-                          <br>
-                          <p>{{ 'address.exc3' | translate }}</p>
+                            </p>
+                            <p>{{ 'address.exc2' | translate }}</p>
+                            <br>
+                            <p class="mb-2">
+                              <span
+                                (click)="copyToClipBoard($event.target.innerText)"
+                                class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">listaddressgroupings</span>
+
+                            </p>
+                            <p>{{ 'address.exc21' | translate }}</p>
+                            <br>
+                            <p>{{ 'address.exc3' | translate }}</p>
+                          </div>
+
+                          <div class="mt-4">
+                            <div class="inline-block w-full md:w-3/4 my-2 md:mt-0">
+                              <div
+                                class="relative h-14 input-component"
+                                [ngClass]="!adress ? 'empty' : ''"
+                                title="DFI Address"
+                              >
+                                <input
+                                  required
+                                  [(ngModel)]="adress"
+                                  id="inputAddress"
+                                  class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                                />
+                                <label for="inputAddress"
+                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                  DFI Addresses
+                                </label>
+                              </div>
+                            </div>
+                            <div class="inline-block w-full md:w-1/4 md:pl-2 align-top">
+                              <button
+                                class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase"
+                                (click)="addAdress()"
+                              >
+                                {{ 'address.button-add' | translate }}
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            *ngIf="showDialogAddressesAdded"
+                            class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
+                            role="alert"
+                          >
+                            + {{newAddressesAdded?.length}} Addresses
+                            <p *ngFor="let a of newAddressesAdded">{{a}} </p>
+                          </div>
+                          <div
+                            *ngIf="showDialogAddressesNotAdded && adress"
+                            class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+                            role="alert"
+                          >
+                            {{ 'address.freezer-error' | translate }}
+                          </div>
+                          <div
+                            *ngIf="showDialogAddressesNotAdded && !adress"
+                            class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+                            role="alert"
+                          >
+                            {{ 'address.empty' | translate }}
+                          </div>
                         </div>
+                        </div>
+                        <br>
+                        <div class="flex items-center mb-2">
+                          <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                              type="checkbox"
+                              id="masternodeAdress"
+                              [(ngModel)]="masternodeAdress"
+                              [ngClass]="{ 'isChecked': masternodeAdress }"
+                              class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                            />
+                            <label
+                              for="masternodeAdress"
+                              class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                            ></label>
+                          </div>
+                          <div>
+                            Masternode  {{ 'address.label' | translate }}
+                          </div>
+                        </div>
+                        <div *ngIf="masternodeAdress" class="flex flex-row gap-4">
+                          <div class="flex items-center">
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                              <input
+                                type="checkbox"
+                                id="masternodeFreezer5"
+                                [(ngModel)]="masternodeFreezer5"
+                                [ngClass]="{ 'isChecked': masternodeFreezer5 }"
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                              />
+                              <label
+                                for="masternodeFreezer5"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                              ></label>
+                            </div>
+                            <div>
+                              Freezer 5 Years - 1,5X
+                            </div>
+                          </div>
 
-                        <div class="mt-4">
-                          <div class="inline-block w-full md:w-4/6">
-                            <div
-                              class="relative h-16 input-component"
-                              [ngClass]="!adress ? 'empty' : ''"
-                              title="DFI Address"
+                          <div class="flex items-center">
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                              <input
+                                type="checkbox"
+                                id="masternodeFreezer10"
+                                [(ngModel)]="masternodeFreezer10"
+                                [ngClass]="{ 'isChecked': masternodeFreezer10 }"
+                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                              />
+                              <label
+                                for="masternodeFreezer10"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                              ></label>
+                            </div>
+                            <div>
+                              Freezer 10 Years - 2X
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                        <h3 class="text-2xl mb-2 text-pink-500">
+                          Masternode Monitor Import
+                        </h3>
+                        <div class="dark:text-gray-100 mb-2">
+                          {{ 'mamon-info' | translate }}
+                        </div>
+                        <div class="flex">
+                          <div class="w-3/4">
+                            <div 
+                              class="relative h-14 input-component"
+                              [ngClass]="(!mamonKey && mamonKey !== 0) ? 'empty' : ''"
                             >
-                              <textarea
+                              <input
                                 required
-                                rows="6"
-                                [(ngModel)]="adress"
-                                id="inputAddress"
+                                [(ngModel)]="mamonKey"
+                                type="text"
+                                id="mamon"
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
-                              ></textarea>
-                              <label for="inputAddress"
-                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                                DFI Addresses
+                              >
+                              <label for="mamon"
+                                    class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                Masternode Monitor Key
                               </label>
                             </div>
                           </div>
-                          <div class="inline-block w-full md:w-2/6 md:pl-2 align-top">
+                          <div class="inline-block w-1/4 pl-2 align-top">
                             <button
-                              class="bg-pink-500 rounded-md w-full h-14 text-white focus:outline-none uppercase"
-                              (click)="addAdress()"
+                              type="button"
+                              (click)="importMamon()"
+                              class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
                             >
-                              {{ 'address.button-add' | translate }}
+                              Import
                             </button>
                           </div>
                         </div>
-                        <div
-                          *ngIf="showDialogAddressesAdded"
-                          class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
-                          role="alert"
-                        >
-                          + {{newAddressesAdded?.length}} Addresses
-                          <p *ngFor="let a of newAddressesAdded">{{a}} </p>
-                        </div>
-                        <div
-                          *ngIf="showDialogAddressesNotAdded && adress"
-                          class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
-                          role="alert"
-                        >
-                          {{ 'address.freezer-error' | translate }}
-                        </div>
-                        <div
-                          *ngIf="showDialogAddressesNotAdded && !adress"
-                          class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
-                          role="alert"
-                        >
-                          {{ 'address.empty' | translate }}
-                        </div>
                       </div>
-                      <br>
-                      <div class="flex items-center">
-                        <input [(ngModel)]="masternodeAdress" type="checkbox" id="checkbox-large-example"
-                               class="h-6 w-6 text-gray-700 border rounded mr-2">
-                        <label for="checkbox-large-example">Masternode  {{ 'address.label' | translate }}</label>
-                      </div>
-                      <div *ngIf="masternodeAdress">
-                        <div class="flex items-center">
-                          <input [(ngModel)]="masternodeFreezer5" type="checkbox" id="checkbox-mn-freezer5"
-                                 class="h-6 w-6 text-gray-700 border rounded mr-2">
-                          <label for="checkbox-mn-freezer5">Freezer 5 Years - 1,5X</label>
+                      <div class="w-full lg:w-1/2 rounded p-2 dark:bg-gray-600 bg-gray-100">
+                        <h3 class="text-2xl mb-2 text-pink-500">
+                          {{ 'address.titleList' | translate }}
+                        </h3>
+
+                        <div *ngIf="allAddresses().length < 1" class="flex-1 h-full w-full text-center items-center justify-center">
+                          <span>
+                            {{ 'address.noAddresses' | translate }}
+                          </span>
                         </div>
 
-                        <div class="flex items-center">
-                          <input [(ngModel)]="masternodeFreezer10" type="checkbox" id="checkbox-mn-freezer10"
-                                 class="h-6 w-6 text-gray-700 border rounded mr-2">
-                          <label for="checkbox-mn-freezer10">Freezer 10 Years - 2X</label>
-                        </div>
-                      </div>
-                      <br>
-                      <h3 class="text-2xl mb-2 text-pink-500">
-                        Masternode Monitor Import
-                      </h3>
-                      <div class="dark:text-gray-100">
-                        {{ 'mamon-info' | translate }}
-                      </div>
-                      <div class="flex">
-                        <div class="w-3/4">
-                          <div class="relative h-14 input-component">
-                            <input
-                              required
-                              [(ngModel)]="mamonKey"
-                              type="text"
-                              id="mamon"
-                              class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                        <div class="flex" *ngIf="allAddresses().length > 0">
+                          <div class="block h-auto w-full rounded">
+                            <div
+                              *ngFor="let a of allAddresses(); index as i;"
+                              class="relative lg:px-2 transition duration-150 p-2 dark:hover:bg-gray-600 hover:bg-gray-300"
+                              [ngClass]="{'bg-gray-200 dark:bg-gray-800': i % 2 === 1, 'bg-gray-100 dark:bg-gray-700': i % 2 === 0}"
                             >
-                            <label for="mamon"
-                                   class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
-                              Masternode Monitor Key
-                            </label>
-                          </div>
-                        </div>
-                        <div class="inline-block w-1/4 pl-2 align-top">
-                          <button
-                            type="button"
-                            (click)="importMamon()"
-                            class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
-                          >
-                            Import
-                          </button>
-                        </div>
-                      </div>
-                      <br>
-                      <h3 class="text-2xl mb-2 text-pink-500">
-                        {{ 'address.titleList' | translate }}
-                      </h3>
+                              <div class="mr-7 my-2 text-white flex flex-col">
+                                <div *ngIf="getAddressBalance(a)?.masternode"
+                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                    Masternode
+                                </div>
+                                <div *ngIf="getAddressBalance(a)?.freezed5"
+                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                    Freezer 5 Years - 1,5X
+                                </div>
+                                <div *ngIf="getAddressBalance(a)?.freezed10"
+                                    class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                    Freezer 10 Years - 2X
+                                </div>
+                                <div
+                                  class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                                  {{ isIncognitoModeOn ? '****' : a }}
+                                </div>
+                                <div class="my-2 -mx-1">
+                                  <div *ngIf="getAddressBalance(a)?.dfiCoins > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DFI: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiCoins}} </div>
+                                  <div *ngIf="getAddressBalance(a)?.dfiTokens > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DFI Token: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiTokens}}</div>
+                                  <div *ngIf="getAddressBalance(a)?.btcToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcToken }} </div>
+                                  <div *ngIf="getAddressBalance(a)?.ethToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ETH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethToken }} </div>
+                                  <div *ngIf="getAddressBalance(a)?.ltcToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    LTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.bchToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BCH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.bchToken  }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.dogeToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DOGE: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.dogeToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdtToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdcToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
+                                  <div *ngIf="getAddressBalance(a)?.ethdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ETHDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethdfiToken }} </div>
+                                  <div *ngIf="getAddressBalance(a)?.ltcdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    LTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.bchdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BCHDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.bchdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.dogedfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DOGEDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.dogedfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdtdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDTDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdcdfiToken > 0"
+                                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcdfiToken }}</div>
+                                </div>
+                              </div>
 
-                      <div class="flex">
-                        <div class="block mt-2 h-auto w-full">
-                          <div
-                            *ngFor="let a of allAddresses(); index as i;"
-                            class="relative lg:px-2 transition duration-150 hover:bg-gray-200 p-2 dark:hover:bg-gray-600"
-                            [ngClass]="{'bg-gray-100 dark:bg-gray-700': i % 2 === 1}"
-                          >
-                            <div class="mr-7 my-2 text-white flex flex-col">
-                              <div *ngIf="getAddressBalance(a)?.masternode"
-                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Masternode
-                              </div>
-                              <div *ngIf="getAddressBalance(a)?.freezed5"
-                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Freezer 5 Years - 1,5X
-                              </div>
-                              <div *ngIf="getAddressBalance(a)?.freezed10"
-                                   class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                  Freezer 10 Years - 2X
-                              </div>
-                              <div
-                                class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis min-h-7 inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                                {{ isIncognitoModeOn ? '****' : a }}
-                              </div>
-                              <div class="my-2 -mx-1">
-                                <div *ngIf="getAddressBalance(a)?.dfiCoins > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  DFI: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiCoins}} </div>
-                                <div *ngIf="getAddressBalance(a)?.dfiTokens > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  DFI Token: {{isIncognitoModeOn ? '****' : getAddressBalance(a)?.dfiTokens}}</div>
-                                <div *ngIf="getAddressBalance(a)?.btcToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  BTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcToken }} </div>
-                                <div *ngIf="getAddressBalance(a)?.ethToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  ETH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethToken }} </div>
-                                <div *ngIf="getAddressBalance(a)?.ltcToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  LTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.bchToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  BCH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.bchToken  }}</div>
-                                <div *ngIf="getAddressBalance(a)?.dogeToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  DOGE: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.dogeToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.usdtToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  USDT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.usdcToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  USDC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
-                                <div *ngIf="getAddressBalance(a)?.ethdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  ETHDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ethdfiToken }} </div>
-                                <div *ngIf="getAddressBalance(a)?.ltcdfiToken > 0"
-                                    class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  LTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ltcdfiToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.bchdfiToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  BCHDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.bchdfiToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.dogedfiToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  DOGEDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.dogedfiToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.usdtdfiToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  USDTDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtdfiToken }}</div>
-                                <div *ngIf="getAddressBalance(a)?.usdcdfiToken > 0"
-                                     class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                  USDCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcdfiToken }}</div>
-                              </div>
+                              <a
+                                class="absolute top-1/2 right-3 transform -translate-y-1/2 hover:text-pink-500 cursor-pointer"
+                                (click)="deleteAdress(a)"
+                              >
+                                <div class="w-3 h-3 flex items-center hover:text-pink-500">
+                                  <app-icon name="close"></app-icon>
+                                </div>
+                              </a>
                             </div>
-
-                            <a
-                              class="absolute top-1/2 right-3 transform -translate-y-1/2 hover:text-pink-500 cursor-pointer"
-                              (click)="deleteAdress(a)"
-                            >
-                              <div class="w-3 h-3 flex items-center hover:text-pink-500">
-                                <app-icon name="close"></app-icon>
-                              </div>
-                            </a>
                           </div>
                         </div>
                       </div>
@@ -1979,7 +2039,7 @@
             <div *ngSwitchDefault>
               <h1 class="text-3xl mb-4 text-pink-500">Dashboard</h1>
 
-              <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-3 gap-6">
+              <div class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-4 gap-6">
                 <div *ngIf="wallet && poolBtc">
                   <app-income
                     [isIncognitoModeOn]="isIncognitoModeOn"
