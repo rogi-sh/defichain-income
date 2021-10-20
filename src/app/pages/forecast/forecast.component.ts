@@ -12,7 +12,7 @@ import {
   OutcomeStaking, Pool,
   PoolAllOut,
 } from '@interfaces/Dex';
-import { ChartComponent } from 'ng-apexcharts';
+import {ChartComponent} from 'ng-apexcharts';
 import {ChartOptions5, Series, Wallet} from '@interfaces/Data';
 
 @Component({
@@ -79,7 +79,24 @@ export class ForecastComponent implements OnInit, OnChanges {
   @Input()
   wallet!: Wallet;
 
+  @Input()
+  apyCake!: number;
+
+  @Input()
+  aprMn!: number;
+
+  @Input()
+  adressesMasternodes!: Array<string>;
+
+  @Input()
+  adressesMasternodesFreezer5!: Array<string>;
+
+  @Input()
+  adressesMasternodesFreezer10!: Array<string>;
+
   average: number;
+
+  averageMn: number;
 
   euonsHardforkeBlock = 894000;
 
@@ -95,6 +112,8 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   poolMnOuts = new Array<PoolAllOut>();
 
+  poolMnCompoundOuts = new Array<PoolAllOut>();
+
   blocksPerCycle = 32690;
 
   poolOutcomeChartPos: Outcome;
@@ -103,16 +122,23 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolLMChartPos: Outcome;
   poolLMCompoundChartPos: Outcome;
   poolMnChartPos: Outcome;
+  poolMnCompoundChartPos: Outcome;
   actualPoolIndex = 0;
 
   reinvestPeriod = 356;
+  reinvestPeriodMn = 259200;
 
   lmApy = 0;
 
-  constructor() {}
+  lastCycleReinvestedDfiMn = 0;
+  lastCycleReinvestedDfiLm = 0;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.average = this.getAPRAverage();
+    this.averageMn = this.getAprMnAverage();
     this.computeMasternodesReduce();
     this.buildChart();
   }
@@ -122,6 +148,10 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   computeMasternodesReduce(): void {
+
+    this.lastCycleReinvestedDfiMn = 0;
+    this.lastCycleReinvestedDfiLm = 0;
+
     if (this.poolOut === undefined || this.poolOut.dfiPerDay === undefined) {
       return;
     }
@@ -133,6 +163,7 @@ export class ForecastComponent implements OnInit, OnChanges {
     this.poolLmCompoundOuts = new Array<PoolAllOut>();
     this.poolStakingOuts = new Array<PoolAllOut>();
     this.poolMnOuts = new Array<PoolAllOut>();
+    this.poolMnCompoundOuts = new Array<PoolAllOut>();
 
     for (let i = 0; i <= this.timeHorizonCycles; i++) {
       const poolAllOut = new PoolAllOut();
@@ -141,6 +172,7 @@ export class ForecastComponent implements OnInit, OnChanges {
       const poolLmOut = new PoolAllOut();
       const poolLmCompoundOut = new PoolAllOut();
       const poolMnOut = new PoolAllOut();
+      const poolMnCompoundOut = new PoolAllOut();
 
       if (i === 0) {
         this.transformPool(poolAllOut, this.poolOut);
@@ -150,13 +182,15 @@ export class ForecastComponent implements OnInit, OnChanges {
         // Compound ist gleich mit dem LM zu Beginn
         this.transformPool(poolLmCompoundOut, poolLmOut);
         this.transformPool(poolMnOut, this.poolMasternodeOut);
+        this.transformPool(poolMnCompoundOut, poolMnOut);
       } else {
         this.transformPoolReduced(poolAllOut, this.poolOuts, i);
         this.transformPoolReduced(poolStakingOut, this.poolStakingOuts, i);
         this.transformPoolReduced(poolLmOut, this.poolLmOuts, i);
         this.transformPoolReducedCompound(poolLmCompoundOut, this.poolLmCompoundOuts, i);
         this.transformPoolReduced(poolMnOut, this.poolMnOuts, i);
-        this.transformPoolAllReducedCompound(poolCompoundAllOut, poolStakingOut, poolLmCompoundOut, poolMnOut);
+        this.transformPoolReducedCompoundMn(poolMnCompoundOut, this.poolMnOuts, i);
+        this.transformPoolAllReducedCompound(poolCompoundAllOut, poolStakingOut, poolLmCompoundOut, poolMnCompoundOut);
       }
 
       this.poolOuts.push(poolAllOut);
@@ -164,6 +198,7 @@ export class ForecastComponent implements OnInit, OnChanges {
       this.poolLmOuts.push(poolLmOut);
       this.poolLmCompoundOuts.push(poolLmCompoundOut);
       this.poolMnOuts.push(poolMnOut);
+      this.poolMnCompoundOuts.push(poolMnCompoundOut);
       this.poolStakingOuts.push(poolStakingOut);
     }
 
@@ -173,24 +208,26 @@ export class ForecastComponent implements OnInit, OnChanges {
     this.poolLMChartPos = this.poolLmOuts[0];
     this.poolLMCompoundChartPos = this.poolLmCompoundOuts[0];
     this.poolMnChartPos = this.poolMnOuts[0];
+    this.poolMnCompoundChartPos = this.poolMnCompoundOuts[0];
   }
 
   buildChart(): void {
     this.chartOptions = {
       series: this.getSeries(),
       chart: {
-        type: 'area',
+        type: 'line',
         background: 'transparent',
-        height: 450,
+        height: 550,
         events: {
           mouseMove: (function(event, chartContext, config): void {
-            if (this.poolOuts?.length > 0 && config?.dataPointIndex  > -1 && this.actualPoolIndex !== config?.dataPointIndex ) {
+            if (this.poolOuts?.length > 0 && config?.dataPointIndex > -1 && this.actualPoolIndex !== config?.dataPointIndex) {
               this.poolOutcomeChartPos = this.poolOuts[config.dataPointIndex];
               this.poolOutcomeCompoundChartPos = this.poolCompoundAllOuts[config.dataPointIndex];
               this.poolStakingChartPos = this.poolStakingOuts[config.dataPointIndex];
               this.poolLMChartPos = this.poolLmOuts[config.dataPointIndex];
               this.poolLMCompoundChartPos = this.poolLmCompoundOuts[config.dataPointIndex];
               this.poolMnChartPos = this.poolMnOuts[config.dataPointIndex];
+              this.poolMnCompoundChartPos = this.poolMnCompoundOuts[config.dataPointIndex];
             }
           }).bind(this)
         }
@@ -203,7 +240,8 @@ export class ForecastComponent implements OnInit, OnChanges {
         fontWeight: 600,
       },
       stroke: {
-        curve: 'smooth',
+        curve: 'straight',
+        width: 3
       },
       xaxis: {
         type: 'category',
@@ -259,6 +297,12 @@ export class ForecastComponent implements OnInit, OnChanges {
       mn.name = 'Masternode';
       mn.data = this.getMNData();
       series.push(mn);
+    }
+    if (this.poolMasternodeOut?.dfiPerMonth > 0) {
+      const mnC = new Series();
+      mnC.name = 'Masternode Compound';
+      mnC.data = this.getMNCompoundData();
+      series.push(mnC);
     }
 
     const all = new Series();
@@ -319,6 +363,14 @@ export class ForecastComponent implements OnInit, OnChanges {
     return result;
   }
 
+  getMNCompoundData(): Array<number> {
+    const result = new Array<number>();
+    this.poolMnCompoundOuts.forEach((p) =>
+      result.push(Math.round(p.dfiPerMonth * 100) / 100)
+    );
+    return result;
+  }
+
   getAllData(): Array<number> {
     const result = new Array<number>();
     this.poolOuts.forEach((p) =>
@@ -337,7 +389,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   getCat(): Array<string> {
     const result = new Array<string>();
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' } as const;
+    const options = {year: 'numeric', month: 'numeric', day: 'numeric'} as const;
     let date =
       new Date(2021, 5, 3) > new Date() ? new Date(2021, 5, 3) : new Date();
 
@@ -381,40 +433,95 @@ export class ForecastComponent implements OnInit, OnChanges {
     inputPool: Array<PoolAllOut>,
     i: number
   ): void {
-    const reinvestDFI = this.getReinvestDFI(inputPool[i - 1], i);
-    const dfiiInLm = this.getDfiCountLM() * 2 + reinvestDFI;
+    const newReinvestDFIActualCycle = this.getReinvestDFI(inputPool[i - 1], i, this.reinvestPeriod);
+    const oldCyclesDFIReinvest = this.lastCycleReinvestedDfiLm;
+    const newAndOld = newReinvestDFIActualCycle + oldCyclesDFIReinvest;
+    this.lastCycleReinvestedDfiLm = newAndOld;
+    const dfiiInLm = this.getDfiCountLM() * 2 + newAndOld;
 
     const reduction = this.getReduction(i);
-    this.lmApy = Math.pow(1 + (this.average / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
+    this.lmApy = Math.pow(1 + (this.average * reduction / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
 
-    poolAllOut.dfiPerDay = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 365) - dfiiInLm) * reduction;
-    poolAllOut.dfiPerMin =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 525600) - dfiiInLm) * reduction;
-    poolAllOut.dfiPerHour =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 8760) - dfiiInLm) * reduction;
-    poolAllOut.dfiPerMonth = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 12) - dfiiInLm) * reduction;
-    poolAllOut.dfiPerWeek =  (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 52) - dfiiInLm) * reduction;
-    poolAllOut.dfiPerYear = dfiiInLm * this.lmApy * reduction;
+    poolAllOut.dfiPerDay = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 365) - dfiiInLm);
+    poolAllOut.dfiPerMin = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 525600) - dfiiInLm);
+    poolAllOut.dfiPerHour = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 8760) - dfiiInLm);
+    poolAllOut.dfiPerMonth = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 12) - dfiiInLm);
+    poolAllOut.dfiPerWeek = (dfiiInLm * Math.pow(1 + this.lmApy, 1 / 52) - dfiiInLm);
+    poolAllOut.dfiPerYear = dfiiInLm * this.lmApy;
+
   }
 
-  getReinvestDFI(inputPool: PoolAllOut, i: number): number {
-    if (inputPool && this.reinvestPeriod === 356) {
+  transformPoolReducedCompoundMn(
+    poolAllOut: PoolAllOut,
+    inputPool: Array<PoolAllOut>,
+    i: number
+  ): void {
+    const mnApy = this.apyCake / 100 * this.reducePercent;
+    const oldCyclesDFIReinvest = this.lastCycleReinvestedDfiMn;
+    const reinvestDFI = this.getReinvestDFIMn(inputPool[i - 1], oldCyclesDFIReinvest, i, mnApy);
+    this.lastCycleReinvestedDfiMn = reinvestDFI;
+
+    const poolReinvest = new PoolAllOut();
+    poolReinvest.dfiPerMin = reinvestDFI * Math.pow(1 + mnApy, 1 / 525600) - reinvestDFI;
+    poolReinvest.dfiPerHour = reinvestDFI * Math.pow(1 + mnApy, 1 / 8760) - reinvestDFI;
+    poolReinvest.dfiPerDay = reinvestDFI * Math.pow(1 + mnApy, 1 / 365) - reinvestDFI;
+    poolReinvest.dfiPerWeek = reinvestDFI * Math.pow(1 + mnApy, 1 / 52) - reinvestDFI;
+    poolReinvest.dfiPerMonth = reinvestDFI * Math.pow(1 + mnApy, 1 / 12) - reinvestDFI;
+    poolReinvest.dfiPerYear = reinvestDFI * Math.pow(1 + mnApy, 1) - reinvestDFI;
+
+    poolAllOut.dfiPerDay = (inputPool[i - 1]?.dfiPerDay + poolReinvest.dfiPerDay);
+    poolAllOut.dfiPerMin = (inputPool[i - 1]?.dfiPerMin + poolReinvest.dfiPerMin);
+    poolAllOut.dfiPerHour = (inputPool[i - 1]?.dfiPerHour + poolReinvest.dfiPerHour);
+    poolAllOut.dfiPerMonth = (inputPool[i - 1]?.dfiPerMonth + poolReinvest.dfiPerMonth);
+    poolAllOut.dfiPerWeek = (inputPool[i - 1]?.dfiPerWeek + poolReinvest.dfiPerWeek);
+    poolAllOut.dfiPerYear = (inputPool[i - 1]?.dfiPerYear + poolReinvest.dfiPerYear);
+  }
+
+  getPreviousReinvests(i: number, dfiList: Array<number>): number {
+    return i > 1 ? dfiList[i - 2] : 0;
+  }
+
+  getReinvestDFIMn(inputPool: PoolAllOut, previousReinvest: number,  i: number, mnApy: number): number {
+    if (inputPool) {
+      let dfiToReinvest = previousReinvest;
+      let reinvestPeriodTimes = 0;
+      const reinvestReward = inputPool.dfiPerDay * 3;
+      if (i === 1) {
+        const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
+        reinvestPeriodTimes = Math.round(blocks * this.bs / this.reinvestPeriodMn);
+      } else {
+        reinvestPeriodTimes = Math.round(this.blocksPerCycle * this.bs / this.reinvestPeriodMn);
+      }
+      for (let j = 0; j < reinvestPeriodTimes; j++) {
+        dfiToReinvest = (dfiToReinvest + reinvestReward) * Math.pow(1 + mnApy, 1 / 122);
+      }
+      return dfiToReinvest;
+    } else {
+      return 0;
+    }
+  }
+
+
+  getReinvestDFI(inputPool: PoolAllOut, i: number, reinvestPeriod: number): number {
+    if (inputPool && reinvestPeriod === 356) {
       if (i === 1) {
         const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
         const daysForReinvest = Math.round(blocks * this.bs / 86400);
         return inputPool.dfiPerDay * daysForReinvest;
       } else {
-          const daysForReinvest = Math.round(this.blocksPerCycle * this.bs / 86400);
-          return inputPool.dfiPerDay * daysForReinvest;
-        }
-    } else if (inputPool && this.reinvestPeriod === 52) {
+        const daysForReinvest = Math.round(this.blocksPerCycle * this.bs / 86400);
+        return inputPool.dfiPerDay * daysForReinvest;
+      }
+    } else if (inputPool && reinvestPeriod === 52) {
       if (i === 1) {
         const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
-        const weeksForInvest =  Math.round(blocks * this.bs / 604800 * 10) / 10;
+        const weeksForInvest = Math.round(blocks * this.bs / 604800 * 10) / 10;
         return inputPool.dfiPerWeek * weeksForInvest;
       } else {
         const weeksForInvest = Math.round(this.blocksPerCycle * this.bs / 604800 * 10) / 10;
         return inputPool.dfiPerWeek * weeksForInvest;
       }
-    } else if (inputPool && this.reinvestPeriod === 12) {
+    } else if (inputPool && reinvestPeriod === 12) {
       if (i === 1) {
         const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
         const monthForInvest = Math.round(blocks * this.bs / 2628000 * 10) / 10;
@@ -478,8 +585,24 @@ export class ForecastComponent implements OnInit, OnChanges {
     return Math.round(average * 100) / 100;
   }
 
+  getAprMnAverage(): number {
+    const normalMns = this.adressesMasternodes?.length - (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
+    const mns = normalMns + this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length;
+
+    const aprs = normalMns * this.aprMn
+      + this.adressesMasternodesFreezer5?.length * this.aprMn * 1.5
+      + this.adressesMasternodesFreezer10?.length * this.aprMn * 2;
+
+    return aprs / mns;
+  }
+
   getDfiCountLM(): number {
     return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
       + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool;
+  }
+
+  getDfiCountMn(): number {
+    return this.adressesMasternodes?.length * 20000 + this.adressesMasternodesFreezer5?.length * 20000
+      + this.adressesMasternodesFreezer10?.length * 20000;
   }
 }

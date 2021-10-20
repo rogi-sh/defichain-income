@@ -75,7 +75,7 @@
   },
   "income": {
     "all": "Total",
-    "all-compound": "Total avec LM réinvesti",
+    "all-compound": "Total avec réinvesti",
     "title": "Votre revenu total",
     "word": "Revenu",
     "share": "Part",
@@ -88,7 +88,8 @@
     "title": "Forecast",
     "subtitle": "Votre revenu mensuel prévisionnel (tous les chiffres sont sans garantie) en DFI pour les prochains mois en tenant compte de la réduction des récompenses tous les 32690 blocs (Axe des dates)",
     "drop": "Choisissez votre période de temps en mois",
-    "reinvest": "Choisissez votre période de capitalisation lm"
+    "reinvest": "Choisissez votre période de capitalisation lm",
+    "reinvest-mn": "Les récompenses des masternodes sont réinvesties tous les 3 jours."
   },
   "hour": "Heure",
   "day": "Jour",

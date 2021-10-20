@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.19.0 - 20.10.2021';
+    this.log.comment = 'Masternode Compound added';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.18.1 - 20.10.2021';
     this.log.comment = 'Fix styles';
     this.logs.push(this.log);

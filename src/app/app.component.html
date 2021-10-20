@@ -843,6 +843,11 @@
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
+                  [apyCake]="stakingApy"
+                  [aprMn]="stakingApyMN"
+                  [adressesMasternodes]="adressesMasternodes"
+                  [adressesMasternodesFreezer5]="adressesMasternodesFreezer5"
+                  [adressesMasternodesFreezer10]="adressesMasternodesFreezer10"
                 >
                 </app-forecast>
               </div>
@@ -1904,7 +1909,7 @@
                         </div>
                         <div class="flex">
                           <div class="w-3/4">
-                            <div 
+                            <div
                               class="relative h-14 input-component"
                               [ngClass]="(!mamonKey && mamonKey !== 0) ? 'empty' : ''"
                             >
