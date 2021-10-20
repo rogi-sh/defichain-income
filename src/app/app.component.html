@@ -1092,7 +1092,7 @@
                       </div>
                     </div>
 
-                    <div *ngIf="loggedIn" class="absolute bottom-2 w-full">
+                    <div *ngIf="loggedIn" class="mt-2 lg:absolute lg:bottom-2 w-full flex">
                       <button
                         (click)="logout()"
                         type="button"
@@ -1104,7 +1104,7 @@
                       <button
                         (click)="update()"
                         type="button"
-                        class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-1/4 h-14 text-white align-top uppercase"
+                        class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-2/4 lg:w-1/4 h-14 text-white align-top uppercase"
                       >
                         {{ 'save' | translate }}
                       </button>
