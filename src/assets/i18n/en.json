@@ -88,7 +88,8 @@
     "title": "Forecast",
     "subtitle": "Your forecast monthly income (all figures without guarantee) in DFI for the next few months taking into account the reduction of rewards all 32690 blocks (Date-Axis)",
     "drop": "Choose your time period in months",
-    "reinvest": "Choose your lm compounding period"
+    "reinvest": "Choose your lm compounding period",
+    "reinvest-mn": "Reward from masternodes is reinvested every 3 days"
   },
   "hour": "Hour",
   "day": "Day",

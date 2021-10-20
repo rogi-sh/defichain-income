@@ -87,7 +87,8 @@
     "title": "Previsión",
     "subtitle": "Sus ingresos mensuales previstos (todas las cifras sin garantía) en DFI para los próximos meses teniendo en cuenta la reducción de las recompensas todos los 32690 bloques (Eje de fechas)",
     "drop": "Elige tu periodo de tiempo en meses",
-    "reinvest": "Elija su período de capitalización lm"
+    "reinvest": "Elija su período de capitalización lm",
+    "reinvest-mn": "La recompensa de los masternodes se reinvierte cada 3 días"
   },
   "hour": "Hora",
   "day": "Día",
