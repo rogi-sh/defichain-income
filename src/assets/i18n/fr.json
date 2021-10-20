@@ -75,7 +75,7 @@
   },
   "income": {
     "all": "Total",
-    "all-compound": "Total avec LM réinvesti",
+    "all-compound": "Total avec réinvesti",
     "title": "Votre revenu total",
     "word": "Revenu",
     "share": "Part",

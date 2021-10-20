@@ -190,7 +190,7 @@ export class ForecastComponent implements OnInit, OnChanges {
         this.transformPoolReducedCompound(poolLmCompoundOut, this.poolLmCompoundOuts, i);
         this.transformPoolReduced(poolMnOut, this.poolMnOuts, i);
         this.transformPoolReducedCompoundMn(poolMnCompoundOut, this.poolMnOuts, i);
-        this.transformPoolAllReducedCompound(poolCompoundAllOut, poolStakingOut, poolLmCompoundOut, poolMnOut);
+        this.transformPoolAllReducedCompound(poolCompoundAllOut, poolStakingOut, poolLmCompoundOut, poolMnCompoundOut);
       }
 
       this.poolOuts.push(poolAllOut);

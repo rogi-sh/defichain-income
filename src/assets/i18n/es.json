@@ -74,7 +74,7 @@
   },
   "income": {
     "all": "Total",
-    "all-compound": "Total con LM reinvertida",
+    "all-compound": "Total con reinvertida",
     "title": "Sus ingresos totales",
     "word": "Ingresos",
     "share": "Share",
