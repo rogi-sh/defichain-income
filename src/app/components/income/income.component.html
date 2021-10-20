@@ -264,7 +264,7 @@
           </span>
           <div>
             <span class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
-              <app-pric *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLMUsd"></app-pric>
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLMUsd"></app-price>
               <div *ngIf="isIncognitoModeOn">****</div>
             </span>
           </div>
