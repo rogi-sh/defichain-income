@@ -57,7 +57,7 @@
       <div class="grid grid-flow-col grid-cols-2 md:gap-2">
         <span class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 border-b pb-2 col-span-2 mb-2">
           <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : getDfiCount() | number: '1.2-2' }}
               <br/>
               <div
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
               <br/>
               <div
@@ -88,7 +88,7 @@
           </div>
 
           <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : getDfiCountLM() | number: '1.2-2' }}
               <br/>
               <div
@@ -104,7 +104,7 @@
           </div>
 
           <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : wallet?.dfi | number: '1.2-2' }}
               <br/>
               <div
@@ -120,7 +120,7 @@
           </div>
 
            <div *ngIf="wallet?.dfiInMasternodes > 0" class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes - getFreezerDfiCount() | number: '1.2-2' }}
               <br/>
               <div
@@ -136,7 +136,7 @@
           </div>
 
            <div *ngIf="getFreezerDfiCount()> 0" class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block pr-2">
+            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
               {{isIncognitoModeOn ? '****' : getFreezerDfiCount() | number: '1.2-2' }}
               <br/>
               <div
@@ -159,11 +159,11 @@
       </h3>
 
       <div class="grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
-        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             BTC
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
             <div
               class="text-xs text-gray-400 dark:text-gray-300"
@@ -174,11 +174,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             ETH
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
             <div
               class="text-xs text-gray-400 dark:text-gray-300"
@@ -189,11 +189,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             USDT
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
             <div
               class="text-xs text-gray-400 dark:text-gray-300"
@@ -204,11 +204,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdc > 0 || wallet?.usdcInUsdcPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.usdc > 0 || wallet?.usdcInUsdcPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             USDC
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.usdc + wallet?.usdcInUsdcPool | number: '1.5-5'}}
             <div
               class="text-xs text-gray-400 dark:text-gray-300"
@@ -219,11 +219,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             LTC
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
             <div
               class="text-xs text-gray-400 dark:text-gray-300"
@@ -234,11 +234,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             DOGE
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
               <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDogeValueUsd()"></app-price>
@@ -247,11 +247,11 @@
           </div>
         </div>
 
-        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg dark:text-gray-100">
+        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             BCH
           </div>
-          <div class="text-pink-500 font-semibold inline-block">
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
             {{isIncognitoModeOn ? '****' : wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
               <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
