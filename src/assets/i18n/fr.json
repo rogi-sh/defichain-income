@@ -41,6 +41,7 @@
     "label": "adresses",
     "title": "Vos adresses DFI",
     "titleList": "Vos adresses DFI suivies",
+    "noAddresses": "Aucune adresse trouvée",
     "title2": "Pour le suivi vous avez besoin de vos adresses DeFiChain. Pour trouver ce adresses, vous avez 2 options",
     "imp": "Option 2 - Lecture manuelle à partir de l'application Defichain",
     "imp2": "Option 1 - Lecture automatique avec l'aide de l'assistant d'adresse",

@@ -12,6 +12,16 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.18.1 - 20.10.2021';
+    this.log.comment = 'Fix styles';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '7.18.0 - 20.10.2021';
+    this.log.comment = 'Update settings design';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.17.2 - 16.10.2021';
     this.log.comment = 'Correct compound interest calculation';
     this.logs.push(this.log);

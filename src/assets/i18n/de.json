@@ -42,6 +42,7 @@
     "label": "Adresse",
     "title": "Deine Adressen",
     "titleList": "Diese Adressen werden analysiert",
+    "noAddresses": "Keine Adressen hinterlegt",
     "title2": "Für das Tracking werden deine DeFiChain Adressen benötigt. Um die Adressen zu finden hast du 2 Optionen",
     "imp": "Option 2 - Manuelles Auslesen aus der Defichain App",
     "imp2": "Option 1 - Automatisches Auslesen mit Hilfe des Adressen Helpers",
