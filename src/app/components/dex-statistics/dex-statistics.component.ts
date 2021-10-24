@@ -235,7 +235,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getApyFromApr(apr: number): number {
-    return 100 * (Math.pow(1 + (apr / 100 / 356), 356) - 1);
+    return 100 * (Math.pow(1 + (apr / 100 / 52), 52) - 1);
   }
 
 }

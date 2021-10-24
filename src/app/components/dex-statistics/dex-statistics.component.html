@@ -270,20 +270,41 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
     <div class="rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto">
       <h1 class="text-lg font-bold">Staking</h1>
-      <div class="mb-1 w-full sm:mr-4">
-        Staking Cake:
-        <span
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
-        >
+      <div class="mb-1 w-full grid gap-2 auto-rows-max">
+        <div class="w-full dark:text-gray-100">
+          Staking Cake:
+          <span
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer"
+          >
           {{ this.stakingApyCake | number: '1.1-1' }}% APY
         </span>
-      </div>
-      <div class="w-full">
-        Staking Masternode:
-        <div
-          class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block"
-        >
-          {{ this.stakingApyMN | number: '1.1-1' }}% APR
+        </div>
+        <div class="w-full dark:text-gray-100">
+          Staking Masternode:
+          <div
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block"
+          >
+            {{ this.stakingApyMN | number: '1.1-1' }}% APR /   {{ getApyFromApr(this.stakingApyMN) | number: '1.1-1' }}%
+            APY
+          </div>
+        </div>
+        <div class="w-full dark:text-gray-100">
+          Staking 5Y Freezer:
+          <div
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block"
+          >
+            {{ this.stakingApyMN * 1.5 | number: '1.1-1' }}% APR
+            /   {{ getApyFromApr(this.stakingApyMN * 1.5) | number: '1.1-1' }}% APY
+          </div>
+        </div>
+        <div class="w-full dark:text-gray-100">
+          Staking 10Y Freezer:
+          <div
+            class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block"
+          >
+            {{ this.stakingApyMN * 2 | number: '1.1-1' }}% APR
+            /   {{ getApyFromApr(this.stakingApyMN * 2) | number: '1.1-1' }}% APY
+          </div>
         </div>
       </div>
 
@@ -418,9 +439,9 @@
 
             </span>
             <br>
-            <a    class="text-pink-500 hover:underline"
-                  target="_blank"
-                  href="{{m?.html_url}}">Link to github</a>
+            <a class="text-pink-500 hover:underline"
+               target="_blank"
+               href="{{m?.html_url}}">Link to github</a>
             <br>
             <span>{{m.closed_issues}} &#9989; - {{m.open_issues}} &#9203;</span>
             <br>
@@ -440,13 +461,13 @@
               {{ getLatestReleaseNode()?.name }}
             </span>
         <br>
-        <a    class="text-pink-500 hover:underline"
-              target="_blank"
-              href="{{getLatestReleaseNode()?.html_url}}">Link in github</a>
+        <a class="text-pink-500 hover:underline"
+           target="_blank"
+           href="{{getLatestReleaseNode()?.html_url}}">Link in github</a>
         <br>
         <span class="text-sm">{{ getLatestReleaseNode()?.published_at | date}}</span>
         <br>
-        <markdown class="prose-sm dark:prose-white" [data]="getReleaseText(getLatestReleaseNode()?.body)" ></markdown>
+        <markdown class="prose-sm dark:prose-white" [data]="getReleaseText(getLatestReleaseNode()?.body)"></markdown>
       </div>
     </div>
     <div class="rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2">
@@ -457,13 +478,13 @@
               {{ getLatestReleaseApp()?.name }}
             </span>
         <br>
-        <a    class="text-pink-500 hover:underline"
-              target="_blank"
-              href="{{getLatestReleaseApp()?.html_url}}">Link to github</a>
+        <a class="text-pink-500 hover:underline"
+           target="_blank"
+           href="{{getLatestReleaseApp()?.html_url}}">Link to github</a>
         <br>
         <span class="text-sm">{{ getLatestReleaseApp()?.published_at | date}}</span>
         <br>
-        <markdown class="prose-sm dark:prose-white" [data]="getLatestReleaseApp()?.body" ></markdown>
+        <markdown class="prose-sm dark:prose-white" [data]="getLatestReleaseApp()?.body"></markdown>
       </div>
     </div>
     <div class="rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2">
@@ -474,13 +495,14 @@
               {{ getLatestReleaseWallet()?.name }}
             </span>
         <br>
-        <a    class="text-pink-500 hover:underline"
-              target="_blank"
-              href="{{getLatestReleaseWallet()?.html_url}}">Link to github</a>
+        <a class="text-pink-500 hover:underline"
+           target="_blank"
+           href="{{getLatestReleaseWallet()?.html_url}}">Link to github</a>
         <br>
         <span class="text-sm">{{ getLatestReleaseWallet()?.published_at | date}}</span>
         <br>
-        <markdown class="prose-sm dark:prose-white" [data]="getReleaseTextWallet(getLatestReleaseWallet()?.body)" ></markdown>
+        <markdown class="prose-sm dark:prose-white"
+                  [data]="getReleaseTextWallet(getLatestReleaseWallet()?.body)"></markdown>
       </div>
     </div>
   </div>
