@@ -10,7 +10,8 @@
         <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
         CEX
         <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
-        DFI
+        DFI /
+        {{ 'your' | translate }} &Oslash; APR {{getAPRAverage()}}
       </div>
 
       <div
@@ -88,7 +89,8 @@
           <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
           CEX
           <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
-          DFI
+          DFI /
+          {{ 'your' | translate }} &Oslash; APR {{getAPRAverage()}} %
         </span>
       </div>
       <div

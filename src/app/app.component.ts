@@ -2094,6 +2094,55 @@ export class AppComponent implements OnInit {
     this.refresh();
   }
 
+  getAPRAverage(): number {
+
+    const dfiInAll = this.getDfiForAverageAPR();
+    const dfiBtcPart = this.wallet?.dfiInBtcPool * 2 / dfiInAll;
+    const dfiEthPart = this.wallet?.dfiInEthPool * 2 / dfiInAll;
+    const dfiUsdcPart = this.wallet?.dfiInUsdcPool * 2 / dfiInAll;
+    const dfiUsdtPart = this.wallet?.dfiInUsdtPool * 2 / dfiInAll;
+    const dfiDogePart = this.wallet?.dfiInDogePool * 2  / dfiInAll;
+    const dfiBchPart = this.wallet?.dfiInBchPool * 2 / dfiInAll;
+    const dfiLtcPart = this.wallet?.dfiInLtcPool * 2 / dfiInAll;
+    const stakingPart = this.wallet?.dfiInStaking / dfiInAll;
+    const normalMns = this.adressesMasternodes?.length -
+      (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
+    const normalMnsPart = normalMns * 20000 / dfiInAll;
+    const fiveFreezerMnsPart = this.adressesMasternodesFreezer5?.length * 20000 / dfiInAll;
+    const tenFreezerMnsPart = this.adressesMasternodesFreezer10?.length * 20000 / dfiInAll;
+
+    // Anteile berechnen je nachdem wie viel man in den Pools hat
+    const btcApr = dfiBtcPart * 100 * this.poolBtc?.apy;
+    const ethApr = dfiEthPart * 100 * this.poolEth?.apy;
+    const usdcApr = dfiUsdcPart * 100 * this.poolUsdc?.apy;
+    const bchApr = dfiBchPart * 100 * this.poolBch?.apy;
+    const dogeApr = dfiDogePart * 100 * this.poolDoge?.apy;
+    const usdtApr = dfiUsdtPart * 100 * this.poolUsdt?.apy;
+    const ltcApr = dfiLtcPart * 100 * this.poolLtc?.apy;
+    const stakingApr = stakingPart * 100 * this.stakingApyMN * 0.85;
+    const normalMnApr = normalMnsPart * 100 * this.stakingApyMN;
+    const fiveFreezerMnApr = fiveFreezerMnsPart * 100 * this.stakingApyMN * 1.5;
+    const tenFreezerMnApr = tenFreezerMnsPart * 100 * this.stakingApyMN * 2;
+
+    const average = (btcApr + ethApr + usdcApr + bchApr + dogeApr + usdtApr + ltcApr + stakingApr + normalMnApr + fiveFreezerMnApr
+      + tenFreezerMnApr) / 100;
+
+    console.log('Deine Apr' + average);
+
+    return Math.round(average * 100) / 100;
+  }
+
+  getDfiForAverageAPR(): number {
+    return this.getDfiCountInLM() * 2 + this.dfiInStaking + this.getDfiCountMn();
+  }
+
+  getDfiCountMn(): number {
+    const normalMns = this.adressesMasternodes?.length -
+      (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
+    const mns = normalMns + this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length;
+    return mns * 20000;
+  }
+
   handlePageHeight(): void {
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
 
