@@ -234,4 +234,8 @@ export class DexStatisticsComponent implements OnInit {
     return this.getDexDFI() + this.MNCount * 20000;
   }
 
+  getApyFromApr(apr: number): number {
+    return 100 * (Math.pow(1 + (apr / 100 / 356), 356) - 1);
+  }
+
 }
