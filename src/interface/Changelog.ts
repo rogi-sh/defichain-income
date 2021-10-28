@@ -11,6 +11,12 @@ export class Changelog {
 
     this.logs = new Array<Log>();
 
+
+    this.log = new Log();
+    this.log.version = '7.20.2 - 28.10.2021';
+    this.log.comment = 'Fix calc of masternode apr based on subnodes, add cake apr, small fixes';
+    this.logs.push(this.log);
+
     this.log = new Log();
     this.log.version = '7.20.1 - 25.10.2021';
     this.log.comment = 'Staking with freezer apr and apy, weekly apy of lm pools';

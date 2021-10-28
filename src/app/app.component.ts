@@ -92,6 +92,7 @@ export class AppComponent implements OnInit {
   stakingApy = this.stakingApyCake;
   stakingApyMN = 77.6;
   masternodeCount = 7960;
+  masternodeCountForAprCalc = 7960;
   masternodeCount5Freezer = 0;
   masternodeCount10Freezer = 0;
   masternodeCount0Freezer = 0;
@@ -896,6 +897,8 @@ export class AppComponent implements OnInit {
         this.masternodeCount10Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 520).count;
         this.masternodeCount0Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 0).count;
         this.masternodeCount = this.masternodeCount5Freezer + this.masternodeCount10Freezer + this.masternodeCount0Freezer;
+        this.masternodeCountForAprCalc = this.masternodeCount5Freezer * 1.5 + this.masternodeCount10Freezer * 2
+          + this.masternodeCount0Freezer;
         this.dfiBurned = masternode.data.burned.total;
         this.berechneMNOut();
         this.berechneAllOut();
@@ -1210,7 +1213,7 @@ export class AppComponent implements OnInit {
   }
 
   berechneMNOut(): void {
-    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards?.rewards?.minter / this.masternodeCount * 525600 / 20000 * 100;
+    this.stakingApyMN = 60 / this.blocktimeInS * this.rewards?.rewards?.minter / this.masternodeCountForAprCalc * 525600 / 20000 * 100;
     this.poolMasternodeOut.dfiPerYear = this.getRewardMnForYear();
     this.poolMasternodeOut.dfiPerMonth = this.poolMasternodeOut.dfiPerYear / 12;
     this.poolMasternodeOut.dfiPerWeek = this.poolMasternodeOut.dfiPerMonth / 4;
