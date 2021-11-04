@@ -11,6 +11,10 @@ export class Changelog {
 
     this.logs = new Array<Log>();
 
+    this.log = new Log();
+    this.log.version = '7.20.3 - 5.11.2021';
+    this.log.comment = 'Fix calc of average apr';
+    this.logs.push(this.log);
 
     this.log = new Log();
     this.log.version = '7.20.2 - 28.10.2021';
