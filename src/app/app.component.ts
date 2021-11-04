@@ -120,6 +120,7 @@ export class AppComponent implements OnInit {
   masternodeFreezer5 = false;
   masternodeFreezer10 = false;
   mamonKey: string;
+  avgApr = 0;
 
   dex: DexInfo;
 
@@ -734,6 +735,7 @@ export class AppComponent implements OnInit {
     this.dataService.setBtcUsd(this.poolBtc.priceA);
     this.dataService.setEthUsd(this.poolEth.priceA);
     this.dataLoaded = true;
+    this.avgApr = this.getAPRAverage();
     this.spinner.hide();
   }
 
@@ -2100,37 +2102,49 @@ export class AppComponent implements OnInit {
   getAPRAverage(): number {
 
     const dfiInAll = this.getDfiForAverageAPR();
-    const dfiBtcPart = this.wallet?.dfiInBtcPool * 2 / dfiInAll;
-    const dfiEthPart = this.wallet?.dfiInEthPool * 2 / dfiInAll;
-    const dfiUsdcPart = this.wallet?.dfiInUsdcPool * 2 / dfiInAll;
-    const dfiUsdtPart = this.wallet?.dfiInUsdtPool * 2 / dfiInAll;
-    const dfiDogePart = this.wallet?.dfiInDogePool * 2  / dfiInAll;
-    const dfiBchPart = this.wallet?.dfiInBchPool * 2 / dfiInAll;
-    const dfiLtcPart = this.wallet?.dfiInLtcPool * 2 / dfiInAll;
-    const stakingPart = this.wallet?.dfiInStaking / dfiInAll;
-    const normalMns = this.adressesMasternodes?.length -
-      (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
-    const normalMnsPart = normalMns * 20000 / dfiInAll;
-    const fiveFreezerMnsPart = this.adressesMasternodesFreezer5?.length * 20000 / dfiInAll;
-    const tenFreezerMnsPart = this.adressesMasternodesFreezer10?.length * 20000 / dfiInAll;
 
-    // Anteile berechnen je nachdem wie viel man in den Pools hat
-    const btcApr = dfiBtcPart * 100 * this.poolBtc?.apy;
-    const ethApr = dfiEthPart * 100 * this.poolEth?.apy;
-    const usdcApr = dfiUsdcPart * 100 * this.poolUsdc?.apy;
-    const bchApr = dfiBchPart * 100 * this.poolBch?.apy;
-    const dogeApr = dfiDogePart * 100 * this.poolDoge?.apy;
-    const usdtApr = dfiUsdtPart * 100 * this.poolUsdt?.apy;
-    const ltcApr = dfiLtcPart * 100 * this.poolLtc?.apy;
-    const stakingApr = stakingPart * 100 * this.stakingApyMN * 0.85;
-    const normalMnApr = normalMnsPart * 100 * this.stakingApyMN;
-    const fiveFreezerMnApr = fiveFreezerMnsPart * 100 * this.stakingApyMN * 1.5;
-    const tenFreezerMnApr = tenFreezerMnsPart * 100 * this.stakingApyMN * 2;
+    if (!this.wallet || !this.poolOut || !this.stakingOut || !this.poolMasternodeOut) {
+      return 0;
+    }
 
+    // calculate how much income all
+    const allIncome = this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear + this.poolMasternodeOut.dfiPerYear;
+
+    // calculate how much income from all pools, staking and masternode
+    const countFreezer5 = this.adressesMasternodesFreezer5.length;
+    const countFreezer10 = this.adressesMasternodesFreezer10.length;
+    const countNormal = this.adressesMasternodes.length - countFreezer5 - countFreezer10;
+
+    const rewardNormaleMnPart = countNormal * 20000 * this.stakingApyMN / allIncome;
+    const reward5MnPart = countFreezer5 * 20000 * this.stakingApyMN * 1.5 / allIncome;
+    const reward10MnPart = countFreezer10 * 20000 * this.stakingApyMN * 2 / allIncome;
+
+    const dfiBtcPart = this.poolBtcOut?.dfiPerYear / allIncome * 100;
+    const dfiEthPart = this.poolEthOut?.dfiPerYear / allIncome * 100;
+    const dfiUsdcPart = this.poolUsdcOut?.dfiPerYear / allIncome * 100;
+    const dfiUsdtPart = this.poolUsdtOut?.dfiPerYear / allIncome * 100;
+    const dfiDogePart = this.poolDogeOut?.dfiPerYear  / allIncome * 100;
+    const dfiBchPart = this.poolBchOut?.dfiPerYear / allIncome * 100;
+    const dfiLtcPart = this.poolLtcOut?.dfiPerYear / allIncome * 100;
+    const stakingPart = this.stakingOut?.dfiPerYear / allIncome * 100;
+
+
+    // Calculate weighted apr
+    const btcApr = dfiBtcPart * this.poolBtc?.apy;
+    const ethApr = dfiEthPart * this.poolEth?.apy;
+    const usdcApr = dfiUsdcPart * this.poolUsdc?.apy;
+    const bchApr = dfiBchPart * this.poolBch?.apy;
+    const dogeApr = dfiDogePart * this.poolDoge?.apy;
+    const usdtApr = dfiUsdtPart * this.poolUsdt?.apy;
+    const ltcApr = dfiLtcPart * this.poolLtc?.apy;
+    const stakingApr = stakingPart * this.stakingApyMN * 0.85;
+    const normalMnApr = rewardNormaleMnPart * this.stakingApyMN;
+    const fiveFreezerMnApr = reward5MnPart  * this.stakingApyMN * 1.5;
+    const tenFreezerMnApr = reward10MnPart  * this.stakingApyMN * 2;
+
+    // compute average
     const average = (btcApr + ethApr + usdcApr + bchApr + dogeApr + usdtApr + ltcApr + stakingApr + normalMnApr + fiveFreezerMnApr
       + tenFreezerMnApr) / 100;
-
-    console.log('Deine Apr' + average);
 
     return Math.round(average * 100) / 100;
   }
