@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '7.21.0 - 5.11.2021';
-    this.log.comment = 'Add prices in holdings view for holdings and lü tokens, add DFI as official currency';
+    this.log.comment = 'Add prices in holdings view for holdings and lp tokens, add DFI as official currency';
     this.logs.push(this.log);
 
     this.log = new Log();
