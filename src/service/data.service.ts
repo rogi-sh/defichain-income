@@ -15,6 +15,7 @@ export class DataService {
 
   poolBtcPrice: number;
   poolEthPrice: number;
+  poolDfiPrice: number;
 
   constructor(private http: HttpClient) {
 
@@ -46,6 +47,14 @@ export class DataService {
 
   public getEthUsd(): number {
     return this.poolEthPrice;
+  }
+
+  public setDfiUsd(price: number): void {
+    this.poolDfiPrice = price;
+  }
+
+  public getDfiUsd(): number {
+    return this.poolDfiPrice;
   }
 
   public getCurrencies = async () =>  {

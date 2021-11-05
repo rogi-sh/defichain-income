@@ -734,6 +734,7 @@ export class AppComponent implements OnInit {
     this.berechneAllOut();
     this.dataService.setBtcUsd(this.poolBtc.priceA);
     this.dataService.setEthUsd(this.poolEth.priceA);
+    this.dataService.setDfiUsd(this.poolBtc.priceB);
     this.dataLoaded = true;
     this.avgApr = this.getAPRAverage();
     this.spinner.hide();

@@ -10,3 +10,4 @@
 <span *ngIf="fiat === 'SGD'">{{usdPrice * usd?.sgd | currency: "SGD"}}</span>
 <span *ngIf="fiat === 'BTC'">{{usdPrice / service?.getBtcUsd()  | currency: "BTC" : 'symbol': '1.8-8' }}</span>
 <span *ngIf="fiat === 'ETH'">{{usdPrice / service?.getEthUsd()  | currency: "ETH" : 'symbol': '1.8-8' }}</span>
+<span *ngIf="fiat === 'DFI'">{{usdPrice / service?.getDfiUsd()  | currency: "DFI" : 'symbol': '1.2-2' }}</span>
