@@ -449,7 +449,8 @@
                     <div *ngIf="wallet?.dfi > 0">DFI</div>
                     <div *ngIf="wallet?.dfi > 0">
                       <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfi | number: '1.3-3'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfi | number: '1.3-3'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.dfi * poolBtc?.priceB"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -458,7 +459,8 @@
                     <div *ngIf="dfiInStaking > 0">
                       <div
                         class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
-                        <div *ngIf="!isIncognitoModeOn">{{dfiInStaking | number: '1.1-1'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{dfiInStaking | number: '1.1-1'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="dfiInStaking * poolBtc?.priceB"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -467,7 +469,8 @@
                     <div *ngIf="wallet?.dfiInMasternodes > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfiInMasternodes  | number: '1.1-1'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.dfiInMasternodes  | number: '1.1-1'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.dfiInMasternodes * poolBtc?.priceB"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -476,7 +479,8 @@
                     <div *ngIf="adressesMasternodesFreezer5?.length > 0 || adressesMasternodesFreezer10?.length > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center">
-                        <div *ngIf="!isIncognitoModeOn">{{getFreezerDfiCount() | number: '1.1-1'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{getFreezerDfiCount() | number: '1.1-1'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getFreezerDfiCount()  * poolBtc?.priceB"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -486,7 +490,8 @@
                     </div>
                     <div *ngIf="wallet?.btc > 0">
                       <div class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.btc | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.btc | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.btc  * poolBtc?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -496,7 +501,8 @@
                     <div *ngIf="wallet?.eth > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.eth | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.eth | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.eth  * poolEth?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -506,7 +512,8 @@
                     <div *ngIf="wallet?.ltc > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.ltc | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.ltc | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.ltc  * poolLtc?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -516,7 +523,8 @@
                     <div *ngIf="wallet?.usdt > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.usdt | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.usdt | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.usdt  * poolUsdt?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -526,7 +534,8 @@
                     <div *ngIf="wallet?.usdc > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.usdc | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.usdc | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.usdc  * poolUsdc?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -536,7 +545,8 @@
                     <div *ngIf="wallet?.doge > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.doge | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.doge | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.doge  * poolDoge?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -546,7 +556,8 @@
                     <div *ngIf="wallet?.bch > 0">
                       <div
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-                        <div *ngIf="!isIncognitoModeOn">{{wallet?.bch | number: '1.5-5'}}</div>
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.bch | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.bch  * poolBch?.priceA"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -557,37 +568,44 @@
                   <div class="grid grid-flow-row grid-cols-2 auto-rows-max gap-2">
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
                     <div *ngIf="wallet?.btcdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.btcdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.btcdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.btcdfi * poolBtc?.totalStaked/poolBtc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.ethdfi > 0">ETH-DFI</div>
                     <div *ngIf="wallet?.ethdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ethdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ethdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ethdfi * poolEth?.totalStaked/poolEth?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.ltcdfi > 0">LTC-DFI</div>
                     <div *ngIf="wallet?.ltcdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ltcdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ltcdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ltcdfi * poolLtc?.totalStaked/poolLtc?.totalLiquidityLpToken"></app-price><</span>
                     </div>
 
                     <div *ngIf="wallet?.usdtdfi > 0">USDT-DFI</div>
                     <div *ngIf="wallet?.usdtdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdtdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdtdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdtdfi * poolUsdt?.totalStaked/poolUsdt?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.usdcdfi > 0">USDC-DFI</div>
                     <div *ngIf="wallet?.usdcdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdcdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdcdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdcdfi * poolUsdc?.totalStaked/poolUsdc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
                     <div *ngIf="wallet?.dogedfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.dogedfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.dogedfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.dogedfi * poolDoge?.totalStaked/poolDoge?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.bchdfi > 0">BCH-DFI</div>
                     <div *ngIf="wallet?.bchdfi > 0">
-                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.bchdfi | number: '1.3-3'}}</span>
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.bchdfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.bchdfi * poolBch?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price></span>
                     </div>
                   </div>
                 </div>
