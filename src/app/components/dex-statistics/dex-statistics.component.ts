@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
@@ -73,6 +73,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   burnedDfi: number;
 
+  @Input()
+  correlationDays: number;
+
   corr: Correlation;
 
   euonsHardforkeBlock = 894000;
@@ -90,7 +93,7 @@ export class DexStatisticsComponent implements OnInit {
   constructor(private apollo: Apollo) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void  {
     this.loadCor();
     this.loadMilestones();
     this.loadNodeRelease();
@@ -185,7 +188,10 @@ export class DexStatisticsComponent implements OnInit {
 
   loadCor(): void {
     this.apollo.query({
-      query: CORRELATION
+      query: CORRELATION,
+      variables: {
+        days: this.correlationDays
+      }
     }).subscribe((result: any) => {
       if (result?.data?.getCorrelation) {
         this.corr = result?.data?.getCorrelation;

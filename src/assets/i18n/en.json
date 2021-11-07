@@ -26,6 +26,7 @@
   "price": "Price",
   "currency": "Currency",
   "correlation": "Correlation",
+  "correlationDay": "Days",
   "since": "since",
   "save": "Save",
   "login": "Login",
@@ -114,6 +115,7 @@
   "copy": "Copy to clipboard",
   "blocktime": "{{ count }} Blocks",
   "blocktimeHeadline": "Last blocks for the calculation of the block time",
+  "correlationDays": "Enter how many days to calculate the correlation of the pool pairs in the LM",
   "blocksTillCycle": "Blocks till next cycle (rewards decrease 1,658%)",
   "blocksTillDiff": "Blocks till next difficulty change",
   "mamon-info": "Import your Masternodes from Masternode Monitor with Auth Key"

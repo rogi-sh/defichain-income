@@ -122,6 +122,9 @@ export class AppComponent implements OnInit {
   mamonKey: string;
   avgApr = 0;
 
+  correlationDays = 365;
+  correlationDaysKey = 'correlationDaysKey';
+
   dex: DexInfo;
 
   poolBtc: Pool;
@@ -344,6 +347,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.cakeApyLoadAutoKey) !== null) {
       this.cakeApyLoadAuto = JSON.parse(localStorage.getItem(this.cakeApyLoadAutoKey));
+    }
+    if (localStorage.getItem(this.correlationDaysKey) !== null) {
+      this.correlationDays = JSON.parse(localStorage.getItem(this.correlationDaysKey));
     }
 
   }
@@ -2098,6 +2104,11 @@ export class AppComponent implements OnInit {
     this.lastBlocksForCompute = +value;
     localStorage.setItem(this.lastBlocksForComputeKey, String(value));
     this.refresh();
+  }
+
+  onChangeCorrelationForCalc(value: number): void {
+    this.correlationDays = +value;
+    localStorage.setItem(this.correlationDaysKey, String(value));
   }
 
   getAPRAverage(): number {
