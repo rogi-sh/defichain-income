@@ -39,6 +39,7 @@ import {ToastrService} from 'ngx-toastr';
 import {SupernodeAccount} from '@interfaces/Supernode';
 import {firstValueFrom} from 'rxjs';
 import {MamonAccountNode} from '@interfaces/Mamon';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -196,7 +197,7 @@ export class AppComponent implements OnInit {
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private route: ActivatedRoute, private router: Router) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
@@ -227,6 +228,14 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.route.paramMap.subscribe(params => {
+      // sobald authkey gesetzt ist
+      if (params.get('authkey') && params.get('authkey') != null) {
+        console.log("Authkey" + params.get('authkey'));
+      }
+    });
+
     this.loadData();
 
     this.toggleDarkMode();

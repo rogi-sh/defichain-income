@@ -32,6 +32,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
+import { RouterModule, Routes } from '@angular/router';
+
+const APP_ROUTES_ROOT: Routes = [
+  { path: '', component: AppComponent }
+];
 
 @NgModule({
   declarations: [
@@ -64,6 +69,7 @@ import { MarkdownModule } from 'ngx-markdown';
     CountdownModule,
     HttpClientModule,
     NgxSpinnerModule,
+    RouterModule.forRoot(APP_ROUTES_ROOT, { anchorScrolling: 'enabled' }),
     ToastrModule.forRoot({
       timeOut: 5000,
       maxOpened: 3,
@@ -83,10 +89,12 @@ import { MarkdownModule } from 'ngx-markdown';
       registrationStrategy: 'registerImmediately'
     }),
   ],
+  exports: [RouterModule],
   providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 
 // required for AOT compilation
 // tslint:disable-next-line:typedef
