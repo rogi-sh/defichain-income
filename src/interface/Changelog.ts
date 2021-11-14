@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.22.1 - 14.11.2021';
+    this.log.comment = 'Stats Endpoint version update';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.22.0 - 7.11.2021';
     this.log.comment = 'Select the number of days for the calculation of the correlation in settings';
     this.logs.push(this.log);
