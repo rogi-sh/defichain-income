@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.22.2 - 15.11.2021';
+    this.log.comment = 'Stats endpoint moved to ocean';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.22.1 - 14.11.2021';
     this.log.comment = 'Stats Endpoint version update';
     this.logs.push(this.log);
