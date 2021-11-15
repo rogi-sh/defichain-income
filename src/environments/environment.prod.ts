@@ -6,7 +6,6 @@ export const environment = {
   accountDetails: 'https://api.defichain.io/v1/getaccount?including_start=true&owner=',
   balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
   health: 'https://api.defichain.io/ok',
-  stats: 'https://api.defichain.io/v1/stats',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/coins/apy',
   oceanstats: 'https://ocean.defichain.com/v0.13/mainnet/stats',
