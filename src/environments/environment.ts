@@ -4,20 +4,17 @@
 
 export const environment = {
   production: false,
-  listyieldfarming: 'https://api.defichain.io/v1/listyieldfarming',
-  poolDetails: 'https://api.defichain.io/v1/getpoolpair?id=',
+  listyieldfarming: 'https://supernode.saiive.live/api/v1/mainnet/DFI/list-yield-farming',
   listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/DFI/listpoolpairs',
-  accountDetails: 'https://api.defichain.io/v1/getaccount?including_start=true&owner=',
-  balance: 'https://mainnet-api.defichain.io/api/DFI/mainnet/address/SET-ADDRESS/balance',
-  health: 'https://api.defichain.io/ok',
+  health: 'https://supernode.saiive.live/api/v1/health',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/coins/apy',
   oceanstats: 'https://ocean.defichain.com/v0.14/mainnet/stats',
-  blocks: 'https://mainnet-api.defichain.io/api/DFI/mainnet/block?limit=2000&anchorsOnly=false',
+  blocks: 'https://ocean.defichain.com/v0/mainnet/blocks?size=2000',
   supernode_account: 'https://supernode.saiive.live/api/v1/mainnet/DFI/account/',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '7.22.3',
+  version: '7.22.4',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
