@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Dex} from '@services/dex.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Dex } from '@services/dex.service';
 import {
   AddressBalance,
-  DexInfo,
   DexPoolPair,
   MasternodeOutcome,
   Outcome,
@@ -17,38 +16,38 @@ import {
   PoolPair,
   PoolUsdtOut,
   PoolUsdcOut,
-  Stats, Rewards,
-} from '@interfaces/Dex';
-import {Balance, Wallet, WalletDto} from '@interfaces/Data';
-import {environment} from '@environments/environment';
-import {forkJoin} from 'rxjs';
-import {CountdownComponent} from 'ngx-countdown';
+  Stats, Rewards, PoolUsdOut, PoolTslaOut,
+} from '@interfaces/Dex'
+import { Wallet, WalletDto } from '@interfaces/Data';
+import { environment } from '@environments/environment';
+import { forkJoin } from 'rxjs';
+import { CountdownComponent } from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
-import {TranslateService} from '@ngx-translate/core';
-import {IncomeComponent} from '@components/income/income.component';
-import {ValueComponent} from '@components/value/value.component';
-import {MatomoInjector, MatomoTracker} from 'ngx-matomo-v9';
-import {Apollo} from 'apollo-angular';
-import {LOGIN, REGISTER, UPDATE} from '@interfaces/Graphql';
-import {DataService} from '@services/data.service';
-import {StakingService} from '@services/staking.service';
-import {Meta} from '@angular/platform-browser';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {ToastrService} from 'ngx-toastr';
-import {SupernodeAccount} from '@interfaces/Supernode';
-import {firstValueFrom} from 'rxjs';
-import {MamonAccountNode} from '@interfaces/Mamon';
+import { TranslateService } from '@ngx-translate/core';
+import { IncomeComponent } from '@components/income/income.component';
+import { ValueComponent } from '@components/value/value.component';
+import { MatomoInjector, MatomoTracker } from 'ngx-matomo-v9';
+import { Apollo } from 'apollo-angular';
+import { LOGIN, REGISTER, UPDATE } from '@interfaces/Graphql';
+import { DataService } from '@services/data.service';
+import { StakingService } from '@services/staking.service';
+import { Meta } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { SupernodeAccount } from '@interfaces/Supernode';
+import { firstValueFrom } from 'rxjs';
+import { MamonAccountNode } from '@interfaces/Mamon';
 import { OceanStats } from '@interfaces/Staking';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('cd', {static: false})
+  @ViewChild('cd', { static: false })
   private countdown: CountdownComponent;
 
   @ViewChild(IncomeComponent)
@@ -74,16 +73,22 @@ export class AppComponent implements OnInit {
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
   dfiProBlockBch = 1;
+  dfiProBlockUsd = 1;
+  dfiProBlockTsla = 10;
   rewards: Stats;
 
   blocktimeInS = 30;
   blocktimeInSSecond = 30;
+  blocktimeFirstLastSecond = 30;
   fiat = 'USD';
   details = 'Staking';
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
 
   priceDFICEX: number;
+
+  pools: Array<Pool>;
+  oceanStats: OceanStats;
 
   // Staking infos
   dfiInStaking = 0;
@@ -126,8 +131,6 @@ export class AppComponent implements OnInit {
   correlationDays = 365;
   correlationDaysKey = 'correlationDaysKey';
 
-  dex: DexInfo;
-
   poolBtc: Pool;
   poolBtcOut: PoolBtcOut = new PoolBtcOut();
   anteilAmPoolBtc: number;
@@ -155,6 +158,14 @@ export class AppComponent implements OnInit {
   poolBch: Pool;
   poolBchOut: PoolBchOut = new PoolBchOut();
   anteilAmPoolBch: number;
+
+  poolUsd: Pool;
+  poolUsdOut: PoolUsdOut = new PoolUsdOut();
+  anteilAmPoolUsd: number;
+
+  poolTsla: Pool;
+  poolTslaOut: PoolTslaOut = new PoolTslaOut();
+  anteilAmPoolTsla: number;
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
@@ -216,7 +227,7 @@ export class AppComponent implements OnInit {
 
   updateDescription(description: string): void {
     this.translate.stream(description).subscribe((res: string) => {
-      this.meta.updateTag({name: 'description', content: res});
+      this.meta.updateTag({ name: 'description', content: res });
     });
   }
 
@@ -413,8 +424,8 @@ export class AppComponent implements OnInit {
         dogeInDogePool: this.wallet.dogeInDogePool,
         dfiInDogePool: this.wallet.dfiInDogePool,
         bchInBchPool: this.wallet.bchInBchPool,
-        dfiInBchPool: this.wallet.dfiInBchPool
-      }
+        dfiInBchPool: this.wallet.dfiInBchPool,
+      },
     }).subscribe((result: any) => {
       if (result?.data?.addUser) {
         this.loggedInAuth = result?.data?.addUser?.key;
@@ -471,8 +482,8 @@ export class AppComponent implements OnInit {
         ltcInLtcPool: this.wallet.ltcInLtcPool,
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
-        dfiInDogePool: this.wallet.dfiInDogePool
-      }
+        dfiInDogePool: this.wallet.dfiInDogePool,
+      },
     }).subscribe((result: any) => {
       if (result?.data?.updateUser) {
         console.log('User Updated!');
@@ -509,8 +520,8 @@ export class AppComponent implements OnInit {
       this.apollo.query({
         query: LOGIN,
         variables: {
-          key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
-        }
+          key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth,
+        },
       }).subscribe((result: any) => {
         if (result?.data?.userByKey) {
           this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
@@ -603,8 +614,8 @@ export class AppComponent implements OnInit {
 
     this.dexService
       .getHealthCheck()
-      .subscribe(ok => {
-          if ('OK' === ok) {
+      .subscribe(response => {
+          if (response.status === 204) {
             this.apiOnline = true;
           }
         },
@@ -623,8 +634,6 @@ export class AppComponent implements OnInit {
 
     try {
       const promiseStats = await this.dexService.getStats().toPromise();
-      const promiseBlocks = await this.dexService.getLastBlocks(
-        this.lastBlocksForCompute === -1 ? 2 : this.lastBlocksForCompute).toPromise();
       this.apiOnline = true;
 
       this.setStats(promiseStats);
@@ -633,19 +642,27 @@ export class AppComponent implements OnInit {
       if (this.lastBlocksForCompute < 0) {
         this.blocktimeInS = 30;
         this.blocktimeInSSecond = 30;
+        this.blocktimeFirstLastSecond = 30;
         return;
       }
 
-      promiseBlocks.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
+      const promiseBlocks = await this.dexService.getLastBlocks(
+        this.lastBlocksForCompute === -1 ? 2 : this.lastBlocksForCompute).toPromise();
+
+      promiseBlocks.data.sort((a, b) => a.time - b.time);
 
       const diffS = new Array<number>();
 
-      for (let i = 0; i < promiseBlocks.length - 2; i++) {
-        const date = new Date(promiseBlocks [i].time);
-        const date2 = new Date(promiseBlocks [i + 1].time);
-        const diff = Math.abs((date.getTime() - date2.getTime()) / 1000);
-        diffS.push(diff);
+      for (let i = 0; i < promiseBlocks.data.length - 2; i++) {
+        const date = promiseBlocks.data[i].time;
+        const date2 = promiseBlocks.data[i + 1].time;
+        diffS.push(Math.abs(date - date2));
       }
+
+      // avg first and last
+      const diff = (promiseBlocks.data[promiseBlocks.data.length - 1].time
+        - promiseBlocks.data[0].time);
+      const avgFirstAndLast = Math.round(diff / promiseBlocks.data.length);
 
       // avg
       const sum = diffS.reduce((previous, current) => current += previous);
@@ -659,6 +676,7 @@ export class AppComponent implements OnInit {
 
       this.blocktimeInS = avg;
       this.blocktimeInSSecond = median;
+      this.blocktimeFirstLastSecond = avgFirstAndLast;
 
 
     } catch (err) {
@@ -677,13 +695,14 @@ export class AppComponent implements OnInit {
     this.rewards.rewards.liquidity = promiseStats?.data?.emission.dex;
     this.rewards.rewards.minter = promiseStats?.data?.emission.masternode;
     this.rewards.rewards.total = promiseStats?.data?.emission.total;
+    this.oceanStats = promiseStats;
   }
 
   loadDex(): void {
     forkJoin([
       this.dexService.getListyieldfarming(),
-      this.dexService.getListpoolpairs()]
-    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
+      this.dexService.getListpoolpairs()],
+    ).subscribe((([dex, poolPairs]: [Array<Pool>, DexPoolPair]) => {
           this.parsePoolsAndComputeOutcome(dex, poolPairs);
 
         }
@@ -700,8 +719,8 @@ export class AppComponent implements OnInit {
 
   }
 
-  private parsePoolsAndComputeOutcome(dex: DexInfo, poolPairs: DexPoolPair): void {
-    this.extractPools(dex);
+  private parsePoolsAndComputeOutcome(pools: Array<Pool> , poolPairs: DexPoolPair): void {
+    this.extractPools(pools);
 
     // compute correct price of dfi
     this.priceDFICEX = this.poolBtc.priceB;
@@ -710,30 +729,48 @@ export class AppComponent implements OnInit {
     this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
     this.poolBtc.customRewards = poolPairs['5'].customRewards;
     this.poolBtc.rewardPct = poolPairs['5'].rewardPct;
+    this.poolBtc.totalLiquidityUsd = poolPairs['5'].totalLiquidityUsd;
 
     this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
     this.poolEth.customRewards = poolPairs['4'].customRewards;
     this.poolEth.rewardPct = poolPairs['4'].rewardPct;
+    this.poolEth.totalLiquidityUsd = poolPairs['4'].totalLiquidityUsd;
 
     this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
     this.poolUsdt.customRewards = poolPairs['6'].customRewards;
     this.poolUsdt.rewardPct = poolPairs['6'].rewardPct;
+    this.poolUsdt.totalLiquidityUsd = poolPairs['6'].totalLiquidityUsd;
 
     this.poolUsdc.totalLiquidityLpToken = poolPairs['14'].totalLiquidity;
     this.poolUsdc.customRewards = poolPairs['14'].customRewards;
     this.poolUsdc.rewardPct = poolPairs['14'].rewardPct;
+    this.poolUsdc.totalLiquidityUsd = poolPairs['14'].totalLiquidityUsd;
 
     this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
     this.poolLtc.customRewards = poolPairs['10'].customRewards;
     this.poolLtc.rewardPct = poolPairs['10'].rewardPct;
+    this.poolLtc.totalLiquidityUsd = poolPairs['10'].totalLiquidityUsd;
 
     this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
     this.poolDoge.customRewards = poolPairs['8'].customRewards;
     this.poolDoge.rewardPct = poolPairs['8'].rewardPct;
+    this.poolDoge.totalLiquidityUsd = poolPairs['8'].totalLiquidityUsd;
 
     this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
     this.poolBch.customRewards = poolPairs['12'].customRewards;
     this.poolBch.rewardPct = poolPairs['12'].rewardPct;
+    this.poolBch.totalLiquidityUsd = poolPairs['12'].totalLiquidityUsd;
+
+    this.poolUsd.totalLiquidityLpToken = poolPairs['17'].totalLiquidity;
+    this.poolUsd.customRewards = poolPairs['17'].customRewards;
+    this.poolUsd.rewardPct = poolPairs['17'].rewardPct;
+    this.poolUsd.totalLiquidityUsd = poolPairs['17'].totalLiquidityUsd;
+
+    this.poolTsla.totalLiquidityLpToken = poolPairs['18'].totalLiquidity;
+    this.poolTsla.customRewards = poolPairs['18'].customRewards;
+    this.poolTsla.rewardPct = poolPairs['18'].rewardPct;
+    this.poolTsla.totalLiquidityUsd = poolPairs['18'].totalLiquidityUsd;
+
 
     this.computeRewardsPerBlockInPools();
 
@@ -744,6 +781,8 @@ export class AppComponent implements OnInit {
     this.berechnePoolOutUsdt();
     this.berechnePoolOutUsdc();
     this.berechnePoolOutDoge();
+    this.berechnePoolOutUsd();
+    this.berechnePoolOutTsla();
 
     this.berechneStakingOut();
     this.berechneMNOut();
@@ -757,15 +796,17 @@ export class AppComponent implements OnInit {
     this.spinner.hide();
   }
 
-  private extractPools(dex: DexInfo): void {
-    this.dex = dex;
-    this.poolBtc = dex.pools.find(x => x.poolPairId === '5');
-    this.poolEth = dex.pools.find(x => x.poolPairId === '4');
-    this.poolUsdt = dex.pools.find(x => x.poolPairId === '6');
-    this.poolUsdc = dex.pools.find(x => x.poolPairId === '14');
-    this.poolLtc = dex.pools.find(x => x.poolPairId === '10');
-    this.poolDoge = dex.pools.find(x => x.poolPairId === '8');
-    this.poolBch = dex.pools.find(x => x.poolPairId === '12');
+  private extractPools(pools: Array<Pool>): void {
+    this.pools = pools;
+    this.poolBtc = pools.find(x => x.poolPairId === '5');
+    this.poolEth = pools.find(x => x.poolPairId === '4');
+    this.poolUsdt = pools.find(x => x.poolPairId === '6');
+    this.poolUsdc = pools.find(x => x.poolPairId === '14');
+    this.poolLtc = pools.find(x => x.poolPairId === '10');
+    this.poolDoge = pools.find(x => x.poolPairId === '8');
+    this.poolBch = pools.find(x => x.poolPairId === '12');
+    this.poolUsd = pools.find(x => x.poolPairId === '17');
+    this.poolTsla = pools.find(x => x.poolPairId === '18');
   }
 
   private computeRewardsPerBlockInPools(): void {
@@ -791,6 +832,9 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
+    this.dfiProBlockUsd = this.poolUsd.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd.customRewards);
+
   }
 
   private getCustomRewards(rewards: string []): number {
@@ -810,8 +854,8 @@ export class AppComponent implements OnInit {
   loadDexManual(): void {
     forkJoin([
       this.dexService.getListyieldfarming(),
-      this.dexService.getListpoolpairs()]
-    ).subscribe((([dex, poolPairs]: [DexInfo, DexPoolPair]) => {
+      this.dexService.getListpoolpairs()],
+    ).subscribe((([dex, poolPairs]: [Array<Pool>, DexPoolPair]) => {
           this.parsePoolsAndComputeOutcome(dex, poolPairs);
         }
       ),
@@ -1054,7 +1098,7 @@ export class AppComponent implements OnInit {
   }
 
   getPool(id: string): Pool {
-    return this.dex.pools.find(x => x.poolPairId === id);
+    return this.pools.find(x => x.poolPairId === id);
   }
 
   berechnePoolOutBtc(): void {
@@ -1084,6 +1128,15 @@ export class AppComponent implements OnInit {
   berechnePoolOutBch(): void {
     this.berechnePool('BCH', this.poolBch, this.poolBchOut, this.dfiProBlockBch);
   }
+
+  berechnePoolOutUsd(): void {
+    this.berechnePool('USD', this.poolUsd, this.poolUsdOut, this.dfiProBlockUsd);
+  }
+
+  berechnePoolOutTsla(): void {
+    this.berechnePool('TSLA', this.poolTsla, this.poolTslaOut, this.dfiProBlockTsla);
+  }
+
 
   private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
 
@@ -1156,6 +1209,29 @@ export class AppComponent implements OnInit {
       } else {
         this.anteilAmPoolBch =
           this.berechneAnteilAmPoolManuel(this.wallet.bchInBchPool, this.wallet.dfiInBchPool, pool, outcome, dfiProBlock);
+      }
+
+    }
+    if (poolName === 'USD') {
+      if (this.autoLoadData) {
+        this.anteilAmPoolUsd = this.berechneAnteilAmPool(this.wallet.usddfi, pool, outcome, dfiProBlock);
+        this.wallet.usdInUsdPool = this.anteilAmPoolUsd * +pool.reserveA / 100;
+        this.wallet.dfiInUsdPool = this.anteilAmPoolUsd * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolUsd =
+          this.berechneAnteilAmPoolManuel(this.wallet.usdInUsdPool, this.wallet.dfiInUsdPool, pool, outcome, dfiProBlock);
+      }
+
+    }
+
+    if (poolName === 'TSLA') {
+      if (this.autoLoadData) {
+        this.anteilAmPoolTsla = this.berechneAnteilAmPool(this.wallet.tsladfi, pool, outcome, dfiProBlock);
+        this.wallet.tslaInTslaPool = this.anteilAmPoolTsla * +pool.reserveA / 100;
+        this.wallet.usdInTslaPool = this.anteilAmPoolTsla * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolTsla =
+          this.berechneAnteilAmPoolManuel(this.wallet.tslaInTslaPool, this.wallet.usdInTslaPool, pool, outcome, dfiProBlock);
       }
 
     }
@@ -2146,7 +2222,7 @@ export class AppComponent implements OnInit {
     const dfiEthPart = this.poolEthOut?.dfiPerYear / allIncome * 100;
     const dfiUsdcPart = this.poolUsdcOut?.dfiPerYear / allIncome * 100;
     const dfiUsdtPart = this.poolUsdtOut?.dfiPerYear / allIncome * 100;
-    const dfiDogePart = this.poolDogeOut?.dfiPerYear  / allIncome * 100;
+    const dfiDogePart = this.poolDogeOut?.dfiPerYear / allIncome * 100;
     const dfiBchPart = this.poolBchOut?.dfiPerYear / allIncome * 100;
     const dfiLtcPart = this.poolLtcOut?.dfiPerYear / allIncome * 100;
     const stakingPart = this.stakingOut?.dfiPerYear / allIncome * 100;
@@ -2162,8 +2238,8 @@ export class AppComponent implements OnInit {
     const ltcApr = dfiLtcPart * this.poolLtc?.apy;
     const stakingApr = stakingPart * this.stakingApyMN * 0.85;
     const normalMnApr = rewardNormaleMnPart * this.stakingApyMN;
-    const fiveFreezerMnApr = reward5MnPart  * this.stakingApyMN * 1.5;
-    const tenFreezerMnApr = reward10MnPart  * this.stakingApyMN * 2;
+    const fiveFreezerMnApr = reward5MnPart * this.stakingApyMN * 1.5;
+    const tenFreezerMnApr = reward10MnPart * this.stakingApyMN * 2;
 
     // compute average
     const average = (btcApr + ethApr + usdcApr + bchApr + dogeApr + usdtApr + ltcApr + stakingApr + normalMnApr + fiveFreezerMnApr

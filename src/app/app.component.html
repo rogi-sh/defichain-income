@@ -879,7 +879,7 @@
               <div class="overflow-x-auto sm:overflow-visible max-w-full">
                 <app-dex-statistics
                   [fiat]="fiat"
-                  [dex]="dex"
+                  [oceanStats]="oceanStats"
                   [poolBtc]="poolBtc"
                   [poolEth]="poolEth"
                   [poolUsdt]="poolUsdt"
@@ -887,6 +887,8 @@
                   [poolLtc]="poolLtc"
                   [poolDoge]="poolDoge"
                   [poolBch]="poolBch"
+                  [poolUsd]='poolUsd'
+                  [poolTsla]='poolTsla'
                   [stakingApyCake]="stakingApyCake"
                   [stakingApyMN]="stakingApyMN"
                   [MNCount]="masternodeCount"
@@ -1036,20 +1038,12 @@
                       <select class="border dark:border-none bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
                        dark:text-gray-100 mb-2" (change)="onChangeLastBlocksForCalc($event.target.value)">
                         <option [selected]="lastBlocksForCompute === -1" value="-1">Fix 30s</option>
-                        <option [selected]="lastBlocksForCompute === 100" value="100">100</option>
-                        <option [selected]="lastBlocksForCompute === 500" value="500">500</option>
-                        <option [selected]="lastBlocksForCompute === 1000" value="1000">1000</option>
-                        <option [selected]="lastBlocksForCompute === 2000" value="2000">2000</option>
-                        <option [selected]="lastBlocksForCompute === 3000" value="3000">3000</option>
-                        <option [selected]="lastBlocksForCompute === 4000" value="4000">4000</option>
-                        <option [selected]="lastBlocksForCompute === 6000" value="6000">6000</option>
-                        <option [selected]="lastBlocksForCompute === 10000" value="10000">10000</option>
-                        <option [selected]="lastBlocksForCompute === 20000" value="20000">20000</option>
+                        <option [selected]="lastBlocksForCompute === 100" value="200">200</option>
                       </select>
 
                     </div>
                     <div *ngIf="lastBlocksForCompute > -1" class="dark:text-gray-100">
-                      Avg {{blocktimeInS}} s (Median {{ blocktimeInSSecond }} s)
+                      Avg {{blocktimeInS}} s, (Avg First/Last {{blocktimeFirstLastSecond}} s, Median {{ blocktimeInSSecond }} s)
                     </div>
                     <br>
                     <div class="dark:text-gray-100">
@@ -2139,7 +2133,7 @@
                 <div class="lg:col-span-2 overflow-x-auto">
                   <app-dex-statistics
                     [fiat]="fiat"
-                    [dex]="dex"
+                    [oceanStats]="oceanStats"
                     [poolBtc]="poolBtc"
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
@@ -2147,6 +2141,8 @@
                     [poolLtc]="poolLtc"
                     [poolDoge]="poolDoge"
                     [poolBch]="poolBch"
+                    [poolUsd]='poolUsd'
+                    [poolTsla]='poolTsla'
                     [stakingApyCake]="stakingApyCake"
                     [stakingApyMN]="stakingApyMN"
                     [MNCount]="masternodeCount"

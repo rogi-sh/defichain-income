@@ -1,8 +1,3 @@
-export interface DexInfo {
-  pools: Pool [];
-  tvl: number;
-  provider_logo: string;
-}
 
 export interface DexPoolPair {
   '4': Pool;
@@ -12,6 +7,8 @@ export interface DexPoolPair {
   '10': Pool;
   '12': Pool;
   '14': Pool;
+  '17': Pool;
+  '18': Pool;
 }
 
 
@@ -39,6 +36,10 @@ export interface Pool {
   priceB: number;
   totalLiquidityLpToken: number;
   totalLiquidity: number;
+  totalLiquidityUsd: number;
+  commission: number;
+  reserveADivReserveB: number;
+  reserveBDivReserveA: number;
 }
 
 export class Stats {
@@ -114,6 +115,10 @@ export class PoolLtcOut extends Outcome {}
 
 export class PoolDogeOut extends Outcome {}
 
+export class PoolUsdOut extends Outcome {}
+
+export class PoolTslaOut extends Outcome {}
+
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}
@@ -129,6 +134,8 @@ export class Correlation {
   bchPool: number;
   usdtPool: number;
   usdcPool: number;
+  usdPool: number;
+  tslaPool: number;
 
   btcPricesDex: [number];
   ethPricesDex: [number];
@@ -137,5 +144,7 @@ export class Correlation {
   bchPricesDex: [number];
   usdtPricesDex: [number];
   usdcPricesDex: [number];
+  usdPricesDex: [number];
+  tslaPricesDex: [number];
   dfiPricesDex: [number];
 }
