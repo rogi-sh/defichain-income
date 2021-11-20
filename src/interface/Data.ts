@@ -18,10 +18,14 @@ export class Data {
   value: number;
 }
 
+export class Blocks {
+  data: Array<Block>;
+}
+
 export class Block {
   hash: string;
   height: number;
-  time: Date;
+  time: number;
 
 }
 
@@ -155,6 +159,8 @@ export class Wallet {
   dogedfi = 0;
   usdtdfi = 0;
   usdcdfi = 0;
+  usddfi = 0;
+  tsladfi = 0;
 
   // User Infos
   // BTC Pool
@@ -212,6 +218,22 @@ export class Wallet {
   bchKey = 'bchKey';
   dfiInBchPoolKey = 'dfiInBchPoolKey';
   dfiInBchPool = 0;
+
+  // USD Pool
+  usdInUsdPool = 0;
+  usdInUsdPoolKey = 'usdInUsdPoolKey';
+  usd = 0;
+  usdKey = 'usdKey';
+  dfiInUsdPoolKey = 'dfiInUsdPoolKey';
+  dfiInUsdPool = 0;
+
+  // TSLA Pool
+  tslaInTslaPool = 0;
+  tslaInTslaPoolKey = 'tslaInTslaPoolKey';
+  tsla = 0;
+  tslaKey = 'tslaKey';
+  usdInTslaPoolKey = 'usdInTslaPoolKey';
+  usdInTslaPool = 0;
 
 }
 

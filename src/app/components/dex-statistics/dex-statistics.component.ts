@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
-import {Correlation, DexInfo, Pool, Stats} from '@interfaces/Dex';
+import { Component, Input, OnInit } from '@angular/core';
+import {Correlation, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
+import { OceanStats } from '@interfaces/Staking'
 
 @Component({
   selector: 'app-dex-statistics',
@@ -14,7 +15,7 @@ export class DexStatisticsComponent implements OnInit {
   fiat: string;
 
   @Input()
-  dex: DexInfo;
+  oceanStats: OceanStats;
 
   @Input()
   poolBtc: Pool;
@@ -36,6 +37,12 @@ export class DexStatisticsComponent implements OnInit {
 
   @Input()
   poolBch: Pool;
+
+  @Input()
+  poolUsd: Pool;
+
+  @Input()
+  poolTsla: Pool;
 
   @Input()
   stakingApyMN: number;
@@ -221,14 +228,6 @@ export class DexStatisticsComponent implements OnInit {
     const blocks = 1008 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 1008;
     const time = blocks * this.blockTimeUsed / 60 / 60;
     return String(blocks) + ' ~ ' + Math.round(time) + ' h';
-  }
-
-  getMasternodeTVL(): number {
-    return this.MNCount * 20000 * this.poolUsdc?.priceB;
-  }
-
-  getTotalTVL(): number {
-    return this.dex?.tvl + this.getMasternodeTVL();
   }
 
   getDexDFI(): number {

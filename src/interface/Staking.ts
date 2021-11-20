@@ -16,6 +16,13 @@ export class StatsData {
   masternodes: Masternodes;
   burned: Burned;
   emission: Emisssion;
+  tvl: Tvl;
+}
+
+export class Tvl {
+  total: number;
+  dex: number;
+  masternodes: number;
 }
 
 export class Burned {

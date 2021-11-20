@@ -131,7 +131,7 @@ export const LOGIN = gql`
 export const CORRELATION = gql`
   query ($days: Int){
     getCorrelation(days: $days) {
-      btcPool, ethPool, ltcPool, dogePool, bchPool, dogePool, usdtPool, usdcPool
+      btcPool, ethPool, ltcPool, dogePool, bchPool, dogePool, usdtPool, usdcPool, usdPool, tslaPool
     }
   }
 `;
