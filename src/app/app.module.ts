@@ -35,7 +35,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: 'adress/:adress', component: AppComponent },
+  { path: 'address/:address', component: AppComponent },
   { path: '', component: AppComponent
   }
 ];

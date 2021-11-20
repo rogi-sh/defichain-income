@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.23.2 - 20.11.2021';
+    this.log.comment = 'Adress over url, fix typo';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.23.1 - 20.11.2021';
     this.log.comment = 'Ocean stats endpoint without version';
     this.logs.push(this.log);

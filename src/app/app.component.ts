@@ -209,7 +209,7 @@ export class AppComponent implements OnInit {
   cakeApyLoadAutoKey = 'cakeApyLoadAutoKey';
   timestamp = null;
 
-  oneTrackingAdress = null;
+  oneTrackingAddress = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
@@ -249,10 +249,10 @@ export class AppComponent implements OnInit {
 
       // only one adress calculation
       const url = this.router.url;
-      const match = 'adress/';
+      const match = 'address/';
       if (url.toLowerCase().indexOf(match) >= 0) {
         const index = url.toLowerCase().indexOf(match);
-        this.oneTrackingAdress = url.slice(index + match.length, url.length);
+        this.oneTrackingAddress = url.slice(index + match.length, url.length);
       }
 
       this.loadData();
@@ -293,7 +293,7 @@ export class AppComponent implements OnInit {
     this.loadStackingMasternode();
 
     // only one adress over url
-    if (this.oneTrackingAdress) {
+    if (this.oneTrackingAddress) {
       this.loadDataFromServerForOneAdress();
     }
     else if (this.loggedIn) {
@@ -538,7 +538,7 @@ export class AppComponent implements OnInit {
         this.loggedIn = true;
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
 
-        this.addressesDto = new Array(this.oneTrackingAdress);
+        this.addressesDto = new Array(this.oneTrackingAddress);
         this.adresses = this.addressesDto.slice();
 
         this.loadAddressesAndDexData();
