@@ -146,7 +146,7 @@
     "ora" "5.4.1"
     "rxjs" "6.6.7"
 
-"@angular/animations@^12.0.0 || ^13.0.0-0", "@angular/animations@^12.2.4fs", "@angular/animations@12.2.4":
+"@angular/animations@^12.0.0 || ^13.0.0-0", "@angular/animations@^12.2.4", "@angular/animations@12.2.4":
   "integrity" "sha512-UpTddGkftkW/vOhF19Z6lbtvhUX+LpMw+1qC2miM65XNrOWBe5bojX9/9pwGd1CpP189aRFHl933YLCgVxGKPA=="
   "resolved" "https://registry.npmjs.org/@angular/animations/-/animations-12.2.4.tgz"
   "version" "12.2.4"
