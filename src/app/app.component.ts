@@ -543,6 +543,8 @@ export class AppComponent implements OnInit {
 
         this.loadAddressesAndDexData();
 
+        this.handlePage('dashboard');
+
         this.successBackend = 'Data Loaded!';
         setInterval(() => {
           this.successBackend = null;
