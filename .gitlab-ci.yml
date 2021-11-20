@@ -24,7 +24,7 @@ build:
   script:
     - rm ./package-lock.json
     #- npx npm-force-resolutions
-    - npm install
+    - npm install --force
     - ./node_modules/@angular/cli/bin/ng build --aot --vendor-chunk --common-chunk --delete-output-path --build-optimizer --prod
 
 # build docker image
