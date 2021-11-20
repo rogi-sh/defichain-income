@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.23.0 - 20.11.2021';
+    this.log.comment = 'Add tracking of one adress without login over url ex. defichain-income/adress/your-adress';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.22.4 - 19.11.2021';
     this.log.comment = 'Api completly moved to saiive or ocean, limit blocks for blocktime to 200, add usd and tsla pool in dex view';
     this.logs.push(this.log);

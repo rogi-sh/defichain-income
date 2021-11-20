@@ -17,10 +17,10 @@ import {
   PoolUsdtOut,
   PoolUsdcOut,
   Stats, Rewards, PoolUsdOut, PoolTslaOut,
-} from '@interfaces/Dex'
+} from '@interfaces/Dex';
 import { Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
-import { forkJoin } from 'rxjs';
+import { filter, forkJoin } from 'rxjs';
 import { CountdownComponent } from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
@@ -39,6 +39,7 @@ import { SupernodeAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
 import { OceanStats } from '@interfaces/Staking';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -208,10 +209,12 @@ export class AppComponent implements OnInit {
   cakeApyLoadAutoKey = 'cakeApyLoadAutoKey';
   timestamp = null;
 
+  oneTrackingAdress = null;
+
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
@@ -242,21 +245,33 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.loadData();
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
 
-    this.toggleDarkMode();
-    this.handlePageHeight();
+      // only one adress calculation
+      const url = this.router.url;
+      const match = 'adress/';
+      if (url.toLowerCase().indexOf(match) >= 0) {
+        const index = url.toLowerCase().indexOf(match);
+        this.oneTrackingAdress = url.slice(index + match.length, url.length);
+      }
 
-    if (
-      localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      this.isDarkModeOn = true;
-    }
+      this.loadData();
+
+      this.toggleDarkMode();
+      this.handlePageHeight();
+
+      if (
+        localStorage.getItem('theme') === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        this.isDarkModeOn = true;
+      }
+    });
 
   }
 
   async loadData(): Promise<void> {
+
     this.spinner.show();
 
     setTimeout(() => {
@@ -277,7 +292,11 @@ export class AppComponent implements OnInit {
     this.loadStackingCake();
     this.loadStackingMasternode();
 
-    if (this.loggedIn) {
+    // only one adress over url
+    if (this.oneTrackingAdress) {
+      this.loadDataFromServerForOneAdress();
+    }
+    else if (this.loggedIn) {
       this.loadDataFromServerAndLoadAllStuff();
     } else {
       this.loadAddressesAndDexData();
@@ -513,6 +532,22 @@ export class AppComponent implements OnInit {
 
   toggleMenu(): void {
     this.menu = !this.menu;
+  }
+
+  loadDataFromServerForOneAdress(): void {
+        this.loggedIn = true;
+        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+
+        this.addressesDto = new Array(this.oneTrackingAdress);
+        this.adresses = this.addressesDto.slice();
+
+        this.loadAddressesAndDexData();
+
+        this.successBackend = 'Data Loaded!';
+        setInterval(() => {
+          this.successBackend = null;
+        }, 5000);
+
   }
 
   loadDataFromServerAndLoadAllStuff(): void {
@@ -1535,40 +1570,41 @@ export class AppComponent implements OnInit {
   }
 
   getBtcValueUsd(): number {
-    return (this.wallet.btcInBtcPool + this.wallet.btc) * this.poolBtc?.priceA;
+    return (this.wallet?.btcInBtcPool + this.wallet?.btc) * this.poolBtc?.priceA;
   }
 
   getEthValueUsd(): number {
-    return (this.wallet.ethInEthPool + this.wallet.eth) * this.poolEth?.priceA;
+    return (this.wallet?.ethInEthPool + this.wallet?.eth) * this.poolEth?.priceA;
   }
 
   getUsdtValueUsd(): number {
-    return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
+    return (this.wallet?.usdtInUsdtPool + this.wallet?.usdt) * this.poolUsdt?.priceA;
   }
 
   /*
    * USDC Price from usdt pool because not in usdc pool
    */
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdc?.priceA;
+    return (this.wallet?.usdcInUsdcPool + this.wallet?.usdc) * this.poolUsdc?.priceA;
   }
 
 
   getLtcValueUsd(): number {
-    return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.poolLtc?.priceA;
+    return (this.wallet?.ltcInLtcPool + this.wallet?.ltc) * this.poolLtc?.priceA;
   }
 
   getDogeValueUsd(): number {
-    return (this.wallet.dogeInDogePool + this.wallet.doge) * this.poolDoge?.priceA;
+    return (this.wallet?.dogeInDogePool + this.wallet?.doge) * this.poolDoge?.priceA;
   }
 
   getBchValueUsd(): number {
-    return (this.wallet.bchInBchPool + this.wallet.bch) * this.poolBch?.priceA;
+    return (this.wallet?.bchInBchPool + this.wallet?.bch) * this.poolBch?.priceA;
   }
 
   getDfiCount(): number {
-    return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
-      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.dfiInStaking + this.wallet.dfiInMasternodes;
+    return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
+      + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool
+      + this.wallet?.dfiInBchPool + this.dfiInStaking + this.wallet?.dfiInMasternodes;
   }
 
   getDfiCountLM(): number {

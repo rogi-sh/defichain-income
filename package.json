@@ -21,6 +21,7 @@
     "@angular/material": "^13.0.2",
     "@angular/platform-browser": "~13.0.2",
     "@angular/platform-browser-dynamic": "~13.0.2",
+    "@angular/router": "^13.0.2",
     "@angular/service-worker": "^13.0.2",
     "@apollo/client": "^3.4.17",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
@@ -29,6 +30,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "@octokit/rest": "^18.12.0",
     "@tailwindcss/typography": "^0.4.1",
+    "ajv": "^6.12.5",
     "apexcharts": "3.30.0",
     "apollo-angular": "^2.6.0",
     "autoprefixer": "^10.4.0",
@@ -43,8 +45,7 @@
     "postcss": "^8.3.11",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.1",
-    "zone.js": "~0.11.4",
-    "ajv": "^6.12.5"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^13.0.0",

@@ -260,6 +260,13 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"@angular/router@^13.0.2":
+  "integrity" "sha512-AfmT845dcYPvNbUdV2ALlf++szZP3ie2d0eu7JyGWe3anV1fbDcg76RhjxFK8yVUxryrCQtEnot1VEEVlhGkyw=="
+  "resolved" "https://registry.npmjs.org/@angular/router/-/router-13.0.2.tgz"
+  "version" "13.0.2"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "@angular/service-worker@^13.0.0", "@angular/service-worker@^13.0.2":
   "integrity" "sha512-cH5adbvwI+cr6qKVdvNfQ5B0I//3NJwXkP04ifllPUIw7Te1pUfVb8eIN8UI/80aqG0uu/uIes7QoovSIayqOA=="
   "resolved" "https://registry.npmjs.org/@angular/service-worker/-/service-worker-13.0.2.tgz"

@@ -32,6 +32,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'adress/:adress', component: AppComponent },
+  { path: '', component: AppComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -52,6 +59,10 @@ import { MarkdownModule } from 'ngx-markdown';
     ForecastComponent,
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false } // <-- debugging purposes only
+    ),
     MarkdownModule.forRoot(),
     BrowserModule,
     HttpClientModule,
