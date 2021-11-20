@@ -12,6 +12,26 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.22.3 - 16.11.2021';
+    this.log.comment = 'Stats endpoint version update';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '7.22.2 - 15.11.2021';
+    this.log.comment = 'Stats endpoint moved to ocean';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '7.22.1 - 14.11.2021';
+    this.log.comment = 'Stats Endpoint version update';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '7.22.0 - 7.11.2021';
+    this.log.comment = 'Select the number of days for the calculation of the correlation in settings';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.21.0 - 5.11.2021';
     this.log.comment = 'Add prices in holdings view for holdings and lp tokens, add DFI as official currency';
     this.logs.push(this.log);

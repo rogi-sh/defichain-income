@@ -27,6 +27,7 @@
   "price": "Preis",
   "currency": "Währung",
   "correlation": "Korrelation",
+  "correlationDay": "Tage",
   "since": "seit dem ",
   "login": "Login",
   "register": "Registrieren",
@@ -116,6 +117,7 @@
   "blocktime": "{{ count }} Blöcke",
   "blocktimeHeadline": "Letzte Blöcke für die Berechnung der Blockzeit",
   "blocksTillCycle": "Blöcke bis zum nächsten Zyklus (Belohnungen verringern sich um 1,658%)",
+  "correlationDays": "Gib ein wie viele Tage für die Berechnung der Korrelation der Pool Paare im LM",
   "blocksTillDiff": "Blöcke bis zur nächsten Schwierigkeitsänderung",
   "mamon-info": "Importiere deine Masternodes aus dem Masternode Monitor mit deinem Key"
 

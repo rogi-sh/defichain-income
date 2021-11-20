@@ -26,6 +26,7 @@
   "price": "Prix",
   "currency": "Devise",
   "correlation": "Corrélation",
+  "correlationDay": "Jours",
   "since": "depuis lors",
   "save": "Sauvegarder",
   "login": "Connexion",
@@ -114,6 +115,7 @@
   "copy": "Copier dans le presse-papier",
   "blocktime": "les {{ count }} derniers blocs",
   "blocktimeHeadline": "Derniers blocs pour le calcul du temps de bloc",
+  "correlationDays": "Indiquez combien de jours sont nécessaires pour calculer la corrélation des paires de piscines dans le LM.",
   "blocksTillCycle": "Blocs jusqu'au prochain cycle (diminution des récompenses de 1,658%)",
   "blocksTillDiff": "Blocs jusqu'au prochain changement de difficulté",
   "mamon-info": "Importez vos Masternodes depuis Masternode Monitor avec Auth Key"

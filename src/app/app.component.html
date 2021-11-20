@@ -1052,6 +1052,24 @@
                     <div *ngIf="lastBlocksForCompute > -1" class="dark:text-gray-100">
                       Avg {{blocktimeInS}} s (Median {{ blocktimeInSSecond }} s)
                     </div>
+                    <br>
+                    <div class="dark:text-gray-100">
+                      {{ 'correlationDays' | translate }}
+                    </div>
+                    <div class="flex">
+                      <select class="border dark:border-none bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
+                       dark:text-gray-100 mb-2" (change)="onChangeCorrelationForCalc($event.target.value)">
+                        <option [selected]="correlationDays === 30" value="30">30</option>
+                        <option [selected]="correlationDays === 60" value="60">60</option>
+                        <option [selected]="correlationDays === 90" value="90">90</option>
+                        <option [selected]="correlationDays === 120" value="120">120</option>
+                        <option [selected]="correlationDays === 180" value="180">180</option>
+                        <option [selected]="correlationDays === 270" value="270">270</option>
+                        <option [selected]="correlationDays === 360" value="360">360</option>
+                        <option [selected]="correlationDays === 540" value="540">540</option>
+                      </select>
+
+                    </div>
 
                   </div>
                   <div class="dark:text-gray-100 dark:bg-gray-600 rounded p-2 bg-gray-100 relative">
@@ -2142,6 +2160,7 @@
                     [blockTimeSecond]="blocktimeInSSecond"
                     [blockCountForCalc]="lastBlocksForCompute"
                     [isIncognitoModeOn]="isIncognitoModeOn"
+                    [correlationDays]='correlationDays'
                   >
                   </app-dex-statistics>
                 </div>

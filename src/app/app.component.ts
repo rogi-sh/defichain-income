@@ -17,7 +17,7 @@ import {
   PoolPair,
   PoolUsdtOut,
   PoolUsdcOut,
-  Stats
+  Stats, Rewards,
 } from '@interfaces/Dex';
 import {Balance, Wallet, WalletDto} from '@interfaces/Data';
 import {environment} from '@environments/environment';
@@ -40,6 +40,7 @@ import {SupernodeAccount} from '@interfaces/Supernode';
 import {firstValueFrom} from 'rxjs';
 import {MamonAccountNode} from '@interfaces/Mamon';
 import {ActivatedRoute, Router} from '@angular/router';
+import { OceanStats } from '@interfaces/Staking';
 
 @Component({
   selector: 'app-root',
@@ -122,6 +123,9 @@ export class AppComponent implements OnInit {
   masternodeFreezer10 = false;
   mamonKey: string;
   avgApr = 0;
+
+  correlationDays = 365;
+  correlationDaysKey = 'correlationDaysKey';
 
   dex: DexInfo;
 
@@ -353,6 +357,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.cakeApyLoadAutoKey) !== null) {
       this.cakeApyLoadAuto = JSON.parse(localStorage.getItem(this.cakeApyLoadAutoKey));
+    }
+    if (localStorage.getItem(this.correlationDaysKey) !== null) {
+      this.correlationDays = JSON.parse(localStorage.getItem(this.correlationDaysKey));
     }
 
   }
@@ -629,8 +636,7 @@ export class AppComponent implements OnInit {
         this.lastBlocksForCompute === -1 ? 2 : this.lastBlocksForCompute).toPromise();
       this.apiOnline = true;
 
-      this.rewards = promiseStats;
-      this.rewards.blockHeight = promiseBlocks [0].height;
+      this.setStats(promiseStats);
 
       // if fixed blocktime to 30 s
       if (this.lastBlocksForCompute < 0) {
@@ -669,6 +675,17 @@ export class AppComponent implements OnInit {
       this.apiOnline = false;
     }
 
+  }
+
+  private setStats(promiseStats: OceanStats): void {
+    this.rewards = new Stats();
+    this.rewards.blockHeight = promiseStats?.data?.count?.blocks;
+    this.rewards.rewards = new Rewards();
+    this.rewards.rewards.community = promiseStats?.data?.emission?.community;
+    this.rewards.rewards.anchor = promiseStats?.data?.emission.anchor;
+    this.rewards.rewards.liquidity = promiseStats?.data?.emission.dex;
+    this.rewards.rewards.minter = promiseStats?.data?.emission.masternode;
+    this.rewards.rewards.total = promiseStats?.data?.emission.total;
   }
 
   loadDex(): void {
@@ -2107,6 +2124,11 @@ export class AppComponent implements OnInit {
     this.lastBlocksForCompute = +value;
     localStorage.setItem(this.lastBlocksForComputeKey, String(value));
     this.refresh();
+  }
+
+  onChangeCorrelationForCalc(value: number): void {
+    this.correlationDays = +value;
+    localStorage.setItem(this.correlationDaysKey, String(value));
   }
 
   getAPRAverage(): number {
