@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.24.1 - 21.11.2021';
+    this.log.comment = 'fix usd and tsla not over api';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.24.0 - 21.11.2021';
     this.log.comment = 'AuthKey over url: defichain-income.com/authKey/your-key';
     this.logs.push(this.log);

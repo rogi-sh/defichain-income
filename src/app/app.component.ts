@@ -850,16 +850,19 @@ export class AppComponent implements OnInit {
     this.poolBch.rewardPct = poolPairs['12'].rewardPct;
     this.poolBch.totalLiquidityUsd = poolPairs['12'].totalLiquidityUsd;
 
-    this.poolUsd.totalLiquidityLpToken = poolPairs['17'].totalLiquidity;
-    this.poolUsd.customRewards = poolPairs['17'].customRewards;
-    this.poolUsd.rewardPct = poolPairs['17'].rewardPct;
-    this.poolUsd.totalLiquidityUsd = poolPairs['17'].totalLiquidityUsd;
+    if (this.poolUsd) {
+      this.poolUsd.totalLiquidityLpToken = poolPairs['17'].totalLiquidity;
+      this.poolUsd.customRewards = poolPairs['17'].customRewards;
+      this.poolUsd.rewardPct = poolPairs['17'].rewardPct;
+      this.poolUsd.totalLiquidityUsd = poolPairs['17'].totalLiquidityUsd;
+    }
 
-    this.poolTsla.totalLiquidityLpToken = poolPairs['18'].totalLiquidity;
-    this.poolTsla.customRewards = poolPairs['18'].customRewards;
-    this.poolTsla.rewardPct = poolPairs['18'].rewardPct;
-    this.poolTsla.totalLiquidityUsd = poolPairs['18'].totalLiquidityUsd;
-
+    if (this.poolTsla) {
+      this.poolTsla.totalLiquidityLpToken = poolPairs['18'].totalLiquidity;
+      this.poolTsla.customRewards = poolPairs['18'].customRewards;
+      this.poolTsla.rewardPct = poolPairs['18'].rewardPct;
+      this.poolTsla.totalLiquidityUsd = poolPairs['18'].totalLiquidityUsd;
+    }
 
     this.computeRewardsPerBlockInPools();
 
@@ -921,8 +924,11 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
-    this.dfiProBlockUsd = this.poolUsd.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd.customRewards);
+    this.dfiProBlockUsd = this.poolUsd?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd?.customRewards);
+
+    this.dfiProBlockTsla = this.poolTsla?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockTsla += this.getCustomRewards(this.poolTsla?.customRewards);
 
   }
 
@@ -1333,7 +1339,7 @@ export class AppComponent implements OnInit {
   }
 
   private berechneAnteilAmPool(lpToken: number, pool: Pool, outcome: Outcome, dfiProBlock: number): number {
-    const anteilAmPool = lpToken / pool.totalLiquidityLpToken * 100;
+    const anteilAmPool = lpToken / pool?.totalLiquidityLpToken * 100;
     outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
     return anteilAmPool;
   }
