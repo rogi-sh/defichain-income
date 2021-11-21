@@ -815,53 +815,19 @@ export class AppComponent implements OnInit {
     this.priceDFICEX = this.poolBtc.priceB;
     this.poolBtc.priceB = this.poolBtc.priceA / (+this.poolBtc.reserveB / +this.poolBtc.reserveA);
 
-    this.poolBtc.totalLiquidityLpToken = poolPairs['5'].totalLiquidity;
-    this.poolBtc.customRewards = poolPairs['5'].customRewards;
-    this.poolBtc.rewardPct = poolPairs['5'].rewardPct;
-    this.poolBtc.totalLiquidityUsd = poolPairs['5'].totalLiquidityUsd;
-
-    this.poolEth.totalLiquidityLpToken = poolPairs['4'].totalLiquidity;
-    this.poolEth.customRewards = poolPairs['4'].customRewards;
-    this.poolEth.rewardPct = poolPairs['4'].rewardPct;
-    this.poolEth.totalLiquidityUsd = poolPairs['4'].totalLiquidityUsd;
-
-    this.poolUsdt.totalLiquidityLpToken = poolPairs['6'].totalLiquidity;
-    this.poolUsdt.customRewards = poolPairs['6'].customRewards;
-    this.poolUsdt.rewardPct = poolPairs['6'].rewardPct;
-    this.poolUsdt.totalLiquidityUsd = poolPairs['6'].totalLiquidityUsd;
-
-    this.poolUsdc.totalLiquidityLpToken = poolPairs['14'].totalLiquidity;
-    this.poolUsdc.customRewards = poolPairs['14'].customRewards;
-    this.poolUsdc.rewardPct = poolPairs['14'].rewardPct;
-    this.poolUsdc.totalLiquidityUsd = poolPairs['14'].totalLiquidityUsd;
-
-    this.poolLtc.totalLiquidityLpToken = poolPairs['10'].totalLiquidity;
-    this.poolLtc.customRewards = poolPairs['10'].customRewards;
-    this.poolLtc.rewardPct = poolPairs['10'].rewardPct;
-    this.poolLtc.totalLiquidityUsd = poolPairs['10'].totalLiquidityUsd;
-
-    this.poolDoge.totalLiquidityLpToken = poolPairs['8'].totalLiquidity;
-    this.poolDoge.customRewards = poolPairs['8'].customRewards;
-    this.poolDoge.rewardPct = poolPairs['8'].rewardPct;
-    this.poolDoge.totalLiquidityUsd = poolPairs['8'].totalLiquidityUsd;
-
-    this.poolBch.totalLiquidityLpToken = poolPairs['12'].totalLiquidity;
-    this.poolBch.customRewards = poolPairs['12'].customRewards;
-    this.poolBch.rewardPct = poolPairs['12'].rewardPct;
-    this.poolBch.totalLiquidityUsd = poolPairs['12'].totalLiquidityUsd;
-
+    this.setFromPoolPair(this.poolBtc, poolPairs);
+    this.setFromPoolPair(this.poolEth, poolPairs);
+    this.setFromPoolPair(this.poolUsdc, poolPairs);
+    this.setFromPoolPair(this.poolUsdt, poolPairs);
+    this.setFromPoolPair(this.poolLtc, poolPairs);
+    this.setFromPoolPair(this.poolDoge, poolPairs);
+    this.setFromPoolPair(this.poolBch, poolPairs);
     if (this.poolUsd) {
-      this.poolUsd.totalLiquidityLpToken = poolPairs['17'].totalLiquidity;
-      this.poolUsd.customRewards = poolPairs['17'].customRewards;
-      this.poolUsd.rewardPct = poolPairs['17'].rewardPct;
-      this.poolUsd.totalLiquidityUsd = poolPairs['17'].totalLiquidityUsd;
+      this.setFromPoolPair(this.poolUsd, poolPairs);
     }
 
     if (this.poolTsla) {
-      this.poolTsla.totalLiquidityLpToken = poolPairs['18'].totalLiquidity;
-      this.poolTsla.customRewards = poolPairs['18'].customRewards;
-      this.poolTsla.rewardPct = poolPairs['18'].rewardPct;
-      this.poolTsla.totalLiquidityUsd = poolPairs['18'].totalLiquidityUsd;
+      this.setFromPoolPair(this.poolTsla, poolPairs);
     }
 
     this.computeRewardsPerBlockInPools();
@@ -886,6 +852,15 @@ export class AppComponent implements OnInit {
     this.dataLoaded = true;
     this.avgApr = this.getAPRAverage();
     this.spinner.hide();
+  }
+
+  private setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
+    pool.totalLiquidityLpToken = poolPairs[pool.poolPairId].totalLiquidity;
+    pool.customRewards = poolPairs[pool.poolPairId].customRewards;
+    pool.rewardPct = poolPairs[pool.poolPairId].rewardPct;
+    pool.totalLiquidityUsd = poolPairs[pool.poolPairId].totalLiquidityUsd;
+    pool.reserveA = poolPairs[pool.poolPairId].reserveA;
+    pool.reserveB = poolPairs[pool.poolPairId].reserveB;
   }
 
   private extractPools(pools: Array<Pool>): void {
