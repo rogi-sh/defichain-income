@@ -36,6 +36,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
+  { path: 'authKey/:authKey', component: AppComponent },
   { path: '', component: AppComponent
   }
 ];

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.24.0 - 21.11.2021';
+    this.log.comment = 'AuthKey over url: defichain-income.com/authKey/your-key';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.23.2 - 20.11.2021';
     this.log.comment = 'Address over url, fix typo';
     this.logs.push(this.log);
@@ -23,7 +28,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '7.23.0 - 20.11.2021';
-    this.log.comment = 'Add tracking of one adress without login over url ex. defichain-income/adress/your-adress';
+    this.log.comment = 'Add tracking of one adress without login over url: defichain-income.com/address/your-adress';
     this.logs.push(this.log);
 
     this.log = new Log();

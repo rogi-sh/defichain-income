@@ -210,6 +210,7 @@ export class AppComponent implements OnInit {
   timestamp = null;
 
   oneTrackingAddress = null;
+  authKeyOverUrl = null;
 
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
@@ -247,12 +248,19 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
 
-      // only one adress calculation
       const url = this.router.url;
+
+      // only one adress calculation
       const match = 'address/';
       if (url.toLowerCase().indexOf(match) >= 0) {
         const index = url.toLowerCase().indexOf(match);
         this.oneTrackingAddress = url.slice(index + match.length, url.length);
+      }
+      // authKey over url
+      const matchAuthKey = 'authKey/';
+      if (url.indexOf(matchAuthKey) >= 0) {
+        const index = url.indexOf(matchAuthKey);
+        this.authKeyOverUrl = url.slice(index + matchAuthKey.length, url.length);
       }
 
       this.loadData();
@@ -295,8 +303,10 @@ export class AppComponent implements OnInit {
     // only one adress over url
     if (this.oneTrackingAddress) {
       this.loadDataFromServerForOneAdress();
-    }
-    else if (this.loggedIn) {
+    // authKey over url
+    } else if (this.authKeyOverUrl) {
+      this.loadDataFromServerAndLoadAllStuffAuthKeyFromUrl();
+    } else if (this.loggedIn) {
       this.loadDataFromServerAndLoadAllStuff();
     } else {
       this.loadAddressesAndDexData();
@@ -552,6 +562,63 @@ export class AppComponent implements OnInit {
 
   }
 
+  loadDataFromServerAndLoadAllStuffAuthKeyFromUrl(): void {
+      this.apollo.query({
+        query: LOGIN,
+        variables: {
+          key: this.authKeyOverUrl,
+        },
+      }).subscribe((result: any) => {
+        if (result?.data?.userByKey) {
+          this.loggedInAuth = this.authKeyOverUrl;
+          this.loggedIn = true;
+
+          this.parseWallet(result);
+          this.parseAddresses(result);
+          this.loadAddressesAndDexData();
+
+          this.successBackend = 'Data Loaded!';
+          setInterval(() => {
+            this.successBackend = null;
+          }, 5000);
+
+        } else {
+          this.errorBackend = 'No users found';
+          this.logout();
+          setInterval(() => {
+            this.errorBackend = null;
+          }, 5000);
+        }
+      }, (error) => {
+        this.errorBackend = error.message;
+        setInterval(() => {
+          this.errorBackend = null;
+        }, 5000);
+      });
+    }
+
+  private parseAddresses(result: any): void {
+    this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
+    this.adresses = this.addressesDto.slice();
+
+    this.addressesMasternodesDto = new Array(...result?.data?.userByKey?.addressesMasternodes);
+    this.adressesMasternodes = this.addressesMasternodesDto.slice();
+
+    this.adressesMasternodesFreezer5Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer5);
+    this.adressesMasternodesFreezer5 = this.adressesMasternodesFreezer5Dto.slice();
+
+    this.adressesMasternodesFreezer10Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer10);
+    this.adressesMasternodesFreezer10 = this.adressesMasternodesFreezer10Dto.slice();
+  }
+
+  private parseWallet(result: any): void {
+    this.walletDTO = result?.data?.userByKey.wallet;
+    this.dfiInStaking = this.walletDTO.dfiInStaking;
+    if (!this.autoLoadData) {
+      this.wallet = this.copyValues(this.walletDTO);
+    }
+  }
+
   loadDataFromServerAndLoadAllStuff(): void {
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
@@ -564,24 +631,9 @@ export class AppComponent implements OnInit {
           this.loggedInAuth = this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth;
           this.loggedIn = true;
           localStorage.setItem(this.loggedInKey, this.loggedInAuth);
-          this.walletDTO = result?.data?.userByKey.wallet;
-          this.dfiInStaking = this.walletDTO.dfiInStaking;
-          if (!this.autoLoadData) {
-            this.wallet = this.copyValues(this.walletDTO);
-          }
 
-          this.addressesDto = new Array(...result?.data?.userByKey?.addresses);
-          this.adresses = this.addressesDto.slice();
-
-          this.addressesMasternodesDto = new Array(...result?.data?.userByKey?.addressesMasternodes);
-          this.adressesMasternodes = this.addressesMasternodesDto.slice();
-
-          this.adressesMasternodesFreezer5Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer5);
-          this.adressesMasternodesFreezer5 = this.adressesMasternodesFreezer5Dto.slice();
-
-          this.adressesMasternodesFreezer10Dto = new Array(...result?.data?.userByKey?.adressesMasternodesFreezer10);
-          this.adressesMasternodesFreezer10 = this.adressesMasternodesFreezer10Dto.slice();
-
+          this.parseWallet(result);
+          this.parseAddresses(result);
           this.loadAddressesAndDexData();
 
           this.successBackend = 'Data Loaded!';
