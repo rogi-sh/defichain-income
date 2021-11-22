@@ -1785,6 +1785,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  trackCakeRef(): void {
+    this.matomoTracker.trackEvent('Klick', 'Cake Reflink');
+  }
+
   addAdress(): void {
 
     // checkCheckboxes

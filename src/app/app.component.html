@@ -1339,6 +1339,27 @@
 
                       <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded w-full md:w-1/2">
                         <div class="text-lg mb-5">Staking Cake</div>
+                        <div class='grid grid-cols-3 gap-4'>
+                          <div><h3 class='text-2xl mb-2 text-pink-500'>
+                            Staking
+                          </h3>
+                          </div>
+                          <div>
+                            <a href='https://cakedefi.com/?ref=754025' (click)='trackCakeRef()'>
+                              <img alt='CakeDefi'
+                                   src='https://www.cakedefi.com/downloads/press-materials/cake/2line/logo-cakedefi-2line-lockup-rgb.png'>
+                            </a>
+                          </div>
+                          <div>
+                            <button
+                              class='bg-blueCake-600 hover:bg-blueCake-700 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+                              onclick="window.open('https://cakedefi.com/?ref=754025', '_blank');"
+                              (click)='trackCakeRef()'>
+                              Login / SignUp
+                            </button>
+                          </div>
+                        </div>
+                        <br>
                         <div class="flex gap-2 flex-row mb-2">
                           <div class="dark:text-gray-100">
                             Auto APY load from Cake:
@@ -1692,9 +1713,27 @@
 
                     <div *ngIf="autoLoadData" class="flex flex-col lg:flex-row gap-4">
                       <div class="w-full lg:w-1/2 rounded p-2 dark:bg-gray-600 bg-gray-100">
-                        <h3 class="text-2xl mb-2 text-pink-500">
-                          Staking Cake
-                        </h3>
+                        <div class='grid grid-cols-3 gap-4'>
+                          <div><h3 class='text-2xl mb-2 text-pink-500'>
+                            Staking
+                          </h3>
+                          </div>
+                          <div>
+                            <a href='https://cakedefi.com/?ref=754025' (click)='trackCakeRef()'>
+                              <img alt='CakeDefi'
+                                   src='https://www.cakedefi.com/downloads/press-materials/cake/2line/logo-cakedefi-2line-lockup-rgb.png'>
+                            </a>
+                          </div>
+                          <div>
+                            <button
+                              class='bg-blueCake-600 hover:bg-blueCake-700 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+                              onclick="window.open('https://cakedefi.com/?ref=754025', '_blank');"
+                              (click)='trackCakeRef()'>
+                              Login / SignUp
+                            </button>
+                          </div>
+                        </div>
+                        <br>
                         <div class="flex gap-2">
                           <div class="dark:text-gray-100">
                             Auto APY load from Cake:

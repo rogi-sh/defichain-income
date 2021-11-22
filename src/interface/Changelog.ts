@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.24.3 - 22.11.2021';
+    this.log.comment = 'Add CakeDefi Reflink in settings';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.24.2 - 21.11.2021';
     this.log.comment = 'fix reserve of pools';
     this.logs.push(this.log);
