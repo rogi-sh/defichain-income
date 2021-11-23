@@ -1282,7 +1282,7 @@ export class AppComponent implements OnInit {
       }
 
     }
-    if (poolName === 'USD') {
+    if (poolName === 'USD' && pool) {
       if (this.autoLoadData) {
         this.anteilAmPoolUsd = this.berechneAnteilAmPool(this.wallet.usddfi, pool, outcome, dfiProBlock);
         this.wallet.usdInUsdPool = this.anteilAmPoolUsd * +pool.reserveA / 100;
@@ -1294,7 +1294,7 @@ export class AppComponent implements OnInit {
 
     }
 
-    if (poolName === 'TSLA') {
+    if (poolName === 'TSLA' && pool) {
       if (this.autoLoadData) {
         this.anteilAmPoolTsla = this.berechneAnteilAmPool(this.wallet.tsladfi, pool, outcome, dfiProBlock);
         this.wallet.tslaInTslaPool = this.anteilAmPoolTsla * +pool.reserveA / 100;
@@ -1314,7 +1314,7 @@ export class AppComponent implements OnInit {
   }
 
   private berechneAnteilAmPool(lpToken: number, pool: Pool, outcome: Outcome, dfiProBlock: number): number {
-    const anteilAmPool = lpToken / pool?.totalLiquidityLpToken * 100;
+    const anteilAmPool = pool ? (lpToken / pool?.totalLiquidityLpToken * 100) : 0;
     outcome.dfiPerMin = this.getDfiPerMin(dfiProBlock) * anteilAmPool / 100;
     return anteilAmPool;
   }
