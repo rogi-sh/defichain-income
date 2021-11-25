@@ -1135,7 +1135,7 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).usdcToken = +splitted[0];
           break;
         }
-        case 'USD': {
+        case 'DUSD': {
           this.wallet.usd += +splitted[0];
           this.getAddressBalance(address).usdToken = +splitted[0];
           break;

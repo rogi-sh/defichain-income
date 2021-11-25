@@ -17,12 +17,31 @@ export class StatsData {
   burned: Burned;
   emission: Emisssion;
   tvl: Tvl;
+  loan: Loan;
+}
+export class Loan {
+  count: CountLoan;
+  value: ValueLoan;
+}
+
+export class CountLoan {
+  collateralTokens: number;
+  loanTokens: number;
+  openAuctions: number;
+  openVaults: number;
+  schemes: number;
+}
+
+export class ValueLoan {
+  collateral: number;
+  loan: number;
 }
 
 export class Tvl {
   total: number;
   dex: number;
   masternodes: number;
+  loan: number;
 }
 
 export class Burned {
