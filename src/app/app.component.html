@@ -434,6 +434,8 @@
                     [poolLtc]="poolLtc"
                     [poolDoge]="poolDoge"
                     [poolBch]="poolBch"
+                    [poolUsd]='poolUsd'
+                    [poolTsla]='poolTsla'
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"
@@ -541,6 +543,17 @@
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
+                    <div *ngIf="wallet?.usd > 0">
+                      USD
+                    </div>
+                    <div *ngIf="wallet?.usd > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.usd | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.usd  * getUsdPriceOfStockPools(this.poolUsd)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
                     <div *ngIf="wallet?.doge > 0">
                       DOGE
                     </div>
@@ -560,6 +573,17 @@
                         class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                         <div *ngIf="!isIncognitoModeOn">{{wallet?.bch | number: '1.5-5'}} ~
                           <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.bch  * poolBch?.priceA"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.tsla > 0">
+                      TSLA
+                    </div>
+                    <div *ngIf="wallet?.tsla > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.tsla | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.tsla  * getUsdPriceOfStockPools(this.poolTsla)"></app-price></div>
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
@@ -598,6 +622,12 @@
                         ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdcdfi * poolUsdc?.totalStaked/poolUsdc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
+                    <div *ngIf="wallet?.usddfi > 0">USD-DFI</div>
+                    <div *ngIf="wallet?.usddfi > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usddfi | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usddfi * poolUsd?.totalStaked/poolUsd?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+
                     <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
                     <div *ngIf="wallet?.dogedfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.dogedfi | number: '1.3-3'}}
@@ -608,6 +638,12 @@
                     <div *ngIf="wallet?.bchdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.bchdfi | number: '1.3-3'}}
                         ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.bchdfi * poolBch?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+
+                    <div *ngIf="wallet?.tslausd > 0">TSLA-DFI</div>
+                    <div *ngIf="wallet?.tslausd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.tslausd | number: '1.3-3'}}
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.tslausd * poolTsla?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price></span>
                     </div>
                   </div>
                 </div>
@@ -628,6 +664,8 @@
                 [poolAllOut]="poolAllOut"
                 [poolUsdtOut]="poolUsdtOut"
                 [poolUsdcOut]="poolUsdcOut"
+                [poolUsdOut]="poolUsdOut"
+                [poolTslaOut]="poolTslaOut"
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [stakingApy]="stakingApy"
@@ -642,6 +680,8 @@
                 [getAnteilUSDCPoolAnGesamtLM]="getAnteilUSDCPoolAnGesamtLM()"
                 [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM()"
                 [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM()"
+                [getAnteilUsdPoolAnGesamtLM]='getAnteilUsdPoolAnGesamtLM()'
+                [getAnteilTslaPoolAnGesamtLM]='getAnteilTslaPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -770,6 +810,34 @@
                   ></app-earning>
                 </div>
                 <div
+                  *ngIf=" wallet?.usdInUsdPool > 0 || wallet?.dfiInUsdPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      USD/DFI {{poolUsd?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsd | number: '1.2-2'}}
+                      DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolUsd| number: '1.4-4' }} %</span>
+                    <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsd, poolUsd)?.dfi | number: '1.2-2'}} DFI
+                      / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsd, poolUsd)?.poolPairToken | number: '1.4-4'}} USD </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn"
+                    [out]="poolUsdOut"
+                    [pool]="poolBtc"
+                    [fiat]="fiat"
+                  ></app-earning>
+                </div>
+                <div
                   *ngIf=" wallet?.ltcInLtcPool > 0 || wallet?.dfiInLtcPool > 0"
                   class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
                 >
@@ -843,6 +911,29 @@
                   <app-earning
                     [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolBchOut" [pool]="poolBch" [fiat]="fiat"></app-earning>
                 </div>
+                <div
+                  *ngIf=" wallet?.tslaInTslaPool > 0 || wallet?.usdInTslaPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      TSLA/DFI {{poolTsla?.apy | number: '1.2-2' }}% APR - {{dfiProBlockTsla | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolTsla| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolTsla, poolTsla)?.dfi | number: '1.2-2'}} DFI
+                      / {{getPoolPairFromShare(anteilAmPoolTsla, poolTsla)?.poolPairToken | number: '1.4-4'}} TSLA </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolTslaOut" [pool]="poolTsla" [fiat]="fiat"></app-earning>
+                </div>
               </div>
             </div>
             <div *ngSwitchCase="'forecast'">
@@ -862,6 +953,8 @@
                   [poolDoge]="poolDoge"
                   [poolUsdt]="poolUsdt"
                   [poolLtc]="poolLtc"
+                  [poolUsd]='poolUsd'
+                  [poolTsla]='poolTsla'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -924,6 +1017,8 @@
                 [poolUsdt]="poolUsdt"
                 [poolUsdc]="poolUsdc"
                 [poolEth]="poolEth"
+                [poolUsd]='poolUsd'
+                [poolTsla]='poolTsla'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -932,6 +1027,8 @@
                 [dfiProBlockLtc]="dfiProBlockLtc"
                 [dfiProBlockUsdt]="dfiProBlockUsdt"
                 [dfiProBlockUsdc]="dfiProBlockUsdc"
+                [dfiProBlockUsd]="dfiProBlockUsd"
+                [dfiProBlockTsla]="dfiProBlockTsla"
               ></app-calculator-page>
             </div>
             <div *ngSwitchCase="'info'">
@@ -1297,6 +1394,26 @@
                           <div>
                             <div
                               class="relative h-14 input-component"
+                              [ngClass]="wallet.usd === null || wallet.usd === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usd"
+                                (ngModelChange)="onChangeUsdWallet()"
+                                type="number"
+                                id="inputUsdWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputUsdWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
                               [ngClass]="wallet.doge === null || wallet.doge === undefined  ? 'empty' : ''"
                               title="DOGE"
                             >
@@ -1331,6 +1448,26 @@
                               <label for="inputBchWallet"
                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 BCH
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.tsla === null || wallet.tsla === undefined  ? 'empty' : ''"
+                              title="TSLA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.tsla"
+                                (ngModelChange)="onChangeTslaWallet()"
+                                type="number"
+                                id="inputTslaWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="inputTslaWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                TSLA
                               </label>
                             </div>
                           </div>
@@ -1589,6 +1726,46 @@
                           <div class="md:col-start-1">
                             <div
                               class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInUsdPool === null || wallet.usdInUsdPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInUsdPool"
+                                (ngModelChange)="onChangeUsdUsdPool()"
+                                type="number"
+                                id="onChangeUsdUsdPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdUsdPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.dfiInUsdPool === null || wallet.dfiInUsdPool === undefined  ? 'empty' : ''"
+                              title="DFI"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.dfiInUsdPool"
+                                (ngModelChange)="onChangeDfiUsdPool()"
+                                type="number"
+                                id="onChangeDfiUsdPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeDfiUsdPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
                               [ngClass]="wallet.ltcInLtcPool === null || wallet.ltcInLtcPool === undefined  ? 'empty' : ''"
                               title="LTC"
                             >
@@ -1704,6 +1881,47 @@
                               <label for="onChangeDfiBchPool"
                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DFI
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.tslaInTslaPool === null || wallet.tslaInTslaPool === undefined  ? 'empty' : ''"
+                              title="TSLA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.tslaInTslaPool"
+                                (ngModelChange)="onChangeTslaTslaPool()"
+                                type="number"
+                                id="onChangeTslaTslaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeTslaTslaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                TSLA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInTslaPool === null || wallet.usdInTslaPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInTslaPool"
+                                (ngModelChange)="onChangeUsdTslaPool()"
+                                type="number"
+                                id="onChangeUsdTslaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdTslaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
                               </label>
                             </div>
                           </div>
@@ -2073,6 +2291,12 @@
                                   <div *ngIf="getAddressBalance(a)?.usdcToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     USDC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tslaToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TSLA: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tslaToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -2094,6 +2318,12 @@
                                   <div *ngIf="getAddressBalance(a)?.usdcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     USDCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usddfiToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usddfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tslausdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TSLAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tslausdToken }}</div>
                                 </div>
                               </div>
 
@@ -2133,6 +2363,8 @@
                     [poolAllOut]="poolAllOut"
                     [poolUsdtOut]="poolUsdtOut"
                     [poolUsdcOut]="poolUsdcOut"
+                    [poolUsdOut]="poolUsdOut"
+                    [poolTslaOut]="poolTslaOut"
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -2147,6 +2379,8 @@
                     [getAnteilUSDCPoolAnGesamtLM]="getAnteilUSDCPoolAnGesamtLM()"
                     [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM()"
                     [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM()"
+                    [getAnteilUsdPoolAnGesamtLM]='getAnteilUsdPoolAnGesamtLM()'
+                    [getAnteilTslaPoolAnGesamtLM]='getAnteilTslaPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>
@@ -2160,6 +2394,8 @@
                     [poolEth]="poolEth"
                     [poolUsdt]="poolUsdt"
                     [poolUsdc]="poolUsdc"
+                    [poolUsd]="poolUsd"
+                    [poolTsla]="poolUsd"
                     [poolLtc]="poolLtc"
                     [poolDoge]="poolDoge"
                     [poolBch]="poolBch"

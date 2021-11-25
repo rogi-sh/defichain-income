@@ -30,6 +30,12 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolBch: Pool;
 
   @Input()
+  poolUsd: Pool;
+
+  @Input()
+  poolTsla: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -49,6 +55,12 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockBch;
+
+  @Input()
+  dfiProBlockUsd;
+
+  @Input()
+  dfiProBlockTsla;
 
   @Input()
   blocktimeInS;
@@ -145,6 +157,12 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'USDT'){
       pool = this.poolUsdt;
       dfiPerBlock = this.dfiProBlockUsdt;
+    } else if (this.poolLmCalculationTargetReturn === 'USD'){
+      pool = this.poolUsd;
+      dfiPerBlock = this.dfiProBlockUsd;
+    } else if (this.poolLmCalculationTargetReturn === 'TSLA'){
+      pool = this.poolTsla;
+      dfiPerBlock = this.dfiProBlockTsla;
     } else {
       pool = this.poolUsdc;
       dfiPerBlock = this.dfiProBlockUsdc;

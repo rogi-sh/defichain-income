@@ -219,6 +219,21 @@
           </div>
         </div>
 
+        <div *ngIf="wallet?.usd > 0 || wallet?.usdInUsdPool > 0" class="text-lg dark:text-gray-100 flex">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+            USD
+          </div>
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+            {{isIncognitoModeOn ? '****' : wallet?.usd + wallet?.usdInUsdPool | number: '1.5-5'}}
+            <div
+              class="text-xs text-gray-400 dark:text-gray-300"
+            >
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn">****</div>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg dark:text-gray-100 flex">
           <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
             LTC
@@ -255,6 +270,19 @@
             {{isIncognitoModeOn ? '****' : wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
             <div class="text-xs text-gray-400">
               <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
+              <div *ngIf="isIncognitoModeOn" >*****</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="wallet?.tsla > 0 || wallet?.tslaInTslaPool > 0" class="text-lg dark:text-gray-100 flex">
+          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+            TSLA
+          </div>
+          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+            {{isIncognitoModeOn ? '****' : wallet?.tsla + wallet?.tslaInTslaPool | number: '1.5-5'}}
+            <div class="text-xs text-gray-400">
+              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getTslaValueUsd()"></app-price>
               <div *ngIf="isIncognitoModeOn" >*****</div>
             </div>
           </div>

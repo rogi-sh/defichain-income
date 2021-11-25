@@ -104,6 +104,8 @@ export interface WalletDto {
   usdtdfi: number;
   usdcdfi: number;
   bchdfi: number;
+  usddfi: number;
+  tslausd: number;
 
   // User Infos
   // BTC Pool
@@ -140,6 +142,16 @@ export interface WalletDto {
   bchInBchPool: number;
   bch: number;
   dfiInBchPool: number;
+
+  // USD Pool
+  usdInUsdPool: number;
+  usd: number;
+  dfiInUsdPool: number;
+
+  // TSLA Pool
+  tslaInTslaPool: number;
+  tsla: number;
+  usdInTslaPool: number;
 }
 
 export class Wallet {
@@ -160,7 +172,7 @@ export class Wallet {
   usdtdfi = 0;
   usdcdfi = 0;
   usddfi = 0;
-  tsladfi = 0;
+  tslausd = 0;
 
   // User Infos
   // BTC Pool

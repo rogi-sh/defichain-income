@@ -74,8 +74,8 @@ export class AppComponent implements OnInit {
   dfiProBlockLtc = 2;
   dfiProBlockDoge = 0.1;
   dfiProBlockBch = 1;
-  dfiProBlockUsd = 1;
-  dfiProBlockTsla = 10;
+  dfiProBlockUsd = 35;
+  dfiProBlockTsla = 7;
   rewards: Stats;
 
   blocktimeInS = 30;
@@ -433,6 +433,8 @@ export class AppComponent implements OnInit {
         usdt: this.wallet.usdt,
         usdc: this.wallet.usdc,
         bch: this.wallet.bch,
+        usd: this.wallet.usd,
+        tsla: this.wallet.tsla,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -440,6 +442,8 @@ export class AppComponent implements OnInit {
         usdcdfi: this.wallet.usdcdfi,
         dogedfi: this.wallet.dogedfi,
         bchdfi: this.wallet.bchdfi,
+        usddfi: this.wallet.usddfi,
+        tslausd: this.wallet.tslausd,
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
         ethInEthPool: this.wallet.ethInEthPool,
@@ -454,6 +458,10 @@ export class AppComponent implements OnInit {
         dfiInDogePool: this.wallet.dfiInDogePool,
         bchInBchPool: this.wallet.bchInBchPool,
         dfiInBchPool: this.wallet.dfiInBchPool,
+        usdInUsdPool: this.wallet.usdInUsdPool,
+        dfiInUsdPool: this.wallet.dfiInUsdPool,
+        tslaInTslaPool: this.wallet.tslaInTslaPool,
+        usdInTslaPool: this.wallet.usdInTslaPool,
       },
     }).subscribe((result: any) => {
       if (result?.data?.addUser) {
@@ -493,6 +501,8 @@ export class AppComponent implements OnInit {
         usdt: this.wallet.usdt,
         usdc: this.wallet.usdc,
         bch: this.wallet.bch,
+        usd: this.wallet.usd,
+        tsla: this.wallet.tsla,
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -500,6 +510,8 @@ export class AppComponent implements OnInit {
         usdcdfi: this.wallet.usdcdfi,
         dogedfi: this.wallet.dogedfi,
         bchdfi: this.wallet.bchdfi,
+        usddfi: this.wallet.usddfi,
+        tslausd: this.wallet.tslausd,
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
         ethInEthPool: this.wallet.ethInEthPool,
@@ -512,6 +524,10 @@ export class AppComponent implements OnInit {
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
         dfiInDogePool: this.wallet.dfiInDogePool,
+        usdInUsdPool: this.wallet.usdInUsdPool,
+        dfiInUsdPool: this.wallet.dfiInUsdPool,
+        tslaInTslaPool: this.wallet.tslaInTslaPool,
+        usdInTslaPool: this.wallet.usdInTslaPool,
       },
     }).subscribe((result: any) => {
       if (result?.data?.updateUser) {
@@ -1119,6 +1135,16 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).usdcToken = +splitted[0];
           break;
         }
+        case 'USD': {
+          this.wallet.usd += +splitted[0];
+          this.getAddressBalance(address).usdToken = +splitted[0];
+          break;
+        }
+        case 'TSLA': {
+          this.wallet.tsla += +splitted[0];
+          this.getAddressBalance(address).tslaToken = +splitted[0];
+          break;
+        }
         case 'BTC-DFI': {
           this.wallet.btcdfi += +splitted[0];
           this.getAddressBalance(address).btcdfiToken = +splitted[0];
@@ -1152,6 +1178,16 @@ export class AppComponent implements OnInit {
         case 'USDC-DFI': {
           this.wallet.usdcdfi += +splitted[0];
           this.getAddressBalance(address).usdcdfiToken = +splitted[0];
+          break;
+        }
+        case 'DUSD-DFI': {
+          this.wallet.usddfi += +splitted[0];
+          this.getAddressBalance(address).usddfiToken = +splitted[0];
+          break;
+        }
+        case 'TSLA-DUSD': {
+          this.wallet.tslausd += +splitted[0];
+          this.getAddressBalance(address).tslausdToken = +splitted[0];
           break;
         }
         default: {
@@ -1296,7 +1332,7 @@ export class AppComponent implements OnInit {
 
     if (poolName === 'TSLA' && pool) {
       if (this.autoLoadData) {
-        this.anteilAmPoolTsla = this.berechneAnteilAmPool(this.wallet.tsladfi, pool, outcome, dfiProBlock);
+        this.anteilAmPoolTsla = this.berechneAnteilAmPool(this.wallet.tslausd, pool, outcome, dfiProBlock);
         this.wallet.tslaInTslaPool = this.anteilAmPoolTsla * +pool.reserveA / 100;
         this.wallet.usdInTslaPool = this.anteilAmPoolTsla * +pool.reserveB / 100;
       } else {
@@ -1342,22 +1378,22 @@ export class AppComponent implements OnInit {
   berechnePoolOut(): void {
     this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin
       + this.poolUsdtOut.dfiPerMin + this.poolUsdcOut.dfiPerMin + this.poolLtcOut.dfiPerMin
-      + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin;
+      + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin + this.poolUsdOut.dfiPerMin + this.poolTslaOut.dfiPerMin;
     this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
       + this.poolUsdtOut.dfiPerHour + this.poolUsdcOut.dfiPerHour + this.poolLtcOut.dfiPerHour
-      + this.poolDogeOut.dfiPerHour + this.poolBchOut.dfiPerHour;
+      + this.poolDogeOut.dfiPerHour + this.poolBchOut.dfiPerHour + this.poolUsdOut.dfiPerHour + this.poolTslaOut.dfiPerHour;
     this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay
       + this.poolUsdtOut.dfiPerDay + this.poolUsdcOut.dfiPerDay + this.poolLtcOut.dfiPerDay
-      + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
+      + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay + this.poolUsdOut.dfiPerDay + this.poolTslaOut.dfiPerDay;
     this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek
       + this.poolUsdtOut.dfiPerWeek + this.poolUsdcOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek
-      + this.poolDogeOut.dfiPerWeek + this.poolBchOut.dfiPerWeek;
+      + this.poolDogeOut.dfiPerWeek + this.poolBchOut.dfiPerWeek + this.poolUsdOut.dfiPerWeek + this.poolTslaOut.dfiPerWeek;
     this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth
       + this.poolUsdtOut.dfiPerMonth + this.poolUsdcOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth
-      + this.poolDogeOut.dfiPerMonth + this.poolBchOut.dfiPerMonth;
+      + this.poolDogeOut.dfiPerMonth + this.poolBchOut.dfiPerMonth + this.poolUsdOut.dfiPerMonth + this.poolTslaOut.dfiPerMonth;
     this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear
       + this.poolUsdtOut.dfiPerYear + this.poolUsdcOut.dfiPerYear + this.poolLtcOut.dfiPerYear
-      + this.poolDogeOut.dfiPerYear + this.poolBchOut.dfiPerYear;
+      + this.poolDogeOut.dfiPerYear + this.poolBchOut.dfiPerYear + this.poolUsdOut.dfiPerYear + this.poolTslaOut.dfiPerYear;
   }
 
   berechneStakingOut(): void {
@@ -1518,6 +1554,38 @@ export class AppComponent implements OnInit {
     } else {
       this.wallet.dfiInBchPool = 0;
     }
+    // USD POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.usdInUsdPoolKey)) {
+      this.wallet.usdInUsdPool = +localStorage.getItem(this.wallet.usdInUsdPoolKey);
+    } else {
+      this.wallet.usdInUsdPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.usdKey)) {
+      this.wallet.usd = +localStorage.getItem(this.wallet.usdKey);
+    } else {
+      this.wallet.usd = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.dfiInUsdPoolKey)) {
+      this.wallet.dfiInUsdPool = +localStorage.getItem(this.wallet.dfiInUsdPoolKey);
+    } else {
+      this.wallet.dfiInUsdPool = 0;
+    }
+    // TSLA POOL
+    if (this.isLocalStorageNotEmpty(this.wallet.tslaInTslaPoolKey)) {
+      this.wallet.tslaInTslaPool = +localStorage.getItem(this.wallet.tslaInTslaPoolKey);
+    } else {
+      this.wallet.tslaInTslaPool = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.tslaKey)) {
+      this.wallet.tsla = +localStorage.getItem(this.wallet.tslaKey);
+    } else {
+      this.wallet.tsla = 0;
+    }
+    if (this.isLocalStorageNotEmpty(this.wallet.usdInTslaPoolKey)) {
+      this.wallet.usdInTslaPool = +localStorage.getItem(this.wallet.usdInTslaPoolKey);
+    } else {
+      this.wallet.usdInTslaPool = 0;
+    }
     // WALLET
     if (this.isLocalStorageNotEmpty(this.wallet.dfiKey)) {
       this.wallet.dfi = +localStorage.getItem(this.wallet.dfiKey);
@@ -1636,15 +1704,27 @@ export class AppComponent implements OnInit {
     return (this.wallet?.bchInBchPool + this.wallet?.bch) * this.poolBch?.priceA;
   }
 
+  getUsdValueUsd(): number {
+    return (this.wallet?.usdInUsdPool + this.wallet?.usd + this.wallet.usdInTslaPool) * this.getUsdPriceOfStockPools(this.poolUsd);
+  }
+
+  getTslaValueUsd(): number {
+    return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.poolTsla);
+  }
+
+  getUsdPriceOfStockPools(pool: Pool): number {
+    return pool?.totalLiquidityUsd / 2 / +pool?.reserveA;
+  }
+
   getDfiCount(): number {
     return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
-      + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool
+      + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool  + this.wallet?.dfiInUsdPool
       + this.wallet?.dfiInBchPool + this.dfiInStaking + this.wallet?.dfiInMasternodes;
   }
 
   getDfiCountLM(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
-      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool;
+      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet?.dfiInUsdPool;
   }
 
   getDfiCountLMUsd(): number {
@@ -1657,7 +1737,8 @@ export class AppComponent implements OnInit {
 
   getAnteilLMOfAllValue(): number {
     return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-        + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd())
+        + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd()
+        + this.getUsdValueUsd() + this.getTslaValueUsd())
       / this.getAllValuesUsdPrice() * 100;
   }
 
@@ -1676,7 +1757,8 @@ export class AppComponent implements OnInit {
 
   getLMUsd(): number {
     return this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd();
+      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd()
+      + this.getUsdValueUsd() + this.getTslaValueUsd();
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -1689,7 +1771,7 @@ export class AppComponent implements OnInit {
 
   getDfiCountInLM(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
-      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool;
+      + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInUsdPool;
   }
 
   getDfiValueUsd(): number {
@@ -1702,7 +1784,8 @@ export class AppComponent implements OnInit {
 
   getAllPoolDfIncome(): number {
     return this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay + this.poolLtcOut.dfiPerDay + this.poolUsdtOut.dfiPerDay
-      + this.poolUsdcOut.dfiPerDay + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay;
+      + this.poolUsdcOut.dfiPerDay + this.poolDogeOut.dfiPerDay + this.poolBchOut.dfiPerDay + this.poolUsdOut.dfiPerDay +
+       this.poolTslaOut.dfiPerDay;
   }
 
   getAnteilBTCPoolAnGesamtLM(): number {
@@ -1731,6 +1814,14 @@ export class AppComponent implements OnInit {
 
   getAnteilBchPoolAnGesamtLM(): number {
     return this.poolBchOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilUsdPoolAnGesamtLM(): number {
+    return this.poolUsdOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+  }
+
+  getAnteilTslaPoolAnGesamtLM(): number {
+    return this.poolTslaOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
 
   allAddresses(): string [] {
@@ -2028,6 +2119,42 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onChangeUsdUsdPool(): void {
+    if (this.checkInputNumber(this.wallet.usdInUsdPool)) {
+      localStorage.setItem(this.wallet.usdInUsdPoolKey, JSON.stringify(this.wallet.usdInUsdPool));
+      this.berechnePoolOutUsd();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
+  onChangeTslaTslaPool(): void {
+    if (this.checkInputNumber(this.wallet.tslaInTslaPool)) {
+      localStorage.setItem(this.wallet.tslaInTslaPoolKey, JSON.stringify(this.wallet.tslaInTslaPool));
+      this.berechnePoolOutTsla();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
+  onChangeUsdTslaPool(): void {
+    if (this.checkInputNumber(this.wallet.usdInTslaPool)) {
+      localStorage.setItem(this.wallet.usdInTslaPoolKey, JSON.stringify(this.wallet.usdInTslaPool));
+      this.berechnePoolOutTsla();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
   onChangeUsdtWallet(): void {
     if (this.checkInputNumber(this.wallet.usdt)) {
       localStorage.setItem(this.wallet.usdtKey, JSON.stringify(this.wallet.usdt));
@@ -2040,6 +2167,24 @@ export class AppComponent implements OnInit {
   onChangeUsdcWallet(): void {
     if (this.checkInputNumber(this.wallet.usdc)) {
       localStorage.setItem(this.wallet.usdcKey, JSON.stringify(this.wallet.usdc));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
+  onChangeUsdWallet(): void {
+    if (this.checkInputNumber(this.wallet.usd)) {
+      localStorage.setItem(this.wallet.usdKey, JSON.stringify(this.wallet.usd));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
+  onChangeTslaWallet(): void {
+    if (this.checkInputNumber(this.wallet.tsla)) {
+      localStorage.setItem(this.wallet.tslaKey, JSON.stringify(this.wallet.tsla));
       this.buildDataForChart();
       this.buildDataForChartValue();
       this.buildDataForChartIncome();
@@ -2194,6 +2339,18 @@ export class AppComponent implements OnInit {
     }
   }
 
+  onChangeDfiUsdPool(): void {
+    if (this.checkInputNumber(this.wallet.dfiInUsdPool)) {
+      localStorage.setItem(this.wallet.dfiInUsdPoolKey, JSON.stringify(this.wallet.dfiInUsdPool));
+      this.berechnePoolOutUsd();
+      this.berechnePoolOut();
+      this.berechneAllOut();
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+
   checkInputNumber(value: number): boolean {
     return value !== null && value >= 0;
   }
@@ -2211,6 +2368,8 @@ export class AppComponent implements OnInit {
     walletFinal.usdtdfi = wallet.usdtdfi;
     walletFinal.usdcdfi = wallet.usdcdfi;
     walletFinal.bchdfi = wallet.bchdfi;
+    walletFinal.usddfi = wallet.usdcdfi;
+    walletFinal.tslausd = wallet.tslausd;
 
     walletFinal.btcInBtcPool = wallet.btcInBtcPool;
     walletFinal.dfiInBtcPool = wallet.dfiInBtcPool;
@@ -2224,9 +2383,12 @@ export class AppComponent implements OnInit {
     walletFinal.dfiInLtcPool = wallet.dfiInLtcPool;
     walletFinal.dogeInDogePool = wallet.dogeInDogePool;
     walletFinal.dfiInDogePool = wallet.dfiInDogePool;
-
     walletFinal.bchInBchPool = wallet.bchInBchPool;
     walletFinal.dfiInBchPool = wallet.dfiInBchPool;
+    walletFinal.tslaInTslaPool = wallet.tslaInTslaPool;
+    walletFinal.usdInTslaPool = wallet.usdInTslaPool;
+    walletFinal.usdInUsdPool = wallet.usdInUsdPool;
+    walletFinal.dfiInUsdPool = wallet.dfiInUsdPool;
 
     walletFinal.btc = wallet.btc;
     walletFinal.eth = wallet.eth;
@@ -2235,6 +2397,8 @@ export class AppComponent implements OnInit {
     walletFinal.usdt = wallet.usdt;
     walletFinal.usdc = wallet.usdc;
     walletFinal.bch = wallet.bch;
+    walletFinal.usd = wallet.usd;
+    walletFinal.tsla = wallet.tsla;
 
     return walletFinal;
   }

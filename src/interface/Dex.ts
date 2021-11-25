@@ -81,6 +81,8 @@ export class AddressBalance {
   bchToken: number;
   usdtToken: number;
   usdcToken: number;
+  usdToken: number;
+  tslaToken: number;
 
   btcdfiToken: number;
   ltcdfiToken: number;
@@ -89,6 +91,8 @@ export class AddressBalance {
   bchdfiToken: number;
   usdtdfiToken: number;
   usdcdfiToken: number;
+  usddfiToken: number;
+  tslausdToken: number;
 
 }
 

@@ -71,6 +71,12 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolLtc!: Pool;
 
   @Input()
+  poolUsd!: Pool;
+
+  @Input()
+  poolTsla!: Pool;
+
+  @Input()
   blockHeight!: number;
 
   @Input()
@@ -571,6 +577,8 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiDogePart = this.wallet?.dfiInDogePool / dfiInLm;
     const dfiBchPart = this.wallet?.dfiInBchPool / dfiInLm;
     const dfiLtcPart = this.wallet?.dfiInLtcPool / dfiInLm;
+    const dfiUsdPart = this.wallet?.dfiInUsdPool / dfiInLm;
+    const dfiTslaPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTslaPool) / dfiInLm;
 
     // Anteile berechnen je nachdem wie viel man in den Pools hat
     const average =
@@ -580,13 +588,16 @@ export class ForecastComponent implements OnInit, OnChanges {
         (dfiBchPart * 100 * this.poolBch?.apy) +
         (dfiDogePart * 100 * this.poolDoge?.apy) +
         (dfiUsdtPart * 100 * this.poolUsdt?.apy) +
-        (dfiLtcPart * 100 * this.poolLtc?.apy)) / 100;
+        (dfiLtcPart * 100 * this.poolLtc?.apy) +
+        (dfiUsdPart * 100 * this.poolUsd?.apy) +
+        (dfiTslaPart * 100 * this.poolTsla?.apy) ) / 100;
 
     return Math.round(average * 100) / 100;
   }
 
   getAprMnAverage(): number {
-    const normalMns = this.adressesMasternodes?.length - (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
+    const normalMns = this.adressesMasternodes?.length - (this.adressesMasternodesFreezer5?.length
+      + this.adressesMasternodesFreezer10?.length);
     const mns = normalMns + this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length;
 
     const aprs = normalMns * this.aprMn
@@ -598,7 +609,16 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   getDfiCountLM(): number {
     return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
-      + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool;
+      + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool + this.wallet?.dfiInUsdPool
+      + this.getDfiEqOfUsdPartOfPool(this.wallet.usdInTslaPool);
+  }
+
+  getUsdPriceOfDfiInDFIUSDPool(): number {
+    return this.poolUsd?.totalLiquidityUsd / 2 / +this.poolUsd?.reserveB;
+  }
+
+  getDfiEqOfUsdPartOfPool(usd: number): number {
+    return usd / this.getUsdPriceOfDfiInDFIUSDPool();
   }
 
   getDfiCountMn(): number {

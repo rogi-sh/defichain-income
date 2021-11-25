@@ -48,6 +48,12 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolDogeOut!: Outcome;
 
   @Input()
+  poolUsdOut!: Outcome;
+
+  @Input()
+  poolTslaOut!: Outcome;
+
+  @Input()
   poolBtc!: Pool;
 
   @Input()
@@ -85,6 +91,12 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   getAnteilBchPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilUsdPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilTslaPoolAnGesamtLM: number;
 
   @Input()
   getDfiCountInLM: number;
@@ -206,7 +218,12 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolBchOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolBchOut.dfiPerMonth * 100) / 100);
     }
-
+    if (this.poolUsdOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolUsdOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolTslaOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolTslaOut.dfiPerMonth * 100) / 100);
+    }
 
     return incomeNumbers;
   }
@@ -254,6 +271,12 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolBchOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#4CC947');
     }
+    if (this.poolUsdOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#6B8068');
+    }
+    if (this.poolTslaOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#cc0000');
+    }
 
     return incomeNumbers;
   }
@@ -289,6 +312,12 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolBchOut.dfiPerMonth > 0) {
       incomeNumbers.push(`BCH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolBchOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolUsdOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`USD-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolTslaOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`TSLA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolTslaOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }

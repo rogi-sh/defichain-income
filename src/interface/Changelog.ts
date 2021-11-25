@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.24.5 - 25.11.2021';
+    this.log.comment = 'Added USD and TSLA Pool Support (beta)';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.24.4 - 23.11.2021';
     this.log.comment = 'Fix computation when usd or tsla pool is not responded from api';
     this.logs.push(this.log);
