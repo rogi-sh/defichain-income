@@ -610,40 +610,40 @@ export class ValueComponent implements OnInit, OnChanges {
 
     const incomeNumbers = new Array<string>();
     if (this.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
-      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue) + '%');
+      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
-      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue) + '%');
+      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
-      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue) + '%');
+      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsdc, allValue) > 0) {
-      incomeNumbers.push('USDC ' + this.getAnteilPortfolioForChart(dataUsdc, allValue) + '%');
+      incomeNumbers.push('USDC ' + this.getAnteilPortfolioForChart(dataUsdc, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsd, allValue) > 0) {
-      incomeNumbers.push('USD ' + this.getAnteilPortfolioForChart(dataUsd, allValue) + '%');
+      incomeNumbers.push('USD ' + this.getAnteilPortfolioForChart(dataUsd, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
-      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue) + '%');
+      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
-      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue) + '%');
+      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataBch, allValue) > 0) {
-      incomeNumbers.push('BCH ' + this.getAnteilPortfolioForChart(dataBch, allValue) + '%');
+      incomeNumbers.push('BCH ' + this.getAnteilPortfolioForChart(dataBch, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataTsla, allValue) > 0) {
-      incomeNumbers.push('TSLA ' + this.getAnteilPortfolioForChart(dataTsla, allValue) + '%');
+      incomeNumbers.push('TSLA ' + this.getAnteilPortfolioForChart(dataTsla, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
-      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue) + '%');
+      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(5) + '%');
     }
     return incomeNumbers;
   }
 
   getAnteilPortfolioForChart(data: Data, allValue: number): number {
-    return +(data.value / allValue * 100).toFixed(5);
+    return +(data.value / allValue * 100);
   }
 
   handleDetails(): void {
