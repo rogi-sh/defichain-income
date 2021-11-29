@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
-import {Currencies, USD} from '@interfaces/Data';
+import { AddressVaults, Currencies, USD } from '@interfaces/Data'
 import {Observable} from 'rxjs';
 import {SupernodeAccount} from '@interfaces/Supernode';
 import {MamonAccountNode} from '@interfaces/Mamon';
@@ -64,6 +64,11 @@ export class DataService {
 
   public getAdressAccount(address: string): Observable<Array<SupernodeAccount>>  {
     return this.http.get<Array<SupernodeAccount>>(environment.supernode_account + address);
+  }
+
+  public getAddressVaults(address: string): Observable<AddressVaults>  {
+    const url = environment.address_vaults.replace('ADDRESS_VAULTS', address);
+    return this.http.get<AddressVaults>(url);
   }
 
   public getMamonAccount(key: string): Observable<any>  {

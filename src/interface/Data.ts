@@ -34,6 +34,28 @@ export class Balance {
   balance: number;
 }
 
+export class AddressVaults {
+  data: Array<Vault>;
+}
+
+export class Vault {
+  vaultId: string;
+  ownerAddress: string;
+  state: string;
+  informativeRatio: string;
+  collateralRatio: string;
+  collateralValue: string;
+  loanValue: number;
+  interestValue: number;
+  collateralAmounts: Array<CollateralAmount>;
+}
+
+export class CollateralAmount {
+  amount: string;
+  symbol: string;
+  symbolKey: string;
+}
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;

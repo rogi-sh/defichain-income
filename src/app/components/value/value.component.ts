@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {AddressBalance, Pool} from '@interfaces/Dex';
-import {ChartOptions, ChartOptions3, Data, Wallet} from '@interfaces/Data';
+import { AddressVaults, ChartOptions, ChartOptions3, Data, Wallet } from '@interfaces/Data';
 import {ChartComponent} from 'ng-apexcharts';
 
 @Component({
@@ -66,6 +66,9 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   freezer10!: string [];
 
+  @Input()
+  vaultsOfAllAddresses: Array<AddressVaults>;
+
   detailsOpen = false;
 
   ngOnInit(): void {
@@ -91,6 +94,26 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getDfiCountWalletUsd(): number {
     return this.wallet?.dfi * this.poolBtc?.priceB;
+  }
+
+  getDfiCountVaults(): number {
+    let dfiInVaults = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return dfiInVaults;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          if ('DFI' === vaultCollaterral.symbolKey) {
+              dfiInVaults += +vaultCollaterral.amount;
+          }
+        });
+      });
+    });
+
+    return dfiInVaults;
   }
 
   getMasternodeDfiUsd(): number {
@@ -127,8 +150,16 @@ export class ValueComponent implements OnInit, OnChanges {
     return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdc?.priceA;
   }
 
+  isUsdInPortfolio(): boolean {
+    return this.wallet?.usd > 0 || this.wallet?.usdInUsdPool > 0 || this.wallet?.usdInTslaPool > 0;
+  }
+
+  getUsdCount(): number {
+    return this.wallet?.usdInUsdPool + this.wallet?.usd + this.wallet?.usdInTslaPool;
+  }
+
   getUsdValueUsd(): number {
-    return (this.wallet?.usdInUsdPool + this.wallet?.usd + this.wallet.usdInTslaPool) * this.getUsdPriceOfStockPools(this.poolUsd);
+    return this. getUsdCount() * this.getUsdPriceOfStockPools(this.poolUsd);
   }
 
   getTslaValueUsd(): number {
@@ -568,7 +599,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   private getColorsOverallValue(dataBtc: Data, dataEth: Data, dataUsdt: Data, dataUsdc: Data, dataUsd: Data, dataLtc: Data,
-                                       dataDoge: Data, dataBch: Data, dataTsla: Data, dataDfi: Data): Array<string> {
+                                dataDoge: Data, dataBch: Data, dataTsla: Data, dataDfi: Data): Array<string> {
     const incomeNumbers = new Array<string>();
 
     if (dataBtc.value > 0) {
@@ -605,8 +636,9 @@ export class ValueComponent implements OnInit, OnChanges {
     return incomeNumbers;
   }
 
-  private getLabelsOverallValue(dataBtc: Data, allValue: number, dataEth: Data, dataUsdt: Data, dataUsdc: Data, dataUsd: Data, dataLtc: Data, dataDoge: Data,
-                                dataBch: Data, dataTsla: Data, dataDfi: Data): Array<string> {
+  private getLabelsOverallValue(dataBtc: Data, allValue: number, dataEth: Data, dataUsdt: Data, dataUsdc: Data,
+                                dataUsd: Data, dataLtc: Data, dataDoge: Data, dataBch: Data, dataTsla: Data,
+                                dataDfi: Data): Array<string> {
 
     const incomeNumbers = new Array<string>();
     if (this.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {

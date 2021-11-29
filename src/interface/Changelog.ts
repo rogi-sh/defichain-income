@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.25.0 - 29.11.2021';
+    this.log.comment = 'Add Vault Support for adresses, Small fixes in value with tesla and usd pools';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.24.8 - 28.11.2021';
     this.log.comment = 'Fix small amounts in value chart';
     this.logs.push(this.log);

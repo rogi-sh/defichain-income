@@ -18,7 +18,7 @@ import {
   PoolUsdcOut,
   Stats, Rewards, PoolUsdOut, PoolTslaOut,
 } from '@interfaces/Dex';
-import { Wallet, WalletDto } from '@interfaces/Data';
+import { AddressVaults, Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 import { CountdownComponent } from 'ngx-countdown';
@@ -128,6 +128,8 @@ export class AppComponent implements OnInit {
   masternodeFreezer10 = false;
   mamonKey: string;
   avgApr = 0;
+
+  vaultsOfAllAddresses = new Array<AddressVaults>();
 
   correlationDays = 365;
   correlationDaysKey = 'correlationDaysKey';
@@ -957,11 +959,17 @@ export class AppComponent implements OnInit {
 
   loadAllAccounts(): void {
     this.adressBalances = new Array<AddressBalance>();
+    this.vaultsOfAllAddresses = new Array<AddressVaults>();
     const requestArray = [];
 
     // normal adresses
     for (const ad of this.adresses) {
       requestArray.push(this.dataService.getAdressAccount(ad));
+    }
+
+    // vaults
+    for (const ad of this.adresses) {
+      requestArray.push(this.dataService.getAddressVaults(ad));
     }
 
     // minter adresses
@@ -973,15 +981,22 @@ export class AppComponent implements OnInit {
     if (requestArray.length > 0) {
       forkJoin(requestArray).subscribe(results => {
           results.forEach((value, i) => {
-            // minter address
-            if (i > this.adresses?.length - 1) {
-              const adress = this.getMasternodeAddressForIteration(i);
-              this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress),
-                this.isFrozen10(adress));
-            } else {
-              this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false,
-                false, false);
-            }
+            // normal address
+             if (i <= this.adresses?.length - 1) {
+               this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false,
+                 false, false);
+               // vaults address
+             } else if (i > this.adresses?.length - 1 && i <= this.adresses?.length * 2 - 1) {
+               if ((value as AddressVaults)?.data?.length > 0) {
+                 this.vaultsOfAllAddresses.push(value as AddressVaults);
+                 this.addTokenFromVaults(value as AddressVaults, this.getVaultAddressForIteration(i));
+               }
+               // minter address
+             } else if (i > (this.adresses?.length * 2) - 1) {
+               const adress = this.getMasternodeAddressForIteration(i);
+               this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress),
+                 this.isFrozen10(adress));
+             }
           });
 
           this.loadDex();
@@ -1068,7 +1083,63 @@ export class AppComponent implements OnInit {
   }
 
   getMasternodeAddressForIteration(i: number): string {
-    return this.adressesMasternodes[i - this.adresses?.length];
+    return this.adressesMasternodes[i - this.adresses?.length * 2];
+  }
+
+  getVaultAddressForIteration(i: number): string {
+    return this.adresses[i - this.adresses?.length];
+  }
+
+  addTokenFromVaults(vaultsOfAddress: AddressVaults, address: string): void {
+
+    if (!this.getAddressBalance(address)) {
+      const aB = new AddressBalance();
+      aB.address = address;
+      aB.masternode = false;
+      aB.freezed5 = false;
+      aB.freezed10 = false;
+      this.adressBalances.push(aB);
+    }
+
+    vaultsOfAddress.data.forEach(vault => {
+      vault.collateralAmounts.forEach(col => {
+      switch (col.symbolKey) {
+        case 'DFI': {
+          this.wallet.dfi += +col.amount;
+          this.getAddressBalance(address).dfiTokens += +col.amount;
+          break;
+        }
+        case 'BTC': {
+          this.wallet.btc += +col.amount;
+          this.getAddressBalance(address).btcToken += +col.amount;
+          break;
+        }
+        case 'ETH': {
+          this.wallet.eth += +col.amount;
+          this.getAddressBalance(address).ethToken += +col.amount;
+          break;
+        }
+        case 'USDT': {
+          this.wallet.usdt += +col.amount;
+          this.getAddressBalance(address).usdtToken += +col.amount;
+          break;
+        }
+        case 'USDC': {
+          this.wallet.usdc += +col.amount;
+          this.getAddressBalance(address).usdcToken += +col.amount;
+          break;
+        }
+        case 'DUSD': {
+          this.wallet.usd += +col.amount;
+          this.getAddressBalance(address).usdToken += +col.amount;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      });
+    });
   }
 
   addCoinsAndTokensToWallet(accounts: Array<SupernodeAccount>, address: string, masternode: boolean, freezed5: boolean,
@@ -1195,8 +1266,6 @@ export class AppComponent implements OnInit {
         }
       }
     });
-
-
   }
 
   getAddressBalance(address: string): AddressBalance {
