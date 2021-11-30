@@ -153,7 +153,9 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getStockPools(): Array<Pool> {
-    return this.stocksPools;
+
+    return this.stocksPools.filter(f => f?.totalLiquidityUsd > 0 && f?.tokenASymbol
+      && +f?.reserveA > 0 && +f?.reserveB > 0);
   }
 
   getCryptoPools(): Array<Pool> {

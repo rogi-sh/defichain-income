@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.26.1 - 30.11.2021';
+    this.log.comment = 'DEX Table to the end because too large, small fix if stock pools not available';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.26.0 - 30.11.2021';
     this.log.comment = 'Add more stocks to dex, technical improvements for faster pool add in future';
     this.logs.push(this.log);
