@@ -105,7 +105,7 @@
 
           <div class="text-xl relative">
             <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-              {{isIncognitoModeOn ? '****' : wallet?.dfi | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getDfiCountWallet()| number: '1.2-2' }}
               <br/>
               <div
                 class="text-xs text-gray-400 dark:text-gray-300"

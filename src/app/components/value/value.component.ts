@@ -93,7 +93,11 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getDfiCountWalletUsd(): number {
-    return this.wallet?.dfi * this.poolBtc?.priceB;
+    return this.getDfiCountWallet() * this.poolBtc?.priceB;
+  }
+
+  getDfiCountWallet(): number {
+    return this.wallet?.dfi - this.getDfiCountVaults();
   }
 
   getDfiCountVaults(): number {
