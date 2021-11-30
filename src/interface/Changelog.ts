@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '7.26.3 - 30.11.2021';
-    this.log.comment = 'Fix overall USD not included usd and tesla';
+    this.log.comment = 'Fix overall USD not included usd and tesla, small fixes';
     this.logs.push(this.log);
 
     this.log = new Log();
