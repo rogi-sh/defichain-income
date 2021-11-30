@@ -236,8 +236,8 @@ export class AppComponent implements OnInit {
   poolPdbcOut: PoolPdbcOut = new PoolPdbcOut();
   anteilAmPoolPdbc: number;
 
-  cryptoPools = new Array<Pool>();
-  stocksPools = new Array<Pool>();
+  cryptoPools: Array<Pool>;
+  stocksPools: Array<Pool>;
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
@@ -896,6 +896,9 @@ export class AppComponent implements OnInit {
   }
 
   private parsePoolsAndComputeOutcome(pools: Array<Pool> , poolPairs: DexPoolPair): void {
+
+    this.cryptoPools = new Array<Pool>();
+    this.stocksPools = new Array<Pool>();
     this.extractPools(pools);
 
     // compute correct price of dfi
@@ -1933,7 +1936,7 @@ export class AppComponent implements OnInit {
   }
 
   getUsdValueUsd(): number {
-    return (this.wallet?.usdInUsdPool + this.wallet?.usd + this.wallet.usdInTslaPool) * this.getUsdPriceOfStockPools(this.poolUsd);
+    return (this.wallet?.usdInUsdPool + this.wallet?.usd + this.wallet?.usdInTslaPool) * this.getUsdPriceOfStockPools(this.poolUsd);
   }
 
   getTslaValueUsd(): number {
