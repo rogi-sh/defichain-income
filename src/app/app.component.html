@@ -972,7 +972,7 @@
               <h1 class="text-3xl mb-4 text-pink-500">DEX</h1>
 
               <div class="overflow-x-auto sm:overflow-visible max-w-full">
-                <app-dex-statistics
+                <app-dex-statistics *ngIf='cryptoPools && stocksPools'
                   [fiat]="fiat"
                   [oceanStats]="oceanStats"
                   [poolBtc]="poolBtc"
@@ -983,7 +983,8 @@
                   [poolDoge]="poolDoge"
                   [poolBch]="poolBch"
                   [poolUsd]='poolUsd'
-                  [poolTsla]='poolTsla'
+                  [stocksPools]='stocksPools'
+                  [cryptoPools]='cryptoPools'
                   [stakingApyCake]="stakingApyCake"
                   [stakingApyMN]="stakingApyMN"
                   [MNCount]="masternodeCount"
@@ -2409,7 +2410,7 @@
                   ></app-value>
                 </div>
                 <div class="lg:col-span-2 overflow-x-auto">
-                  <app-dex-statistics
+                  <app-dex-statistics *ngIf='cryptoPools && stocksPools'
                     [fiat]="fiat"
                     [oceanStats]="oceanStats"
                     [poolBtc]="poolBtc"
@@ -2420,7 +2421,8 @@
                     [poolDoge]="poolDoge"
                     [poolBch]="poolBch"
                     [poolUsd]='poolUsd'
-                    [poolTsla]='poolTsla'
+                    [stocksPools]='stocksPools'
+                    [cryptoPools]='cryptoPools'
                     [stakingApyCake]="stakingApyCake"
                     [stakingApyMN]="stakingApyMN"
                     [MNCount]="masternodeCount"

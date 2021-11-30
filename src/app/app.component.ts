@@ -16,7 +16,17 @@ import {
   PoolPair,
   PoolUsdtOut,
   PoolUsdcOut,
-  Stats, Rewards, PoolUsdOut, PoolTslaOut,
+  Stats,
+  Rewards,
+  PoolUsdOut,
+  PoolTslaOut,
+  PoolQqqOut,
+  PoolSpyOut,
+  PoolPltrOut,
+  PoolSlvOut,
+  PoolAaplOut,
+  PoolGldOut,
+  PoolGmeOut, PoolGooglOut, PoolArkkOut, PoolBabaOut, PoolVnqOut, PoolUrthOut, PoolTltOut, PoolPdbcOut,
 } from '@interfaces/Dex';
 import { AddressVaults, Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
@@ -169,6 +179,65 @@ export class AppComponent implements OnInit {
   poolTsla: Pool;
   poolTslaOut: PoolTslaOut = new PoolTslaOut();
   anteilAmPoolTsla: number;
+
+  poolQqq: Pool;
+  poolQqqOut: PoolQqqOut = new PoolQqqOut();
+  anteilAmPoolQqq: number;
+
+  poolSpy: Pool;
+  poolSpyOut: PoolSpyOut = new PoolSpyOut();
+  anteilAmPoolSpy: number;
+
+  poolPltr: Pool;
+  poolPltrOut: PoolPltrOut = new PoolPltrOut();
+  anteilAmPoolPltr: number;
+
+  poolSlv: Pool;
+  poolSlvOut: PoolSlvOut = new PoolSlvOut();
+  anteilAmPoolSlv: number;
+
+  poolAapl: Pool;
+  poolAaplOut: PoolAaplOut = new PoolAaplOut();
+  anteilAmPoolAapl: number;
+
+  poolGld: Pool;
+  poolGldOut: PoolGldOut = new PoolGldOut();
+  anteilAmPoolGld: number;
+
+  poolGme: Pool;
+  poolGmeOut: PoolGmeOut = new PoolGmeOut();
+  anteilAmPoolGme: number;
+
+  poolGoogl: Pool;
+  poolGooglOut: PoolGooglOut = new PoolGooglOut();
+  anteilAmPoolGoogl: number;
+
+  poolArkk: Pool;
+  poolArkkOut: PoolArkkOut = new PoolArkkOut();
+  anteilAmPoolArkk: number;
+
+  poolBaba: Pool;
+  poolBabaOut: PoolBabaOut = new PoolBabaOut();
+  anteilAmPoolBaba: number;
+
+  poolVnq: Pool;
+  poolVnqOut: PoolVnqOut = new PoolVnqOut();
+  anteilAmPoolVnq: number;
+
+  poolUrth: Pool;
+  poolUrthOut: PoolUrthOut = new PoolUrthOut();
+  anteilAmPoolUrth: number;
+
+  poolTlt: Pool;
+  poolTltOut: PoolTltOut = new PoolTltOut();
+  anteilAmPoolTlt: number;
+
+  poolPdbc: Pool;
+  poolPdbcOut: PoolPdbcOut = new PoolPdbcOut();
+  anteilAmPoolPdbc: number;
+
+  cryptoPools = new Array<Pool>();
+  stocksPools = new Array<Pool>();
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
@@ -840,13 +909,59 @@ export class AppComponent implements OnInit {
     this.setFromPoolPair(this.poolLtc, poolPairs);
     this.setFromPoolPair(this.poolDoge, poolPairs);
     this.setFromPoolPair(this.poolBch, poolPairs);
+
+    this.createCryptoPoolsArray();
+
     if (this.poolUsd) {
       this.setFromPoolPair(this.poolUsd, poolPairs);
     }
-
     if (this.poolTsla) {
       this.setFromPoolPair(this.poolTsla, poolPairs);
     }
+    if (this.poolQqq) {
+      this.setFromPoolPair(this.poolQqq, poolPairs);
+    }
+    if (this.poolSpy) {
+      this.setFromPoolPair(this.poolSpy, poolPairs);
+    }
+    if (this.poolPltr) {
+      this.setFromPoolPair(this.poolPltr, poolPairs);
+    }
+    if (this.poolSlv) {
+      this.setFromPoolPair(this.poolSlv, poolPairs);
+    }
+    if (this.poolAapl) {
+      this.setFromPoolPair(this.poolAapl, poolPairs);
+    }
+    if (this.poolGld) {
+      this.setFromPoolPair(this.poolGld, poolPairs);
+    }
+    if (this.poolGme) {
+      this.setFromPoolPair(this.poolGme, poolPairs);
+    }
+    if (this.poolGoogl) {
+      this.setFromPoolPair(this.poolGoogl, poolPairs);
+    }
+    if (this.poolArkk) {
+      this.setFromPoolPair(this.poolArkk, poolPairs);
+    }
+    if (this.poolBaba) {
+      this.setFromPoolPair(this.poolBaba, poolPairs);
+    }
+    if (this.poolVnq) {
+      this.setFromPoolPair(this.poolVnq, poolPairs);
+    }
+    if (this.poolUrth) {
+      this.setFromPoolPair(this.poolUrth, poolPairs);
+    }
+    if (this.poolTlt) {
+      this.setFromPoolPair(this.poolTlt, poolPairs);
+    }
+    if (this.poolPdbc) {
+      this.setFromPoolPair(this.poolPdbc, poolPairs);
+    }
+
+    this.createStockArray();
 
     this.computeRewardsPerBlockInPools();
 
@@ -892,6 +1007,50 @@ export class AppComponent implements OnInit {
     this.poolBch = pools.find(x => x.poolPairId === '12');
     this.poolUsd = pools.find(x => x.poolPairId === '17');
     this.poolTsla = pools.find(x => x.poolPairId === '18');
+    this.poolQqq = pools.find(x => x.poolPairId === '39');
+    this.poolSpy = pools.find(x => x.poolPairId === '38');
+    this.poolPltr = pools.find(x => x.poolPairId === '35');
+    this.poolSlv = pools.find(x => x.poolPairId === '46');
+    this.poolAapl = pools.find(x => x.poolPairId === '36');
+    this.poolGld = pools.find(x => x.poolPairId === '43');
+    this.poolGme = pools.find(x => x.poolPairId === '25');
+    this.poolGoogl = pools.find(x => x.poolPairId === '32');
+    this.poolArkk = pools.find(x => x.poolPairId === '42');
+    this.poolBaba = pools.find(x => x.poolPairId === '33');
+    this.poolVnq = pools.find(x => x.poolPairId === '41');
+    this.poolUrth = pools.find(x => x.poolPairId === '44');
+    this.poolTlt = pools.find(x => x.poolPairId === '45');
+    this.poolPdbc = pools.find(x => x.poolPairId === '40');
+  }
+
+  private createStockArray(): void {
+    this.stocksPools.push(this.poolUsd);
+    this.stocksPools.push(this.poolTsla);
+    this.stocksPools.push(this.poolQqq);
+    this.stocksPools.push(this.poolSpy);
+    this.stocksPools.push(this.poolPltr);
+    this.stocksPools.push(this.poolSlv);
+    this.stocksPools.push(this.poolAapl);
+    this.stocksPools.push(this.poolGld);
+    this.stocksPools.push(this.poolGme);
+    this.stocksPools.push(this.poolGoogl);
+    this.stocksPools.push(this.poolArkk);
+    this.stocksPools.push(this.poolBaba);
+    this.stocksPools.push(this.poolVnq);
+    this.stocksPools.push(this.poolUrth);
+    this.stocksPools.push(this.poolTlt);
+    this.stocksPools.push(this.poolPdbc);
+  }
+
+  private createCryptoPoolsArray(): void {
+    this.cryptoPools.push(this.poolBtc);
+    this.cryptoPools.push(this.poolEth);
+    this.cryptoPools.push(this.poolLtc);
+    this.cryptoPools.push(this.poolBch);
+    this.cryptoPools.push(this.poolLtc);
+    this.cryptoPools.push(this.poolDoge);
+    this.cryptoPools.push(this.poolUsdt);
+    this.cryptoPools.push(this.poolUsdc);
   }
 
   private computeRewardsPerBlockInPools(): void {

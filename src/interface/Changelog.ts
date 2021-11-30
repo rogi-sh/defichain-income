@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.26.0 - 30.11.2021';
+    this.log.comment = 'Add more stocks to dex, technical improvements for faster pool add in future';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.25.0 - 29.11.2021';
     this.log.comment = 'Add Vault Support for adresses, Small fixes in value with tesla and usd pools';
     this.logs.push(this.log);

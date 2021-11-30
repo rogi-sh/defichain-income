@@ -123,6 +123,34 @@ export class PoolUsdOut extends Outcome {}
 
 export class PoolTslaOut extends Outcome {}
 
+export class PoolQqqOut extends Outcome {}
+
+export class PoolSpyOut extends Outcome {}
+
+export class PoolPltrOut extends Outcome {}
+
+export class PoolSlvOut extends Outcome {}
+
+export class PoolAaplOut extends Outcome {}
+
+export class PoolGldOut extends Outcome {}
+
+export class PoolGmeOut extends Outcome {}
+
+export class PoolGooglOut extends Outcome {}
+
+export class PoolArkkOut extends Outcome {}
+
+export class PoolBabaOut extends Outcome {}
+
+export class PoolVnqOut extends Outcome {}
+
+export class PoolUrthOut extends Outcome {}
+
+export class PoolTltOut extends Outcome {}
+
+export class PoolPdbcOut extends Outcome {}
+
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}

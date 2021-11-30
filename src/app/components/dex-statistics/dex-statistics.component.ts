@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
 import {Correlation, Pool, Stats} from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
-import { OceanStats } from '@interfaces/Staking'
+import { OceanStats } from '@interfaces/Staking';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -15,34 +15,15 @@ export class DexStatisticsComponent implements OnInit {
   fiat: string;
 
   @Input()
-  oceanStats: OceanStats;
+  oceanStats!: OceanStats;
 
+  // Crypto
   @Input()
-  poolBtc: Pool;
+  cryptoPools!: Array<Pool>;
 
+  // Stocks
   @Input()
-  poolEth: Pool;
-
-  @Input()
-  poolUsdt: Pool;
-
-  @Input()
-  poolUsdc: Pool;
-
-  @Input()
-  poolLtc: Pool;
-
-  @Input()
-  poolDoge: Pool;
-
-  @Input()
-  poolBch: Pool;
-
-  @Input()
-  poolUsd: Pool;
-
-  @Input()
-  poolTsla: Pool;
+  stocksPools!: Array<Pool>;
 
   @Input()
   stakingApyMN: number;
@@ -171,6 +152,14 @@ export class DexStatisticsComponent implements OnInit {
     return releases.reverse();
   }
 
+  getStockPools(): Array<Pool> {
+    return this.stocksPools;
+  }
+
+  getCryptoPools(): Array<Pool> {
+    return this.cryptoPools;
+  }
+
   getLatestReleaseApp(): Release {
     return this.releasesApp[0];
   }
@@ -231,8 +220,17 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getDexDFI(): number {
-    return +this.poolBtc?.reserveB + +this.poolEth?.reserveB + +this.poolLtc?.reserveB + +this.poolUsdt?.reserveB +
-      +this.poolUsdc?.reserveB + +this.poolDoge?.reserveB;
+    let dfi = 0;
+
+    if (!this.cryptoPools) {
+      return dfi;
+    }
+
+    this.cryptoPools?.forEach(c => {
+      dfi += +c?.reserveB;
+    });
+
+    return dfi;
   }
 
   getTotalDFILocked(): number {
@@ -241,6 +239,27 @@ export class DexStatisticsComponent implements OnInit {
 
   getApyFromApr(apr: number): number {
     return 100 * (Math.pow(1 + (apr / 100 / 52), 52) - 1);
+  }
+
+  getCorr(pool: string): number {
+
+    if ('BTC' === pool) {
+      return this.corr?.btcPool;
+    } else if ('ETH' === pool) {
+      return this.corr?.ethPool;
+    } else if ('LTC' === pool) {
+      return this.corr?.ltcPool;
+    } else if ('BCH' === pool) {
+      return this.corr?.bchPool;
+    } else if ('DOGE' === pool) {
+      return this.corr?.dogePool;
+    } else if ('USDT' === pool) {
+      return this.corr?.usdtPool;
+    } else if ('USDC' === pool) {
+      return this.corr?.usdcPool;
+    } else {
+      return this.corr?.tslaPool;
+    }
   }
 
 }
