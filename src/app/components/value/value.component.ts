@@ -163,7 +163,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdValueUsd(): number {
-    return this. getUsdCount() * this.getUsdPriceOfStockPools(this.poolUsd);
+    return this.getUsdCount() * this.getUsdPriceOfStockPools(this.poolUsd);
   }
 
   getTslaValueUsd(): number {
