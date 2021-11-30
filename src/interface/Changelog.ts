@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.26.3 - 30.11.2021';
+    this.log.comment = 'Fix overall USD not included usd and tesla';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.26.2 - 30.11.2021';
     this.log.comment = 'DFI in Wallet now shown without Vault DFI';
     this.logs.push(this.log);

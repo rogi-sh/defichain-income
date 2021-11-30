@@ -1897,7 +1897,7 @@ export class AppComponent implements OnInit {
 
   getAllValuesUsdPrice(): number {
     return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
-      + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd();
+      + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() + this.getTslaValueUsd() + this.getUsdValueUsd();
   }
 
   getBtcValueUsd(): number {
