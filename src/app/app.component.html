@@ -626,7 +626,7 @@
                     <div *ngIf="wallet?.usddfi > 0">USD-DFI</div>
                     <div *ngIf="wallet?.usddfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usddfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usddfi * poolUsd?.totalStaked/poolUsd?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usddfi * poolUsd?.totalLiquidityUsd/poolUsd?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
@@ -644,7 +644,7 @@
                     <div *ngIf="wallet?.tslausd > 0">TSLA-DFI</div>
                     <div *ngIf="wallet?.tslausd > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.tslausd | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.tslausd * poolTsla?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.tslausd * poolTsla?.totalLiquidityUsd/poolTsla?.totalLiquidityLpToken"></app-price></span>
                     </div>
                   </div>
                 </div>
