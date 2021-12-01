@@ -901,11 +901,11 @@ export class AppComponent implements OnInit {
     this.stocksPools = new Array<Pool>();
     this.extractPools(pools);
 
+    this.setFromPoolPair(this.poolBtc, poolPairs);
     // compute correct price of dfi
     this.priceDFICEX = this.poolBtc.priceB;
-    this.poolBtc.priceB = this.poolBtc.priceA / (+this.poolBtc.reserveB / +this.poolBtc.reserveA);
+    this.poolBtc.priceB = this.poolBtc.totalLiquidityUsd / +this.poolBtc.reserveB / 2;
 
-    this.setFromPoolPair(this.poolBtc, poolPairs);
     this.setFromPoolPair(this.poolEth, poolPairs);
     this.setFromPoolPair(this.poolUsdc, poolPairs);
     this.setFromPoolPair(this.poolUsdt, poolPairs);
@@ -975,9 +975,14 @@ export class AppComponent implements OnInit {
     this.berechnePoolOutUsdt();
     this.berechnePoolOutUsdc();
     this.berechnePoolOutDoge();
-    this.berechnePoolOutUsd();
-    this.berechnePoolOutTsla();
 
+    if (this.poolUsd) {
+      this.berechnePoolOutUsd();
+    }
+
+    if (this.poolTsla) {
+      this.berechnePoolOutTsla();
+    }
     this.berechneStakingOut();
     this.berechneMNOut();
     this.berechnePoolOut();
@@ -1609,7 +1614,7 @@ export class AppComponent implements OnInit {
   berechnePoolOut(): void {
     this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin
       + this.poolUsdtOut.dfiPerMin + this.poolUsdcOut.dfiPerMin + this.poolLtcOut.dfiPerMin
-      + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin + this.poolUsdOut.dfiPerMin + this.poolTslaOut.dfiPerMin;
+      + this.poolDogeOut.dfiPerMin + this.poolBchOut.dfiPerMin + this.poolUsdOut?.dfiPerMin + this.poolTslaOut?.dfiPerMin;
     this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
       + this.poolUsdtOut.dfiPerHour + this.poolUsdcOut.dfiPerHour + this.poolLtcOut.dfiPerHour
       + this.poolDogeOut.dfiPerHour + this.poolBchOut.dfiPerHour + this.poolUsdOut.dfiPerHour + this.poolTslaOut.dfiPerHour;
@@ -1944,7 +1949,7 @@ export class AppComponent implements OnInit {
   }
 
   getUsdPriceOfStockPools(pool: Pool): number {
-    return pool?.totalLiquidityUsd / 2 / +pool?.reserveA;
+    return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
   }
 
   getDfiCount(): number {

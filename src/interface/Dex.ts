@@ -97,12 +97,12 @@ export class AddressBalance {
 }
 
 export class Outcome {
-  dfiPerMin: number;
-  dfiPerHour: number;
-  dfiPerDay: number;
-  dfiPerWeek: number;
-  dfiPerMonth: number;
-  dfiPerYear: number;
+  dfiPerMin = 0;
+  dfiPerHour = 0;
+  dfiPerDay = 0;
+  dfiPerWeek = 0;
+  dfiPerMonth = 0;
+  dfiPerYear = 0;
 }
 
 export class PoolBtcOut extends Outcome {}

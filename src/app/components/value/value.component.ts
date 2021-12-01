@@ -171,7 +171,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdPriceOfStockPools(pool: Pool): number {
-    return pool?.totalLiquidityUsd / 2 / +pool?.reserveA;
+    return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
   }
 
   getUsdtWalletValueUsd(): number {

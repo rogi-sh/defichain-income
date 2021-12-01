@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '7.26.5 - 1.12.2021';
+    this.log.comment = 'Fix stocks pool missing for income calc, fix price of dfi in btc pool';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '7.26.4 - 30.11.2021';
     this.log.comment = 'Fix lp token value';
     this.logs.push(this.log);
