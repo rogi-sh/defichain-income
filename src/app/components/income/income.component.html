@@ -200,6 +200,18 @@
               </span>
               BCH
             </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdInUsdPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUsdPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              USD
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.tslaInTslaPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilTslaPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              TSLA
+            </span>
           </span>
         </div>
 
