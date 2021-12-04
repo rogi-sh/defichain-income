@@ -1069,7 +1069,8 @@ export class AppComponent implements OnInit {
     this.poolUsdt.priceB = prices.defichain.fiat;
     this.poolUsdc.priceA = prices.tether.fiat;
     this.poolUsdc.priceB = prices.defichain.fiat;
-    this.poolBch.priceA = prices.bitcoin.fiat;
+    // TODO correct price from api
+    this.poolBch.priceA = 475.7;
     this.poolBch.priceB = prices.defichain.fiat;
   }
 
