@@ -54,6 +54,48 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolTslaOut!: Outcome;
 
   @Input()
+  poolSpyOut!: Outcome;
+
+  @Input()
+  poolQqqOut!: Outcome;
+
+  @Input()
+  poolPltrOut!: Outcome;
+
+  @Input()
+  poolSlvOut!: Outcome;
+
+  @Input()
+  poolAaplOut!: Outcome;
+
+  @Input()
+  poolGldOut!: Outcome;
+
+  @Input()
+  poolGmeOut!: Outcome;
+
+  @Input()
+  poolGooglOut!: Outcome;
+
+  @Input()
+  poolArkkOut!: Outcome;
+
+  @Input()
+  poolBabaOut!: Outcome;
+
+  @Input()
+  poolVnqOut!: Outcome;
+
+  @Input()
+  poolUrthOut!: Outcome;
+
+  @Input()
+  poolTltOut!: Outcome;
+
+  @Input()
+  poolPdbcOut!: Outcome;
+
+  @Input()
   poolBtc!: Pool;
 
   @Input()
@@ -99,6 +141,48 @@ export class IncomeComponent implements OnInit, OnChanges {
   getAnteilTslaPoolAnGesamtLM: number;
 
   @Input()
+  getAnteilQqqPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilSpyPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilPltrPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilSlvPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilAaplPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilGldPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilGmePoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilGooglPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilArkkPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilBabaPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilVnqPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilUrthPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilTltPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilPdbcPoolAnGesamtLM: number;
+
+  @Input()
   getDfiCountInLM: number;
 
   @Input()
@@ -139,54 +223,6 @@ export class IncomeComponent implements OnInit, OnChanges {
     return this.poolOut.dfiPerYear + this.stakingOut.dfiPerYear + this.masternodeOut.dfiPerYear;
   }
 
-  getDfiIncomePerMin(): number {
-    return this.stakingOut.dfiPerMin + this.poolOut.dfiPerMin;
-  }
-
-  getDfiIncomeValuePerMinUsd(): number {
-    return this.getDfiIncomePerMin() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerHour(): number {
-    return this.stakingOut.dfiPerHour + this.poolOut.dfiPerHour;
-  }
-
-  getDfiIncomeValuePerHourUsd(): number {
-    return this.getDfiIncomePerHour() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerDay(): number {
-    return this.stakingOut.dfiPerDay + this.poolOut.dfiPerDay;
-  }
-
-  getDfiIncomeValuePerDayUsd(): number {
-    return this.getDfiIncomePerDay() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerWeek(): number {
-    return this.stakingOut.dfiPerWeek + this.poolOut.dfiPerWeek;
-  }
-
-  getDfiIncomeValuePerWeekUsd(): number {
-    return this.getDfiIncomePerWeek() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerMonth(): number {
-    return this.stakingOut.dfiPerMonth + this.poolOut.dfiPerMonth;
-  }
-
-  getDfiIncomeValuePerMonthUsd(): number {
-    return this.getDfiIncomePerMonth() * this.poolBtc?.priceB;
-  }
-
-  getDfiIncomePerYear(): number {
-    return this.stakingOut.dfiPerYear + this.poolOut.dfiPerYear;
-  }
-
-  getDfiIncomeValuePerYearUsd(): number {
-    return this.getDfiIncomePerYear() * this.poolBtc?.priceB;
-  }
-
   getSeriesIncome(): Array<number> {
 
     const incomeNumbers = new Array<number>();
@@ -223,6 +259,48 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolTslaOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolTslaOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolSpyOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolSpyOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolQqqOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolQqqOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolPltrOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolPltrOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolSlvOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolSlvOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolAaplOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolAaplOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolGldOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolGldOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolGmeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolGmeOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolGooglOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolGooglOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolArkkOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolArkkOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolBabaOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolBabaOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolVnqOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolVnqOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolUrthOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolUrthOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolTltOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolTltOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolPdbcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolPdbcOut.dfiPerMonth * 100) / 100);
     }
 
     return incomeNumbers;
@@ -277,6 +355,49 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolTslaOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#cc0000');
     }
+    if (this.poolSpyOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#87CEFA');
+    }
+    if (this.poolQqqOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#87CEEB');
+    }
+    if (this.poolPltrOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#47484a');
+    }
+    if (this.poolSlvOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#aaa9ad');
+    }
+    if (this.poolAaplOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#A2AAAD');
+    }
+    if (this.poolGldOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#FFD700');
+    }
+    if (this.poolGmeOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#f84443');
+    }
+    if (this.poolGooglOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#4285F4');
+    }
+    if (this.poolArkkOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#00BFFF');
+    }
+    if (this.poolBabaOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#FF7300');
+    }
+    if (this.poolVnqOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#B0C4DE');
+    }
+    if (this.poolUrthOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#1E90FF');
+    }
+    if (this.poolTltOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#6495ED');
+    }
+    if (this.poolPdbcOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#1e1e1e');
+    }
+
 
     return incomeNumbers;
   }
@@ -318,6 +439,48 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolTslaOut.dfiPerMonth > 0) {
       incomeNumbers.push(`TSLA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolTslaOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolSpyOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`SPY-Pool - ${this.isIncognitoModeOn ? '****' : this.poolSpyOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolQqqOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`QQQ-Pool - ${this.isIncognitoModeOn ? '****' : this.poolQqqOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolPltrOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`PLTR-Pool - ${this.isIncognitoModeOn ? '****' : this.poolPltrOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolSlvOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`SLV-Pool - ${this.isIncognitoModeOn ? '****' : this.poolSlvOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolAaplOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`AAPL-Pool - ${this.isIncognitoModeOn ? '****' : this.poolAaplOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolGldOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`GLD-Pool - ${this.isIncognitoModeOn ? '****' : this.poolGldOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolGmeOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`GME-Pool - ${this.isIncognitoModeOn ? '****' : this.poolGmeOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolGooglOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`GOOGL-Pool - ${this.isIncognitoModeOn ? '****' : this.poolGooglOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolArkkOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`ARKK-Pool - ${this.isIncognitoModeOn ? '****' : this.poolArkkOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolBabaOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`BABA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolBabaOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolVnqOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`VNQ-Pool - ${this.isIncognitoModeOn ? '****' : this.poolVnqOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolUrthOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`URTH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUrthOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolTltOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`TLT-Pool - ${this.isIncognitoModeOn ? '****' : this.poolTltOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolPdbcOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`PDBC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolPdbcOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }

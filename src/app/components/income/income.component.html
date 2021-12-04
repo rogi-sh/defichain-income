@@ -212,6 +212,90 @@
               </span>
               TSLA
             </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.spyInSpyPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilSpyPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              SPY
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.qqqInQqqPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilQqqPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              SPY
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pltrInPltrPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilPltrPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              PLTR
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.slvInSlvPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilSlvPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              SLV
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.aaplInAaplPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilAaplPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              AAPL
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gldInGldPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGldPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GLD
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gmeInGmePool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGmePoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GME
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.googlInGooglPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGooglPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GOOGL
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.arkkInArkkPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilArkkPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              ARKK
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.babaInBabaPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilBabaPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              BABA
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.vnqInVnqPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilVnqPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              VNQ
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.urthInUrthPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUrthPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              URTH
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.tltInTltPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilTltPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              TLT
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pdbcInPdbcPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilPdbcPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              PDBC
+            </span>
           </span>
         </div>
 
@@ -261,6 +345,102 @@
               {{isIncognitoModeOn ? '****' : wallet?.bchInBchPool | number: "1.3-3"}}
             </div>
             BCH
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usdInUsdPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.usdInUsdPool | number: "1.3-3"}}
+            </div>
+            USD
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.tslaInTslaPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.tslaInTslaPool | number: "1.3-3"}}
+            </div>
+            TSLA
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.spyInSpyPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.spyInSpyPool | number: "1.3-3"}}
+            </div>
+            SPY
+          </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.qqqInQqqPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.qqqInQqqPool | number: "1.3-3"}}
+            </div>
+            QQQ
+          </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pltrInPltrPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.pltrInPltrPool | number: "1.3-3"}}
+            </div>
+            PLTR
+          </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.slvInSlvPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.slvInSlvPool | number: "1.3-3"}}
+            </div>
+            SLV
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.aaplInAaplPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.aaplInAaplPool | number: "1.3-3"}}
+            </div>
+            AAPL
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gldInGldPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.gldInGldPool | number: "1.3-3"}}
+            </div>
+            GLD
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gmeInGmePool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.gmeInGmePool | number: "1.3-3"}}
+            </div>
+            GME
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.googlInGooglPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.googlInGooglPool | number: "1.3-3"}}
+            </div>
+            GOOGL
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.arkkInArkkPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.arkkInArkkPool | number: "1.3-3"}}
+            </div>
+            ARKK
+          </span>
+          <span class="text-xl dark:text-gray-100" *ngIf="wallet?.babaInBabaPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.babaInBabaPool | number: "1.3-3"}}
+            </div>
+            BABA
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.vnqInVnqPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.vnqInVnqPool | number: "1.3-3"}}
+            </div>
+            VNQ
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.urthInUrthPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.urthInUrthPool | number: "1.3-3"}}
+            </div>
+            URTH
+          </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.tltInTltPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.tltInTltPool | number: "1.3-3"}}
+            </div>
+            TLT
+          </span>
+           <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pdbcInPdbcPool > 0">
+            <div class="text-pink-500 font-semibold inline-block">
+              {{isIncognitoModeOn ? '****' : wallet?.pdbcInPdbcPool | number: "1.3-3"}}
+            </div>
+            PDBC
           </span>
           <span class="text-xl dark:text-gray-100">
             <div class="text-pink-500 font-semibold inline-block">

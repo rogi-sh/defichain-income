@@ -2778,52 +2778,52 @@ export class AppComponent implements OnInit {
     return this.poolBchOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
   }
   getAnteilUsdPoolAnGesamtLM(): number {
-    return this.poolUsdOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolUsdOut.dfiPerDay > 0 ? this.poolUsdOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilTslaPoolAnGesamtLM(): number {
-    return this.poolTslaOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolTslaOut.dfiPerDay > 0 ? this.poolTslaOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilSpyPoolAnGesamtLM(): number {
-    return this.poolSpyOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolSpyOut.dfiPerDay > 0 ? this.poolSpyOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilQqqPoolAnGesamtLM(): number {
-    return this.poolQqqOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolQqqOut.dfiPerDay > 0 ?  this.poolQqqOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilPltrPoolAnGesamtLM(): number {
-    return this.poolPltrOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolPltrOut.dfiPerDay > 0 ? this.poolPltrOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilSlvPoolAnGesamtLM(): number {
-    return this.poolSlvOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolSlvOut.dfiPerDay > 0 ? this.poolSlvOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilAaplPoolAnGesamtLM(): number {
-    return this.poolAaplOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolAaplOut.dfiPerDay > 0 ? this.poolAaplOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilGldPoolAnGesamtLM(): number {
-    return this.poolGldOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolGldOut.dfiPerDay > 0 ? this.poolGldOut.dfiPerDay  / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilGmePoolAnGesamtLM(): number {
-    return this.poolGmeOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolGmeOut.dfiPerDay > 0 ? this.poolGmeOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilGooglPoolAnGesamtLM(): number {
-    return this.poolGooglOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolGooglOut.dfiPerDay > 0 ? this.poolGooglOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilArkkPoolAnGesamtLM(): number {
-    return this.poolArkkOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolArkkOut.dfiPerDay > 0 ? this.poolArkkOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilBabaPoolAnGesamtLM(): number {
-    return this.poolBabaOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolBabaOut.dfiPerDay > 0 ? this.poolBabaOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilVnqPoolAnGesamtLM(): number {
-    return this.poolVnqOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolVnqOut.dfiPerDay > 0 ?  this.poolVnqOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilUrthPoolAnGesamtLM(): number {
-    return this.poolUrthOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolUrthOut.dfiPerDay > 0 ? this.poolUrthOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilTltPoolAnGesamtLM(): number {
-    return this.poolTltOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolTltOut.dfiPerDay > 0 ? this.poolTltOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
   getAnteilPdbcPoolAnGesamtLM(): number {
-    return this.poolPdbcOut.dfiPerDay / this.getAllPoolDfIncome() * 100;
+    return this.poolPdbcOut.dfiPerDay >  0 ? this.poolPdbcOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
 
   allAddresses(): string [] {
