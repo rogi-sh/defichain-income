@@ -1073,6 +1073,9 @@ export class AppComponent implements OnInit {
 
   private setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
     pool.totalLiquidityLpToken = poolPairs[pool.id].totalLiquidity;
+    const splitted = poolPairs[pool.id].symbol.split('-');
+    pool.tokenASymbol = splitted[0];
+    pool.tokenBSymbol = splitted[1];
   }
 
   private extractPools(pools: DexPoolPair): void {

@@ -350,7 +350,7 @@
       <table class='max-w-full w-full rounded-md'>
         <thead class='bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b'>
         <tr>
-          <th class='text-left p-2'>{{ 'currency' | translate }}</th>
+          <th class='text-left p-2'>Pool</th>
           <th class='text-right p-2'>{{ 'price' | translate }}</th>
           <th class='text-right p-2'>{{ 'Pool TVL' | translate }}</th>
           <th class='text-right p-2'>{{ 'LP Token' | translate }}</th>
@@ -363,11 +363,12 @@
         </thead>
         <tbody>
 
-        <tr *ngFor='let cryptoPool of cryptoPools; let i = index'
+
+        <tr *ngFor='let cryptoPool of getCryptoPools(); let i = index'
             [ngClass]=" i % 2 ?  'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600'
              : 'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700' ">
 
-          <td class='p-2'>{{cryptoPool?.tokenASymbol}}</td>
+          <td class='p-2'>{{cryptoPool?.symbol}}</td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price>
           </td>
@@ -384,17 +385,32 @@
             {{getCorr(cryptoPool?.tokenASymbol)}}
           </td>
           <td class='text-right p-2'>
-            {{cryptoPool?.apy | number: '1.2-2' }}%
+            {{cryptoPool?.apr | number: '1.2-2' }}%
           </td>
           <td class='text-right p-2'>
-            {{getApyFromApr(cryptoPool?.apy) | number: '1.2-2' }}%
+            {{getApyFromApr(cryptoPool?.apr) | number: '1.2-2' }}%
           </td>
         </tr>
+        <tr class='dark:bg-green-400 hover:bg-blue-700 dark:hover:bg-green-400'>
+          <td class='p-2'></td>
+          <td class='text-right p-2'>
+          </td>
+          <td class='text-right p-2'>
+          </td>
+          <td class='text-right p-2'>
+          </td>
+          <td class='text-right p-2'>
+          </td>
+          <td class='text-right p-2'>
+          </td>
+          <td class='text-right p-2'>
 
+          </td>
+        </tr>
         <tr *ngFor='let stockPool of getStockPools(); let i = index'
             [ngClass]=" i % 2 ?  'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600'
              : 'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700' ">
-          <td class='p-2'>{{stockPool?.tokenASymbol}}</td>
+          <td class='p-2'>{{stockPool?.symbol}}</td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
           </td>
@@ -413,10 +429,10 @@
             {{getCorr(stockPool?.tokenASymbol)}}
           </td>
           <td class='text-right p-2'>
-            {{stockPool?.apy | number: '1.2-2' }}%
+            {{stockPool?.apr | number: '1.2-2' }}%
           </td>
           <td class='text-right p-2'>
-            {{getApyFromApr(stockPool?.apy) | number: '1.2-2' }}%
+            {{getApyFromApr(stockPool?.apr) | number: '1.2-2' }}%
           </td>
         </tr>
         </tbody>

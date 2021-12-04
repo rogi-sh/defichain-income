@@ -1213,14 +1213,6 @@
                 <app-dex-statistics *ngIf='cryptoPools && stocksPools'
                   [fiat]="fiat"
                   [oceanStats]="oceanStats"
-                  [poolBtc]="poolBtc"
-                  [poolEth]="poolEth"
-                  [poolUsdt]="poolUsdt"
-                  [poolUsdc]="poolUsdc"
-                  [poolLtc]="poolLtc"
-                  [poolDoge]="poolDoge"
-                  [poolBch]="poolBch"
-                  [poolUsd]='poolUsd'
                   [stocksPools]='stocksPools'
                   [cryptoPools]='cryptoPools'
                   [stakingApyCake]="stakingApyCake"
@@ -2537,6 +2529,49 @@
                                   <div *ngIf="getAddressBalance(a)?.tslaToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     TSLA: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tslaToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.qqqToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    QQQ: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.qqqToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.spyToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SPY: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.spyToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pltrToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PLTR: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pltrToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.slvToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SLV: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.slvToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.aaplToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    AAPL: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.aaplToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gldToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GLD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gldToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gmeToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GME: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gmeToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.googlToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GOOGL: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.googlToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.arkkToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ARKK: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.arkkToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.babaToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BABA: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.babaToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.vnqToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    VNQ: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.vnqToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.urthToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    URTH: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.urthToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tltToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TLT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tltToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pdbcToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PDBC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pdbcToken }}</div>
+
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -2564,6 +2599,48 @@
                                   <div *ngIf="getAddressBalance(a)?.tslausdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     TSLAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tslausdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.qqqusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    QQQUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.qqqusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.spyusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SPYUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.spyusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pltrusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PLTRUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pltrusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.slvusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SLVUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.slvusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.aaplusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    AAPLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.aaplusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gldusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GLDUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gldusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gmeusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GMEUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gmeusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.googlusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GOOGLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.googlusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.arkkusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ARKKUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.arkkusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.babausdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BABAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.babausdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.vnqusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    VNQUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.vnqusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.urthusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    URTHUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.urthusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tltusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TLTUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tltusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pdbcusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PDBCUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pdbcusdToken }}</div>
                                 </div>
                               </div>
 
@@ -2665,14 +2742,6 @@
                   <app-dex-statistics *ngIf='cryptoPools && stocksPools'
                     [fiat]="fiat"
                     [oceanStats]="oceanStats"
-                    [poolBtc]="poolBtc"
-                    [poolEth]="poolEth"
-                    [poolUsdt]="poolUsdt"
-                    [poolUsdc]="poolUsdc"
-                    [poolLtc]="poolLtc"
-                    [poolDoge]="poolDoge"
-                    [poolBch]="poolBch"
-                    [poolUsd]='poolUsd'
                     [stocksPools]='stocksPools'
                     [cryptoPools]='cryptoPools'
                     [stakingApyCake]="stakingApyCake"
