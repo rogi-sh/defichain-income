@@ -436,6 +436,20 @@
                     [poolBch]="poolBch"
                     [poolUsd]='poolUsd'
                     [poolTsla]='poolTsla'
+                    [poolAapl]='poolAapl'
+                    [poolArkk]='poolArkk'
+                    [poolBaba]='poolBaba'
+                    [poolGld]='poolGld'
+                    [poolGme]='poolGme'
+                    [poolGoogl]='poolGoogl'
+                    [poolPdbc]='poolPdbc'
+                    [poolPltr]='poolPltr'
+                    [poolQqq]='poolQqq'
+                    [poolSlv]='poolSlv'
+                    [poolSpy]='poolSpy'
+                    [poolTlt]='poolTlt'
+                    [poolUrth]='poolUrth'
+                    [poolVnq]='poolVnq'
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"
@@ -697,7 +711,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      BTC/DFI {{isIncognitoModeOn ? '****' : poolBtc?.apy | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockBtc | number: '1.2-2'}} DFI/Block
+                      BTC/DFI {{isIncognitoModeOn ? '****' : poolBtc?.apr | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockBtc | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -730,7 +744,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      ETH/DFI {{isIncognitoModeOn ? '****' : poolEth?.apy | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockEth | number: '1.2-2'}} DFI/Block
+                      ETH/DFI {{isIncognitoModeOn ? '****' : poolEth?.apr | number: '1.2-2' }}% APR - {{isIncognitoModeOn ? '****' : dfiProBlockEth | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -760,7 +774,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USDT/DFI {{poolUsdt?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsdt | number: '1.2-2'}}
+                      USDT/DFI {{poolUsdt?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUsdt | number: '1.2-2'}}
                       DFI/Block
                     </span>
                   </h2>
@@ -788,7 +802,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USDC/DFI {{poolUsdc?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsdc | number: '1.2-2'}}
+                      USDC/DFI {{poolUsdc?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUsdc | number: '1.2-2'}}
                       DFI/Block
                     </span>
                   </h2>
@@ -816,7 +830,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USD/DFI {{poolUsd?.apy | number: '1.2-2' }}% APR - {{dfiProBlockUsd | number: '1.2-2'}}
+                      USD/DFI {{poolUsd?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUsd | number: '1.2-2'}}
                       DFI/Block
                     </span>
                   </h2>
@@ -844,7 +858,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      LTC/DFI {{poolLtc?.apy | number: '1.2-2' }}% APR - {{dfiProBlockLtc | number: '1.2-2'}} DFI/Block
+                      LTC/DFI {{poolLtc?.apr | number: '1.2-2' }}% APR - {{dfiProBlockLtc | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -871,7 +885,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      DOGE/DFI {{poolDoge?.apy | number: '1.2-2' }}% APR - {{dfiProBlockDoge | number: '1.2-2'}}
+                      DOGE/DFI {{poolDoge?.apr | number: '1.2-2' }}% APR - {{dfiProBlockDoge | number: '1.2-2'}}
                       DFI/Block
                     </span>
                   </h2>
@@ -895,7 +909,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      BCH/DFI {{poolBch?.apy | number: '1.2-2' }}% APR - {{dfiProBlockBch | number: '1.2-2'}} DFI/Block
+                      BCH/DFI {{poolBch?.apr | number: '1.2-2' }}% APR - {{dfiProBlockBch | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -918,7 +932,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      TSLA/DFI {{poolTsla?.apy | number: '1.2-2' }}% APR - {{dfiProBlockTsla | number: '1.2-2'}} DFI/Block
+                      TSLA/DFI {{poolTsla?.apr | number: '1.2-2' }}% APR - {{dfiProBlockTsla | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>

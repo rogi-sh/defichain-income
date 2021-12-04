@@ -9,6 +9,37 @@ export interface DexPoolPair {
   '14': Pool;
   '17': Pool;
   '18': Pool;
+  '39': Pool;
+  '38': Pool;
+  '35': Pool;
+  '46': Pool;
+  '36': Pool;
+  '43': Pool;
+  '25': Pool;
+  '32': Pool;
+  '42': Pool;
+  '33': Pool;
+  '41': Pool;
+  '44': Pool;
+  '45': Pool;
+  '40': Pool;
+}
+
+export interface Prices {
+  bitcoin: PriceAsset;
+  tether: PriceAsset;
+  dogecoin: PriceAsset;
+  litecoin: PriceAsset;
+  ethereum: PriceAsset;
+  defichain: PriceAsset;
+  'bitcoin-cash': PriceAsset;
+}
+
+export class PriceAsset {
+  coin: string;
+  fiat: number;
+  idToken: string;
+  currency: string;
 }
 
 
@@ -21,7 +52,6 @@ export interface Pool {
   poolRewards: string [];
   rewardPct: number;
   pairLink: string;
-  apy: number;
   idTokenA: string;
   idTokenB: string;
   totalStaked: number;
@@ -40,6 +70,7 @@ export interface Pool {
   commission: number;
   reserveADivReserveB: number;
   reserveBDivReserveA: number;
+  id: string;
 }
 
 export class Stats {
@@ -82,7 +113,22 @@ export class AddressBalance {
   usdtToken: number;
   usdcToken: number;
   usdToken: number;
+
   tslaToken: number;
+  qqqToken: number;
+  spyToken: number;
+  pltrToken: number;
+  slvToken: number;
+  aaplToken: number;
+  gldToken: number;
+  gmeToken: number;
+  googlToken: number;
+  arkkToken: number;
+  babaToken: number;
+  vnqToken: number;
+  urthToken: number;
+  tltToken: number;
+  pdbcToken: number;
 
   btcdfiToken: number;
   ltcdfiToken: number;
@@ -92,7 +138,22 @@ export class AddressBalance {
   usdtdfiToken: number;
   usdcdfiToken: number;
   usddfiToken: number;
+
   tslausdToken: number;
+  qqqusdToken: number;
+  spyusdToken: number;
+  pltrusdToken: number;
+  slvusdToken: number;
+  aaplusdToken: number;
+  gldusdToken: number;
+  gmeusdToken: number;
+  googlusdToken: number;
+  arkkusdToken: number;
+  babausdToken: number;
+  vnqusdToken: number;
+  urthusdToken: number;
+  tltusdToken: number;
+  pdbcusdToken: number;
 
 }
 

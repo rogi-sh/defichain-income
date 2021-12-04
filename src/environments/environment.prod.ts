@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  listyieldfarming: 'https://supernode.saiive.live/api/v1/mainnet/DFI/list-yield-farming',
+  prices: 'https://supernode.saiive.live/api/v1/mainnet/DFI/coin-price/USD',
   listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/DFI/listpoolpairs',
   health: 'https://supernode.saiive.live/api/v1/health',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',

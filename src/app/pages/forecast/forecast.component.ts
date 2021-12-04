@@ -582,15 +582,15 @@ export class ForecastComponent implements OnInit, OnChanges {
 
     // Anteile berechnen je nachdem wie viel man in den Pools hat
     const average =
-      ((dfiBtcPart * 100 * this.poolBtc?.apy) +
-        (dfiEthPart * 100 * this.poolEth?.apy) +
-        (dfiUsdcPart * 100 * this.poolUsdc?.apy) +
-        (dfiBchPart * 100 * this.poolBch?.apy) +
-        (dfiDogePart * 100 * this.poolDoge?.apy) +
-        (dfiUsdtPart * 100 * this.poolUsdt?.apy) +
-        (dfiLtcPart * 100 * this.poolLtc?.apy) +
-        (dfiUsdPart * 100 * this.poolUsd?.apy) +
-        (dfiTslaPart * 100 * this.poolTsla?.apy) ) / 100;
+      ((dfiBtcPart * 100 * this.poolBtc?.apr) +
+        (dfiEthPart * 100 * this.poolEth?.apr) +
+        (dfiUsdcPart * 100 * this.poolUsdc?.apr) +
+        (dfiBchPart * 100 * this.poolBch?.apr) +
+        (dfiDogePart * 100 * this.poolDoge?.apr) +
+        (dfiUsdtPart * 100 * this.poolUsdt?.apr) +
+        (dfiLtcPart * 100 * this.poolLtc?.apr) +
+        (dfiUsdPart * 100 * this.poolUsd?.apr) +
+        (dfiTslaPart * 100 * this.poolTsla?.apr) ) / 100;
 
     return Math.round(average * 100) / 100;
   }
