@@ -47,6 +47,48 @@ export class CalculatorComponent implements OnInit {
   poolTsla: Pool;
 
   @Input()
+  poolQqq!: Pool;
+
+  @Input()
+  poolSpy!: Pool;
+
+  @Input()
+  poolPltr!: Pool;
+
+  @Input()
+  poolSlv!: Pool;
+
+  @Input()
+  poolAapl!: Pool;
+
+  @Input()
+  poolGld!: Pool;
+
+  @Input()
+  poolGme!: Pool;
+
+  @Input()
+  poolGoogl!: Pool;
+
+  @Input()
+  poolArkk!: Pool;
+
+  @Input()
+  poolBaba!: Pool;
+
+  @Input()
+  poolVnq!: Pool;
+
+  @Input()
+  poolUrth!: Pool;
+
+  @Input()
+  poolTlt!: Pool;
+
+  @Input()
+  poolPdbc!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -72,6 +114,48 @@ export class CalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockTsla;
+
+  @Input()
+  dfiProBlockQqq;
+
+  @Input()
+  dfiProBlockSpy;
+
+  @Input()
+  dfiProBlockPltr;
+
+  @Input()
+  dfiProBlockSlv;
+
+  @Input()
+  dfiProBlockAapl;
+
+  @Input()
+  dfiProBlockGld;
+
+  @Input()
+  dfiProBlockGme;
+
+  @Input()
+  dfiProBlockGoogl;
+
+  @Input()
+  dfiProBlockArkk;
+
+  @Input()
+  dfiProBlockBaba;
+
+  @Input()
+  dfiProBlockVnq;
+
+  @Input()
+  dfiProBlockUrth;
+
+  @Input()
+  dfiProBlockTlt;
+
+  @Input()
+  dfiProBlockPdbc;
 
   @Input()
   blocktimeInS;

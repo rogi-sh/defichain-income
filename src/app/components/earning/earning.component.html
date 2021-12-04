@@ -59,7 +59,7 @@
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerYear| number: '1.2-2'}} DFI -
        <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
-        <app-price *ngIf="!isIncognitoModeOn"e [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerYearUsd(out) "></app-price>
+        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerYearUsd(out) "></app-price>
       </span>
     </div>
   </div>

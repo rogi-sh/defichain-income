@@ -153,13 +153,11 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getStockPools(): Array<Pool> {
-
-    return this.stocksPools.filter(f => f?.totalLiquidityUsd > 0 && f?.tokenASymbol
-      && +f?.reserveA > 0 && +f?.reserveB > 0);
+    return this.stocksPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
   }
 
   getCryptoPools(): Array<Pool> {
-    return this.cryptoPools;
+    return this.cryptoPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
   }
 
   getLatestReleaseApp(): Release {

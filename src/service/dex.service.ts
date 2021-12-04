@@ -1,7 +1,7 @@
 import {Injectable } from '@angular/core';
 import {environment} from '@environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http'
-import {DexPoolPair, Pool } from '@interfaces/Dex';
+import { DexPoolPair, Pool, Prices } from '@interfaces/Dex'
 import {Observable} from 'rxjs';
 import {Blocks } from '@interfaces/Data';
 import {OceanStats} from '@interfaces/Staking';
@@ -13,8 +13,8 @@ export class Dex {
 
   constructor(private http: HttpClient) {  }
 
-  public getListyieldfarming(): Observable<Array<Pool>> {
-    return this.http.get<Array<Pool>>(environment.listyieldfarming);
+  public getPrices(): Observable<Prices> {
+    return this.http.get<Prices>(environment.prices);
   }
 
   public getStats(): Observable<OceanStats>  {
