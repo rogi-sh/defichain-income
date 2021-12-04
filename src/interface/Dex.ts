@@ -91,7 +91,7 @@ export class Rewards {
 }
 
 export class PoolPair {
-  dfi: number;
+  dfiOrUsdToken: number;
   poolPairToken: number;
 }
 

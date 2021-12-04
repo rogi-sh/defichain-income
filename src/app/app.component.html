@@ -976,7 +976,7 @@
                       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block"
                     >
                       <div>
-                        {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfi | number: '1.2-2'}} DFI
+                        {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                         / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolBtc, poolBtc)?.poolPairToken | number: '1.4-4'}} BTC
                       </div>
                     </div>
@@ -1009,7 +1009,7 @@
                     <div
                       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block"
                     >
-                    {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfi | number: '1.2-2'}} DFI
+                    {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                     / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolEth, poolEth)?.poolPairToken | number: '1.4-4'}} ETH </div>
                   </h3>
                   <br>
@@ -1037,7 +1037,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsdt| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfi | number: '1.2-2'}} DFI
+                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdt, poolUsdt)?.poolPairToken | number: '1.4-4'}} USDT </div>
                   </h3>
                   <br>
@@ -1065,7 +1065,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsdc| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdc, poolUsdc)?.dfi | number: '1.2-2'}} DFI
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdc, poolUsdc)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                       / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsdc, poolUsdc)?.poolPairToken | number: '1.4-4'}} USDC </div>
                   </h3>
                   <br>
@@ -1093,7 +1093,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolUsd| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsd, poolUsd)?.dfi | number: '1.2-2'}} DFI
+                      {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsd, poolUsd)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                       / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolUsd, poolUsd)?.poolPairToken | number: '1.4-4'}} USD </div>
                   </h3>
                   <br>
@@ -1120,7 +1120,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolLtc| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfi | number: '1.2-2'}} DFI
+                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolLtc, poolLtc)?.poolPairToken | number: '1.4-4'}} LTC </div>
                   </h3>
                   <br>
@@ -1148,7 +1148,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolDoge| number: '1.4-4' }} %</span>
                     <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfi | number: '1.2-2'}} DFI
+                       {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                        / {{isIncognitoModeOn ? '****' : getPoolPairFromShare(anteilAmPoolDoge, poolDoge)?.poolPairToken | number: '1.4-4'}} DOGE </div>
                   </h3>
                   <br>
@@ -1171,7 +1171,7 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolBch| number: '1.4-4' }} %</span>
                     <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                       {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfi | number: '1.2-2'}} DFI
+                       {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.dfiOrUsdToken | number: '1.2-2'}} DFI
                        / {{getPoolPairFromShare(anteilAmPoolBch, poolBch)?.poolPairToken | number: '1.4-4'}} BCH </div>
                   </h3>
                   <br>
@@ -1184,7 +1184,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      TSLA/DFI {{poolTsla?.apr | number: '1.2-2' }}% APR - {{dfiProBlockTsla | number: '1.2-2'}} DFI/Block
+                      TSLA/USD {{poolTsla?.apr | number: '1.2-2' }}% APR - {{dfiProBlockTsla | number: '1.2-2'}} DFI/Block
                     </span>
                   </h2>
                   <br>
@@ -1194,12 +1194,334 @@
                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
                       {{anteilAmPoolTsla| number: '1.4-4' }} %</span>
                     <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
-                      {{getPoolPairFromShare(anteilAmPoolTsla, poolTsla)?.dfi | number: '1.2-2'}} DFI
+                      {{getPoolPairFromShare(anteilAmPoolTsla, poolTsla)?.dfiOrUsdToken | number: '1.2-2'}} USD
                       / {{getPoolPairFromShare(anteilAmPoolTsla, poolTsla)?.poolPairToken | number: '1.4-4'}} TSLA </div>
                   </h3>
                   <br>
                   <app-earning
                     [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolTslaOut" [pool]="poolTsla" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.spyInSpyPool > 0 || wallet?.usdInSpyPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      SPY/USD {{poolSpy?.apr | number: '1.2-2' }}% APR - {{dfiProBlockSpy | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolSpy| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolSpy, poolSpy)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolSpy, poolSpy)?.poolPairToken | number: '1.4-4'}} SPY </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolSpyOut" [pool]="poolSpy" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.qqqInQqqPool > 0 || wallet?.usdInQqqPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      QQQ/USD {{poolQqq?.apr | number: '1.2-2' }}% APR - {{dfiProBlockQqq | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolQqq| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolQqq, poolQqq)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolQqq, poolQqq)?.poolPairToken | number: '1.4-4'}} QQQ </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolQqqOut" [pool]="poolQqq" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.pltrInPltrPool > 0 || wallet?.usdInPltrPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      PLTR/USD {{poolPltr?.apr | number: '1.2-2' }}% APR - {{dfiProBlockPltr | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolPltr| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolPltr, poolPltr)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolPltr, poolPltr)?.poolPairToken | number: '1.4-4'}} PLTR </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolPltrOut" [pool]="poolPltr" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.slvInSlvPool > 0 || wallet?.usdInSlvPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      SLV/USD {{poolSlv?.apr | number: '1.2-2' }}% APR - {{dfiProBlockSlv | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolSlv| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolSlv, poolSlv)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolSlv, poolSlv)?.poolPairToken | number: '1.4-4'}} SLV </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolSlvOut" [pool]="poolSlv" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.aaplInAaplPool > 0 || wallet?.usdInAaplPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      AAPL/USD {{poolAapl?.apr | number: '1.2-2' }}% APR - {{dfiProBlockAapl | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolAapl| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolAapl, poolAapl)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolAapl, poolAapl)?.poolPairToken | number: '1.4-4'}} AAPL </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolAaplOut" [pool]="poolAapl" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.gldInGldPool > 0 || wallet?.usdInGldPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      GLD/USD {{poolGld?.apr | number: '1.2-2' }}% APR - {{dfiProBlockGld | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolGld| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolGld, poolGld)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolGld, poolGld)?.poolPairToken | number: '1.4-4'}} GLD </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolGldOut" [pool]="poolGld" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.gmeInGmePool > 0 || wallet?.usdInGmePool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      GME/USD {{poolGme?.apr | number: '1.2-2' }}% APR - {{dfiProBlockGme | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolGme| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolGme, poolGme)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolGme, poolGme)?.poolPairToken | number: '1.4-4'}} GME </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolGmeOut" [pool]="poolGme" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.googlInGooglPool > 0 || wallet?.usdInGooglPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      GOOGL/USD {{poolGoogl?.apr | number: '1.2-2' }}% APR - {{dfiProBlockGoogle | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolGoogl| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolGoogl, poolGoogl)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolGoogl, poolGoogl)?.poolPairToken | number: '1.4-4'}} GOOGL </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolGooglOut" [pool]="poolGoogl" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.arkkInArkkPool > 0 || wallet?.usdInArkkPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      ARKK/USD {{poolArkk?.apr | number: '1.2-2' }}% APR - {{dfiProBlockArkk | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolArkk| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolArkk, poolArkk)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolArkk, poolArkk)?.poolPairToken | number: '1.4-4'}} ARKK </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolArkkOut" [pool]="poolArkk" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.babaInBabaPool > 0 || wallet?.usdInBabaPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      BABA/USD {{poolBaba?.apr | number: '1.2-2' }}% APR - {{dfiProBlockBaba | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolBaba| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolBaba, poolBaba)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolBaba, poolBaba)?.poolPairToken | number: '1.4-4'}} BABA </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolBabaOut" [pool]="poolBaba" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.vnqInVnqPool > 0 || wallet?.usdInVnqPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      VNQ/USD {{poolVnq?.apr | number: '1.2-2' }}% APR - {{dfiProBlockVnq | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolVnq| number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolVnq, poolVnq)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolVnq, poolVnq)?.poolPairToken | number: '1.4-4'}} VNQ </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolVnqOut" [pool]="poolVnq" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.urthInUrthPool > 0 || wallet?.usdInUrthPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      URTH/USD {{poolUrth?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUrth | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolUrth | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolUrth, poolUrth)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolUrth, poolUrth)?.poolPairToken | number: '1.4-4'}} URTH </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolUrthOut" [pool]="poolUrth" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.tltInTltPool > 0 || wallet?.usdInTltPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      TLT/USD {{poolTlt?.apr | number: '1.2-2' }}% APR - {{dfiProBlockTlt | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolTlt | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolTlt, poolTlt)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolTlt, poolTlt)?.poolPairToken | number: '1.4-4'}} TLT </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolTltOut" [pool]="poolTlt" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.pdbcInPdbcPool > 0 || wallet?.usdInPdbcPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      PDBC/USD {{poolPdbc?.apr | number: '1.2-2' }}% APR - {{dfiProBlockPdbc | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolPdbc | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolPdbc, poolPdbc)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolPdbc, poolPdbc)?.poolPairToken | number: '1.4-4'}} PDBC </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolPdbcOut" [pool]="poolPdbc" [fiat]="fiat"></app-earning>
                 </div>
               </div>
             </div>

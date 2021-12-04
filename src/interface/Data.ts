@@ -484,6 +484,16 @@ export class Wallet {
 
 }
 
+export class IncomePoolDto {
+  pool; Pool;
+  anteil: number;
+  poolOut: Outcome;
+  pairPoolTokenInWallet: number;
+  dfiOrUsdPoolTokenInWallet: number;
+  blockRewardPool: number;
+
+}
+
 export class StakingCalc extends Outcome {
   dfiAmount = 10000;
   apy = 38;

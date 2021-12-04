@@ -28,7 +28,7 @@ import {
   PoolGldOut,
   PoolGmeOut, PoolGooglOut, PoolArkkOut, PoolBabaOut, PoolVnqOut, PoolUrthOut, PoolTltOut, PoolPdbcOut, Prices,
 } from '@interfaces/Dex';
-import { AddressVaults, Wallet, WalletDto } from '@interfaces/Data';
+import { AddressVaults, IncomePoolDto, Wallet, WalletDto } from '@interfaces/Data'
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 import { CountdownComponent } from 'ngx-countdown';
@@ -259,6 +259,8 @@ export class AppComponent implements OnInit {
   stakingOut: OutcomeStaking = new OutcomeStaking();
   poolAllOut: PoolAllOut = new PoolAllOut();
   poolMasternodeOut: MasternodeOutcome = new MasternodeOutcome();
+
+  poolForIncome: Array<IncomePoolDto>;
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -2074,7 +2076,7 @@ export class AppComponent implements OnInit {
 
   getPoolPairFromShare(share: number, pool: Pool): PoolPair {
     const pair = new PoolPair();
-    pair.dfi = +pool.reserveB * share / 100;
+    pair.dfiOrUsdToken = +pool.reserveB * share / 100;
     pair.poolPairToken = +pool.reserveA * share / 100;
 
     return pair;
