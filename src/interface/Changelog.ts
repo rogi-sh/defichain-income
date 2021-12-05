@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.2.0 - 5.12.2021';
+    this.log.comment = 'Dedicated overview of VAULTS in Value view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.1.0 - 5.12.2021';
     this.log.comment = 'Manual input of the values for the new pools';
     this.logs.push(this.log);

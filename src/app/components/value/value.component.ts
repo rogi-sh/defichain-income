@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {AddressBalance, Pool} from '@interfaces/Dex';
-import { AddressVaults, ChartOptions, ChartOptions3, Data, Wallet } from '@interfaces/Data';
+import { AddressVaults, ChartOptions, ChartOptions3, Data, Vault, Wallet } from '@interfaces/Data';
 import {ChartComponent} from 'ng-apexcharts';
 
 @Component({
@@ -146,6 +146,88 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return dfiInVaults;
+  }
+
+  getBtcCountVaults(): number {
+    let dfiInVaults = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return dfiInVaults;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          if ('BTC' === vaultCollaterral.symbolKey) {
+            dfiInVaults += +vaultCollaterral.amount;
+          }
+        });
+      });
+    });
+
+    return dfiInVaults;
+  }
+
+  getUsdtCountVaults(): number {
+    let dfiInVaults = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return dfiInVaults;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          if ('USDT' === vaultCollaterral.symbolKey) {
+            dfiInVaults += +vaultCollaterral.amount;
+          }
+        });
+      });
+    });
+
+    return dfiInVaults;
+  }
+
+  getUsdcCountVaults(): number {
+    let dfiInVaults = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return dfiInVaults;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          if ('USDC' === vaultCollaterral.symbolKey) {
+            dfiInVaults += +vaultCollaterral.amount;
+          }
+        });
+      });
+    });
+
+    return dfiInVaults;
+  }
+
+  getAllVaultsFromAllAddresses(): Array<Vault> {
+
+    const vaults = new Array<Vault>();
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return vaults;
+    }
+
+    this.vaultsOfAllAddresses.forEach(va => {
+      vaults.push(...va.data);
+    });
+
+    return vaults;
+
+  }
+
+  getShortOfId(id: string): string {
+    const first = id.slice(0, 5);
+    const last = id.slice(id.length - 6, id.length - 1);
+
+    return first + '...' + last;
   }
 
   getMasternodeDfiUsd(): number {
