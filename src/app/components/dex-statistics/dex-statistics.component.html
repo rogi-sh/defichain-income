@@ -419,7 +419,7 @@
             <br>
             <span class='text-xs'>{{stockPool?.reserveA | number: '1.2-2'}}
               {{stockPool?.tokenASymbol}} - {{stockPool?.reserveB | number: '1.2-2'}}
-              dUSD</span>
+              {{stockPool?.tokenASymbol !== 'DUSD' ? 'dUSD' : 'DFI'}}</span>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat'

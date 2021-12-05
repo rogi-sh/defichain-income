@@ -1,152 +1,155 @@
 <div
-  class="flex flex-col lg:flex-row lg:flex-auto"
-  >
+  class='flex flex-col lg:flex-row lg:flex-auto'
+>
   <!-- [ngClass]="{ 'grid-rows-2 lg:grid-cols""-2': !hideHoldings }" -->
-  <div class="mb-4 lg:mb-0 order-2 lg:order-1 flex-1" *ngIf="!hideHoldings">
-    <h2 class="text-lg dark:text-gray-100">{{ 'value.dist' | translate }}</h2>
+  <div class='mb-4 lg:mb-0 order-2 lg:order-1 flex-1' *ngIf='!hideHoldings'>
+    <h2 class='text-lg dark:text-gray-100'>{{ 'value.dist' | translate }}</h2>
     <h2>
-      <div class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center">
+      <div
+        class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
         {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
-        <span *ngIf="wallet?.dfiInMasternodes">- {{getAnteilMasternodesOfAllValue()| number: '1.2-2'}} % Masternode</span>
+        <span *ngIf='wallet?.dfiInMasternodes'>- {{getAnteilMasternodesOfAllValue()| number: '1.2-2'}}
+          % Masternode</span>
       </div>
     </h2>
-    <div class="w-full max-w-lg mx-auto" *ngIf="chartOptions3 && chartOptions3.series.length > 0">
+    <div class='w-full max-w-lg mx-auto' *ngIf='chartOptions3 && chartOptions3.series.length > 0'>
       <apx-chart
-        *ngIf="chartOptions3 && chartOptions3.series.length > 0"
-        [series]="chartOptions3?.series"
-        [chart]="chartOptions3?.chart"
-        [labels]="chartOptions3?.labels"
-        [colors]="chartOptions3?.colors"
-        [fill]="chartOptions3?.fill"
-        [dataLabels]="chartOptions3?.dataLabels"
-        [responsive]="chartOptions3?.responsive"
-        [theme]="{ mode: getTheme() }"
+        *ngIf='chartOptions3 && chartOptions3.series.length > 0'
+        [series]='chartOptions3?.series'
+        [chart]='chartOptions3?.chart'
+        [labels]='chartOptions3?.labels'
+        [colors]='chartOptions3?.colors'
+        [fill]='chartOptions3?.fill'
+        [dataLabels]='chartOptions3?.dataLabels'
+        [responsive]='chartOptions3?.responsive'
+        [theme]='{ mode: getTheme() }'
       ></apx-chart>
     </div>
   </div>
-  <div class="order-1 lg:order-2 flex-1">
-    <h2 class="text-lg dark:text-gray-100">{{ 'value.hold' | translate }}</h2>
+  <div class='order-1 lg:order-2 flex-1'>
+    <h2 class='text-lg dark:text-gray-100'>{{ 'value.hold' | translate }}</h2>
     <h2>
-      <div class="min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice"></app-price>
-        <div *ngIf="isIncognitoModeOn">****</div>
+      <div
+        class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
+        <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getAllValuesUsdPrice'></app-price>
+        <div *ngIf='isIncognitoModeOn'>****</div>
       </div>
     </h2>
-    <div class="w-full max-w-lg mx-auto mb-2" *ngIf="chartOptions && chartOptions.series.length > 0">
-      <apx-chart *ngIf="chartOptions && chartOptions.series.length > 0"
-        class="w-full"
-        [series]="chartOptions?.series"
-        [chart]="chartOptions?.chart"
-        [labels]="chartOptions?.labels"
-        [colors]="chartOptions?.colors"
-        [fill]="chartOptions?.fill"
-        [dataLabels]="chartOptions?.dataLabels"
-        [responsive]="chartOptions?.responsive"
-        [theme]="{ mode: getTheme() }"
+    <div class='w-full max-w-lg mx-auto mb-2' *ngIf='chartOptions && chartOptions.series.length > 0'>
+      <apx-chart *ngIf='chartOptions && chartOptions.series.length > 0'
+                 class='w-full'
+                 [series]='chartOptions?.series'
+                 [chart]='chartOptions?.chart'
+                 [labels]='chartOptions?.labels'
+                 [colors]='chartOptions?.colors'
+                 [fill]='chartOptions?.fill'
+                 [dataLabels]='chartOptions?.dataLabels'
+                 [responsive]='chartOptions?.responsive'
+                 [theme]='{ mode: getTheme() }'
       ></apx-chart>
     </div>
 
     <div>
 
-      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+      <h3 class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
         {{ "balance" | translate }} DFI
       </h3>
 
-      <div class="grid grid-flow-col grid-cols-2 md:gap-2">
-        <span class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 border-b pb-2 col-span-2 mb-2">
-          <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+      <div class='grid grid-flow-col grid-cols-2 md:gap-2'>
+        <span class='grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 border-b pb-2 col-span-2 mb-2'>
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getDfiCount() | number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiValueUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getDfiValueUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               DFI
             </div>
           </div>
-          <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getStakingValueUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getStakingValueUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               Staking
             </div>
           </div>
 
-          <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getDfiCountLM() | number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountLMUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getDfiCountLMUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               LM
             </div>
           </div>
 
-          <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getDfiCountWallet()| number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountWalletUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getDfiCountWalletUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               Wallet
             </div>
           </div>
 
-           <div *ngIf="wallet?.dfiInMasternodes > 0" class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+           <div *ngIf='wallet?.dfiInMasternodes > 0' class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes - getFreezerDfiCount() | number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400"
+                class='text-xs text-gray-400'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getMasternodeDfiUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getMasternodeDfiUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               Masternodes
             </div>
           </div>
 
-           <div *ngIf="getFreezerDfiCount()> 0" class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
+           <div *ngIf='getFreezerDfiCount()> 0' class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getFreezerDfiCount() | number: '1.2-2' }}
-              <br/>
+              <br />
               <div
-                class="text-xs text-gray-400"
+                class='text-xs text-gray-400'
               >
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getFreezerDfiUsd()"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getFreezerDfiUsd()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
-            <div class="inline-block h-full align-middle dark:text-gray-100">
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
               Freezer
             </div>
           </div>
@@ -154,415 +157,422 @@
         </span>
       </div>
 
-      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
+      <h3 class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
         {{ "balance" | translate }}
       </h3>
 
-      <div class="grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
-        <div *ngIf="wallet?.btc > 0 || wallet?.btcInBtcPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+      <div
+        class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2'>
+        <div *ngIf='wallet?.btc > 0 || wallet?.btcInBtcPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             BTC
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.btc + wallet?.btcInBtcPool | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBtcValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getBtcValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.eth > 0 || wallet?.ethInEthPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.eth > 0 || wallet?.ethInEthPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             ETH
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.eth + wallet?.ethInEthPool | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getEthValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getEthValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.usdt > 0 || wallet?.usdtInUsdtPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             USDT
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.usdt + wallet?.usdtInUsdtPool | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdtValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdtValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.usdc > 0 || wallet?.usdcInUsdcPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.usdc > 0 || wallet?.usdcInUsdcPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             USDC
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.usdc + wallet?.usdcInUsdcPool | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdcValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdcValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="isUsdInPortfolio()" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='isUsdInPortfolio()' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             USD
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : getUsdCount() | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.ltc > 0 || wallet?.ltcInLtcPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             LTC
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.ltc + wallet?.ltcInLtcPool | number: '1.5-5'}}
             <div
-              class="text-xs text-gray-400 dark:text-gray-300"
+              class='text-xs text-gray-400 dark:text-gray-300'
             >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getLtcValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLtcValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.doge > 0 || wallet?.dogeInDogePool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.doge > 0 || wallet?.dogeInDogePool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             DOGE
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.doge + wallet?.dogeInDogePool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDogeValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getDogeValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.bch > 0 || wallet?.bchInBchPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.bch > 0 || wallet?.bchInBchPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             BCH
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.bch + wallet?.bchInBchPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBchValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getBchValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.tsla > 0 || wallet?.tslaInTslaPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.tsla > 0 || wallet?.tslaInTslaPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             TSLA
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.tsla + wallet?.tslaInTslaPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getTslaValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getTslaValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.qqq > 0 || wallet?.qqqInQqqPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.qqq > 0 || wallet?.qqqInQqqPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             QQQ
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.qqq + wallet?.qqqInQqqPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getQqqValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getQqqValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.spy > 0 || wallet?.spyInSpyPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.spy > 0 || wallet?.spyInSpyPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             SPY
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.spy + wallet?.spyInSpyPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getSpyValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getSpyValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.pltr > 0 || wallet?.pltrInPltrPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.pltr > 0 || wallet?.pltrInPltrPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             PLTR
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.pltr + wallet?.pltrInPltrPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getPltrValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getPltrValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.slv > 0 || wallet?.slvInSlvPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.slv > 0 || wallet?.slvInSlvPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             SLV
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.slv + wallet?.slvInSlvPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getSlvValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getSlvValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.aapl > 0 || wallet?.aaplInAaplPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.aapl > 0 || wallet?.aaplInAaplPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             AAPL
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.aapl + wallet?.aaplInAaplPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAaplValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getAaplValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.gld > 0 || wallet?.gldInGldPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.gld > 0 || wallet?.gldInGldPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             GLD
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.gld + wallet?.gldInGldPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getGldValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getGldValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.gme > 0 || wallet?.gme > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.gme > 0 || wallet?.gme > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             GME
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.gme + wallet?.gmeInGmePool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getGmeValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getGmeValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.googl > 0 || wallet?.googl > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.googl > 0 || wallet?.googl > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             GOOGL
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.googl + wallet?.googlInGooglPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getGooglValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getGooglValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.arkk > 0 || wallet?.arkkInArkkPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.arkk > 0 || wallet?.arkkInArkkPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             ARKK
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.arkk + wallet?.arkkInArkkPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getArkkValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getArkkValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.baba > 0 || wallet?.babaInBabaPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.baba > 0 || wallet?.babaInBabaPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             BABA
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.baba + wallet?.babaInBabaPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBabaValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getBabaValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.vnq > 0 || wallet?.vnqInVnqPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.vnq > 0 || wallet?.vnqInVnqPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             VNQ
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.vnq + wallet?.vnqInVnqPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getVnqValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVnqValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.urth > 0 || wallet?.urthInUrthPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.urth > 0 || wallet?.urthInUrthPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             URTH
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.urth + wallet?.urthInUrthPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUrthValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUrthValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.tlt > 0 || wallet?.tltInTltPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.tlt > 0 || wallet?.tltInTltPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             TLT
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.tlt + wallet?.tltInTltPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getTltValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getTltValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="wallet?.pdbc > 0 || wallet?.pdbcInPdbcPool > 0" class="text-lg dark:text-gray-100 flex">
-          <div class="inline-block h-full align-middle dark:text-gray-100 pr-3">
+        <div *ngIf='wallet?.pdbc > 0 || wallet?.pdbcInPdbcPool > 0' class='text-lg dark:text-gray-100 flex'>
+          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
             PDBC
           </div>
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis">
+          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
             {{isIncognitoModeOn ? '****' : wallet?.pdbc + wallet?.pdbcInPdbcPool | number: '1.5-5'}}
-            <div class="text-xs text-gray-400">
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getPdbcValueUsd()"></app-price>
-              <div *ngIf="isIncognitoModeOn" >*****</div>
+            <div class='text-xs text-gray-400'>
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getPdbcValueUsd()'></app-price>
+              <div *ngIf='isIncognitoModeOn'>*****</div>
             </div>
           </div>
         </div>
 
       </div>
+      <div *ngIf='getAllVaultsFromAllAddresses().length > 0'>
+        <h3
+            class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+          Vaults
+        </h3>
 
-      <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
-        Vaults
-      </h3>
-
-      <div *ngFor='let v of getAllVaultsFromAllAddresses()' class="grid grid-flow-col grid-cols-2 md:gap-2">
-        <span class="grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 pb-2 col-span-2 mb-2">
-          <div class="text-xl relative">
-            <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-              {{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}} - {{isIncognitoModeOn ? '****' :v.state}}
-              <br/>
+        <div *ngFor='let v of getAllVaultsFromAllAddresses()' class='grid grid-flow-col grid-cols-2 md:gap-2'>
+        <span class='grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-3 gap-3 pb-2 col-span-2 mb-2'>
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+              {{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}} - {{isIncognitoModeOn ? '****' : v.state}}
+              <br />
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               >
-               Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}} % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
-                <div *ngIf="isIncognitoModeOn">****</div>
+               Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
+                % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
+                <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
               <div
-                class="text-xs text-gray-400 dark:text-gray-300"
+                class='text-xs text-gray-400 dark:text-gray-300'
               > Collateral
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="v.collateralValue"></app-price> -
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.collateralValue'></app-price> -
                 Loan
-                <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="v.loanValue"></app-price>
-                <div *ngIf="isIncognitoModeOn">****</div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.loanValue'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
 
               </div>
             </div>
           </div>
         </span>
-      </div>
-      <div class="grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2">
-      <div class="text-xl relative">
-        <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-          {{isIncognitoModeOn ? '****' : getDfiCountVaults() | number: '1.2-2' }}
-          <br/>
-          <div
-            class="text-xs text-gray-400 dark:text-gray-300"
-          >
-            <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getDfiCountVaults() * this.poolBtc.priceB"></app-price>
-            <div *ngIf="isIncognitoModeOn">****</div>
-          </div>
         </div>
-        <div class="inline-block h-full align-middle dark:text-gray-100">
-          DFI
-        </div>
-      </div>
-      <div class="text-xl relative">
-        <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-          {{isIncognitoModeOn ? '****' : getBtcCountVaults() | number: '1.2-2' }}
-          <br/>
-          <div
-            class="text-xs text-gray-400 dark:text-gray-300"
-          >
-            <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getBtcCountVaults() * this.poolBtc.priceA"></app-price>
-            <div *ngIf="isIncognitoModeOn">****</div>
-          </div>
-        </div>
-        <div class="inline-block h-full align-middle dark:text-gray-100">
-          BTC
-        </div>
-      </div>
-      <div class="text-xl relative">
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-            {{isIncognitoModeOn ? '****' : getUsdcCountVaults() | number: '1.2-2' }}
-            <br/>
-            <div
-              class="text-xs text-gray-400 dark:text-gray-300"
-            >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdcCountVaults()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+        <div
+          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2'>
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+              {{isIncognitoModeOn ? '****' : getDfiCountVaults() | number: '1.2-2' }}
+              <br />
+              <div
+                class='text-xs text-gray-400 dark:text-gray-300'
+              >
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]='getDfiCountVaults() * this.poolBtc.priceB'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
+              </div>
+            </div>
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
+              DFI
             </div>
           </div>
-          <div class="inline-block h-full align-middle dark:text-gray-100">
-            USDC
-          </div>
-        </div>
-        <div class="text-xl relative">
-          <div class="text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2">
-            {{isIncognitoModeOn ? '****' : getUsdtCountVaults() | number: '1.2-2' }}
-            <br/>
-            <div
-              class="text-xs text-gray-400 dark:text-gray-300"
-            >
-              <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getUsdtCountVaults()"></app-price>
-              <div *ngIf="isIncognitoModeOn">****</div>
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+              {{isIncognitoModeOn ? '****' : getBtcCountVaults() | number: '1.2-2' }}
+              <br />
+              <div
+                class='text-xs text-gray-400 dark:text-gray-300'
+              >
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]='getBtcCountVaults() * this.poolBtc.priceA'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
+              </div>
+            </div>
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
+              BTC
             </div>
           </div>
-          <div class="inline-block h-full align-middle dark:text-gray-100">
-            USDT
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+              {{isIncognitoModeOn ? '****' : getUsdcCountVaults() | number: '1.2-2' }}
+              <br />
+              <div
+                class='text-xs text-gray-400 dark:text-gray-300'
+              >
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdcCountVaults()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
+              </div>
+            </div>
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
+              USDC
+            </div>
+          </div>
+          <div class='text-xl relative'>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+              {{isIncognitoModeOn ? '****' : getUsdtCountVaults() | number: '1.2-2' }}
+              <br />
+              <div
+                class='text-xs text-gray-400 dark:text-gray-300'
+              >
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdtCountVaults()'></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
+              </div>
+            </div>
+            <div class='inline-block h-full align-middle dark:text-gray-100'>
+              USDT
+            </div>
           </div>
         </div>
-    </div>
+      </div>
 
     </div>
   </div>

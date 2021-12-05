@@ -627,26 +627,26 @@ export class ValueComponent implements OnInit, OnChanges {
     return ((this.wallet.dfiInBtcPool * this.poolBtc?.priceB) + (this.wallet.btcInBtcPool * this.poolBtc?.priceA));
   }
   getAnteilLMOfEthPoolValue(): number {
-    return ((this.wallet.dfiInEthPool * this.poolEth?.priceB) + (this.wallet.ethInEthPool * this.poolEth?.priceA));
+    return ((this.wallet.dfiInEthPool * this.poolBtc?.priceB) + (this.wallet.ethInEthPool * this.poolEth?.priceA));
   }
   getAnteilLMOfLtcPoolValue(): number {
-    return ((this.wallet.dfiInLtcPool * this.poolLtc?.priceB) + (this.wallet.ltcInLtcPool * this.poolLtc?.priceA));
+    return ((this.wallet.dfiInLtcPool * this.poolBtc?.priceB) + (this.wallet.ltcInLtcPool * this.poolLtc?.priceA));
   }
   getAnteilLMOfUsdtPoolValue(): number {
-    return ((this.wallet.dfiInUsdtPool * this.poolUsdt?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
+    return ((this.wallet.dfiInUsdtPool * this.poolBtc?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
   }
   getAnteilLMOfUsdcPoolValue(): number {
-    return ((this.wallet.dfiInUsdcPool * this.poolUsdc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdc?.priceA));
+    return ((this.wallet.dfiInUsdcPool * this.poolBtc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdc?.priceA));
   }
   getAnteilLMOfDogePoolValue(): number {
-    return ((this.wallet.dfiInDogePool * this.poolDoge?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
+    return ((this.wallet.dfiInDogePool * this.poolBtc?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
   }
   getAnteilLMOfBchPoolValue(): number {
-    return ((this.wallet.dfiInBchPool * this.poolBch?.priceB) + (this.wallet.bchInBchPool * this.poolBch?.priceA));
+    return ((this.wallet.dfiInBchPool * this.poolBtc?.priceB) + (this.wallet.bchInBchPool * this.poolBch?.priceA));
   }
   // ANTEIL STOCKS
   getAnteilLMOfUsdPoolValue(): number {
-    return ((this.wallet.dfiInUsdPool * this.poolUsd?.priceB) + (this.wallet.usdInUsdPool * this.getUsdPriceOfStockPools(this.poolUsd)));
+    return ((this.wallet.dfiInUsdPool * this.poolBtc?.priceB) + (this.wallet.usdInUsdPool * this.getUsdPriceOfStockPools(this.poolUsd)));
   }
   getAnteilLMOfTslaPoolValue(): number {
     return ((this.wallet.usdInTslaPool * this.getUsdPriceOfStockPools(this.poolUsd))
