@@ -32,7 +32,7 @@ export interface Prices {
   litecoin: PriceAsset;
   ethereum: PriceAsset;
   defichain: PriceAsset;
-  'bitcoin-cash': PriceAsset;
+  bitcoincash: PriceAsset;
 }
 
 export class PriceAsset {

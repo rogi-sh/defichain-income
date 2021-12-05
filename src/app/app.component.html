@@ -2095,6 +2095,286 @@
                               </label>
                             </div>
                           </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.qqq === null || wallet.qqq === undefined  ? 'empty' : ''"
+                              title="QQQ"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.qqq"
+                                (ngModelChange)="onChangeQqqWallet()"
+                                type="number"
+                                id="onChangeQqqWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeQqqWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                QQQ
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.spy === null || wallet.spy === undefined  ? 'empty' : ''"
+                              title="SPY"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.spy"
+                                (ngModelChange)="onChangeSpyWallet()"
+                                type="number"
+                                id="onChangeSpyWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeSpyWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                SPY
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pltr === null || wallet.pltr === undefined  ? 'empty' : ''"
+                              title="PLTR"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pltr"
+                                (ngModelChange)="onChangePltrWallet()"
+                                type="number"
+                                id="onChangePltrWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePltrWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PLTR
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.slv === null || wallet.slv === undefined  ? 'empty' : ''"
+                              title="SLV"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.slv"
+                                (ngModelChange)="onChangeSlvWallet()"
+                                type="number"
+                                id="onChangeSlvWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeSlvWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                SLV
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.aapl === null || wallet.aapl === undefined  ? 'empty' : ''"
+                              title="AAPL"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.aapl"
+                                (ngModelChange)="onChangeAaplWallet()"
+                                type="number"
+                                id="onChangeAaplWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeAaplWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                AAPL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.gld === null || wallet.gld === undefined  ? 'empty' : ''"
+                              title="GLD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.gld"
+                                (ngModelChange)="onChangeGldWallet()"
+                                type="number"
+                                id="onChangeGldWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGldWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GLD
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.gme === null || wallet.gme === undefined  ? 'empty' : ''"
+                              title="GME"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.gme"
+                                (ngModelChange)="onChangeGmeWallet()"
+                                type="number"
+                                id="onChangeGmeWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGmeWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GME
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.googl === null || wallet.googl === undefined  ? 'empty' : ''"
+                              title="GOOGL"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.googl"
+                                (ngModelChange)="onChangeGooglWallet()"
+                                type="number"
+                                id="onChangeGooglWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGooglWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GOOGL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.arkk === null || wallet.arkk === undefined  ? 'empty' : ''"
+                              title="ARKK"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.arkk"
+                                (ngModelChange)="onChangeArkkWallet()"
+                                type="number"
+                                id="onChangeArkkWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeArkkWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                ARKK
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.baba === null || wallet.baba === undefined  ? 'empty' : ''"
+                              title="BABA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.baba"
+                                (ngModelChange)="onChangeBabaWallet()"
+                                type="number"
+                                id="onChangeBabaWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeBabaWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BABA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.vnq === null || wallet.vnq === undefined  ? 'empty' : ''"
+                              title="BABA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.vnq"
+                                (ngModelChange)="onChangeVnqWallet()"
+                                type="number"
+                                id="onChangeVnqWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeVnqWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                VNQ
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.urth === null || wallet.urth === undefined  ? 'empty' : ''"
+                              title="URTH"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.urth"
+                                (ngModelChange)="onChangeUrthWallet()"
+                                type="number"
+                                id="onChangeUrthWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUrthWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                URTH
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.tlt === null || wallet.tlt === undefined  ? 'empty' : ''"
+                              title="TLT"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.tlt"
+                                (ngModelChange)="onChangeTltWallet()"
+                                type="number"
+                                id="onChangeTltWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeTltWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                TLT
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pdbc === null || wallet.pdbc === undefined  ? 'empty' : ''"
+                              title="PDBC"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pdbc"
+                                (ngModelChange)="onChangePdbcWallet()"
+                                type="number"
+                                id="onChangePdbcWallet"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePdbcWallet"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PDBC
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -2544,6 +2824,580 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                               >
                               <label for="onChangeUsdTslaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.qqqInQqqPool === null || wallet.qqqInQqqPool === undefined  ? 'empty' : ''"
+                              title="QQQ"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.qqqInQqqPool"
+                                (ngModelChange)="onChangeQqqQqqPool()"
+                                type="number"
+                                id="onChangeQqqQqqPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeQqqQqqPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                QQQ
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInQqqPool === null || wallet.usdInQqqPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInQqqPool"
+                                (ngModelChange)="onChangeUsdQqqPool()"
+                                type="number"
+                                id="onChangeUsdQqqPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdQqqPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.spyInSpyPool === null || wallet.spyInSpyPool === undefined  ? 'empty' : ''"
+                              title="SPY"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.spyInSpyPool"
+                                (ngModelChange)="onChangeSpySpyPool()"
+                                type="number"
+                                id="onChangeSpySpyPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeSpySpyPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                SPY
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInSpyPool === null || wallet.usdInSpyPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInSpyPool"
+                                (ngModelChange)="onChangeUsdSpyPool()"
+                                type="number"
+                                id="onChangeUsdSpyPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdSpyPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pltrInPltrPool === null || wallet.pltrInPltrPool === undefined  ? 'empty' : ''"
+                              title="PLTR"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pltrInPltrPool"
+                                (ngModelChange)="onChangePltrPltrPool()"
+                                type="number"
+                                id="onChangePltrPltrPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePltrPltrPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PLTR
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInPltrPool === null || wallet.usdInPltrPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInPltrPool"
+                                (ngModelChange)="onChangeUsdPltrPool()"
+                                type="number"
+                                id="onChangeUsdPltrPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdPltrPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.slvInSlvPool === null || wallet.slvInSlvPool === undefined  ? 'empty' : ''"
+                              title="SLV"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.slvInSlvPool"
+                                (ngModelChange)="onChangeSlvSlvPool()"
+                                type="number"
+                                id="onChangeSlvSlvPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeSlvSlvPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                SLV
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInSlvPool === null || wallet.usdInSlvPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInSlvPool"
+                                (ngModelChange)="onChangeUsdSlvPool()"
+                                type="number"
+                                id="onChangeUsdSlvPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdSlvPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.aaplInAaplPool === null || wallet.aaplInAaplPool === undefined  ? 'empty' : ''"
+                              title="AAPL"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.aaplInAaplPool"
+                                (ngModelChange)="onChangeAaplAaplPool()"
+                                type="number"
+                                id="onChangeAaplAaplPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeAaplAaplPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                AAPL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInAaplPool === null || wallet.usdInAaplPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInAaplPool"
+                                (ngModelChange)="onChangeUsdAaplPool()"
+                                type="number"
+                                id="onChangeUsdAaplPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdAaplPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.gldInGldPool === null || wallet.gldInGldPool === undefined  ? 'empty' : ''"
+                              title="GLD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.gldInGldPool"
+                                (ngModelChange)="onChangeGldGldPool()"
+                                type="number"
+                                id="onChangeGldGldPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGldGldPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GLD
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInGldPool === null || wallet.usdInGldPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInGldPool"
+                                (ngModelChange)="onChangeUsdGldPool()"
+                                type="number"
+                                id="onChangeUsdGldPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdGldPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.gmeInGmePool === null || wallet.gmeInGmePool === undefined  ? 'empty' : ''"
+                              title="GME"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.gmeInGmePool"
+                                (ngModelChange)="onChangeGmeGmePool()"
+                                type="number"
+                                id="onChangeGmeGmePool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGmeGmePool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GME
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInGmePool === null || wallet.usdInGmePool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInGmePool"
+                                (ngModelChange)="onChangeUsdGmePool()"
+                                type="number"
+                                id="onChangeUsdGmePool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdGmePool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.googlInGooglPool === null || wallet.googlInGooglPool === undefined  ? 'empty' : ''"
+                              title="GOOGL"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.googlInGooglPool"
+                                (ngModelChange)="onChangeGooglGooglPool()"
+                                type="number"
+                                id="onChangeGooglGooglPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGooglGooglPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GOOGL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInGooglPool === null || wallet.usdInGooglPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInGooglPool"
+                                (ngModelChange)="onChangeUsdGooglPool()"
+                                type="number"
+                                id="onChangeUsdGooglPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdGooglPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.arkkInArkkPool === null || wallet.arkkInArkkPool === undefined  ? 'empty' : ''"
+                              title="ARKK"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.arkkInArkkPool"
+                                (ngModelChange)="onChangeArkkArkkPool()"
+                                type="number"
+                                id="onChangeArkkArkkPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeArkkArkkPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                ARKK
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInArkkPool === null || wallet.usdInArkkPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInArkkPool"
+                                (ngModelChange)="onChangeUsdArkkPool()"
+                                type="number"
+                                id="onChangeUsdArkkPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdArkkPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.babaInBabaPool === null || wallet.babaInBabaPool === undefined  ? 'empty' : ''"
+                              title="BABA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.babaInBabaPool"
+                                (ngModelChange)="onChangeBabaBabaPool()"
+                                type="number"
+                                id="onChangeBabaBabaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeBabaBabaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BABA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInBabaPool === null || wallet.usdInBabaPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInBabaPool"
+                                (ngModelChange)="onChangeUsdBabaPool()"
+                                type="number"
+                                id="onChangeUsdBabaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdBabaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.vnqInVnqPool === null || wallet.vnqInVnqPool === undefined  ? 'empty' : ''"
+                              title="VNQ"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.vnqInVnqPool"
+                                (ngModelChange)="onChangeVnqVnqPool()"
+                                type="number"
+                                id="onChangeVnqVnqPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeVnqVnqPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                VNQ
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInVnqPool === null || wallet.usdInVnqPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInVnqPool"
+                                (ngModelChange)="onChangeUsdVnqPool()"
+                                type="number"
+                                id="onChangeUsdVnqPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdVnqPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.urthInUrthPool === null || wallet.urthInUrthPool === undefined  ? 'empty' : ''"
+                              title="URTH"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.urthInUrthPool"
+                                (ngModelChange)="onChangeUrthUrthPool()"
+                                type="number"
+                                id="onChangeUrthUrthPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUrthUrthPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                URTH
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInUrthPool === null || wallet.usdInUrthPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInUrthPool"
+                                (ngModelChange)="onChangeUsdUrthPool()"
+                                type="number"
+                                id="onChangeUsdUrthPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdUrthPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.tltInTltPool === null || wallet.tltInTltPool === undefined  ? 'empty' : ''"
+                              title="TLT"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.tltInTltPool"
+                                (ngModelChange)="onChangeTltTltPool()"
+                                type="number"
+                                id="onChangeTltTltPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeTltTltPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                TLT
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInTltPool === null || wallet.usdInTltPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInTltPool"
+                                (ngModelChange)="onChangeUsdTltPool()"
+                                type="number"
+                                id="onChangeUsdTltPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdTltPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                USD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pdbcInPdbcPool === null || wallet.pdbcInPdbcPool === undefined  ? 'empty' : ''"
+                              title="PDBC"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pdbcInPdbcPool"
+                                (ngModelChange)="onChangePdbcPdbcPool()"
+                                type="number"
+                                id="onChangePdbcPdbcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePdbcPdbcPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PDBC
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInPdbcPool === null || wallet.usdInPdbcPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInPdbcPool"
+                                (ngModelChange)="onChangeUsdPdbcPool()"
+                                type="number"
+                                id="onChangeUsdPdbcPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdPdbcPool"
                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 USD
                               </label>
