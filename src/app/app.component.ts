@@ -1421,7 +1421,7 @@ export class AppComponent implements OnInit {
              } else if (i > this.adresses?.length - 1 && i <= this.adresses?.length * 2 - 1) {
                if ((value as AddressVaults)?.data?.length > 0) {
                  this.vaultsOfAllAddresses.push(value as AddressVaults);
-                 this.addTokenFromVaults(value as AddressVaults, this.getVaultAddressForIteration(i));
+                 //this.addTokenFromVaults(value as AddressVaults, this.getVaultAddressForIteration(i));
                }
                // minter address
              } else if (i > (this.adresses?.length * 2) - 1) {
@@ -2737,7 +2737,38 @@ export class AppComponent implements OnInit {
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() + this.getTslaValueUsd() + this.getUsdValueUsd()
       + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd()
       + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
-      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd();
+      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getVaultsValueUsd();
+  }
+
+  getVaultsValueUsd(): number {
+
+      let dfiInVaults = 0;
+      let btcInVaults = 0;
+      let usdcInVaults = 0;
+      let usdtInVaults = 0;
+
+      if (this.vaultsOfAllAddresses.length === 0) {
+        return 0;
+      }
+
+      this.vaultsOfAllAddresses.forEach(vault => {
+        vault.data.forEach(addressVault => {
+          addressVault.collateralAmounts.forEach(vaultCollaterral => {
+            if ('DFI' === vaultCollaterral.symbolKey) {
+              dfiInVaults += +vaultCollaterral.amount;
+            } else if ('BTC' === vaultCollaterral.symbolKey) {
+              btcInVaults += +vaultCollaterral.amount;
+            } else if ('USDC' === vaultCollaterral.symbolKey) {
+              usdcInVaults += +vaultCollaterral.amount;
+            } else if ('USDT' === vaultCollaterral.symbolKey) {
+              usdtInVaults += +vaultCollaterral.amount;
+            }
+          });
+        });
+      });
+
+      return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+
   }
 
   getBtcValueUsd(): number {

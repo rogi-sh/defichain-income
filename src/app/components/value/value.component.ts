@@ -111,6 +111,9 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   vaultsOfAllAddresses: Array<AddressVaults>;
 
+  @Input()
+  getAllValuesUsdPrice: number;
+
   detailsOpen = false;
 
   ngOnInit(): void {
@@ -125,7 +128,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilWalletOfAllValue(): number {
-    return this.getWalletValueUsd() / this.getAllValuesUsdPrice() * 100;
+    return this.getWalletValueUsd() / this.getAllValuesUsdPrice * 100;
   }
 
   getDfiCountVaults(): number {
@@ -232,14 +235,6 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getMasternodeDfiUsd(): number {
     return (this.wallet?.dfiInMasternodes - this.getFreezerDfiCount()) * this.poolBtc?.priceB;
-  }
-
-  getAllValuesUsdPrice(): number {
-    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
-      + this.getDogeValueUsd() + this.getBchValueUsd() + this.getUsdValueUsd() + this.getTslaValueUsd() + this.getSpyValueUsd()
-      + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd()
-      + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
-      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getDfiValueUsd();
   }
 
   // WALLET AND POOLS CRYPTO
@@ -358,7 +353,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getDfiCountWallet(): number {
-    return this.wallet?.dfi - this.getDfiCountVaults();
+    return this.wallet?.dfi;
   }
 
   getEthWalletValueUsd(): number {
@@ -451,11 +446,11 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilStakingOfAllValue(): number {
-    return this.getStakingValueUsd() / this.getAllValuesUsdPrice() * 100;
+    return this.getStakingValueUsd() / this.getAllValuesUsdPrice * 100;
   }
 
   getAnteilMasternodesOfAllValue(): number {
-    return this.getMasternodeDfiUsd() / this.getAllValuesUsdPrice() * 100;
+    return this.getMasternodeDfiUsd() / this.getAllValuesUsdPrice * 100;
   }
 
   getStakingValueUsd(): number {
@@ -469,7 +464,7 @@ export class ValueComponent implements OnInit, OnChanges {
         + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd()
         + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
         + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getDfiValueUsd())
-      / this.getAllValuesUsdPrice() * 100;
+      / this.getAllValuesUsdPrice * 100;
   }
 
   getDfiCountLMUsd(): number {
@@ -888,7 +883,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   buildDataForChart(): void {
 
-    const allValue = this.getAllValuesUsdPrice();
+    const allValue = this.getAllValuesUsdPrice;
 
     const dataBtc = new Data();
     dataBtc.value = this.getBtcValueUsd();
