@@ -102,6 +102,8 @@ export class AppComponent implements OnInit {
   dfiProBlockTlt = 1.12;
   dfiProBlockPdbc = 0.83;
 
+  dfiPorBlockStock = 77.8;
+
   rewards: Stats;
 
   blocktimeInS = 30;
@@ -1308,52 +1310,54 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
-    this.dfiProBlockUsd = this.poolUsd?.rewardPct * this.rewards?.rewards?.liquidity;
+    // STOCKS
+    // TODO Change when api is useable
+    this.dfiProBlockUsd = 0.5 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd?.customRewards);
 
-    this.dfiProBlockTsla = this.poolTsla?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockTsla = 0.1098 * this.dfiPorBlockStock;
     this.dfiProBlockTsla += this.getCustomRewards(this.poolTsla?.customRewards);
 
-    this.dfiProBlockQqq = this.poolQqq?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockQqq = 0.0479 * this.dfiPorBlockStock;
     this.dfiProBlockQqq += this.getCustomRewards(this.poolQqq?.customRewards);
 
-    this.dfiProBlockSpy = this.poolSpy?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockSpy = 0.0786 * this.dfiPorBlockStock;
     this.dfiProBlockSpy += this.getCustomRewards(this.poolSpy?.customRewards);
 
-    this.dfiProBlockAapl = this.poolAapl?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockAapl = 0.0378 * this.dfiPorBlockStock;
     this.dfiProBlockAapl += this.getCustomRewards(this.poolAapl?.customRewards);
 
-    this.dfiProBlockPltr = this.poolPltr?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockPltr = 0.0263 * this.dfiPorBlockStock;
     this.dfiProBlockPltr += this.getCustomRewards(this.poolPltr?.customRewards);
 
-    this.dfiProBlockSlv = this.poolSlv?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockSlv = 0.0166 * this.dfiPorBlockStock;
     this.dfiProBlockSlv += this.getCustomRewards(this.poolSlv?.customRewards);
 
-    this.dfiProBlockGld = this.poolGld?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockGld = 0.0108 * this.dfiPorBlockStock;
     this.dfiProBlockGld += this.getCustomRewards(this.poolGld?.customRewards);
 
-    this.dfiProBlockGme = this.poolGme?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockGme = 0.0499 * this.dfiPorBlockStock;
     this.dfiProBlockGme += this.getCustomRewards(this.poolGme?.customRewards);
 
-    this.dfiProBlockGoogle = this.poolGoogl?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockGoogle = 0.0239 * this.dfiPorBlockStock;
     this.dfiProBlockGoogle += this.getCustomRewards(this.poolGoogl?.customRewards);
 
-    this.dfiProBlockArkk = this.poolArkk?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockArkk = 0.0222 * this.dfiPorBlockStock;
     this.dfiProBlockArkk += this.getCustomRewards(this.poolArkk?.customRewards);
 
-    this.dfiProBlockBaba = this.poolBaba?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockBaba = 0.0355 * this.dfiPorBlockStock;
     this.dfiProBlockBaba += this.getCustomRewards(this.poolBaba?.customRewards);
 
-    this.dfiProBlockVnq = this.poolVnq?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockVnq = 0.0096 * this.dfiPorBlockStock;
     this.dfiProBlockVnq += this.getCustomRewards(this.poolVnq?.customRewards);
 
-    this.dfiProBlockUrth = this.poolUrth?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockUrth = 0.008 * this.dfiPorBlockStock;
     this.dfiProBlockUrth += this.getCustomRewards(this.poolUrth?.customRewards);
 
-    this.dfiProBlockTlt = this.poolTlt?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockTlt = 0.0144 * this.dfiPorBlockStock;
     this.dfiProBlockTlt += this.getCustomRewards(this.poolTlt?.customRewards);
 
-    this.dfiProBlockPdbc = this.poolPdbc?.rewardPct * this.rewards?.rewards?.liquidity;
+    this.dfiProBlockPdbc = 0.0107 * this.dfiPorBlockStock;
     this.dfiProBlockPdbc += this.getCustomRewards(this.poolPdbc?.customRewards);
   }
 

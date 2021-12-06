@@ -131,84 +131,44 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.getWalletValueUsd() / this.getAllValuesUsdPrice * 100;
   }
 
-  getDfiCountVaults(): number {
-    let dfiInVaults = 0;
+  getCollateralCountVaults(currency: string): number {
+    let curInVaults = 0;
 
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return dfiInVaults;
+    if (this.vaultsOfAllAddresses.length === 0 || !currency ) {
+      return curInVaults;
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
         addressVault.collateralAmounts.forEach(vaultCollaterral => {
-          if ('DFI' === vaultCollaterral.symbolKey) {
-              dfiInVaults += +vaultCollaterral.amount;
+          if (currency === vaultCollaterral.symbolKey) {
+              curInVaults += +vaultCollaterral.amount;
           }
         });
       });
     });
 
-    return dfiInVaults;
+    return curInVaults;
   }
 
-  getBtcCountVaults(): number {
-    let dfiInVaults = 0;
+  getLoanCountVaults(currency: string): number {
+    let curInVaults = 0;
 
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return dfiInVaults;
+    if (this.vaultsOfAllAddresses.length === 0 || !currency ) {
+      return curInVaults;
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        addressVault.collateralAmounts.forEach(vaultCollaterral => {
-          if ('BTC' === vaultCollaterral.symbolKey) {
-            dfiInVaults += +vaultCollaterral.amount;
+        addressVault.loanAmounts.forEach(loanCollaterral => {
+          if (currency === loanCollaterral.symbolKey) {
+            curInVaults += +loanCollaterral.amount;
           }
         });
       });
     });
 
-    return dfiInVaults;
-  }
-
-  getUsdtCountVaults(): number {
-    let dfiInVaults = 0;
-
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return dfiInVaults;
-    }
-
-    this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        addressVault.collateralAmounts.forEach(vaultCollaterral => {
-          if ('USDT' === vaultCollaterral.symbolKey) {
-            dfiInVaults += +vaultCollaterral.amount;
-          }
-        });
-      });
-    });
-
-    return dfiInVaults;
-  }
-
-  getUsdcCountVaults(): number {
-    let dfiInVaults = 0;
-
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return dfiInVaults;
-    }
-
-    this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        addressVault.collateralAmounts.forEach(vaultCollaterral => {
-          if ('USDC' === vaultCollaterral.symbolKey) {
-            dfiInVaults += +vaultCollaterral.amount;
-          }
-        });
-      });
-    });
-
-    return dfiInVaults;
+    return curInVaults;
   }
 
   getAllVaultsFromAllAddresses(): Array<Vault> {

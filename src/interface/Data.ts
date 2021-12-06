@@ -48,9 +48,16 @@ export class Vault {
   loanValue: number;
   interestValue: number;
   collateralAmounts: Array<CollateralAmount>;
+  loanAmounts: Array<LoanAmount>;
 }
 
 export class CollateralAmount {
+  amount: string;
+  symbol: string;
+  symbolKey: string;
+}
+
+export class LoanAmount {
   amount: string;
   symbol: string;
   symbolKey: string;

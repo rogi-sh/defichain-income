@@ -477,7 +477,7 @@
       </div>
       <div *ngIf='getAllVaultsFromAllAddresses().length > 0'>
         <h3
-            class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+          class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
           Vaults
         </h3>
 
@@ -487,39 +487,44 @@
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
                 <a class='text-pink-500 hover:underline'
                    target='_blank'
-                   href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}} - {{isIncognitoModeOn ? '****' : v.state}}</a>
+                   href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
+                  - {{isIncognitoModeOn ? '****' : v.state}}</a>
               <br />
-              <div
-                class='text-xs text-gray-400 dark:text-gray-300'
-              >
+              <div class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
                Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
-                % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
+                             % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
               <div
-                class='text-xs text-gray-400 dark:text-gray-300'
-              > Collateral
-              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.collateralValue'></app-price> -
+                class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+                Collateral
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.collateralValue'></app-price> </div>
+
+              <div
+                class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
                 Loan
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.loanValue'></app-price>
+                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.loanValue'></app-price> </div>
                 <div *ngIf='isIncognitoModeOn'>****</div>
 
               </div>
-            </div>
           </div>
         </span>
         </div>
+        <h3
+          class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+          Collaterals
+        </h3>
         <div
-          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2'>
+          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3  pb-2 col-span-2 mb-2'>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : getDfiCountVaults() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getCollateralCountVaults('DFI') | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400 dark:text-gray-300'
               >
                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                           [usdPrice]='getDfiCountVaults() * this.poolBtc.priceB'></app-price>
+                           [usdPrice]="getCollateralCountVaults('DFI') * this.poolBtc.priceB"></app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
@@ -529,13 +534,13 @@
           </div>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : getBtcCountVaults() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getCollateralCountVaults('BTC') | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400 dark:text-gray-300'
               >
                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                           [usdPrice]='getBtcCountVaults() * this.poolBtc.priceA'></app-price>
+                           [usdPrice]="getCollateralCountVaults('BTC') * this.poolBtc.priceA"></app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
@@ -545,12 +550,13 @@
           </div>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : getUsdcCountVaults() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getCollateralCountVaults('USDC') | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdcCountVaults()'></app-price>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getCollateralCountVaults('USDC')"></app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
@@ -560,12 +566,13 @@
           </div>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : getUsdtCountVaults() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : getCollateralCountVaults('USDT') | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400 dark:text-gray-300'
               >
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getUsdtCountVaults()'></app-price>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getCollateralCountVaults('USDT')"></app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
@@ -574,8 +581,219 @@
             </div>
           </div>
         </div>
-      </div>
+        <h3
+          class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+          Loans
+        </h3>
+        <div
+          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 border-b pb-2 col-span-2 mb-2'>
+          <div *ngIf="getLoanCountVaults('DUSD')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              DUSD
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('DUSD') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getLoanCountVaults('DUSD') "></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('TSLA')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              TSLA
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('TSLA') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getLoanCountVaults('TSLA') * getUsdPriceOfStockPools(this.poolTsla)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
 
+          <div *ngIf="getLoanCountVaults('QQQ')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              QQQ
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('QQQ') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getLoanCountVaults('QQQ') * getUsdPriceOfStockPools(this.poolQqq)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('SPY')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              SPY
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('SPY')  | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getLoanCountVaults('SPY') * getUsdPriceOfStockPools(this.poolSpy)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('PLTR')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              PLTR
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('PLTR') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]="getLoanCountVaults('PLTR') * getUsdPriceOfStockPools(this.poolPltr)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('SLV')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              SLV
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('SLV') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('SLV') * getUsdPriceOfStockPools(this.poolSlv)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('AAPL')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              AAPL
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('AAPL') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('AAPL') * getUsdPriceOfStockPools(this.poolAapl)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('GLD')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              GLD
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('GLD') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('GLD') * getUsdPriceOfStockPools(this.poolGld)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('GME')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              GME
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('GME') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('GME') * getUsdPriceOfStockPools(this.poolGme)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('GOOGL')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              GOOGL
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('GOOGL')  | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('GOOGL') * getUsdPriceOfStockPools(this.poolGoogl)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('ARKK')  > 0"  class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              ARKK
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('ARKK')| number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('ARKK') * getUsdPriceOfStockPools(this.poolArkk)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('BABA')  > 0"  class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              BABA
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('BABA')  | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('BABA') * getUsdPriceOfStockPools(this.poolBaba)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('VNQ')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              VNQ
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('VNQ') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('VNQ') * getUsdPriceOfStockPools(this.poolVnq)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('URTH')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              URTH
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('URTH') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('URTH') * getUsdPriceOfStockPools(this.poolUrth)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="getLoanCountVaults('TLT')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              TLT
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults('TLT') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('TLT') * getUsdPriceOfStockPools(this.poolTlt)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getLoanCountVaults('PDBC')  > 0" class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              PDBC
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' :getLoanCountVaults('PDBC') | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]="getLoanCountVaults('PDBC') * getUsdPriceOfStockPools(this.poolPdbc)"></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+
