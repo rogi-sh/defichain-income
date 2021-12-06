@@ -16,7 +16,7 @@
       </div>
 
       <div
-      *ngIf="!!getAllValuesUsdPrice()"
+      *ngIf="getAllValuesUsdPrice()"
       class="inline-block h-full items-center border-l pl-4"
       >
         {{ 'balance' | translate }}:
@@ -765,31 +765,31 @@
                     <div *ngIf="wallet?.btcdfi > 0">BTC-DFI</div>
                     <div *ngIf="wallet?.btcdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.btcdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.btcdfi * poolBtc?.totalStaked/poolBtc?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.btcdfi * poolBtc?.totalLiquidityUsd/poolBtc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.ethdfi > 0">ETH-DFI</div>
                     <div *ngIf="wallet?.ethdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ethdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ethdfi * poolEth?.totalStaked/poolEth?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ethdfi * poolEth?.totalLiquidityUsd/poolEth?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.ltcdfi > 0">LTC-DFI</div>
                     <div *ngIf="wallet?.ltcdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.ltcdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ltcdfi * poolLtc?.totalStaked/poolLtc?.totalLiquidityLpToken"></app-price><</span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.ltcdfi * poolLtc?.totalLiquidityUsd/poolLtc?.totalLiquidityLpToken"></app-price><</span>
                     </div>
 
                     <div *ngIf="wallet?.usdtdfi > 0">USDT-DFI</div>
                     <div *ngIf="wallet?.usdtdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdtdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdtdfi * poolUsdt?.totalStaked/poolUsdt?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdtdfi * poolUsdt?.totalLiquidityUsd/poolUsdt?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.usdcdfi > 0">USDC-DFI</div>
                     <div *ngIf="wallet?.usdcdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usdcdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdcdfi * poolUsdc?.totalStaked/poolUsdc?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.usdcdfi * poolUsdc?.totalLiquidityUsd/poolUsdc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.usddfi > 0">USD-DFI</div>
@@ -801,13 +801,13 @@
                     <div *ngIf="wallet?.dogedfi > 0">DOGE-DFI</div>
                     <div *ngIf="wallet?.dogedfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.dogedfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.dogedfi * poolDoge?.totalStaked/poolDoge?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.dogedfi * poolDoge?.totalLiquidityUsd/poolDoge?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.bchdfi > 0">BCH-DFI</div>
                     <div *ngIf="wallet?.bchdfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.bchdfi | number: '1.3-3'}}
-                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.bchdfi * poolBch?.totalStaked/poolBch?.totalLiquidityLpToken"></app-price></span>
+                        ~  <app-price [fiat]="fiat" [usdPrice]="wallet?.bchdfi * poolBch?.totalLiquidityUsd/poolBch?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
                     <div *ngIf="wallet?.tslausd > 0">TSLA-USD</div>
