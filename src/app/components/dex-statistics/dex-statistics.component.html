@@ -3,6 +3,10 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>TVL</h1>
+        <a class='text-pink-500 hover:underline'
+           target='_blank'
+           href='https://defiscan.live'>Link to defiscan</a>
+        <br>
         <div class='grid gap-2'>
           <div>
             <span class='mr-2'>TVL Total:</span>
@@ -39,7 +43,10 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>DFI</h1>
-
+        <a class='text-pink-500 hover:underline'
+           target='_blank'
+           href='https://defiscan.live/dex'>Link to defiscan</a>
+        <br>
         <div class='grid gap-2'>
           <div>
             <span class='mr-2'>DFI DEX:</span>
@@ -71,8 +78,11 @@
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
-        <h1 class='text-lg font-bold'>Loan</h1>
-
+        <h1 class='text-lg font-bold'>Vaults</h1>
+        <a class='text-pink-500 hover:underline'
+           target='_blank'
+           href='https://defiscan.live/vaults'>Link to defiscan</a>
+        <br>
         <div class='grid gap-2'>
           <div>
             <span class='mr-2'>Collateral:</span>
@@ -89,6 +99,13 @@
             </div>
           </div>
           <div>
+            <span class='mr-2'>Total Ratio:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{this.oceanStats?.data?.loan?.value?.collateral/this.oceanStats?.data?.loan?.value?.loan * 100 |  number: '1.2-2'}} %
+            </div>
+          </div>
+          <div>
             <span class='mr-2'>Vaults:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
@@ -102,6 +119,7 @@
               {{this.oceanStats?.data?.loan?.count?.openAuctions }}
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -148,7 +166,10 @@
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <h1 class='text-lg font-bold'>Masternodes</h1>
-
+      <a class='text-pink-500 hover:underline'
+         target='_blank'
+         href='https://defiscan.live/masternodes'>Link to defiscan</a>
+      <br>
       <div class='mb-1 w-full grid gap-2 auto-rows-max'>
         <div class='w-full dark:text-gray-100'>
           Total:
@@ -229,7 +250,10 @@
     </div>
     <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <h1 class='text-lg font-bold'>Block</h1>
-
+      <a class='text-pink-500 hover:underline'
+         target='_blank'
+         href='https://defiscan.live/blocks'>Link to defiscan</a>
+      <br>
       <div class='my-2 dark:text-gray-100'>
         <span class='mr-2'>Block:</span>
         <div
