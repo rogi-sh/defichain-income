@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.3.2 - 6.12.2021';
+    this.log.comment = 'Loan Value is not part of holdings';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.3.1 - 6.12.2021';
     this.log.comment = 'Stock block reward auto computation';
     this.logs.push(this.log);

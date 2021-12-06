@@ -1313,7 +1313,6 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
 
     // STOCKS
-    // TODO Change when api is useable
     this.dfiProBlockUsd = 0.5 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd?.customRewards);
 
@@ -2743,39 +2742,57 @@ export class AppComponent implements OnInit {
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() + this.getTslaValueUsd() + this.getUsdValueUsd()
       + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd()
       + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
-      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getVaultsValueUsd();
+      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getVaultsValueUsd()
+      - this.getVaultsLoansValueUsd();
+  }
+
+  getVaultsLoansValueUsd(): number {
+    let loan = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return 0;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        loan += addressVault.loanValue;
+      });
+    });
+
+    return loan;
   }
 
   getVaultsValueUsd(): number {
 
-      let dfiInVaults = 0;
-      let btcInVaults = 0;
-      let usdcInVaults = 0;
-      let usdtInVaults = 0;
+    let dfiInVaults = 0;
+    let btcInVaults = 0;
+    let usdcInVaults = 0;
+    let usdtInVaults = 0;
 
-      if (this.vaultsOfAllAddresses.length === 0) {
-        return 0;
-      }
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return 0;
+    }
 
-      this.vaultsOfAllAddresses.forEach(vault => {
-        vault.data.forEach(addressVault => {
-          addressVault.collateralAmounts.forEach(vaultCollaterral => {
-            if ('DFI' === vaultCollaterral.symbolKey) {
-              dfiInVaults += +vaultCollaterral.amount;
-            } else if ('BTC' === vaultCollaterral.symbolKey) {
-              btcInVaults += +vaultCollaterral.amount;
-            } else if ('USDC' === vaultCollaterral.symbolKey) {
-              usdcInVaults += +vaultCollaterral.amount;
-            } else if ('USDT' === vaultCollaterral.symbolKey) {
-              usdtInVaults += +vaultCollaterral.amount;
-            }
-          });
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          if ('DFI' === vaultCollaterral.symbolKey) {
+            dfiInVaults += +vaultCollaterral.amount;
+          } else if ('BTC' === vaultCollaterral.symbolKey) {
+            btcInVaults += +vaultCollaterral.amount;
+          } else if ('USDC' === vaultCollaterral.symbolKey) {
+            usdcInVaults += +vaultCollaterral.amount;
+          } else if ('USDT' === vaultCollaterral.symbolKey) {
+            usdtInVaults += +vaultCollaterral.amount;
+          }
         });
       });
+    });
 
-      return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+    return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
 
   }
+
 
   getBtcValueUsd(): number {
     return (this.wallet?.btcInBtcPool + this.wallet?.btc) * this.poolBtc?.priceA;
