@@ -952,6 +952,7 @@ export class AppComponent implements OnInit {
       this.apiOnline = true;
 
       this.setStats(promiseStats);
+      this.dfiPorBlockStock = promiseStats?.data?.emission.total * 0.2468;
 
       // if fixed blocktime to 30 s
       if (this.lastBlocksForCompute < 0) {

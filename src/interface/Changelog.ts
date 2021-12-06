@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.3.1 - 6.12.2021';
+    this.log.comment = 'Stock block reward auto computation';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.3.0 - 6.12.2021';
     this.log.comment = 'Add loans to vaults overview, add dfi per block for stock token, add more links to github, small fixes';
     this.logs.push(this.log);
