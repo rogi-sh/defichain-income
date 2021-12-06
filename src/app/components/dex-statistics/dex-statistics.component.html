@@ -213,7 +213,7 @@
       </div>
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
-      <h1 class='text-lg font-bold'>Rewards</h1>
+      <h1 class='text-lg font-bold'>Block Rewards in DFI</h1>
       <div class='mb-2'>
         Total:
         <div
@@ -228,6 +228,12 @@
           class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
           {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
         </div>
+        LM Stocks:
+        <div
+          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+          {{rewards?.rewards?.liquidityStocks |  number: '1.2-2'  }} </div>
+      </div>
+      <div class='mb-2'>
         Masternode:
         <div
           class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>

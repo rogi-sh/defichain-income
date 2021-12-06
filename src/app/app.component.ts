@@ -952,7 +952,6 @@ export class AppComponent implements OnInit {
       this.apiOnline = true;
 
       this.setStats(promiseStats);
-      this.dfiPorBlockStock = promiseStats?.data?.emission.total * 0.2468;
 
       // if fixed blocktime to 30 s
       if (this.lastBlocksForCompute < 0) {
@@ -1011,6 +1010,8 @@ export class AppComponent implements OnInit {
     this.rewards.rewards.liquidity = promiseStats?.data?.emission.dex;
     this.rewards.rewards.minter = promiseStats?.data?.emission.masternode;
     this.rewards.rewards.total = promiseStats?.data?.emission.total;
+    this.rewards.rewards.liquidityStocks = promiseStats?.data?.emission.total * 0.2468;
+    this.dfiPorBlockStock = promiseStats?.data?.emission.total * 0.2468;
     this.oceanStats = promiseStats;
   }
 

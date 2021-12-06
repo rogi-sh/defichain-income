@@ -87,6 +87,7 @@ export class Rewards {
     swap: number;
     futures: number;
     options: number;
+    liquidityStocks: number;
 
 }
 
