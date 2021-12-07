@@ -357,12 +357,10 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getPdbcValueUsd();
     // Staking
     const staking = this.getStakingValueUsd();
-    // Masternodes
-    const masternodes = this.getMasternodeDfiUsd();
-    // Collateral
+       // Collateral
     const collateral = this.getVaultsValueUsd();
 
-    return allCryptoAndStocks + staking + masternodes + collateral;
+    return allCryptoAndStocks + staking + collateral;
 
   }
 

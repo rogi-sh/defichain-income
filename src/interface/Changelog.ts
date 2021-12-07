@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.4.1 - 7.12.2021';
+    this.log.comment = 'Fix masternode dfi counted twice';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.4.0 - 7.12.2021';
     this.log.comment = 'Holdings view refactoring and restructuring, loan is treated as working capital';
     this.logs.push(this.log);

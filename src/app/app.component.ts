@@ -2734,14 +2734,10 @@ export class AppComponent implements OnInit {
       + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd();
     // Staking
     const staking = this.getStakingValueUsd();
-    // Masternodes
-    const masternodes = this.getMasternodeDfiUsd();
     // Collateral
     const collateral = this.getVaultsValueUsd();
 
-
-
-    return allCryptoAndStocks + staking + masternodes + collateral;
+    return allCryptoAndStocks + staking + collateral;
   }
 
   getVaultsValueUsd(): number {
