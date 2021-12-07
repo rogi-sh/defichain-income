@@ -11,7 +11,16 @@
         - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
         - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
         <span *ngIf='wallet?.dfiInMasternodes'>- {{getAnteilMasternodesOfAllValue()| number: '1.2-2'}}
-          % Masternode</span>
+          % Masternodes/Freezer</span>
+      </div>
+      <br>
+      <br>
+      <div
+        class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
+        <span *ngIf='this.vaultsOfAllAddresses?.length > 0'>
+          {{getAnteilCollaterallOfAllValue()| number: '1.2-2'}}  % Collateral
+          - {{getAnteilLoanOfAllValue()| number: '1.2-2'}}  % Loans
+        </span>
       </div>
     </h2>
     <div class='w-full max-w-lg mx-auto' *ngIf='chartOptions3 && chartOptions3.series.length > 0'>
@@ -29,14 +38,6 @@
     </div>
   </div>
   <div class='order-1 lg:order-2 flex-1'>
-    <h2 class='text-lg dark:text-gray-100'>{{ 'value.hold' | translate }}</h2>
-    <h2>
-      <div
-        class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
-        <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getAllValuesUsdPrice'></app-price>
-        <div *ngIf='isIncognitoModeOn'>****</div>
-      </div>
-    </h2>
     <div class='w-full max-w-lg mx-auto mb-2' *ngIf='chartOptions && chartOptions.series.length > 0'>
       <apx-chart *ngIf='chartOptions && chartOptions.series.length > 0'
                  class='w-full'
@@ -129,7 +130,7 @@
               <div
                 class='text-xs text-gray-400'
               >
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getMasternodeDfiUsd()'></app-price>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getMasternodeDfiUsdWithoutFreeezer()'></app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
             </div>
@@ -490,7 +491,7 @@
                    href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
                   - {{isIncognitoModeOn ? '****' : v.state}}</a>
               <br />
-              <div class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
                Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
                              % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
                 <div *ngIf='isIncognitoModeOn'>****</div>

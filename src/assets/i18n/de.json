@@ -62,7 +62,7 @@
     "empty": "Adresse ist leer"
   },
   "holdings": {
-    "title": "Dein Vermögen",
+    "title": "Dein Vermögen/Verbindlichkeiten",
     "wallet": "Dein Bestand",
     "lp": "Dein LP Token Bestand",
     "stake-add": "Trage dein DFI Staking Bestand ein.",
@@ -72,7 +72,7 @@
   "value": {
     "title": "Dein aktueller Wert",
     "cur": "Wähle deine Währung aus",
-    "dist": "Verteilung deines Vermögens",
+    "dist": "Verteilung deines Vermögens/Verbindlichkeit",
     "hold": "Wert des Bestands"
   },
   "income": {

@@ -109,10 +109,7 @@ export class ValueComponent implements OnInit, OnChanges {
   freezer10!: string [];
 
   @Input()
-  vaultsOfAllAddresses: Array<AddressVaults>;
-
-  @Input()
-  getAllValuesUsdPrice: number;
+  vaultsOfAllAddresses!: Array<AddressVaults>;
 
   detailsOpen = false;
 
@@ -128,7 +125,55 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilWalletOfAllValue(): number {
-    return this.getWalletValueUsd() / this.getAllValuesUsdPrice * 100;
+    return this.getWalletValueUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getVaultsLoansValueUsd(): number {
+    let loan = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return 0;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        loan += +addressVault.loanValue;
+      });
+    });
+
+    return loan;
+  }
+
+  getVaultsValueUsd(): number {
+
+      let dfiInVaults = 0;
+      let btcInVaults = 0;
+      let usdcInVaults = 0;
+      let usdtInVaults = 0;
+
+      if (this.vaultsOfAllAddresses.length === 0) {
+        return 0;
+      }
+
+      this.vaultsOfAllAddresses.forEach(vault => {
+        vault.data.forEach(addressVault => {
+          addressVault.collateralAmounts.forEach(vaultCollaterral => {
+            if ('DFI' === vaultCollaterral.symbolKey) {
+              dfiInVaults += +vaultCollaterral.amount;
+            } else if ('BTC' === vaultCollaterral.symbolKey) {
+              btcInVaults += +vaultCollaterral.amount;
+            } else if ('USDC' === vaultCollaterral.symbolKey) {
+              usdcInVaults += +vaultCollaterral.amount;
+            } else if ('USDT' === vaultCollaterral.symbolKey) {
+              usdtInVaults += +vaultCollaterral.amount;
+            }
+          });
+        });
+      });
+
+      return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+
+
   }
 
   getCollateralCountVaults(currency: string): number {
@@ -152,23 +197,23 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getLoanCountVaults(currency: string): number {
-    let curInVaults = 0;
+    let loanInVaults = 0;
 
     if (this.vaultsOfAllAddresses.length === 0 || !currency ) {
-      return curInVaults;
+      return loanInVaults;
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        addressVault.loanAmounts.forEach(loanCollaterral => {
-          if (currency === loanCollaterral.symbolKey) {
-            curInVaults += +loanCollaterral.amount;
+        addressVault.loanAmounts.forEach(loan => {
+          if (currency === loan.symbolKey) {
+            loanInVaults += +loan.amount;
           }
         });
       });
     });
 
-    return curInVaults;
+    return loanInVaults;
   }
 
   getAllVaultsFromAllAddresses(): Array<Vault> {
@@ -194,10 +239,14 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getMasternodeDfiUsd(): number {
+    return (this.wallet?.dfiInMasternodes) * this.poolBtc?.priceB;
+  }
+
+  getMasternodeDfiUsdWithoutFreeezer(): number {
     return (this.wallet?.dfiInMasternodes - this.getFreezerDfiCount()) * this.poolBtc?.priceB;
   }
 
-  // WALLET AND POOLS CRYPTO
+  // CRYPTO IN WALLET AND POOLS
   getBtcValueUsd(): number {
     return (this.wallet.btcInBtcPool + this.wallet.btc) * this.poolBtc?.priceA;
   }
@@ -247,7 +296,7 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.getUsdCount() * this.getUsdPriceOfStockPools(this.poolUsd);
   }
 
-  //  WALLET AND POOLS STOCKS
+  //  STOCKS VALUE IN WALLET AND POOLS
   getTslaValueUsd(): number {
     return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.poolTsla);
   }
@@ -296,6 +345,25 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getUsdPriceOfStockPools(pool: Pool): number {
     return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
+  }
+
+  getAllValuesUsdPrice(): number {
+    // All Crypto and Stock values
+    const allCryptoAndStocks = this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd()
+      + this.getLtcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() +  this.getDfiInVaultUsd()
+      + this.getTslaValueUsd() + this.getUsdValueUsd() + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd()
+      + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd()
+      + this.getArkkValueUsd() + this.getBabaValueUsd() + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd()
+      + this.getPdbcValueUsd();
+    // Staking
+    const staking = this.getStakingValueUsd();
+    // Masternodes
+    const masternodes = this.getMasternodeDfiUsd();
+    // Collateral
+    const collateral = this.getVaultsValueUsd();
+
+    return allCryptoAndStocks + staking + masternodes + collateral;
+
   }
 
   // WALLETS HOLDINGS
@@ -399,6 +467,14 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.getDfiCount() * this.poolBtc?.priceB;
   }
 
+  getDfiInVaultUsd(): number {
+    return this.getCollateralCountVaults('DFI') * this.poolBtc?.priceB;
+  }
+
+  getBtcInVaultUsd(): number {
+    return this.getCollateralCountVaults('BTC') * this.poolBtc?.priceA;
+  }
+
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet.dfiInUsdPool
@@ -406,11 +482,11 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilStakingOfAllValue(): number {
-    return this.getStakingValueUsd() / this.getAllValuesUsdPrice * 100;
+    return this.getStakingValueUsd() / this.getAllValuesUsdPrice() * 100;
   }
 
   getAnteilMasternodesOfAllValue(): number {
-    return this.getMasternodeDfiUsd() / this.getAllValuesUsdPrice * 100;
+    return (this.getMasternodeDfiUsd()) / this.getAllValuesUsdPrice() * 100;
   }
 
   getStakingValueUsd(): number {
@@ -418,13 +494,23 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilLMOfAllValue(): number {
-    return (this.getDfiCountLMUsd() + this.getBtcValueUsd() + this.getEthValueUsd() + this.getLtcValueUsd()
-      + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd()
-      + this.getUsdValueUsd() + this.getTslaValueUsd() + this.getSpyValueUsd()
-        + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd()
-        + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
-        + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getDfiValueUsd())
-      / this.getAllValuesUsdPrice * 100;
+    return (this.getDfiCountLMUsd() + this.getAnteilLMOfBtcPoolValue() + this.getAnteilLMOfEthPoolValue()
+        + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdcPoolValue()
+        + this.getAnteilLMOfDogePoolValue() + this.getAnteilLMOfBchPoolValue() + this.getAnteilLMOfUsdPoolValue()
+        + this.getAnteilLMOfTslaPoolValue() + this.getAnteilLMOfSpyPoolValue() + this.getAnteilLMOfQqqPoolValue()
+        + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
+        + this.getAnteilLMOfGldPoolValue()  + this.getAnteilLMOfGmePoolValue() + this.getAnteilLMOfGooglPoolValue()
+        + this.getAnteilLMOfArkkPoolValue() + this.getAnteilLMOfBabaPoolValue() + this.getAnteilLMOfVnqPoolValue()
+        + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue())
+      / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getAnteilCollaterallOfAllValue(): number {
+    return this.getVaultsValueUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getAnteilLoanOfAllValue(): number {
+    return this.getVaultsLoansValueUsd() / this.getAllValuesUsdPrice() * 100;
   }
 
   getDfiCountLMUsd(): number {
@@ -502,6 +588,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.getWalletValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getWalletValueUsd() * 100) / 100);
+    }
+    if (this.getVaultsValueUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getVaultsValueUsd() * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
@@ -676,6 +765,9 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilWalletOfAllValue() > 0) {
       incomeNumbers.push('Wallet ');
     }
+    if (this.getAnteilCollaterallOfAllValue() > 0) {
+      incomeNumbers.push('Collateral');
+    }
     if (this.getAnteilStakingOfAllValue() > 0) {
       incomeNumbers.push('Staking ');
     }
@@ -762,6 +854,9 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilWalletOfAllValue() > 0) {
       incomeNumbers.push('#1ab7ea');
     }
+    if (this.getAnteilCollaterallOfAllValue() > 0) {
+      incomeNumbers.push('#FFBF00');
+    }
     if (this.getAnteilStakingOfAllValue() > 0) {
       incomeNumbers.push('#ff00af');
     }
@@ -843,10 +938,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   buildDataForChart(): void {
 
-    const allValue = this.getAllValuesUsdPrice;
-
     const dataBtc = new Data();
-    dataBtc.value = this.getBtcValueUsd();
+    dataBtc.value = this.getBtcValueUsd() + this.getBtcInVaultUsd();
     dataBtc.name = 'BTC';
 
     const dataEth = new Data();
@@ -855,11 +948,11 @@ export class ValueComponent implements OnInit, OnChanges {
 
     const dataUsdt = new Data();
     dataUsdt.name = 'USDT';
-    dataUsdt.value = this.getUsdtValueUsd();
+    dataUsdt.value = this.getUsdtValueUsd() + this.getCollateralCountVaults('USDT');
 
     const dataUsdc = new Data();
     dataUsdc.name = 'USDC';
-    dataUsdc.value = this.getUsdcValueUsd();
+    dataUsdc.value = this.getUsdcValueUsd() + this.getCollateralCountVaults('USDC');
 
     const dataUsd = new Data();
     dataUsd.name = 'USD';
@@ -939,7 +1032,12 @@ export class ValueComponent implements OnInit, OnChanges {
 
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
-    dataDfi.value = this.getDfiValueUsd();
+    dataDfi.value = this.getDfiValueUsd() + this.getDfiInVaultUsd();
+
+    const allValue = dataBtc.value + dataEth.value + dataUsdt.value + dataUsdc.value + dataUsd.value + dataLtc.value +
+      dataDoge.value + dataBch.value + dataTsla.value + dataSpy.value + dataQqq.value + dataPltr.value + dataSLV.value +
+      dataAAPL.value + dataGLD.value + dataGME.value + dataGOOGL.value + dataARKK.value + dataBABA.value + dataVNQ.value +
+      dataURTH.value + dataTLT.value + dataPDBC.value + dataDfi.value;
 
     this.chartOptions = {
       series: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,

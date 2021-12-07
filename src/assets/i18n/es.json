@@ -60,7 +60,7 @@
     "empty": "La dirección está vacía"
   },
   "holdings": {
-    "title": "Sus activos crypto",
+    "title": "Sus activos crypto/pasivos",
     "wallet": "Su stock",
     "lp": "Su Token LP (Minería de Liquidez)",
     "stake-add": "Añada la cantidad de su depósito en DFI.",
@@ -70,7 +70,7 @@
   "value": {
     "title": "Valor actual",
     "cur": "Elija su moneda",
-    "dist": "Distribución de activos",
+    "dist": "Distribución de activos/pasivos",
     "hold": "Valor de los activos"
   },
   "income": {

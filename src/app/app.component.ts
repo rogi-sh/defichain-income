@@ -1426,7 +1426,6 @@ export class AppComponent implements OnInit {
              } else if (i > this.adresses?.length - 1 && i <= this.adresses?.length * 2 - 1) {
                if ((value as AddressVaults)?.data?.length > 0) {
                  this.vaultsOfAllAddresses.push(value as AddressVaults);
-                 //this.addTokenFromVaults(value as AddressVaults, this.getVaultAddressForIteration(i));
                }
                // minter address
              } else if (i > (this.adresses?.length * 2) - 1) {
@@ -2724,42 +2723,25 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'DFX Buy');
   }
 
-  getFreezerDfiCount(): number {
-    let dfi = 0;
-    this.adressesMasternodesFreezer5.forEach(a => {
-      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
-    });
-
-    this.adressesMasternodesFreezer10.forEach(a => {
-      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
-    });
-
-    return dfi;
-  }
-
   getAllValuesUsdPrice(): number {
-    return this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd() + this.getLtcValueUsd()
+
+    // All Crypo and Stock values
+    const allCryptoAndStocks = this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd()
+      + this.getLtcValueUsd()
       + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() + this.getTslaValueUsd() + this.getUsdValueUsd()
       + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd()
       + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
-      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd() + this.getVaultsValueUsd()
-      - this.getVaultsLoansValueUsd();
-  }
+      + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd();
+    // Staking
+    const staking = this.getStakingValueUsd();
+    // Masternodes
+    const masternodes = this.getMasternodeDfiUsd();
+    // Collateral
+    const collateral = this.getVaultsValueUsd();
 
-  getVaultsLoansValueUsd(): number {
-    let loan = 0;
 
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return 0;
-    }
 
-    this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        loan += addressVault.loanValue;
-      });
-    });
-
-    return loan;
+    return allCryptoAndStocks + staking + masternodes + collateral;
   }
 
   getVaultsValueUsd(): number {
@@ -2793,6 +2775,26 @@ export class AppComponent implements OnInit {
 
   }
 
+  getFreezerDfiCount(): number {
+    let dfi = 0;
+    this.adressesMasternodesFreezer5.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    this.adressesMasternodesFreezer10.forEach(a => {
+      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+    });
+
+    return dfi;
+  }
+
+  getFreezerDfiUsd(): number {
+    return this.getFreezerDfiCount() * this.poolBtc?.priceB;
+  }
+
+  getMasternodeDfiUsd(): number {
+    return (this.wallet?.dfiInMasternodes) * this.poolBtc?.priceB;
+  }
 
   getBtcValueUsd(): number {
     return (this.wallet?.btcInBtcPool + this.wallet?.btc) * this.poolBtc?.priceA;
@@ -2877,6 +2879,8 @@ export class AppComponent implements OnInit {
     return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
       + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool  + this.wallet?.dfiInUsdPool
       + this.wallet?.dfiInBchPool + this.dfiInStaking + this.wallet?.dfiInMasternodes;
+
+
   }
 
   getDfiCountLM(): number {

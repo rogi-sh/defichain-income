@@ -61,7 +61,7 @@
     "empty": "Adress is empty"
   },
   "holdings": {
-    "title": "Your crypto holdings",
+    "title": "Your crypto holdings/liabilities",
     "wallet": "Your holdings",
     "lp": "Your LP Token",
     "stake-add": "Add your stake DFI amount.",
@@ -71,7 +71,7 @@
   "value": {
     "title": "Your actual value",
     "cur": "Choose your currency",
-    "dist": "Distribution of holdings",
+    "dist": "Distribution of holdings/liabilities",
     "hold": "Value of holdings"
   },
   "income": {

@@ -61,7 +61,7 @@
     "empty": "L'adresse est vide"
   },
   "holdings": {
-    "title": "Vos possessions crypto",
+    "title": "Vos possessions crypto/dettes",
     "wallet": "Vos stocks",
     "lp": "Vos jetons LP",
     "stake-add": "Ajoutez votre montant de DFI stacké.",
@@ -71,7 +71,7 @@
   "value": {
     "title": "Votre valorisation actuelle",
     "cur": "Choisissez votre devise",
-    "dist": "Ventilation de la possession",
+    "dist": "Ventilation de la possession/dettes",
     "hold": "Valorisation de la possession"
   },
   "income": {
