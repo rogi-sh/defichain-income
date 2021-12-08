@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.4.3 - 8.12.2021';
+    this.log.comment = 'Loan value with dex prices';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.4.2 - 8.12.2021';
     this.log.comment = 'Vault values calculated with dex prices, Total holdings with loan and without loan in the header';
     this.logs.push(this.log);

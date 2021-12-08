@@ -180,10 +180,24 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getLoanFromVaultUsd(vault: Vault): number {
 
-    const loan = +vault.loanValue;
-    const priceRatioDexCex = this.cexPrice / this.poolBtc.priceB;
-
-    return loan * priceRatioDexCex;
+    const usd = this.getLoanCountVaults('DUSD');
+    const spy = this.getLoanCountVaults('SPY') * this.getUsdPriceOfStockPools(this.poolSpy);
+    const tsla = this.getLoanCountVaults('TSLA') * this.getUsdPriceOfStockPools(this.poolTsla);
+    const qqq = this.getLoanCountVaults('QQQ') * this.getUsdPriceOfStockPools(this.poolQqq);
+    const pltr = this.getLoanCountVaults('PLTR') * this.getUsdPriceOfStockPools(this.poolPltr);
+    const slv = this.getLoanCountVaults('SLV') * this.getUsdPriceOfStockPools(this.poolSlv);
+    const aapl = this.getLoanCountVaults('AAPL') * this.getUsdPriceOfStockPools(this.poolAapl);
+    const gld = this.getLoanCountVaults('GLD') * this.getUsdPriceOfStockPools(this.poolGld);
+    const gme = this.getLoanCountVaults('GME') * this.getUsdPriceOfStockPools(this.poolGme);
+    const google = this.getLoanCountVaults('GOOGL') * this.getUsdPriceOfStockPools(this.poolGoogl);
+    const arkk = this.getLoanCountVaults('ARKK') * this.getUsdPriceOfStockPools(this.poolArkk);
+    const baba = this.getLoanCountVaults('BABA') * this.getUsdPriceOfStockPools(this.poolBaba);
+    const vnq = this.getLoanCountVaults('VNQ') * this.getUsdPriceOfStockPools(this.poolVnq);
+    const urth = this.getLoanCountVaults('URTH') * this.getUsdPriceOfStockPools(this.poolUrth);
+    const tlt = this.getLoanCountVaults('TLT') * this.getUsdPriceOfStockPools(this.poolTlt);
+    const pdbc = this.getLoanCountVaults('PDBC') * this.getUsdPriceOfStockPools(this.poolPdbc);
+    return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
+      + baba + vnq + urth + tlt + pdbc;
   }
 
 
