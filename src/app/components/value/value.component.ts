@@ -111,6 +111,9 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   vaultsOfAllAddresses!: Array<AddressVaults>;
 
+  @Input()
+  cexPrice!: number;
+
   detailsOpen = false;
 
   ngOnInit(): void {
@@ -173,7 +176,42 @@ export class ValueComponent implements OnInit, OnChanges {
 
       return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
 
+  }
 
+  getLoanFromVaultUsd(vault: Vault): number {
+
+    const loan = +vault.loanValue;
+    const priceRatioDexCex = this.cexPrice / this.poolBtc.priceB;
+
+    return loan * priceRatioDexCex;
+  }
+
+
+  getCollateralFromVaultUsd(vault: Vault): number {
+
+    let dfiInVaults = 0;
+    let btcInVaults = 0;
+    let usdcInVaults = 0;
+    let usdtInVaults = 0;
+
+    if (!vault) {
+      return 0;
+    }
+
+    vault.collateralAmounts.forEach(vaultCollaterral => {
+      if ('DFI' === vaultCollaterral.symbolKey) {
+        dfiInVaults += +vaultCollaterral.amount;
+      } else if ('BTC' === vaultCollaterral.symbolKey) {
+        btcInVaults += +vaultCollaterral.amount;
+      } else if ('USDC' === vaultCollaterral.symbolKey) {
+        usdcInVaults += +vaultCollaterral.amount;
+      } else if ('USDT' === vaultCollaterral.symbolKey) {
+        usdtInVaults += +vaultCollaterral.amount;
+      }
+
+    });
+
+    return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
   }
 
   getCollateralCountVaults(currency: string): number {

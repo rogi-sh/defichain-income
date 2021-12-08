@@ -2740,6 +2740,29 @@ export class AppComponent implements OnInit {
     return allCryptoAndStocks + staking + collateral;
   }
 
+  getAllValuesUsdPriceWithputLoan(): number {
+
+    // All Crypto and Stock values
+    const allWithLoans = this.getAllValuesUsdPrice();
+    return allWithLoans - this.getVaultsLoansValueUsd();
+  }
+
+  getVaultsLoansValueUsd(): number {
+    let loan = 0;
+
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return 0;
+    }
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        loan += +addressVault.loanValue;
+      });
+    });
+
+    return loan;
+  }
+
   getVaultsValueUsd(): number {
 
     let dfiInVaults = 0;
@@ -2875,7 +2898,6 @@ export class AppComponent implements OnInit {
     return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
       + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool  + this.wallet?.dfiInUsdPool
       + this.wallet?.dfiInBchPool + this.dfiInStaking + this.wallet?.dfiInMasternodes;
-
 
   }
 

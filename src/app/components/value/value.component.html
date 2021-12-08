@@ -500,12 +500,12 @@
               <div
                 class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Collateral
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.collateralValue'></app-price> </div>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price> </div>
               <br>
               <div
                 class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Loan
-                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='v.loanValue'></app-price> </div>
+                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLoanFromVaultUsd(v)'></app-price> </div>
                 <div *ngIf='isIncognitoModeOn'>****</div>
 
               </div>

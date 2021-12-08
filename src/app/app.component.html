@@ -15,12 +15,10 @@
         &Oslash; APR {{avgApr}} %
       </div>
 
-      <div
-      *ngIf="wallet"
-      class="inline-block h-full items-center border-l pl-4"
-      >
+      <div *ngIf="wallet" class="inline-block h-full items-center border-l pl-4" >
         {{ 'balance' | translate }}:
-        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
+        <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPriceWithputLoan()"></app-price>
+        - <app-price class='text-sm' *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
         <div class="inline-block" *ngIf="isIncognitoModeOn">****</div>
       </div>
     </div>
@@ -94,13 +92,10 @@
           &Oslash; APR {{avgApr}} %
         </span>
       </div>
-      <div
-        *ngIf="wallet"
-        class="hidden xl:inline-block h-full md:mr-5 items-center"
-      >
+      <div *ngIf="wallet" class="hidden xl:inline-block h-full md:mr-5 items-center">
         <span
           class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer">
-          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
+          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPriceWithputLoan()"></app-price> - <app-price class='text-sm' *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getAllValuesUsdPrice()"></app-price>
           <div class="inline-block" *ngIf="isIncognitoModeOn">****</div>
         </span>
       </div>
@@ -456,6 +451,7 @@
                     [freezer5]="adressesMasternodesFreezer5"
                     [freezer10]="adressesMasternodesFreezer10"
                     [vaultsOfAllAddresses]='vaultsOfAllAddresses'
+                    [cexPrice]='priceDFICEX'
                   ></app-value>
                 </div>
               </div>
@@ -4010,6 +4006,7 @@
                     [freezer5]="adressesMasternodesFreezer5"
                     [freezer10]="adressesMasternodesFreezer10"
                     [vaultsOfAllAddresses]='vaultsOfAllAddresses'
+                    [cexPrice]='priceDFICEX'
                   ></app-value>
                 </div>
                 <div class="lg:col-span-2 overflow-x-auto">
