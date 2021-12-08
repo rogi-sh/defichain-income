@@ -2732,12 +2732,10 @@ export class AppComponent implements OnInit {
       + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd() + this.getSlvValueUsd() + this.getAaplValueUsd()
       + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd() + this.getArkkValueUsd() + this.getBabaValueUsd()
       + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd() + this.getPdbcValueUsd();
-    // Staking
-    const staking = this.getStakingValueUsd();
     // Collateral
     const collateral = this.getVaultsValueUsd();
 
-    return allCryptoAndStocks + staking + collateral;
+    return allCryptoAndStocks  + collateral;
   }
 
   getAllValuesUsdPriceWithputLoan(): number {
