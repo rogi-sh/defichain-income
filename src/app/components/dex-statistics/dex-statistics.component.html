@@ -308,7 +308,7 @@
             <br>
             <a class='text-pink-500 hover:underline'
                target='_blank'
-               href='{{m?.html_url}}'>Link to github</a>
+               href='{{m?.html_url}}'>Github</a>
             <br>
             <span>{{m.closed_issues}} &#9989; - {{m.open_issues}} &#9203;</span>
             <br>
@@ -347,7 +347,7 @@
         <br>
         <a class='text-pink-500 hover:underline'
            target='_blank'
-           href='{{getLatestReleaseApp()?.html_url}}'>Link to github</a>
+           href='{{getLatestReleaseApp()?.html_url}}'>Github</a>
         <br>
         <span class='text-sm'>{{ getLatestReleaseApp()?.published_at | date}}</span>
         <br>
@@ -364,7 +364,7 @@
         <br>
         <a class='text-pink-500 hover:underline'
            target='_blank'
-           href='{{getLatestReleaseWallet()?.html_url}}'>Link to github</a>
+           href='{{getLatestReleaseWallet()?.html_url}}'>Github</a>
         <br>
         <span class='text-sm'>{{ getLatestReleaseWallet()?.published_at | date}}</span>
         <br>
@@ -400,7 +400,8 @@
 
           <td class='p-2'>{{cryptoPool?.symbol}}</td>
           <td class='text-right p-2'>
-            <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price>
+            <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price> -
+            <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB '></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd'></app-price>
@@ -442,7 +443,8 @@
              : 'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700' ">
           <td class='p-2'>{{stockPool?.symbol}}</td>
           <td class='text-right p-2'>
-            <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
+            <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price> -
+            <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd'></app-price>
