@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.4.6 - 9.12.2021';
+    this.log.comment = 'Fix: Remove second number in total amount (green bubble in header) because it causes more confusion, add collateral and loan of all vaults';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.4.5 - 8.12.2021';
     this.log.comment = 'Fix: Loan value of vault always same';
     this.logs.push(this.log);

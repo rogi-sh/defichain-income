@@ -28,7 +28,7 @@ import {
   PoolGldOut,
   PoolGmeOut, PoolGooglOut, PoolArkkOut, PoolBabaOut, PoolVnqOut, PoolUrthOut, PoolTltOut, PoolPdbcOut, Prices,
 } from '@interfaces/Dex';
-import { AddressVaults, IncomePoolDto, Wallet, WalletDto } from '@interfaces/Data';
+import { AddressVaults, IncomePoolDto, Vault, Wallet, WalletDto } from '@interfaces/Data'
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 import { CountdownComponent } from 'ngx-countdown';
@@ -2754,11 +2754,57 @@ export class AppComponent implements OnInit {
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        loan += +addressVault.loanValue;
+        loan += +this.getLoanFromVaultUsd(addressVault);
       });
     });
 
     return loan;
+  }
+
+  getLoanFromVaultUsd(vault: Vault): number {
+
+    let usd = 0; let spy = 0; let tsla = 0; let qqq = 0; let pltr = 0; let slv = 0; let aapl = 0; let gld = 0;
+    let gme = 0; let google = 0; let arkk = 0; let baba = 0; let vnq = 0; let urth = 0; let tlt = 0;
+    let pdbc = 0;
+
+    vault.loanAmounts.forEach(loan => {
+      if ('DUSD' === loan.symbolKey) {
+        usd = +loan.amount;
+      } else if ('SPY' === loan.symbolKey) {
+        spy = +loan.amount * this.getUsdPriceOfStockPools(this.poolSpy);
+      } else if ('TSLA' === loan.symbolKey) {
+        tsla = +loan.amount * this.getUsdPriceOfStockPools(this.poolTsla);
+      } else if ('QQQ' === loan.symbolKey) {
+        qqq = +loan.amount * this.getUsdPriceOfStockPools(this.poolQqq);
+      } else if ('PLTR' === loan.symbolKey) {
+        pltr = +loan.amount * this.getUsdPriceOfStockPools(this.poolPltr);
+      } else if ('SLV' === loan.symbolKey) {
+        slv = +loan.amount * this.getUsdPriceOfStockPools(this.poolSlv);
+      } else if ('AAPL' === loan.symbolKey) {
+        aapl = +loan.amount * this.getUsdPriceOfStockPools(this.poolAapl);
+      } else if ('GLD' === loan.symbolKey) {
+        gld = +loan.amount * this.getUsdPriceOfStockPools(this.poolGld);
+      } else if ('GME' === loan.symbolKey) {
+        gme = +loan.amount * this.getUsdPriceOfStockPools(this.poolGme);
+      } else if ('GOOGL' === loan.symbolKey) {
+        google = +loan.amount * this.getUsdPriceOfStockPools(this.poolGoogl);
+      } else if ('ARKK' === loan.symbolKey) {
+        arkk = +loan.amount * this.getUsdPriceOfStockPools(this.poolArkk);
+      } else if ('BABA' === loan.symbolKey) {
+        baba = +loan.amount * this.getUsdPriceOfStockPools(this.poolBaba);
+      } else if ('VNQ' === loan.symbolKey) {
+        vnq = +loan.amount * this.getUsdPriceOfStockPools(this.poolVnq);
+      } else if ('URTH' === loan.symbolKey) {
+        urth = +loan.amount * this.getUsdPriceOfStockPools(this.poolUrth);
+      } else if ('TLT' === loan.symbolKey) {
+        tlt = +loan.amount * this.getUsdPriceOfStockPools(this.poolTlt);
+      } else if ('PDBC' === loan.symbolKey) {
+        pdbc = +loan.amount * this.getUsdPriceOfStockPools(this.poolPdbc);
+      }
+    });
+
+    return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
+      + baba + vnq + urth + tlt + pdbc;
   }
 
   getVaultsValueUsd(): number {

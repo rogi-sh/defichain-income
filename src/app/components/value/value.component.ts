@@ -140,14 +140,14 @@ export class ValueComponent implements OnInit, OnChanges {
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        loan += +addressVault.loanValue;
+        loan += +this.getLoanFromVaultUsd(addressVault);
       });
     });
 
     return loan;
   }
 
-  getVaultsValueUsd(): number {
+  getVaultsCollateralUsd(): number {
 
       let dfiInVaults = 0;
       let btcInVaults = 0;
@@ -432,7 +432,7 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getArkkValueUsd() + this.getBabaValueUsd() + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd()
       + this.getPdbcValueUsd();
        // Collateral
-    const collateral = this.getVaultsValueUsd();
+    const collateral = this.getVaultsCollateralUsd();
 
     return allCryptoAndStocks  + collateral;
 
@@ -578,7 +578,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilCollaterallOfAllValue(): number {
-    return this.getVaultsValueUsd() / this.getAllValuesUsdPrice() * 100;
+    return this.getVaultsCollateralUsd() / this.getAllValuesUsdPrice() * 100;
   }
 
   getAnteilLoanOfAllValue(): number {
@@ -661,8 +661,8 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getWalletValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getWalletValueUsd() * 100) / 100);
     }
-    if (this.getVaultsValueUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getVaultsValueUsd() * 100) / 100);
+    if (this.getVaultsCollateralUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getVaultsCollateralUsd() * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
