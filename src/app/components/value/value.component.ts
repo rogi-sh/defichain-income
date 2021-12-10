@@ -1,7 +1,7 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {AddressBalance, Pool} from '@interfaces/Dex';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AddressBalance, Pool } from '@interfaces/Dex';
 import { AddressVaults, ChartOptions, ChartOptions3, Data, Vault, Wallet } from '@interfaces/Data';
-import {ChartComponent} from 'ng-apexcharts';
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-value',
@@ -566,15 +566,18 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getAnteilLMOfAllValue(): number {
+    return this.getLmUsd() / this.getAllValuesUsdPrice() * 100;
+  }
+
+  getLmUsd(): number {
     return (this.getDfiCountLMUsd() + this.getAnteilLMOfBtcPoolValue() + this.getAnteilLMOfEthPoolValue()
-        + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdcPoolValue()
-        + this.getAnteilLMOfDogePoolValue() + this.getAnteilLMOfBchPoolValue() + this.getAnteilLMOfUsdPoolValue()
-        + this.getAnteilLMOfTslaPoolValue() + this.getAnteilLMOfSpyPoolValue() + this.getAnteilLMOfQqqPoolValue()
-        + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
-        + this.getAnteilLMOfGldPoolValue()  + this.getAnteilLMOfGmePoolValue() + this.getAnteilLMOfGooglPoolValue()
-        + this.getAnteilLMOfArkkPoolValue() + this.getAnteilLMOfBabaPoolValue() + this.getAnteilLMOfVnqPoolValue()
-        + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue())
-      / this.getAllValuesUsdPrice() * 100;
+      + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdcPoolValue()
+      + this.getAnteilLMOfDogePoolValue() + this.getAnteilLMOfBchPoolValue() + this.getAnteilLMOfUsdPoolValue()
+      + this.getAnteilLMOfTslaPoolValue() + this.getAnteilLMOfSpyPoolValue() + this.getAnteilLMOfQqqPoolValue()
+      + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
+      + this.getAnteilLMOfGldPoolValue()  + this.getAnteilLMOfGmePoolValue() + this.getAnteilLMOfGooglPoolValue()
+      + this.getAnteilLMOfArkkPoolValue() + this.getAnteilLMOfBabaPoolValue() + this.getAnteilLMOfVnqPoolValue()
+      + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue())
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -616,26 +619,19 @@ export class ValueComponent implements OnInit, OnChanges {
     this.chartOptions3 = {
 
       series: this.getSeriesValue(),
-
-      labels: this.getLabelsValue(),
       colors: this.getColorsValue(),
       chart: {
         width: '100%',
-        type: 'donut',
+        height: '700px',
+        type: 'polarArea',
         background: 'transparent'
       },
-      dataLabels: {
-        enabled: true
+      stroke: {
+        colors: ['#fff']
       },
+      labels: this.getLabelsValue(),
       fill: {
-        type: 'gradient'
-      },
-      legend: {
-        // tslint:disable-next-line:only-arrow-functions typedef
-        formatter(val, opts) {
-          return '55';
-
-        }
+        opacity: 0.9
       },
       responsive: [
         {
@@ -663,6 +659,12 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getVaultsCollateralUsd() > 0) {
       incomeNumbers.push(Math.round(this.getVaultsCollateralUsd() * 100) / 100);
+    }
+    if (this.getLmUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getLmUsd() * 100) / 100);
+    }
+    if (this.getAnteilLMOfAllValue() > 0) {
+      incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
@@ -840,8 +842,14 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilCollaterallOfAllValue() > 0) {
       incomeNumbers.push('Collateral');
     }
+    if (this.getAnteilLoanOfAllValue() > 0) {
+      incomeNumbers.push('Loan');
+    }
     if (this.getAnteilStakingOfAllValue() > 0) {
       incomeNumbers.push('Staking ');
+    }
+    if (this.getAnteilLMOfAllValue() > 0) {
+      incomeNumbers.push('LM ');
     }
     if (this.getAnteilMasternodesOfAllValue() > 0) {
       incomeNumbers.push('Masternode ');
@@ -929,8 +937,14 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilCollaterallOfAllValue() > 0) {
       incomeNumbers.push('#FFBF00');
     }
+    if (this.getAnteilLoanOfAllValue() > 0) {
+      incomeNumbers.push('#ff4c4c');
+    }
     if (this.getAnteilStakingOfAllValue() > 0) {
       incomeNumbers.push('#ff00af');
+    }
+    if (this.getAnteilLMOfAllValue() > 0) {
+      incomeNumbers.push('#93c47d');
     }
     if (this.getAnteilMasternodesOfAllValue() > 0) {
       incomeNumbers.push('#ff00af');

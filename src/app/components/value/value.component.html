@@ -4,25 +4,8 @@
   <!-- [ngClass]="{ 'grid-rows-2 lg:grid-cols""-2': !hideHoldings }" -->
   <div class='mb-4 lg:mb-0 order-2 lg:order-1 flex-1' *ngIf='!hideHoldings'>
     <h2 class='text-lg dark:text-gray-100'>{{ 'value.dist' | translate }}</h2>
-    <h2>
-      <div
-        class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
-        {{getAnteilWalletOfAllValue() | number: '1.2-2'}} % Wallet
-        - {{getAnteilStakingOfAllValue() | number: '1.2-2'}} % Staking
-        - {{getAnteilLMOfAllValue()| number: '1.2-2'}} % LM
-        <span *ngIf='wallet?.dfiInMasternodes'>- {{getAnteilMasternodesOfAllValue()| number: '1.2-2'}}
-          % Masternodes/Freezer</span>
-      </div>
-      <br>
-      <br>
-      <div
-        class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
-        <span *ngIf='this.vaultsOfAllAddresses?.length > 0'>
-          {{getAnteilCollaterallOfAllValue()| number: '1.2-2'}}  % Collateral
-          - {{getAnteilLoanOfAllValue()| number: '1.2-2'}}  % Loans
-        </span>
-      </div>
-    </h2>
+    <br>
+    <br>
     <div class='w-full max-w-lg mx-auto' *ngIf='chartOptions3 && chartOptions3.series.length > 0'>
       <apx-chart
         *ngIf='chartOptions3 && chartOptions3.series.length > 0'
@@ -36,8 +19,6 @@
         [theme]='{ mode: getTheme() }'
       ></apx-chart>
     </div>
-  </div>
-  <div class='order-1 lg:order-2 flex-1'>
     <div class='w-full max-w-lg mx-auto mb-2' *ngIf='chartOptions && chartOptions.series.length > 0'>
       <apx-chart *ngIf='chartOptions && chartOptions.series.length > 0'
                  class='w-full'
@@ -51,7 +32,8 @@
                  [theme]='{ mode: getTheme() }'
       ></apx-chart>
     </div>
-
+  </div>
+  <div class='order-1 lg:order-2 flex-1'>
     <div>
 
       <h3 class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>

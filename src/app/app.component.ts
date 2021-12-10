@@ -2735,14 +2735,15 @@ export class AppComponent implements OnInit {
     // Collateral
     const collateral = this.getVaultsValueUsd();
 
-    return allCryptoAndStocks  + collateral;
+    return allCryptoAndStocks + collateral;
   }
 
   getAllValuesUsdPriceWithputLoan(): number {
 
     // All Crypto and Stock values
     const allWithLoans = this.getAllValuesUsdPrice();
-    return allWithLoans - this.getVaultsLoansValueUsd();
+    const loans = this.getVaultsLoansValueUsd();
+    return allWithLoans - loans;
   }
 
   getVaultsLoansValueUsd(): number {

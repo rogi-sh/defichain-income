@@ -10,6 +10,8 @@ import {
   ApexXAxis,
   ApexYAxis,
   ApexTooltip,
+  ApexTitleSubtitle,
+  ApexMarkers
 } from 'ng-apexcharts';
 import {Outcome} from './Dex';
 
@@ -90,9 +92,8 @@ export type ChartOptions3 = {
   responsive: ApexResponsive[];
   labels: any;
   colors: string[];
+  stroke: ApexStroke;
   fill: ApexFill;
-  legend: ApexLegend;
-  dataLabels: ApexDataLabels;
 };
 
 export type ChartOptions4 = {
