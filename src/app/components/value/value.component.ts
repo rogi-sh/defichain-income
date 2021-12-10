@@ -577,7 +577,7 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
       + this.getAnteilLMOfGldPoolValue()  + this.getAnteilLMOfGmePoolValue() + this.getAnteilLMOfGooglPoolValue()
       + this.getAnteilLMOfArkkPoolValue() + this.getAnteilLMOfBabaPoolValue() + this.getAnteilLMOfVnqPoolValue()
-      + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue())
+      + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue());
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -622,7 +622,7 @@ export class ValueComponent implements OnInit, OnChanges {
       colors: this.getColorsValue(),
       chart: {
         width: '100%',
-        height: '700px',
+        height: '900px',
         type: 'polarArea',
         background: 'transparent'
       },
@@ -837,91 +837,91 @@ export class ValueComponent implements OnInit, OnChanges {
     const incomeNumbers = new Array<string>();
 
     if (this.getAnteilWalletOfAllValue() > 0) {
-      incomeNumbers.push('Wallet ');
+      incomeNumbers.push('Wallet' + ' - ' + Math.round(this.getWalletValueUsd() / 100 * 100) + ' USD') ;
     }
     if (this.getAnteilCollaterallOfAllValue() > 0) {
-      incomeNumbers.push('Collateral');
+      incomeNumbers.push('Collateral' + ' - ' + Math.round(this.getVaultsCollateralUsd() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLoanOfAllValue() > 0) {
-      incomeNumbers.push('Loan');
+      incomeNumbers.push('Loan' + ' - ' + Math.round(this.getVaultsLoansValueUsd() / 100 * 100) + ' USD');
     }
     if (this.getAnteilStakingOfAllValue() > 0) {
-      incomeNumbers.push('Staking ');
+      incomeNumbers.push('Staking' + ' - ' + Math.round(this.getStakingValueUsd() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfAllValue() > 0) {
-      incomeNumbers.push('LM ');
+      incomeNumbers.push('LM ' + ' - ' + Math.round(this.getLmUsd() / 100 * 100) + ' USD');
     }
     if (this.getAnteilMasternodesOfAllValue() > 0) {
-      incomeNumbers.push('Masternode ');
+      incomeNumbers.push('Masternode ' + ' - ' + Math.round(this.getMasternodeDfiUsd() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push('BTC-Pool ');
+      incomeNumbers.push('BTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBtcPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push('ETH-Pool ');
+      incomeNumbers.push('ETH-Pool '+ ' - ' + Math.round(this.getAnteilLMOfEthPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push('LTC-Pool ');
+      incomeNumbers.push('LTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfLtcPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push('DOGE-Pool ');
+      incomeNumbers.push('DOGE-Pool ' + ' - ' + Math.round(this.getAnteilLMOfDogePoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfBchPoolValue() > 0) {
       incomeNumbers.push('BCH-Pool ');
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push('USDT-Pool ');
+      incomeNumbers.push('USDT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdtPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfUsdcPoolValue() > 0) {
-      incomeNumbers.push('USDC-Pool ');
+      incomeNumbers.push('USDC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdcPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfUsdPoolValue() > 0) {
-      incomeNumbers.push('USD-Pool ');
+      incomeNumbers.push('USD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfTslaPoolValue() > 0) {
-      incomeNumbers.push('TSLA-Pool ');
+      incomeNumbers.push('TSLA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTslaPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfSpyPoolValue() > 0) {
-      incomeNumbers.push('SPY-Pool ');
+      incomeNumbers.push('SPY-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSpyPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfQqqPoolValue() > 0) {
-      incomeNumbers.push('QQQ-Pool ');
+      incomeNumbers.push('QQQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfQqqPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfPltrPoolValue() > 0) {
-      incomeNumbers.push('PLTR-Pool ');
+      incomeNumbers.push('PLTR-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPltrPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfSlvPoolValue() > 0) {
-      incomeNumbers.push('SLV-Pool ');
+      incomeNumbers.push('SLV-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSlvPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfAaplPoolValue() > 0) {
-      incomeNumbers.push('AAPL-Pool ');
+      incomeNumbers.push('AAPL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfAaplPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfGldPoolValue() > 0) {
-      incomeNumbers.push('GLD-Pool ');
+      incomeNumbers.push('GLD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGldPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfGmePoolValue() > 0) {
-      incomeNumbers.push('GME-Pool ');
+      incomeNumbers.push('GME-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGmePoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfGooglPoolValue() > 0) {
-      incomeNumbers.push('GOOGL-Pool ');
+      incomeNumbers.push('GOOGL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGooglPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfArkkPoolValue() > 0) {
-      incomeNumbers.push('ARKK-Pool ');
+      incomeNumbers.push('ARKK-Pool ' + ' - ' + Math.round(this.getAnteilLMOfArkkPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfBabaPoolValue() > 0) {
-      incomeNumbers.push('BABA-Pool ');
+      incomeNumbers.push('BABA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBabaPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfVnqPoolValue() > 0) {
-      incomeNumbers.push('VNQ-Pool ');
+      incomeNumbers.push('VNQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfVnqPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfUrthPoolValue() > 0) {
-      incomeNumbers.push('URTH-Pool ');
+      incomeNumbers.push('URTH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUrthPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfTltPoolValue() > 0) {
-      incomeNumbers.push('TLT-Pool ');
+      incomeNumbers.push('TLT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTltPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfPdbcPoolValue() > 0) {
-      incomeNumbers.push('PDBC-Pool ');
+      incomeNumbers.push('PDBC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPdbcPoolValue() / 100 * 100) + ' USD');
     }
 
     return incomeNumbers;

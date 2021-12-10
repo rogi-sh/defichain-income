@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.6.1 - 10.12.2021';
+    this.log.comment = 'Radar chart usd values added to Label';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.6.0 - 10.12.2021';
     this.log.comment = 'Value Chart type changed to radar. Better view of all usd values from different types, Optmized dashboard only income Chart, small fixes';
     this.logs.push(this.log);
