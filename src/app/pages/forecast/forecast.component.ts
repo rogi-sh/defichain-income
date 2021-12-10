@@ -174,7 +174,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolMnCompoundChartPos: Outcome;
   actualPoolIndex = 0;
 
-  reinvestPeriod = 356;
+  reinvestPeriod = 365;
   reinvestPeriodMn = 259200;
 
   lmApy = 0;
@@ -552,7 +552,7 @@ export class ForecastComponent implements OnInit, OnChanges {
 
 
   getReinvestDFI(inputPool: PoolAllOut, i: number, reinvestPeriod: number): number {
-    if (inputPool && reinvestPeriod === 356) {
+    if (inputPool && reinvestPeriod === 365) {
       if (i === 1) {
         const blocks = 32690 - (this.blockHeight - this.euonsHardforkeBlock) % 32690;
         const daysForReinvest = Math.round(blocks * this.bs / 86400);
