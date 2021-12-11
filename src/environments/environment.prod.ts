@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   prices: 'https://supernode.saiive.live/api/v1/mainnet/DFI/coin-price/USD',
+  oraclePrices: 'https://ocean.defichain.com/v0/mainnet/prices?size=1000',
   listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/DFI/listpoolpairs',
   health: 'https://supernode.saiive.live/api/v1/health',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
@@ -11,7 +12,7 @@ export const environment = {
   address_vaults: 'https://ocean.defichain.com/v0/mainnet/address/ADDRESS_VAULTS/vaults',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '8.6.1',
+  version: '8.7.0',
   graphql: 'https://graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,

@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
-import {Correlation, Pool, Stats} from '@interfaces/Dex';
+import { Component, Input, OnInit } from '@angular/core';
+import { Correlation, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import {CORRELATION} from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
+import { Dex } from '@services/dex.service';
+import { StockOracles } from '@interfaces/Data';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -64,6 +66,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   correlationDays: number;
 
+  @Input()
+  priceDFICEX: number;
+
   corr: Correlation;
 
   euonsHardforkeBlock = 894000;
@@ -78,7 +83,9 @@ export class DexStatisticsComponent implements OnInit {
 
   releasesWallet = new Array<Release>();
 
-  constructor(private apollo: Apollo) {
+  oraclePrices: StockOracles;
+
+  constructor(private apollo: Apollo, private dex: Dex) {
   }
 
   ngOnInit(): void  {
@@ -87,6 +94,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadNodeRelease();
     this.loadAppRelease();
     this.loadWalletRelease();
+    this.loadOraclePrices();
   }
 
   loadMilestones(): void {
@@ -199,6 +207,16 @@ export class DexStatisticsComponent implements OnInit {
     });
   }
 
+  loadOraclePrices(): void {
+  this.dex.getOraclePrices()
+    .subscribe(prices => {
+        this.oraclePrices = prices;
+        },
+      err => {
+        console.error('Fehler beim load oracle Prices: ' + JSON.stringify(err.message));
+      });
+  }
+
   getBlockToNextCycle(): string {
     if (!this.rewards || !this.blockTimeUsed) {
       return '0';
@@ -230,9 +248,17 @@ export class DexStatisticsComponent implements OnInit {
       dfi += +c?.reserveB;
     });
 
+    dfi += +this.stocksPools?.find(a => a.symbol === 'DUSD-DFI').reserveB;
+
     return dfi;
   }
 
+  // TODO Correct calculation
+  getVaultDFI(): number {
+    return this.getTotalDFILocked() - this.getDexDFI() - this.MNCount * 20000;
+  }
+
+  // TODO Add Vaults DFI
   getTotalDFILocked(): number {
     return this.getDexDFI() + this.MNCount * 20000;
   }
@@ -260,6 +286,23 @@ export class DexStatisticsComponent implements OnInit {
     } else {
       return this.corr?.tslaPool;
     }
+  }
+
+  getArb(cex: number, dex: number): number {
+    return Math.round(cex / dex * 100) - 100;
+  }
+
+  isDUSDPool(pool: Pool): boolean {
+    return pool?.symbol === 'DUSD-DFI';
+  }
+
+  getStockPrice(key: string): number {
+
+    if (!this.oraclePrices || this.oraclePrices.data.length === 0) {
+      return 0;
+    }
+
+    return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD')).price.aggregated.amount;
   }
 
 }

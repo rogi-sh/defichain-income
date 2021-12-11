@@ -49,7 +49,7 @@
         <br>
         <div class='grid gap-2'>
           <div>
-            <span class='mr-2'>DFI DEX:</span>
+            <span class='mr-2'>DFI DEX locked:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
               {{getDexDFI()  |  number: '1.2-2'}} -
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div>
-            <span class='mr-2'>Total DFI Locked:</span>
+            <span class='mr-2'>DEX&Masternodes DFI Locked:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
               {{getTotalDFILocked() |  number: '1.2-2'}} /
@@ -399,9 +399,14 @@
              : 'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700' ">
 
           <td class='p-2'>{{cryptoPool?.symbol}}</td>
-          <td class='text-right p-2'>
-            <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price> -
-            <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB '></app-price>
+          <td class='text-right text-sm p-2'>
+            CEX: <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.priceA '></app-price> /
+            DEX: <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price>
+            ARB: <span>{{getArb(cryptoPool?.priceA,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %
+            <br>
+            DEX:<app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB '></app-price>/
+            CEX:<app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            ARB: <span>{{getArb(priceDFICEX,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> %
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd'></app-price>
@@ -442,9 +447,19 @@
             [ngClass]=" i % 2 ?  'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600'
              : 'dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700' ">
           <td class='p-2'>{{stockPool?.symbol}}</td>
-          <td class='text-right p-2'>
-            <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price> -
-            <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
+          <td class='text-right text-sm p-2'>
+            DEX: <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
+
+            <span *ngIf='!isDUSDPool(stockPool)'> / Oracle: <app-price [fiat]='fiat' [usdPrice]='getStockPrice(stockPool?.symbol)'></app-price>
+            ARB: <span>{{getArb(getStockPrice(stockPool?.symbol),stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA)}}</span> %</span>
+
+            <br>
+
+            DEX: <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
+            <span *ngIf='isDUSDPool(stockPool)'> / CEX:<app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            ARB: <span>{{getArb(priceDFICEX,stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB)}}</span> %</span>
+
+
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd'></app-price>

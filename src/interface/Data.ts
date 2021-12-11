@@ -31,6 +31,23 @@ export class Block {
 
 }
 
+export class StockOracles {
+  data: Array<StockOracle>;
+}
+
+export class StockOracle {
+  id: string;
+  price: OrcalePrice;
+}
+
+export class OrcalePrice {
+    aggregated: OraclePriceAggregated;
+}
+
+export class OraclePriceAggregated {
+  amount: string;
+}
+
 export class Balance {
   confirmed: number;
   balance: number;

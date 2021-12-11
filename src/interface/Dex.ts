@@ -71,6 +71,7 @@ export interface Pool {
   reserveADivReserveB: number;
   reserveBDivReserveA: number;
   id: string;
+  symbol: string;
 }
 
 export class Stats {
