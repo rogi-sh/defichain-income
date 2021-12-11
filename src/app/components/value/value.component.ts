@@ -570,14 +570,14 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getLmUsd(): number {
-    return (this.getDfiCountLMUsd() + this.getAnteilLMOfBtcPoolValue() + this.getAnteilLMOfEthPoolValue()
+    return this.getAnteilLMOfBtcPoolValue() + this.getAnteilLMOfEthPoolValue()
       + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdcPoolValue()
       + this.getAnteilLMOfDogePoolValue() + this.getAnteilLMOfBchPoolValue() + this.getAnteilLMOfUsdPoolValue()
       + this.getAnteilLMOfTslaPoolValue() + this.getAnteilLMOfSpyPoolValue() + this.getAnteilLMOfQqqPoolValue()
       + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
       + this.getAnteilLMOfGldPoolValue()  + this.getAnteilLMOfGmePoolValue() + this.getAnteilLMOfGooglPoolValue()
       + this.getAnteilLMOfArkkPoolValue() + this.getAnteilLMOfBabaPoolValue() + this.getAnteilLMOfVnqPoolValue()
-      + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue());
+      + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue();
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -858,7 +858,7 @@ export class ValueComponent implements OnInit, OnChanges {
       incomeNumbers.push('BTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBtcPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push('ETH-Pool '+ ' - ' + Math.round(this.getAnteilLMOfEthPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('ETH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfEthPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfLtcPoolValue() > 0) {
       incomeNumbers.push('LTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfLtcPoolValue() / 100 * 100) + ' USD');
@@ -867,7 +867,7 @@ export class ValueComponent implements OnInit, OnChanges {
       incomeNumbers.push('DOGE-Pool ' + ' - ' + Math.round(this.getAnteilLMOfDogePoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push('BCH-Pool ');
+      incomeNumbers.push('BCH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBchPoolValue() / 100 * 100) + ' USD');
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
       incomeNumbers.push('USDT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdtPoolValue() / 100 * 100) + ' USD');
