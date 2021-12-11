@@ -1283,7 +1283,6 @@ export class AppComponent implements OnInit {
     this.cryptoPools.push(this.poolEth);
     this.cryptoPools.push(this.poolLtc);
     this.cryptoPools.push(this.poolBch);
-    this.cryptoPools.push(this.poolLtc);
     this.cryptoPools.push(this.poolDoge);
     this.cryptoPools.push(this.poolUsdt);
     this.cryptoPools.push(this.poolUsdc);
