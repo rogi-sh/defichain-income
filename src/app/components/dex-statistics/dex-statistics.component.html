@@ -1,5 +1,6 @@
 <div>
   <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>TVL</h1>
@@ -288,6 +289,42 @@
         <div
           class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
           {{getBlockToNextDiffChange()}}
+        </div>
+      </div>
+    </div>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h1 class='text-lg font-bold'>Defichain Income Statistics</h1>
+        <div class='grid gap-2'>
+          <div>
+            <span class='mr-2'>Active Users:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{incomeStatistics?.users}}
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>Monitored Adresses:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{incomeStatistics?.addresses}}
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>Monitored Masternodes:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{incomeStatistics?.addressesMasternodes}}
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>⌀ Visitors per Day</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{incomeStatistics?.visits}}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

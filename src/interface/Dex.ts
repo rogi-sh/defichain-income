@@ -243,3 +243,10 @@ export class Correlation {
   tslaPricesDex: [number];
   dfiPricesDex: [number];
 }
+
+export class IncomeStatistics {
+    users: number;
+    addresses: number;
+    addressesMasternodes: number;
+    visits: number;
+}

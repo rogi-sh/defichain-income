@@ -300,5 +300,13 @@ export const CORRELATION = gql`
   }
 `;
 
+export const INCOME_STATISTICS = gql`
+  query {
+    getStatisticsIncome {
+      users, addresses, addressesMasternodes, visits
+    }
+  }
+`;
+
 
 

@@ -28,7 +28,6 @@ export class Block {
   hash: string;
   height: number;
   time: number;
-
 }
 
 export class StockOracles {

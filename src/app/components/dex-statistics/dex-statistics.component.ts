@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Correlation, Pool, Stats } from '@interfaces/Dex';
+import { Correlation, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
-import {CORRELATION} from '@interfaces/Graphql';
+import { CORRELATION, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
@@ -85,6 +85,8 @@ export class DexStatisticsComponent implements OnInit {
 
   oraclePrices: StockOracles;
 
+  incomeStatistics: IncomeStatistics;
+
   constructor(private apollo: Apollo, private dex: Dex) {
   }
 
@@ -95,6 +97,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadAppRelease();
     this.loadWalletRelease();
     this.loadOraclePrices();
+    this.loadIncomeStatistics();
   }
 
   loadMilestones(): void {
@@ -201,6 +204,20 @@ export class DexStatisticsComponent implements OnInit {
         this.corr = result?.data?.getCorrelation;
       } else {
         console.log('No Date for Corr');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  loadIncomeStatistics(): void {
+    this.apollo.query({
+      query: INCOME_STATISTICS
+    }).subscribe((result: any) => {
+      if (result?.data?.getStatisticsIncome) {
+        this.incomeStatistics = result?.data?.getStatisticsIncome;
+      } else {
+        console.log('No Date for Income Statistics');
       }
     }, (error) => {
       console.log(error);
