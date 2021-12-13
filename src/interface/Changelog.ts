@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.8.1 - 13.12.2021';
+    this.log.comment = 'Radar Chart fixes';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.0 - 12.12.2021';
     this.log.comment = 'Add Income Statistics to Dex View';
     this.logs.push(this.log);

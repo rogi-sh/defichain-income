@@ -109,6 +109,7 @@ export type ChartOptions3 = {
   labels: any;
   colors: string[];
   stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
   fill: ApexFill;
 };
 

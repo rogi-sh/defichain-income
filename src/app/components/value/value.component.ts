@@ -660,14 +660,14 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getVaultsCollateralUsd() > 0) {
       incomeNumbers.push(Math.round(this.getVaultsCollateralUsd() * 100) / 100);
     }
-    if (this.getLmUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getLmUsd() * 100) / 100);
-    }
-    if (this.getAnteilLMOfAllValue() > 0) {
-      incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
+    if (this.getVaultsLoansValueUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getVaultsLoansValueUsd() * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
       incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
+    }
+    if (this.getLmUsd() > 0) {
+      incomeNumbers.push(Math.round(this.getLmUsd() * 100) / 100);
     }
     if (this.getMasternodeDfiUsd() > 0) {
       incomeNumbers.push(Math.round(this.getMasternodeDfiUsd() * 100) / 100);
