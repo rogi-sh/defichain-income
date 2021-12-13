@@ -280,8 +280,12 @@ export class DexStatisticsComponent implements OnInit {
     return this.getDexDFI() + this.MNCount * 20000;
   }
 
-  getApyFromApr(apr: number): number {
+  getApyWeeklyFromApr(apr: number): number {
     return 100 * (Math.pow(1 + (apr / 100 / 52), 52) - 1);
+  }
+
+  getAprFromApy(apy: number): number {
+    return 100 * 730 * (Math.pow(1 + apy / 100, 1 / 730) - 1);
   }
 
   getCorr(pool: string): number {

@@ -132,7 +132,7 @@
           <span
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'
           >
-          {{ this.stakingApyMN * 0.9  | number: '1.1-1' }}% APR  ~  {{ this.stakingApyCake | number: '1.1-1' }}% APY
+          {{ getAprFromApy(this.stakingApyMN) * 0.9  | number: '1.1-1' }}% APR  ~  {{ this.stakingApyCake | number: '1.1-1' }}% APY
         </span>
         </div>
         <div class='w-full dark:text-gray-100'>
@@ -140,7 +140,7 @@
           <div
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block'
           >
-            {{ this.stakingApyMN | number: '1.1-1' }}% APR ~  {{ getApyFromApr(this.stakingApyMN) | number: '1.1-1' }}%
+            {{ this.stakingApyMN | number: '1.1-1' }}% APR ~  {{ getApyWeeklyFromApr(this.stakingApyMN) | number: '1.1-1' }}%
             APY
           </div>
         </div>
@@ -150,7 +150,7 @@
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block'
           >
             {{ this.stakingApyMN * 1.5 | number: '1.1-1' }}% APR
-            ~   {{ getApyFromApr(this.stakingApyMN * 1.5) | number: '1.1-1' }}% APY
+            ~   {{ getApyWeeklyFromApr(this.stakingApyMN * 1.5) | number: '1.1-1' }}% APY
           </div>
         </div>
         <div class='w-full dark:text-gray-100'>
@@ -159,7 +159,7 @@
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block'
           >
             {{ this.stakingApyMN * 2 | number: '1.1-1' }}% APR
-            ~    {{ getApyFromApr(this.stakingApyMN * 2) | number: '1.1-1' }}% APY
+            ~    {{ getApyWeeklyFromApr(this.stakingApyMN * 2) | number: '1.1-1' }}% APY
           </div>
         </div>
       </div>
@@ -461,7 +461,7 @@
             {{cryptoPool?.apr | number: '1.2-2' }}%
           </td>
           <td class='text-right p-2'>
-            {{getApyFromApr(cryptoPool?.apr) | number: '1.2-2' }}%
+            {{getApyWeeklyFromApr(cryptoPool?.apr) | number: '1.2-2' }}%
           </td>
         </tr>
         <tr class='dark:bg-green-400 hover:bg-blue-700 dark:hover:bg-green-400'>
@@ -516,7 +516,7 @@
             {{stockPool?.apr | number: '1.2-2' }}%
           </td>
           <td class='text-right p-2'>
-            {{getApyFromApr(stockPool?.apr) | number: '1.2-2' }}%
+            {{getApyWeeklyFromApr(stockPool?.apr) | number: '1.2-2' }}%
           </td>
         </tr>
         </tbody>
