@@ -1026,11 +1026,7 @@ export class AppComponent implements OnInit {
       ),
       err => {
         console.error('Fehler beim Load Dex Data wait: ' + JSON.stringify(err.message));
-        setTimeout(() => {
-            this.loadDex();
-            console.error('Try again ...');
-          },
-          10000);
+        this.apiOnline = false;
 
       });
 
@@ -1384,12 +1380,8 @@ export class AppComponent implements OnInit {
         }
       ),
       err => {
-        console.error(err);
-        setTimeout(() => {
-            this.loadDexManual();
-            console.error('Try again ...');
-          },
-          5000);
+        console.error('Fehler beim loadDexManual: ' + JSON.stringify(err.message));
+        this.apiOnline = false;
       });
   }
 
@@ -1440,11 +1432,7 @@ export class AppComponent implements OnInit {
         },
         err => {
           console.error('Fehler beim Load Accounts: ' + JSON.stringify(err.message));
-          setTimeout(() => {
-              this.loadDex();
-              console.error('Try again ...');
-            },
-            5000);
+          this.apiOnline = false;
 
         });
     } else {
@@ -1480,12 +1468,7 @@ export class AppComponent implements OnInit {
         this.berechneAllOut();
       },
       err => {
-        console.error(err);
-        setTimeout(() => {
-            this.loadStackingCake();
-            console.error('Try again loadStackingCake ...');
-          },
-          60000);
+        console.error('Fehler beim get staking from cake: ' + JSON.stringify(err.message));
       });
   }
 
@@ -1504,12 +1487,8 @@ export class AppComponent implements OnInit {
         this.berechneAllOut();
       },
       err => {
-        console.error(err);
-        setTimeout(() => {
-            this.loadStackingCake();
-            console.error('Try again loadStackingMasternode ...');
-          },
-          600000);
+        console.error('Fehler beim loadStackingMasternode: ' + JSON.stringify(err.message));
+        this.apiOnline = false;
       });
   }
 

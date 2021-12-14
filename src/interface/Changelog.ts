@@ -12,10 +12,14 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.8.3 - 13.12.2021';
+    this.log.comment = 'Fix: try again removed, just show api offline, Just try later with reload';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.2 - 13.12.2021';
     this.log.comment = 'Fix Cake Apr';
     this.logs.push(this.log);
-
 
     this.log = new Log();
     this.log.version = '8.8.1 - 13.12.2021';
