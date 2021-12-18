@@ -160,7 +160,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
       this.vaultsOfAllAddresses.forEach(vault => {
         vault.data.forEach(addressVault => {
-          addressVault.collateralAmounts.forEach(vaultCollaterral => {
+          addressVault?.collateralAmounts?.forEach(vaultCollaterral => {
             if ('DFI' === vaultCollaterral.symbolKey) {
               dfiInVaults += +vaultCollaterral.amount;
             } else if ('BTC' === vaultCollaterral.symbolKey) {
@@ -184,7 +184,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let gme = 0; let google = 0; let arkk = 0; let baba = 0; let vnq = 0; let urth = 0; let tlt = 0;
     let pdbc = 0;
 
-    vault.loanAmounts.forEach(loan => {
+    vault?.loanAmounts?.forEach(loan => {
         if ('DUSD' === loan.symbolKey) {
           usd = +loan.amount;
         } else if ('SPY' === loan.symbolKey) {
@@ -236,7 +236,7 @@ export class ValueComponent implements OnInit, OnChanges {
       return 0;
     }
 
-    vault.collateralAmounts.forEach(vaultCollaterral => {
+    vault?.collateralAmounts?.forEach(vaultCollaterral => {
       if ('DFI' === vaultCollaterral.symbolKey) {
         dfiInVaults += +vaultCollaterral.amount;
       } else if ('BTC' === vaultCollaterral.symbolKey) {
@@ -261,7 +261,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        addressVault.collateralAmounts.forEach(vaultCollaterral => {
+        addressVault?.collateralAmounts?.forEach(vaultCollaterral => {
           if (currency === vaultCollaterral.symbolKey) {
               curInVaults += +vaultCollaterral.amount;
           }
@@ -281,7 +281,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
-        addressVault.loanAmounts.forEach(loan => {
+        addressVault?.loanAmounts?.forEach(loan => {
           if (currency === loan.symbolKey) {
             loanInVaults += +loan.amount;
           }
