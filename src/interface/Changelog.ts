@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.8.4 - 18.12.2021';
+    this.log.comment = 'Fix: vaults in liquidation with no colleteral and loan';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.3 - 13.12.2021';
     this.log.comment = 'Fix: try again removed, just show api offline, Just try later with reload';
     this.logs.push(this.log);
