@@ -310,7 +310,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getArb(cex: number, dex: number): number {
-    return Math.round(cex / dex * 100) - 100;
+    return Math.round(dex / cex  * 100) - 100;
   }
 
   isDUSDPool(pool: Pool): boolean {
