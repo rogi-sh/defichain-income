@@ -26,12 +26,20 @@ import {
   PoolSlvOut,
   PoolAaplOut,
   PoolGldOut,
-  PoolGmeOut, PoolGooglOut, PoolArkkOut, PoolBabaOut, PoolVnqOut, PoolUrthOut, PoolTltOut, PoolPdbcOut, Prices,
+  PoolGmeOut,
+  PoolGooglOut,
+  PoolArkkOut,
+  PoolBabaOut,
+  PoolVnqOut,
+  PoolUrthOut,
+  PoolTltOut,
+  PoolPdbcOut,
+  Prices,
 } from '@interfaces/Dex';
+import {CountdownComponent} from 'ngx-countdown';
 import { AddressVaults, IncomePoolDto, Vault, Wallet, WalletDto } from '@interfaces/Data'
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
-import { CountdownComponent } from 'ngx-countdown';
 // @ts-ignore
 import Timer = NodeJS.Timer;
 import { TranslateService } from '@ngx-translate/core';

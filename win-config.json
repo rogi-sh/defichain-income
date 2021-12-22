@@ -1,0 +1,12 @@
+{
+  "dest": "installers/",
+  "name": "DeFiChain Income",
+  "productName": "DeFiChain Income",
+  "homepage": "https://www.defichain-income.com/",
+  "maintainer": "Igor Shelkovenkov <cypto@shelkovenkov.de>",
+  "icon": "src/assets/defi-icon.ico",
+  "iconNuget": "src/assets/icons/icon-512x512.png",
+  "tags": [
+    "Utility"
+  ]
+}
