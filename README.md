@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+# Create electron
+
+Build electron version for mac and windows
+```bash
+yarn build-electron && yarn package-mac && yarn package-win && yarn mac-installers && yarn mac-installers-arm
+```
+
+Build electron version for linux need to be build on Linux
+```bash
+yarn build-electron && yarn package-linux
+```
+
+
+
+
+
