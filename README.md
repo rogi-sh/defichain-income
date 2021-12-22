@@ -32,7 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Build electron version for mac and windows
 ```bash
-yarn build-electron && yarn package-mac && yarn package-win && yarn mac-installers && yarn mac-installers-arm
+yarn build-electron && yarn package-mac && yarn package-win
 ```
 
 Build electron version for linux need to be build on Linux
