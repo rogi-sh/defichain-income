@@ -1,5 +1,15 @@
 {
   "name": "defichain-income",
+  "productName": "DeFiChain Income",
+  "description": "DeFiChain-Income",
+  "icon": "src/assets/icons/icon-512x512.png",
+  "maintainer": "Igor Shelkovenkov <cypto@shelkovenkov.de>",
+  "main": "dist/main.js",
+  "author": {
+    "name": "Igor Shelkovenkov",
+    "email": "cypto@shelkovenkov.de",
+    "url": "https://www.defichain-income.com"
+  },
   "version": "8.8.5",
   "scripts": {
     "ng": "ng",
@@ -7,7 +17,14 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "yarn build-electron && ./node_modules/.bin/electron dist/",
+    "build-electron": "ng build --base-href . && cp src/electron/* dist/",
+    "package-mac": "electron-packager . DeFiChain\" \"Income --overwrite --platform=darwin --arch=all --icon=src/assets/mac-icons.icns --prune=true --out=release-builds && yarn mac-installers && yarn mac-installers-arm",
+    "mac-installers": "electron-installer-dmg release-builds/DeFiChain\" \"Income-darwin-x64/DeFiChain\" \"Income.app DEFIChainIncome --title=DEFI\" \"Chain\" \"Income\" \"installer --out=installers/ --icon=src/assets/mac-icons.icns --overwrite",
+    "mac-installers-arm": "electron-installer-dmg release-builds/DeFiChain\" \"Income-darwin-arm64/DeFiChain\" \"Income.app DEFIChainIncomeARM --title=DEFI\" \"Chain\" \"Income\" \"installer --out=installers/ --icon=src/assets/mac-icons.icns --overwrite --background=src/assets/background.png",
+    "package-win": "electron-packager . defichain-income --overwrite --platform=win32 --arch=x64 --icon=src/assets/defi-icon.ico --prune=true --out=release-builds",
+    "package-linux": "electron-packager . defichain-income --overwrite --platform=linux --arch=x64 --icon=dist/defichain-income/assets/defi-icon.ico --prune=true --out=release-builds && electron-installer-debian --src release-builds/defichain-income-linux-x64/ --dest installers/ --arch amd64 --config config.json"
   },
   "private": true,
   "dependencies": {
@@ -56,6 +73,12 @@
     "@types/node": "^12.11.1",
     "@types/react": "^17.0.2",
     "codelyzer": "^6.0.0",
+    "electron": "^15.1.2",
+    "electron-installer-debian": "^3.1.0",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^15.4.0",
+    "electron-winstaller": "^5.0.0",
+    "electron-wix-msi": "^3.2.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.4",
