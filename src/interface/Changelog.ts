@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.8.7 - 23.12.2021';
+    this.log.comment = 'Fix: bch pool update in manual input';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.6 - 22.12.2021';
     this.log.comment = 'Add electron';
     this.logs.push(this.log);

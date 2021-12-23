@@ -713,6 +713,8 @@ export class AppComponent implements OnInit {
         dfiInLtcPool: this.wallet.dfiInLtcPool,
         dogeInDogePool: this.wallet.dogeInDogePool,
         dfiInDogePool: this.wallet.dfiInDogePool,
+        bchInBchPool: this.wallet.bchInBchPool,
+        dfiInBchPool: this.wallet.dfiInBchPool,
         usdInUsdPool: this.wallet.usdInUsdPool,
         dfiInUsdPool: this.wallet.dfiInUsdPool,
         tslaInTslaPool: this.wallet.tslaInTslaPool,
