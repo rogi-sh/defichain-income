@@ -37,7 +37,7 @@ import {
   Prices,
 } from '@interfaces/Dex';
 import {CountdownComponent} from 'ngx-countdown';
-import { AddressVaults, IncomePoolDto, Vault, Wallet, WalletDto } from '@interfaces/Data'
+import { AddressVaults, IncomePoolDto, Vault, Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 // @ts-ignore
@@ -1351,7 +1351,7 @@ export class AppComponent implements OnInit {
     this.dfiProBlockArkk = 0.0222 * this.dfiPorBlockStock;
     this.dfiProBlockArkk += this.getCustomRewards(this.poolArkk?.customRewards);
 
-    this.dfiProBlockBaba = 0.0355 * this.dfiPorBlockStock;
+    this.dfiProBlockBaba = 0.0335 * this.dfiPorBlockStock;
     this.dfiProBlockBaba += this.getCustomRewards(this.poolBaba?.customRewards);
 
     this.dfiProBlockVnq = 0.0096 * this.dfiPorBlockStock;

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.8.8 - 25.12.2021';
+    this.log.comment = 'Fix: baba pool dfi per block reward';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.7 - 23.12.2021';
     this.log.comment = 'Fix: bch pool update in manual input';
     this.logs.push(this.log);
