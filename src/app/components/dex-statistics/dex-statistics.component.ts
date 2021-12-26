@@ -1,18 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Correlation, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Correlation, History, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
-import { CORRELATION, INCOME_STATISTICS } from '@interfaces/Graphql';
+import { CORRELATION, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { StockOracles } from '@interfaces/Data';
+import { ChartOptions, ChartOptions6, StockOracles } from '@interfaces/Data';
+import { ChartComponent } from 'ng-apexcharts';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dex-statistics',
   templateUrl: './dex-statistics.component.html',
 })
 export class DexStatisticsComponent implements OnInit {
+
+  @ViewChild('chart6') chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions6>;
+
   @Input()
   fiat: string;
 
@@ -87,7 +93,11 @@ export class DexStatisticsComponent implements OnInit {
 
   incomeStatistics: IncomeStatistics;
 
-  constructor(private apollo: Apollo, private dex: Dex) {
+  history = new Array<History>();
+
+  curentStock = 'SPY-DUSD';
+
+  constructor(private apollo: Apollo, private dex: Dex, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void  {
@@ -224,6 +234,23 @@ export class DexStatisticsComponent implements OnInit {
     });
   }
 
+  loadHistory(): void {
+    this.spinner.show();
+    this.apollo.query({
+      query: HISTORY
+    }).subscribe((result: any) => {
+      if (result?.data?.getFarmingHistory) {
+        this.history = result?.data?.getFarmingHistory;
+        this.buildChartPrice();
+        this.spinner.hide();
+      } else {
+        console.log('No Date for Historx');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   loadOraclePrices(): void {
   this.dex.getOraclePrices()
     .subscribe(prices => {
@@ -324,6 +351,104 @@ export class DexStatisticsComponent implements OnInit {
     }
 
     return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD')).price.aggregated.amount;
+  }
+
+  buildChartPrice(): void {
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Price',
+          data: this.getPrices(this.curentStock)
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 5,
+        curve: 'straight',
+        dashArray: [0, 8, 5]
+      },
+      title: {
+        text: 'Stock Price - ' + this.curentStock,
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false
+        },
+        categories: this.getDates(this.curentStock)
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return val + ' DUSD';
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
+  getPrices(stock: string): Array<number> {
+    const prices = new Array<number>();
+    if (!this.history) {
+      return prices;
+    }
+    this.history.forEach(h => {
+      prices.push(Math.round(h.pools.find(p => p.symbol === stock)?.priceA));
+    });
+
+    return prices;
+  }
+
+  getDates(stock: string): Array<string> {
+    const dates = new Array<string>();
+    if (!this.history) {
+      return dates;
+    }
+    this.history.forEach(h => {
+      dates.push(new Date(h.date).toLocaleString());
+    });
+
+    return dates;
+  }
+
+  getTheme(): string {
+    return localStorage.getItem('theme');
+  }
+
+  onChangeStockPool(newValue: string): void {
+    this.curentStock = newValue + '-DUSD';
+    this.buildChartPrice();
   }
 
 }

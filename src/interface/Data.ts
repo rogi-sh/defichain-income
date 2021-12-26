@@ -9,6 +9,7 @@ import {
   ApexAxisChartSeries,
   ApexXAxis,
   ApexYAxis,
+  ApexGrid,
   ApexTooltip,
   ApexTitleSubtitle,
   ApexMarkers
@@ -132,6 +133,20 @@ export type ChartOptions5 = {
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
   legend: ApexLegend;
+};
+
+export type ChartOptions6 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
+  markers: ApexMarkers;
+  tooltip: any; // ApexTooltip;
+  yaxis: ApexYAxis;
+  grid: ApexGrid;
+  legend: ApexLegend;
+  title: ApexTitleSubtitle;
 };
 
 export class Series {

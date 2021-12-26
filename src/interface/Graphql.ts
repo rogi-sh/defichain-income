@@ -308,5 +308,17 @@ export const INCOME_STATISTICS = gql`
   }
 `;
 
+export const HISTORY = gql`
+  query {
+      getFarmingHistory (
+          from : {year: 2021, month:12, day:20, hour: 0, min: 0,s: 0},
+          till : {year: 2021, month:12, day:26, hour: 0, min: 0,s: 0}) {
+
+    date, tvl, pools {id,symbol,name, pair,priceA, priceB, reserveA, reserveB,
+    volumeA, volumeB, tokenASymbol, tokenBSymbol, volumeA30, volumeB30,
+    poolPairId, totalLiquidity, totalLiquidityLpToken }
+    }
+  }
+`;
 
 

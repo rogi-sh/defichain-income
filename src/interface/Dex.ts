@@ -1,3 +1,4 @@
+import { StockOracle } from '@interfaces/Data';
 
 export interface DexPoolPair {
   '4': Pool;
@@ -249,4 +250,9 @@ export class IncomeStatistics {
     addresses: number;
     addressesMasternodes: number;
     visits: number;
+}
+
+export class History {
+  date: Date;
+  pools: [Pool];
 }
