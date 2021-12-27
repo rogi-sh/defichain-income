@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.9.0 - 27.12.2021';
+    this.log.comment = 'Add pool price history of crypto and stock pools (ex. dUSD pool)';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.8.8 - 25.12.2021';
     this.log.comment = 'Fix: baba pool dfi per block reward';
     this.logs.push(this.log);
