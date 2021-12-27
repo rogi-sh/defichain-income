@@ -256,3 +256,8 @@ export class History {
   date: Date;
   pools: [Pool];
 }
+
+export class HistoryPrice {
+  date: Date;
+  price: number;
+}

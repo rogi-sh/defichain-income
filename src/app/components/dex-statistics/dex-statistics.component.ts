@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Correlation, History, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
+import { Correlation, History, HistoryPrice, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import { CORRELATION, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
@@ -16,7 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class DexStatisticsComponent implements OnInit {
 
-  @ViewChild('chart6') chart: ChartComponent;
+  @ViewChild('chart6', { static: false }) chart: ChartComponent;
   public chartOptions: Partial<ChartOptions6>;
 
   @Input()
@@ -94,6 +94,7 @@ export class DexStatisticsComponent implements OnInit {
   incomeStatistics: IncomeStatistics;
 
   history = new Array<History>();
+  historyPrices = new Array<HistoryPrice>();
 
   curentStock = 'BTC';
 
@@ -238,7 +239,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   async loadHistory(): Promise<void> {
-    this.spinner.show();
+    this.spinner.show('historySpinner');
     this.apollo.query({
       query: HISTORY,
       variables: {
@@ -254,8 +255,9 @@ export class DexStatisticsComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.getFarmingHistory) {
         this.history = result?.data?.getFarmingHistory;
+        this.computePrices(this.curentStock);
         this.buildChartPrice();
-        this.spinner.hide();
+        this.spinner.hide('historySpinner');
       } else {
         console.log('No Date for Historx');
       }
@@ -435,37 +437,58 @@ export class DexStatisticsComponent implements OnInit {
     };
   }
 
+  computePrices(stock: string): void{
+    if (!this.history) {
+      return;
+    }
+    this.historyPrices = new Array<HistoryPrice>();
+    this.history.forEach(h => {
+
+      // search first with pair
+      const indexPairSearch = h.pools.findIndex(p => p.pair?.startsWith(stock));
+      if (indexPairSearch > -1) {
+        if (h.pools[indexPairSearch]?.priceA) {
+          this.pushPrice(h, indexPairSearch);
+        }
+      // search second with symbol
+      } else {
+        const indexSymbolSearch = h.pools.findIndex(p => p.symbol?.startsWith(stock));
+        if (indexSymbolSearch > -1) {
+          if (h.pools[indexSymbolSearch]?.priceA) {
+            this.pushPrice(h, indexSymbolSearch);
+          }
+        }
+      }
+    });
+
+  }
+
+  private pushPrice(h: History, indexPairSearch: number): void {
+    const price = new HistoryPrice();
+    price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
+    price.date = h.date;
+    this.historyPrices.push(price);
+  }
+
   getPrices(stock: string): Array<number> {
     const prices = new Array<number>();
-    if (!this.history) {
+    if (!this.historyPrices || this.historyPrices.length === 0) {
       return prices;
     }
-    this.history.forEach(h => {
-      prices.push(Math.round(h.pools.find(p => p.symbol.startsWith(stock))?.priceA));
+    this.historyPrices.forEach(h => {
+      prices.push(h.price);
     });
 
     return prices;
   }
 
-  getReserves(stock: string): Array<number> {
-    const reservs = new Array<number>();
-    if (!this.history) {
-      return reservs;
-    }
-    this.history.forEach(h => {
-      reservs.push(Math.round(+h.pools.find(p => p.symbol.startsWith(stock))?.reserveA));
-    });
-
-    return reservs;
-  }
-
   getDates(): Array<string> {
     const dates = new Array<string>();
-    if (!this.history) {
+    if (!this.historyPrices || this.historyPrices.length === 0) {
       return dates;
     }
-    this.history.forEach(h => {
-      dates.push(new Date(h.date).toLocaleString());
+    this.historyPrices.forEach(h => {
+      dates.push(h.date.toLocaleString());
     });
 
     return dates;
@@ -476,8 +499,11 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   onChangeStockPool(newValue: string): void {
+    this.spinner.show('historySpinner');
     this.curentStock = newValue;
+    this.computePrices(this.curentStock);
     this.buildChartPrice();
+    this.spinner.hide('historySpinner');
   }
 
   onChangeDateStockPool(newValue: string): void {

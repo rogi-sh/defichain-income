@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.9.1 - 27.12.2021';
+    this.log.comment = 'FIX: if no price from api is available';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.9.0 - 27.12.2021';
     this.log.comment = 'Add pool price history of crypto and stock pools (ex. dUSD pool)';
     this.logs.push(this.log);
