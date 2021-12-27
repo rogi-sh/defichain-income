@@ -95,7 +95,10 @@ export class DexStatisticsComponent implements OnInit {
 
   history = new Array<History>();
 
-  curentStock = 'SPY-DUSD';
+  curentStock = 'BTC';
+
+  fromDate: Date = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+  tillDate: Date = new Date();
 
   constructor(private apollo: Apollo, private dex: Dex, private spinner: NgxSpinnerService) {
   }
@@ -234,10 +237,20 @@ export class DexStatisticsComponent implements OnInit {
     });
   }
 
-  loadHistory(): void {
+  async loadHistory(): Promise<void> {
     this.spinner.show();
     this.apollo.query({
-      query: HISTORY
+      query: HISTORY,
+      variables: {
+        fromYear: this.fromDate.getFullYear(),
+        fromMonth: this.fromDate.getMonth() + 1,
+        fromDay: this.fromDate.getUTCDate(),
+        fromHour: this.fromDate.getHours(),
+        tillYear: this.tillDate.getFullYear(),
+        tillMonth: this.tillDate.getMonth() + 1,
+        tillDay: this.tillDate.getUTCDate(),
+        tillHour:  this.tillDate.getHours()
+      }
     }).subscribe((result: any) => {
       if (result?.data?.getFarmingHistory) {
         this.history = result?.data?.getFarmingHistory;
@@ -353,7 +366,7 @@ export class DexStatisticsComponent implements OnInit {
     return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD')).price.aggregated.amount;
   }
 
-  buildChartPrice(): void {
+  async buildChartPrice(): Promise<void> {
     this.chartOptions = {
       series: [
         {
@@ -369,12 +382,13 @@ export class DexStatisticsComponent implements OnInit {
         enabled: false
       },
       stroke: {
-        width: 5,
-        curve: 'straight',
-        dashArray: [0, 8, 5]
+        width: 2,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#ff00af']
       },
       title: {
-        text: 'Stock Price - ' + this.curentStock,
+        text: 'Pool Price - ' + this.curentStock,
         align: 'left'
       },
       legend: {
@@ -396,9 +410,12 @@ export class DexStatisticsComponent implements OnInit {
       },
       xaxis: {
         labels: {
-          trim: false
+          trim: false,
+          style: {
+            colors: '#ff00af'
+          }
         },
-        categories: this.getDates(this.curentStock)
+        categories: this.getDates(),
       },
       tooltip: {
         y: [
@@ -406,14 +423,14 @@ export class DexStatisticsComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return val + ' DUSD';
+                return val + ' dUSD/USD';
               }
             }
           }
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: '#ff00af'
       }
     };
   }
@@ -424,13 +441,25 @@ export class DexStatisticsComponent implements OnInit {
       return prices;
     }
     this.history.forEach(h => {
-      prices.push(Math.round(h.pools.find(p => p.symbol === stock)?.priceA));
+      prices.push(Math.round(h.pools.find(p => p.symbol.startsWith(stock))?.priceA));
     });
 
     return prices;
   }
 
-  getDates(stock: string): Array<string> {
+  getReserves(stock: string): Array<number> {
+    const reservs = new Array<number>();
+    if (!this.history) {
+      return reservs;
+    }
+    this.history.forEach(h => {
+      reservs.push(Math.round(+h.pools.find(p => p.symbol.startsWith(stock))?.reserveA));
+    });
+
+    return reservs;
+  }
+
+  getDates(): Array<string> {
     const dates = new Array<string>();
     if (!this.history) {
       return dates;
@@ -447,8 +476,24 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   onChangeStockPool(newValue: string): void {
-    this.curentStock = newValue + '-DUSD';
+    this.curentStock = newValue;
     this.buildChartPrice();
+  }
+
+  onChangeDateStockPool(newValue: string): void {
+    if ('1D' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+    } else if ('7D' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 7));
+    } else if ('1M' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 30));
+    } else if ('3M' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 90));
+    } else if ('1Y' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 365));
+    } else if ('ALL' === newValue) {
+      this.fromDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 3650));
+    }
   }
 
 }

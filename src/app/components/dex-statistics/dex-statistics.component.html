@@ -412,6 +412,88 @@
   </div>
   <br>
   <br>
+  <div class='container'>
+    <ngx-spinner
+      bdColor='rgba(51,51,51,0.8)'
+      size='large'
+      color='#FF00AF'
+      type='pacman'
+      fullScreen=false
+    >
+      <p style='font-size: 20px; color: white'>Loading History ...</p>
+    </ngx-spinner>
+  </div>
+
+  <div class="flex">
+    <div class="inline-block w-1/4 pl-2 align-top">
+      <button
+        type="button"
+        (click)="loadHistory()"
+        class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
+      >
+        Load History of Pool
+      </button>
+    </div>
+    <div class="inline-block pl-2 align-top">
+      <select
+        class='bg-gray-100 w-30 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
+        (change)='onChangeStockPool($event.target.value)'
+      >
+        <option selected>BTC</option>
+        <option>ETH</option>
+        <option>LTC</option>
+        <option>USDT</option>
+        <option>USDC</option>
+        <option>DOGE</option>
+        <option>BCH</option>
+        <option>TSLA</option>
+        <option>SPY</option>
+        <option>QQQ</option>
+        <option>PLTR</option>
+        <option>SLV</option>
+        <option>AAPL</option>
+        <option>GLD</option>
+        <option>GME</option>
+        <option>GOOGL</option>
+        <option>ARKK</option>
+        <option>BABA</option>
+        <option>VNQ</option>
+        <option>URTH</option>
+        <option>TLT</option>
+        <option>PDBC</option>
+      </select>
+    </div>
+    <div class="inline-block pl-2 align-top">
+      <select
+        class='bg-gray-100 w-30 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
+        (change)='onChangeDateStockPool($event.target.value)'
+      >
+        <option selected>1D</option>
+        <option>7D</option>
+        <option>1M</option>
+        <option>3M</option>
+        <option>1Y</option>
+        <option>ALL</option>
+      </select>
+    </div>
+  </div>
+  <div class='mt-2'>
+    <apx-chart
+      *ngIf='history && history.length > 0 && chartOptions && chartOptions.series.length > 0'
+      [series]='chartOptions?.series'
+      [chart]='chartOptions?.chart'
+      [xaxis]= 'chartOptions?.xaxis'
+      [stroke]='chartOptions?.stroke'
+      [markers]='chartOptions?.markers'
+      [tooltip]='chartOptions?.tooltip'
+      [yaxis]='chartOptions?.yaxis'
+      [grid]='chartOptions?.grid'
+      [legend]='chartOptions?.legend'
+      [title]='chartOptions?.title'
+      [theme]='{ mode: getTheme() }'
+    ></apx-chart>
+  </div>
+  <br>
   <div class='mt-2'>
     <div class='overflow-x-auto rounded-md my-4'>
       <table class='max-w-full w-full rounded-md'>
@@ -523,66 +605,5 @@
       </table>
     </div>
   </div>
-  <br>
-  <div class='container'>
-    <ngx-spinner
-      bdColor='rgba(51,51,51,0.8)'
-      size='large'
-      color='#FF00AF'
-      type='pacman'
-      fullScreen=false
-    >
-      <p style='font-size: 20px; color: white'>Loading History ...</p>
-    </ngx-spinner>
-  </div>
 
-    <div class="flex">
-      <div class="w-2/4">
-        <button
-          type="button"
-          (click)="loadHistory()"
-          class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
-        >
-          Load History of Stock
-        </button>
-      </div>
-      <div class="inline-block w-1/4 pl-2 align-top">
-        <select
-          class='bg-gray-100 h-14 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
-          (change)='onChangeStockPool($event.target.value)'
-        >
-          <option>TSLA</option>
-          <option selected>SPY</option>
-          <option>QQQ</option>
-          <option>PLTR</option>
-          <option>SLV</option>
-          <option>AAPL</option>
-          <option>GLD</option>
-          <option>GME</option>
-          <option>GOOGL</option>
-          <option>ARKK</option>
-          <option>BABA</option>
-          <option>VNQ</option>
-          <option>URTH</option>
-          <option>TLT</option>
-          <option>PDBC</option>
-        </select>
-      </div>
-    </div>
-  <div class='mt-2'>
-    <apx-chart
-      *ngIf='chartOptions && chartOptions.series.length > 0'
-      [series]='chartOptions?.series'
-      [chart]='chartOptions?.chart'
-      [xaxis]= 'chartOptions?.xaxis'
-      [stroke]='chartOptions?.stroke'
-      [markers]='chartOptions?.markers'
-      [tooltip]='chartOptions?.tooltip'
-      [yaxis]='chartOptions?.yaxis'
-      [grid]='chartOptions?.grid'
-      [legend]='chartOptions?.legend'
-      [title]='chartOptions?.title'
-      [theme]='{ mode: getTheme() }'
-    ></apx-chart>
-  </div>
 </div>
