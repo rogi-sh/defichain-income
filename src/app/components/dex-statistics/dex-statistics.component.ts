@@ -6,7 +6,7 @@ import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { ChartOptions, ChartOptions6, StockOracles } from '@interfaces/Data';
+import { ChartOptions6, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -18,6 +18,12 @@ export class DexStatisticsComponent implements OnInit {
 
   @ViewChild('chart6', { static: false }) chart: ChartComponent;
   public chartOptions: Partial<ChartOptions6>;
+
+  @ViewChild('chart7', { static: false }) chart2: ChartComponent;
+  public chartOptions2: Partial<ChartOptions6>;
+
+  @ViewChild('chart8', { static: false }) chart3: ChartComponent;
+  public chartOptions3: Partial<ChartOptions6>;
 
   @Input()
   fiat: string;
@@ -94,7 +100,7 @@ export class DexStatisticsComponent implements OnInit {
   incomeStatistics: IncomeStatistics;
 
   history = new Array<History>();
-  historyPrices = new Array<HistoryPrice>();
+  historyNumbers = new Array<HistoryPrice>();
 
   curentStock = 'BTC';
 
@@ -255,8 +261,10 @@ export class DexStatisticsComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.getFarmingHistory) {
         this.history = result?.data?.getFarmingHistory;
-        this.computePrices(this.curentStock);
+        this.computeNumbers(this.curentStock);
         this.buildChartPrice();
+        this.buildChartReserve();
+        this.buildChartLiquidity();
         this.spinner.hide('historySpinner');
       } else {
         console.log('No Date for Historx');
@@ -373,7 +381,7 @@ export class DexStatisticsComponent implements OnInit {
       series: [
         {
           name: 'Price',
-          data: this.getPrices(this.curentStock)
+          data: this.getPrices()
         }
       ],
       chart: {
@@ -438,25 +446,165 @@ export class DexStatisticsComponent implements OnInit {
     };
   }
 
-  computePrices(stock: string): void{
+  async buildChartReserve(): Promise<void> {
+    this.chartOptions2 = {
+      series: [
+        {
+          name: 'Reserve',
+          data: this.getReserves()
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line',
+        background: 'transparent'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 4,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#00f700']
+      },
+      title: {
+        text: 'Pool Reserve - ' + this.curentStock,
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false,
+          style: {
+            colors: '#f1f1f1'
+          }
+        },
+        categories: this.getDates(),
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return val;
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
+  async buildChartLiquidity(): Promise<void> {
+    this.chartOptions3 = {
+      series: [
+        {
+          name: 'Liquidity Token',
+          data: this.getLiquidity()
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line',
+        background: 'transparent'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 4,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#00f700']
+      },
+      title: {
+        text: 'Pool Liquidity - ' + this.curentStock,
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false,
+          style: {
+            colors: '#f1f1f1'
+          }
+        },
+        categories: this.getDates(),
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return val;
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
+  computeNumbers(stock: string): void{
     if (!this.history) {
       return;
     }
-    this.historyPrices = new Array<HistoryPrice>();
+    this.historyNumbers = new Array<HistoryPrice>();
     this.history.forEach(h => {
 
       // search first with pair
       const indexPairSearch = h.pools.findIndex(p => p.pair?.startsWith(stock));
       if (indexPairSearch > -1) {
         if (h.pools[indexPairSearch]?.priceA) {
-          this.pushPrice(h, indexPairSearch);
+          this.pushHistoryNumbers(h, indexPairSearch);
         }
       // search second with symbol
       } else {
         const indexSymbolSearch = h.pools.findIndex(p => p.symbol?.startsWith(stock));
         if (indexSymbolSearch > -1) {
           if (h.pools[indexSymbolSearch]?.priceA) {
-            this.pushPrice(h, indexSymbolSearch);
+            this.pushHistoryNumbers(h, indexSymbolSearch);
           }
         }
       }
@@ -464,31 +612,57 @@ export class DexStatisticsComponent implements OnInit {
 
   }
 
-  private pushPrice(h: History, indexPairSearch: number): void {
+  private pushHistoryNumbers(h: History, indexPairSearch: number): void {
     const price = new HistoryPrice();
     price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
+    price.reserve = Math.round(+h.pools[indexPairSearch]?.reserveA * 100) / 100;
+    price.liquidiy = Math.round(+h.pools[indexPairSearch]?.totalLiquidity * 100) / 100;
     price.date = new Date(h.date);
-    this.historyPrices.push(price);
+    this.historyNumbers.push(price);
   }
 
-  getPrices(stock: string): Array<number> {
+  getPrices(): Array<number> {
     const prices = new Array<number>();
-    if (!this.historyPrices || this.historyPrices.length === 0) {
+    if (!this.historyNumbers || this.historyNumbers.length === 0) {
       return prices;
     }
-    this.historyPrices.forEach(h => {
+    this.historyNumbers.forEach(h => {
       prices.push(h.price);
     });
 
     return prices;
   }
 
+  getReserves(): Array<number> {
+    const reserves = new Array<number>();
+    if (!this.historyNumbers || this.historyNumbers.length === 0) {
+      return reserves;
+    }
+    this.historyNumbers.forEach(h => {
+      reserves.push(h.reserve);
+    });
+
+    return reserves;
+  }
+
+  getLiquidity(): Array<number> {
+    const liquidity = new Array<number>();
+    if (!this.historyNumbers || this.historyNumbers.length === 0) {
+      return liquidity;
+    }
+    this.historyNumbers.forEach(h => {
+      liquidity.push(h.liquidiy);
+    });
+
+    return liquidity;
+  }
+
   getDates(): Array<string> {
     const dates = new Array<string>();
-    if (!this.historyPrices || this.historyPrices.length === 0) {
+    if (!this.historyNumbers || this.historyNumbers.length === 0) {
       return dates;
     }
-    this.historyPrices.forEach(h => {
+    this.historyNumbers.forEach(h => {
       dates.push(h.date.toLocaleDateString() + ' - ' + h.date.toLocaleTimeString());
     });
 
@@ -502,8 +676,10 @@ export class DexStatisticsComponent implements OnInit {
   onChangeStockPool(newValue: string): void {
     this.spinner.show('historySpinner');
     this.curentStock = newValue;
-    this.computePrices(this.curentStock);
+    this.computeNumbers(this.curentStock);
     this.buildChartPrice();
+    this.buildChartReserve();
+    this.buildChartLiquidity();
     this.spinner.hide('historySpinner');
   }
 

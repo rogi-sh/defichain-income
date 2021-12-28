@@ -260,4 +260,6 @@ export class History {
 export class HistoryPrice {
   date: Date;
   price: number;
+  reserve: number;
+  liquidiy: number;
 }

@@ -494,7 +494,39 @@
       [theme]='{ mode: getTheme() }'
     ></apx-chart>
   </div>
+  <div class='mt-2'>
+    <apx-chart
+      *ngIf='history && history.length > 0 && chartOptions3 && chartOptions3.series.length > 0'
+      [series]='chartOptions3?.series'
+      [chart]='chartOptions3?.chart'
+      [xaxis]= 'chartOptions3?.xaxis'
+      [stroke]='chartOptions3?.stroke'
+      [markers]='chartOptions3?.markers'
+      [tooltip]='chartOptions3?.tooltip'
+      [yaxis]='chartOptions3?.yaxis'
+      [grid]='chartOptions3?.grid'
+      [legend]='chartOptions3?.legend'
+      [title]='chartOptions3?.title'
+      [theme]='{ mode: getTheme() }'
+    ></apx-chart>
+  </div>
   <br>
+  <div class='mt-2'>
+    <apx-chart
+      *ngIf='history && history.length > 0 && chartOptions2 && chartOptions2.series.length > 0'
+      [series]='chartOptions2?.series'
+      [chart]='chartOptions2?.chart'
+      [xaxis]= 'chartOptions2?.xaxis'
+      [stroke]='chartOptions2?.stroke'
+      [markers]='chartOptions2?.markers'
+      [tooltip]='chartOptions2?.tooltip'
+      [yaxis]='chartOptions2?.yaxis'
+      [grid]='chartOptions2?.grid'
+      [legend]='chartOptions2?.legend'
+      [title]='chartOptions2?.title'
+      [theme]='{ mode: getTheme() }'
+    ></apx-chart>
+  </div>
   <div class='mt-2'>
     <div class='overflow-x-auto rounded-md my-4'>
       <table class='max-w-full w-full rounded-md'>
