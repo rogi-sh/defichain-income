@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.9.2 - 28.12.2021';
+    this.log.comment = 'Better colors and formats for history chart';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.9.1 - 27.12.2021';
     this.log.comment = 'FIX: if no price from api is available';
     this.logs.push(this.log);

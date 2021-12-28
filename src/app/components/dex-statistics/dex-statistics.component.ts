@@ -378,16 +378,17 @@ export class DexStatisticsComponent implements OnInit {
       ],
       chart: {
         height: 500,
-        type: 'line'
+        type: 'line',
+        background: 'transparent'
       },
       dataLabels: {
         enabled: false
       },
       stroke: {
-        width: 2,
+        width: 4,
         curve: 'smooth',
         dashArray: [0, 8, 5],
-        colors: ['#ff00af']
+        colors: ['#00f700']
       },
       title: {
         text: 'Pool Price - ' + this.curentStock,
@@ -414,7 +415,7 @@ export class DexStatisticsComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#ff00af'
+            colors: '#f1f1f1'
           }
         },
         categories: this.getDates(),
@@ -432,7 +433,7 @@ export class DexStatisticsComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#ff00af'
+        borderColor: '#f1f1f1'
       }
     };
   }
@@ -466,7 +467,7 @@ export class DexStatisticsComponent implements OnInit {
   private pushPrice(h: History, indexPairSearch: number): void {
     const price = new HistoryPrice();
     price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
-    price.date = h.date;
+    price.date = new Date(h.date);
     this.historyPrices.push(price);
   }
 
@@ -488,7 +489,7 @@ export class DexStatisticsComponent implements OnInit {
       return dates;
     }
     this.historyPrices.forEach(h => {
-      dates.push(h.date.toLocaleString());
+      dates.push(h.date.toLocaleDateString() + ' - ' + h.date.toLocaleTimeString());
     });
 
     return dates;
