@@ -60,7 +60,7 @@
     "empty": "La dirección está vacía"
   },
   "holdings": {
-    "title": "Sus activos crypto/pasivos",
+    "title": "Activos/pasivos",
     "wallet": "Su stock",
     "lp": "Su Token LP (Minería de Liquidez)",
     "stake-add": "Añada la cantidad de su depósito en DFI.",
@@ -90,6 +90,9 @@
     "drop": "Elige tu periodo de tiempo en meses",
     "reinvest": "Elija su período de capitalización lm",
     "reinvest-mn": "La recompensa de los masternodes se reinvierte cada 3 días"
+  },
+  "history-app": {
+    "title": "Historia"
   },
   "hour": "Hora",
   "day": "Día",

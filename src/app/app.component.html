@@ -216,6 +216,15 @@
           </a>
 
           <a
+            (click)="handlePage('history')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'history' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="clock"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'history-app.title' | translate }}</div>
+          </a>
+
+          <a
             (click)="handlePage('dex')"
             [ngClass]="{ 'text-pink-500': currentPage === 'dex' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
@@ -347,6 +356,15 @@
           title="{{ 'forecast.title' | translate }}"
         >
           <app-icon name="world"></app-icon>
+        </a>
+
+        <a
+          (click)="handlePage('history')"
+          [ngClass]="currentPage === 'history' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'history.title' | translate }}"
+        >
+          <app-icon name="clock"></app-icon>
         </a>
 
         <a
@@ -1563,6 +1581,12 @@
                   [adressesMasternodesFreezer10]="adressesMasternodesFreezer10"
                 >
                 </app-forecast>
+              </div>
+            </div>
+            <div *ngSwitchCase="'history'">
+              <div class="contents w-full max-h-screen h-full overflow-visible">
+                <app-history>
+                </app-history>
               </div>
             </div>
             <div *ngSwitchCase="'dex'">

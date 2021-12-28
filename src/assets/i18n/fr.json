@@ -61,7 +61,7 @@
     "empty": "L'adresse est vide"
   },
   "holdings": {
-    "title": "Vos possessions crypto/dettes",
+    "title": "Possessions/dettes",
     "wallet": "Vos stocks",
     "lp": "Vos jetons LP",
     "stake-add": "Ajoutez votre montant de DFI stacké.",
@@ -91,6 +91,9 @@
     "drop": "Choisissez votre période de temps en mois",
     "reinvest": "Choisissez votre période de capitalisation lm",
     "reinvest-mn": "Les récompenses des masternodes sont réinvesties tous les 3 jours."
+  },
+  "history-app": {
+    "title": "Histoire"
   },
   "hour": "Heure",
   "day": "Jour",

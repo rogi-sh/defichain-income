@@ -33,6 +33,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
+import { HistoryComponent } from './components/history/history.component';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
     InfoComponent,
     PriceComponent,
     ForecastComponent,
+    HistoryComponent,
   ],
   imports: [
     RouterModule.forRoot(

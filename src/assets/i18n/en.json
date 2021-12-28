@@ -61,7 +61,7 @@
     "empty": "Adress is empty"
   },
   "holdings": {
-    "title": "Your crypto holdings/liabilities",
+    "title": "Holdings/liabilities",
     "wallet": "Your holdings",
     "lp": "Your LP Token",
     "stake-add": "Add your stake DFI amount.",
@@ -91,6 +91,9 @@
     "drop": "Choose your time period in months",
     "reinvest": "Choose your lm compounding period",
     "reinvest-mn": "Reward from masternodes is reinvested every 3 days"
+  },
+  "history-app": {
+    "title": "History"
   },
   "hour": "Hour",
   "day": "Day",

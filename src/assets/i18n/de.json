@@ -62,7 +62,7 @@
     "empty": "Adresse ist leer"
   },
   "holdings": {
-    "title": "Dein Vermögen/Verbindlichkeiten",
+    "title": "Vermögen/Verbindlichkeiten",
     "wallet": "Dein Bestand",
     "lp": "Dein LP Token Bestand",
     "stake-add": "Trage dein DFI Staking Bestand ein.",
@@ -92,6 +92,9 @@
     "drop": "Wähle deinen Zeitraum in Monaten",
     "reinvest": "Wähle wie oft du die Rewards aus LM reinvestierst",
     "reinvest-mn": "Reward aus Masternodes wird alle 3 Tage reinvestiert"
+  },
+  "history-app": {
+    "title": "Historie"
   },
   "hour": "Stunde",
   "day": "Tag",
