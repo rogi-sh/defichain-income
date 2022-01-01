@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.9.4 - 1.1.2022';
+    this.log.comment = 'Hide spinner if error';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.9.3 - 28.12.2021';
     this.log.comment = 'Add reserve and liauidity tokens, moved history to a new view';
     this.logs.push(this.log);

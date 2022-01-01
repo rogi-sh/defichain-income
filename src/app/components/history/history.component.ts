@@ -59,9 +59,11 @@ export class HistoryComponent implements OnInit {
         this.buildChartLiquidity();
         this.spinner.hide('historySpinner');
       } else {
+        this.spinner.hide('historySpinner');
         console.log('No Date for Historx');
       }
     }, (error) => {
+      this.spinner.hide('historySpinner');
       console.log(error);
     });
   }
