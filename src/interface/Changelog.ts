@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.9.5 - 2.1.2022';
+    this.log.comment = 'Remove dynamic Blocktime, fix to 30s';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.9.4 - 1.1.2022';
     this.log.comment = 'Hide spinner if error';
     this.logs.push(this.log);

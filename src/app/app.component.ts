@@ -286,9 +286,6 @@ export class AppComponent implements OnInit {
   showSettingsArea = true;
   showSettingsAreaKey = 'showSettingsAreaKey';
 
-  lastBlocksForCompute = 2000;
-  lastBlocksForComputeKey = 'lastBlocksForComputeKey';
-
   apiOnline = true;
 
   loggedIn = false;
@@ -478,9 +475,6 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.currentPageKey) !== null) {
       this.currentPage = localStorage.getItem(this.currentPageKey);
-    }
-    if (localStorage.getItem(this.lastBlocksForComputeKey) !== null) {
-      this.lastBlocksForCompute = +localStorage.getItem(this.lastBlocksForComputeKey);
     }
     if (localStorage.getItem('theme') !== null) {
       this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
@@ -964,45 +958,9 @@ export class AppComponent implements OnInit {
       this.setStats(promiseStats);
 
       // if fixed blocktime to 30 s
-      if (this.lastBlocksForCompute < 0) {
-        this.blocktimeInS = 30;
-        this.blocktimeInSSecond = 30;
-        this.blocktimeFirstLastSecond = 30;
-        return;
-      }
-
-      const promiseBlocks = await this.dexService.getLastBlocks(
-        this.lastBlocksForCompute === -1 ? 2 : this.lastBlocksForCompute).toPromise();
-
-      promiseBlocks.data.sort((a, b) => a.time - b.time);
-
-      const diffS = new Array<number>();
-
-      for (let i = 0; i < promiseBlocks.data.length - 2; i++) {
-        const date = promiseBlocks.data[i].time;
-        const date2 = promiseBlocks.data[i + 1].time;
-        diffS.push(Math.abs(date - date2));
-      }
-
-      // avg first and last
-      const diff = (promiseBlocks.data[promiseBlocks.data.length - 1].time
-        - promiseBlocks.data[0].time);
-      const avgFirstAndLast = Math.round(diff / promiseBlocks.data.length);
-
-      // avg
-      const sum = diffS.reduce((previous, current) => current += previous);
-      const avg = Math.round(sum / diffS.length);
-
-      // median
-      diffS.sort((a, b) => a - b);
-      const lowMiddle = Math.floor((diffS.length - 1) / 2);
-      const highMiddle = Math.ceil((diffS.length - 1) / 2);
-      const median = Math.round((diffS[lowMiddle] + diffS[highMiddle]) / 2);
-
-      this.blocktimeInS = avg;
-      this.blocktimeInSSecond = median;
-      this.blocktimeFirstLastSecond = avgFirstAndLast;
-
+      this.blocktimeInS = 30;
+      this.blocktimeInSSecond = 30;
+      this.blocktimeFirstLastSecond = 30;
 
     } catch (err) {
       console.error('Api down?' + err.message);
@@ -4112,12 +4070,6 @@ export class AppComponent implements OnInit {
   toggleAutoCake(): void {
 
     localStorage.setItem(this.cakeApyLoadAutoKey, String(this.cakeApyLoadAuto));
-  }
-
-  onChangeLastBlocksForCalc(value: number): void {
-    this.lastBlocksForCompute = +value;
-    localStorage.setItem(this.lastBlocksForComputeKey, String(value));
-    this.refresh();
   }
 
   onChangeCorrelationForCalc(value: number): void {

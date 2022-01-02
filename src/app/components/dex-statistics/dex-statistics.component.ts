@@ -61,15 +61,6 @@ export class DexStatisticsComponent implements OnInit {
   rewards: Stats;
 
   @Input()
-  blockTimeUsed: number;
-
-  @Input()
-  blockTimeSecond: number;
-
-  @Input()
-  blockCountForCalc: number;
-
-  @Input()
   isIncognitoModeOn: boolean;
 
   @Input()
@@ -80,6 +71,12 @@ export class DexStatisticsComponent implements OnInit {
 
   @Input()
   priceDFICEX: number;
+
+  @Input()
+  blockTimeUsed: number;
+
+  @Input()
+  blockTimeSecond: number;
 
   corr: Correlation;
 

@@ -1608,7 +1608,6 @@
                   [rewards]="rewards"
                   [blockTimeUsed]="blocktimeInS"
                   [blockTimeSecond]="blocktimeInSSecond"
-                  [blockCountForCalc]="lastBlocksForCompute"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [correlationDays]='correlationDays'
                   [priceDFICEX]='priceDFICEX'
@@ -1772,21 +1771,6 @@
                           ></label>
                         </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="dark:text-gray-100">
-                      {{ 'blocktimeHeadline' | translate }}
-                    </div>
-                    <div class="flex">
-                      <select class="border dark:border-none bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700
-                       dark:text-gray-100 mb-2" (change)="onChangeLastBlocksForCalc($event.target.value)">
-                        <option [selected]="lastBlocksForCompute === -1" value="-1">Fix 30s</option>
-                        <option [selected]="lastBlocksForCompute === 200" value="200">200</option>
-                      </select>
-
-                    </div>
-                    <div *ngIf="lastBlocksForCompute > -1" class="dark:text-gray-100">
-                      Avg {{blocktimeInS}} s, (Avg First/Last {{blocktimeFirstLastSecond}} s, Median {{ blocktimeInSSecond }} s)
                     </div>
                     <br>
                     <div class="dark:text-gray-100">
@@ -4050,7 +4034,6 @@
                     [rewards]="rewards"
                     [blockTimeUsed]="blocktimeInS"
                     [blockTimeSecond]="blocktimeInSSecond"
-                    [blockCountForCalc]="lastBlocksForCompute"
                     [isIncognitoModeOn]="isIncognitoModeOn"
                     [correlationDays]='correlationDays'
                     [priceDFICEX]='priceDFICEX'
