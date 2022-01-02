@@ -96,7 +96,6 @@
     [theme]='{ mode: getTheme() }'
   ></apx-chart>
 </div>
-<br>
 <div class='mt-2'>
   <apx-chart
     *ngIf='history && history.length > 0 && chartOptions2 && chartOptions2.series.length > 0'
@@ -110,6 +109,22 @@
     [grid]='chartOptions2?.grid'
     [legend]='chartOptions2?.legend'
     [title]='chartOptions2?.title'
+    [theme]='{ mode: getTheme() }'
+  ></apx-chart>
+</div>
+<div class='mt-2'>
+  <apx-chart
+    *ngIf='history && history.length > 0 && chartOptions4 && chartOptions4.series.length > 0'
+    [series]='chartOptions4?.series'
+    [chart]='chartOptions4?.chart'
+    [xaxis]= 'chartOptions4?.xaxis'
+    [stroke]='chartOptions4?.stroke'
+    [markers]='chartOptions4?.markers'
+    [tooltip]='chartOptions4?.tooltip'
+    [yaxis]='chartOptions4?.yaxis'
+    [grid]='chartOptions4?.grid'
+    [legend]='chartOptions4?.legend'
+    [title]='chartOptions4?.title'
     [theme]='{ mode: getTheme() }'
   ></apx-chart>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartOptions6 } from '@interfaces/Data';
-import { History, HistoryPrice } from '@interfaces/Dex';
+import { History, HistoryPrice, Pool } from '@interfaces/Dex';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HISTORY } from '@interfaces/Graphql';
 import { Apollo } from 'apollo-angular';
@@ -20,6 +20,9 @@ export class HistoryComponent implements OnInit {
 
   @ViewChild('chart8', { static: false }) chart3: ChartComponent;
   public chartOptions3: Partial<ChartOptions6>;
+
+  @ViewChild('chart9', { static: false }) chart4: ChartComponent;
+  public chartOptions4: Partial<ChartOptions6>;
 
   history = new Array<History>();
   historyNumbers = new Array<HistoryPrice>();
@@ -57,6 +60,7 @@ export class HistoryComponent implements OnInit {
         this.buildChartPrice();
         this.buildChartReserve();
         this.buildChartLiquidity();
+        this.buildChartVolume();
         this.spinner.hide('historySpinner');
       } else {
         this.spinner.hide('historySpinner');
@@ -278,6 +282,76 @@ export class HistoryComponent implements OnInit {
     };
   }
 
+  async buildChartVolume(): Promise<void> {
+    this.chartOptions4 = {
+      series: [
+        {
+          name: 'Volume',
+          data: this.getVolume()
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line',
+        background: 'transparent'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 4,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#00f700']
+      },
+      title: {
+        text: 'Pool Volume - ' + this.curentStock,
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false,
+          style: {
+            colors: '#f1f1f1'
+          }
+        },
+        categories: this.getDates(),
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return val;
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
   computeNumbers(stock: string): void{
     if (!this.history) {
       return;
@@ -308,9 +382,20 @@ export class HistoryComponent implements OnInit {
     const price = new HistoryPrice();
     price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
     price.reserve = Math.round(+h.pools[indexPairSearch]?.reserveA * 100) / 100;
-    price.liquidiy = Math.round(+h.pools[indexPairSearch]?.totalLiquidity * 100) / 100;
+    price.liquidiy = Math.round(this.getLiquidityNumber(h.pools[indexPairSearch]) * 100) / 100;
+    price.volume = Math.round(+h.pools[indexPairSearch]?.volumeA * 100) / 100;
     price.date = new Date(h.date);
     this.historyNumbers.push(price);
+  }
+
+  private getLiquidityNumber(pool: Pool): number {
+    if (+pool?.totalLiquidity) {
+      return +pool?.totalLiquidity;
+    } else if (+pool?.totalLiquidityLpToken) {
+      return +pool?.totalLiquidityLpToken;
+    } else if (+pool?.totalStaked) {
+      return +pool?.totalStaked;
+    }
   }
 
   getPrices(): Array<number> {
@@ -335,6 +420,18 @@ export class HistoryComponent implements OnInit {
     });
 
     return reserves;
+  }
+
+  getVolume(): Array<number> {
+    const volume = new Array<number>();
+    if (!this.historyNumbers || this.historyNumbers.length === 0) {
+      return volume;
+    }
+    this.historyNumbers.forEach(h => {
+      volume.push(h.volume);
+    });
+
+    return volume;
   }
 
   getLiquidity(): Array<number> {
@@ -372,6 +469,7 @@ export class HistoryComponent implements OnInit {
     this.buildChartPrice();
     this.buildChartReserve();
     this.buildChartLiquidity();
+    this.buildChartVolume();
     this.spinner.hide('historySpinner');
   }
 
