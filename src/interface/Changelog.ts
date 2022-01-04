@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '8.10.0 - 4.1.2022';
-    this.log.comment = 'Computed Blocktime, Exchnage Status added';
+    this.log.comment = 'Computed Blocktime last 200 Blocks, Exchange Status added';
     this.logs.push(this.log);
 
     this.log = new Log();
