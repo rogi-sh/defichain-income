@@ -6,7 +6,7 @@ import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { ChartOptions6, StockOracles } from '@interfaces/Data';
+import { Blocks, ChartOptions6, StockOracles } from '@interfaces/Data'
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -104,7 +104,11 @@ export class DexStatisticsComponent implements OnInit {
   fromDate: Date = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
   tillDate: Date = new Date();
 
-  constructor(private apollo: Apollo, private dex: Dex) {
+  avgBlocktime = 30;
+  medianBlocktime = 30;
+  avgFirstLastBlocktime = 30;
+
+  constructor(private apollo: Apollo, private dex: Dex, private dexService: Dex) {
   }
 
   ngOnInit(): void  {
@@ -115,6 +119,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadWalletRelease();
     this.loadOraclePrices();
     this.loadIncomeStatistics();
+    this.calculateBlockTime();
   }
 
   loadMilestones(): void {
@@ -341,6 +346,43 @@ export class DexStatisticsComponent implements OnInit {
     }
 
     return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD')).price.aggregated.amount;
+  }
+
+  calculateBlockTime(): void {
+    this.dexService.getLastBlocks(2000).subscribe((result: Blocks) => {
+
+      result.data.sort((a, b) => a.time - b.time);
+
+      const diffS = new Array<number>();
+
+      for (let i = 0; i < result.data.length - 2; i++) {
+        const date = result.data[i].time;
+        const date2 = result.data[i + 1].time;
+        diffS.push(Math.abs(date - date2));
+      }
+
+      // avg first and last
+      const diff = (result.data[result.data.length - 1].time
+        - result.data[0].time);
+      const avgFirstAndLast = Math.round(diff / result.data.length);
+
+      // avg
+      const sum = diffS.reduce((previous, current) => current += previous);
+      const avg = Math.round(sum / diffS.length);
+
+      // median
+      diffS.sort((a, b) => a - b);
+      const lowMiddle = Math.floor((diffS.length - 1) / 2);
+      const highMiddle = Math.ceil((diffS.length - 1) / 2);
+      const median = Math.round((diffS[lowMiddle] + diffS[highMiddle]) / 2);
+
+      this.avgBlocktime = avg;
+      this.medianBlocktime = median;
+      this.avgFirstLastBlocktime = avgFirstAndLast;
+
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }
