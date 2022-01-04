@@ -550,7 +550,7 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet.dfiInUsdPool
-      + this.dfiInStaking + this.wallet.dfiInMasternodes;
+      + this.dfiInStaking + this.wallet.dfiInMasternodes + this.getCollateralCountVaults('DFI');
   }
 
   getAnteilStakingOfAllValue(): number {

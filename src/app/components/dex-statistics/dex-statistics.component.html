@@ -303,26 +303,42 @@
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>Status Exchanges</h1>
         <h2 class='text-lg font-bold'>Kucoin</h2>
-        <div class='grid gap-2'>
-          <div>
-            <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              Deposit: {{exchange?.kucoinStatusDeposit ? 'ONLINE' : 'OFFLINE'}}
-            </div>
-            <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              Withdraw: {{exchange?.kucoinStatusWithdraw ? 'ONLINE' : 'OFFLINE' }}
-            </div>
+        <div class='my-2 dark:text-gray-100'>
+          <span class='mr-2'>Deposit:</span>
+          <div *ngIf='exchange && exchange?.kucoinStatusDeposit'
+            class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Online
+          </div>
+          <div *ngIf="exchange && !exchange?.kucoinStatusDeposit"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Offline
+          </div>
+        </div>
+        <div class='my-2 dark:text-gray-100'>
+          <span
+            class='mr-2'>Withdraw:</span>
+          <div *ngIf='exchange && exchange?.kucoinStatusWithdraw'
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Online
+          </div>
+          <div *ngIf="exchange && !exchange?.kucoinStatusWithdraw"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Offline
           </div>
         </div>
         <h2 class='text-lg font-bold'>Bittrex</h2>
-        <div class='grid gap-2'>
-          <div>
-            <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{exchange?.bittrexStatus}}
-            </div>
+        <div class='my-2 dark:text-gray-100'>
+          <span class='mr-2'>Status:</span>
+          <div *ngIf="exchange?.bittrexStatus === 'ONLINE'"
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Online
           </div>
+          <div *ngIf="exchange?.bittrexStatus === 'OFFLINE'"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+            Offline
+          </div>
+        </div>
+        <div class='grid gap-2'>
           <div>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
