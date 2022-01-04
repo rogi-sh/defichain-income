@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Correlation, History, HistoryPrice, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
-import { CORRELATION, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
+import { CORRELATION, EXCHANGE, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { Blocks, ChartOptions6, StockOracles } from '@interfaces/Data'
+import { Blocks, ChartOptions6, Exchange, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -108,6 +108,8 @@ export class DexStatisticsComponent implements OnInit {
   medianBlocktime = 30;
   avgFirstLastBlocktime = 30;
 
+  exchange: Exchange;
+
   constructor(private apollo: Apollo, private dex: Dex, private dexService: Dex) {
   }
 
@@ -120,6 +122,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadOraclePrices();
     this.loadIncomeStatistics();
     this.calculateBlockTime();
+    this.calculateExchangesStatus();
   }
 
   loadMilestones(): void {
@@ -383,6 +386,22 @@ export class DexStatisticsComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+  calculateExchangesStatus(): void {
+
+    this.apollo.query({
+      query: EXCHANGE
+    }).subscribe((result: any) => {
+      if (result?.data?.getExchangeStatus) {
+        this.exchange = result?.data?.getExchangeStatus;
+      } else {
+        console.log('No Date for Income Statistics');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+
   }
 
 }

@@ -560,3 +560,10 @@ export class USD {
   cny: number;
   sgd: number;
 }
+
+export class Exchange {
+  bittrexStatus: string;
+  bittrexNotice: string;
+  kucoinStatusDeposit: boolean;
+  kucoinStatusWithdraw: boolean;
+}

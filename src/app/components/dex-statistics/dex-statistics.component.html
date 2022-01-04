@@ -301,6 +301,39 @@
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h1 class='text-lg font-bold'>Status Exchanges</h1>
+        <h2 class='text-lg font-bold'>Kucoin</h2>
+        <div class='grid gap-2'>
+          <div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              Deposit: {{exchange?.kucoinStatusDeposit ? 'ONLINE' : 'OFFLINE'}}
+            </div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              Withdraw: {{exchange?.kucoinStatusWithdraw ? 'ONLINE' : 'OFFLINE' }}
+            </div>
+          </div>
+        </div>
+        <h2 class='text-lg font-bold'>Bittrex</h2>
+        <div class='grid gap-2'>
+          <div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{exchange?.bittrexStatus}}
+            </div>
+          </div>
+          <div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{exchange?.bittrexNotice}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>Defichain Income Statistics</h1>
         <div class='grid gap-2'>
           <div>

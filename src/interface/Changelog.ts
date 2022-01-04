@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.10.0 - 4.1.2022';
+    this.log.comment = 'Computed Blocktime, Exchnage Status added';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.9.5 - 2.1.2022';
     this.log.comment = 'Remove dynamic Blocktime, fix to 30s, add volume chart and liquidity numbers fix';
     this.logs.push(this.log);

@@ -320,4 +320,17 @@ export const HISTORY = gql`
   }
 `;
 
+export const EXCHANGE = gql`
+  query GetStatisticsIncome {
+  getExchangeStatus {
+    bittrexStatus
+    bittrexNotice
+    kucoinStatusDeposit
+    kucoinStatusWithdraw
+  }
+}
+`;
+
+
+
 

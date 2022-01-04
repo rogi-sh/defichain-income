@@ -1,9 +1,9 @@
 import {Injectable } from '@angular/core';
 import {environment} from '@environments/environment';
-import { HttpClient, HttpResponse } from '@angular/common/http'
-import { DexPoolPair, Pool, Prices } from '@interfaces/Dex'
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { DexPoolPair, Pool, Prices } from '@interfaces/Dex';
 import {Observable} from 'rxjs';
-import { Blocks, StockOracles } from '@interfaces/Data'
+import { Blocks, StockOracles } from '@interfaces/Data';
 import {OceanStats} from '@interfaces/Staking';
 
 @Injectable({
@@ -37,7 +37,5 @@ export class Dex {
   public getHealthCheck(): Observable<HttpResponse<any>> {
     return this.http.get(environment.health, { observe: 'response' });
   }
-
-
 
 }
