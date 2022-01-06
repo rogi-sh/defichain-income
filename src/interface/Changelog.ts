@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.10.2 - 6.1.2022';
+    this.log.comment = 'Fix apr of cake';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.10.1 - 4.1.2022';
     this.log.comment = 'DFI in Vaults added to holdings overview, better UI for exhcange status, Small inkognito fix';
     this.logs.push(this.log);
