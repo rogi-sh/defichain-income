@@ -1,7 +1,9 @@
 import {gql} from 'apollo-angular';
 
 export const REGISTER = gql`
-  mutation ($addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String], $totalValue: Float, $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
+  mutation ($addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],
+    $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
+    $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float, $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float,  $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float,
     $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,    $vnq: Float,    $urth: Float,
     $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
@@ -22,6 +24,8 @@ export const REGISTER = gql`
         adressesMasternodesFreezer5: $adressesMasternodesFreezer5
         adressesMasternodesFreezer10: $adressesMasternodesFreezer10
         totalValue: $totalValue
+        totalValueIncomeDfi: $totalValueIncomeDfi
+        totalValueIncomeUsd: $totalValueIncomeUsd
         wallet : {
           btcdfi :$btcdfi
           ethdfi: $ethdfi
@@ -138,7 +142,9 @@ export const REGISTER = gql`
 `;
 
 export const UPDATE = gql`
-  mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String], $totalValue: Float,  $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
+  mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],
+    $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
+    $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float
     $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,    $vnq: Float,    $urth: Float,
     $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
@@ -160,6 +166,8 @@ export const UPDATE = gql`
         adressesMasternodesFreezer5: $adressesMasternodesFreezer5
         adressesMasternodesFreezer10: $adressesMasternodesFreezer10
         totalValue: $totalValue
+        totalValueIncomeDfi: $totalValueIncomeDfi
+        totalValueIncomeUsd: $totalValueIncomeUsd
         wallet : {
           btcdfi :$btcdfi
           ethdfi: $ethdfi
