@@ -518,6 +518,7 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
+        totalValue: this.getAllValuesUsdPriceWithputLoan(),
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
         eth: this.wallet.eth,
@@ -646,6 +647,7 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
+        totalValue: this.getAllValuesUsdPriceWithputLoan(),
         dfi: this.wallet.dfi,
         btc: this.wallet.btc,
         eth: this.wallet.eth,
@@ -1134,6 +1136,7 @@ export class AppComponent implements OnInit {
     this.dataService.setDfiUsd(this.poolBtc.priceB);
     this.dataLoaded = true;
     this.avgApr = this.getAPRAverage();
+    this.update();
     this.spinner.hide();
   }
 
