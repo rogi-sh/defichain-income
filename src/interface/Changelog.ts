@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.0- 9.1.2022';
+    this.log.comment = 'Add History of total value and monthly income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.10.3- 8.1.2022';
     this.log.comment = 'Auto update user after load all data';
     this.logs.push(this.log);
