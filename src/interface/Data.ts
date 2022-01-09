@@ -567,3 +567,15 @@ export class Exchange {
   kucoinStatusDeposit: boolean;
   kucoinStatusWithdraw: boolean;
 }
+
+export class UserHistoryItem {
+  date: Date;
+  totalValue: number;
+  totalValueIncomeDfi: number;
+  totalValueIncomeUsd: number;
+}
+
+export class UserHistory {
+  key: string;
+  values: Array<UserHistoryItem>;
+}

@@ -472,6 +472,24 @@
                   ></app-value>
                 </div>
               </div>
+              <br>
+              <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
+                <h3 class="text-lg font-bold mb-2">Total Value History</h3>
+                <apx-chart *ngIf='isUserHistoryForValue()'
+                  [series]='chartOptions?.series'
+                  [chart]='chartOptions?.chart'
+                  [xaxis]= 'chartOptions?.xaxis'
+                  [stroke]='chartOptions?.stroke'
+                  [markers]='chartOptions?.markers'
+                  [tooltip]='chartOptions?.tooltip'
+                  [yaxis]='chartOptions?.yaxis'
+                  [grid]='chartOptions?.grid'
+                  [legend]='chartOptions?.legend'
+                  [title]='chartOptions?.title'
+                  [theme]='{ mode: getTheme() }'
+                ></apx-chart>
+              </div>
+              <br>
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-4 gap-6"
               >

@@ -343,5 +343,19 @@ export const EXCHANGE = gql`
 `;
 
 
+export const HISTORY_USER = gql`
+  query ($key: String) {
+  userHistoryByKey(key: $key) {
+    key
+    values {
+      date
+      totalValue
+      totalValueIncomeDfi
+      totalValueIncomeUsd
+    }
+  }
+}
+`;
+
 
 

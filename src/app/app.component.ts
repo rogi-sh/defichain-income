@@ -37,7 +37,7 @@ import {
   Prices,
 } from '@interfaces/Dex';
 import {CountdownComponent} from 'ngx-countdown';
-import { AddressVaults, IncomePoolDto, Vault, Wallet, WalletDto } from '@interfaces/Data';
+import { AddressVaults, ChartOptions6, IncomePoolDto, UserHistory, Vault, Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 // @ts-ignore
@@ -47,7 +47,7 @@ import { IncomeComponent } from '@components/income/income.component';
 import { ValueComponent } from '@components/value/value.component';
 import { MatomoInjector, MatomoTracker } from 'ngx-matomo-v9';
 import { Apollo } from 'apollo-angular';
-import { LOGIN, REGISTER, UPDATE } from '@interfaces/Graphql';
+import { HISTORY_USER, LOGIN, REGISTER, UPDATE } from '@interfaces/Graphql';
 import { DataService } from '@services/data.service';
 import { StakingService } from '@services/staking.service';
 import { Meta } from '@angular/platform-browser';
@@ -58,6 +58,7 @@ import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
 import { OceanStats } from '@interfaces/Staking';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-root',
@@ -74,6 +75,9 @@ export class AppComponent implements OnInit {
 
   @ViewChild(ValueComponent)
   private valueComponent: ValueComponent;
+
+  @ViewChild('chart10', { static: false }) chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions6>;
 
   title = 'defichain-income';
   lang = 'en';
@@ -308,6 +312,8 @@ export class AppComponent implements OnInit {
   oneTrackingAddress = null;
   authKeyOverUrl = null;
 
+  userHistory: UserHistory = null;
+
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
@@ -395,6 +401,7 @@ export class AppComponent implements OnInit {
 
     this.loadStackingCake();
     this.loadStackingMasternode();
+    this.loadHistoryUser();
 
     // only one adress over url
     if (this.oneTrackingAddress) {
@@ -415,6 +422,139 @@ export class AppComponent implements OnInit {
 
     this.timestamp = new Date().toLocaleTimeString();
   }
+
+  loadHistoryUser(): void {
+    this.apollo.query({
+      query: HISTORY_USER,
+      variables: {
+        key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
+      }
+    }).subscribe((result: any) => {
+      if (result?.data?.userHistoryByKey) {
+        this.userHistory = result?.data?.userHistoryByKey;
+        if (this.isUserHistoryForValue()) {
+          this.buildChartPrice();
+        }
+
+      } else {
+        console.log('No Date for History User');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  isUserHistoryForValue(): boolean {
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      if (this.userHistory.values.some(v => v.totalValue > 0)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  getTheme(): string {
+    return localStorage.getItem('theme');
+  }
+
+  getUserHistoryTotalValues(): Array<number> {
+    const numbers = new Array<number>();
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      this.userHistory.values.forEach(v => {
+        if (v.totalValue > 0) {
+          numbers.push(Math.round(v.totalValue * 100) / 100);
+        }
+      });
+    }
+
+    return numbers;
+  }
+
+  getUserHistoryDates(): Array<string> {
+    const dates = new Array<string>();
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      this.userHistory.values.forEach(v => {
+        if (v.totalValue > 0) {
+          const date = new Date(v.date);
+          dates.push( date.toLocaleDateString() + ' - ' + date.toLocaleTimeString());
+        }
+      });
+    }
+
+    return dates;
+  }
+
+  async buildChartPrice(): Promise<void> {
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Value History',
+          data: this.getUserHistoryTotalValues()
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line',
+        background: 'transparent'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 4,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#00f700']
+      },
+      title: {
+        text: 'Total Value in USD',
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false,
+          style: {
+            colors: '#f1f1f1'
+          }
+        },
+        categories: this.getUserHistoryDates(),
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return 'USD';
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
 
   handlePage(pageTag: string): void {
     this.currentPage = pageTag;
