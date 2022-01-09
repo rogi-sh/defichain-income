@@ -79,6 +79,9 @@ export class AppComponent implements OnInit {
   @ViewChild('chart10', { static: false }) chart: ChartComponent;
   public chartOptions: Partial<ChartOptions6>;
 
+  @ViewChild('chart11', { static: false }) chart2: ChartComponent;
+  public chartOptions2: Partial<ChartOptions6>;
+
   title = 'defichain-income';
   lang = 'en';
   env = environment;
@@ -433,7 +436,11 @@ export class AppComponent implements OnInit {
       if (result?.data?.userHistoryByKey) {
         this.userHistory = result?.data?.userHistoryByKey;
         if (this.isUserHistoryForValue()) {
-          this.buildChartPrice();
+          this.buildChartValue();
+        }
+
+        if (this.isUserHistoryForIncome()) {
+          this.buildChartIncome();
         }
 
       } else {
@@ -447,6 +454,16 @@ export class AppComponent implements OnInit {
   isUserHistoryForValue(): boolean {
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       if (this.userHistory.values.some(v => v.totalValue > 0)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  isUserHistoryForIncome(): boolean {
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      if (this.userHistory.values.some(v => v.totalValueIncomeDfi > 0)) {
         return true;
       }
     }
@@ -471,6 +488,32 @@ export class AppComponent implements OnInit {
     return numbers;
   }
 
+  getUserHistoryTotalIncomeDfi(): Array<number> {
+    const numbers = new Array<number>();
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      this.userHistory.values.forEach(v => {
+        if (v.totalValueIncomeDfi > 0) {
+          numbers.push(Math.round(v.totalValueIncomeDfi * 100) / 100);
+        }
+      });
+    }
+
+    return numbers;
+  }
+
+  getUserHistoryTotalIncomeUsd(): Array<number> {
+    const numbers = new Array<number>();
+    if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
+      this.userHistory.values.forEach(v => {
+        if (v.totalValueIncomeUsd > 0) {
+          numbers.push(Math.round(v.totalValueIncomeUsd * 100) / 100);
+        }
+      });
+    }
+
+    return numbers;
+  }
+
   getUserHistoryDates(): Array<string> {
     const dates = new Array<string>();
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
@@ -485,7 +528,7 @@ export class AppComponent implements OnInit {
     return dates;
   }
 
-  async buildChartPrice(): Promise<void> {
+  async buildChartValue(): Promise<void> {
     this.chartOptions = {
       series: [
         {
@@ -554,6 +597,92 @@ export class AppComponent implements OnInit {
       }
     };
   }
+
+  async buildChartIncome(): Promise<void> {
+    this.chartOptions2 = {
+      series: [
+        {
+          name: 'Income History DFI per Month',
+          data: this.getUserHistoryTotalIncomeDfi(),
+          color: '#ff00af'
+        },
+        {
+          name: 'Income History USD per Month',
+          data: this.getUserHistoryTotalIncomeUsd(),
+          color: '#00f700'
+        }
+      ],
+      chart: {
+        height: 500,
+        type: 'line',
+        background: 'transparent'
+
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 6,
+        curve: 'smooth',
+        dashArray: [0, 8, 5],
+        colors: ['#ff00af', '#00f700'],
+      },
+      title: {
+        text: 'Total Income in DFI & USD',
+        align: 'left'
+      },
+      legend: {
+        // tslint:disable-next-line:typedef
+        tooltipHoverFormatter(val, opts) {
+          return (
+            val +
+            ' - <strong>' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            '</strong>'
+          );
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        labels: {
+          trim: false,
+          style: {
+            colors: '#f1f1f1'
+          }
+        },
+        categories: this.getUserHistoryDates(),
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return 'DFI';
+              }
+            }
+          },
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return 'USD';
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      }
+    };
+  }
+
 
 
   handlePage(pageTag: string): void {

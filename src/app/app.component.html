@@ -984,6 +984,25 @@
                 [getLMUsd]="getLMUsd()"
               ></app-income>
 
+              <br>
+              <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
+                <h3 class="text-lg font-bold mb-2">Total Income per Month History</h3>
+                <apx-chart *ngIf='isUserHistoryForIncome()'
+                           [series]='chartOptions2?.series'
+                           [chart]='chartOptions2?.chart'
+                           [xaxis]= 'chartOptions2?.xaxis'
+                           [stroke]='chartOptions2?.stroke'
+                           [markers]='chartOptions2?.markers'
+                           [tooltip]='chartOptions2?.tooltip'
+                           [yaxis]='chartOptions2?.yaxis'
+                           [grid]='chartOptions2?.grid'
+                           [legend]='chartOptions2?.legend'
+                           [title]='chartOptions2?.title'
+                           [theme]='{ mode: getTheme() }'
+                ></apx-chart>
+              </div>
+              <br>
+
               <h1 class="text-xl font-semibold text-pink-500 mt-3 mb-2">
                 {{ 'your' | translate }} pools
               </h1>
