@@ -472,24 +472,7 @@
                   ></app-value>
                 </div>
               </div>
-              <br>
-              <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
-                <h3 class="text-lg font-bold mb-2">Total Value History</h3>
-                <apx-chart *ngIf='isUserHistoryForValue()'
-                  [series]='chartOptions?.series'
-                  [chart]='chartOptions?.chart'
-                  [xaxis]= 'chartOptions?.xaxis'
-                  [stroke]='chartOptions?.stroke'
-                  [markers]='chartOptions?.markers'
-                  [tooltip]='chartOptions?.tooltip'
-                  [yaxis]='chartOptions?.yaxis'
-                  [grid]='chartOptions?.grid'
-                  [legend]='chartOptions?.legend'
-                  [title]='chartOptions?.title'
-                  [theme]='{ mode: getTheme() }'
-                ></apx-chart>
-              </div>
-              <br>
+
               <div
                 class="grid grid-flow-row grid-cols-1 auto-rows-max lg:grid-cols-2 lg:gap-4 gap-6"
               >
@@ -918,9 +901,42 @@
                   </div>
                 </div>
               </div>
-
+              <br>
+              <div class='bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100'>
+                <h3 class='text-lg font-bold mb-2'>Total Value History</h3>
+                <div
+                  class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
+                  <input
+                    type='checkbox'
+                    id='valueChartOn'
+                    [(ngModel)]='isValueChartOn'
+                    (ngModelChange)='toggleTotalValueChart()'
+                    [ngClass]="{ 'isChecked': isValueChartOn }"
+                    class='toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none'
+                  />
+                  <label
+                    for='valueChartOn'
+                    class='toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer'
+                  ></label>
+                </div>
+                <br>
+                <br>
+                <apx-chart *ngIf='isValueChartOn && isUserHistoryForValue()'
+                           [series]='chartOptions?.series'
+                           [chart]='chartOptions?.chart'
+                           [xaxis]= 'chartOptions?.xaxis'
+                           [stroke]='chartOptions?.stroke'
+                           [markers]='chartOptions?.markers'
+                           [tooltip]='chartOptions?.tooltip'
+                           [yaxis]='chartOptions?.yaxis'
+                           [grid]='chartOptions?.grid'
+                           [legend]='chartOptions?.legend'
+                           [title]='chartOptions?.title'
+                           [theme]='{ mode: getTheme() }'
+                ></apx-chart>
+              </div>
             </div>
-            <div *ngSwitchCase="'income'">
+           <div *ngSwitchCase="'income'">
               <app-income
                 [isIncognitoModeOn]="isIncognitoModeOn"
                 [poolBtc]="poolBtc"
@@ -983,25 +999,6 @@
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
-
-              <br>
-              <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
-                <h3 class="text-lg font-bold mb-2">Total Income per Month History</h3>
-                <apx-chart *ngIf='isUserHistoryForIncome()'
-                           [series]='chartOptions2?.series'
-                           [chart]='chartOptions2?.chart'
-                           [xaxis]= 'chartOptions2?.xaxis'
-                           [stroke]='chartOptions2?.stroke'
-                           [markers]='chartOptions2?.markers'
-                           [tooltip]='chartOptions2?.tooltip'
-                           [yaxis]='chartOptions2?.yaxis'
-                           [grid]='chartOptions2?.grid'
-                           [legend]='chartOptions2?.legend'
-                           [title]='chartOptions2?.title'
-                           [theme]='{ mode: getTheme() }'
-                ></apx-chart>
-              </div>
-              <br>
 
               <h1 class="text-xl font-semibold text-pink-500 mt-3 mb-2">
                 {{ 'your' | translate }} pools
@@ -1574,6 +1571,41 @@
                     [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolPdbcOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
                 </div>
               </div>
+              <br>
+              <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
+                <h3 class="text-lg font-bold mb-2">Total Income per Month History</h3>
+                <div
+                  class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
+                  <input
+                    type='checkbox'
+                    id='valueChartOn'
+                    [(ngModel)]='isIncomeChartOn'
+                    (ngModelChange)='toggleTotalincomeChart()'
+                    [ngClass]="{ 'isChecked': isIncomeChartOn }"
+                    class='toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none'
+                  />
+                  <label
+                    for='valueChartOn'
+                    class='toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer'
+                  ></label>
+                </div>
+                <br>
+                <br>
+                <apx-chart *ngIf='isIncomeChartOn && isUserHistoryForIncome()'
+                           [series]='chartOptions2?.series'
+                           [chart]='chartOptions2?.chart'
+                           [xaxis]= 'chartOptions2?.xaxis'
+                           [stroke]='chartOptions2?.stroke'
+                           [markers]='chartOptions2?.markers'
+                           [tooltip]='chartOptions2?.tooltip'
+                           [yaxis]='chartOptions2?.yaxis'
+                           [grid]='chartOptions2?.grid'
+                           [legend]='chartOptions2?.legend'
+                           [title]='chartOptions2?.title'
+                           [theme]='{ mode: getTheme() }'
+                ></apx-chart>
+              </div>
+              <br>
             </div>
             <div *ngSwitchCase="'forecast'">
               <div class="contents w-full max-h-screen h-full overflow-visible">

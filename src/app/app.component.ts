@@ -317,6 +317,11 @@ export class AppComponent implements OnInit {
 
   userHistory: UserHistory = null;
 
+  isValueChartOn = true;
+  isValueChartOnKey = 'isValueChartOnKey';
+  isIncomeChartOn = true;
+  isIncomeChartOnKey = 'isIncomeChartOnKey';
+
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
@@ -747,6 +752,12 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem('theme') !== null) {
       this.isDarkModeOn = localStorage.getItem('theme') === 'dark';
+    }
+    if (localStorage.getItem(this.isValueChartOnKey) !== null) {
+      this.isValueChartOn =  JSON.parse(localStorage.getItem(this.isValueChartOnKey));
+    }
+    if (localStorage.getItem(this.isIncomeChartOnKey) !== null) {
+      this.isIncomeChartOn =  JSON.parse(localStorage.getItem(this.isIncomeChartOnKey));
     }
     if (localStorage.getItem(this.cakeApyLoadAutoKey) !== null) {
       this.cakeApyLoadAuto = JSON.parse(localStorage.getItem(this.cakeApyLoadAutoKey));
@@ -4341,6 +4352,16 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light');
+  }
+
+  toggleTotalValueChart(): void {
+
+    localStorage.setItem(this.isValueChartOnKey, String(this.isValueChartOn));
+  }
+
+  toggleTotalincomeChart(): void {
+
+    localStorage.setItem(this.isIncomeChartOnKey, String(this.isIncomeChartOn));
   }
 
   toggleAutoCake(): void {
