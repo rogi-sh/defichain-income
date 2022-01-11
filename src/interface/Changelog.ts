@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.1- 11.1.2022';
+    this.log.comment = 'History Charts toggable, next prices and ration for vaults, better headline in value view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.0- 9.1.2022';
     this.log.comment = 'Add History of total value and monthly income';
     this.logs.push(this.log);
