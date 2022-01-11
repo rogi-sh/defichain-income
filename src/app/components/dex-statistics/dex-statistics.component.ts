@@ -82,6 +82,8 @@ export class DexStatisticsComponent implements OnInit {
 
   euonsHardforkeBlock = 894000;
 
+  fortCanningBlock = 1367000;
+
   octokit = new Octokit();
 
   milestones = new Array<Milestone>();
@@ -277,6 +279,16 @@ export class DexStatisticsComponent implements OnInit {
     const blocks = 1008 - (this.rewards?.blockHeight - this.euonsHardforkeBlock) % 1008;
     const time = blocks * this.blockTimeUsed / 60 / 60;
     return String(blocks) + ' ~ ' + Math.round(time) + ' h';
+  }
+
+  getBlockToNextOracle(): string {
+    if (!this.rewards || !this.blockTimeUsed) {
+      return '0';
+    }
+
+    const blocks = 120 - (this.rewards?.blockHeight - this.fortCanningBlock) % 120;
+    const time = blocks * this.blockTimeUsed / 60;
+    return String(blocks) + ' ~ ' + Math.round(time) + ' min';
   }
 
   getDexDFI(): number {
