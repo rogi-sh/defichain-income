@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { AddressBalance, Pool } from '@interfaces/Dex';
+import { AddressBalance, Pool, Stats } from '@interfaces/Dex';
 import { AddressVaults, ChartOptions, ChartOptions3, Data, Vault, Wallet } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 
@@ -116,6 +116,11 @@ export class ValueComponent implements OnInit, OnChanges {
 
   detailsOpen = false;
 
+  oracleBlockBase = 1528800;
+
+  @Input()
+  rewards: Stats;
+
   ngOnInit(): void {
     this.buildDataForChart();
     this.buildDataForChartValue();
@@ -149,34 +154,22 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getVaultsCollateralUsd(): number {
 
-      let dfiInVaults = 0;
-      let btcInVaults = 0;
-      let usdcInVaults = 0;
-      let usdtInVaults = 0;
+    let total = 0;
 
-      if (this.vaultsOfAllAddresses.length === 0) {
-        return 0;
-      }
+    if (this.vaultsOfAllAddresses.length === 0) {
+      return 0;
+    }
 
-      this.vaultsOfAllAddresses.forEach(vault => {
-        vault.data.forEach(addressVault => {
-          addressVault?.collateralAmounts?.forEach(vaultCollaterral => {
-            if ('DFI' === vaultCollaterral.symbolKey) {
-              dfiInVaults += +vaultCollaterral.amount;
-            } else if ('BTC' === vaultCollaterral.symbolKey) {
-              btcInVaults += +vaultCollaterral.amount;
-            } else if ('USDC' === vaultCollaterral.symbolKey) {
-              usdcInVaults += +vaultCollaterral.amount;
-            } else if ('USDT' === vaultCollaterral.symbolKey) {
-              usdtInVaults += +vaultCollaterral.amount;
-            }
-          });
-        });
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault.data.forEach(addressVault => {
+        total += this.getCollateralFromVaultUsd(addressVault);
       });
+    });
 
-      return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+    return total;
 
   }
+
 
   getLoanFromVaultUsd(vault: Vault): number {
 
@@ -188,35 +181,35 @@ export class ValueComponent implements OnInit, OnChanges {
         if ('DUSD' === loan.symbolKey) {
           usd = +loan.amount;
         } else if ('SPY' === loan.symbolKey) {
-          spy = +loan.amount * this.getUsdPriceOfStockPools(this.poolSpy);
+          spy = +loan.amount * +loan.activePrice.active.amount;
         } else if ('TSLA' === loan.symbolKey) {
-          tsla = +loan.amount * this.getUsdPriceOfStockPools(this.poolTsla);
+          tsla = +loan.amount * +loan.activePrice.active.amount;
         } else if ('QQQ' === loan.symbolKey) {
-          qqq = +loan.amount * this.getUsdPriceOfStockPools(this.poolQqq);
+          qqq = +loan.amount * +loan.activePrice.active.amount;
         } else if ('PLTR' === loan.symbolKey) {
-          pltr = +loan.amount * this.getUsdPriceOfStockPools(this.poolPltr);
+          pltr = +loan.amount * +loan.activePrice.active.amount;
         } else if ('SLV' === loan.symbolKey) {
-          slv = +loan.amount * this.getUsdPriceOfStockPools(this.poolSlv);
+          slv = +loan.amount * +loan.activePrice.active.amount;
         } else if ('AAPL' === loan.symbolKey) {
-          aapl = +loan.amount * this.getUsdPriceOfStockPools(this.poolAapl);
+          aapl = +loan.amount * +loan.activePrice.active.amount;
         } else if ('GLD' === loan.symbolKey) {
-          gld = +loan.amount * this.getUsdPriceOfStockPools(this.poolGld);
+          gld = +loan.amount * +loan.activePrice.active.amount;
         } else if ('GME' === loan.symbolKey) {
-          gme = +loan.amount * this.getUsdPriceOfStockPools(this.poolGme);
+          gme = +loan.amount * +loan.activePrice.active.amount;
         } else if ('GOOGL' === loan.symbolKey) {
-          google = +loan.amount * this.getUsdPriceOfStockPools(this.poolGoogl);
+          google = +loan.amount * +loan.activePrice.active.amount;
         } else if ('ARKK' === loan.symbolKey) {
-          arkk = +loan.amount * this.getUsdPriceOfStockPools(this.poolArkk);
+          arkk = +loan.amount * +loan.activePrice.active.amount;
         } else if ('BABA' === loan.symbolKey) {
-          baba = +loan.amount * this.getUsdPriceOfStockPools(this.poolBaba);
+          baba = +loan.amount * +loan.activePrice.active.amount;
         } else if ('VNQ' === loan.symbolKey) {
-          vnq = +loan.amount * this.getUsdPriceOfStockPools(this.poolVnq);
+          vnq = +loan.amount * +loan.activePrice.active.amount;
         } else if ('URTH' === loan.symbolKey) {
-          urth = +loan.amount * this.getUsdPriceOfStockPools(this.poolUrth);
+          urth = +loan.amount * +loan.activePrice.active.amount;
         } else if ('TLT' === loan.symbolKey) {
-          tlt = +loan.amount * this.getUsdPriceOfStockPools(this.poolTlt);
+          tlt = +loan.amount * +loan.activePrice.active.amount;
         } else if ('PDBC' === loan.symbolKey) {
-          pdbc = +loan.amount * this.getUsdPriceOfStockPools(this.poolPdbc);
+          pdbc = +loan.amount * +loan.activePrice.active.amount;
         }
       });
 
@@ -224,13 +217,76 @@ export class ValueComponent implements OnInit, OnChanges {
       + baba + vnq + urth + tlt + pdbc;
   }
 
+  getNextLoanFromVaultUsd(vault: Vault): number {
+
+    let usd = 0; let spy = 0; let tsla = 0; let qqq = 0; let pltr = 0; let slv = 0; let aapl = 0; let gld = 0;
+    let gme = 0; let google = 0; let arkk = 0; let baba = 0; let vnq = 0; let urth = 0; let tlt = 0;
+    let pdbc = 0;
+
+    vault?.loanAmounts?.forEach(loan => {
+      if ('DUSD' === loan.symbolKey) {
+        usd = +loan.amount;
+      } else if ('SPY' === loan.symbolKey) {
+        spy = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('TSLA' === loan.symbolKey) {
+        tsla = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('QQQ' === loan.symbolKey) {
+        qqq = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('PLTR' === loan.symbolKey) {
+        pltr = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('SLV' === loan.symbolKey) {
+        slv = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('AAPL' === loan.symbolKey) {
+        aapl = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('GLD' === loan.symbolKey) {
+        gld = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('GME' === loan.symbolKey) {
+        gme = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('GOOGL' === loan.symbolKey) {
+        google = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('ARKK' === loan.symbolKey) {
+        arkk = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('BABA' === loan.symbolKey) {
+        baba = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('VNQ' === loan.symbolKey) {
+        vnq = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('URTH' === loan.symbolKey) {
+        urth = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('TLT' === loan.symbolKey) {
+        tlt = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('PDBC' === loan.symbolKey) {
+        pdbc = +loan.amount * +loan.activePrice.next.amount;
+      }
+    });
+
+    return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
+      + baba + vnq + urth + tlt + pdbc;
+  }
+
+  getRatioNext(vault: Vault): number {
+    return Math.round(this.getNextCollateralFromVaultUsd(vault) / this.getNextLoanFromVaultUsd(vault) * 100 * 100) / 100;
+  }
+
+  getBlockToNextOracle(): string {
+    if (!this.rewards) {
+      return '0';
+    }
+
+    const blocks = 120 - (this.rewards?.blockHeight - this.oracleBlockBase) % 120;
+    const time = blocks * 30 / 60;
+    return String(blocks) + ' Blocks  ~ ' + Math.round(time) + ' min';
+  }
 
   getCollateralFromVaultUsd(vault: Vault): number {
 
     let dfiInVaults = 0;
+    let dfiActualPrice = 0;
     let btcInVaults = 0;
+    let btcActualPrice = 0;
     let usdcInVaults = 0;
+    let usdcActualPrice = 0;
     let usdtInVaults = 0;
+    let usdtActualPrice = 0;
 
     if (!vault) {
       return 0;
@@ -239,17 +295,58 @@ export class ValueComponent implements OnInit, OnChanges {
     vault?.collateralAmounts?.forEach(vaultCollaterral => {
       if ('DFI' === vaultCollaterral.symbolKey) {
         dfiInVaults += +vaultCollaterral.amount;
+        dfiActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       } else if ('BTC' === vaultCollaterral.symbolKey) {
         btcInVaults += +vaultCollaterral.amount;
+        btcActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       } else if ('USDC' === vaultCollaterral.symbolKey) {
         usdcInVaults += +vaultCollaterral.amount;
+        usdcActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       } else if ('USDT' === vaultCollaterral.symbolKey) {
         usdtInVaults += +vaultCollaterral.amount;
+        usdtActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       }
 
     });
 
-    return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+    return dfiInVaults * dfiActualPrice + btcInVaults * btcActualPrice + usdcInVaults * usdcActualPrice
+      + usdtInVaults * usdtActualPrice;
+  }
+
+  getNextCollateralFromVaultUsd(vault: Vault): number {
+
+    let dfiInVaults = 0;
+    let dfiNextPrice = 0;
+    let btcInVaults = 0;
+    let btcNextPrice = 0;
+    let usdcInVaults = 0;
+    let usdcNextPrice = 0;
+    let usdtInVaults = 0;
+    let usdtNextPrice = 0;
+
+    if (!vault) {
+      return 0;
+    }
+
+    vault?.collateralAmounts?.forEach(vaultCollaterral => {
+      if ('DFI' === vaultCollaterral.symbolKey) {
+        dfiInVaults += +vaultCollaterral.amount;
+        dfiNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      } else if ('BTC' === vaultCollaterral.symbolKey) {
+        btcInVaults += +vaultCollaterral.amount;
+        btcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      } else if ('USDC' === vaultCollaterral.symbolKey) {
+        usdcInVaults += +vaultCollaterral.amount;
+        usdcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      } else if ('USDT' === vaultCollaterral.symbolKey) {
+        usdtInVaults += +vaultCollaterral.amount;
+        usdtNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      }
+
+    });
+
+    return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + usdcInVaults * usdcNextPrice
+      + usdtInVaults * usdtNextPrice;
   }
 
   getCollateralCountVaults(currency: string): number {

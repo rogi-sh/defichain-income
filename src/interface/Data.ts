@@ -74,12 +74,23 @@ export class CollateralAmount {
   amount: string;
   symbol: string;
   symbolKey: string;
+  activePrice: ActivePrice;
 }
 
 export class LoanAmount {
   amount: string;
   symbol: string;
   symbolKey: string;
+  activePrice: ActivePrice;
+}
+
+export class ActivePrice {
+  active: Price;
+  next: Price;
+}
+
+export class Price {
+  amount: string;
 }
 
 export type ChartOptions = {
