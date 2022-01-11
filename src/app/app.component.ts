@@ -720,9 +720,6 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.detailsKey) !== null) {
       this.details = localStorage.getItem(this.detailsKey);
     }
-    if (localStorage.getItem(this.adressesKey) !== null) {
-      this.adresses = JSON.parse(localStorage.getItem(this.adressesKey));
-    }
     if (localStorage.getItem(this.adressesMasternodesKey) !== null) {
       this.adressesMasternodes = JSON.parse(localStorage.getItem(this.adressesMasternodesKey));
     }
@@ -3471,8 +3468,6 @@ export class AppComponent implements OnInit {
       this.showDialogAddressesAdded = false;
     }, 5000);
 
-    localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
-    localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
     this.adress = '';
     this.masternodeAdress = false;
     this.masternodeFreezer5 = false;
@@ -3488,12 +3483,10 @@ export class AppComponent implements OnInit {
     const indexMnF10 = this.adressesMasternodesFreezer10.indexOf(adress, 0);
     if (index > -1) {
       this.adresses.splice(index, 1);
-      localStorage.setItem(this.adressesKey, JSON.stringify(this.adresses));
     }
 
     if (indexMn > -1) {
       this.adressesMasternodes.splice(indexMn, 1);
-      localStorage.setItem(this.adressesMasternodesKey, JSON.stringify(this.adressesMasternodes));
     }
 
     if (indexMnF5 > -1) {

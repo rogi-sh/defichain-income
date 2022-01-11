@@ -324,7 +324,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   // CRYPTO IN WALLET AND POOLS
   getBtcValueUsd(): number {
-    return (this.wallet.btcInBtcPool + this.wallet.btc) * this.poolBtc?.priceA;
+    return (this.wallet.btcInBtcPool + this.wallet.btc + this.getCollateralCountVaults('BTC') ) * this.poolBtc?.priceA;
   }
 
   getEthValueUsd(): number {
@@ -332,11 +332,11 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdtValueUsd(): number {
-    return (this.wallet.usdtInUsdtPool + this.wallet.usdt) * this.poolUsdt?.priceA;
+    return (this.wallet.usdtInUsdtPool + this.wallet.usdt + this.getCollateralCountVaults('USDT')) * this.poolUsdt?.priceA;
   }
 
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc) * this.poolUsdc?.priceA;
+    return (this.wallet.usdcInUsdcPool + this.wallet.usdc + this.getCollateralCountVaults('USDC')) * this.poolUsdc?.priceA;
   }
 
   getLtcValueUsd(): number {
