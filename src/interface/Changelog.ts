@@ -12,22 +12,27 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '8.11.2- 11.1.2022';
+    this.log.version = '8.11.3 - 14.1.2022';
+    this.log.comment = 'All currencies for income and value charts';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.11.2 - 11.1.2022';
     this.log.comment = 'Fix use total income for history chart, not only lm';
     this.logs.push(this.log);
 
     this.log = new Log();
-    this.log.version = '8.11.1- 11.1.2022';
+    this.log.version = '8.11.1 - 11.1.2022';
     this.log.comment = 'History Charts toggable, next prices and ration for vaults, better headline in value view';
     this.logs.push(this.log);
 
     this.log = new Log();
-    this.log.version = '8.11.0- 9.1.2022';
+    this.log.version = '8.11.0 - 9.1.2022';
     this.log.comment = 'Add History of total value and monthly income';
     this.logs.push(this.log);
 
     this.log = new Log();
-    this.log.version = '8.10.3- 8.1.2022';
+    this.log.version = '8.10.3 - 8.1.2022';
     this.log.comment = 'Auto update user after load all data';
     this.logs.push(this.log);
 

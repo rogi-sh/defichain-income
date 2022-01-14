@@ -485,12 +485,42 @@ export class AppComponent implements OnInit {
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
         if (v.totalValue > 0) {
-          numbers.push(Math.round(v.totalValue * 100) / 100);
+          numbers.push(Math.round(v.totalValue * this.getPrice() * 100) / 100);
         }
       });
     }
 
     return numbers;
+  }
+
+  getPrice(): number {
+   if (this.fiat === 'USD') {
+     return 1;
+   } else if (this.fiat === 'EUR') {
+     return this.dataService.getUsdCur().eur;
+   } else if (this.fiat === 'CHF') {
+     return this.dataService.getUsdCur().chf;
+   }  else if (this.fiat === 'GBP') {
+     return this.dataService.getUsdCur().gbp;
+   } else if (this.fiat === 'AUD') {
+     return this.dataService.getUsdCur().aud;
+   } else if (this.fiat === 'RUB') {
+     return this.dataService.getUsdCur().rub;
+   } else if (this.fiat === 'JPY') {
+     return this.dataService.getUsdCur().jpy;
+   } else if (this.fiat === 'CAD') {
+     return this.dataService.getUsdCur().cad;
+   } else if (this.fiat === 'CNY') {
+     return this.dataService.getUsdCur().cny;
+   } else if (this.fiat === 'SGD') {
+     return this.dataService.getUsdCur().sgd;
+   } else if (this.fiat === 'BTC') {
+     return this.dataService.getBtcUsd();
+   } else if (this.fiat === 'ETH') {
+     return this.dataService.getEthUsd();
+   } else if (this.fiat === 'DFI') {
+     return this.dataService.getDfiUsd();
+   }
   }
 
   getUserHistoryTotalIncomeDfi(): Array<number> {
@@ -511,7 +541,7 @@ export class AppComponent implements OnInit {
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
         if (v.totalValueIncomeUsd > 0) {
-          numbers.push(Math.round(v.totalValueIncomeUsd * 100) / 100);
+          numbers.push(Math.round(v.totalValueIncomeUsd * this.getPrice() * 100) / 100);
         }
       });
     }
@@ -556,7 +586,7 @@ export class AppComponent implements OnInit {
         colors: ['#00f700']
       },
       title: {
-        text: 'Total Value in USD',
+        text: 'Total Value in ' + this.fiat,
         align: 'left'
       },
       legend: {
@@ -612,7 +642,7 @@ export class AppComponent implements OnInit {
           color: '#ff00af'
         },
         {
-          name: 'Income History USD per Month',
+          name: 'Income History ' + this.fiat + ' per Month',
           data: this.getUserHistoryTotalIncomeUsd(),
           color: '#00f700'
         }
@@ -633,7 +663,7 @@ export class AppComponent implements OnInit {
         colors: ['#ff00af', '#00f700'],
       },
       title: {
-        text: 'Total Income in DFI & USD',
+        text: 'Total Income in DFI & ' + this.fiat,
         align: 'left'
       },
       legend: {
@@ -676,7 +706,7 @@ export class AppComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return 'USD';
+                return this.fiat;
               }
             }
           }
@@ -2932,6 +2962,8 @@ export class AppComponent implements OnInit {
     this.fiat = newValue;
     this.matomoTracker.trackEvent('Klick', 'Change Fiat', newValue);
 
+    this.buildChartValue();
+    this.buildChartIncome();
     localStorage.setItem(this.fiatKey, newValue);
 
   }
