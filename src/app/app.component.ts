@@ -621,7 +621,7 @@ export class AppComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return 'USD';
+                return 'Currency';
               }
             }
           }
@@ -706,7 +706,7 @@ export class AppComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return this.fiat;
+                return 'Currency';
               }
             }
           }
