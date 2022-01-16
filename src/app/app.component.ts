@@ -1054,6 +1054,9 @@ export class AppComponent implements OnInit {
       }, 5000);
     });
 
+    localStorage.removeItem(this.adressesKey);
+    localStorage.removeItem(this.adressesMasternodesKey);
+
   }
 
   logout(): void {
