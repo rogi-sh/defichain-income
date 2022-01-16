@@ -722,9 +722,6 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem(this.detailsKey) !== null) {
       this.details = localStorage.getItem(this.detailsKey);
     }
-    if (localStorage.getItem(this.adressesMasternodesKey) !== null) {
-      this.adressesMasternodes = JSON.parse(localStorage.getItem(this.adressesMasternodesKey));
-    }
     if (localStorage.getItem(this.sCountdownKey) !== null) {
       this.sCountdown = JSON.parse(localStorage.getItem(this.sCountdownKey));
       this.sCountdownShow = this.sCountdown;
@@ -918,6 +915,19 @@ export class AppComponent implements OnInit {
 
   }
 
+  clearAddresses(): void {
+    this.adresses = [];
+    this.adressesMasternodes = [];
+    this.adressesMasternodesFreezer5 = [];
+    this.adressesMasternodesFreezer10 = [];
+
+    this.update();
+
+    localStorage.removeItem(this.adressesKey);
+    localStorage.removeItem(this.adressesMasternodesKey);
+
+  }
+
   update(): void {
     this.apollo.mutate({
       mutation: UPDATE,
@@ -1053,6 +1063,8 @@ export class AppComponent implements OnInit {
     this.wallet = new Wallet();
     this.dfiInStaking = 0;
     this.adresses = [];
+    localStorage.removeItem(this.adressesKey);
+    localStorage.removeItem(this.adressesMasternodesKey);
   }
 
   toggleMenu(): void {
