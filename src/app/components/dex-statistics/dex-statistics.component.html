@@ -503,11 +503,11 @@
           <td class='text-right text-sm p-2'>
             CEX: <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.priceA '></app-price> /
             DEX: <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA '></app-price>
-            Premium: <span>{{getArb(cryptoPool?.priceA,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %
+            <span class='font-bold'> Premium: <span>{{getArb(cryptoPool?.priceA,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %</span>
             <br>
             DEX:<app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB '></app-price>/
             CEX:<app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
-            Premium: <span>{{getArb(priceDFICEX,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> %
+            <span class='font-bold'> Premium: <span>{{getArb(priceDFICEX,cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd'></app-price>
@@ -550,15 +550,13 @@
           <td class='p-2'>{{stockPool?.symbol}}</td>
           <td class='text-right text-sm p-2'>
             DEX: <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
-
             <span *ngIf='!isDUSDPool(stockPool)'> / Oracle: <app-price [fiat]='fiat' [usdPrice]='getStockPrice(stockPool?.symbol)'></app-price>
-            Premium: <span>{{getArb(getStockPrice(stockPool?.symbol),stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA)}}</span> %</span>
+              <span class='font-bold'> Premium: <span>{{getArb(getStockPrice(stockPool?.symbol),stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA)}}</span> %</span></span>
 
             <br>
-
             DEX: <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
             <span *ngIf='isDUSDPool(stockPool)'> / CEX:<app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
-            Premium: <span>{{getArb(priceDFICEX,stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB)}}</span> %</span>
+              <span class='font-bold'> Premium: <span>{{getArb(priceDFICEX,stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB)}}</span> %</span></span>
 
 
           </td>
