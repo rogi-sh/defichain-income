@@ -955,7 +955,7 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getAnteilLMOfAllValue() > 0) {
       incomeNumbers.push('LM ' + ' - ' + Math.round(this.getLmUsd()
-        * this.dataService.getPrice(this.fiat) / 100 * 100) + ' USD');
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilMasternodesOfAllValue() > 0) {
       incomeNumbers.push('Masternode ' + ' - ' + Math.round(this.getMasternodeDfiUsd()
