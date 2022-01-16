@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@
 import { AddressBalance, Pool, Stats } from '@interfaces/Dex';
 import { AddressVaults, ChartOptions, ChartOptions3, Data, Vault, Wallet } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
+import { DataService } from '@services/data.service';
 
 @Component({
   selector: 'app-value',
@@ -120,6 +121,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
   @Input()
   rewards: Stats;
+
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit(): void {
     this.buildDataForChart();
@@ -421,7 +425,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   // CRYPTO IN WALLET AND POOLS
   getBtcValueUsd(): number {
-    return (this.wallet.btcInBtcPool + this.wallet.btc + this.getCollateralCountVaults('BTC') ) * this.poolBtc?.priceA;
+    return (this.wallet.btcInBtcPool + this.wallet.btc + this.getCollateralCountVaults('BTC')) * this.poolBtc?.priceA;
   }
 
   getEthValueUsd(): number {
@@ -752,91 +756,91 @@ export class ValueComponent implements OnInit, OnChanges {
     const incomeNumbers = new Array<number>();
 
     if (this.getWalletValueUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getWalletValueUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getWalletValueUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getVaultsCollateralUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getVaultsCollateralUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getVaultsCollateralUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getVaultsLoansValueUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getVaultsLoansValueUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getVaultsLoansValueUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getStakingValueUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getStakingValueUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getStakingValueUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getLmUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getLmUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getLmUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getMasternodeDfiUsd() > 0) {
-      incomeNumbers.push(Math.round(this.getMasternodeDfiUsd() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getMasternodeDfiUsd() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfBtcPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfBtcPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfEthPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfEthPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfLtcPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfLtcPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfDogePoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfDogePoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfBchPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfBchPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdtPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdtPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfUsdcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdcPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdcPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfUsdPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfUsdPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfTslaPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfTslaPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfTslaPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfQqqPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfQqqPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfQqqPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfSpyPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfSpyPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfSpyPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfPltrPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfPltrPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfPltrPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfSlvPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfSlvPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfSlvPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfAaplPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfAaplPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfAaplPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfGldPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfGldPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfGldPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfGmePoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfGmePoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfGmePoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfGooglPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfGooglPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfGooglPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfArkkPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfArkkPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfArkkPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfBabaPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfBabaPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfBabaPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfVnqPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfVnqPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfVnqPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfUrthPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfUrthPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfUrthPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfTltPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfTltPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfTltPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
     if (this.getAnteilLMOfPdbcPoolValue() > 0) {
-      incomeNumbers.push(Math.round(this.getAnteilLMOfPdbcPoolValue() * 100) / 100);
+      incomeNumbers.push(Math.round(this.getAnteilLMOfPdbcPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
 
     return incomeNumbers;
@@ -934,91 +938,120 @@ export class ValueComponent implements OnInit, OnChanges {
     const incomeNumbers = new Array<string>();
 
     if (this.getAnteilWalletOfAllValue() > 0) {
-      incomeNumbers.push('Wallet' + ' - ' + Math.round(this.getWalletValueUsd() / 100 * 100) + ' USD') ;
+      incomeNumbers.push('Wallet' + ' - ' + Math.round(this.getWalletValueUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat) ;
     }
     if (this.getAnteilCollaterallOfAllValue() > 0) {
-      incomeNumbers.push('Collateral' + ' - ' + Math.round(this.getVaultsCollateralUsd() / 100 * 100) + ' USD');
+      incomeNumbers.push('Collateral' + ' - ' + Math.round(this.getVaultsCollateralUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLoanOfAllValue() > 0) {
-      incomeNumbers.push('Loan' + ' - ' + Math.round(this.getVaultsLoansValueUsd() / 100 * 100) + ' USD');
+      incomeNumbers.push('Loan' + ' - ' + Math.round(this.getVaultsLoansValueUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilStakingOfAllValue() > 0) {
-      incomeNumbers.push('Staking' + ' - ' + Math.round(this.getStakingValueUsd() / 100 * 100) + ' USD');
+      incomeNumbers.push('Staking' + ' - ' + Math.round(this.getStakingValueUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfAllValue() > 0) {
-      incomeNumbers.push('LM ' + ' - ' + Math.round(this.getLmUsd() / 100 * 100) + ' USD');
+      incomeNumbers.push('LM ' + ' - ' + Math.round(this.getLmUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + ' USD');
     }
     if (this.getAnteilMasternodesOfAllValue() > 0) {
-      incomeNumbers.push('Masternode ' + ' - ' + Math.round(this.getMasternodeDfiUsd() / 100 * 100) + ' USD');
+      incomeNumbers.push('Masternode ' + ' - ' + Math.round(this.getMasternodeDfiUsd()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfBtcPoolValue() > 0) {
-      incomeNumbers.push('BTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBtcPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('BTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBtcPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfEthPoolValue() > 0) {
-      incomeNumbers.push('ETH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfEthPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('ETH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfEthPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfLtcPoolValue() > 0) {
-      incomeNumbers.push('LTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfLtcPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('LTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfLtcPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfDogePoolValue() > 0) {
-      incomeNumbers.push('DOGE-Pool ' + ' - ' + Math.round(this.getAnteilLMOfDogePoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('DOGE-Pool ' + ' - ' + Math.round(this.getAnteilLMOfDogePoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfBchPoolValue() > 0) {
-      incomeNumbers.push('BCH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBchPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('BCH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBchPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfUsdtPoolValue() > 0) {
-      incomeNumbers.push('USDT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdtPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('USDT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdtPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfUsdcPoolValue() > 0) {
-      incomeNumbers.push('USDC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdcPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('USDC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdcPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfUsdPoolValue() > 0) {
-      incomeNumbers.push('USD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('DUSD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUsdPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfTslaPoolValue() > 0) {
-      incomeNumbers.push('TSLA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTslaPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('TSLA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTslaPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfSpyPoolValue() > 0) {
-      incomeNumbers.push('SPY-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSpyPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('SPY-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSpyPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfQqqPoolValue() > 0) {
-      incomeNumbers.push('QQQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfQqqPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('QQQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfQqqPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfPltrPoolValue() > 0) {
-      incomeNumbers.push('PLTR-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPltrPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('PLTR-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPltrPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfSlvPoolValue() > 0) {
-      incomeNumbers.push('SLV-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSlvPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('SLV-Pool ' + ' - ' + Math.round(this.getAnteilLMOfSlvPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfAaplPoolValue() > 0) {
-      incomeNumbers.push('AAPL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfAaplPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('AAPL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfAaplPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfGldPoolValue() > 0) {
-      incomeNumbers.push('GLD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGldPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('GLD-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGldPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfGmePoolValue() > 0) {
-      incomeNumbers.push('GME-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGmePoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('GME-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGmePoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfGooglPoolValue() > 0) {
-      incomeNumbers.push('GOOGL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGooglPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('GOOGL-Pool ' + ' - ' + Math.round(this.getAnteilLMOfGooglPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfArkkPoolValue() > 0) {
-      incomeNumbers.push('ARKK-Pool ' + ' - ' + Math.round(this.getAnteilLMOfArkkPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('ARKK-Pool ' + ' - ' + Math.round(this.getAnteilLMOfArkkPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfBabaPoolValue() > 0) {
-      incomeNumbers.push('BABA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBabaPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('BABA-Pool ' + ' - ' + Math.round(this.getAnteilLMOfBabaPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfVnqPoolValue() > 0) {
-      incomeNumbers.push('VNQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfVnqPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('VNQ-Pool ' + ' - ' + Math.round(this.getAnteilLMOfVnqPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfUrthPoolValue() > 0) {
-      incomeNumbers.push('URTH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUrthPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('URTH-Pool ' + ' - ' + Math.round(this.getAnteilLMOfUrthPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfTltPoolValue() > 0) {
-      incomeNumbers.push('TLT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTltPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('TLT-Pool ' + ' - ' + Math.round(this.getAnteilLMOfTltPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
     if (this.getAnteilLMOfPdbcPoolValue() > 0) {
-      incomeNumbers.push('PDBC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPdbcPoolValue() / 100 * 100) + ' USD');
+      incomeNumbers.push('PDBC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfPdbcPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
 
     return incomeNumbers;
@@ -1122,100 +1155,100 @@ export class ValueComponent implements OnInit, OnChanges {
   buildDataForChart(): void {
 
     const dataBtc = new Data();
-    dataBtc.value = this.getBtcValueUsd() + this.getBtcInVaultUsd();
+    dataBtc.value = (this.getBtcValueUsd()) * this.dataService.getPrice(this.fiat);
     dataBtc.name = 'BTC';
 
     const dataEth = new Data();
     dataEth.name = 'ETH';
-    dataEth.value = this.getEthValueUsd();
+    dataEth.value = this.getEthValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataUsdt = new Data();
     dataUsdt.name = 'USDT';
-    dataUsdt.value = this.getUsdtValueUsd() + this.getCollateralCountVaults('USDT');
+    dataUsdt.value = (this.getUsdtValueUsd()) * this.dataService.getPrice(this.fiat);
 
     const dataUsdc = new Data();
     dataUsdc.name = 'USDC';
-    dataUsdc.value = this.getUsdcValueUsd() + this.getCollateralCountVaults('USDC');
+    dataUsdc.value = (this.getUsdcValueUsd()) * this.dataService.getPrice(this.fiat);
 
     const dataUsd = new Data();
     dataUsd.name = 'USD';
-    dataUsd.value = this.getUsdValueUsd();
+    dataUsd.value = this.getUsdValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataLtc = new Data();
     dataLtc.name = 'LTC';
-    dataLtc.value = this.getLtcValueUsd();
+    dataLtc.value = this.getLtcValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataDoge = new Data();
     dataDoge.name = 'DOGE';
-    dataDoge.value = this.getDogeValueUsd();
+    dataDoge.value = this.getDogeValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataBch = new Data();
     dataBch.name = 'BCH';
-    dataBch.value = this.getBchValueUsd();
+    dataBch.value = this.getBchValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataTsla = new Data();
     dataTsla.name = 'TSLA';
-    dataTsla.value = this.getTslaValueUsd();
+    dataTsla.value = this.getTslaValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataSpy = new Data();
     dataSpy.name = 'SPY';
-    dataSpy.value = this.getSpyValueUsd();
+    dataSpy.value = this.getSpyValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataQqq = new Data();
     dataQqq.name = 'QQQ';
-    dataQqq.value = this.getQqqValueUsd();
+    dataQqq.value = this.getQqqValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataPltr = new Data();
     dataPltr.name = 'PLTR';
-    dataPltr.value = this.getPltrValueUsd();
+    dataPltr.value = this.getPltrValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataSLV = new Data();
     dataSLV.name = 'SLV';
-    dataSLV.value = this.getSlvValueUsd();
+    dataSLV.value = this.getSlvValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataAAPL = new Data();
     dataAAPL.name = 'AAPL';
-    dataAAPL.value = this.getAaplValueUsd();
+    dataAAPL.value = this.getAaplValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataGLD = new Data();
     dataGLD.name = 'GLD';
-    dataGLD.value = this.getGldValueUsd();
+    dataGLD.value = this.getGldValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataGME = new Data();
     dataGME.name = 'GME';
-    dataGME.value = this.getGmeValueUsd();
+    dataGME.value = this.getGmeValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataGOOGL = new Data();
     dataGOOGL.name = 'GOOGL';
-    dataGOOGL.value = this.getGooglValueUsd();
+    dataGOOGL.value = this.getGooglValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataARKK = new Data();
     dataARKK.name = 'ARKK';
-    dataARKK.value = this.getArkkValueUsd();
+    dataARKK.value = this.getArkkValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataBABA = new Data();
     dataBABA.name = 'BABA';
-    dataBABA.value = this.getBabaValueUsd();
+    dataBABA.value = this.getBabaValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataVNQ = new Data();
     dataVNQ.name = 'VNQ';
-    dataVNQ.value = this.getVnqValueUsd();
+    dataVNQ.value = this.getVnqValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataURTH = new Data();
     dataURTH.name = 'URTH';
-    dataURTH.value = this.getUrthValueUsd();
+    dataURTH.value = this.getUrthValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataTLT = new Data();
     dataTLT.name = 'TLT';
-    dataTLT.value = this.getTltValueUsd();
+    dataTLT.value = this.getTltValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataPDBC = new Data();
     dataPDBC.name = 'PDBC';
-    dataPDBC.value = this.getPdbcValueUsd();
+    dataPDBC.value = this.getPdbcValueUsd() * this.dataService.getPrice(this.fiat);
 
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
-    dataDfi.value = this.getDfiValueUsd() + this.getDfiInVaultUsd();
+    dataDfi.value = this.getDfiValueUsd() * this.dataService.getPrice(this.fiat);
 
     const allValue = dataBtc.value + dataEth.value + dataUsdt.value + dataUsdc.value + dataUsd.value + dataLtc.value +
       dataDoge.value + dataBch.value + dataTsla.value + dataSpy.value + dataQqq.value + dataPltr.value + dataSLV.value +
@@ -1451,7 +1484,7 @@ export class ValueComponent implements OnInit, OnChanges {
       incomeNumbers.push('USDC ' + this.getAnteilPortfolioForChart(dataUsdc, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsd, allValue) > 0) {
-      incomeNumbers.push('USD ' + this.getAnteilPortfolioForChart(dataUsd, allValue).toFixed(5) + '%');
+      incomeNumbers.push('DUSD ' + this.getAnteilPortfolioForChart(dataUsd, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
       incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue).toFixed(5) + '%');

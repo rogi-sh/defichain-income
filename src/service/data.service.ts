@@ -79,4 +79,34 @@ export class DataService {
   public getMamonAccountNode(key: string): Observable<MamonAccountNode> {
     return this.http.get<MamonAccountNode>(environment.mamon_account_node + key);
   }
+
+  getPrice(fiat: string): number {
+    if (fiat === 'USD') {
+      return 1;
+    } else if (fiat === 'EUR') {
+      return this.getUsdCur().eur;
+    } else if (fiat === 'CHF') {
+      return this.getUsdCur().chf;
+    }  else if (fiat === 'GBP') {
+      return this.getUsdCur().gbp;
+    } else if (fiat === 'AUD') {
+      return this.getUsdCur().aud;
+    } else if (fiat === 'RUB') {
+      return this.getUsdCur().rub;
+    } else if (fiat === 'JPY') {
+      return this.getUsdCur().jpy;
+    } else if (fiat === 'CAD') {
+      return this.getUsdCur().cad;
+    } else if (fiat === 'CNY') {
+      return this.getUsdCur().cny;
+    } else if (fiat === 'SGD') {
+      return this.getUsdCur().sgd;
+    } else if (fiat === 'BTC') {
+      return this.getBtcUsd();
+    } else if (fiat === 'ETH') {
+      return this.getEthUsd();
+    } else if (fiat === 'DFI') {
+      return this.getDfiUsd();
+    }
+  }
 }

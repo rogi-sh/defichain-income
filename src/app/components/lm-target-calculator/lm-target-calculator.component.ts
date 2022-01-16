@@ -241,7 +241,7 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'USDT'){
       pool = this.poolUsdt;
       dfiPerBlock = this.dfiProBlockUsdt;
-    } else if (this.poolLmCalculationTargetReturn === 'USD'){
+    } else if (this.poolLmCalculationTargetReturn === 'DUSD'){
       pool = this.poolUsd;
       dfiPerBlock = this.dfiProBlockUsd;
     } else if (this.poolLmCalculationTargetReturn === 'TSLA'){

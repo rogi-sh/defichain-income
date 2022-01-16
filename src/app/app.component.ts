@@ -485,7 +485,7 @@ export class AppComponent implements OnInit {
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
         if (v.totalValue > 0) {
-          numbers.push(Math.round(v.totalValue * this.getPrice() * 100) / 100);
+          numbers.push(Math.round(v.totalValue * this.dataService.getPrice(this.fiat) * 100) / 100);
         }
       });
     }
@@ -493,35 +493,7 @@ export class AppComponent implements OnInit {
     return numbers;
   }
 
-  getPrice(): number {
-   if (this.fiat === 'USD') {
-     return 1;
-   } else if (this.fiat === 'EUR') {
-     return this.dataService.getUsdCur().eur;
-   } else if (this.fiat === 'CHF') {
-     return this.dataService.getUsdCur().chf;
-   }  else if (this.fiat === 'GBP') {
-     return this.dataService.getUsdCur().gbp;
-   } else if (this.fiat === 'AUD') {
-     return this.dataService.getUsdCur().aud;
-   } else if (this.fiat === 'RUB') {
-     return this.dataService.getUsdCur().rub;
-   } else if (this.fiat === 'JPY') {
-     return this.dataService.getUsdCur().jpy;
-   } else if (this.fiat === 'CAD') {
-     return this.dataService.getUsdCur().cad;
-   } else if (this.fiat === 'CNY') {
-     return this.dataService.getUsdCur().cny;
-   } else if (this.fiat === 'SGD') {
-     return this.dataService.getUsdCur().sgd;
-   } else if (this.fiat === 'BTC') {
-     return this.dataService.getBtcUsd();
-   } else if (this.fiat === 'ETH') {
-     return this.dataService.getEthUsd();
-   } else if (this.fiat === 'DFI') {
-     return this.dataService.getDfiUsd();
-   }
-  }
+
 
   getUserHistoryTotalIncomeDfi(): Array<number> {
     const numbers = new Array<number>();
@@ -541,7 +513,7 @@ export class AppComponent implements OnInit {
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
         if (v.totalValueIncomeUsd > 0) {
-          numbers.push(Math.round(v.totalValueIncomeUsd * this.getPrice() * 100) / 100);
+          numbers.push(Math.round(v.totalValueIncomeUsd * this.dataService.getPrice(this.fiat) * 100) / 100);
         }
       });
     }

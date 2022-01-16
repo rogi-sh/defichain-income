@@ -574,7 +574,7 @@
                       </div>
                     </div>
                     <div *ngIf="wallet?.usd > 0">
-                      USD
+                      DUSD
                     </div>
                     <div *ngIf="wallet?.usd > 0">
                       <div
@@ -806,7 +806,7 @@
                         ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.usdcdfi * poolUsdc?.totalLiquidityUsd/poolUsdc?.totalLiquidityLpToken"></app-price></span>
                     </div>
 
-                    <div *ngIf="wallet?.usddfi > 0">USD-DFI</div>
+                    <div *ngIf="wallet?.usddfi > 0">DUSD-DFI</div>
                     <div *ngIf="wallet?.usddfi > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.usddfi | number: '1.3-3'}}
                         ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.usddfi * poolUsd?.totalLiquidityUsd/poolUsd?.totalLiquidityLpToken"></app-price></span>
@@ -1130,7 +1130,7 @@
                 >
                   <h2>
                     <span class="text-lg font-semibold mb-1">
-                      USD/DFI {{poolUsd?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUsd | number: '1.2-2'}}
+                      DUSD/DFI {{poolUsd?.apr | number: '1.2-2' }}% APR - {{dfiProBlockUsd | number: '1.2-2'}}
                       DFI/Block
                     </span>
                   </h2>

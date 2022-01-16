@@ -435,7 +435,7 @@ export class IncomeComponent implements OnInit, OnChanges {
       incomeNumbers.push(`BCH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolBchOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolUsdOut.dfiPerMonth > 0) {
-      incomeNumbers.push(`USD-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdOut.dfiPerMonth.toFixed(2)} DFI`);
+      incomeNumbers.push(`DUSD-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUsdOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolTslaOut.dfiPerMonth > 0) {
       incomeNumbers.push(`TSLA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolTslaOut.dfiPerMonth.toFixed(2)} DFI`);
