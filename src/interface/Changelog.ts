@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.5 - 17.1.2022';
+    this.log.comment = 'Fix localstorage issues and authKey over url with history';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.4 - 16.1.2022';
     this.log.comment = 'Add currency to value charts, renaming usd to dusd, add clear addresses';
     this.logs.push(this.log);
