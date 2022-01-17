@@ -371,6 +371,9 @@ export class AppComponent implements OnInit {
       if (url.indexOf(matchAuthKey) >= 0) {
         const index = url.indexOf(matchAuthKey);
         this.authKeyOverUrl = url.slice(index + matchAuthKey.length, url.length);
+        this.loggedInAuth = this.authKeyOverUrl;
+        this.loggedIn = true;
+        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
       }
 
       // remove adresses in localstorage
@@ -439,7 +442,7 @@ export class AppComponent implements OnInit {
     this.apollo.query({
       query: HISTORY_USER,
       variables: {
-        key: this.loggedInAuthInput ? this.loggedInAuthInput : this.loggedInAuth
+        key: this.loggedInAuth
       }
     }).subscribe((result: any) => {
       if (result?.data?.userHistoryByKey) {
@@ -738,10 +741,6 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.showSettingsAreaKey) !== null) {
       this.showSettingsArea = JSON.parse(localStorage.getItem(this.showSettingsAreaKey));
-    }
-    // Staking special
-    if (this.isLocalStorageNotEmpty(this.dfiInStakingKey)) {
-      this.dfiInStaking = +localStorage.getItem(this.dfiInStakingKey);
     }
     if (this.isLocalStorageNotEmpty(this.stakingApyKey)) {
       this.stakingApy = JSON.parse(localStorage.getItem(this.stakingApyKey));
@@ -1104,8 +1103,6 @@ export class AppComponent implements OnInit {
         },
       }).subscribe((result: any) => {
         if (result?.data?.userByKey) {
-          this.loggedInAuth = this.authKeyOverUrl;
-          this.loggedIn = true;
 
           this.parseWallet(result);
           this.parseAddresses(result);
@@ -2926,7 +2923,6 @@ export class AppComponent implements OnInit {
   }
 
   onChangeDfiStaking(): void {
-    localStorage.setItem(this.dfiInStakingKey, JSON.stringify(this.dfiInStaking));
     this.berechneStakingOut();
     this.berechnePoolOut();
     this.berechneAllOut();
