@@ -373,6 +373,10 @@ export class AppComponent implements OnInit {
         this.authKeyOverUrl = url.slice(index + matchAuthKey.length, url.length);
       }
 
+      // remove adresses in localstorage
+      localStorage.removeItem(this.adressesKey);
+      localStorage.removeItem(this.adressesMasternodesKey);
+
       this.loadData();
 
       this.toggleDarkMode();
