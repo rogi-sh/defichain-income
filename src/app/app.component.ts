@@ -774,6 +774,7 @@ export class AppComponent implements OnInit {
       // only clear when not manual
       this.clearWallet();
       this.loadAllAccounts();
+      this.loadHistoryUser();
     } else {
       // if logged in not necessary because already loaded
       if (!this.loggedIn) {
