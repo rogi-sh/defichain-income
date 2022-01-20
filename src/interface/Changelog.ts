@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.6 - 20.1.2022';
+    this.log.comment = 'Fix lm calculator for google, add 2 decimals for btc colleteral, refresh history chart with refresh';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.5 - 17.1.2022';
     this.log.comment = 'Fix localstorage issues and authKey over url with history';
     this.logs.push(this.log);
