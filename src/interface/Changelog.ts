@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.7 - 21.1.2022';
+    this.log.comment = 'Add DFX Status in Exchanges Overview';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.6 - 20.1.2022';
     this.log.comment = 'Fix lm calculator for google, add 2 decimals for btc colleteral, refresh history chart with refresh';
     this.logs.push(this.log);
