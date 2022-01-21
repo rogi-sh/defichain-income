@@ -577,6 +577,8 @@ export class Exchange {
   bittrexNotice: string;
   kucoinStatusDeposit: boolean;
   kucoinStatusWithdraw: boolean;
+  dfxBuy: string;
+  dfxSell: string;
 }
 
 export class UserHistoryItem {

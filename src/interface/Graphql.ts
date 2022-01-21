@@ -338,6 +338,8 @@ export const EXCHANGE = gql`
     bittrexNotice
     kucoinStatusDeposit
     kucoinStatusWithdraw
+    dfxBuy
+    dfxSell
   }
 }
 `;
