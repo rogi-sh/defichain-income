@@ -504,13 +504,13 @@
               <div
                 class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Collateral
-                Actual <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price>
                 -> Next  <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price> (Oracle)</div>
               <br>
               <div
                 class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Loan
-                 Actual <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLoanFromVaultUsd(v)'></app-price> ->
+                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLoanFromVaultUsd(v)'></app-price> ->
                  Next <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextLoanFromVaultUsd(v)'></app-price> (Oracle)</div>
                 <div *ngIf='isIncognitoModeOn'>****</div>
 
