@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.8 - 25.1.2022';
+    this.log.comment = 'Small UI Fixes';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.7 - 21.1.2022';
     this.log.comment = 'Add DFX Status in Exchanges Overview';
     this.logs.push(this.log);
