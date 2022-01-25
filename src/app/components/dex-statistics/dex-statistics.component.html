@@ -374,7 +374,7 @@
             Offline
           </div>
         </div>
-        <div class='grid gap-2'>
+        <div *ngIf='exchange?.bittrexNotice && exchange.bittrexNotice?.length > 0' class='grid gap-2'>
           <div>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
