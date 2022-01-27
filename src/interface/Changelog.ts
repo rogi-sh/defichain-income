@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.11.9 - 27.1.2022';
+    this.log.comment = 'Fix stockname in wallet holdings section';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.11.8 - 25.1.2022';
     this.log.comment = 'Small UI Fixes';
     this.logs.push(this.log);
