@@ -34,8 +34,8 @@ import {
   PoolUrthOut,
   PoolTltOut,
   PoolPdbcOut,
-  Prices,
-} from '@interfaces/Dex';
+  Prices, PoolEemOut, PoolAmznOut, PoolNvdaOut, PoolCoinOut,
+} from '@interfaces/Dex'
 import {CountdownComponent} from 'ngx-countdown';
 import { AddressVaults, ChartOptions6, IncomePoolDto, UserHistory, Vault, Wallet, WalletDto } from '@interfaces/Data';
 import { environment } from '@environments/environment';
@@ -116,6 +116,11 @@ export class AppComponent implements OnInit {
   dfiProBlockUrth = 0.62;
   dfiProBlockTlt = 1.12;
   dfiProBlockPdbc = 0.83;
+
+  dfiProBlockEem = 0.75;
+  dfiProBlockAmzn = 0.62;
+  dfiProBlockNvda = 1.12;
+  dfiProBlockCoin = 0.83;
 
   dfiPorBlockStock = 77.8;
 
@@ -268,6 +273,24 @@ export class AppComponent implements OnInit {
   poolPdbc: Pool;
   poolPdbcOut: PoolPdbcOut = new PoolPdbcOut();
   anteilAmPoolPdbc: number;
+
+  // new stocks 1.2.2022
+  poolEem: Pool;
+  poolEemOut: PoolEemOut = new PoolEemOut();
+  anteilAmPoolEem: number;
+
+  poolAmzn: Pool;
+  poolAmznOut: PoolAmznOut = new PoolAmznOut();
+  anteilAmPoolAmzn: number;
+
+  poolNvda: Pool;
+  poolNvdaOut: PoolNvdaOut = new PoolNvdaOut();
+  anteilAmPoolNvda: number;
+
+  poolCoin: Pool;
+  poolCoinOut: PoolCoinOut = new PoolCoinOut();
+  anteilAmPoolCoin: number;
+
 
   cryptoPools: Array<Pool>;
   stocksPools: Array<Pool>;
@@ -1367,6 +1390,19 @@ export class AppComponent implements OnInit {
     if (this.poolPdbc) {
       this.setFromPoolPair(this.poolPdbc, poolPairs);
     }
+    // new stocks 1.2.2022
+    if (this.poolEem) {
+      this.setFromPoolPair(this.poolEem, poolPairs);
+    }
+    if (this.poolAmzn) {
+      this.setFromPoolPair(this.poolAmzn, poolPairs);
+    }
+    if (this.poolNvda) {
+      this.setFromPoolPair(this.poolNvda, poolPairs);
+    }
+    if (this.poolCoin) {
+      this.setFromPoolPair(this.poolCoin, poolPairs);
+    }
 
     this.createStockArray();
     this.computeRewardsPerBlockInPools();
@@ -1491,6 +1527,11 @@ export class AppComponent implements OnInit {
     this.poolUrth = pools['44'];
     this.poolTlt = pools['45'];
     this.poolPdbc = pools['40'];
+    // 1.2.2022
+    this.poolAmzn = pools['54'];
+    this.poolEem = pools['53'];
+    this.poolNvda = pools['55'];
+    this.poolCoin = pools['56'];
     this.pools = this.addAllPools();
   }
 
@@ -1522,7 +1563,11 @@ export class AppComponent implements OnInit {
     pools.push(this.poolUrth);
     pools.push(this.poolTlt);
     pools.push(this.poolPdbc);
-
+    // 1.2.2022
+    pools.push(this.poolEem);
+    pools.push(this.poolAmzn);
+    pools.push(this.poolNvda);
+    pools.push(this.poolCoin);
     return pools;
   }
 
@@ -1543,6 +1588,11 @@ export class AppComponent implements OnInit {
     this.stocksPools.push(this.poolUrth);
     this.stocksPools.push(this.poolTlt);
     this.stocksPools.push(this.poolPdbc);
+    // 1.2.2022
+    this.stocksPools.push(this.poolEem);
+    this.stocksPools.push(this.poolAmzn);
+    this.stocksPools.push(this.poolNvda);
+    this.stocksPools.push(this.poolCoin);
   }
 
   private createCryptoPoolsArray(): void {
