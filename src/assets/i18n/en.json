@@ -121,6 +121,8 @@
   "correlationDays": "Enter how many days to calculate the correlation of the pool pairs in the LM",
   "blocksTillCycle": "Blocks till next cycle (rewards decrease 1,658%)",
   "blocksTillDiff": "Blocks till next difficulty change",
-  "mamon-info": "Import your Masternodes from Masternode Monitor with Auth Key"
-
+  "mamon-info": "Import your Masternodes from Masternode Monitor with Auth Key",
+  "newsletter" : {
+    "title": "Newsletter"
+  }
 }

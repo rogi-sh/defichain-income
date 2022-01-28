@@ -120,6 +120,8 @@
   "correlationDays": "Introduzca cuántos días son necesarios para calcular la correlación de los pares de la piscina en el LM",
   "blocksTillCycle": "Bloques hasta el próximo ciclo (las recompensas disminuyen un 1,658%)",
   "blocksTillDiff": "Bloques hasta el próximo cambio de dificultad",
-  "mamon-info": "Importe sus Masternodes desde Masternode Monitor con Auth Key"
-
+  "mamon-info": "Importe sus Masternodes desde Masternode Monitor con Auth Key",
+  "newsletter" : {
+    "title": "Newsletter"
+  }
 }
