@@ -34,6 +34,7 @@ import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
 import { HistoryComponent } from './components/history/history.component';
+import { NewsletterComponent } from '@pages/newsletter/newsletter.component'
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     IconComponent,
     CalculatorComponent,
     InfoComponent,
+    NewsletterComponent,
     PriceComponent,
     ForecastComponent,
     HistoryComponent,

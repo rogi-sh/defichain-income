@@ -251,6 +251,15 @@
             <div class="inline self-center ml-2 text-xl">{{ 'income.calc' | translate }}</div>
           </a>
 
+          <a
+            (click)="handlePage('newsletter')"
+            [ngClass]="{ 'text-pink-500': currentPage === 'newsletter' }"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
+          >
+            <app-icon name="newsletter"></app-icon>
+            <div class="inline self-center ml-2 text-xl">{{ 'newsletter.title' | translate }}</div>
+          </a>
+
           <div class="pt-3 mt-3 border-t border-gray-500">
             <a
               (click)="handlePage('info')"
@@ -391,6 +400,14 @@
           title="{{ 'income.calc' | translate }}"
         >
           <app-icon name="calculator"></app-icon>
+        </a>
+        <a
+          (click)="handlePage('newsletter')"
+          [ngClass]="currentPage === 'newsletter' ? 'text-pink-500' : 'dark:text-gray-100'"
+          class="hover:text-pink-400 py-3 text-center cursor-pointer"
+          title="{{ 'newsletter.title' | translate }}"
+        >
+          <app-icon name="newsletter"></app-icon>
         </a>
       </div>
 
@@ -1750,6 +1767,9 @@
                 [trackGraphQL]="trackGraphQL.bind(this)"
                 [trackGit]="trackGit.bind(this)"
               ></app-info-page>
+            </div>
+            <div *ngSwitchCase="'newsletter'">
+              <app-newsletter-page></app-newsletter-page>
             </div>
 
             <!-- Settings Page -->
