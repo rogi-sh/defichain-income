@@ -479,6 +479,10 @@
                     [poolTlt]='poolTlt'
                     [poolUrth]='poolUrth'
                     [poolVnq]='poolVnq'
+                    [poolAmzn]='poolAmzn'
+                    [poolNvda]='poolNvda'
+                    [poolCoin]='poolCoin'
+                    [poolEem]='poolEem'
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"
@@ -788,6 +792,50 @@
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
+                    <div *ngIf="wallet?.amzn > 0">
+                      AMZN
+                    </div>
+                    <div *ngIf="wallet?.amzn > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.amzn | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.amzn  * getUsdPriceOfStockPools(this.poolAmzn)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.nvda > 0">
+                      NVDA
+                    </div>
+                    <div *ngIf="wallet?.nvda > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.nvda | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.nvda  * getUsdPriceOfStockPools(this.poolNvda)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.coin > 0">
+                      COIN
+                    </div>
+                    <div *ngIf="wallet?.coin > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.coin | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.coin  * getUsdPriceOfStockPools(this.poolCoin)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.eem > 0">
+                      EEM
+                    </div>
+                    <div *ngIf="wallet?.eem > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.eem | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.eem  * getUsdPriceOfStockPools(this.poolEem)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
@@ -926,14 +974,14 @@
                   class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
                   <input
                     type='checkbox'
-                    id='valueChartOn'
+                    id='historyChartOn'
                     [(ngModel)]='isValueChartOn'
                     (ngModelChange)='toggleTotalValueChart()'
                     [ngClass]="{ 'isChecked': isValueChartOn }"
                     class='toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none'
                   />
                   <label
-                    for='valueChartOn'
+                    for='historyChartOn'
                     class='toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer'
                   ></label>
                 </div>
@@ -984,6 +1032,11 @@
                 [poolTltOut]='poolTltOut'
                 [poolUrthOut]='poolUrthOut'
                 [poolVnqOut]='poolVnqOut'
+                [poolAmznOut]='poolAmznOut'
+                [poolNvdaOut]='poolNvdaOut'
+                [poolCoinOut]='poolCoinOut'
+                [poolEemOut]='poolEemOut'
+
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [stakingApy]="stakingApy"
@@ -1014,6 +1067,10 @@
                 [getAnteilTltPoolAnGesamtLM]='getAnteilTltPoolAnGesamtLM()'
                 [getAnteilUrthPoolAnGesamtLM]='getAnteilUrthPoolAnGesamtLM()'
                 [getAnteilVnqPoolAnGesamtLM]='getAnteilVnqPoolAnGesamtLM()'
+                [getAnteilAmznPoolAnGesamtLM]='getAnteilAmznPoolAnGesamtLM()'
+                [getAnteilCoinPoolAnGesamtLM]='getAnteilCoinPoolAnGesamtLM()'
+                [getAnteilEemPoolAnGesamtLM]='getAnteilEemPoolAnGesamtLM()'
+                [getAnteilNvdaPoolAnGesamtLM]='getAnteilNvdaPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -1588,6 +1645,98 @@
                   <app-earning
                     [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolPdbcOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
                 </div>
+                <div
+                  *ngIf=" wallet?.amznInAmznPool > 0 || wallet?.usdInAmznPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      AMZN/USD {{poolAmzn?.apr | number: '1.2-2' }}% APR - {{dfiProBlockAmzn | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolAmzn | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolAmzn, poolAmzn)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolAmzn, poolAmzn)?.poolPairToken | number: '1.4-4'}} AMZN </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolAmznOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.nvdaInNvdaPool > 0 || wallet?.usdInNvdaPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      NVDA/USD {{poolAmzn?.apr | number: '1.2-2' }}% APR - {{dfiProBlockNvda | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolNvda | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolNvda, poolNvda)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolNvda, poolNvda)?.poolPairToken | number: '1.4-4'}} NVDA </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolNvdaOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.coinInCoinPool > 0 || wallet?.usdInCoinPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      COIN/USD {{poolCoin?.apr | number: '1.2-2' }}% APR - {{dfiProBlockCoin | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolCoin | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolCoin, poolCoin)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolCoin, poolCoin)?.poolPairToken | number: '1.4-4'}} COIN </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolCoinOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.eemInEemPool > 0 || wallet?.usdInEemPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      EEM/USD {{poolCoin?.apr | number: '1.2-2' }}% APR - {{dfiProBlockEem | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolEem | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolEem, poolEem)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolEem, poolEem)?.poolPairToken | number: '1.4-4'}} EEM </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolEemOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
               </div>
               <br>
               <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
@@ -1658,6 +1807,10 @@
                   [poolTlt]='poolTlt'
                   [poolUrth]='poolUrth'
                   [poolVnq]='poolVnq'
+                  [poolEem]='poolEem'
+                  [poolCoin]='poolCoin'
+                  [poolNvda]='poolNvda'
+                  [poolAmzn]='poolAmzn'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -1736,6 +1889,10 @@
                 [poolTlt]='poolTlt'
                 [poolUrth]='poolUrth'
                 [poolVnq]='poolVnq'
+                [poolEem]='poolEem'
+                [poolCoin]='poolCoin'
+                [poolNvda]='poolNvda'
+                [poolAmzn]='poolAmzn'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -1760,6 +1917,10 @@
                 [dfiProBlockTlt]='dfiProBlockTlt'
                 [dfiProBlockUrth]='dfiProBlockUrth'
                 [dfiProBlockVnq]='dfiProBlockVnq'
+                [dfiProBlockAmzn]='dfiProBlockAmzn'
+                [dfiProBlockCoin]='dfiProBlockCoin'
+                [dfiProBlockEem]='dfiProBlockEem'
+                [dfiProBlockNvda]='dfiProBlockNvda'
               ></app-calculator-page>
             </div>
             <div *ngSwitchCase="'info'">
@@ -2470,8 +2631,89 @@
                               </label>
                             </div>
                           </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.amzn === null || wallet.amzn === undefined  ? 'empty' : ''"
+                              title='AMZN'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.amzn'
+                                (ngModelChange)='onChangeAmznWallet()'
+                                type='number'
+                                id='onChangeAmznWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeAmznWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                AMZN
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.nvda === null || wallet.nvda === undefined  ? 'empty' : ''"
+                              title='NVDA'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.nvda'
+                                (ngModelChange)='onChangeNvdaWallet()'
+                                type='number'
+                                id='onChangeNvdaWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeNvdaWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                NVDA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.coin === null || wallet.coin === undefined  ? 'empty' : ''"
+                              title='COIN'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.coin'
+                                (ngModelChange)='onChangeCoinWallet()'
+                                type='number'
+                                id='onChangeCoinWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeCoinWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                COIN
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.eem === null || wallet.eem === undefined  ? 'empty' : ''"
+                              title='EEM'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.eem'
+                                (ngModelChange)='onChangeEemWallet()'
+                                type='number'
+                                id='onChangeEemWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeEemWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                EEM
+                              </label>
+                            </div>
+                          </div>
+                          </div>
                         </div>
-                      </div>
+
 
                       <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded w-full md:w-1/2">
                         <div class="text-lg mb-5">Staking Cake</div>
@@ -3437,7 +3679,6 @@
                             </div>
                           </div>
                           <div>
-
                             <div
                               class="relative h-14 input-component"
                               [ngClass]="wallet.usdInTltPool === null || wallet.usdInTltPool === undefined  ? 'empty' : ''"
@@ -3493,6 +3734,170 @@
                                 class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
                               >
                               <label for="onChangeUsdPdbcPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.amznInAmznPool === null || wallet.amznInAmznPool === undefined  ? 'empty' : ''"
+                              title="AMZN"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.amznInAmznPool"
+                                (ngModelChange)="onChangeAmznAmznPool()"
+                                type="number"
+                                id="onChangeAmznAmznPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeAmznAmznPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                AMZN
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInAmznPool === null || wallet.usdInAmznPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInAmznPool"
+                                (ngModelChange)="onChangeUsdAmznPool()"
+                                type="number"
+                                id="onChangeUsdAmznPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdAmznPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.nvdaInNvdaPool === null || wallet.nvdaInNvdaPool === undefined  ? 'empty' : ''"
+                              title="NVDA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.nvdaInNvdaPool"
+                                (ngModelChange)="onChangeNvdaNvdaPool()"
+                                type="number"
+                                id="onChangeNvdaNvdaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeNvdaNvdaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                NVDA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInNvdaPool === null || wallet.usdInNvdaPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInNvdaPool"
+                                (ngModelChange)="onChangeUsdNvdaPool()"
+                                type="number"
+                                id="onChangeUsdNvdaPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdNvdaPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.coinInCoinPool === null || wallet.coinInCoinPool === undefined  ? 'empty' : ''"
+                              title="COIN"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.coinInCoinPool"
+                                (ngModelChange)="onChangeCoinCoinPool()"
+                                type="number"
+                                id="onChangeCoinCoinPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeCoinCoinPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                COIN
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInCoinPool === null || wallet.usdInCoinPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInCoinPool"
+                                (ngModelChange)="onChangeUsdCoinPool()"
+                                type="number"
+                                id="onChangeUsdCoinPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdCoinPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.eemInEemPool === null || wallet.eemInEemPool === undefined  ? 'empty' : ''"
+                              title="EEM"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.eemInEemPool"
+                                (ngModelChange)="onChangeEemEemPool()"
+                                type="number"
+                                id="onChangeEemEemPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeEemEemPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                EEM
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInEemPool === null || wallet.usdInEemPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInEemPool"
+                                (ngModelChange)="onChangeUsdEemPool()"
+                                type="number"
+                                id="onChangeUsdEemPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdEemPool"
                                      class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
                                 DUSD
                               </label>
@@ -3923,6 +4328,18 @@
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     PDBC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pdbcToken }}</div>
 
+                                  <div *ngIf="getAddressBalance(a)?.amznToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    AMZN: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.amznToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.nvdaToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    NVDA: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.nvdaToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.coinToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    COIN: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.coinToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.eemToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    EEM: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.eemToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -3992,6 +4409,18 @@
                                   <div *ngIf="getAddressBalance(a)?.pdbcusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     PDBCUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pdbcusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.amznusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    AMZNUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.amznusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.nvdausdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    NVDAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.nvdausdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.coinusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    COINUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.coinusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.eemusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    EEMUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.eemusdToken }}</div>
                                 </div>
                               </div>
 
@@ -4047,6 +4476,10 @@
                     [poolTltOut]='poolTltOut'
                     [poolUrthOut]='poolUrthOut'
                     [poolVnqOut]='poolVnqOut'
+                    [poolAmznOut]='poolAmznOut'
+                    [poolNvdaOut]='poolNvdaOut'
+                    [poolCoinOut]='poolCoinOut'
+                    [poolEemOut]='poolEemOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4077,6 +4510,10 @@
                     [getAnteilTltPoolAnGesamtLM]='getAnteilTltPoolAnGesamtLM()'
                     [getAnteilUrthPoolAnGesamtLM]='getAnteilUrthPoolAnGesamtLM()'
                     [getAnteilVnqPoolAnGesamtLM]='getAnteilVnqPoolAnGesamtLM()'
+                    [getAnteilAmznPoolAnGesamtLM]='getAnteilAmznPoolAnGesamtLM()'
+                    [getAnteilCoinPoolAnGesamtLM]='getAnteilCoinPoolAnGesamtLM()'
+                    [getAnteilEemPoolAnGesamtLM]='getAnteilEemPoolAnGesamtLM()'
+                    [getAnteilNvdaPoolAnGesamtLM]='getAnteilNvdaPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>
@@ -4109,6 +4546,10 @@
                     [poolTlt]='poolTlt'
                     [poolUrth]='poolUrth'
                     [poolVnq]='poolVnq'
+                    [poolAmzn]='poolAmzn'
+                    [poolNvda]='poolNvda'
+                    [poolCoin]='poolCoin'
+                    [poolEem]='poolEem'
                     [dfiInStaking]="dfiInStaking"
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"

@@ -78,6 +78,18 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolPdbc!: Pool;
 
   @Input()
+  poolAmzn!: Pool;
+
+  @Input()
+  poolNvda!: Pool;
+
+  @Input()
+  poolCoin!: Pool;
+
+  @Input()
+  poolEem!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -145,6 +157,18 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockPdbc;
+
+  @Input()
+  dfiProBlockAmzn;
+
+  @Input()
+  dfiProBlockNvda;
+
+  @Input()
+  dfiProBlockCoin;
+
+  @Input()
+  dfiProBlockEem;
 
   @Input()
   blocktimeInS;
@@ -289,6 +313,18 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'PDBC'){
       pool = this.poolPdbc;
       dfiPerBlock = this.dfiProBlockPdbc;
+    } else if (this.poolLmCalculationTargetReturn === 'AMZN'){
+      pool = this.poolAmzn;
+      dfiPerBlock = this.dfiProBlockAmzn;
+    } else if (this.poolLmCalculationTargetReturn === 'NVDA'){
+      pool = this.poolNvda;
+      dfiPerBlock = this.dfiProBlockNvda;
+    } else if (this.poolLmCalculationTargetReturn === 'COIN'){
+      pool = this.poolCoin;
+      dfiPerBlock = this.dfiProBlockCoin;
+    } else if (this.poolLmCalculationTargetReturn === 'EEM'){
+      pool = this.poolEem;
+      dfiPerBlock = this.dfiProBlockEem;
     } else {
       pool = this.poolUsdc;
       dfiPerBlock = this.dfiProBlockUsdc;
