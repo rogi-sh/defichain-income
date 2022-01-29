@@ -1930,7 +1930,9 @@
               ></app-info-page>
             </div>
             <div *ngSwitchCase="'newsletter'">
-              <app-newsletter-page></app-newsletter-page>
+              <app-newsletter-page
+              [newsletter]='newsletter'
+              ></app-newsletter-page>
             </div>
 
             <!-- Settings Page -->

@@ -37,7 +37,16 @@ import {
   Prices, PoolEemOut, PoolAmznOut, PoolNvdaOut, PoolCoinOut,
 } from '@interfaces/Dex';
 import {CountdownComponent} from 'ngx-countdown';
-import { AddressVaults, ChartOptions6, IncomePoolDto, UserHistory, Vault, Wallet, WalletDto } from '@interfaces/Data';
+import {
+  AddressVaults,
+  ChartOptions6,
+  IncomePoolDto,
+  Newsletter,
+  UserHistory,
+  Vault,
+  Wallet,
+  WalletDto,
+} from '@interfaces/Data'
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 // @ts-ignore
@@ -90,6 +99,7 @@ export class AppComponent implements OnInit {
 
   wallet: Wallet;
   walletDTO: WalletDto;
+  newsletter: Newsletter;
 
   // fixed variables
   dfiProBlockBtc = 80;
@@ -1167,6 +1177,7 @@ export class AppComponent implements OnInit {
           this.parseWallet(result);
           this.parseAddresses(result);
           this.loadAddressesAndDexData();
+          this.newsletter = result?.data?.userByKey.newsletter;
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {
@@ -1226,6 +1237,7 @@ export class AppComponent implements OnInit {
           this.parseWallet(result);
           this.parseAddresses(result);
           this.loadAddressesAndDexData();
+          this.newsletter = result?.data?.userByKey.newsletter;
 
           this.successBackend = 'Data Loaded!';
           setInterval(() => {

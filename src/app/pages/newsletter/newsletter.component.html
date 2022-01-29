@@ -4,4 +4,63 @@
   <h2 class="text-xl mb-4 text-pink-500">{{ "newsletter.title-3" | translate }}</h2>
   <h2 class="text-xl mb-4 text-pink-500">{{ "newsletter.title-4" | translate }}</h2>
   <h2 class="text-xl mb-4 text-pink-500">{{ "newsletter.title-5" | translate }}</h2>
+
+  <h3 class="mb-4 ">Subscribed {{newsletter?.subscribed}}</h3>
+  <h3 class="mb-4 ">Status
+    <div *ngIf="newsletter?.status === 'payed'"
+         class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+    {{newsletter?.status}}
+    </div>
+    <div *ngIf="!newsletter || !newsletter.email"
+         class="rounded-full bg-red-500 hover:bg-red-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+      {{newsletter?.status}}
+    </div>
+  </h3>
+
+  <div class="inline-block w-full md:w-1/4 my-2 md:mt-0">
+    <div
+      class="relative h-14 input-component"
+      [ngClass]="!newsletter ? 'empty' : ''"
+      title="Paying Address"
+    >
+      <input
+        required
+        [(ngModel)]="newsletter.payingAddress"
+        id="inputAddress"
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+      />
+      <label for="inputAddress"
+             class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+        Paying Adrress
+      </label>
+    </div>
+  </div>
+  <br>
+  <div class="inline-block w-full md:w-1/4 my-2 md:mt-0">
+    <div
+      class="relative h-14 input-component"
+      [ngClass]="!newsletter ? 'empty' : ''"
+      title="E-Mail"
+    >
+      <input
+        required
+        [(ngModel)]="newsletter.email"
+        id="inputMail"
+        class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+      />
+      <label for="inputMail"
+             class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+        E-Mail
+      </label>
+    </div>
+  </div>
+
+
+  <div class="w-full md:w-1/4 md:pl-2 align-top">
+    <button
+      class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase"
+      (click)="save()" >
+      Save
+    </button>
+  </div>
 </div>

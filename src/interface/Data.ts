@@ -345,6 +345,13 @@ export interface WalletDto {
 
 }
 
+export class Newsletter {
+  email: string;
+  payingAddress: string;
+  status: string;
+  subscribed: Date;
+}
+
 export class Wallet {
 
   dfi = 0;
