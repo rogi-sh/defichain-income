@@ -414,5 +414,20 @@ export const HISTORY_USER = gql`
 }
 `;
 
+export const UPDATE_NEWSLETTER = gql`
+  mutation ($key: String!, $email: String!, $payingAddress: String) {
+  updateUserNewsletter(
+    user: {
+      key: $key
+      email: $email
+      payingAddress: $payingAddress
+    }) {
+    newsletter {
+      status, subscribed, email, payingAddress
+    }
+  }
+}
+`;
+
 
 

@@ -1932,6 +1932,7 @@
             <div *ngSwitchCase="'newsletter'">
               <app-newsletter-page
               [newsletter]='newsletter'
+              [key]='loggedInAuth'
               ></app-newsletter-page>
             </div>
 
