@@ -18,7 +18,22 @@
     </div>
   </div>
   <br><br>
-  <h3 class='mb-4 '>Dein Status
+  <div class='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4'>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h3 class='mb-4 '>{{ "newsletter.address" | translate }}</h3>
+
+        <div
+          class='rounded-full bg-pink-500 hover:bg-pink-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+          df1qdc79xa70as0a5d0pdtgdww7tu65c2ncu9v7k2k
+        </div>
+        <br><br>
+        <img src="/assets/img/IMG_1532.jpg" alt="Target address newsletter" width="200" height="240">
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <h3 class='mb-4 '>{{ "newsletter.status" | translate }}
     <div *ngIf="newsletter && newsletter?.status === 'payed'"
          class='rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
       Subscribed & Payed
@@ -87,7 +102,7 @@
     <button
       class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
       (click)='save()'>
-      Update&Refresh
+      {{ "newsletter.save" | translate }}
     </button>
   </div>
 </div>

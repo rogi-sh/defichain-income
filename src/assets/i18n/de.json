@@ -123,13 +123,15 @@
   "correlationDays": "Gib ein wie viele Tage für die Berechnung der Korrelation der Pool Paare im LM",
   "blocksTillDiff": "Blöcke bis zur nächsten Schwierigkeitsänderung",
   "mamon-info": "Importiere deine Masternodes aus dem Masternode Monitor mit deinem Key",
-
   "newsletter" : {
     "title": "Newsletter",
-    "title-2": "Als registrierter Kunde bekommst du die Möglichkeit, dich für unseren Newsletter einzuschreiben. In diesem Newsletter bekommst du alle Informationen rund um die Statistiken der DefiChain und alle wichtigen Information rund um deinen Account. Der Newsletter wird 2 mal am Tag (morgens und abends) versendet.",
-    "title-3": "Trage dafür hier deine EMail-Adresse ein, auf die du deinen Newsletter erhalten möchtest. ",
-    "title-4": "Der Newsletter beginnt in Februar und ist ein Monat lang für alle kostenlos. Ab März wird dieser Service 1 DFI im Monat kosten. Dafür trage hier die defichain Adresse ein von der du 1 DFI bezahlen möchtest.",
-    "title-5": "Sobald du 1 DFI von der angegebenen Adresse auf unsere Defichain-Bezahladresse überwiesen hast, wird der Newsletter für dich für den Rest des Monats freigeschaltet."
+    "status": "Dein Status",
+    "address": "Bezahladresse",
+    "title-2": "Als registrierter Kunde kannst Du dich für unseren Newsletter einschreiben. Der Newsletter kommt direkt auf deine E-Mail-Adresse mit allen wichtigen Informationen rund um die Statistiken der DefiChain und alle wichtigen Informationen rund um deinen Account bei defichain-income. Der Newsletter wird 2 mal am Tag (morgens und abends) versendet.",
+    "title-3": "Trage dafür weiter unten deine EMail-Adresse ein, auf die du deinen Newsletter erhalten möchtest. ",
+    "title-4": "Der Newsletter geht in Februar live. Februar wird Rampup-Phase sein, in welcher der Newsletter ein Monat lang für alle kostenlos ist. Ab März wird dieser Service 1 DFI im Monat kosten. Dafür trage hier die defichain Adresse ein von der du 1 DFI bezahlen möchtest.",
+    "title-5": "Sobald du 1 DFI von der angegebenen Adresse auf unsere Defichain-Bezahladresse überwiesen hast, wird der Newsletter für dich für den Rest des Monats freigeschaltet.",
+    "save": "Aktualisieren"
   }
 
 }

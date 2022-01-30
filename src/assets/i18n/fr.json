@@ -123,6 +123,13 @@
   "blocksTillDiff": "Blocs jusqu'au prochain changement de difficulté",
   "mamon-info": "Importez vos Masternodes depuis Masternode Monitor avec Auth Key",
   "newsletter" : {
-    "title": "Newsletter"
+    "title" : "Newsletter",
+    "status" : "Votre statut",
+    "address" : "adresse de paiement",
+    "title-2" : "En tant que client enregistré, tu peux t'inscrire à notre newsletter. La newsletter arrive directement sur ton adresse e-mail avec toutes les informations importantes concernant les statistiques de DefiChain et toutes les informations importantes concernant ton compte chez defichain-income. La newsletter est envoyée 2 fois par jour (matin et soir)",
+    "title-3" : "Inscris pour cela plus bas l'adresse e-mail sur laquelle tu souhaites recevoir ta newsletter. ",
+    "title-4" : "La newsletter sera lancée en février. Février sera la phase de ramp-up, durant laquelle la newsletter sera gratuite pour tous pendant un mois. A partir de mars, ce service coûtera 1 DFI par mois. Pour cela, saisis ici l'adresse defichain à partir de laquelle tu souhaites payer 1 DFI",
+    "title-5" : "Dès que tu auras versé 1 DFI de l'adresse indiquée sur notre adresse de paiement Defichain, la newsletter sera activée pour toi pour le reste du mois.",
+    "save" : "Mettre à jour"
   }
 }

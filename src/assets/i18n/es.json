@@ -122,6 +122,13 @@
   "blocksTillDiff": "Bloques hasta el próximo cambio de dificultad",
   "mamon-info": "Importe sus Masternodes desde Masternode Monitor con Auth Key",
   "newsletter" : {
-    "title": "Newsletter"
+    "title": "boletín informativo",
+    "status": "Su estado",
+    "address": "Dirección de pago",
+    "title-2": "Como cliente registrado puede suscribirse a nuestro boletín de noticias. El boletín de noticias llega directamente a su dirección de correo electrónico con toda la información importante sobre las estadísticas de la DefiChain y toda la información importante sobre su cuenta en defichain-income. El boletín se enviará 2 veces al día (por la mañana y por la noche)",
+    "title-3": "Introduzca a continuación su dirección de correo electrónico en la que desea recibir el boletín. ",
+    "title-4": "El boletín de noticias se pondrá en marcha en febrero. El mes de febrero será la fase de arranque, durante la cual el boletín será gratuito para todos durante un mes. A partir de marzo, este servicio costará 1 DFI al mes. Para ello, introduzca aquí la dirección de defichain desde la que desea pagar 1 DFI",
+    "title-5": "En cuanto transfieras 1 DFI de la dirección indicada a nuestra dirección de pago defichain, el boletín se activará para ti durante el resto del mes",
+    "save": "actualizar"
   }
 }

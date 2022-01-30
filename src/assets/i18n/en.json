@@ -123,6 +123,13 @@
   "blocksTillDiff": "Blocks till next difficulty change",
   "mamon-info": "Import your Masternodes from Masternode Monitor with Auth Key",
   "newsletter" : {
-    "title": "Newsletter"
+    "title": "Newsletter",
+    "status": "Your status",
+    "address": "Payment address",
+    "title-2": "As a registered customer you can subscribe to our newsletter. The newsletter will come directly to your email address with all important information about the statistics of DefiChain and all important information about your account at defichain-income. The newsletter will be sent 2 times a day (morning and evening).",
+    "title-3": "For this, enter below your E-Mail address to which you want to receive your newsletter. ",
+    "title-4": "The newsletter will go live in February. February will be ramp up phase in which the newsletter will be free for everyone for one month. From March this service will cost 1 DFI per month. For this, enter here the defichain address from which you want to pay 1 DFI.",
+    "title-5": "Once you transfer 1 DFI from the given address to our defichain payment address, the newsletter will be unlocked for you for the rest of the month.",
+    "save": "Update & Refresh"
   }
 }
