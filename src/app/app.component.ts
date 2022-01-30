@@ -982,6 +982,13 @@ export class AppComponent implements OnInit {
 
   }
 
+  getShortOfAddress(id: string): string {
+    const first = id.slice(0, 8);
+    const last = id.slice(id.length - 8, id.length - 1);
+
+    return first + '...' + last;
+  }
+
   update(): void {
     this.apollo.mutate({
       mutation: UPDATE,
