@@ -21,15 +21,15 @@
   <h3 class='mb-4 '>Dein Status
     <div *ngIf="newsletter && newsletter?.status === 'payed'"
          class='rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
-      {{newsletter?.status}}
+      Subscribed & Payed
     </div>
     <div *ngIf='!newsletter || !newsletter.email'
-         class='rounded-full bg-red-500 hover:bg-red-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
-      {{newsletter?.status}}
+         class='rounded-full bg-red-600 hover:bg-red-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+      Not Subscribed
     </div>
     <div *ngIf="newsletter && (newsletter?.status === 'subscribed' || newsletter?.status === 'subscribedWithAddress')"
-         class='rounded-full bg-yellow-500 hover:bg-yellow-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
-      {{newsletter?.status}}
+         class='rounded-full text-black bg-yellow-500 hover:bg-yellow-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+      Subscribed & Not Payed
     </div>
   </h3>
 
@@ -47,7 +47,7 @@
       />
       <label for='inputAddress'
              class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
-        Paying Adrress
+        Paying Address
       </label>
     </div>
   </div>
@@ -87,7 +87,7 @@
     <button
       class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
       (click)='save()'>
-      Save
+      Update&Refresh
     </button>
   </div>
 </div>

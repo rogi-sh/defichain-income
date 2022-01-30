@@ -44,7 +44,9 @@ export class NewsletterComponent implements OnInit, OnChanges {
       }
     }).subscribe((result: any) => {
       if (result?.data?.updateUserNewsletter) {
-        this.newsletter = result?.data?.updateUserNewsletter;
+        this.newsletter = result?.data?.updateUserNewsletter.newsletter;
+        this.email = this.newsletter?.email;
+        this.address = this.newsletter?.payingAddress;
         this.successBackend = 'Newsletter updated';
         setInterval(() => {
           this.successBackend = null;
