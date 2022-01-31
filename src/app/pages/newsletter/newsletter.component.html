@@ -1,0 +1,108 @@
+<div class='dark:text-gray-100'>
+  <h1 class='text-3xl mb-4 text-pink-500'>{{ "newsletter.title" | translate }}</h1>
+  <div class='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4'>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h3 class='text-xl mb-4'>{{ "newsletter.title-2" | translate }}</h3>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4'>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h2 class='text-xl '>{{ "newsletter.title-3" | translate }}</h2>
+        <h2 class='text-xl mb-4 '>{{ "newsletter.title-4" | translate }}</h2>
+        <h2 class='text-xl mb-4 '>{{ "newsletter.title-5" | translate }}</h2>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4'>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h3 class='mb-4 '>{{ "newsletter.address" | translate }}</h3>
+
+        <div
+          class='rounded-full bg-pink-500 hover:bg-pink-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+          df1qdc79xa70as0a5d0pdtgdww7tu65c2ncu9v7k2k
+        </div>
+        <br><br>
+        <img src="/assets/img/IMG_1532.jpg" alt="Target address newsletter" width="200" height="240">
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <h3 class='mb-4 '>{{ "newsletter.status" | translate }}
+    <div *ngIf="newsletter && newsletter?.status === 'payed'"
+         class='rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+      Subscribed & Payed
+    </div>
+    <div *ngIf='!newsletter || !newsletter.email'
+         class='rounded-full bg-red-600 hover:bg-red-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+      Not Subscribed
+    </div>
+    <div *ngIf="newsletter && (newsletter?.status === 'subscribed' || newsletter?.status === 'subscribedWithAddress')"
+         class='rounded-full text-black bg-yellow-500 hover:bg-yellow-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
+      Subscribed & Not Payed
+    </div>
+  </h3>
+
+  <div class='inline-block w-full md:w-1/4 my-2 md:mt-0'>
+    <div
+      class='relative h-14 input-component'
+      [ngClass]="!newsletter ? 'empty' : ''"
+      title='Paying Address'
+    >
+      <input
+        required
+        [(ngModel)]='address'
+        id='inputAddress'
+        class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+      />
+      <label for='inputAddress'
+             class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+        Paying Address
+      </label>
+    </div>
+  </div>
+  <br>
+  <div class='inline-block w-full md:w-1/4 my-2 md:mt-0'>
+    <div
+      class='relative h-14 input-component'
+      [ngClass]="!newsletter ? 'empty' : ''"
+      title='E-Mail'
+    >
+      <input
+        required
+        [(ngModel)]='email'
+        id='inputMail'
+        class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+      />
+      <label for='inputMail'
+             class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+        E-Mail
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="errorBackend" class="bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2"
+       role="alert">
+    {{errorBackend}}
+  </div>
+  <div
+    *ngIf="successBackend"
+    class="bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2"
+    role="alert"
+  >
+    {{successBackend}}
+  </div>
+
+  <div class='w-full md:w-1/4 md:pl-2 align-top'>
+    <button
+      class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+      (click)='save()'>
+      {{ "newsletter.save" | translate }}
+    </button>
+  </div>
+</div>

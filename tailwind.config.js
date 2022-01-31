@@ -30,6 +30,11 @@ module.exports = {
         blueCake: {
           600: '#5B10FF',
           700: '#1E40AF'
+        },
+        yellow: {
+          500: '#ffff00',
+          600: '#ffff4c'
+
         }
       },
       minHeight: {

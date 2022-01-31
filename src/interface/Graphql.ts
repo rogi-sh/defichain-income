@@ -6,8 +6,10 @@ export const REGISTER = gql`
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float, $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float,  $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float,
     $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,    $vnq: Float,    $urth: Float,
+    $amzn: Float, $nvda: Float, $coin: Float, $eem: Float,
     $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
-    $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float,   $pdbcusd: Float
+    $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float,   $pdbcusd: Float,
+    $amznusd: Float,  $nvdausd: Float,  $coinusd: Float, $eemusd: Float,
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float, $usdcInUsdcPool: Float, $usdInUsdPool: Float,
     $dfiInUsdtPool: Float, $dfiInUsdcPool: Float, $dfiInUsdPool: Float, $ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float, $bchInBchPool: Float, $dfiInBchPool: Float,
     $tslaInTslaPool: Float, $usdInTslaPool: Float
@@ -15,7 +17,9 @@ export const REGISTER = gql`
     $usdInSlvPool: Float, $aaplInAaplPool: Float,  $usdInAaplPool: Float, $gldInGldPool: Float, $usdInGldPool: Float, $gmeInGmePool: Float, $usdInGmePool: Float,
     $googlInGooglPool: Float, $usdInGooglPool: Float, $arkkInArkkPool: Float, $usdInArkkPool: Float, $babaInBabaPool: Float, $usdInBabaPool: Float,
     $vnqInVnqPool: Float, $usdInVnqPool: Float, $urthInUrthPool: Float, $usdInUrthPool: Float, $tltInTltPool: Float, $usdInTltPool: Float, $pdbcInPdbcPool: Float,
-    $usdInPdbcPool: Float
+    $usdInPdbcPool: Float,
+    $amznInAmznPool: Float, $usdInAmznPool: Float, $nvdaInNvdaPool: Float, $usdInNvdaPool: Float, $coinInCoinPool: Float, $usdInCoinPool: Float, $eemInEemPool: Float,
+    $usdInEemPool: Float
     ){
     addUser (
       user : {
@@ -61,6 +65,10 @@ export const REGISTER = gql`
           urth: $urth
           tlt: $tlt
           pdbc: $pdbc
+          amzn: $amzn
+          nvda: $nvda
+          coin: $coin
+          eem: $eem
           spyusd: $spyusd
           qqqusd: $qqqusd
           pltrusd: $pltrusd
@@ -75,6 +83,10 @@ export const REGISTER = gql`
           urthusd: $urthusd
           tltusd: $tltusd
           pdbcusd: $pdbcusd
+          amznusd: $amznusd
+          nvdausd: $nvdausd
+          coinusd: $coinusd
+          eemusd: $eemusd
           btcInBtcPool: $btcInBtcPool
           dfiInBtcPool: $dfiInBtcPool
           ethInEthPool: $ethInEthPool
@@ -121,13 +133,23 @@ export const REGISTER = gql`
           usdInTltPool: $usdInTltPool
           pdbcInPdbcPool: $pdbcInPdbcPool
           usdInPdbcPool: $usdInPdbcPool
+          amznInAmznPool: $amznInAmznPool
+          usdInAmznPool: $usdInAmznPool
+          nvdaInNvdaPool: $nvdaInNvdaPool
+          usdInNvdaPool: $usdInNvdaPool
+          coinInCoinPool: $coinInCoinPool
+          usdInCoinPool: $usdInCoinPool
+          eemInEemPool: $eemInEemPool
+          usdInEemPool: $usdInEemPool
         }
       }
     )
     {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
       dfi, dfiInStaking, btc, bch, eth, doge, usdt, usdc, usd, ltc, tsla,
       qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc,
+      amzn, nvda, coin, eem,
       spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
+      amznusd,nvdausd,coinusd, eemusd,
       btcdfi , ethdfi, dogedfi, ltcdfi, usdtdfi, usdcdfi, usddfi, bchdfi, tslausd,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,usdcInUsdcPool,
       dfiInUsdtPool, dfiInUsdcPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
@@ -135,7 +157,9 @@ export const REGISTER = gql`
       qqqInQqqPool, usdInQqqPool, spyInSpyPool, usdInSpyPool, pltrInPltrPool, usdInPltrPool, slvInSlvPool, usdInSlvPool,
       aaplInAaplPool, usdInAaplPool, gldInGldPool, usdInGldPool, gmeInGmePool,usdInGmePool,googlInGooglPool, usdInGooglPool,
       arkkInArkkPool, usdInArkkPool,babaInBabaPool,usdInBabaPool,vnqInVnqPool, usdInVnqPool,urthInUrthPool,usdInUrthPool,
-      tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool
+      tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool,
+      amznInAmznPool, usdInAmznPool,nvdaInNvdaPool,usdInNvdaPool,
+      coinInCoinPool,usdInCoinPool,eemInEemPool, usdInEemPool
     }
     }
   }
@@ -145,10 +169,13 @@ export const UPDATE = gql`
   mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],
     $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
-    $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float
-    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,    $vnq: Float,    $urth: Float,
-    $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
-    $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float,   $pdbcusd: Float
+    $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float,
+    $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float
+    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,   $vnq: Float,    $urth: Float,
+    $tlt: Float, $pdbc: Float, $amzn: Float, $nvda: Float, $coin: Float, $eem: Float,
+    $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
+    $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float, $pdbcusd: Float,
+    $amznusd: Float,  $nvdausd: Float,  $coinusd: Float, $eemusd: Float,
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float, $usdtInUsdtPool: Float, $usdcInUsdcPool: Float, $usdInUsdPool: Float,
     $dfiInUsdtPool: Float, $dfiInUsdcPool: Float, $dfiInUsdPool: Float, $ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float,
     $bchInBchPool: Float, $dfiInBchPool: Float, $tslaInTslaPool: Float, $usdInTslaPool: Float,
@@ -156,7 +183,9 @@ export const UPDATE = gql`
     $usdInSlvPool: Float, $aaplInAaplPool: Float,  $usdInAaplPool: Float, $gldInGldPool: Float, $usdInGldPool: Float, $gmeInGmePool: Float, $usdInGmePool: Float,
     $googlInGooglPool: Float, $usdInGooglPool: Float, $arkkInArkkPool: Float, $usdInArkkPool: Float, $babaInBabaPool: Float, $usdInBabaPool: Float,
     $vnqInVnqPool: Float, $usdInVnqPool: Float, $urthInUrthPool: Float, $usdInUrthPool: Float, $tltInTltPool: Float, $usdInTltPool: Float, $pdbcInPdbcPool: Float,
-    $usdInPdbcPool: Float
+    $usdInPdbcPool: Float,
+    $amznInAmznPool: Float, $usdInAmznPool: Float, $nvdaInNvdaPool: Float, $usdInNvdaPool: Float, $coinInCoinPool: Float, $usdInCoinPool: Float, $eemInEemPool: Float,
+    $usdInEemPool: Float
   ){
     updateUser (
       user : {
@@ -203,6 +232,10 @@ export const UPDATE = gql`
           urth: $urth
           tlt: $tlt
           pdbc: $pdbc
+          amzn: $amzn
+          nvda: $nvda
+          coin: $coin
+          eem: $eem
           spyusd: $spyusd
           qqqusd: $qqqusd
           pltrusd: $pltrusd
@@ -217,6 +250,10 @@ export const UPDATE = gql`
           urthusd: $urthusd
           tltusd: $tltusd
           pdbcusd: $pdbcusd
+          amznusd: $amznusd
+          nvdausd: $nvdausd
+          coinusd: $coinusd
+          eemusd: $eemusd
           btcInBtcPool: $btcInBtcPool
           dfiInBtcPool: $dfiInBtcPool
           ethInEthPool: $ethInEthPool
@@ -263,13 +300,22 @@ export const UPDATE = gql`
           usdInTltPool: $usdInTltPool
           pdbcInPdbcPool: $pdbcInPdbcPool
           usdInPdbcPool: $usdInPdbcPool
+          amznInAmznPool: $amznInAmznPool
+          usdInAmznPool: $usdInAmznPool
+          nvdaInNvdaPool: $nvdaInNvdaPool
+          usdInNvdaPool: $usdInNvdaPool
+          coinInCoinPool: $coinInCoinPool
+          usdInCoinPool: $usdInCoinPool
+          eemInEemPool: $eemInEemPool
+          usdInEemPool: $usdInEemPool
         }
       }
     )
     {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
       dfi, dfiInStaking, btc,eth, doge, usdt, usdc, usd, ltc, bch, tsla,
-      qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc,
+      qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc, amzn, nvda, coin, eem,
       spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
+      amznusd,nvdausd,coinusd, eemusd,
       btcdfi , ethdfi, dogedfi, ltcdfi, usdtdfi, usdcdfi, usddfi, bchdfi, tslausd,
       btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,usdcInUsdcPool,
       dfiInUsdtPool,  dfiInUsdcPool,ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
@@ -277,7 +323,11 @@ export const UPDATE = gql`
       qqqInQqqPool, usdInQqqPool, spyInSpyPool, usdInSpyPool, pltrInPltrPool, usdInPltrPool, slvInSlvPool, usdInSlvPool,
       aaplInAaplPool, usdInAaplPool, gldInGldPool, usdInGldPool, gmeInGmePool,usdInGmePool,googlInGooglPool, usdInGooglPool,
       arkkInArkkPool, usdInArkkPool,babaInBabaPool,usdInBabaPool,vnqInVnqPool, usdInVnqPool,urthInUrthPool,usdInUrthPool,
-      tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool
+      tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool,
+      amznInAmznPool, usdInAmznPool,nvdaInNvdaPool,usdInNvdaPool,
+      coinInCoinPool,usdInCoinPool,eemInEemPool, usdInEemPool,
+      amznInAmznPool, usdInAmznPool,nvdaInNvdaPool,usdInNvdaPool,
+      coinInCoinPool,usdInCoinPool,eemInEemPool, usdInEemPool
     }
     }
   }
@@ -286,10 +336,13 @@ export const UPDATE = gql`
 export const LOGIN = gql`
   query ($key: String) {
     userByKey(key: $key) {
-      id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
+      id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10,
+       newsletter {email, payingAddress, status, subscribed },
+       wallet {
         dfi, dfiInStaking, btc, eth, doge, usdt, usdc, usd, ltc, bch, tsla,
-        qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc,
+        qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc, amzn, nvda, coin, eem,
         spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
+        amznusd,nvdausd,coinusd, eemusd,
         btcdfi, ethdfi,dogedfi, ltcdfi, usdtdfi, usdcdfi, usddfi, bchdfi, tslausd,
         btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,usdcInUsdcPool
         dfiInUsdtPool, dfiInUsdcPool, ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
@@ -297,7 +350,9 @@ export const LOGIN = gql`
         qqqInQqqPool, usdInQqqPool, spyInSpyPool, usdInSpyPool, pltrInPltrPool, usdInPltrPool, slvInSlvPool, usdInSlvPool,
         aaplInAaplPool, usdInAaplPool, gldInGldPool, usdInGldPool, gmeInGmePool,usdInGmePool,googlInGooglPool, usdInGooglPool,
         arkkInArkkPool, usdInArkkPool,babaInBabaPool,usdInBabaPool,vnqInVnqPool, usdInVnqPool,urthInUrthPool,usdInUrthPool,
-        tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool
+        tltInTltPool,usdInTltPool,pdbcInPdbcPool, usdInPdbcPool,
+        amznInAmznPool, usdInAmznPool,nvdaInNvdaPool,usdInNvdaPool,
+        coinInCoinPool,usdInCoinPool,eemInEemPool, usdInEemPool
       }
     }
   }
@@ -354,6 +409,21 @@ export const HISTORY_USER = gql`
       totalValue
       totalValueIncomeDfi
       totalValueIncomeUsd
+    }
+  }
+}
+`;
+
+export const UPDATE_NEWSLETTER = gql`
+  mutation ($key: String!, $email: String!, $payingAddress: String) {
+  updateUserNewsletter(
+    user: {
+      key: $key
+      email: $email
+      payingAddress: $payingAddress
+    }) {
+    newsletter {
+      status, subscribed, email, payingAddress
     }
   }
 }

@@ -68,6 +68,7 @@ export class Vault {
   interestValue: number;
   collateralAmounts: Array<CollateralAmount>;
   loanAmounts: Array<LoanAmount>;
+  loanScheme: LoanSchema;
 }
 
 export class CollateralAmount {
@@ -82,6 +83,12 @@ export class LoanAmount {
   symbol: string;
   symbolKey: string;
   activePrice: ActivePrice;
+}
+
+export class LoanSchema {
+  id: string;
+  minColRatio: string;
+  interestRate: string;
 }
 
 export class ActivePrice {
@@ -194,6 +201,11 @@ export interface WalletDto {
   urthusd: number;
   tltusd: number;
   pdbcusd: number;
+
+  amznusd: number;
+  nvdausd: number;
+  coinusd: number;
+  eemusd: number;
 
   // User Infos
   // BTC Pool
@@ -311,6 +323,33 @@ export interface WalletDto {
   pdbc: number;
   usdInPdbcPool: number;
 
+  // AMZN Pool
+  amznInAmznPool: number;
+  amzn: number;
+  usdInAmznPool: number;
+
+  // NVDA Pool
+  nvdaInNvdaPool: number;
+  nvda: number;
+  usdInNvdaPool: number;
+
+  // COIN Pool
+  coinInCoinPool: number;
+  coin: number;
+  usdInCoinPool: number;
+
+  // EEM Pool
+  eemInEemPool: number;
+  eem: number;
+  usdInEemPool: number;
+
+}
+
+export class Newsletter {
+  email: string;
+  payingAddress: string;
+  status: string;
+  subscribed: Date;
 }
 
 export class Wallet {
@@ -347,6 +386,11 @@ export class Wallet {
   urthusd = 0;
   tltusd = 0;
   pdbcusd = 0;
+
+  amznusd = 0;
+  nvdausd = 0;
+  coinusd = 0;
+  eemusd = 0;
 
   // User Infos
   // BTC Pool
@@ -532,6 +576,38 @@ export class Wallet {
   pdbcKey = 'pdbcKey';
   usdInPdbcPoolKey = 'usdInPdbcPoolKey';
   usdInPdbcPool = 0;
+
+  // AMZN Pool
+  amznInAmznPool = 0;
+  amznInAmznPoolKey = 'amznInAmznPoolKey';
+  amzn = 0;
+  amznKey = 'amznKey';
+  usdInAmznPoolKey = 'usdInAmznPoolKey';
+  usdInAmznPool = 0;
+
+  // NVDA Pool
+  nvdaInNvdaPool = 0;
+  nvdaInNvdaPoolKey = 'nvdaInNvdaPoolKey';
+  nvda = 0;
+  nvdaKey = 'nvdaKey';
+  usdInNvdaPoolKey = 'usdInNvdaPoolKey';
+  usdInNvdaPool = 0;
+
+  // COIN Pool
+  coinInCoinPool = 0;
+  coinInCoinPoolKey = 'coinInCoinPoolKey';
+  coin = 0;
+  coinKey = 'coinKey';
+  usdInCoinPoolKey = 'usdInCoinPoolKey';
+  usdInCoinPool = 0;
+
+  // EEM Pool
+  eemInEemPool = 0;
+  eemInEemPoolKey = 'eemInEemPoolKey';
+  eem = 0;
+  eemKey = 'eemKey';
+  usdInEemPoolKey = 'usdInEemPoolKey';
+  usdInEemPool = 0;
 
 }
 

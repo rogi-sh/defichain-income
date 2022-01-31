@@ -133,6 +133,11 @@ export class AddressBalance {
   tltToken: number;
   pdbcToken: number;
 
+  amznToken: number;
+  coinToken: number;
+  nvdaToken: number;
+  eemToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -157,6 +162,11 @@ export class AddressBalance {
   urthusdToken: number;
   tltusdToken: number;
   pdbcusdToken: number;
+
+  amznusdToken: number;
+  nvdausdToken: number;
+  coinusdToken: number;
+  eemusdToken: number;
 
 }
 
@@ -214,6 +224,14 @@ export class PoolUrthOut extends Outcome {}
 export class PoolTltOut extends Outcome {}
 
 export class PoolPdbcOut extends Outcome {}
+
+export class PoolEemOut extends Outcome {}
+
+export class PoolAmznOut extends Outcome {}
+
+export class PoolNvdaOut extends Outcome {}
+
+export class PoolCoinOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

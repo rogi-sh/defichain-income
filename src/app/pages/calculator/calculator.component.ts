@@ -86,6 +86,18 @@ export class CalculatorComponent implements OnInit {
   poolTlt!: Pool;
 
   @Input()
+  poolAmzn!: Pool;
+
+  @Input()
+  poolNvda!: Pool;
+
+  @Input()
+  poolCoin!: Pool;
+
+  @Input()
+  poolEem!: Pool;
+
+  @Input()
   poolPdbc!: Pool;
 
   @Input()
@@ -153,6 +165,18 @@ export class CalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockTlt;
+
+  @Input()
+  dfiProBlockAmzn;
+
+  @Input()
+  dfiProBlockNvda;
+
+  @Input()
+  dfiProBlockCoin;
+
+  @Input()
+  dfiProBlockEem;
 
   @Input()
   dfiProBlockPdbc;
