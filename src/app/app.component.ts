@@ -984,7 +984,7 @@ export class AppComponent implements OnInit {
 
   getShortOfAddress(id: string): string {
     const first = id.slice(0, 8);
-    const last = id.slice(id.length - 8, id.length - 1);
+    const last = id.slice(id.length - 8, id.length);
 
     return first + '...' + last;
   }

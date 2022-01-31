@@ -438,7 +438,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getShortOfId(id: string): string {
     const first = id.slice(0, 5);
-    const last = id.slice(id.length - 6, id.length - 1);
+    const last = id.slice(id.length - 5, id.length);
 
     return first + '...' + last;
   }
