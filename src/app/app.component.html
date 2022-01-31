@@ -964,6 +964,26 @@
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.pdbcusd | number: '1.3-3'}}
                         ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.pdbcusd * poolPdbc?.totalLiquidityUsd/poolPdbc?.totalLiquidityLpToken"></app-price></span>
                     </div>
+                    <div *ngIf="wallet?.amznusd > 0">AMZN-USD</div>
+                    <div *ngIf="wallet?.amznusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.amznusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.amznusd * poolAmzn?.totalLiquidityUsd/poolAmzn?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.nvdausd > 0">NVDA-USD</div>
+                    <div *ngIf="wallet?.nvdausd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.nvdausd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.nvdausd * poolNvda?.totalLiquidityUsd/poolNvda?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.coinusd > 0">COIN-USD</div>
+                    <div *ngIf="wallet?.coinusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.coinusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.coinusd * poolCoin?.totalLiquidityUsd/poolCoin?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.eemusd > 0">EEM-USD</div>
+                    <div *ngIf="wallet?.eemusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.eemusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.eemusd * poolEem?.totalLiquidityUsd/poolEem?.totalLiquidityLpToken"></app-price></span>
+                    </div>
                   </div>
                 </div>
               </div>

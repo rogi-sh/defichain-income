@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.3 - 31.1.2022';
+    this.log.comment = 'Fix lp tokens holdings';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '8.12.2 - 31.1.2022';
     this.log.comment = 'Fix address shortcuts and added links to defiscan';
     this.logs.push(this.log);
