@@ -12,7 +12,7 @@ export const environment = {
   address_vaults: 'https://ocean.defichain.com/v0/mainnet/address/ADDRESS_VAULTS/vaults',
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
-  version: '8.12.0',
+  version: '8.12.1',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
   graphql: 'https://graphql.defichain-income.com/graphql',

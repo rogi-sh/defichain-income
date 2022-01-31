@@ -530,16 +530,16 @@ export class IncomeComponent implements OnInit, OnChanges {
       incomeNumbers.push(`PDBC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolPdbcOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolAmznOut.dfiPerMonth > 0) {
-      incomeNumbers.push(`VNQ-Pool - ${this.isIncognitoModeOn ? '****' : this.poolAmznOut.dfiPerMonth.toFixed(2)} DFI`);
+      incomeNumbers.push(`AMZN-Pool - ${this.isIncognitoModeOn ? '****' : this.poolAmznOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolNvdaOut.dfiPerMonth > 0) {
-      incomeNumbers.push(`URTH-Pool - ${this.isIncognitoModeOn ? '****' : this.poolNvdaOut.dfiPerMonth.toFixed(2)} DFI`);
+      incomeNumbers.push(`NVDA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolNvdaOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolCoinOut.dfiPerMonth > 0) {
-      incomeNumbers.push(`TLT-Pool - ${this.isIncognitoModeOn ? '****' : this.poolCoinOut.dfiPerMonth.toFixed(2)} DFI`);
+      incomeNumbers.push(`COIN-Pool - ${this.isIncognitoModeOn ? '****' : this.poolCoinOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     if (this.poolEemOut.dfiPerMonth > 0) {
-      incomeNumbers.push(`PDBC-Pool - ${this.isIncognitoModeOn ? '****' : this.poolEemOut.dfiPerMonth.toFixed(2)} DFI`);
+      incomeNumbers.push(`EEM-Pool - ${this.isIncognitoModeOn ? '****' : this.poolEemOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.1 - 31.1.2022';
+    this.log.comment = 'Fix income pool names';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.0 - 31.1.2022';
     this.log.comment = 'New Stocks added, new newsletter subscription';
     this.logs.push(this.log);
