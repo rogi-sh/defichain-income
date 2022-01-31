@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.5 - 31.1.2022';
+    this.log.comment = 'Mobile view fixes for vaults and newsletter';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.4 - 31.1.2022';
     this.log.comment = 'Add new pools to history';
     this.logs.push(this.log);

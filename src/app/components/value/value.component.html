@@ -534,8 +534,7 @@
           {{ "balance" | translate }} Vaults
         </h3>
 
-        <div *ngFor='let v of getAllVaultsFromAllAddresses()' class='grid grid-flow-col grid-cols-2 md:gap-2'>
-        <span class='grid grid-flow-row auto-rows-max grid-cols-2 lg:grid-cols-2 gap-3 pb-2 col-span-2 mb-2'>
+        <div *ngFor='let v of getAllVaultsFromAllAddresses()' class='md:gap-2'>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
                 <a class='text-pink-500 hover:underline'
@@ -548,6 +547,7 @@
                              % -> Next {{isIncognitoModeOn ? '****' : getRatioNext(v)}} %  (Oracle)
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
+              <br />
                <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
                 In {{getBlockToNextOracle()}} - Schema {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}}
                  / {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} % (Oracle)
@@ -569,7 +569,7 @@
 
               </div>
           </div>
-        </span>
+
         </div>
         <h3
           class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
