@@ -296,6 +296,30 @@
               </span>
               PDBC
             </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.amznInAmznPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilAmznPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              AMZN
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.nvdaInNvdaPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilNvdaPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              NVDA
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.coinInCoinPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilCoinPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              COIN
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.eemInEemPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilEemPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              COIN
+            </span>
           </span>
         </div>
 
