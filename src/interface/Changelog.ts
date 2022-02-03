@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.8 - 3.2.2022';
+    this.log.comment = 'Add epic pacman loading to newsletter';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.7 - 3.2.2022';
     this.log.comment = 'Add DUSD history, add better wording source address newsletter ';
     this.logs.push(this.log);
