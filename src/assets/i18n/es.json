@@ -129,6 +129,7 @@
     "title-3": "Introduzca a continuación su dirección de correo electrónico en la que desea recibir el boletín. ",
     "title-4": "El boletín de noticias se pondrá en marcha en febrero. El mes de febrero será la fase de arranque, durante la cual el boletín será gratuito para todos durante un mes. A partir de marzo, este servicio costará 1 DFI al mes. Para ello, introduzca aquí la dirección de defichain desde la que desea pagar 1 DFI",
     "title-5": "En cuanto transfieras 1 DFI de la dirección indicada a nuestra dirección de pago defichain, el boletín se activará para ti durante el resto del mes",
-    "save": "actualizar"
+    "save": "actualizar",
+    "your-address": "Su dirección de origen para la asignación de la transacción"
   }
 }

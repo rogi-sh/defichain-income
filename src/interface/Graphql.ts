@@ -381,7 +381,7 @@ export const HISTORY = gql`
           from : {year: $fromYear, month: $fromMonth, day: $fromDay, hour: $fromHour, min: 0,s: 0},
           till : {year: $tillYear, month: $tillMonth, day: $tillDay, hour: $tillHour, min: 0,s: 0}) {
 
-    date, pools {symbol, pair, priceA, reserveA, volumeA, totalLiquidity, totalLiquidityLpToken, totalStaked }
+    date, pools {symbol, pair, priceA, priceB, reserveA, volumeA, totalLiquidity, totalLiquidityLpToken, totalStaked }
     }
   }
 `;

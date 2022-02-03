@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartOptions6 } from '@interfaces/Data';
 import { History, HistoryPrice, Pool } from '@interfaces/Dex';
@@ -32,6 +32,8 @@ export class HistoryComponent implements OnInit {
   fromDate: Date = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
   tillDate: Date = new Date();
 
+  @Input()
+  dfiPriceCex!: number;
 
   constructor(private apollo: Apollo, private spinner: NgxSpinnerService) { }
 
@@ -380,7 +382,13 @@ export class HistoryComponent implements OnInit {
 
   private pushHistoryNumbers(h: History, indexPairSearch: number): void {
     const price = new HistoryPrice();
-    price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
+    if (h.pools[indexPairSearch]?.symbol.startsWith('DUSD')) {
+      const priceDif =  this.dfiPriceCex / h.pools[indexPairSearch]?.priceB;
+      price.price = Math.round(priceDif * 100) / 100;
+    } else {
+      price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
+    }
+
     price.reserve = Math.round(+h.pools[indexPairSearch]?.reserveA * 100) / 100;
     price.liquidiy = Math.round(this.getLiquidityNumber(h.pools[indexPairSearch]) * 100) / 100;
     price.volume = Math.round(+h.pools[indexPairSearch]?.volumeA * 100) / 100;
