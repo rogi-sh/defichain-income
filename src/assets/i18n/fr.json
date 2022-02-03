@@ -131,6 +131,7 @@
     "title-4" : "La newsletter sera lancée en février. Février sera la phase de ramp-up, durant laquelle la newsletter sera gratuite pour tous pendant un mois. A partir de mars, ce service coûtera 1 DFI par mois. Pour cela, saisis ici l'adresse defichain à partir de laquelle tu souhaites payer 1 DFI",
     "title-5" : "Dès que tu auras versé 1 DFI de l'adresse indiquée sur notre adresse de paiement Defichain, la newsletter sera activée pour toi pour le reste du mois.",
     "save" : "Mettre à jour",
-    "your-address": "Votre adresse source pour l'attribution de la transaction"
+    "your-address": "Votre adresse source pour l'attribution de la transaction",
+    "button": "Veuillez vous enregistrer ou vous connecter avec votre AutKey"
   }
 }

@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
-import { Pool } from '@interfaces/Dex';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Newsletter } from '@interfaces/Data';
-import { INCOME_STATISTICS, UPDATE_NEWSLETTER } from '@interfaces/Graphql'
-import { Apollo } from 'apollo-angular'
-import { NgxSpinnerService } from 'ngx-spinner'
+import { UPDATE_NEWSLETTER } from '@interfaces/Graphql';
+import { Apollo } from 'apollo-angular';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-newsletter-page',

@@ -131,6 +131,7 @@
     "title-4": "The newsletter will go live in February. February will be ramp up phase in which the newsletter will be free for everyone for one month. From March this service will cost 1 DFI per month. For this, enter here the defichain address from which you want to pay 1 DFI.",
     "title-5": "Once you transfer 1 DFI from the given address to our defichain payment address, the newsletter will be unlocked for you for the rest of the month.",
     "save": "Update & Refresh",
-    "your-address": "YOUR, source address for the assignment of the transaction"
+    "your-address": "YOUR, source address for the assignment of the transaction",
+    "button": "Please register or log in with your AutKey"
   }
 }

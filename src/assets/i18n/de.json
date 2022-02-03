@@ -132,7 +132,8 @@
     "title-4": "Der Newsletter geht in Februar live. Februar wird Rampup-Phase sein, in welcher der Newsletter ein Monat lang für alle kostenlos ist. Ab März wird dieser Service 1 DFI im Monat kosten. Dafür trage hier die defichain Adresse ein von der du 1 DFI bezahlen möchtest.",
     "title-5": "Sobald du 1 DFI von der angegebenen Adresse auf unsere Defichain-Bezahladresse überwiesen hast, wird der Newsletter für dich für den Rest des Monats freigeschaltet.",
     "save": "Aktualisieren",
-    "your-address": "EURE Quell-Addresse für die Zuordnung der Transaktion"
+    "your-address": "EURE Quell-Addresse für die Zuordnung der Transaktion",
+    "button": "Bitte registriere Dich oder logge dich mit deinem AutKey ein"
   }
 
 }
