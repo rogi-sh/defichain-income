@@ -48,41 +48,40 @@
         </div>
       </h3>
 
-      <div class='inline-block w-full md:w-2/4 my-2 md:mt-0'>
+      <div class='inline-block w-full lg:w-2/4 md:w-3/4 my-2 md:mt-0'>
         <div
           class='relative h-14 input-component'
           [ngClass]="!newsletter ? 'empty' : ''"
           title='Paying Address'
         >
+          {{ "newsletter.your-address" | translate }}
+          <br>
+          <br>
           <input
             required
             [(ngModel)]='address'
             id='inputAddress'
             class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
           />
-          <label for='inputAddress'
-                 class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
-            {{ "newsletter.your-address" | translate }}
-          </label>
         </div>
       </div>
       <br>
-      <div class='inline-block w-full md:w-2/4 my-2 md:mt-0'>
+      <div class='inline-block w-full lg:w-2/4 md:w-3/4 my-2 md:mt-0'>
         <div
           class='relative h-14 input-component'
           [ngClass]="!newsletter ? 'empty' : ''"
           title='E-Mail'
         >
+          <br>
+          E-Mail
+          <br>
+          <br>
           <input
             required
             [(ngModel)]='email'
             id='inputMail'
             class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
           />
-          <label for='inputMail'
-                 class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
-            E-Mail
-          </label>
         </div>
       </div>
 
@@ -98,12 +97,15 @@
         {{successBackend}}
       </div>
 
-      <div *ngIf='!key' class='bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2'
+      <br>
+      <br>
+      <br>
+      <div *ngIf='!key' class='bg-red-600 text-white w-full lg:w-2/4 md:w-3/4 py-2 px-4 rounded-sm my-2'
            role='alert'>
         {{ "newsletter.button" | translate }}
       </div>
 
-      <div *ngIf='key' class='w-full md:w-2/4 md:pl-2 align-top'>
+      <div *ngIf='key' class='w-full lg:w-2/4 md:w-3/4 md:pl-2 align-top'>
         <button
           class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
           (click)='save()'>
