@@ -48,7 +48,7 @@
         </div>
       </h3>
 
-      <div class='inline-block w-full md:w-1/4 my-2 md:mt-0'>
+      <div class='inline-block w-full md:w-2/4 my-2 md:mt-0'>
         <div
           class='relative h-14 input-component'
           [ngClass]="!newsletter ? 'empty' : ''"
@@ -67,7 +67,7 @@
         </div>
       </div>
       <br>
-      <div class='inline-block w-full md:w-1/4 my-2 md:mt-0'>
+      <div class='inline-block w-full md:w-2/4 my-2 md:mt-0'>
         <div
           class='relative h-14 input-component'
           [ngClass]="!newsletter ? 'empty' : ''"
@@ -103,7 +103,7 @@
         {{ "newsletter.button" | translate }}
       </div>
 
-      <div *ngIf='key' class='w-full md:w-1/4 md:pl-2 align-top'>
+      <div *ngIf='key' class='w-full md:w-2/4 md:pl-2 align-top'>
         <button
           class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
           (click)='save()'>

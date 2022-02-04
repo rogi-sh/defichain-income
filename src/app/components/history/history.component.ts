@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core'
-import { ChartComponent } from 'ng-apexcharts';
-import { ChartOptions6 } from '@interfaces/Data';
-import { History, HistoryPrice, Pool } from '@interfaces/Dex';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { HISTORY } from '@interfaces/Graphql';
-import { Apollo } from 'apollo-angular';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { ChartComponent } from 'ng-apexcharts'
+import { ChartOptions6 } from '@interfaces/Data'
+import { History, HistoryPrice, Pool } from '@interfaces/Dex'
+import { NgxSpinnerService } from 'ngx-spinner'
+import { HISTORY } from '@interfaces/Graphql'
+import { Apollo } from 'apollo-angular'
 
 @Component({
   selector: 'app-history',
@@ -31,9 +31,6 @@ export class HistoryComponent implements OnInit {
 
   fromDate: Date = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
   tillDate: Date = new Date();
-
-  @Input()
-  dfiPriceCex!: number;
 
   constructor(private apollo: Apollo, private spinner: NgxSpinnerService) { }
 
@@ -383,8 +380,12 @@ export class HistoryComponent implements OnInit {
   private pushHistoryNumbers(h: History, indexPairSearch: number): void {
     const price = new HistoryPrice();
     if (h.pools[indexPairSearch]?.symbol.startsWith('DUSD')) {
-      const priceDif =  this.dfiPriceCex / h.pools[indexPairSearch]?.priceB;
-      price.price = Math.round(priceDif * 100) / 100;
+      const priceDfiCex = h.pools.filter(p => p.symbol.startsWith('BTC'))[0].priceB;
+      const priceDfiDex = h.pools[indexPairSearch]?.priceB;
+      if (priceDfiCex && priceDfiDex) {
+        const priceDif =  priceDfiCex / priceDfiDex;
+        price.price = Math.round(priceDif * 100) / 100;
+      }
     } else {
       price.price = Math.round(h.pools[indexPairSearch]?.priceA * 100) / 100;
     }
