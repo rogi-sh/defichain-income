@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.11 - 6.2.2022';
+    this.log.comment = 'Small fix wrong coin name in income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.10 - 4.2.2022';
     this.log.comment = 'DUSD stock price cex from btc pool, style fixes newsletter view';
     this.logs.push(this.log);

@@ -46,7 +46,7 @@ import {
   Vault,
   Wallet,
   WalletDto,
-} from '@interfaces/Data'
+} from '@interfaces/Data';
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
 // @ts-ignore
