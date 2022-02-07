@@ -1940,6 +1940,11 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).usdcToken += +col.amount;
           break;
         }
+        case 'DUSD': {
+          this.wallet.usd += +col.amount;
+          this.getAddressBalance(address).usdToken += +col.amount;
+          break;
+        }
         default: {
           break;
         }
@@ -3371,6 +3376,7 @@ export class AppComponent implements OnInit {
     let btcInVaults = 0;
     let usdcInVaults = 0;
     let usdtInVaults = 0;
+    let dusdInVaults = 0;
 
     if (this.vaultsOfAllAddresses.length === 0) {
       return 0;
@@ -3387,12 +3393,15 @@ export class AppComponent implements OnInit {
             usdcInVaults += +vaultCollaterral.amount;
           } else if ('USDT' === vaultCollaterral.symbolKey) {
             usdtInVaults += +vaultCollaterral.amount;
+          } else if ('DUSD' === vaultCollaterral.symbolKey) {
+            dusdInVaults += +vaultCollaterral.amount;
           }
         });
       });
     });
 
-    return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults;
+    return dfiInVaults * this.poolBtc?.priceB + btcInVaults * this.poolBtc?.priceA + usdcInVaults + usdtInVaults
+      + dusdInVaults * 0.99;
 
   }
 

@@ -319,6 +319,8 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdcActualPrice = 0;
     let usdtInVaults = 0;
     let usdtActualPrice = 0;
+    let dusdInVaults = 0;
+    let dusdActualPrice = 0;
 
     if (!vault) {
       return 0;
@@ -337,6 +339,9 @@ export class ValueComponent implements OnInit, OnChanges {
       } else if ('USDT' === vaultCollaterral.symbolKey) {
         usdtInVaults += +vaultCollaterral.amount;
         usdtActualPrice = +vaultCollaterral.activePrice?.active?.amount;
+      } else if ('DUSD' === vaultCollaterral.symbolKey) {
+        dusdInVaults += +vaultCollaterral.amount;
+        dusdActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       }
 
     });
@@ -355,6 +360,8 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdcNextPrice = 0;
     let usdtInVaults = 0;
     let usdtNextPrice = 0;
+    let dusdInVaults = 0;
+    let dusdActualPrice = 0;
 
     if (!vault) {
       return 0;
@@ -373,6 +380,9 @@ export class ValueComponent implements OnInit, OnChanges {
       } else if ('USDT' === vaultCollaterral.symbolKey) {
         usdtInVaults += +vaultCollaterral.amount;
         usdtNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      } else if ('DUSD' === vaultCollaterral.symbolKey) {
+        dusdInVaults += +vaultCollaterral.amount;
+        dusdActualPrice = +vaultCollaterral.activePrice?.next?.amount;
       }
 
     });
