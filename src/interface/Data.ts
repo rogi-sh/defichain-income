@@ -655,6 +655,7 @@ export class Exchange {
   kucoinStatusWithdraw: boolean;
   dfxBuy: string;
   dfxSell: string;
+  dfxStaking: string;
 }
 
 export class UserHistoryItem {

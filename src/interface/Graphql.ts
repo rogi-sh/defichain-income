@@ -395,6 +395,7 @@ export const EXCHANGE = gql`
     kucoinStatusWithdraw
     dfxBuy
     dfxSell
+    dfxStaking
   }
 }
 `;

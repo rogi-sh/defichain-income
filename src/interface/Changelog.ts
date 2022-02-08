@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.13 - 8.2.2022';
+    this.log.comment = 'Add DFX Status Staking';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.12 - 7.2.2022';
     this.log.comment = 'Add DUSD as collateral';
     this.logs.push(this.log);
