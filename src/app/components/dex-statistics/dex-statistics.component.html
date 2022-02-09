@@ -559,6 +559,8 @@
             /
             CEX:
             <app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            / Oracle:
+            <app-price [fiat]='fiat' [usdPrice]='getStockPrice("DFI-USD")'></app-price>
             <span
               class='font-bold'> Premium: <span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
