@@ -1844,6 +1844,9 @@
               </div>
             </div>
             <div *ngSwitchCase="'history'">
+              <h1 class="text-3xl mb-4 text-pink-500">{{ 'history-app.title' | translate }}</h1>
+              <h2 class='text-lg dark:text-gray-100'>{{ 'history-app.h2' | translate }}</h2>
+              <br>
               <div class="contents w-full max-h-screen h-full overflow-visible">
                 <app-history>
                 </app-history>

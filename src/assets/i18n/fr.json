@@ -93,7 +93,8 @@
     "reinvest-mn": "Les récompenses des masternodes sont réinvesties tous les 3 jours."
   },
   "history-app": {
-    "title": "Histoire"
+    "title": "Histoire",
+    "h2": "Sélectionne le pool et la période pour la consultation de l'historique"
   },
   "hour": "Heure",
   "day": "Jour",

@@ -12,18 +12,10 @@
 </div>
 
 <div class="flex">
-  <div class="inline-block w-2/4 pl-2 align-top">
-    <button
-      type="button"
-      (click)="loadHistory()"
-      class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
-    >
-      Load History of Pool
-    </button>
-  </div>
+
   <div class="inline-block pl-2 align-top">
     <select
-      class='bg-gray-100 w-30 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
+      class='bg-gray-100 w-35 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
       (change)='onChangeStockPool($event.target.value)'
     >
       <option selected>BTC</option>
@@ -57,7 +49,7 @@
   </div>
   <div class="inline-block pl-2 align-top">
     <select
-      class='bg-gray-100 w-30 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
+      class='bg-gray-100 w-33 h-14 px-3 py-2 rounded-md mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2'
       (change)='onChangeDateStockPool($event.target.value)'
     >
       <option selected>1D</option>
@@ -68,7 +60,18 @@
       <option>ALL</option>
     </select>
   </div>
+  <div class="w-40 pl-2 align-top">
+    <button
+      type="button"
+      (click)="loadHistory()"
+      class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md w-full h-14 text-white align-top uppercase"
+    >
+      GO
+    </button>
+  </div>
 </div>
+<br>
+
 <div class='mt-2'>
   <apx-chart
     *ngIf='history && history.length > 0 && chartOptions && chartOptions.series.length > 0'

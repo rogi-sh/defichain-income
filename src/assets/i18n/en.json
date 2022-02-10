@@ -93,7 +93,8 @@
     "reinvest-mn": "Reward from masternodes is reinvested every 3 days"
   },
   "history-app": {
-    "title": "History"
+    "title": "History",
+    "h2": "Choose pool and timeperiod for history"
   },
   "hour": "Hour",
   "day": "Day",

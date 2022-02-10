@@ -92,7 +92,8 @@
     "reinvest-mn": "La recompensa de los masternodes se reinvierte cada 3 días"
   },
   "history-app": {
-    "title": "Historia"
+    "title": "Historia",
+    "h2": "Seleccione el grupo y el periodo de tiempo para la recuperación del historial"
   },
   "hour": "Hora",
   "day": "Día",
