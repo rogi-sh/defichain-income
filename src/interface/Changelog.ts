@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.15 - 10.2.2022';
+    this.log.comment = 'Better History wording and styling, show only numbers if value > 0 in all numbers';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.14 - 9.2.2022';
     this.log.comment = 'Oracle Price of DFI in DEX View Crypto pools';
     this.logs.push(this.log);
