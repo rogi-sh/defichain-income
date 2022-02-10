@@ -57,7 +57,7 @@
              {{ 'income.all' | translate }}
             </div>
           </div>
-          <div class='text-xl relative'>
+          <div *ngIf="dfiInStaking > 0"  class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
               <br />
@@ -73,7 +73,7 @@
             </div>
           </div>
 
-          <div class='text-xl relative'>
+          <div *ngIf="getDfiCountLM() > 0" class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getDfiCountLM() | number: '1.2-2' }}
               <br />
@@ -89,7 +89,7 @@
             </div>
           </div>
 
-          <div class='text-xl relative'>
+          <div *ngIf="getDfiCountWallet() > 0" class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
               {{isIncognitoModeOn ? '****' : getDfiCountWallet()| number: '1.2-2' }}
               <br />
