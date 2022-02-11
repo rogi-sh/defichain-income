@@ -1540,7 +1540,9 @@ export class AppComponent implements OnInit {
     this.dataService.setDfiUsd(this.poolBtc.priceB);
     this.dataLoaded = true;
     this.avgApr = this.getAPRAverage();
-    this.update();
+    if (this.apiOnline) {
+      this.update();
+    }
     this.spinner.hide();
   }
 
