@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.15 - 11.2.2022';
+    this.log.comment = 'Add newsletter status to newsletter page';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.15 - 10.2.2022';
     this.log.comment = 'Better History wording and styling, show only numbers if value > 0 in all numbers';
     this.logs.push(this.log);
