@@ -1,13 +1,8 @@
 module.exports = {
   prefix: '',
-  purge: {
-    enabled: true,
-    content: [
-      './src/**/*.{html,ts}',
-    ]
-  },
-  mode: 'jit',
-  darkMode: 'class', // or 'media' or 'class'
+  content: [
+    './src/**/*.{html,ts}',
+  ],
   theme: {
     extend: {
       typography: {
@@ -27,14 +22,9 @@ module.exports = {
           500: '#FF00AF',
           600: '#CC008B',
         },
-        blueCake: {
-          600: '#5B10FF',
-          700: '#1E40AF'
-        },
         yellow: {
           500: '#ffff00',
           600: '#ffff4c'
-
         }
       },
       minHeight: {
@@ -46,12 +36,6 @@ module.exports = {
       width: {
         'fit-content': 'fit-content',
       },
-    },
-  },
-  variants: {
-    extend: {
-      borderStyle: ['dark'],
-      textColor: ['active, focus, hover'],
     },
   },
   plugins: [
