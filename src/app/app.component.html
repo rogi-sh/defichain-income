@@ -332,87 +332,87 @@
 
   <div class="dashboard-height dark:bg-gray-800 sm:flex w-full">
     <div class="hidden sm:inline-block transition duration-300 ease-in-out transform sm:w-24">
-      <div class="flex flex-col text-center h-full relative sm:w-24">
-        <a
-          (click)="handlePage('dashboard')"
-          [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="Dashboard"
-        >
-          <app-icon name="home"></app-icon>
-        </a>
-        <a
-          (click)="handlePage('holdings')"
-          [ngClass]="currentPage === 'holdings' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'holdings.title' | translate }}"
-        >
-          <app-icon name="doughnut-chart"></app-icon>
-        </a>
-        <a
-          (click)="handlePage('income')"
-          [ngClass]="currentPage === 'income' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'income.word' | translate }}"
-        >
-          <app-icon name="income"></app-icon>
-        </a>
+      <div class="flex flex-grow flex-1 flex-col h-full overflow-hidden">
+        <div class="flex flex-1 flex-col overflow-y-auto">
+          <a
+            (click)="handlePage('dashboard')"
+            [ngClass]="currentPage === 'dashboard' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="Dashboard"
+          >
+            <app-icon name="home"></app-icon>
+          </a>
+          <a
+            (click)="handlePage('holdings')"
+            [ngClass]="currentPage === 'holdings' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'holdings.title' | translate }}"
+          >
+            <app-icon name="doughnut-chart"></app-icon>
+          </a>
+          <a
+            (click)="handlePage('income')"
+            [ngClass]="currentPage === 'income' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'income.word' | translate }}"
+          >
+            <app-icon name="income"></app-icon>
+          </a>
 
-        <a
-          (click)="handlePage('forecast')"
-          [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'forecast.title' | translate }}"
-        >
-          <app-icon name="world"></app-icon>
-        </a>
+          <a
+            (click)="handlePage('forecast')"
+            [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'forecast.title' | translate }}"
+          >
+            <app-icon name="world"></app-icon>
+          </a>
 
-        <a
-          (click)="handlePage('history')"
-          [ngClass]="currentPage === 'history' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'history.title' | translate }}"
-        >
-          <app-icon name="clock"></app-icon>
-        </a>
+          <a
+            (click)="handlePage('history')"
+            [ngClass]="currentPage === 'history' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'history.title' | translate }}"
+          >
+            <app-icon name="clock"></app-icon>
+          </a>
 
-        <a
-          (click)="handlePage('dex')"
-          [ngClass]="currentPage === 'dex' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="DEX"
-        >
-          <app-icon name="bar-chart"></app-icon>
-        </a>
+          <a
+            (click)="handlePage('dex')"
+            [ngClass]="currentPage === 'dex' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="DEX"
+          >
+            <app-icon name="bar-chart"></app-icon>
+          </a>
 
-        <a
-          (click)="handlePage('defi')"
-          [ngClass]="currentPage === 'defi' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="DEFI"
-        >
-          <app-icon name="line-chart"></app-icon>
-        </a>
-        <a
-          (click)="handlePage('calculator')"
-          [ngClass]="currentPage === 'calculator' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'income.calc' | translate }}"
-        >
-          <app-icon name="calculator"></app-icon>
-        </a>
-        <a
-          (click)="handlePage('newsletter')"
-          [ngClass]="currentPage === 'newsletter' ? 'text-pink-500' : 'dark:text-gray-100'"
-          class="hover:text-pink-400 py-3 text-center cursor-pointer"
-          title="{{ 'newsletter.title' | translate }}"
-        >
-          <app-icon name="newsletter"></app-icon>
-        </a>
-      </div>
+          <a
+            (click)="handlePage('defi')"
+            [ngClass]="currentPage === 'defi' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="DEFI"
+          >
+            <app-icon name="line-chart"></app-icon>
+          </a>
+          <a
+            (click)="handlePage('calculator')"
+            [ngClass]="currentPage === 'calculator' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'income.calc' | translate }}"
+          >
+            <app-icon name="calculator"></app-icon>
+          </a>
+          <a
+            (click)="handlePage('newsletter')"
+            [ngClass]="currentPage === 'newsletter' ? 'text-pink-500' : 'dark:text-gray-100'"
+            class="hover:text-pink-400 py-3 text-center cursor-pointer"
+            title="{{ 'newsletter.title' | translate }}"
+          >
+            <app-icon name="newsletter"></app-icon>
+          </a>
+        </div>
 
-      <div class="mx-8">
-        <div class="absolute bottom-5 inset-x-2/4 transform -translate-x-2/4 w-full">
+        <div class="flex-2 justify-end self-end mx-8">
           <a
             (click)="handlePage('info')"
             [ngClass]="currentPage === 'info' ? 'text-pink-500' : 'dark:text-gray-100'"
@@ -2756,7 +2756,7 @@
                           </div>
                           <div>
                             <button
-                              class='bg-blueCake-600 hover:bg-blueCake-700 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+                              class='bg-blueCake-[#5B10FF] hover:bg-blueCake-[#1E40AF] transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
                               onclick="window.open('https://cakedefi.com/?ref=754025', '_blank');"
                               (click)='trackCakeRef()'>
                               Login / SignUp
@@ -3948,7 +3948,7 @@
                           </div>
                           <div>
                             <button
-                              class='bg-blueCake-600 hover:bg-blueCake-700 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+                              class='bg-blueCake-[#5B10FF] hover:bg-blueCake-[#1E40AF] transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
                               onclick="window.open('https://cakedefi.com/?ref=754025', '_blank');"
                               (click)='trackCakeRef()'>
                               Login / SignUp

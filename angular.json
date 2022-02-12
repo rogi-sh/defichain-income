@@ -29,9 +29,7 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/marked/lib/marked.js"
-            ],
+            "scripts": [],
             "customWebpackConfig": {
               "path": "webpack.config.js"
             },
