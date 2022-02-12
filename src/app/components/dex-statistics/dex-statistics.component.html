@@ -43,35 +43,88 @@
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
-        <h1 class='text-lg font-bold'>DFI</h1>
+        <h1 class='text-lg font-bold'>DFI Locked</h1>
         <a class='text-pink-500 hover:underline'
            target='_blank'
            href='https://defiscan.live/dex'>Defiscan</a>
         <br>
         <div class='grid gap-2'>
           <div>
-            <span class='mr-2'>DFI DEX locked:</span>
+            <span class='mr-2'>DEX:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{getDexDFI()  |  number: '1.2-2'}} -
+              {{getDexDFI()  |  number: '1.2-2'}} ~
               <app-price [fiat]='fiat' [usdPrice]='getDexDFI() * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
           <div>
-            <span class='mr-2'>DEX&Masternodes DFI Locked:</span>
+            <span class='mr-2'>Masternodes:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{getTotalDFILocked() |  number: '1.2-2'}} /
-              <app-price [fiat]='fiat' [usdPrice]='getTotalDFILocked() * this.getCryptoPools()[0]?.priceB'></app-price>
+              {{getTotalMasternodesDfiLocked() |  number: '1.2-2'}} ~
+              <app-price [fiat]='fiat' [usdPrice]='getTotalMasternodesDfiLocked() * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h1 class='text-lg font-bold'>DFI Burn</h1>
+        <a class='text-pink-500 hover:underline'
+           target='_blank'
+           href='https://defiscan.live/address/8defichainBurnAddressXXXXXXXdRQkSm'>Defiscan</a>
+        <br>
+        <div class='grid gap-2'>
+          <div>
+            <span class='mr-2'>Payback burn:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+                {{burnDfi?.paybackburn |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.paybackburn * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>Auction burn:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{burnDfi?.auctionburn |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.auctionburn * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>Fee burn:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{burnDfi?.feeburn |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.feeburn * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+          </div>
+          <div>
+            <span class='mr-2'>Payback fee:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{burnDfi?.dfipaybackfee |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.dfipaybackfee * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
 
           <div>
-            <span class='mr-2'>Total DFI Burned:</span>
+            <span class='mr-2'>Amount UTXO:</span>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{burnedDfi |  number: '1.2-2'}} /
-              <app-price [fiat]='fiat' [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
+              {{burnDfi?.amount |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.amount * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+          </div>
+
+          <div>
+            <span class='mr-2'>Total:</span>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              {{burnedDfi |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnedDfi' [fiat]='fiat' [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
         </div>
@@ -180,7 +233,7 @@
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
           >
-            {{ MNCount }} / {{ MNCount * 20000 / 1000000 }} Mio. DFI /
+            {{ MNCount }} ~ {{ MNCount * 20000 / 1000000 }} Mio. DFI ~
             <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.masternodes'></app-price>
           </div>
         </div>
@@ -189,8 +242,8 @@
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
           >
-            {{ MNCount5Freezer }} /  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
-            /
+            {{ MNCount5Freezer }} ~  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
+            ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount5Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>
@@ -200,8 +253,8 @@
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
           >
-            {{ MNCount10Freezer }} /  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
-            /
+            {{ MNCount10Freezer }} ~  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
+            ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount10Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>
@@ -211,8 +264,8 @@
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
           >
-            {{ MNCount0Freezer }} /  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
-            /
+            {{ MNCount0Freezer }} ~  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
+            ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount0Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>

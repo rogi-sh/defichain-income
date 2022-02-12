@@ -35,6 +35,14 @@ export class StockOracles {
   data: Array<StockOracle>;
 }
 
+export class Burn {
+  paybackburn: number;
+  dfipaybackfee: number;
+  auctionburn: number;
+  feeburn: number;
+  amount: number;
+}
+
 export class StockOracle {
   id: string;
   price: OrcalePrice;

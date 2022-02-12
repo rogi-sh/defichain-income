@@ -6,7 +6,7 @@ import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { Blocks, ChartOptions6, Exchange, StockOracles } from '@interfaces/Data';
+import { Blocks, Burn, ChartOptions6, Exchange, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -96,6 +96,8 @@ export class DexStatisticsComponent implements OnInit {
 
   oraclePrices: StockOracles;
 
+  burnDfi: Burn;
+
   incomeStatistics: IncomeStatistics;
 
   history = new Array<History>();
@@ -122,6 +124,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadAppRelease();
     this.loadWalletRelease();
     this.loadOraclePrices();
+    this.loadBurnInfo();
     this.loadIncomeStatistics();
     this.calculateBlockTime();
     this.calculateExchangesStatus();
@@ -261,6 +264,16 @@ export class DexStatisticsComponent implements OnInit {
       });
   }
 
+  loadBurnInfo(): void {
+    this.dex.getBurnInfo()
+      .subscribe(burn => {
+          this.burnDfi = burn;
+        },
+        err => {
+          console.error('Fehler beim load burn info: ' + JSON.stringify(err.message));
+        });
+  }
+
   getBlockToNextCycle(): string {
     if (!this.rewards || !this.blockTimeUsed) {
       return '0';
@@ -314,7 +327,11 @@ export class DexStatisticsComponent implements OnInit {
 
   // TODO Add Vaults DFI
   getTotalDFILocked(): number {
-    return this.getDexDFI() + this.MNCount * 20000;
+    return this.getDexDFI() + this.getTotalMasternodesDfiLocked();
+  }
+
+  getTotalMasternodesDfiLocked(): number {
+    return this.MNCount * 20000;
   }
 
   getApyWeeklyFromApr(apr: number): number {
