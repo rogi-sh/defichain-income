@@ -554,10 +554,14 @@ export class IncomeComponent implements OnInit, OnChanges {
         width: '100%',
         height: '400px',
         type: 'polarArea',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       stroke: {
-        colors: ['#fff']
+        colors: ['#fff'],
+        curve: 'straight'
       },
       labels: this.getSeriesIncomeTitle(),
       fill: {

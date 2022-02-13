@@ -566,7 +566,7 @@ export class AppComponent implements OnInit {
       this.userHistory.values.forEach(v => {
         if (v.totalValue > 0) {
           const date = new Date(v.date);
-          dates.push( date.toLocaleDateString() + ' - ' + date.toLocaleTimeString());
+          dates.push( date.toISOString());
         }
       });
     }
@@ -585,31 +585,23 @@ export class AppComponent implements OnInit {
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: false
       },
       stroke: {
         width: 4,
-        curve: 'smooth',
+        curve: 'straight',
         dashArray: [0, 8, 5],
         colors: ['#00f700']
       },
       title: {
         text: 'Total Value in ' + this.fiat,
         align: 'left'
-      },
-      legend: {
-        // tslint:disable-next-line:typedef
-        tooltipHoverFormatter(val, opts) {
-          return (
-            val +
-            ' - <strong>' +
-            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-            '</strong>'
-          );
-        }
       },
       markers: {
         size: 0,
@@ -621,10 +613,11 @@ export class AppComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
         categories: this.getUserHistoryDates(),
+        type: 'datetime'
       },
       tooltip: {
         y: [
@@ -639,7 +632,7 @@ export class AppComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }
@@ -655,38 +648,30 @@ export class AppComponent implements OnInit {
         {
           name: 'Income History ' + this.fiat + ' per Month',
           data: this.getUserHistoryTotalIncomeUsd(),
-          color: '#00f700'
+          color: '#0BDA51'
         }
       ],
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
 
       },
       dataLabels: {
         enabled: false
       },
       stroke: {
-        width: 6,
-        curve: 'smooth',
+        width: 4,
+        curve: 'straight',
         dashArray: [0, 8, 5],
-        colors: ['#ff00af', '#00f700'],
+        colors: ['#ff00af', '#0BDA51'],
       },
       title: {
         text: 'Total Income in DFI & ' + this.fiat,
         align: 'left'
-      },
-      legend: {
-        // tslint:disable-next-line:typedef
-        tooltipHoverFormatter(val, opts) {
-          return (
-            val +
-            ' - <strong>' +
-            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-            '</strong>'
-          );
-        }
       },
       markers: {
         size: 0,
@@ -698,9 +683,10 @@ export class AppComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
+        type: 'datetime',
         categories: this.getUserHistoryDates(),
       },
       tooltip: {
@@ -724,7 +710,7 @@ export class AppComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }

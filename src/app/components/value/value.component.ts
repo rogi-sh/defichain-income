@@ -791,10 +791,14 @@ export class ValueComponent implements OnInit, OnChanges {
         width: '100%',
         height: '900px',
         type: 'polarArea',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       stroke: {
-        colors: ['#fff']
+        colors: ['#fff'],
+        curve: 'straight'
       },
       labels: this.getLabelsValue(),
       fill: {
@@ -1395,7 +1399,10 @@ export class ValueComponent implements OnInit, OnChanges {
       chart: {
         width: '100%',
         type: 'donut',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: true
