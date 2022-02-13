@@ -82,7 +82,10 @@ export class HistoryComponent implements OnInit {
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: false
@@ -118,9 +121,10 @@ export class HistoryComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
+        type: 'datetime',
         categories: this.getDates(),
       },
       tooltip: {
@@ -136,7 +140,7 @@ export class HistoryComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }
@@ -152,7 +156,10 @@ export class HistoryComponent implements OnInit {
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: false
@@ -188,9 +195,10 @@ export class HistoryComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
+        type: 'datetime',
         categories: this.getDates(),
       },
       tooltip: {
@@ -206,7 +214,7 @@ export class HistoryComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }
@@ -222,7 +230,10 @@ export class HistoryComponent implements OnInit {
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: false
@@ -258,9 +269,10 @@ export class HistoryComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
+        type: 'datetime',
         categories: this.getDates(),
       },
       tooltip: {
@@ -276,7 +288,7 @@ export class HistoryComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }
@@ -292,7 +304,10 @@ export class HistoryComponent implements OnInit {
       chart: {
         height: 500,
         type: 'line',
-        background: 'transparent'
+        background: 'transparent',
+        animations: {
+          enabled: false
+        }
       },
       dataLabels: {
         enabled: false
@@ -328,9 +343,10 @@ export class HistoryComponent implements OnInit {
         labels: {
           trim: false,
           style: {
-            colors: '#f1f1f1'
+            colors: this.getTheme() === 'dark' ? '#f1f1f1' : '#000000'
           }
         },
+        type: 'datetime',
         categories: this.getDates(),
       },
       tooltip: {
@@ -346,7 +362,7 @@ export class HistoryComponent implements OnInit {
         ]
       },
       grid: {
-        borderColor: '#f1f1f1'
+        borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
       }
     };
   }
@@ -461,7 +477,7 @@ export class HistoryComponent implements OnInit {
       return dates;
     }
     this.historyNumbers.forEach(h => {
-      dates.push(h.date.toLocaleDateString() + ' - ' + h.date.toLocaleTimeString());
+      dates.push(h.date.toISOString());
     });
 
     return dates;
