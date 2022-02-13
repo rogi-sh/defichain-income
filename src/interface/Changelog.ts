@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.18 - 13.2.2022';
+    this.log.comment = 'Fix DUSD colleteral in next calculation';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.17 - 12.2.2022';
     this.log.comment = 'Add burn to dex view';
     this.logs.push(this.log);

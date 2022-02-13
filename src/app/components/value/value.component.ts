@@ -320,7 +320,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdtInVaults = 0;
     let usdtActualPrice = 0;
     let dusdInVaults = 0;
-    let dusdActualPrice = 0;
+    const dusdActualPrice = 0.99;
 
     if (!vault) {
       return 0;
@@ -341,13 +341,12 @@ export class ValueComponent implements OnInit, OnChanges {
         usdtActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       } else if ('DUSD' === vaultCollaterral.symbolKey) {
         dusdInVaults += +vaultCollaterral.amount;
-        dusdActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       }
 
     });
 
     return dfiInVaults * dfiActualPrice + btcInVaults * btcActualPrice + usdcInVaults * usdcActualPrice
-      + usdtInVaults * usdtActualPrice;
+      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice;
   }
 
   getNextCollateralFromVaultUsd(vault: Vault): number {
@@ -361,7 +360,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdtInVaults = 0;
     let usdtNextPrice = 0;
     let dusdInVaults = 0;
-    let dusdActualPrice = 0;
+    const dusdActualPrice = 0.99;
 
     if (!vault) {
       return 0;
@@ -382,13 +381,12 @@ export class ValueComponent implements OnInit, OnChanges {
         usdtNextPrice = +vaultCollaterral.activePrice?.next?.amount;
       } else if ('DUSD' === vaultCollaterral.symbolKey) {
         dusdInVaults += +vaultCollaterral.amount;
-        dusdActualPrice = +vaultCollaterral.activePrice?.next?.amount;
       }
 
     });
 
     return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + usdcInVaults * usdcNextPrice
-      + usdtInVaults * usdtNextPrice;
+      + usdtInVaults * usdtNextPrice + dusdInVaults * dusdActualPrice;
   }
 
   getCollateralCountVaults(currency: string): number {
