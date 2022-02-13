@@ -595,7 +595,7 @@ export class AppComponent implements OnInit {
       },
       stroke: {
         width: 4,
-        curve: 'straight',
+        curve: 'smooth',
         dashArray: [0, 8, 5],
         colors: ['#00f700']
       },
@@ -665,7 +665,7 @@ export class AppComponent implements OnInit {
       },
       stroke: {
         width: 4,
-        curve: 'straight',
+        curve: 'smooth',
         dashArray: [0, 8, 5],
         colors: ['#ff00af', '#0BDA51'],
       },
