@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.21 - 15.2.2022';
+    this.log.comment = 'Add better tooltip with hours to charts';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.20 - 15.2.2022';
     this.log.comment = 'Fix darkmode change in value and income history charts';
     this.logs.push(this.log);

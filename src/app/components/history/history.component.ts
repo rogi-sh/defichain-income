@@ -59,7 +59,7 @@ export class HistoryComponent implements OnInit {
         this.buildChartPrice();
         this.buildChartReserve();
         this.buildChartLiquidity();
-        this.buildChartVolume();
+        //this.buildChartVolume();
         this.spinner.hide('historySpinner');
       } else {
         this.spinner.hide('historySpinner');
@@ -140,7 +140,10 @@ export class HistoryComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
@@ -217,7 +220,10 @@ export class HistoryComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
@@ -294,7 +300,10 @@ export class HistoryComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
@@ -371,7 +380,10 @@ export class HistoryComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
@@ -506,7 +518,7 @@ export class HistoryComponent implements OnInit {
     this.buildChartPrice();
     this.buildChartReserve();
     this.buildChartLiquidity();
-    this.buildChartVolume();
+    //this.buildChartVolume();
     this.spinner.hide('historySpinner');
   }
 

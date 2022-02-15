@@ -632,7 +632,10 @@ export class AppComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'
@@ -713,7 +716,10 @@ export class AppComponent implements OnInit {
               }
             }
           }
-        ]
+        ],
+        x: {
+          format: 'd/M/yyyy H:m'
+        }
       },
       grid: {
         borderColor: this.getTheme() === 'dark' ? '#f1f1f1' : '#808080'

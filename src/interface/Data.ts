@@ -170,7 +170,7 @@ export type ChartOptions6 = {
   stroke: ApexStroke;
   dataLabels: ApexDataLabels;
   markers: ApexMarkers;
-  tooltip: any; // ApexTooltip;
+  tooltip: ApexTooltip;
   yaxis: ApexYAxis;
   grid: ApexGrid;
   legend: ApexLegend;
