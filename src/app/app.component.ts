@@ -523,24 +523,18 @@ export class AppComponent implements OnInit {
     const numbers = new Array<number>();
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
-        if (v.totalValue > 0) {
           numbers.push(Math.round(v.totalValue * this.dataService.getPrice(this.fiat) * 100) / 100);
-        }
       });
     }
 
     return numbers;
   }
 
-
-
   getUserHistoryTotalIncomeDfi(): Array<number> {
     const numbers = new Array<number>();
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
-        if (v.totalValueIncomeDfi > 0) {
           numbers.push(Math.round(v.totalValueIncomeDfi * 100) / 100);
-        }
       });
     }
 
@@ -551,9 +545,7 @@ export class AppComponent implements OnInit {
     const numbers = new Array<number>();
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
-        if (v.totalValueIncomeUsd > 0) {
           numbers.push(Math.round(v.totalValueIncomeUsd * this.dataService.getPrice(this.fiat) * 100) / 100);
-        }
       });
     }
 
