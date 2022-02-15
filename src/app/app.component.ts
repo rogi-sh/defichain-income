@@ -590,6 +590,9 @@ export class AppComponent implements OnInit {
           enabled: false
         }
       },
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
+      },
       dataLabels: {
         enabled: false
       },
@@ -651,6 +654,9 @@ export class AppComponent implements OnInit {
           color: '#0BDA51'
         }
       ],
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
+      },
       chart: {
         height: 500,
         type: 'line',
@@ -4836,6 +4842,8 @@ export class AppComponent implements OnInit {
     }
 
     localStorage.setItem('theme', this.isDarkModeOn ? 'dark' : 'light');
+    this.buildChartValue();
+    this.buildChartIncome();
   }
 
   toggleTotalValueChart(): void {

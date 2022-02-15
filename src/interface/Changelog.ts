@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.20 - 15.2.2022';
+    this.log.comment = 'Fix darkmode change in value and income history charts';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.19 - 13.2.2022';
     this.log.comment = 'Fix Value and Income Chart performance';
     this.logs.push(this.log);

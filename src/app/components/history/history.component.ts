@@ -87,6 +87,9 @@ export class HistoryComponent implements OnInit {
           enabled: false
         }
       },
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
+      },
       dataLabels: {
         enabled: false
       },
@@ -160,6 +163,9 @@ export class HistoryComponent implements OnInit {
         animations: {
           enabled: false
         }
+      },
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
       },
       dataLabels: {
         enabled: false
@@ -235,6 +241,9 @@ export class HistoryComponent implements OnInit {
           enabled: false
         }
       },
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
+      },
       dataLabels: {
         enabled: false
       },
@@ -308,6 +317,9 @@ export class HistoryComponent implements OnInit {
         animations: {
           enabled: false
         }
+      },
+      theme: {
+        mode: this.getTheme() === 'dark' ? 'dark' : 'light'
       },
       dataLabels: {
         enabled: false

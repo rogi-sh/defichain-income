@@ -12,8 +12,8 @@ import {
   ApexGrid,
   ApexTooltip,
   ApexTitleSubtitle,
-  ApexMarkers
-} from 'ng-apexcharts';
+  ApexMarkers, ApexTheme,
+} from 'ng-apexcharts'
 import {Outcome} from './Dex';
 
 export class Data {
@@ -117,6 +117,7 @@ export type ChartOptions = {
   fill: ApexFill;
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
+  theme: ApexTheme;
 };
 
 export type ChartOptions2 = {
@@ -138,6 +139,7 @@ export type ChartOptions3 = {
   stroke: ApexStroke;
   dataLabels: ApexDataLabels;
   fill: ApexFill;
+  theme: ApexTheme;
 };
 
 export type ChartOptions4 = {
@@ -173,6 +175,7 @@ export type ChartOptions6 = {
   grid: ApexGrid;
   legend: ApexLegend;
   title: ApexTitleSubtitle;
+  theme: ApexTheme;
 };
 
 export class Series {

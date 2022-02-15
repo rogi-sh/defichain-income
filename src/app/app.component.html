@@ -1018,7 +1018,7 @@
                            [grid]='chartOptions?.grid'
                            [legend]='chartOptions?.legend'
                            [title]='chartOptions?.title'
-                           [theme]='{ mode: getTheme() }'
+                           [theme]='chartOptions?.theme'
                 ></apx-chart>
               </div>
             </div>
@@ -1789,7 +1789,7 @@
                            [grid]='chartOptions2?.grid'
                            [legend]='chartOptions2?.legend'
                            [title]='chartOptions2?.title'
-                           [theme]='{ mode: getTheme() }'
+                           [theme]='chartOptions2?.theme'
                 ></apx-chart>
               </div>
               <br>
@@ -1843,7 +1843,7 @@
                 </app-forecast>
               </div>
             </div>
-            <div *ngSwitchCase="'history'">R
+            <div *ngSwitchCase="'history'">
               <h1 class="text-3xl mb-4 text-pink-500">{{ 'history-app.title' | translate }}</h1>
               <h2 class='text-lg dark:text-gray-100'>{{ 'history-app.h2' | translate }}</h2>
               <br>
