@@ -3656,6 +3656,11 @@ export class AppComponent implements OnInit {
 
     this.clearWallet();
     this.loadAddressesAndDexData();
+
+    setTimeout(() => {
+      this.update();
+    }, 10000);
+
   }
 
   async loadMamon(): Promise<void> {
@@ -3817,9 +3822,10 @@ export class AppComponent implements OnInit {
     }
 
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
+      /** spinner ends after 10 seconds and update */
       this.showDialogAddressesAdded = false;
-    }, 5000);
+      this.update();
+    }, 10000);
 
     this.adress = '';
     this.masternodeAdress = false;
@@ -3827,6 +3833,7 @@ export class AppComponent implements OnInit {
     this.masternodeFreezer10 = false;
     this.clearWallet();
     this.loadAddressesAndDexData();
+
   }
 
   deleteAdress(adress: string): void {
