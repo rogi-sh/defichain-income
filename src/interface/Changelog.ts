@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.22 - 16.2.2022';
+    this.log.comment = 'Fix no user history chart if total value 0';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.21 - 15.2.2022';
     this.log.comment = 'Add better tooltip with hours to charts';
     this.logs.push(this.log);

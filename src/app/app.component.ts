@@ -556,10 +556,8 @@ export class AppComponent implements OnInit {
     const dates = new Array<string>();
     if (this.userHistory && this.userHistory.values && this.userHistory.values.length > 0) {
       this.userHistory.values.forEach(v => {
-        if (v.totalValue > 0) {
           const date = new Date(v.date);
           dates.push( date.toISOString());
-        }
       });
     }
 
