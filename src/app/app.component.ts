@@ -1115,7 +1115,7 @@ export class AppComponent implements OnInit {
         }, 5000);
       }
     }, (error) => {
-      console.log('there was an error sending mutation register', error);
+      console.log('there was an error sending mutation update', error);
       this.errorBackend = error.message;
       setInterval(() => {
         this.errorBackend = null;
@@ -3860,6 +3860,11 @@ export class AppComponent implements OnInit {
       this.clearWallet();
       this.loadAddressesAndDexData();
     }
+
+    setTimeout(() => {
+      /** after 5 seconds update */
+      this.update();
+    }, 5000);
 
   }
 
