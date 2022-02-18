@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.23 - 18.2.2022';
+    this.log.comment = 'Auto Update (5 s) User after add, remove or import addresses, fix history title';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.22 - 16.2.2022';
     this.log.comment = 'Fix no user history chart if total value 0';
     this.logs.push(this.log);
