@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '8.12.25 - 21.2.2022';
-    this.log.comment = 'Fix eem and nvda apr in income';
+    this.log.comment = 'Fix eem and nvda apr in income, better vaults style, sort vaults state and emoji';
     this.logs.push(this.log);
 
     this.log = new Log();
