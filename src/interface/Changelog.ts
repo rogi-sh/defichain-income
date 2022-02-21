@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.25 - 21.2.2022';
+    this.log.comment = 'Fix eem and nvda apr in income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.24 - 18.2.2022';
     this.log.comment = 'Add new language, welcome NL';
     this.logs.push(this.log);
