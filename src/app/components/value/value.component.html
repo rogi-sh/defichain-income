@@ -531,7 +531,7 @@
       <div *ngIf='getAllVaultsFromAllAddresses().length > 0'>
         <h3
           class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
-          {{ "balance" | translate }} Vaults
+          {{ "balance" | translate }} Vaults (Oracle)
         </h3>
 
         <div *ngFor='let v of getAllVaultsFromAllAddresses()' class='md:gap-2'>
@@ -540,31 +540,26 @@
                 <a class='text-pink-500 hover:underline'
                    target='_blank'
                    href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
-                  - {{isIncognitoModeOn ? '****' : v.state}}</a>
-              <br />
-              <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
-               Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
-                             % -> Next {{isIncognitoModeOn ? '****' : getRatioNext(v)}} %  (Oracle)
-                <div *ngIf='isIncognitoModeOn'>****</div>
-              </div>
+                  - {{isIncognitoModeOn ? '****' : v.state}} - Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
+                  % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
+                  - Interest {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} %</a>
               <br />
                <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
-                In {{getBlockToNextOracle()}} - Schema {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}}
-                 / {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} % (Oracle)
+                 Next In {{getBlockToNextOracle()}} ~ <span class='text-xl'>{{isIncognitoModeOn ? '****' : getRatioNext(v)}} % </span>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>
               <br>
               <div
                 class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Collateral
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price>
-                -> Next  <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price> (Oracle)</div>
+                <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price></span>
+                -> Next  <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price></span> </div>
               <br>
               <div
                 class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Loan
                  <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLoanFromVaultUsd(v)'></app-price> ->
-                 Next <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextLoanFromVaultUsd(v)'></app-price> (Oracle)</div>
+                 Next <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextLoanFromVaultUsd(v)'></app-price> </div>
                 <div *ngIf='isIncognitoModeOn'>****</div>
 
               </div>
@@ -576,8 +571,10 @@
           Collaterals
         </h3>
         <div
-          class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
-          <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsCollateralUsd()'></app-price> (Oracle) </div>
+          class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
+          <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsCollateralUsd()'></app-price> <span class='text-sm'></span>
+
+        </div>
         <br>
 
         <div
@@ -668,8 +665,8 @@
           Loans
         </h3>
         <div
-          class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
-          <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsLoansValueUsd()'></app-price> (Oracle)</div>
+          class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
+        <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsLoansValueUsd()'></app-price> <span class='text-sm'></span></div>
         <div *ngIf='isIncognitoModeOn'>****</div>
 
       </div>
