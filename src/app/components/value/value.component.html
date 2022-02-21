@@ -537,12 +537,16 @@
         <div *ngFor='let v of getAllVaultsFromAllAddresses()' class='md:gap-2'>
           <div class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+                <span  *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
+               <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span>
                 <a class='text-pink-500 hover:underline'
                    target='_blank'
                    href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
                   - {{isIncognitoModeOn ? '****' : v.state}} - Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
                   % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
                   - Interest {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} %</a>
+              <span *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
+              <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span>
               <br />
                <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
                  Next In {{getBlockToNextOracle()}} ~ <span class='text-xl'>{{isIncognitoModeOn ? '****' : getRatioNext(v)}} % </span>
