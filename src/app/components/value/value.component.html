@@ -564,7 +564,6 @@
                 <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price></span>
                 -> Next  <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price></span> </div>
               <br>
-              <span  *ngIf='getRatioNext(v) >= v.collateralRatio'>&#11014;</span>
               <div
                 class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Loan
