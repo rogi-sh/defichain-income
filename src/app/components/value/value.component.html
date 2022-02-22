@@ -539,19 +539,24 @@
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
                 <span  *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
                <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span>
-                <a class='text-pink-500 hover:underline'
+              &nbsp;<a class='text-pink-500 hover:underline'
                    target='_blank'
                    href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
                   - {{isIncognitoModeOn ? '****' : v.state}} - Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
                   % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
-                  - Interest {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} %</a>
+                  - Interest {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} %</a> &nbsp;
               <span *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
               <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span>
               <br />
-               <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
-                 Next In {{getBlockToNextOracle()}} ~ <span class='text-xl'>{{isIncognitoModeOn ? '****' : getRatioNext(v)}} % </span>
+              <span  *ngIf='getRatioNext(v) < v.collateralRatio'>📉</span>
+              <span  *ngIf='getRatioNext(v) >= v.collateralRatio'>📈</span>
+              &nbsp; <div class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
+                 Next In {{getBlockToNextOracle()}} ~
+                 <span class='text-xl'>{{isIncognitoModeOn ? '****' : getRatioNext(v)}} % </span>
                 <div *ngIf='isIncognitoModeOn'>****</div>
-              </div>
+              </div>&nbsp;
+              <span  *ngIf='getRatioNext(v) < v.collateralRatio'>📉</span>
+              <span  *ngIf='getRatioNext(v) >= v.collateralRatio'>📈</span>
               <br>
               <div
                 class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
@@ -559,6 +564,7 @@
                 <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getCollateralFromVaultUsd(v)'></app-price></span>
                 -> Next  <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price></span> </div>
               <br>
+              <span  *ngIf='getRatioNext(v) >= v.collateralRatio'>&#11014;</span>
               <div
                 class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                 Loan
