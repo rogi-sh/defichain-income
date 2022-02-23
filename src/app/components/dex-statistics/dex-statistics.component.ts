@@ -13,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-dex-statistics',
   templateUrl: './dex-statistics.component.html',
+  styleUrls: ['../../app.component.css'],
 })
 export class DexStatisticsComponent implements OnInit {
 
@@ -114,10 +115,20 @@ export class DexStatisticsComponent implements OnInit {
 
   exchange: Exchange;
 
+  statisticsOn = true;
+  statisticsOnKey = 'statisticsOnKey';
+
   constructor(private apollo: Apollo, private dex: Dex, private dexService: Dex) {
   }
 
   ngOnInit(): void  {
+
+    console.log(this.statisticsOn);
+
+    if (localStorage.getItem(this.statisticsOnKey) !== null) {
+      this.statisticsOn = JSON.parse(localStorage.getItem(this.statisticsOnKey));
+    }
+
     this.loadCor();
     this.loadMilestones();
     this.loadNodeRelease();
@@ -128,6 +139,8 @@ export class DexStatisticsComponent implements OnInit {
     this.loadIncomeStatistics();
     this.calculateBlockTime();
     this.calculateExchangesStatus();
+
+    console.log(this.statisticsOn);
   }
 
   loadMilestones(): void {
@@ -431,6 +444,11 @@ export class DexStatisticsComponent implements OnInit {
       console.log(error);
     });
 
+  }
+
+
+  toggleStatisticsOn(): void {
+    localStorage.setItem(this.statisticsOnKey, String(this.statisticsOn));
   }
 
 }

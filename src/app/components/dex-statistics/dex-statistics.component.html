@@ -1,5 +1,23 @@
 <div>
-  <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
+  <span class="text-2xl mb-4 text-pink-500">DeFiChain Statistics</span> &nbsp;&nbsp;
+  <span
+    class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
+    <input
+      type='checkbox'
+      id='statisticsOnId'
+      [(ngModel)]='statisticsOn'
+      (ngModelChange)='toggleStatisticsOn()'
+      [ngClass]="{ 'isChecked': statisticsOn }"
+      class=' toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none'
+    />
+    <label
+      for='statisticsOnId'
+      class='toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer'
+    ></label>
+  </span>
+  <br>
+  <br>
+  <div *ngIf='statisticsOn' class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
 
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
@@ -492,7 +510,7 @@
     </div>
   </div>
   <br>
-  <div class='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4'>
+  <div *ngIf='statisticsOn' class='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4'>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <div class='max-h-96 overflow-auto'>
         <h1 class='text-lg font-bold'>Next Upgrades</h1>
@@ -571,9 +589,10 @@
                   [data]='getReleaseTextWallet(getLatestReleaseWallet()?.body)'></markdown>
       </div>
     </div>
+    <br>
+    <br>
   </div>
-  <br>
-  <br>
+
   <div class='mt-2'>
     <div class='overflow-x-auto rounded-md my-4'>
       <table class='max-w-full w-full rounded-md'>

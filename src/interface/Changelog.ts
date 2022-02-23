@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.26 - 23.2.2022';
+    this.log.comment = 'Toggle for Statistics in DEX View';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.25 - 21.2.2022';
     this.log.comment = 'Fix eem and nvda apr in income, better vaults style, sort vaults state and emoji';
     this.logs.push(this.log);
