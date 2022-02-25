@@ -6,7 +6,7 @@ import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { Blocks, Burn, ChartOptions6, Exchange, StockOracles } from '@interfaces/Data';
+import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data'
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -97,6 +97,8 @@ export class DexStatisticsComponent implements OnInit {
 
   oraclePrices: StockOracles;
 
+  poolPairsOcean: PoolPairsOcean;
+
   burnDfi: Burn;
 
   incomeStatistics: IncomeStatistics;
@@ -135,6 +137,7 @@ export class DexStatisticsComponent implements OnInit {
     this.loadAppRelease();
     this.loadWalletRelease();
     this.loadOraclePrices();
+    this.loadPoolPairsOcean();
     this.loadBurnInfo();
     this.loadIncomeStatistics();
     this.calculateBlockTime();
@@ -185,8 +188,8 @@ export class DexStatisticsComponent implements OnInit {
       });
   }
 
-  loadWalletRelease(): void {
-    this.octokit.rest.repos.listReleases({
+  async loadWalletRelease(): Promise<void> {
+    await this.octokit.rest.repos.listReleases({
       owner: 'DeFiCh',
       repo: 'wallet',
     })
@@ -277,6 +280,16 @@ export class DexStatisticsComponent implements OnInit {
       });
   }
 
+  loadPoolPairsOcean(): void {
+    this.dex.getPoolPairsOcean()
+      .subscribe(pairs => {
+          this.poolPairsOcean = pairs;
+        },
+        err => {
+          console.error('Fehler beim load pairs ocean: ' + JSON.stringify(err.message));
+        });
+  }
+
   loadBurnInfo(): void {
     this.dex.getBurnInfo()
       .subscribe(burn => {
@@ -285,6 +298,10 @@ export class DexStatisticsComponent implements OnInit {
         err => {
           console.error('Fehler beim load burn info: ' + JSON.stringify(err.message));
         });
+  }
+
+  getPoolFromOceanPoolPairs(id: string): PoolPairOcean {
+    return this.poolPairsOcean.data.find(p => p.id === id);
   }
 
   getBlockToNextCycle(): string {

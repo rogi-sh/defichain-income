@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.12.27 - 25.2.2022';
+    this.log.comment = 'Add Volume and detailed APR % with reward and commision split to dex table of pools';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.26 - 23.2.2022';
     this.log.comment = 'Toggle for Statistics in DEX View';
     this.logs.push(this.log);

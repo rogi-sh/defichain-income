@@ -35,6 +35,28 @@ export class StockOracles {
   data: Array<StockOracle>;
 }
 
+export class PoolPairsOcean {
+  data: Array<PoolPairOcean>;
+}
+
+export class PoolPairOcean {
+  id: string;
+  symbol: string;
+  volume: PoolPairVolume;
+  apr: PoolPairApr;
+}
+
+export class PoolPairVolume {
+  h24: number;
+  d30: number;
+}
+
+export class PoolPairApr {
+  reward: number;
+  commission: number;
+  total: number;
+}
+
 export class Burn {
   paybackburn: number;
   dfipaybackfee: number;
