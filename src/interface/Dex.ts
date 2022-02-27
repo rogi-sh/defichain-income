@@ -281,4 +281,5 @@ export class HistoryPrice {
   reserve: number;
   liquidiy: number;
   volume: number;
+  apr: number;
 }

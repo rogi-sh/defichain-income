@@ -59,7 +59,7 @@ export class HistoryComponent implements OnInit {
         this.buildChartPrice();
         this.buildChartReserve();
         this.buildChartLiquidity();
-        //this.buildChartVolume();
+        this.buildChartApr();
         this.spinner.hide('historySpinner');
       } else {
         this.spinner.hide('historySpinner');
@@ -311,12 +311,12 @@ export class HistoryComponent implements OnInit {
     };
   }
 
-  async buildChartVolume(): Promise<void> {
+  async buildChartApr(): Promise<void> {
     this.chartOptions4 = {
       series: [
         {
-          name: 'Volume',
-          data: this.getVolume()
+          name: 'APR in %',
+          data: this.getApr()
         }
       ],
       chart: {
@@ -340,7 +340,7 @@ export class HistoryComponent implements OnInit {
         colors: ['#00f700']
       },
       title: {
-        text: 'Pool Volume - ' + this.curentStock,
+        text: 'Pool APR % - ' + this.curentStock,
         align: 'left'
       },
       legend: {
@@ -376,7 +376,7 @@ export class HistoryComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return val;
+                return val + ' %';
               }
             }
           }
@@ -434,6 +434,7 @@ export class HistoryComponent implements OnInit {
     price.liquidiy = Math.round(this.getLiquidityNumber(h.pools[indexPairSearch]) * 100) / 100;
     price.volume = Math.round(+h.pools[indexPairSearch]?.volumeA * 100) / 100;
     price.date = new Date(h.date);
+    price.apr = Math.round(+h.pools[indexPairSearch]?.apr * 100) / 100;
     this.historyNumbers.push(price);
   }
 
@@ -471,16 +472,16 @@ export class HistoryComponent implements OnInit {
     return reserves;
   }
 
-  getVolume(): Array<number> {
-    const volume = new Array<number>();
+  getApr(): Array<number> {
+    const apr = new Array<number>();
     if (!this.historyNumbers || this.historyNumbers.length === 0) {
-      return volume;
+      return apr;
     }
     this.historyNumbers.forEach(h => {
-      volume.push(h.volume);
+      apr.push(h.apr);
     });
 
-    return volume;
+    return apr;
   }
 
   getLiquidity(): Array<number> {
@@ -518,7 +519,7 @@ export class HistoryComponent implements OnInit {
     this.buildChartPrice();
     this.buildChartReserve();
     this.buildChartLiquidity();
-    //this.buildChartVolume();
+    this.buildChartApr();
     this.spinner.hide('historySpinner');
   }
 
