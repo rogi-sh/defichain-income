@@ -73,6 +73,7 @@ export interface Pool {
   reserveBDivReserveA: number;
   id: string;
   symbol: string;
+  volume24h: number;
 }
 
 export class Stats {
@@ -280,6 +281,6 @@ export class HistoryPrice {
   price: number;
   reserve: number;
   liquidiy: number;
-  volume: number;
+  volume24h: number;
   apr: number;
 }

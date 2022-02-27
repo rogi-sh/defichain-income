@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '8.12.28 - 25.2.2022';
+    this.log.version = '8.12.29 - 27.2.2022';
+    this.log.comment = 'Fix loading history up 3m, add volume chart to history';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.12.28 - 27.2.2022';
     this.log.comment = 'Add Apr history';
     this.logs.push(this.log);
 

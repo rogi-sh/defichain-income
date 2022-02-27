@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { ChartComponent } from 'ng-apexcharts'
-import { ChartOptions6 } from '@interfaces/Data'
-import { History, HistoryPrice, Pool } from '@interfaces/Dex'
-import { NgxSpinnerService } from 'ngx-spinner'
-import { HISTORY } from '@interfaces/Graphql'
-import { Apollo } from 'apollo-angular'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartComponent } from 'ng-apexcharts';
+import { ChartOptions6 } from '@interfaces/Data';
+import { History, HistoryPrice, Pool } from '@interfaces/Dex';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HISTORY } from '@interfaces/Graphql';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-history',
@@ -58,7 +58,7 @@ export class HistoryComponent implements OnInit {
         this.computeNumbers(this.curentStock);
         this.buildChartPrice();
         this.buildChartReserve();
-        this.buildChartLiquidity();
+        this.buildChartVolume();
         this.buildChartApr();
         this.spinner.hide('historySpinner');
       } else {
@@ -231,12 +231,12 @@ export class HistoryComponent implements OnInit {
     };
   }
 
-  async buildChartLiquidity(): Promise<void> {
+  async buildChartVolume(): Promise<void> {
     this.chartOptions3 = {
       series: [
         {
-          name: 'Liquidity Token',
-          data: this.getLiquidity()
+          name: '24 H Volume',
+          data: this.getVolume()
         }
       ],
       chart: {
@@ -260,7 +260,7 @@ export class HistoryComponent implements OnInit {
         colors: ['#00f700']
       },
       title: {
-        text: 'Pool Liquidity - ' + this.curentStock,
+        text: 'Pool 24H Volume - ' + this.curentStock,
         align: 'left'
       },
       legend: {
@@ -419,7 +419,16 @@ export class HistoryComponent implements OnInit {
 
   private pushHistoryNumbers(h: History, indexPairSearch: number): void {
     const price = new HistoryPrice();
-    if (h.pools[indexPairSearch]?.symbol.startsWith('DUSD')) {
+
+    const pair = h.pools[indexPairSearch]?.pair;
+    const symbol = h.pools[indexPairSearch]?.symbol;
+    const namePool = pair ? pair : symbol;
+
+    if (!namePool){
+      return;
+    }
+
+    if (namePool.startsWith('DUSD')) {
       const priceDfiCex = h.pools.filter(p => p.symbol.startsWith('BTC'))[0].priceB;
       const priceDfiDex = h.pools[indexPairSearch]?.priceB;
       if (priceDfiCex && priceDfiDex) {
@@ -432,9 +441,9 @@ export class HistoryComponent implements OnInit {
 
     price.reserve = Math.round(+h.pools[indexPairSearch]?.reserveA * 100) / 100;
     price.liquidiy = Math.round(this.getLiquidityNumber(h.pools[indexPairSearch]) * 100) / 100;
-    price.volume = Math.round(+h.pools[indexPairSearch]?.volumeA * 100) / 100;
     price.date = new Date(h.date);
     price.apr = Math.round(+h.pools[indexPairSearch]?.apr * 100) / 100;
+    price.volume24h = Math.round(h.pools[indexPairSearch]?.volume24h * 100) / 100;
     this.historyNumbers.push(price);
   }
 
@@ -484,16 +493,16 @@ export class HistoryComponent implements OnInit {
     return apr;
   }
 
-  getLiquidity(): Array<number> {
-    const liquidity = new Array<number>();
+  getVolume(): Array<number> {
+    const  volume24h = new Array<number>();
     if (!this.historyNumbers || this.historyNumbers.length === 0) {
-      return liquidity;
+      return  volume24h;
     }
     this.historyNumbers.forEach(h => {
-      liquidity.push(h.liquidiy);
+       volume24h.push(h.volume24h);
     });
 
-    return liquidity;
+    return  volume24h;
   }
 
   getDates(): Array<string> {
@@ -518,7 +527,7 @@ export class HistoryComponent implements OnInit {
     this.computeNumbers(this.curentStock);
     this.buildChartPrice();
     this.buildChartReserve();
-    this.buildChartLiquidity();
+    this.buildChartVolume();
     this.buildChartApr();
     this.spinner.hide('historySpinner');
   }
