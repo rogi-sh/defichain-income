@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.13.00 - 5.3.2022';
+    this.log.comment = 'Add march pool to dex view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.12.29 - 27.2.2022';
     this.log.comment = 'Fix loading history up 3m, add volume chart to history';
     this.logs.push(this.log);

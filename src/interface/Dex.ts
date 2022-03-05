@@ -234,6 +234,15 @@ export class PoolNvdaOut extends Outcome {}
 
 export class PoolCoinOut extends Outcome {}
 
+export class PoolMsftOut extends Outcome {}
+
+export class PoolNflxOut extends Outcome {}
+
+export class PoolFbOut extends Outcome {}
+
+export class PoolVooOut extends Outcome {}
+
+
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}

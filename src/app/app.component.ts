@@ -34,7 +34,7 @@ import {
   PoolUrthOut,
   PoolTltOut,
   PoolPdbcOut,
-  Prices, PoolEemOut, PoolAmznOut, PoolNvdaOut, PoolCoinOut,
+  Prices, PoolEemOut, PoolAmznOut, PoolNvdaOut, PoolCoinOut, PoolMsftOut, PoolNflxOut, PoolFbOut, PoolVooOut,
 } from '@interfaces/Dex';
 import {CountdownComponent} from 'ngx-countdown';
 import {
@@ -300,6 +300,23 @@ export class AppComponent implements OnInit {
   poolCoin: Pool;
   poolCoinOut: PoolCoinOut = new PoolCoinOut();
   anteilAmPoolCoin: number;
+
+  // new stocks 3.3.2022
+  poolMsft: Pool;
+  poolMsftOut: PoolMsftOut = new PoolMsftOut();
+  anteilAmPoolMsft: number;
+
+  poolNflx: Pool;
+  poolNflxOut: PoolNflxOut = new PoolNflxOut();
+  anteilAmPoolNflx: number;
+
+  poolFb: Pool;
+  poolFbOut: PoolFbOut = new PoolFbOut();
+  anteilAmPoolFb: number;
+
+  poolVoo: Pool;
+  poolVooOut: PoolVooOut = new PoolVooOut();
+  anteilAmPoolVoo: number;
 
   cryptoPools: Array<Pool>;
   stocksPools: Array<Pool>;
@@ -1446,6 +1463,19 @@ export class AppComponent implements OnInit {
     if (this.poolCoin) {
       this.setFromPoolPair(this.poolCoin, poolPairs);
     }
+    // new stocks 3.3.2022
+    if (this.poolMsft) {
+      this.setFromPoolPair(this.poolMsft, poolPairs);
+    }
+    if (this.poolFb) {
+      this.setFromPoolPair(this.poolFb, poolPairs);
+    }
+    if (this.poolNflx) {
+      this.setFromPoolPair(this.poolNflx, poolPairs);
+    }
+    if (this.poolVoo) {
+      this.setFromPoolPair(this.poolVoo, poolPairs);
+    }
 
     this.createStockArray();
     this.computeRewardsPerBlockInPools();
@@ -1590,6 +1620,11 @@ export class AppComponent implements OnInit {
     this.poolEem = pools['53'];
     this.poolNvda = pools['55'];
     this.poolCoin = pools['56'];
+    // 3.3.2022
+    this.poolMsft = pools['61'];
+    this.poolFb = pools['64'];
+    this.poolNflx = pools['62'];
+    this.poolVoo = pools['63'];
     this.pools = this.addAllPools();
   }
 
@@ -1626,6 +1661,11 @@ export class AppComponent implements OnInit {
     pools.push(this.poolAmzn);
     pools.push(this.poolNvda);
     pools.push(this.poolCoin);
+    // 3.3.2022
+    pools.push(this.poolFb);
+    pools.push(this.poolMsft);
+    pools.push(this.poolNflx);
+    pools.push(this.poolVoo);
     return pools;
   }
 
@@ -1651,6 +1691,11 @@ export class AppComponent implements OnInit {
     this.stocksPools.push(this.poolAmzn);
     this.stocksPools.push(this.poolNvda);
     this.stocksPools.push(this.poolCoin);
+    // 3.3.2022
+    this.stocksPools.push(this.poolMsft);
+    this.stocksPools.push(this.poolFb);
+    this.stocksPools.push(this.poolNflx);
+    this.stocksPools.push(this.poolVoo);
   }
 
   private createCryptoPoolsArray(): void {
