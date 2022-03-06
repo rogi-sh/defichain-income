@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '8.13.00 - 5.3.2022';
+    this.log.version = '8.13.1 - 6.3.2022';
+    this.log.comment = 'New Stock pool reward distribution';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.0 - 5.3.2022';
     this.log.comment = 'Add march pool to dex view';
     this.logs.push(this.log);
 

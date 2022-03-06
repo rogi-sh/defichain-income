@@ -242,7 +242,6 @@ export class PoolFbOut extends Outcome {}
 
 export class PoolVooOut extends Outcome {}
 
-
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}

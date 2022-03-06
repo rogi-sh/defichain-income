@@ -61,7 +61,7 @@
           Not Subscribed
         </div>
         <div
-          *ngIf="newsletter && (newsletter?.status === 'subscribed' || newsletter?.status === 'subscribedWithAddress')"
+          *ngIf="newsletter && (newsletter?.status === 'subscribed' || newsletter?.status === 'subscribedWithAddress' || newsletter?.status === 'subscribedWithoutAddress')"
           class='rounded-full text-black bg-yellow-500 hover:bg-yellow-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5'>
           Subscribed & Not Payed
         </div>

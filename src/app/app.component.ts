@@ -132,6 +132,11 @@ export class AppComponent implements OnInit {
   dfiProBlockNvda = 1.12;
   dfiProBlockCoin = 0.83;
 
+  dfiProBlockMsft = 0.75;
+  dfiProBlockFb = 0.62;
+  dfiProBlockVoo = 1.12;
+  dfiProBlockNflx = 0.83;
+
   dfiPorBlockStock = 77.8;
 
   rewards: Stats;
@@ -1735,63 +1740,76 @@ export class AppComponent implements OnInit {
     this.dfiProBlockUsd = 0.5 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd?.customRewards);
 
-    this.dfiProBlockTsla = 0.0704 * this.dfiPorBlockStock;
+    this.dfiProBlockTsla = 0.045 * this.dfiPorBlockStock;
     this.dfiProBlockTsla += this.getCustomRewards(this.poolTsla?.customRewards);
 
-    this.dfiProBlockQqq = 0.0499 * this.dfiPorBlockStock;
+    this.dfiProBlockQqq = 0.0443 * this.dfiPorBlockStock;
     this.dfiProBlockQqq += this.getCustomRewards(this.poolQqq?.customRewards);
 
-    this.dfiProBlockSpy = 0.0793 * this.dfiPorBlockStock;
+    this.dfiProBlockSpy = 0.0767 * this.dfiPorBlockStock;
     this.dfiProBlockSpy += this.getCustomRewards(this.poolSpy?.customRewards);
 
-    this.dfiProBlockAapl = 0.0368 * this.dfiPorBlockStock;
+    this.dfiProBlockAapl = 0.027 * this.dfiPorBlockStock;
     this.dfiProBlockAapl += this.getCustomRewards(this.poolAapl?.customRewards);
 
-    this.dfiProBlockPltr = 0.0192 * this.dfiPorBlockStock;
+    this.dfiProBlockPltr = 0.0199 * this.dfiPorBlockStock;
     this.dfiProBlockPltr += this.getCustomRewards(this.poolPltr?.customRewards);
 
-    this.dfiProBlockSlv = 0.0098 * this.dfiPorBlockStock;
+    this.dfiProBlockSlv = 0.0086 * this.dfiPorBlockStock;
     this.dfiProBlockSlv += this.getCustomRewards(this.poolSlv?.customRewards);
 
-    this.dfiProBlockGld = 0.0072 * this.dfiPorBlockStock;
+    this.dfiProBlockGld = 0.0078 * this.dfiPorBlockStock;
     this.dfiProBlockGld += this.getCustomRewards(this.poolGld?.customRewards);
 
-    this.dfiProBlockGme = 0.0308 * this.dfiPorBlockStock;
+    this.dfiProBlockGme = 0.0303 * this.dfiPorBlockStock;
     this.dfiProBlockGme += this.getCustomRewards(this.poolGme?.customRewards);
 
-    this.dfiProBlockGoogle = 0.0169 * this.dfiPorBlockStock;
+    this.dfiProBlockGoogle = 0.0151 * this.dfiPorBlockStock;
     this.dfiProBlockGoogle += this.getCustomRewards(this.poolGoogl?.customRewards);
 
-    this.dfiProBlockArkk = 0.0216 * this.dfiPorBlockStock;
+    this.dfiProBlockArkk = 0.0182 * this.dfiPorBlockStock;
     this.dfiProBlockArkk += this.getCustomRewards(this.poolArkk?.customRewards);
 
-    this.dfiProBlockBaba = 0.0272 * this.dfiPorBlockStock;
+    this.dfiProBlockBaba = 0.0173 * this.dfiPorBlockStock;
     this.dfiProBlockBaba += this.getCustomRewards(this.poolBaba?.customRewards);
 
-    this.dfiProBlockVnq = 0.0071 * this.dfiPorBlockStock;
+    this.dfiProBlockVnq = 0.0072 * this.dfiPorBlockStock;
     this.dfiProBlockVnq += this.getCustomRewards(this.poolVnq?.customRewards);
 
-    this.dfiProBlockUrth = 0.0054 * this.dfiPorBlockStock;
+    this.dfiProBlockUrth = 0.007 * this.dfiPorBlockStock;
     this.dfiProBlockUrth += this.getCustomRewards(this.poolUrth?.customRewards);
 
-    this.dfiProBlockTlt = 0.0102 * this.dfiPorBlockStock;
+    this.dfiProBlockTlt = 0.0085 * this.dfiPorBlockStock;
     this.dfiProBlockTlt += this.getCustomRewards(this.poolTlt?.customRewards);
 
-    this.dfiProBlockPdbc = 0.0052 * this.dfiPorBlockStock;
+    this.dfiProBlockPdbc = 0.0071 * this.dfiPorBlockStock;
     this.dfiProBlockPdbc += this.getCustomRewards(this.poolPdbc?.customRewards);
 
     // stocks 1.2.2022
-    this.dfiProBlockAmzn = 0.0279 * this.dfiPorBlockStock;
+    this.dfiProBlockAmzn = 0.0251 * this.dfiPorBlockStock;
     this.dfiProBlockAmzn += this.getCustomRewards(this.poolAmzn?.customRewards);
 
-    this.dfiProBlockNvda = 0.0368 * this.dfiPorBlockStock;
+    this.dfiProBlockNvda = 0.0311 * this.dfiPorBlockStock;
     this.dfiProBlockNvda += this.getCustomRewards(this.poolNvda?.customRewards);
 
-    this.dfiProBlockCoin = 0.028 * this.dfiPorBlockStock;
+    this.dfiProBlockCoin = 0.0196 * this.dfiPorBlockStock;
     this.dfiProBlockCoin += this.getCustomRewards(this.poolCoin?.customRewards);
 
-    this.dfiProBlockEem = 0.0105 * this.dfiPorBlockStock;
+    this.dfiProBlockEem = 0.0104 * this.dfiPorBlockStock;
     this.dfiProBlockEem += this.getCustomRewards(this.poolEem?.customRewards);
+
+    // stocks 3.3.2022
+    this.dfiProBlockMsft = 0.0229 * this.dfiPorBlockStock;
+    this.dfiProBlockMsft += this.getCustomRewards(this.poolMsft?.customRewards);
+
+    this.dfiProBlockNflx = 0.0162 * this.dfiPorBlockStock;
+    this.dfiProBlockNflx += this.getCustomRewards(this.poolNflx?.customRewards);
+
+    this.dfiProBlockVoo = 0.0121 * this.dfiPorBlockStock;
+    this.dfiProBlockVoo += this.getCustomRewards(this.poolVoo?.customRewards);
+
+    this.dfiProBlockFb = 0.0226 * this.dfiPorBlockStock;
+    this.dfiProBlockFb += this.getCustomRewards(this.poolFb?.customRewards);
   }
 
   private getCustomRewards(rewards: string []): number {
