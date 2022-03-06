@@ -1,0 +1,70 @@
+{
+  "package": {
+    "productName": "DefiChain-Income",
+    "version": "1.0.0"
+  },
+  "build": {
+    "distDir": "../dist/defichain-income",
+    "devPath": "http://localhost:4200",
+    "beforeDevCommand": "yarn start",
+    "beforeBuildCommand": ""
+  },
+  "tauri": {
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.tauri.dev",
+      "icon": [
+        "icons/72x72.png",
+        "icons/96x96.png",
+        "icons/128x128.png",
+        "icons/icon.png",
+        "icons/StoreLogo.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": [],
+      "externalBin": [],
+      "copyright": "",
+      "category": "Finance",
+      "shortDescription": "",
+      "longDescription": "",
+      "deb": {
+        "depends": [],
+        "useBootstrapper": false
+      },
+      "macOS": {
+        "frameworks": [],
+        "minimumSystemVersion": "",
+        "useBootstrapper": false,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "providerShortName": null,
+        "entitlements": null
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
+    },
+    "allowlist": {
+      "all": true
+    },
+    "windows": [
+      {
+        "title": "DefiChain Income",
+        "width": 1280,
+        "height": 960,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}
