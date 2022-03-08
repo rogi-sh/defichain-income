@@ -837,6 +837,50 @@
                         <div *ngIf="isIncognitoModeOn">****</div>
                       </div>
                     </div>
+                    <div *ngIf="wallet?.msft > 0">
+                      MSFT
+                    </div>
+                    <div *ngIf="wallet?.msft > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.msft | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.msft  * getUsdPriceOfStockPools(this.poolMsft)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.nflx > 0">
+                      NFLX
+                    </div>
+                    <div *ngIf="wallet?.nflx > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.nflx | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.nflx  * getUsdPriceOfStockPools(this.poolNflx)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.fb > 0">
+                      FB
+                    </div>
+                    <div *ngIf="wallet?.fb > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.fb | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.fb  * getUsdPriceOfStockPools(this.poolFb)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
+                    <div *ngIf="wallet?.voo > 0">
+                      VOO
+                    </div>
+                    <div *ngIf="wallet?.voo > 0">
+                      <div
+                        class="inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+                        <div *ngIf="!isIncognitoModeOn">{{wallet?.voo | number: '1.5-5'}} ~
+                          <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.voo  * getUsdPriceOfStockPools(this.poolVoo)"></app-price></div>
+                        <div *ngIf="isIncognitoModeOn">****</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div *ngIf="autoLoadData" class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
@@ -984,6 +1028,26 @@
                     <div *ngIf="wallet?.eemusd > 0">
                       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.eemusd | number: '1.3-3'}}
                         ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.eemusd * poolEem?.totalLiquidityUsd/poolEem?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.msftusd > 0">MSFT-USD</div>
+                    <div *ngIf="wallet?.msftusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.msftusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.msftusd * poolMsft?.totalLiquidityUsd/poolMsft?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.nflxusd > 0">NFLX-USD</div>
+                    <div *ngIf="wallet?.nflxusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.nflxusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.nflxusd * poolNflx?.totalLiquidityUsd/poolNflx?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.fbusd > 0">FB-USD</div>
+                    <div *ngIf="wallet?.fbusd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.fbusd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.fbusd * poolFb?.totalLiquidityUsd/poolFb?.totalLiquidityLpToken"></app-price></span>
+                    </div>
+                    <div *ngIf="wallet?.voousd> 0">VOO-USD</div>
+                    <div *ngIf="wallet?.voousd > 0">
+                      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">{{isIncognitoModeOn ? '****' : wallet?.voousd | number: '1.3-3'}}
+                        ~  <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="wallet?.voousd * poolVoo?.totalLiquidityUsd/poolVoo?.totalLiquidityLpToken"></app-price></span>
                     </div>
                   </div>
                 </div>
@@ -1757,6 +1821,98 @@
                   <br>
                   <app-earning
                     [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolEemOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.msftInMsftPool > 0 || wallet?.usdInMsftPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      MSFT/USD {{poolMsft?.apr | number: '1.2-2' }}% APR - {{dfiProBlockMsft | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolMsft | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolMsft, poolMsft)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolMsft, poolMsft)?.poolPairToken | number: '1.4-4'}} MSFT </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolMsftOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.nflxInNflxPool > 0 || wallet?.usdInNflxPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      NFLX/USD {{poolNflx?.apr | number: '1.2-2' }}% APR - {{dfiProBlockNflx | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolNflx | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolNflx, poolNflx)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolNflx, poolNflx)?.poolPairToken | number: '1.4-4'}} NFLX </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolNflxOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.fbInFbPool > 0 || wallet?.usdInFbPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      FB/USD {{poolFb?.apr | number: '1.2-2' }}% APR - {{dfiProBlockFb | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolFb | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolFb, poolFb)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolFb, poolFb)?.poolPairToken | number: '1.4-4'}} FB </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolFbOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
+                </div>
+                <div
+                  *ngIf=" wallet?.vooInVooPool > 0 || wallet?.usdInVooPool > 0"
+                  class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100"
+                >
+                  <h2>
+                    <span class="text-lg font-semibold mb-1">
+                      VOO/USD {{poolVoo?.apr | number: '1.2-2' }}% APR - {{dfiProBlockVoo | number: '1.2-2'}} DFI/Block
+                    </span>
+                  </h2>
+                  <br>
+                  <h3>
+                    Pool {{ 'share' | translate }}
+                    <span
+                      class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1">
+                      {{anteilAmPoolVoo | number: '1.4-4' }} %</span>
+                    <div [ngClass]="isIncognitoModeOn && 'hide-content'" class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer my-2 m-1 inline-block">
+                      {{getPoolPairFromShare(anteilAmPoolVoo, poolVoo)?.dfiOrUsdToken | number: '1.2-2'}} USD
+                      / {{getPoolPairFromShare(anteilAmPoolVoo, poolVoo)?.poolPairToken | number: '1.4-4'}} VOO </div>
+                  </h3>
+                  <br>
+                  <app-earning
+                    [isIncognitoModeOn]="isIncognitoModeOn" [out]="poolVooOut" [pool]="poolBtc" [fiat]="fiat"></app-earning>
                 </div>
               </div>
               <br>
@@ -2735,6 +2891,106 @@
                               <label for='onChangeEemWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 EEM
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.msft === null || wallet.msft === undefined  ? 'empty' : ''"
+                              title='MSFT'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.msft'
+                                (ngModelChange)='onChangeMsftWallet()'
+                                type='number'
+                                id='onChangeMsftWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeMsftWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                MSFT
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.nflx === null || wallet.nflx === undefined  ? 'empty' : ''"
+                              title='NFLX'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.nflx'
+                                (ngModelChange)='onChangeNflxWallet()'
+                                type='number'
+                                id='onChangeNflxWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeNflxWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                NFLX
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.fb === null || wallet.fb === undefined  ? 'empty' : ''"
+                              title='FB'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.fb'
+                                (ngModelChange)='onChangeFbWallet()'
+                                type='number'
+                                id='onChangeFbWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeFbWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                FB
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.fb === null || wallet.fb === undefined  ? 'empty' : ''"
+                              title='FB'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.fb'
+                                (ngModelChange)='onChangeFbWallet()'
+                                type='number'
+                                id='onChangeFbWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeFbWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                FB
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.voo === null || wallet.voo === undefined  ? 'empty' : ''"
+                              title='VOO'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.voo'
+                                (ngModelChange)='onChangeVooWallet()'
+                                type='number'
+                                id='onChangeVooWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeVooWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                VOO
                               </label>
                             </div>
                           </div>
@@ -3930,6 +4186,170 @@
                               </label>
                             </div>
                           </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.msftInMsftPool === null || wallet.msftInMsftPool === undefined  ? 'empty' : ''"
+                              title="MSFT"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.msftInMsftPool"
+                                (ngModelChange)="onChangeMsftMsftPool()"
+                                type="number"
+                                id="onChangeMsftMsftPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeMsftMsftPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                MSFT
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInMsftPool === null || wallet.usdInMsftPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInMsftPool"
+                                (ngModelChange)="onChangeUsdMsftPool()"
+                                type="number"
+                                id="onChangeUsdMsftPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdMsftPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.nflxInNflxPool === null || wallet.nflxInNflxPool === undefined  ? 'empty' : ''"
+                              title="NFLX"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.nflxInNflxPool"
+                                (ngModelChange)="onChangeNflxNflxPool()"
+                                type="number"
+                                id="onChangeNflxNflxPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeNflxNflxPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                NFLX
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInNflxPool === null || wallet.usdInNflxPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInNflxPool"
+                                (ngModelChange)="onChangeUsdNflxPool()"
+                                type="number"
+                                id="onChangeUsdNflxPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdNflxPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.fbInFbPool === null || wallet.fbInFbPool === undefined  ? 'empty' : ''"
+                              title="FB"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.fbInFbPool"
+                                (ngModelChange)="onChangeFbFbPool()"
+                                type="number"
+                                id="onChangeFbFbPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeFbFbPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                FB
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInFbPool === null || wallet.usdInFbPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInFbPool"
+                                (ngModelChange)="onChangeUsdFbPool()"
+                                type="number"
+                                id="onChangeUsdFbPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdFbPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.vooInVooPool === null || wallet.vooInVooPool === undefined  ? 'empty' : ''"
+                              title="VOO"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.vooInVooPool"
+                                (ngModelChange)="onChangeVooVooPool()"
+                                type="number"
+                                id="onChangeVooVooPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeVooVooPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                VOO
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInVooPool === null || wallet.usdInVooPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInVooPool"
+                                (ngModelChange)="onChangeUsdVooPool()"
+                                type="number"
+                                id="onChangeUsdVooPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdVooPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -4371,6 +4791,18 @@
                                   <div *ngIf="getAddressBalance(a)?.eemToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     EEM: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.eemToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.msftToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    MSFT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.msftToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.nflxToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    NFLX: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.nflxToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.fbToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    FB: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.fbToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.vooToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    VOO: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.vooToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -4452,6 +4884,18 @@
                                   <div *ngIf="getAddressBalance(a)?.eemusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     EEMUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.eemusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.msftusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    MSFTUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.msftusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.nflxusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    NFLXUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.nflxusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.voousdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    VOOUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.voousdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.fbusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    FBUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.fbusdToken }}</div>
                                 </div>
                               </div>
 

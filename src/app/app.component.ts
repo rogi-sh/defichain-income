@@ -4503,6 +4503,38 @@ export class AppComponent implements OnInit {
       this.buildDataForChartIncome();
     }
   }
+  onChangeMsftWallet(): void {
+    if (this.checkInputNumber(this.wallet.msft)) {
+      localStorage.setItem(this.wallet.msftKey, JSON.stringify(this.wallet.msft));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+  onChangeNflxWallet(): void {
+    if (this.checkInputNumber(this.wallet.nflx)) {
+      localStorage.setItem(this.wallet.nflxKey, JSON.stringify(this.wallet.nflx));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+  onChangeFbWallet(): void {
+    if (this.checkInputNumber(this.wallet.fb)) {
+      localStorage.setItem(this.wallet.fbKey, JSON.stringify(this.wallet.fb));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
+  onChangeVooWallet(): void {
+    if (this.checkInputNumber(this.wallet.voo)) {
+      localStorage.setItem(this.wallet.vooKey, JSON.stringify(this.wallet.voo));
+      this.buildDataForChart();
+      this.buildDataForChartValue();
+      this.buildDataForChartIncome();
+    }
+  }
 
   // DFI in POOLS
   onChangeDfiBtcPool(): void {
