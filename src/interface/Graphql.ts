@@ -154,7 +154,7 @@ export const REGISTER = gql`
           msftInMsftPool: $msftInMsftPool
           usdInMsftPool: $usdInMsftPool
           nflxInNflxPool: $nflxInNflxPool
-          usdInNflxPool: $nusdInNflxPool
+          usdInNflxPool: $usdInNflxPool
           fbInFbPool: $fbInFbPool
           usdInFbPool: $usdInFbPool
           vooInVooPool: $vooInVooPool
@@ -341,7 +341,7 @@ export const UPDATE = gql`
           msftInMsftPool: $msftInMsftPool
           usdInMsftPool: $usdInMsftPool
           nflxInNflxPool: $nflxInNflxPool
-          usdInNflxPool: $nusdInNflxPool
+          usdInNflxPool: $usdInNflxPool
           fbInFbPool: $fbInFbPool
           usdInFbPool: $usdInFbPool
           vooInVooPool: $vooInVooPool
