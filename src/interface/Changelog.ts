@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.13.2 - 8.3.2022';
+    this.log.comment = 'New Stock pool fully integrated';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '8.13.1 - 6.3.2022';
     this.log.comment = 'New Stock pool reward distribution';
     this.logs.push(this.log);
