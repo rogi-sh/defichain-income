@@ -108,6 +108,18 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolEemOut!: Outcome;
 
   @Input()
+  poolMsftOut!: Outcome;
+
+  @Input()
+  poolNflxOut!: Outcome;
+
+  @Input()
+  poolFbOut!: Outcome;
+
+  @Input()
+  poolVooOut!: Outcome;
+
+  @Input()
   poolBtc!: Pool;
 
   @Input()
@@ -205,6 +217,18 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   getAnteilEemPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilMsftPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilNflxPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilFbPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilVooPoolAnGesamtLM: number;
 
   @Input()
   getDfiCountInLM: number;
@@ -338,6 +362,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolEemOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolEemOut.dfiPerMonth * 100) / 100);
     }
+    if (this.poolMsftOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolMsftOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolNflxOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolNflxOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolFbOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolFbOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolVooOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolVooOut.dfiPerMonth * 100) / 100);
+    }
 
     return incomeNumbers;
   }
@@ -445,6 +481,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolEemOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#4682B4');
     }
+    if (this.poolMsftOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#737373');
+    }
+    if (this.poolNflxOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#E50914');
+    }
+    if (this.poolFbOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#4267B2');
+    }
+    if (this.poolVooOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#6082B6');
+    }
 
     return incomeNumbers;
   }
@@ -540,6 +588,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolEemOut.dfiPerMonth > 0) {
       incomeNumbers.push(`EEM-Pool - ${this.isIncognitoModeOn ? '****' : this.poolEemOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolMsftOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`MSFT-Pool - ${this.isIncognitoModeOn ? '****' : this.poolMsftOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolNflxOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`NFLX-Pool - ${this.isIncognitoModeOn ? '****' : this.poolNflxOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolFbOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`FB-Pool - ${this.isIncognitoModeOn ? '****' : this.poolFbOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolVooOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`VOO-Pool - ${this.isIncognitoModeOn ? '****' : this.poolVooOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }
