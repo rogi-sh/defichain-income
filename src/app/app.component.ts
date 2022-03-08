@@ -2377,8 +2377,8 @@ export class AppComponent implements OnInit {
           break;
         }
         case 'MSFT-DUSD': {
-          this.wallet.eemusd += +splitted[0];
-          this.getAddressBalance(address).eemusdToken = +splitted[0];
+          this.wallet.msftusd += +splitted[0];
+          this.getAddressBalance(address).msftusdToken = +splitted[0];
           break;
         }
         case 'VOO-DUSD': {
