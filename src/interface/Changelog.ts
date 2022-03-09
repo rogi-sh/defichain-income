@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.13.4 - 9.3.2022';
+    this.log.comment = 'Fix: Wrong total reward';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.13.3 - 8.3.2022';
     this.log.comment = 'Fix: No Rewards for msft pool';
     this.logs.push(this.log);

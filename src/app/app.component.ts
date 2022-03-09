@@ -1592,6 +1592,7 @@ export class AppComponent implements OnInit {
     if (this.poolEem) {
       this.berechnePoolOutEem();
     }
+    // 3.3.2022
     if (this.poolMsft) {
       this.berechnePoolOutMsft();
     }
@@ -2891,7 +2892,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerMin + this.poolBabaOut?.dfiPerMin + this.poolVnqOut?.dfiPerMin + this.poolUrthOut?.dfiPerMin
       + this.poolTltOut?.dfiPerMin + this.poolPdbcOut?.dfiPerMin
       + this.poolAmznOut?.dfiPerMin + this.poolNvdaOut?.dfiPerMin + this.poolCoinOut?.dfiPerMin + this.poolEemOut?.dfiPerMin
-      + this.poolMsftOut?.dfiPerMin + this.poolFbOut?.dfiPerMin + this.poolVooOut?.dfiPerMin + this.poolFbOut?.dfiPerMin;
+      + this.poolMsftOut?.dfiPerMin + this.poolFbOut?.dfiPerMin + this.poolVooOut?.dfiPerMin + this.poolNflxOut?.dfiPerMin;
 
     this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
       + this.poolUsdtOut.dfiPerHour + this.poolUsdcOut.dfiPerHour + this.poolLtcOut.dfiPerHour
@@ -2901,7 +2902,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerHour + this.poolBabaOut?.dfiPerHour + this.poolVnqOut?.dfiPerHour + this.poolUrthOut?.dfiPerHour
       + this.poolTltOut?.dfiPerHour + this.poolPdbcOut?.dfiPerHour
       + this.poolAmznOut?.dfiPerHour + this.poolNvdaOut?.dfiPerHour + this.poolCoinOut?.dfiPerHour + this.poolEemOut?.dfiPerHour
-      + this.poolMsftOut?.dfiPerHour + this.poolFbOut?.dfiPerHour + this.poolVooOut?.dfiPerHour + this.poolFbOut?.dfiPerHour;
+      + this.poolMsftOut?.dfiPerHour + this.poolFbOut?.dfiPerHour + this.poolVooOut?.dfiPerHour + this.poolNflxOut?.dfiPerHour;
 
     this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay
       + this.poolUsdtOut.dfiPerDay + this.poolUsdcOut.dfiPerDay + this.poolLtcOut.dfiPerDay
@@ -2911,7 +2912,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerDay + this.poolBabaOut?.dfiPerDay + this.poolVnqOut?.dfiPerDay + this.poolUrthOut?.dfiPerDay
       + this.poolTltOut?.dfiPerDay + this.poolPdbcOut?.dfiPerDay
       + this.poolAmznOut?.dfiPerDay + this.poolNvdaOut?.dfiPerDay + this.poolCoinOut?.dfiPerDay + this.poolEemOut?.dfiPerDay
-      + this.poolMsftOut?.dfiPerDay + this.poolFbOut?.dfiPerDay + this.poolVooOut?.dfiPerDay + this.poolFbOut?.dfiPerDay;
+      + this.poolMsftOut?.dfiPerDay + this.poolFbOut?.dfiPerDay + this.poolVooOut?.dfiPerDay + this.poolNflxOut?.dfiPerDay;
 
     this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek
       + this.poolUsdtOut.dfiPerWeek + this.poolUsdcOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek
@@ -2921,7 +2922,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerWeek + this.poolBabaOut?.dfiPerWeek + this.poolVnqOut?.dfiPerWeek + this.poolUrthOut?.dfiPerWeek
       + this.poolTltOut?.dfiPerWeek + this.poolPdbcOut?.dfiPerWeek
       + this.poolAmznOut?.dfiPerWeek + this.poolNvdaOut?.dfiPerWeek + this.poolCoinOut?.dfiPerWeek + this.poolEemOut?.dfiPerWeek
-      + this.poolMsftOut?.dfiPerWeek + this.poolFbOut?.dfiPerWeek + this.poolVooOut?.dfiPerWeek + this.poolFbOut?.dfiPerWeek;
+      + this.poolMsftOut?.dfiPerWeek + this.poolFbOut?.dfiPerWeek + this.poolVooOut?.dfiPerWeek + this.poolNflxOut?.dfiPerWeek;
 
     this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth
       + this.poolUsdtOut.dfiPerMonth + this.poolUsdcOut.dfiPerMonth + this.poolLtcOut.dfiPerMonth
@@ -2931,7 +2932,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerMonth + this.poolBabaOut?.dfiPerMonth + this.poolVnqOut?.dfiPerMonth + this.poolUrthOut?.dfiPerMonth
       + this.poolTltOut?.dfiPerMonth + this.poolPdbcOut?.dfiPerMonth
       + this.poolAmznOut?.dfiPerMonth + this.poolNvdaOut?.dfiPerMonth + this.poolCoinOut?.dfiPerMonth + this.poolEemOut?.dfiPerMonth
-      + this.poolMsftOut?.dfiPerMonth + this.poolFbOut?.dfiPerMonth + this.poolVooOut?.dfiPerMonth + this.poolFbOut?.dfiPerMonth;
+      + this.poolMsftOut?.dfiPerMonth + this.poolFbOut?.dfiPerMonth + this.poolVooOut?.dfiPerMonth + this.poolNflxOut?.dfiPerMonth;
 
     this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear
       + this.poolUsdtOut.dfiPerYear + this.poolUsdcOut.dfiPerYear + this.poolLtcOut.dfiPerYear
@@ -2941,7 +2942,7 @@ export class AppComponent implements OnInit {
       + this.poolArkkOut?.dfiPerYear + this.poolBabaOut?.dfiPerYear + this.poolVnqOut?.dfiPerYear + this.poolUrthOut?.dfiPerYear
       + this.poolTltOut?.dfiPerYear + this.poolPdbcOut?.dfiPerYear
       + this.poolAmznOut?.dfiPerYear + this.poolNvdaOut?.dfiPerYear + this.poolCoinOut?.dfiPerYear + this.poolEemOut?.dfiPerYear
-      + this.poolMsftOut?.dfiPerYear + this.poolFbOut?.dfiPerYear + this.poolVooOut?.dfiPerYear + this.poolFbOut?.dfiPerYear;
+      + this.poolMsftOut?.dfiPerYear + this.poolFbOut?.dfiPerYear + this.poolVooOut?.dfiPerYear + this.poolNflxOut?.dfiPerYear;
   }
 
   berechneStakingOut(): void {
