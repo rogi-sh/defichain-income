@@ -437,7 +437,6 @@ export class AppComponent implements OnInit {
       this.loadData();
 
       this.toggleDarkMode();
-      this.handlePageHeight();
 
       if (
         localStorage.getItem('theme') === 'dark' ||
@@ -5450,15 +5449,6 @@ export class AppComponent implements OnInit {
       (this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length);
     const mns = normalMns + this.adressesMasternodesFreezer5?.length + this.adressesMasternodesFreezer10?.length;
     return mns * 20000;
-  }
-
-  handlePageHeight(): void {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-
-    window.addEventListener('resize', () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
   }
 
   copyToClipBoard(text: string): void {
