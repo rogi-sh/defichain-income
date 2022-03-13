@@ -69,10 +69,3 @@ input:focus {
 .toggle-checkbox:checked + .toggle-label {
   background-color: #FF00AF;
 }
-
-.custom-height {
-  min-height: -webkit-fill-available;
-  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc(var(--vh, 1vh) * 100);
-  height: -webkit-fill-available;
-}
