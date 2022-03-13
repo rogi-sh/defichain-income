@@ -71,6 +71,8 @@ input:focus {
 }
 
 .custom-height {
+  min-height: -webkit-fill-available;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(100vh - calc(100vh - 100%));
   height: calc(var(--vh, 1vh) * 100);
 }
