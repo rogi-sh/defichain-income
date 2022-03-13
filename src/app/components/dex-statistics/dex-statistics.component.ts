@@ -125,8 +125,6 @@ export class DexStatisticsComponent implements OnInit {
 
   ngOnInit(): void  {
 
-    console.log(this.statisticsOn);
-
     if (localStorage.getItem(this.statisticsOnKey) !== null) {
       this.statisticsOn = JSON.parse(localStorage.getItem(this.statisticsOnKey));
     }
@@ -143,7 +141,6 @@ export class DexStatisticsComponent implements OnInit {
     this.calculateBlockTime();
     this.calculateExchangesStatus();
 
-    console.log(this.statisticsOn);
   }
 
   loadMilestones(): void {
@@ -301,7 +298,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getPoolFromOceanPoolPairs(id: string): PoolPairOcean {
-    return this.poolPairsOcean.data.find(p => p.id === id);
+    return this.poolPairsOcean?.data.find(p => p.id === id);
   }
 
   getBlockToNextCycle(): string {

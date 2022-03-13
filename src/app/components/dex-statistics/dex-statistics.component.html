@@ -638,8 +638,8 @@
               class='font-bold'> Premium: <span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>
-            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id).volume.h24'></app-price>   <br>
-            <span class='font-bold'> 30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id).volume.d30'></app-price>
+            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.h24'></app-price>   <br>
+            <span class='font-bold'> 30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.d30'></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd'></app-price>
@@ -654,10 +654,10 @@
           </td>
 
           <td class='text-right p-2'>
-            {{getPoolFromOceanPoolPairs(cryptoPool.id).apr.total * 100 | number: '1.2-2' }}%
+            {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.total * 100 | number: '1.2-2' }}%
             <br>
-            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(cryptoPool.id).apr.reward * 100 | number: '1.2-2'}}
-              % - Commision {{getPoolFromOceanPoolPairs(cryptoPool.id).apr.commission * 100 | number: '1.2-2'}} %</span>
+            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.reward * 100 | number: '1.2-2'}}
+              % - Commision {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.commission * 100 | number: '1.2-2'}} %</span>
           </td>
           <td class='text-right p-2'>
             {{getApyWeeklyFromApr(cryptoPool?.apr) | number: '1.2-2' }}%
@@ -705,8 +705,8 @@
 
           </td>
           <td class='text-right text-sm p-2'>
-            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id).volume.h24'></app-price>   <br>
-            <span class='font-bold'>30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id).volume.d30'></app-price>
+            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.h24'></app-price>   <br>
+            <span class='font-bold'>30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.d30'></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd'></app-price>
@@ -721,10 +721,10 @@
           </td>
 
           <td class='text-right p-2'>
-            {{getPoolFromOceanPoolPairs(stockPool.id).apr.total * 100 | number: '1.2-2' }}%
+            {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.total * 100 | number: '1.2-2' }}%
             <br>
-            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(stockPool.id).apr.reward * 100 | number: '1.2-2'}}
-              % - Commision {{getPoolFromOceanPoolPairs(stockPool.id).apr.commission * 100 | number: '1.2-2'}} %</span>
+            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.reward * 100 | number: '1.2-2'}}
+              % - Commision {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.commission * 100 | number: '1.2-2'}} %</span>
           </td>
           <td class='text-right p-2'>
             {{getApyWeeklyFromApr(stockPool?.apr) | number: '1.2-2' }}%

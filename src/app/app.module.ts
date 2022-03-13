@@ -33,8 +33,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
-import { HistoryComponent } from './components/history/history.component';
-import { NewsletterComponent } from '@pages/newsletter/newsletter.component'
+import { HistoryComponent } from '@components/history/history.component';
+import { NewsletterComponent } from '@pages/newsletter/newsletter.component';
+import { ApolloModule } from 'apollo-angular';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     ),
+    ApolloModule,
     MarkdownModule.forRoot(),
     BrowserModule,
     HttpClientModule,

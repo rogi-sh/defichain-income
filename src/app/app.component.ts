@@ -1167,7 +1167,6 @@ export class AppComponent implements OnInit {
       },
     }).subscribe((result: any) => {
       if (result?.data?.updateUser) {
-        console.log('User Updated!');
         this.successBackend = 'User updated';
         setInterval(() => {
           this.successBackend = null;
