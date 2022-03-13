@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.13.6 - 13.3.2022';
+    this.log.comment = 'Newsletter unsubscribe added';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.13.5 - 9.3.2022';
     this.log.comment = 'QR Code for tips';
     this.logs.push(this.log);

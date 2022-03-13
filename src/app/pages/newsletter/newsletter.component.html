@@ -1,6 +1,6 @@
 <div class='dark:text-gray-100'>
   <h1 class='text-3xl mb-4 text-pink-500'>{{ "newsletter.title" | translate }}</h1>
-  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-120 overflow-auto'>
     <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <h3 class='text-xl mb-4'>{{ "newsletter.title-2" | translate }}</h3>
     </div>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <br><br>
-  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-120 overflow-auto'>
     <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <h2 class='text-xl '>Status - V1 &#9989;</h2>
       <p class='mb-4 '>Delivery every day 17:00 UTC &#9989;</p>
@@ -49,7 +49,7 @@
   </div>
 
   <br><br>
-  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+  <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-120 overflow-auto'>
     <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <h3 class='mb-4 '>{{ "newsletter.status" | translate }}
         <div *ngIf="newsletter && newsletter?.status === 'payed'"
@@ -103,7 +103,8 @@
           />
         </div>
       </div>
-
+      <br>
+      <br>
       <div *ngIf='errorBackend' class='bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2'
            role='alert'>
         {{errorBackend}}
@@ -129,6 +130,15 @@
           class='bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
           (click)='save()'>
           {{ "newsletter.save" | translate }}
+        </button>
+      </div>
+      <br>
+      <br>
+      <div *ngIf='key' class='w-full lg:w-1/4 md:w-2/4 md:pl-2 align-top'>
+        <button
+          class='bg-red-500 hover:bg-red-600 transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
+          (click)='unsubscribe()'>
+          Unsubscribe
         </button>
       </div>
 

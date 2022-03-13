@@ -66,4 +66,10 @@ export class NewsletterComponent implements OnInit, OnChanges {
       }, 5000);
     });
   }
+
+  unsubscribe() {
+    this.email = '';
+    this.address = '';
+    this.save();
+  }
 }
