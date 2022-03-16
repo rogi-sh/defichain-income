@@ -1,8 +1,8 @@
 [package]
 name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "1.0.0"
+description = "DefiChain Income"
+authors = ["Antoni Kucharczyk", "Igor Shelkovenkov"]
 license = ""
 repository = ""
 default-run = "app"
