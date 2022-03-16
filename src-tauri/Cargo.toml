@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "1.0.0"
+version = "8.13.0"
 description = "DefiChain Income"
 authors = ["Antoni Kucharczyk", "Igor Shelkovenkov"]
 license = ""
