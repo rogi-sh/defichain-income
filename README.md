@@ -30,6 +30,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Create tauri
 
+Setup for the build:
+https://tauri.studio/docs/getting-started/setting-up-macos
+
 Build tauri version for mac and windows
 ```bash
 yarn tauri build
