@@ -1879,56 +1879,6 @@ export class AppComponent implements OnInit {
     return commission;
   }
 
-  getCommissionFromTotalBlockreward(pool: Pool, blockreward: number): number {
-    let commission = 0;
-
-    if (pool === undefined || pool === null || blockreward === null) {
-      return commission;
-    }
-
-    const poolOcean = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr;
-    commission = blockreward / (poolOcean.reward * 100 + poolOcean.commission * 100) * poolOcean.commission * 100;
-
-    return commission;
-  }
-
-  getAprRewards(pool: Pool): number {
-
-    if (pool === undefined || pool === null) {
-      return 0;
-    }
-
-    const poolOceanReward = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.reward;
-
-    return poolOceanReward * 100;
-
-  }
-
-  getAprFees(pool: Pool): number {
-
-    if (pool === undefined || pool === null) {
-      return 0;
-    }
-
-    const poolOceanCom = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.commission;
-
-    return poolOceanCom * 100;
-
-  }
-
-  getAprTotal(pool: Pool): number {
-
-    if (pool === undefined || pool === null) {
-      return 0;
-    }
-
-    const poolOceanReward = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.total;
-
-    return poolOceanReward * 100;
-
-  }
-
-
   loadDexManual(): void {
     forkJoin([
       this.dexService.getPrices(),
