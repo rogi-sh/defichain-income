@@ -13,7 +13,6 @@ import {
   PoolDogeOut,
   PoolEthOut,
   PoolLtcOut,
-  PoolPair,
   PoolUsdtOut,
   PoolUsdcOut,
   Stats,
@@ -66,7 +65,7 @@ import { SupernodeAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
 import { OceanStats } from '@interfaces/Staking';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
@@ -451,7 +450,7 @@ export class AppComponent implements OnInit {
 
   async loadData(): Promise<void> {
 
-    this.spinner.show();
+    await this.spinner.show();
 
     setTimeout(() => {
       /** spinner ends after 15 seconds */
@@ -1436,89 +1435,89 @@ export class AppComponent implements OnInit {
     this.extractPools(poolPairs);
     this.computePrices(prices);
 
-    this.setFromPoolPair(this.poolBtc, poolPairs);
-    this.setFromPoolPair(this.poolEth, poolPairs);
-    this.setFromPoolPair(this.poolUsdc, poolPairs);
-    this.setFromPoolPair(this.poolUsdt, poolPairs);
-    this.setFromPoolPair(this.poolLtc, poolPairs);
-    this.setFromPoolPair(this.poolDoge, poolPairs);
-    this.setFromPoolPair(this.poolBch, poolPairs);
+    AppComponent.setFromPoolPair(this.poolBtc, poolPairs);
+    AppComponent.setFromPoolPair(this.poolEth, poolPairs);
+    AppComponent.setFromPoolPair(this.poolUsdc, poolPairs);
+    AppComponent.setFromPoolPair(this.poolUsdt, poolPairs);
+    AppComponent.setFromPoolPair(this.poolLtc, poolPairs);
+    AppComponent.setFromPoolPair(this.poolDoge, poolPairs);
+    AppComponent.setFromPoolPair(this.poolBch, poolPairs);
 
     this.createCryptoPoolsArray();
 
     if (this.poolUsd) {
-      this.setFromPoolPair(this.poolUsd, poolPairs);
+      AppComponent.setFromPoolPair(this.poolUsd, poolPairs);
     }
     if (this.poolTsla) {
-      this.setFromPoolPair(this.poolTsla, poolPairs);
+      AppComponent.setFromPoolPair(this.poolTsla, poolPairs);
     }
     if (this.poolQqq) {
-      this.setFromPoolPair(this.poolQqq, poolPairs);
+      AppComponent.setFromPoolPair(this.poolQqq, poolPairs);
     }
     if (this.poolSpy) {
-      this.setFromPoolPair(this.poolSpy, poolPairs);
+      AppComponent.setFromPoolPair(this.poolSpy, poolPairs);
     }
     if (this.poolPltr) {
-      this.setFromPoolPair(this.poolPltr, poolPairs);
+      AppComponent.setFromPoolPair(this.poolPltr, poolPairs);
     }
     if (this.poolSlv) {
-      this.setFromPoolPair(this.poolSlv, poolPairs);
+      AppComponent.setFromPoolPair(this.poolSlv, poolPairs);
     }
     if (this.poolAapl) {
-      this.setFromPoolPair(this.poolAapl, poolPairs);
+      AppComponent.setFromPoolPair(this.poolAapl, poolPairs);
     }
     if (this.poolGld) {
-      this.setFromPoolPair(this.poolGld, poolPairs);
+      AppComponent.setFromPoolPair(this.poolGld, poolPairs);
     }
     if (this.poolGme) {
-      this.setFromPoolPair(this.poolGme, poolPairs);
+      AppComponent.setFromPoolPair(this.poolGme, poolPairs);
     }
     if (this.poolGoogl) {
-      this.setFromPoolPair(this.poolGoogl, poolPairs);
+      AppComponent.setFromPoolPair(this.poolGoogl, poolPairs);
     }
     if (this.poolArkk) {
-      this.setFromPoolPair(this.poolArkk, poolPairs);
+      AppComponent.setFromPoolPair(this.poolArkk, poolPairs);
     }
     if (this.poolBaba) {
-      this.setFromPoolPair(this.poolBaba, poolPairs);
+      AppComponent.setFromPoolPair(this.poolBaba, poolPairs);
     }
     if (this.poolVnq) {
-      this.setFromPoolPair(this.poolVnq, poolPairs);
+      AppComponent.setFromPoolPair(this.poolVnq, poolPairs);
     }
     if (this.poolUrth) {
-      this.setFromPoolPair(this.poolUrth, poolPairs);
+      AppComponent.setFromPoolPair(this.poolUrth, poolPairs);
     }
     if (this.poolTlt) {
-      this.setFromPoolPair(this.poolTlt, poolPairs);
+      AppComponent.setFromPoolPair(this.poolTlt, poolPairs);
     }
     if (this.poolPdbc) {
-      this.setFromPoolPair(this.poolPdbc, poolPairs);
+      AppComponent.setFromPoolPair(this.poolPdbc, poolPairs);
     }
     // new stocks 1.2.2022
     if (this.poolEem) {
-      this.setFromPoolPair(this.poolEem, poolPairs);
+      AppComponent.setFromPoolPair(this.poolEem, poolPairs);
     }
     if (this.poolAmzn) {
-      this.setFromPoolPair(this.poolAmzn, poolPairs);
+      AppComponent.setFromPoolPair(this.poolAmzn, poolPairs);
     }
     if (this.poolNvda) {
-      this.setFromPoolPair(this.poolNvda, poolPairs);
+      AppComponent.setFromPoolPair(this.poolNvda, poolPairs);
     }
     if (this.poolCoin) {
-      this.setFromPoolPair(this.poolCoin, poolPairs);
+      AppComponent.setFromPoolPair(this.poolCoin, poolPairs);
     }
     // new stocks 3.3.2022
     if (this.poolMsft) {
-      this.setFromPoolPair(this.poolMsft, poolPairs);
+      AppComponent.setFromPoolPair(this.poolMsft, poolPairs);
     }
     if (this.poolFb) {
-      this.setFromPoolPair(this.poolFb, poolPairs);
+      AppComponent.setFromPoolPair(this.poolFb, poolPairs);
     }
     if (this.poolNflx) {
-      this.setFromPoolPair(this.poolNflx, poolPairs);
+      AppComponent.setFromPoolPair(this.poolNflx, poolPairs);
     }
     if (this.poolVoo) {
-      this.setFromPoolPair(this.poolVoo, poolPairs);
+      AppComponent.setFromPoolPair(this.poolVoo, poolPairs);
     }
 
     this.createStockArray();
@@ -1641,7 +1640,7 @@ export class AppComponent implements OnInit {
     this.poolBch.priceB = prices.defichain.fiat;
   }
 
-  private setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
+  private static setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
     pool.totalLiquidityLpToken = poolPairs[pool.id].totalLiquidity;
     const splitted = poolPairs[pool.id].symbol.split('-');
     pool.tokenASymbol = splitted[0];
@@ -2006,10 +2005,6 @@ export class AppComponent implements OnInit {
 
   getMasternodeAddressForIteration(i: number): string {
     return this.adressesMasternodes[i - this.adresses?.length * 2];
-  }
-
-  getVaultAddressForIteration(i: number): string {
-    return this.adresses[i - this.adresses?.length];
   }
 
   addTokenFromVaults(vaultsOfAddress: AddressVaults, address: string): void {
@@ -2876,14 +2871,6 @@ export class AppComponent implements OnInit {
     return dfiProBlock / this.blocktimeInS * 60;
   }
 
-  getPoolPairFromShare(share: number, pool: Pool): PoolPair {
-    const pair = new PoolPair();
-    pair.dfiOrUsdToken = +pool.reserveB * share / 100;
-    pair.poolPairToken = +pool.reserveA * share / 100;
-
-    return pair;
-  }
-
   berechnePoolOut(): void {
     this.poolOut.dfiPerMin = this.poolBtcOut.dfiPerMin + this.poolEthOut.dfiPerMin
       + this.poolUsdtOut.dfiPerMin + this.poolUsdcOut.dfiPerMin + this.poolLtcOut.dfiPerMin
@@ -3698,14 +3685,6 @@ export class AppComponent implements OnInit {
     });
 
     return dfi;
-  }
-
-  getFreezerDfiUsd(): number {
-    return this.getFreezerDfiCount() * this.poolBtc?.priceB;
-  }
-
-  getMasternodeDfiUsd(): number {
-    return (this.wallet?.dfiInMasternodes) * this.poolBtc?.priceB;
   }
 
   getBtcValueUsd(): number {
@@ -5333,8 +5312,6 @@ export class AppComponent implements OnInit {
   }
 
   getAPRAverage(): number {
-
-    const dfiInAll = this.getDfiForAverageAPR();
 
     if (!this.wallet || !this.poolOut || !this.stakingOut || !this.poolMasternodeOut) {
       return 0;
