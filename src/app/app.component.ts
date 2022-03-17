@@ -436,7 +436,7 @@ export class AppComponent implements OnInit {
 
       this.loadData();
 
-      this.toggleDarkMode();
+
 
       if (
         localStorage.getItem('theme') === 'dark' ||
@@ -444,6 +444,7 @@ export class AppComponent implements OnInit {
       ) {
         this.isDarkModeOn = true;
       }
+      this.toggleDarkMode();
     });
 
   }
