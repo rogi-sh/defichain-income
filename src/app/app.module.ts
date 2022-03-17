@@ -36,6 +36,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HistoryComponent } from '@components/history/history.component';
 import { NewsletterComponent } from '@pages/newsletter/newsletter.component';
 import { ApolloModule } from 'apollo-angular';
+import { PoolIncomeComponent } from '@components/pool-income/pool-income.component';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     PriceComponent,
     ForecastComponent,
     HistoryComponent,
+    PoolIncomeComponent,
   ],
   imports: [
     RouterModule.forRoot(

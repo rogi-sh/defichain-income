@@ -6,7 +6,7 @@ import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
 import { OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
-import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data'
+import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -97,6 +97,7 @@ export class DexStatisticsComponent implements OnInit {
 
   oraclePrices: StockOracles;
 
+  @Input()
   poolPairsOcean: PoolPairsOcean;
 
   burnDfi: Burn;
@@ -135,7 +136,6 @@ export class DexStatisticsComponent implements OnInit {
     this.loadAppRelease();
     this.loadWalletRelease();
     this.loadOraclePrices();
-    this.loadPoolPairsOcean();
     this.loadBurnInfo();
     this.loadIncomeStatistics();
     this.calculateBlockTime();
@@ -275,16 +275,6 @@ export class DexStatisticsComponent implements OnInit {
       err => {
         console.error('Fehler beim load oracle Prices: ' + JSON.stringify(err.message));
       });
-  }
-
-  loadPoolPairsOcean(): void {
-    this.dex.getPoolPairsOcean()
-      .subscribe(pairs => {
-          this.poolPairsOcean = pairs;
-        },
-        err => {
-          console.error('Fehler beim load pairs ocean: ' + JSON.stringify(err.message));
-        });
   }
 
   loadBurnInfo(): void {

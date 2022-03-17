@@ -41,7 +41,7 @@ import {
   AddressVaults,
   ChartOptions6,
   IncomePoolDto,
-  Newsletter,
+  Newsletter, PoolPairsOcean,
   UserHistory,
   Vault,
   Wallet,
@@ -325,6 +325,7 @@ export class AppComponent implements OnInit {
 
   cryptoPools: Array<Pool>;
   stocksPools: Array<Pool>;
+  poolPairsOcean: PoolPairsOcean;
 
   poolOut: Outcome = new Outcome();
   stakingOut: OutcomeStaking = new OutcomeStaking();
@@ -1383,6 +1384,8 @@ export class AppComponent implements OnInit {
 
       this.setStats(promiseStats);
 
+      this.poolPairsOcean = await this.dexService.getPoolPairsOcean().toPromise();
+
       // if fixed blocktime to 30 s
       this.blocktimeInS = 30;
       this.blocktimeInSSecond = 30;
@@ -1765,116 +1768,166 @@ export class AppComponent implements OnInit {
 
   private computeRewardsPerBlockInPools(): void {
 
+    // CRYPTO
     this.dfiProBlockBtc = this.poolBtc.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockBtc += this.getCustomRewards(this.poolBtc.customRewards);
+    this.dfiProBlockBtc += this.getCommission(this.poolBtc, this.dfiProBlockBtc);
 
     this.dfiProBlockEth = this.poolEth.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockEth += this.getCustomRewards(this.poolEth.customRewards);
+    this.dfiProBlockEth += this.getCommission(this.poolEth, this.dfiProBlockEth);
 
     this.dfiProBlockLtc = this.poolLtc.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockLtc += this.getCustomRewards(this.poolLtc.customRewards);
+    this.dfiProBlockLtc += this.getCommission(this.poolLtc, this.dfiProBlockLtc);
 
     this.dfiProBlockUsdt = this.poolUsdt.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockUsdt += this.getCustomRewards(this.poolUsdt.customRewards);
+    this.dfiProBlockUsdt += this.getCommission(this.poolUsdt, this.dfiProBlockUsdt);
 
     this.dfiProBlockUsdc = this.poolUsdc.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockUsdc += this.getCustomRewards(this.poolUsdc.customRewards);
+    this.dfiProBlockUsdc += this.getCommission(this.poolUsdc, this.dfiProBlockUsdc);
 
     this.dfiProBlockDoge = this.poolDoge.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockDoge += this.getCustomRewards(this.poolDoge.customRewards);
+    this.dfiProBlockDoge += this.getCommission(this.poolDoge, this.dfiProBlockDoge);
 
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
-    this.dfiProBlockBch += this.getCustomRewards(this.poolBch.customRewards);
+    this.dfiProBlockBch += this.getCommission(this.poolBch, this.dfiProBlockBch);
 
     // STOCKS
     this.dfiProBlockUsd = 0.5 * this.dfiPorBlockStock;
-    this.dfiProBlockUsd += this.getCustomRewards(this.poolUsd?.customRewards);
+    this.dfiProBlockUsd += this.getCommission(this.poolUsd, this.dfiProBlockUsd);
 
     this.dfiProBlockTsla = 0.045 * this.dfiPorBlockStock;
-    this.dfiProBlockTsla += this.getCustomRewards(this.poolTsla?.customRewards);
+    this.dfiProBlockTsla += this.getCommission(this.poolTsla, this.dfiProBlockTsla);
 
     this.dfiProBlockQqq = 0.0443 * this.dfiPorBlockStock;
-    this.dfiProBlockQqq += this.getCustomRewards(this.poolQqq?.customRewards);
+    this.dfiProBlockQqq += this.getCommission(this.poolQqq, this.dfiProBlockQqq);
 
     this.dfiProBlockSpy = 0.0767 * this.dfiPorBlockStock;
-    this.dfiProBlockSpy += this.getCustomRewards(this.poolSpy?.customRewards);
+    this.dfiProBlockSpy += this.getCommission(this.poolSpy, this.dfiProBlockSpy);
 
     this.dfiProBlockAapl = 0.027 * this.dfiPorBlockStock;
-    this.dfiProBlockAapl += this.getCustomRewards(this.poolAapl?.customRewards);
+    this.dfiProBlockAapl += this.getCommission(this.poolAapl, this.dfiProBlockAapl);
 
     this.dfiProBlockPltr = 0.0199 * this.dfiPorBlockStock;
-    this.dfiProBlockPltr += this.getCustomRewards(this.poolPltr?.customRewards);
+    this.dfiProBlockPltr += this.getCommission(this.poolPltr, this.dfiProBlockPltr);
 
     this.dfiProBlockSlv = 0.0086 * this.dfiPorBlockStock;
-    this.dfiProBlockSlv += this.getCustomRewards(this.poolSlv?.customRewards);
+    this.dfiProBlockSlv += this.getCommission(this.poolSlv, this.dfiProBlockSlv );
 
     this.dfiProBlockGld = 0.0078 * this.dfiPorBlockStock;
-    this.dfiProBlockGld += this.getCustomRewards(this.poolGld?.customRewards);
+    this.dfiProBlockGld += this.getCommission(this.poolGld, this.dfiProBlockGld);
 
     this.dfiProBlockGme = 0.0303 * this.dfiPorBlockStock;
-    this.dfiProBlockGme += this.getCustomRewards(this.poolGme?.customRewards);
+    this.dfiProBlockGme += this.getCommission(this.poolGme, this.dfiProBlockGme);
 
     this.dfiProBlockGoogle = 0.0151 * this.dfiPorBlockStock;
-    this.dfiProBlockGoogle += this.getCustomRewards(this.poolGoogl?.customRewards);
+    this.dfiProBlockGoogle += this.getCommission(this.poolGoogl, this.dfiProBlockGoogle);
 
     this.dfiProBlockArkk = 0.0182 * this.dfiPorBlockStock;
-    this.dfiProBlockArkk += this.getCustomRewards(this.poolArkk?.customRewards);
+    this.dfiProBlockArkk += this.getCommission(this.poolArkk, this.dfiProBlockArkk);
 
     this.dfiProBlockBaba = 0.0173 * this.dfiPorBlockStock;
-    this.dfiProBlockBaba += this.getCustomRewards(this.poolBaba?.customRewards);
+    this.dfiProBlockBaba += this.getCommission(this.poolBaba, this.dfiProBlockBaba);
 
     this.dfiProBlockVnq = 0.0072 * this.dfiPorBlockStock;
-    this.dfiProBlockVnq += this.getCustomRewards(this.poolVnq?.customRewards);
+    this.dfiProBlockVnq += this.getCommission(this.poolVnq, this.dfiProBlockVnq);
 
     this.dfiProBlockUrth = 0.007 * this.dfiPorBlockStock;
-    this.dfiProBlockUrth += this.getCustomRewards(this.poolUrth?.customRewards);
+    this.dfiProBlockUrth += this.getCommission(this.poolUrth, this.dfiProBlockUrth);
 
     this.dfiProBlockTlt = 0.0085 * this.dfiPorBlockStock;
-    this.dfiProBlockTlt += this.getCustomRewards(this.poolTlt?.customRewards);
+    this.dfiProBlockTlt += this.getCommission(this.poolTlt, this.dfiProBlockTlt);
 
     this.dfiProBlockPdbc = 0.0071 * this.dfiPorBlockStock;
-    this.dfiProBlockPdbc += this.getCustomRewards(this.poolPdbc?.customRewards);
+    this.dfiProBlockPdbc += this.getCommission(this.poolPdbc, this.dfiProBlockPdbc);
 
-    // stocks 1.2.2022
+    // STOCKS 1.2.2022
     this.dfiProBlockAmzn = 0.0251 * this.dfiPorBlockStock;
-    this.dfiProBlockAmzn += this.getCustomRewards(this.poolAmzn?.customRewards);
+    this.dfiProBlockAmzn += this.getCommission(this.poolAmzn, this.dfiProBlockAmzn);
 
     this.dfiProBlockNvda = 0.0311 * this.dfiPorBlockStock;
-    this.dfiProBlockNvda += this.getCustomRewards(this.poolNvda?.customRewards);
+    this.dfiProBlockNvda += this.getCommission(this.poolNvda, this.dfiProBlockNvda);
 
     this.dfiProBlockCoin = 0.0196 * this.dfiPorBlockStock;
-    this.dfiProBlockCoin += this.getCustomRewards(this.poolCoin?.customRewards);
+    this.dfiProBlockCoin += this.getCommission(this.poolCoin, this.dfiProBlockCoin);
 
     this.dfiProBlockEem = 0.0104 * this.dfiPorBlockStock;
-    this.dfiProBlockEem += this.getCustomRewards(this.poolEem?.customRewards);
+    this.dfiProBlockEem += this.getCommission(this.poolEem, this.dfiProBlockEem);
 
-    // stocks 3.3.2022
+    // STOCKS 3.3.2022
     this.dfiProBlockMsft = 0.0229 * this.dfiPorBlockStock;
-    this.dfiProBlockMsft += this.getCustomRewards(this.poolMsft?.customRewards);
+    this.dfiProBlockMsft += this.getCommission(this.poolMsft, this.dfiProBlockMsft);
 
     this.dfiProBlockNflx = 0.0162 * this.dfiPorBlockStock;
-    this.dfiProBlockNflx += this.getCustomRewards(this.poolNflx?.customRewards);
+    this.dfiProBlockNflx += this.getCommission(this.poolNflx, this.dfiProBlockNflx);
 
     this.dfiProBlockVoo = 0.0121 * this.dfiPorBlockStock;
-    this.dfiProBlockVoo += this.getCustomRewards(this.poolVoo?.customRewards);
+    this.dfiProBlockVoo += this.getCommission(this.poolVoo, this.dfiProBlockVoo);
 
     this.dfiProBlockFb = 0.0226 * this.dfiPorBlockStock;
-    this.dfiProBlockFb += this.getCustomRewards(this.poolFb?.customRewards);
+    this.dfiProBlockFb += this.getCommission(this.poolFb, this.dfiProBlockFb);
   }
 
-  private getCustomRewards(rewards: string []): number {
-    let reward = 0;
+  getCommission(pool: Pool, blockreward: number): number {
+    let commission = 0;
 
-    if (rewards === undefined || rewards === null) {
-      return reward;
+    if (pool === undefined || pool === null || blockreward === null) {
+      return commission;
     }
 
-    rewards.forEach(r => {
-      reward += +r.split('@') [0];
-    });
+    const poolOcean = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr;
+    commission = blockreward / (poolOcean.reward * 100) * (poolOcean.commission * 100);
 
-    return reward;
+    return commission;
   }
+
+  getCommissionFromTotalBlockreward(pool: Pool, blockreward: number): number {
+    let commission = 0;
+
+    if (pool === undefined || pool === null || blockreward === null) {
+      return commission;
+    }
+
+    const poolOcean = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr;
+    commission = blockreward / (poolOcean.reward * 100 + poolOcean.commission * 100) * poolOcean.commission * 100;
+
+    return commission;
+  }
+
+  getAprRewards(pool: Pool): number {
+
+    if (pool === undefined || pool === null) {
+      return 0;
+    }
+
+    const poolOceanReward = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.reward;
+
+    return poolOceanReward * 100;
+
+  }
+
+  getAprFees(pool: Pool): number {
+
+    if (pool === undefined || pool === null) {
+      return 0;
+    }
+
+    const poolOceanCom = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.commission;
+
+    return poolOceanCom * 100;
+
+  }
+
+  getAprTotal(pool: Pool): number {
+
+    if (pool === undefined || pool === null) {
+      return 0;
+    }
+
+    const poolOceanReward = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.total;
+
+    return poolOceanReward * 100;
+
+  }
+
 
   loadDexManual(): void {
     forkJoin([
@@ -3646,7 +3699,7 @@ export class AppComponent implements OnInit {
     });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
-      + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx + voo +fb;
+      + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx + voo + fb;
   }
 
   getVaultsValueUsd(): number {
