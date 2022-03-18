@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.14.3 - 18.3.2022';
+    this.log.comment = 'DFX staking rates in dex view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.14.2 - 17.3.2022';
     this.log.comment = 'Fix Darkmode';
     this.logs.push(this.log);

@@ -7,6 +7,20 @@ export class Share {
   apy: number;
 }
 
+export class DfxStaking {
+  staking: Staking;
+}
+
+export class Staking {
+  masternodes: number;
+  yield: StakingNumbers;
+}
+
+export class StakingNumbers {
+  apr: number;
+  apy: number;
+}
+
 export class OceanStats {
   data: StatsData;
 }

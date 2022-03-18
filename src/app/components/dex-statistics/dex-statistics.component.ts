@@ -1,14 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Correlation, History, HistoryPrice, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
-import { CORRELATION, EXCHANGE, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
+import { CORRELATION, EXCHANGE, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
-import { OceanStats } from '@interfaces/Staking';
+import { DfxStaking, OceanStats } from '@interfaces/Staking'
 import { Dex } from '@services/dex.service';
 import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -78,6 +77,9 @@ export class DexStatisticsComponent implements OnInit {
 
   @Input()
   blockTimeSecond: number;
+
+  @Input()
+  stakingDfx: DfxStaking;
 
   corr: Correlation;
 

@@ -64,7 +64,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SupernodeAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
-import { OceanStats } from '@interfaces/Staking';
+import { DfxStaking, OceanStats } from '@interfaces/Staking'
 import { Router, NavigationEnd } from '@angular/router';
 import { ChartComponent } from 'ng-apexcharts';
 
@@ -166,6 +166,8 @@ export class AppComponent implements OnInit {
   masternodeCount10Freezer = 0;
   masternodeCount0Freezer = 0;
   stakingApyKey = 'stakingApyKey';
+
+  stakingDfx: DfxStaking;
 
   dfiBurned = 0;
 
@@ -469,6 +471,8 @@ export class AppComponent implements OnInit {
     await this.computeMeta();
 
     this.loadStackingCake();
+    this.loadStackingDfx();
+
     this.loadStackingMasternode();
     this.loadHistoryUser();
 
@@ -1977,6 +1981,18 @@ export class AppComponent implements OnInit {
       },
       err => {
         console.error('Fehler beim get staking from cake: ' + JSON.stringify(err.message));
+      });
+  }
+
+  loadStackingDfx(): void {
+
+    this.stakingService
+      .getStakingDFX().subscribe(
+      dfx => {
+        this.stakingDfx = dfx;
+      },
+      err => {
+        console.error('Fehler beim get staking from dfx: ' + JSON.stringify(err.message));
       });
   }
 

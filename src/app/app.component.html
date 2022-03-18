@@ -1653,25 +1653,25 @@
 
               <div class="overflow-x-auto sm:overflow-visible max-w-full">
                 <app-dex-statistics *ngIf='cryptoPools && stocksPools'
-                  [fiat]="fiat"
-                  [oceanStats]="oceanStats"
-                  [stocksPools]='stocksPools'
-                  [cryptoPools]='cryptoPools'
-                  [stakingApyCake]="stakingApyCake"
-                  [stakingApyMN]="stakingApyMN"
-                  [MNCount]="masternodeCount"
-                  [MNCount0Freezer]="masternodeCount0Freezer"
-                  [MNCount5Freezer]="masternodeCount5Freezer"
-                  [MNCount10Freezer]="masternodeCount10Freezer"
-                  [burnedDfi]="dfiBurned"
-                  [rewards]="rewards"
-                  [blockTimeUsed]="blocktimeInS"
-                  [blockTimeSecond]="blocktimeInSSecond"
-                  [isIncognitoModeOn]="isIncognitoModeOn"
-                  [correlationDays]='correlationDays'
-                  [priceDFICEX]='priceDFICEX'
-                  [poolPairsOcean]='poolPairsOcean'
-                >
+                                    [fiat]='fiat'
+                                    [oceanStats]='oceanStats'
+                                    [stocksPools]='stocksPools'
+                                    [cryptoPools]='cryptoPools'
+                                    [stakingApyCake]='stakingApyCake'
+                                    [stakingApyMN]='stakingApyMN'
+                                    [MNCount]='masternodeCount'
+                                    [MNCount0Freezer]='masternodeCount0Freezer'
+                                    [MNCount5Freezer]='masternodeCount5Freezer'
+                                    [MNCount10Freezer]='masternodeCount10Freezer'
+                                    [burnedDfi]='dfiBurned'
+                                    [rewards]='rewards'
+                                    [blockTimeUsed]='blocktimeInS'
+                                    [blockTimeSecond]='blocktimeInSSecond'
+                                    [isIncognitoModeOn]='isIncognitoModeOn'
+                                    [correlationDays]='correlationDays'
+                                    [priceDFICEX]='priceDFICEX'
+                                    [poolPairsOcean]='poolPairsOcean'
+                                    [stakingDfx]='stakingDfx'>
                 </app-dex-statistics>
               </div>
             </div>
