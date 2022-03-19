@@ -204,9 +204,9 @@
           <span
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'
           >
-          {{ stakingDfx.staking.yield.apr * 100  | number: '1.1-1' }}
-            % APR  ~  {{ stakingDfx.staking.yield.apy * 100 | number: '1.1-1' }}% APY
-            - {{ stakingDfx.staking.masternodes }} MNs
+          {{ stakingDfx?.staking.yield.apr * 100  | number: '1.1-1' }}
+            % APR  ~  {{ stakingDfx?.staking.yield.apy * 100 | number: '1.1-1' }}% APY
+            - {{ stakingDfx?.staking.masternodes }} MNs
         </span>
         </div>
         <div class='w-full dark:text-gray-100'>

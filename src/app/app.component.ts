@@ -438,8 +438,6 @@ export class AppComponent implements OnInit {
 
       this.loadData();
 
-
-
       if (
         localStorage.getItem('theme') === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
