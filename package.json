@@ -11,6 +11,7 @@
     "url": "https://www.defichain-income.com"
   },
   "version": "8.13.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
