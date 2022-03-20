@@ -64,7 +64,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SupernodeAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
-import { DfxStaking, OceanStats } from '@interfaces/Staking'
+import { DfxStaking, OceanStats } from '@interfaces/Staking';
 import { Router, NavigationEnd } from '@angular/router';
 import { ChartComponent } from 'ng-apexcharts';
 
@@ -74,6 +74,23 @@ import { ChartComponent } from 'ng-apexcharts';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
+  constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
+              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
+              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
+              private toastr: ToastrService, private router: Router) {
+    translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
+    translate.setDefaultLang('de');
+
+    this.translate = translate;
+    const browserLang = translate.getBrowserLang();
+    this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';
+    translate.use(this.lang);
+
+    // setze matomo URL
+    this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
+
+  }
 
   @ViewChild('cd', { static: false })
   private countdown: CountdownComponent;
@@ -378,21 +395,11 @@ export class AppComponent implements OnInit {
   isIncomeChartOn = true;
   isIncomeChartOnKey = 'isIncomeChartOnKey';
 
-  constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
-              private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
-              private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
-              private toastr: ToastrService, private router: Router) {
-    translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
-    translate.setDefaultLang('de');
-
-    this.translate = translate;
-    const browserLang = translate.getBrowserLang();
-    this.lang = translate.getLangs().indexOf(browserLang) > -1 ? browserLang : 'en';
-    translate.use(this.lang);
-
-    // setze matomo URL
-    this.matomoInjector.init(environment.matomoUrl, environment.matomoId);
-
+  private static setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
+    pool.totalLiquidityLpToken = poolPairs[pool.id].totalLiquidity;
+    const splitted = poolPairs[pool.id].symbol.split('-');
+    pool.tokenASymbol = splitted[0];
+    pool.tokenBSymbol = splitted[1];
   }
 
   updateDescription(description: string): void {
@@ -1641,13 +1648,6 @@ export class AppComponent implements OnInit {
     this.poolUsdc.priceB = prices.defichain.fiat;
     this.poolBch.priceA = prices.bitcoincash.fiat;
     this.poolBch.priceB = prices.defichain.fiat;
-  }
-
-  private static setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
-    pool.totalLiquidityLpToken = poolPairs[pool.id].totalLiquidity;
-    const splitted = poolPairs[pool.id].symbol.split('-');
-    pool.tokenASymbol = splitted[0];
-    pool.tokenBSymbol = splitted[1];
   }
 
   private extractPools(pools: DexPoolPair): void {
