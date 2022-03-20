@@ -3,7 +3,7 @@
       <h2>Min</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerMin | number: '1.2-2'}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerMinUsd(out)"></app-price>
@@ -14,7 +14,7 @@
       <h2>{{ 'hour' | translate }}</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerHour| number: '1.2-2'}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerHourUsd(out) "></app-price>
@@ -25,7 +25,7 @@
       <h2>{{ 'day' | translate }}</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerDay| number: '1.2-2'}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerDayUsd(out)"></app-price>
@@ -35,7 +35,7 @@
       <h2>{{ 'week' | translate }}</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerWeek| number: '1.2-2'}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerWeekUsd(out)"></app-price>
@@ -45,7 +45,7 @@
       <h2>{{ 'month' | translate }}</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerMonth| number: '1.2-2'}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerMonthUsd(out)"></app-price>
@@ -56,7 +56,7 @@
       <h2>{{ 'year' | translate }}</h2>
     </div>
     <div class="col-span-2 lg:col-span-3">
-      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
+      <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
         {{isIncognitoModeOn ? '****' : out?.dfiPerYear| number: '1.2-2'}} DFI -
        <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerYearUsd(out) "></app-price>
