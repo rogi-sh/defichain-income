@@ -37,3 +37,7 @@ Build tauri version for mac and windows
 ```bash
 yarn tauri build
 ```
+
+
+# Build in pipeline
+To build the project for production just create an release with an tag vX.Y.Z. The pipeline will then build the project and upload it.
