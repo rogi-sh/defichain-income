@@ -11,7 +11,6 @@
     "url": "https://www.defichain-income.com"
   },
   "version": "8.13.0",
-  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,11 +18,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "tauricon": "tauricon",
     "tauri": "tauri"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^13.0.2",
+    "@angular/animations": "13.0.1",
     "@angular/cdk": "^13.0.2",
     "@angular/common": "~13.0.2",
     "@angular/compiler": "~13.0.2",
@@ -65,6 +65,7 @@
     "@angular/cli": "^13.0.3",
     "@angular/compiler-cli": "~13.0.2",
     "@tauri-apps/cli": "^1.0.0-rc.5",
+    "@tauri-apps/tauricon": "github:tauri-apps/tauricon",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/react": "^17.0.2",
