@@ -137,10 +137,10 @@
             </div>
             <br>
             <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
-            {{burnedDfi |  number: '1.1-1'}} ~
-            <app-price *ngIf='burnedDfi' [fiat]='fiat'
-                       [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{burnedDfi |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnedDfi' [fiat]='fiat'
+                         [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
         </div>
@@ -193,13 +193,13 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <h1 class='text-lg font-bold'>Staking</h1>
       <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
-       <div>
-         <p class='mr-2 mb-4'>DFX:</p>
-         <p class='mr-2 mb-4'>Cake:</p>
-         <p class='mr-2 mb-5'>Masternode:</p>
-         <p class='mr-2 mb-5'>5Y Freezer MN:</p>
-         <p class='mr-2 mb-4'>10Y Freezer MN:</p>
-       </div>
+        <div>
+          <p class='mr-2 mb-4'>DFX:</p>
+          <p class='mr-2 mb-4'>Cake:</p>
+          <p class='mr-2 mb-5'>Masternode:</p>
+          <p class='mr-2 mb-5'>5Y Freezer MN:</p>
+          <p class='mr-2 mb-4'>10Y Freezer MN:</p>
+        </div>
         <div class='col-span-2'>
           <div class='w-full dark:text-gray-100  mb-4'>
           <span
@@ -259,94 +259,98 @@
       <br>
       <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
         <div>
-        <p class='mr-2 mb-10'> Total:</p>
+          <p class='mr-2 mb-10'> Total:</p>
           <p class='mr-2 mb-9'> 5Y Freezer:</p>
           <p class='mr-2 mb-8'> 10Y Freezer:</p>
           <p class='mr-2 mb-4'> Regular MN:</p>
         </div>
         <div class='col-span-2'>
-        <div class='w-full dark:text-gray-100'>
-          <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
-          >
-            <span class='font-bold'>{{ MNCount }}</span> ~ {{ MNCount * 20000 / 1000000 }} Mio. DFI ~
-            <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.masternodes'></app-price>
+          <div class='w-full dark:text-gray-100'>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
+            >
+              <span class='font-bold'>{{ MNCount }}</span> ~ {{ MNCount * 20000 / 1000000 }} Mio. DFI ~
+              <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.masternodes'></app-price>
+            </div>
           </div>
-        </div>
-        <div class='w-full dark:text-gray-100'>
-          <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-3 py-1 mb-2 cursor-pointer text-center'
-          >
-            <span class='font-bold'>{{ MNCount5Freezer }}</span>  ~  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
-            ~
-            <app-price [fiat]='fiat'
-                       [usdPrice]='this.MNCount5Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+          <div class='w-full dark:text-gray-100'>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-3 py-1 mb-2 cursor-pointer text-center'
+            >
+              <span class='font-bold'>{{ MNCount5Freezer }}</span> ~  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
+              ~
+              <app-price [fiat]='fiat'
+                         [usdPrice]='this.MNCount5Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
           </div>
-        </div>
-        <div class='w-full dark:text-gray-100'>
+          <div class='w-full dark:text-gray-100'>
 
-          <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
-          >
-            <span class='font-bold'>{{ MNCount10Freezer }}</span>  ~  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
-            ~
-            <app-price [fiat]='fiat'
-                       [usdPrice]='this.MNCount10Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
+            >
+              <span class='font-bold'>{{ MNCount10Freezer }}</span> ~  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
+              ~
+              <app-price [fiat]='fiat'
+                         [usdPrice]='this.MNCount10Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
           </div>
-        </div>
-        <div class='w-full dark:text-gray-100'>
-          <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
-          >
-            <span class='font-bold'>{{ MNCount0Freezer }}</span>  ~  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
-            ~
-            <app-price [fiat]='fiat'
-                       [usdPrice]='this.MNCount0Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+          <div class='w-full dark:text-gray-100'>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
+            >
+              <span class='font-bold'>{{ MNCount0Freezer }}</span> ~  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
+              ~
+              <app-price [fiat]='fiat'
+                         [usdPrice]='this.MNCount0Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <h1 class='text-lg font-bold'>Block Rewards in DFI</h1>
-      <div class='mb-2'>
-        Total:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
-        >
-          {{rewards?.rewards?.total |  number: '1.2-2'  }}
+      <div class='my-2 dark:text-gray-100 grid grid-cols-2 gap-2'>
+        <div>
+          <p class='mr-2 mb-4'>Total:</p>
+          <p class='mr-2 mb-4'>LM:</p>
+          <p class='mr-2 mb-4'>LM Stocks:</p>
+          <p class='mr-2 mb-4'>Masternode:</p>
+          <p class='mr-2 mb-4'>Anchor:</p>
+          <p class='mr-2 mb-4'>Community:</p>
         </div>
-      </div>
-      <div class='mb-2'>
-        LM:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
-        </div>
-        LM Stocks:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{rewards?.rewards?.liquidityStocks |  number: '1.2-2'  }} </div>
-      </div>
-      <div class='mb-2'>
-        Masternode:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{rewards?.rewards?.minter |  number: '1.2-2'  }} </div>
-      </div>
-      <div>
-        Anchor:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
-        >
-          {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
-        </div>
-        Community:
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
-        >
-          {{rewards?.rewards?.community |  number: '1.2-2'  }}</div>
+        <div>
 
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-4 cursor-pointer text-center'
+          >
+            {{rewards?.rewards?.total |  number: '1.2-2'  }}
+          </div>
+          <br>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
+            {{rewards?.rewards?.liquidity |  number: '1.2-2' }}
+          </div>
+          <br>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
+            {{rewards?.rewards?.liquidityStocks |  number: '1.2-2'  }} </div>
+
+          <br>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3  cursor-pointer text-center'>
+            {{rewards?.rewards?.minter |  number: '1.2-2'  }} </div>
+          <br>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3  cursor-pointer text-center'
+          >
+            {{rewards?.rewards?.anchor |  number: '1.2-2'  }}
+          </div>
+          <br>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer text-center'
+          >
+            {{rewards?.rewards?.community |  number: '1.2-2'  }}</div>
+        </div>
       </div>
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
