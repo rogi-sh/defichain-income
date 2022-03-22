@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.14.6 - 22.3.2022';
+    this.log.comment = 'UX optimizations on the dex view cards';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.14.5 - 19.3.2022';
     this.log.comment = 'Small UI optimizations';
     this.logs.push(this.log);

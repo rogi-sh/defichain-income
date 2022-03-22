@@ -359,51 +359,47 @@
          target='_blank'
          href='https://defiscan.live/blocks'>Defiscan</a>
       <br>
-      <div class='my-2 dark:text-gray-100'>
-        <span class='mr-2'>Block:</span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{ rewards?.blockHeight }}
-        </div>
-      </div>
-      <div class='my-2 dark:text-gray-100'>
-          <span
-            class='mr-2'>Blocktime:</span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          30s
-        </div>
-      </div>
-      <div class='my-2 dark:text-gray-100'>
-          <span
-            class='mr-2'>Computed Blocktime (200 Blocks):</span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          Avg ~ {{avgFirstLastBlocktime}}s / Median ~ {{medianBlocktime}}s
-        </div>
-      </div>
-      <div class='my-2 dark:text-gray-100'>
-        <span class='mr-2'>{{ 'blocksTillCycle' | translate }}</span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{getBlockToNextCycle()}}
-        </div>
-      </div>
-      <div class='my-2 dark:text-gray-100'>
-        <span class='mr-2'>{{ 'blocksTillDiff' | translate }}</span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{getBlockToNextDiffChange()}}
-        </div>
-      </div>
-      <div class='my-2 dark:text-gray-100'>
-        <span class='mr-2'>Blocks to next Oracle Price </span>
-        <div
-          class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-          {{getBlockToNextOracle()}}
-        </div>
-      </div>
 
+      <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
+        <div class='col-span-2'>
+          <p class='mr-2 mb-4'>Block:</p>
+          <p class='mr-2 mb-3'>Blocktime:</p>
+          <p class='mr-2 mb-8'>Computed Blocktime (200 Blocks):</p>
+          <p class='mr-2 mb-2'>{{ 'blocksTillCycle' | translate }}</p>
+          <p class='mr-2 mb-2'>{{ 'blocksTillDiff' | translate }}</p>
+          <p class='mr-2 mb-2'>Blocks to next Oracle Price </p>
+        </div>
+        <div>
+          <div
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+            {{ rewards?.blockHeight }}
+          </div>
+          <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
+              30s
+            </div>
+          <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-4 cursor-pointer text-center'>
+              Avg ~ {{avgFirstLastBlocktime}}s / Median ~ {{medianBlocktime}}s
+            </div>
+          <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-12 cursor-pointer text-center'>
+              {{getBlockToNextCycle()}}
+            </div>
+          <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-4 cursor-pointer text-center'>
+              {{getBlockToNextDiffChange()}}
+            </div>
+         <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{getBlockToNextOracle()}}
+            </div>
+          </div>
+        </div>
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
@@ -512,23 +508,23 @@
            </div>
           <div>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'>
-              {{incomeStatistics?.users}}
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{incomeStatistics?.users > 0 ? incomeStatistics?.users : 0}}
             </div>
             <br>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'>
-              {{incomeStatistics?.addresses}}
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{incomeStatistics?.addresses > 0 ? incomeStatistics?.addresses : 0}}
             </div>
             <br>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'>
-              {{incomeStatistics?.addressesMasternodes}}
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{incomeStatistics?.addressesMasternodes > 0 ? incomeStatistics?.addressesMasternodes : 0}}
             </div>
             <br>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{incomeStatistics?.visits}}
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer text-center'>
+              {{incomeStatistics?.visits > 0 ? incomeStatistics?.visits : 0}}
             </div>
           </div>
 
