@@ -1,5 +1,5 @@
 <div>
-  <span class="text-2xl mb-4 text-pink-500">DeFiChain Statistics</span> &nbsp;&nbsp;
+  <span class='text-2xl mb-4 text-pink-500'>DeFiChain Statistics</span> &nbsp;&nbsp;
   <span
     class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
     <input
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
@@ -67,7 +67,7 @@
             <p class='mr-2 mb-4'>DEX:</p>
             <p class='mr-2'>Masternodes:</p>
           </div>
-          <div class="col-span-2">
+          <div class='col-span-2'>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{getDexDFI()  |  number: '1.2-2'}} ~
@@ -75,9 +75,10 @@
             </div>
 
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-3 py-1 cursor-pointer text-center'>
               {{getTotalMasternodesDfiLocked() |  number: '1.2-2'}} ~
-              <app-price [fiat]='fiat' [usdPrice]='getTotalMasternodesDfiLocked() * this.getCryptoPools()[0]?.priceB'></app-price>
+              <app-price [fiat]='fiat'
+                         [usdPrice]='getTotalMasternodesDfiLocked() * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
         </div>
@@ -87,59 +88,55 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>DFI Burn</h1>
-        <a class='text-pink-500 hover:underline'
+        <a class='text-pink-500 hover:underline mb-4'
            target='_blank'
            href='https://defiscan.live/address/8defichainBurnAddressXXXXXXXdRQkSm'>Defiscan</a>
         <br>
-        <div class='grid gap-2'>
+        <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
           <div>
-            <span class='mr-2'>Payback burn:</span>
-            <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-                {{burnDfi?.paybackburn |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.paybackburn * this.getCryptoPools()[0]?.priceB'></app-price>
-            </div>
+            <p class='mr-2 mb-4'>Payback burn:</p>
+            <p class='mr-2 mb-3'>Auction burn:</p>
+            <p class='mr-2 mb-3'>Fee burn:</p>
+            <p class='mr-2 mb-3'>Payback fee:</p>
+            <p class='mr-2 mb-3'>Amount UTXO:</p>
+            <p class='mr-2'>Total:</p>
           </div>
-          <div>
-            <span class='mr-2'>Auction burn:</span>
+          <div class='col-span-2'>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+              {{burnDfi?.paybackburn |  number: '1.1-1'}} ~
+              <app-price *ngIf='burnDfi' [fiat]='fiat'
+                         [usdPrice]='burnDfi.paybackburn * this.getCryptoPools()[0]?.priceB'></app-price>
+            </div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{burnDfi?.auctionburn |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.auctionburn * this.getCryptoPools()[0]?.priceB'></app-price>
+              <app-price *ngIf='burnDfi' [fiat]='fiat'
+                         [usdPrice]='burnDfi.auctionburn * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-          </div>
-          <div>
-            <span class='mr-2'>Fee burn:</span>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2  cursor-pointer text-center'>
               {{burnDfi?.feeburn |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.feeburn * this.getCryptoPools()[0]?.priceB'></app-price>
+              <app-price *ngIf='burnDfi' [fiat]='fiat'
+                         [usdPrice]='burnDfi.feeburn * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-          </div>
-          <div>
-            <span class='mr-2'>Payback fee:</span>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{burnDfi?.dfipaybackfee |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.dfipaybackfee * this.getCryptoPools()[0]?.priceB'></app-price>
+              <app-price *ngIf='burnDfi' [fiat]='fiat'
+                         [usdPrice]='burnDfi.dfipaybackfee * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-          </div>
-
-          <div>
-            <span class='mr-2'>Amount UTXO:</span>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{burnDfi?.amount |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnDfi' [fiat]='fiat' [usdPrice]='burnDfi.amount * this.getCryptoPools()[0]?.priceB'></app-price>
+              <app-price *ngIf='burnDfi' [fiat]='fiat'
+                         [usdPrice]='burnDfi.amount * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-          </div>
-
-          <div>
-            <span class='mr-2'>Total:</span>
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-              {{burnedDfi |  number: '1.1-1'}} ~
-              <app-price *ngIf='burnedDfi' [fiat]='fiat' [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
+            {{burnedDfi |  number: '1.1-1'}} ~
+            <app-price *ngIf='burnedDfi' [fiat]='fiat'
+                       [usdPrice]='burnedDfi * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
           </div>
         </div>
@@ -406,29 +403,29 @@
           </div>
           <div>
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'ONLINE'"
-                 class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Online
             </p>
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'OFFLINE'"
-                 class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Offline
             </p>
             <br>
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'ONLINE'"
-                 class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Online
             </p>
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'OFFLINE'"
-                 class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Offline
             </p>
             <br>
             <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'ONLINE'"
-                 class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Online
             </p>
             <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'OFFLINE'"
-                 class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Offline
             </p>
           </div>
@@ -652,8 +649,11 @@
               class='font-bold'> Premium: <span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>
-            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.h24'></app-price>   <br>
-            <span class='font-bold'> 30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.d30'></app-price>
+            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
+                                                                [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.h24'></app-price>
+            <br>
+            <span class='font-bold'> 30D</span> &nbsp;
+            <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(cryptoPool.id)?.volume.d30'></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.totalLiquidityUsd'></app-price>
@@ -670,8 +670,10 @@
           <td class='text-right p-2'>
             {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.total * 100 | number: '1.2-2' }}%
             <br>
-            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.reward * 100 | number: '1.2-2'}}
-              % - Commision {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.commission * 100 | number: '1.2-2'}} %</span>
+            <span
+              class='text-xs'>Reward {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.reward * 100 | number: '1.2-2'}}
+              % - Commision {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.commission * 100 | number: '1.2-2'}}
+              %</span>
           </td>
           <td class='text-right p-2'>
             {{getApyWeeklyFromApr(cryptoPool?.apr) | number: '1.2-2' }}%
@@ -719,8 +721,11 @@
 
           </td>
           <td class='text-right text-sm p-2'>
-            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.h24'></app-price>   <br>
-            <span class='font-bold'>30D</span> &nbsp; <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.d30'></app-price>
+            <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
+                                                                [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.h24'></app-price>
+            <br>
+            <span class='font-bold'>30D</span> &nbsp;
+            <app-price [fiat]='fiat' [usdPrice]='getPoolFromOceanPoolPairs(stockPool.id)?.volume.d30'></app-price>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd'></app-price>
