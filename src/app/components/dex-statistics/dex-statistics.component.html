@@ -194,7 +194,7 @@
       <h1 class='text-lg font-bold'>Staking</h1>
       <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
        <div>
-        <p class='mr-2 mb-4'>DFX:</p>
+         <p class='mr-2 mb-4'>DFX:</p>
          <p class='mr-2 mb-4'>Cake:</p>
          <p class='mr-2 mb-5'>Masternode:</p>
          <p class='mr-2 mb-5'>5Y Freezer MN:</p>
@@ -257,48 +257,53 @@
          target='_blank'
          href='https://defiscan.live/masternodes'>Defiscan</a>
       <br>
-      <div class='mb-1 w-full grid gap-2 auto-rows-max'>
+      <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
+        <div>
+        <p class='mr-2 mb-10'> Total:</p>
+          <p class='mr-2 mb-9'> 5Y Freezer:</p>
+          <p class='mr-2 mb-8'> 10Y Freezer:</p>
+          <p class='mr-2 mb-4'> Regular MN:</p>
+        </div>
+        <div class='col-span-2'>
         <div class='w-full dark:text-gray-100'>
-          Total:
           <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
           >
-            {{ MNCount }} ~ {{ MNCount * 20000 / 1000000 }} Mio. DFI ~
+            <span class='font-bold'>{{ MNCount }}</span> ~ {{ MNCount * 20000 / 1000000 }} Mio. DFI ~
             <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.masternodes'></app-price>
           </div>
         </div>
         <div class='w-full dark:text-gray-100'>
-          5Y Freezer:
           <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-3 py-1 mb-2 cursor-pointer text-center'
           >
-            {{ MNCount5Freezer }} ~  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
+            <span class='font-bold'>{{ MNCount5Freezer }}</span>  ~  {{ MNCount5Freezer * 20000 / 1000000 }} Mio. DFI
             ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount5Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>
         </div>
         <div class='w-full dark:text-gray-100'>
-          10Y Freezer:
+
           <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
           >
-            {{ MNCount10Freezer }} ~  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
+            <span class='font-bold'>{{ MNCount10Freezer }}</span>  ~  {{ MNCount10Freezer * 20000 / 1000000 }} Mio. DFI
             ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount10Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>
         </div>
         <div class='w-full dark:text-gray-100'>
-          0Y Freezer:
           <div
-            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'
+            class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mb-2 cursor-pointer text-center'
           >
-            {{ MNCount0Freezer }} ~  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
+            <span class='font-bold'>{{ MNCount0Freezer }}</span>  ~  {{ MNCount0Freezer * 20000 / 1000000 }} Mio. DFI
             ~
             <app-price [fiat]='fiat'
                        [usdPrice]='this.MNCount0Freezer * 20000  * this.getCryptoPools()[0]?.priceB'></app-price>
           </div>
+        </div>
         </div>
       </div>
     </div>
