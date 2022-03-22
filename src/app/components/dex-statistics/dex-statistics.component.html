@@ -22,7 +22,7 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>TVL</h1>
-        <a class='text-pink-500 hover:underline'
+        <a class='text-pink-500 hover:underline mb-4'
            target='_blank'
            href='https://defiscan.live'>Defiscan</a>
         <br>
@@ -57,23 +57,25 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>DFI Locked</h1>
-        <a class='text-pink-500 hover:underline'
+        <a class='text-pink-500 hover:underline mb-4'
            target='_blank'
            href='https://defiscan.live/dex'>Defiscan</a>
         <br>
-        <div class='grid gap-2'>
+
+        <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
           <div>
-            <span class='mr-2'>DEX:</span>
+            <p class='mr-2 mb-4'>DEX:</p>
+            <p class='mr-2'>Masternodes:</p>
+          </div>
+          <div class="col-span-2">
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{getDexDFI()  |  number: '1.2-2'}} ~
               <app-price [fiat]='fiat' [usdPrice]='getDexDFI() * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-          </div>
-          <div>
-            <span class='mr-2'>Masternodes:</span>
+
             <div
-              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer text-center'>
               {{getTotalMasternodesDfiLocked() |  number: '1.2-2'}} ~
               <app-price [fiat]='fiat' [usdPrice]='getTotalMasternodesDfiLocked() * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
