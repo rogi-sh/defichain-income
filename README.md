@@ -28,19 +28,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-# Create electron
+# Create tauri
 
-Build electron version for mac and windows
+Setup for the build:
+https://tauri.studio/docs/getting-started/setting-up-macos
+
+Build tauri version for mac and windows
 ```bash
-yarn build-electron && yarn package-mac && yarn package-win
+yarn tauri build
 ```
 
-Build electron version for linux need to be build on Linux
-```bash
-yarn build-electron && yarn package-linux
-```
 
-
-
-
-
+# Build in pipeline
+To build the project for production just create an release with an tag vX.Y.Z. The pipeline will then build the project and upload it.
