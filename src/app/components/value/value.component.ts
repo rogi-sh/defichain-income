@@ -541,7 +541,7 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.wallet?.usdInBabaPool + this.wallet?.usdInVnqPool + this.wallet?.usdInUrthPool + this.wallet?.usdInTltPool
       + this.wallet?.usdInPdbcPool + this.wallet?.usdInAmznPool + this.wallet?.usdInNvdaPool + this.wallet?.usdInCoinPool
       + this.wallet?.usdInEemPool + this.wallet?.usdInMsftPool + this.wallet?.usdInNflxPool + this.wallet?.usdInFbPool
-      + this.wallet?.usdInVooPool;
+      + this.wallet?.usdInVooPool + this.getCollateralCountVaults('DUSD');
   }
 
   getUsdValueUsd(): number {
