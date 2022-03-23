@@ -139,6 +139,11 @@ export class AddressBalance {
   nvdaToken: number;
   eemToken: number;
 
+  msftToken: number;
+  fbToken: number;
+  vooToken: number;
+  nflxToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -168,6 +173,11 @@ export class AddressBalance {
   nvdausdToken: number;
   coinusdToken: number;
   eemusdToken: number;
+
+  msftusdToken: number;
+  fbusdToken: number;
+  voousdToken: number;
+  nflxusdToken: number;
 
 }
 
@@ -241,7 +251,6 @@ export class PoolNflxOut extends Outcome {}
 export class PoolFbOut extends Outcome {}
 
 export class PoolVooOut extends Outcome {}
-
 
 export class OutcomeStaking extends Outcome {}
 

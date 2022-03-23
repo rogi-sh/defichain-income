@@ -12,7 +12,79 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '8.13.00 - 5.3.2022';
+    this.log.version = '8.14.7 - 23.3.2022';
+    this.log.comment = 'Views callable over url like defichain-income.com/income or /dex, small fixes';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.6 - 22.3.2022';
+    this.log.comment = 'UX optimizations on the dex view cards';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.5 - 19.3.2022';
+    this.log.comment = 'Small UI optimizations';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.4 - 19.3.2022';
+    this.log.comment = 'Fix DFX staking not loading correcty causes errors';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.3 - 18.3.2022';
+    this.log.comment = 'DFX staking rates in dex view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.2 - 17.3.2022';
+    this.log.comment = 'Fix Darkmode';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.1 - 17.3.2022';
+    this.log.comment = 'Fix Spinner';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.14.0 - 17.3.2022';
+    this.log.comment = 'Add commission to reward calculation, code refactoring pool income component';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
+    this.log.version = '8.13.6 - 13.3.2022';
+    this.log.comment = 'Newsletter unsubscribe added';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.5 - 9.3.2022';
+    this.log.comment = 'QR Code for tips';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.4 - 9.3.2022';
+    this.log.comment = 'Fix: Wrong total reward';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.3 - 8.3.2022';
+    this.log.comment = 'Fix: No Rewards for msft pool';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.2 - 8.3.2022';
+    this.log.comment = 'New Stock pools fully integrated';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
+    this.log.version = '8.13.1 - 6.3.2022';
+    this.log.comment = 'New Stock pool reward distribution';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.13.0 - 5.3.2022';
     this.log.comment = 'Add march pool to dex view';
     this.logs.push(this.log);
 

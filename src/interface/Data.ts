@@ -240,6 +240,11 @@ export interface WalletDto {
   coinusd: number;
   eemusd: number;
 
+  msftusd: number;
+  fbusd: number;
+  nflxusd: number;
+  voousd: number;
+
   // User Infos
   // BTC Pool
   btcInBtcPool: number;
@@ -376,6 +381,26 @@ export interface WalletDto {
   eem: number;
   usdInEemPool: number;
 
+  // MSFT Pool
+  msftInMsftPool: number;
+  msft: number;
+  usdInMsftPool: number;
+
+  // FB Pool
+  fbInFbPool: number;
+  fb: number;
+  usdInFbPool: number;
+
+  // NFLX Pool
+  nflxInNflxPool: number;
+  nflx: number;
+  usdInNflxPool: number;
+
+  // VOO Pool
+  vooInVooPool: number;
+  voo: number;
+  usdInVooPool: number;
+
 }
 
 export class Newsletter {
@@ -424,6 +449,11 @@ export class Wallet {
   nvdausd = 0;
   coinusd = 0;
   eemusd = 0;
+
+  msftusd = 0;
+  fbusd = 0;
+  nflxusd = 0;
+  voousd = 0;
 
   // User Infos
   // BTC Pool
@@ -641,6 +671,38 @@ export class Wallet {
   eemKey = 'eemKey';
   usdInEemPoolKey = 'usdInEemPoolKey';
   usdInEemPool = 0;
+
+  // MSFT Pool
+  msftInMsftPool = 0;
+  msftInMsftPoolKey = 'msftInMsftPoolKey';
+  msft = 0;
+  msftKey = 'msftKey';
+  usdInMsftPoolKey = 'usdInMsftPoolKey';
+  usdInMsftPool = 0;
+
+  // FB Pool
+  fbInFbPool = 0;
+  fbInFbPoolKey = 'fbInFbPoolKey';
+  fb = 0;
+  fbKey = 'fbKey';
+  usdInFbPoolKey = 'usdInFbPoolKey';
+  usdInFbPool = 0;
+
+  // NFLX Pool
+  nflxInNflxPool = 0;
+  nflxInNflxPoolKey = 'coinInCoinPoolKey';
+  nflx = 0;
+  nflxKey = 'nflxKey';
+  usdInNflxPoolKey = 'usdInNflxPoolKey';
+  usdInNflxPool = 0;
+
+  // VOO Pool
+  vooInVooPool = 0;
+  vooInVooPoolKey = 'vooInVooPoolKey';
+  voo = 0;
+  vooKey = 'vooKey';
+  usdInVooPoolKey = 'usdInVooPoolKey';
+  usdInVooPool = 0;
 
 }
 

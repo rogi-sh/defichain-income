@@ -1,14 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Correlation, History, HistoryPrice, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
-import { CORRELATION, EXCHANGE, HISTORY, INCOME_STATISTICS } from '@interfaces/Graphql';
+import { CORRELATION, EXCHANGE, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
-import { OceanStats } from '@interfaces/Staking';
+import { DfxStaking, OceanStats } from '@interfaces/Staking'
 import { Dex } from '@services/dex.service';
-import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data'
+import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dex-statistics',
@@ -79,6 +78,9 @@ export class DexStatisticsComponent implements OnInit {
   @Input()
   blockTimeSecond: number;
 
+  @Input()
+  stakingDfx: DfxStaking;
+
   corr: Correlation;
 
   euonsHardforkeBlock = 894000;
@@ -97,6 +99,7 @@ export class DexStatisticsComponent implements OnInit {
 
   oraclePrices: StockOracles;
 
+  @Input()
   poolPairsOcean: PoolPairsOcean;
 
   burnDfi: Burn;
@@ -125,8 +128,6 @@ export class DexStatisticsComponent implements OnInit {
 
   ngOnInit(): void  {
 
-    console.log(this.statisticsOn);
-
     if (localStorage.getItem(this.statisticsOnKey) !== null) {
       this.statisticsOn = JSON.parse(localStorage.getItem(this.statisticsOnKey));
     }
@@ -137,13 +138,11 @@ export class DexStatisticsComponent implements OnInit {
     this.loadAppRelease();
     this.loadWalletRelease();
     this.loadOraclePrices();
-    this.loadPoolPairsOcean();
     this.loadBurnInfo();
     this.loadIncomeStatistics();
     this.calculateBlockTime();
     this.calculateExchangesStatus();
 
-    console.log(this.statisticsOn);
   }
 
   loadMilestones(): void {
@@ -280,16 +279,6 @@ export class DexStatisticsComponent implements OnInit {
       });
   }
 
-  loadPoolPairsOcean(): void {
-    this.dex.getPoolPairsOcean()
-      .subscribe(pairs => {
-          this.poolPairsOcean = pairs;
-        },
-        err => {
-          console.error('Fehler beim load pairs ocean: ' + JSON.stringify(err.message));
-        });
-  }
-
   loadBurnInfo(): void {
     this.dex.getBurnInfo()
       .subscribe(burn => {
@@ -301,7 +290,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getPoolFromOceanPoolPairs(id: string): PoolPairOcean {
-    return this.poolPairsOcean.data.find(p => p.id === id);
+    return this.poolPairsOcean?.data.find(p => p.id === id);
   }
 
   getBlockToNextCycle(): string {

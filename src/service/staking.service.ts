@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
-import {CakeStaking, OceanStats} from '@interfaces/Staking';
+import { CakeStaking, DfxStaking, OceanStats } from '@interfaces/Staking'
 
 
 @Injectable({
@@ -14,12 +14,14 @@ export class StakingService {
   }
 
   public getStaking(): Observable<CakeStaking> {
-
     return this.http.get<CakeStaking>(environment.cake);
   }
 
-  public getMasternode(): Observable<OceanStats> {
+  public getStakingDFX(): Observable<DfxStaking> {
+    return this.http.get<DfxStaking>(environment.dfx);
+  }
 
+  public getMasternode(): Observable<OceanStats> {
     return this.http.get<OceanStats>(environment.oceanstats);
   }
 }

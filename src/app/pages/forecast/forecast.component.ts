@@ -131,6 +131,18 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolEem!: Pool;
 
   @Input()
+  poolMsft!: Pool;
+
+  @Input()
+  poolNflx!: Pool;
+
+  @Input()
+  poolFb!: Pool;
+
+  @Input()
+  poolVoo!: Pool;
+
+  @Input()
   blockHeight!: number;
 
   @Input()
@@ -652,6 +664,10 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiNvdaPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNvdaPool) / dfiInLm;
     const dfiCoinPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCoinPool) / dfiInLm;
     const dfiEemPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInEemPool) / dfiInLm;
+    const dfiMsftPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMsftPool) / dfiInLm;
+    const dfiNflxPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNflxPool) / dfiInLm;
+    const dfiFbPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInFbPool) / dfiInLm;
+    const dfiVooPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVooPool) / dfiInLm;
 
     // Anteile berechnen je nachdem wie viel man in den Pools hat
     const average =
@@ -681,7 +697,11 @@ export class ForecastComponent implements OnInit, OnChanges {
         (dfiAmznPart * 100 * this.poolAmzn?.apr) +
         (dfiNvdaPart * 100 * this.poolNvda?.apr) +
         (dfiCoinPart * 100 * this.poolCoin?.apr) +
-        (dfiEemPart * 100 * this.poolEem?.apr)) / 100;
+        (dfiEemPart * 100 * this.poolEem?.apr) +
+        (dfiMsftPart * 100 * this.poolMsft?.apr) +
+        (dfiNflxPart * 100 * this.poolNflx?.apr) +
+        (dfiFbPart * 100 * this.poolFb?.apr) +
+        (dfiVooPart * 100 * this.poolVoo?.apr)) / 100;
 
     return Math.round(average * 100) / 100;
   }
@@ -708,9 +728,11 @@ export class ForecastComponent implements OnInit, OnChanges {
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGooglPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInArkkPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBabaPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVnqPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUrthPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTltPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPdbcPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAmznPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNvdaPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCoinPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInEemPool);
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPdbcPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAmznPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNvdaPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCoinPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInEemPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMsftPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNflxPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInFbPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVooPool);
   }
 
   getUsdPriceOfDfiInDFIUSDPool(): number {

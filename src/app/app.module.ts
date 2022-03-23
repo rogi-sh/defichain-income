@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -33,12 +33,25 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
-import { HistoryComponent } from './components/history/history.component';
-import { NewsletterComponent } from '@pages/newsletter/newsletter.component'
+import { HistoryComponent } from '@components/history/history.component';
+import { NewsletterComponent } from '@pages/newsletter/newsletter.component';
+import { ApolloModule } from 'apollo-angular';
+import { PoolIncomeComponent } from '@components/pool-income/pool-income.component';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
   { path: 'authKey/:authKey', component: AppComponent },
+  { path: 'dashboard', component: AppComponent },
+  { path: 'holdings', component: AppComponent },
+  { path: 'income', component: AppComponent },
+  { path: 'dex', component: AppComponent },
+  { path: 'chart', component: AppComponent },
+  { path: 'forecast', component: AppComponent },
+  { path: 'history', component: AppComponent },
+  { path: 'calculator', component: AppComponent },
+  { path: 'newsletter', component: AppComponent },
+  { path: 'info', component: AppComponent },
+  { path: 'settings', component: AppComponent },
   { path: '', component: AppComponent
   }
 ];
@@ -62,12 +75,14 @@ const appRoutes: Routes = [
     PriceComponent,
     ForecastComponent,
     HistoryComponent,
+    PoolIncomeComponent,
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     ),
+    ApolloModule,
     MarkdownModule.forRoot(),
     BrowserModule,
     HttpClientModule,
@@ -100,7 +115,8 @@ const appRoutes: Routes = [
     }),
   ],
   providers: [DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
 
