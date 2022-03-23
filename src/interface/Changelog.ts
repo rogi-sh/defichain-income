@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.14.8 - 23.3.2022';
+    this.log.comment = 'Tauri builder for mac, windows and linux app';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.14.7 - 23.3.2022';
     this.log.comment = 'Views callable over url like defichain-income.com/income or /dex, small fixes';
     this.logs.push(this.log);
