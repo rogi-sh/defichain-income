@@ -439,6 +439,8 @@ export class AppComponent implements OnInit {
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
       }
 
+      this.handleSites(url)
+
       // remove adresses in localstorage
       localStorage.removeItem(this.adressesKey);
       localStorage.removeItem(this.adressesMasternodesKey);
@@ -454,6 +456,44 @@ export class AppComponent implements OnInit {
       this.toggleDarkMode();
     });
 
+  }
+
+  private handleSites(url: string): void {
+    const matchValue = '/holdings';
+    const matchIncome = '/income';
+    const matchDashboard = '/dashboard';
+    const matchDex = '/dex';
+    const matchForecast = '/forecast';
+    const matchHistory = '/history';
+    const matchChart = '/chart';
+    const matchCalculator = '/calculator';
+    const matchInfo = '/info';
+    const matchSettings = '/settings';
+    const matchNewsletter = '/newsletter';
+
+    if (url.indexOf(matchValue) >= 0) {
+      this.handlePage('holdings');
+    } else if (url.indexOf(matchIncome) >= 0) {
+      this.handlePage('income');
+    } else if (url.indexOf(matchDashboard) >= 0) {
+      this.handlePage('dashboard');
+    } else if (url.indexOf(matchDex) >= 0) {
+      this.handlePage('dex');
+    } else if (url.indexOf(matchForecast) >= 0) {
+      this.handlePage('forecast');
+    } else if (url.indexOf(matchHistory) >= 0) {
+      this.handlePage('history');
+    } else if (url.indexOf(matchChart) >= 0) {
+      this.handlePage('defi');
+    } else if (url.indexOf(matchCalculator) >= 0) {
+      this.handlePage('calculator');
+    } else if (url.indexOf(matchInfo) >= 0) {
+      this.handlePage('info');
+    } else if (url.indexOf(matchSettings) >= 0) {
+      this.handlePage('settings');
+    } else if (url.indexOf(matchNewsletter) >= 0) {
+      this.handlePage('newsletter');
+    }
   }
 
   async loadData(): Promise<void> {

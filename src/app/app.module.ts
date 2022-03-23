@@ -41,6 +41,17 @@ import { PoolIncomeComponent } from '@components/pool-income/pool-income.compone
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
   { path: 'authKey/:authKey', component: AppComponent },
+  { path: 'dashboard', component: AppComponent },
+  { path: 'holdings', component: AppComponent },
+  { path: 'income', component: AppComponent },
+  { path: 'dex', component: AppComponent },
+  { path: 'chart', component: AppComponent },
+  { path: 'forecast', component: AppComponent },
+  { path: 'history', component: AppComponent },
+  { path: 'calculator', component: AppComponent },
+  { path: 'newsletter', component: AppComponent },
+  { path: 'info', component: AppComponent },
+  { path: 'settings', component: AppComponent },
   { path: '', component: AppComponent
   }
 ];
