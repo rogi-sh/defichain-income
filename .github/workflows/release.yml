@@ -54,7 +54,7 @@ jobs:
         run: npm install -g yarn
 
       - name: (client) install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --network-timeout=30000
 
       - name: Tauri Build
         uses: tauri-apps/tauri-action@v0
