@@ -472,7 +472,7 @@ export class ValueComponent implements OnInit, OnChanges {
       vaults.push(...va.data);
     });
 
-    vaults.sort((a, b) => (a.state > b.state) ? 1 : ((b.state > a.state) ? -1 : 0));
+    vaults.sort((a, b) => (+a.collateralValue > +b.collateralValue) ? 1 : ((+b.collateralValue > +a.collateralValue) ? -1 : 0));
 
     return vaults;
 
