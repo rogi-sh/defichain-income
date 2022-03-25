@@ -62,6 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # NOTE: "__VERSION__" automatically replaced
+          tag: tauri__VERSION__
           releaseName: __VERSION__
           body: "See the assets to download this version and install."
           prerelease: false
