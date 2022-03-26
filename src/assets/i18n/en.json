@@ -37,7 +37,7 @@
   "login3": "Logged in with Auth Key:",
   "stakingOnCake": "What is your APY for staking?",
   "stakingOnCake2": "E.g. Cake 98% / MN 77% / Freezer 98+",
-
+  "history-chart-delete": "Select the data points to be deleted and click on DELETE",
   "address": {
     "label": "address",
     "title": "Your DFI addresses",

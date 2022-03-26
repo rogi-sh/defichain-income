@@ -1,0 +1,54 @@
+<button class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md px-2 h-14 text-white align-top uppercase"
+        (click)="handleOpen()">Edit Data</button>
+
+<div *ngIf="isOpen" class="bg-fixed bg-white dark:bg-black fixed inset-0 bg-opacity-80 z-50">
+  <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 w-11/12 lg:w-4/5 xl:w-2/3 max-w-4xl h-4/6 shadow-md rounded p-4 overflow-y-auto overflow-x-hidden">
+    <div class="absolute right-5 top-5 z-10 cursor-pointer dark:text-gray-100" (click)="handleOpen()">
+      <app-icon class="w-5 h-5 inline-block hover:text-pink-500" name="close"></app-icon>
+    </div>
+
+    <div *ngIf = "toDelete && toDelete.length > 1" class="w-full h-full pt-8 relative overflow-hidden">
+      <div class="text-xl font-semibold mb-2 dark:text-gray-100">{{ 'history-chart-delete' | translate }}</div>
+      <button class="bg-pink-500 hover:bg-pink-600 transform transition-all delay-150 focus:outline-none rounded-md px-2 h-14 text-white align-top uppercase"
+              (click)="handleDelete()">DELETE</button>
+      <div *ngIf='errorBackend' class='bg-red-600 text-white w-full py-2 px-4 rounded-sm my-2'
+           role='alert'>
+        {{errorBackend}}
+      </div>
+      <div
+        *ngIf='successBackend'
+        class='bg-green-500 text-white w-full py-2 px-4 rounded-sm my-2'
+        role='alert'
+      >
+        {{successBackend}}
+      </div>
+      <div class="overflow-y-auto h-full my-8">
+        <div *ngFor="let l of toDelete" class='my-8'>
+          <h2><span class="font-bold text-pink-500">{{l.historyItem.date}}</span></h2>
+          <p class="mb-2 dark:text-gray-100">{{l.historyItem.totalValue  | number: '1.2-2'}}USD total value</p>
+          <p class="mb-2 dark:text-gray-100">{{l.historyItem.totalValueIncomeDfi | number: '1.2-2'}}DFI income</p>
+          <p class="mb-2 dark:text-gray-100">{{l.historyItem.totalValueIncomeUsd | number: '1.2-2'}}USD income </p>
+          <div class='flex flex-row gap-2'>
+            <div class='dark:text-gray-100'>
+              Delete ?
+            </div>
+            <div
+              class='relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in'>
+              <input
+                type='checkbox'
+                id='historydeleteOn + {{l.historyItem._id}}'
+                [(ngModel)]='l.toDelete'
+                [ngClass]="{ 'isChecked': l.toDelete }"
+                class='toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none'
+              />
+              <label
+                for='historydeleteOn + {{l.historyItem._id}}'
+                class='toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer'
+              ></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

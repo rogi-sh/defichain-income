@@ -37,6 +37,7 @@ import { HistoryComponent } from '@components/history/history.component';
 import { NewsletterComponent } from '@pages/newsletter/newsletter.component';
 import { ApolloModule } from 'apollo-angular';
 import { PoolIncomeComponent } from '@components/pool-income/pool-income.component';
+import { HistoryModalComponent } from './components/history-modal/history-modal.component';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },
@@ -76,6 +77,7 @@ const appRoutes: Routes = [
     ForecastComponent,
     HistoryComponent,
     PoolIncomeComponent,
+    HistoryModalComponent,
   ],
   imports: [
     RouterModule.forRoot(

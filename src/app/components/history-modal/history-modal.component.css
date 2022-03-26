@@ -1,0 +1,47 @@
+.input-component label {
+  top: 5px;
+  left: 8px;
+  transform: translateY(1%);
+  font-size: 11px;
+}
+
+.input-component label::after {
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 15px;
+}
+
+.empty input:not(:focus) + label {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+input {
+  border-width: 1px;
+}
+
+input::placeholder {
+  display: none;
+  color: transparent;
+}
+
+input:focus {
+  outline: none;
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked,
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: #FF00AF;
+}
+
+.toggle-checkbox.isChecked + .toggle-label,
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #FF00AF;
+}

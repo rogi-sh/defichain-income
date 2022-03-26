@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.15.0 - 26.3.2022';
+    this.log.comment = 'Added dialog to delete data in value and income history charts';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.14.10 - 25.3.2022';
     this.log.comment = 'German video linked, vaults sort by collateral';
     this.logs.push(this.log);

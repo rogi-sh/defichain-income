@@ -37,6 +37,7 @@
   "login3": "Conectado con clave de autenticación:",
   "stakingOnCake": "¿Cuál es su TAE (APY) en depósito?",
   "stakingOnCake2": "E.g. Cake 98% / MN 77%  / Freezer 98+",
+  "history-chart-delete": "Seleccione los puntos de datos que desea eliminar",
   "address": {
     "label": "dirección",
     "title": "Su dirección dfi",

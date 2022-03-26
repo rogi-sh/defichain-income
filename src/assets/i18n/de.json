@@ -38,6 +38,7 @@
   "login3": "Eingeloggt mit Auth Key:",
   "stakingOnCake": "Mit welchem APY stakest Du?",
   "stakingOnCake2": "Bspw. Cake 98% / MN 77% / Freezer 98+",
+  "history-chart-delete": "Wähle die Datenpunkte aus, die gelöscht werden sollen und klicke dann auf DELETE",
 
   "address": {
     "label": "Adresse",

@@ -454,6 +454,7 @@ export const HISTORY_USER = gql`
       totalValue
       totalValueIncomeDfi
       totalValueIncomeUsd
+      _id
     }
   }
 }
@@ -470,6 +471,14 @@ export const UPDATE_NEWSLETTER = gql`
     newsletter {
       status, subscribed, email, payingAddress
     }
+  }
+}
+`;
+
+export const DELETE_HISTORY = gql`
+mutation DeleteUserHistory($key: String!, $items: [String]) {
+  deleteUserHistory(user : { key: $key, items: $items}) {
+   key
   }
 }
 `;

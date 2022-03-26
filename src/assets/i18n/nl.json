@@ -38,7 +38,7 @@
   "login3": "Aangemeld met Auth Key:",
   "stakingOnCake": "Met welke APY stake je?",
   "stakingOnCake2": "Bijv. Cake 98% / MN 77% / Freezer 98+",
-
+  "history-chart-delete": "Selecteer de gegevenspunten die moeten worden gewist",
   "address": {
     "label": "Adres",
     "title": "Jouw adressen",

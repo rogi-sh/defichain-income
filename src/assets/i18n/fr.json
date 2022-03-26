@@ -37,7 +37,7 @@
   "login3": "Connecté avec votre clef d'authentification :",
   "stakingOnCake": "Quel est votre rendement APY pour le staking ?",
   "stakingOnCake2": "Par exemple Cake 98% / MN 77% / Freezer 98+",
-
+  "history-chart-delete": "Sélectionner les points de données à supprimer",
   "address": {
     "label": "adresses",
     "title": "Vos adresses DFI",

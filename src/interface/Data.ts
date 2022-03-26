@@ -758,9 +758,16 @@ export class UserHistoryItem {
   totalValue: number;
   totalValueIncomeDfi: number;
   totalValueIncomeUsd: number;
+  // tslint:disable-next-line:variable-name
+  _id: string;
 }
 
 export class UserHistory {
   key: string;
   values: Array<UserHistoryItem>;
+}
+
+export class UserHistoryDelete {
+  toDelete: boolean;
+  historyItem: UserHistoryItem;
 }

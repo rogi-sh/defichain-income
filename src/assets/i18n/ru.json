@@ -38,7 +38,7 @@
   "login3": "Вход в систему с помощью аунтификационного ключа:",
   "stakingOnCake": "Какой APY ты используешь?",
   "stakingOnCake2": "Например. Cake 98% / MN 77% / Freezer 98+",
-
+  "history-chart-delete": "Выберите точки данных для удаления",
   "address": {
     "label": "Адреса",
     "title": "Твой адрес",
