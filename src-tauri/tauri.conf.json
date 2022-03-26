@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "DefiChain-Income",
-    "version": "v8.15.0"
+    "version": "8.15.0"
   },
   "build": {
     "distDir": "../dist/defichain-income",
@@ -19,6 +19,7 @@
         "icons/128x128.png",
         "icons/128x128@2x.png",
         "icons/icon.ico",
+        "icons/icon.icns",
         "icons/icon.png",
         "icons/Square30x30Logo.png",
         "icons/Square44x44Logo.png",
