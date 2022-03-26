@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.15.4 - 26.3.2022';
+    this.log.comment = 'Fix missing key for delete history modal in income chart';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.15.3 - 26.3.2022';
     this.log.comment = 'Fix not automated release';
     this.logs.push(this.log);

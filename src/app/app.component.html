@@ -1570,7 +1570,7 @@
                 </div>
                 <br>
                 <div class="hidden md:inline-block h-full my-2 items-center m">
-                  <app-history-modal [history]='userHistory'></app-history-modal>
+                  <app-history-modal [history]='userHistory' [key]='loggedInAuth'></app-history-modal>
                 </div>
                 <br>
                 <apx-chart *ngIf='isIncomeChartOn && isUserHistoryForIncome()'
