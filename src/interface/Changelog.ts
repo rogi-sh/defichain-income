@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.15.2 - 26.3.2022';
+    this.log.comment = 'Fix reload data after delete user histories';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.15.1 - 26.3.2022';
     this.log.comment = 'Fix windows build';
     this.logs.push(this.log);

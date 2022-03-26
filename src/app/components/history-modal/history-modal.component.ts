@@ -50,10 +50,9 @@ export class HistoryModalComponent implements OnInit, OnChanges {
 
   handleDelete(): void {
 
-    this.toDelete = this.toDelete?.filter(a => a.toDelete);
-    const toDeleteGraphqQL = this.toDelete.map(a => a.historyItem._id);
+    const filtered = this.toDelete?.filter(a => a.toDelete);
+    const toDeleteGraphqQL = filtered.map(a => a.historyItem._id);
     this.call(toDeleteGraphqQL);
-
 
   }
 
@@ -71,14 +70,12 @@ export class HistoryModalComponent implements OnInit, OnChanges {
         this.successBackend = 'History updated - ' + list.length  + ' deleted!';
         setInterval(() => {
           this.successBackend = null;
-          // close
-          if (this.isOpen) {
-            this.isOpen = !this.isOpen;
-          }
-        }, 2000);
+          this.isOpen = !this.isOpen;
+          window.location.reload();
+        }, 1000);
       } else {
         this.spinner.hide();
-        this.errorBackend = result?.errors[0]?.message;
+        this.errorBackend = 'Some error ' + result?.errors[0]?.message;
       }
     }, (error) => {
       this.spinner.hide();

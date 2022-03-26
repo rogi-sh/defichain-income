@@ -15,7 +15,7 @@ export const environment = {
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   burninfo: 'https://api.mydeficha.in/v1/getburninfo/',
-  version: '8.15.1',
+  version: '8.15.2',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
   graphql: 'https://graphql.defichain-income.com/graphql',
