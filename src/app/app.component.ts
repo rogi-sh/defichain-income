@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dex } from '@services/dex.service';
+import {Location} from '@angular/common';
 import {
   AddressBalance,
   DexPoolPair,
@@ -78,7 +79,7 @@ export class AppComponent implements OnInit {
   constructor(private dexService: Dex, private translate: TranslateService, private apollo: Apollo,
               private matomoInjector: MatomoInjector, private matomoTracker: MatomoTracker, private dataService: DataService,
               private stakingService: StakingService, private meta: Meta, private spinner: NgxSpinnerService,
-              private toastr: ToastrService, private router: Router) {
+              private toastr: ToastrService, private router: Router, private location: Location) {
     translate.addLangs(['en', 'de', 'ru', 'es', 'fr']);
     translate.setDefaultLang('de');
 
@@ -439,7 +440,7 @@ export class AppComponent implements OnInit {
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
       }
 
-      this.handleSites(url)
+      this.handleSites(url);
 
       // remove adresses in localstorage
       localStorage.removeItem(this.adressesKey);
@@ -788,12 +789,11 @@ export class AppComponent implements OnInit {
     };
   }
 
-
-
   handlePage(pageTag: string): void {
     this.currentPage = pageTag;
     this.menu = false;
     localStorage.setItem(this.currentPageKey, this.currentPage);
+    this.location.replaceState(pageTag);
   }
 
   loadAddressesAndDexData(): void {
@@ -859,25 +859,7 @@ export class AppComponent implements OnInit {
   }
 
   async refresh(): Promise<void> {
-    this.dataLoaded = false;
-    await this.computeMeta();
-    if (this.autoLoadData) {
-      // only clear when not manual
-      this.clearWallet();
-      this.loadAllAccounts();
-      this.loadHistoryUser();
-    } else {
-      // if logged in not necessary because already loaded
-      if (!this.loggedIn) {
-        this.loadLocalStorageForManuel();
-      }
-      this.loadDexManual();
-
-    }
-    this.sCountdownShow = this.sCountdown;
-    this.countdown?.restart();
-
-    this.timestamp = new Date().toLocaleTimeString();
+    window.location.reload();
   }
 
   register(): void {
