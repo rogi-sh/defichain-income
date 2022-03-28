@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
-import { UserHistory, UserHistoryDelete } from '@interfaces/Data'
-import { DELETE_HISTORY, UPDATE_NEWSLETTER } from '@interfaces/Graphql'
-import { Apollo } from 'apollo-angular'
-import { NgxSpinnerService } from 'ngx-spinner'
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { UserHistory, UserHistoryDelete } from '@interfaces/Data';
+import { DELETE_HISTORY, UPDATE_NEWSLETTER } from '@interfaces/Graphql';
+import { Apollo } from 'apollo-angular';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-history-modal',
