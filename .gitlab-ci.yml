@@ -45,6 +45,7 @@ dockerize:
     - docker push $CONTAINER_IMAGE_LATEST
   only:
     - tags
+    - master
 
 # deploy to server
 deploy:
@@ -65,3 +66,24 @@ deploy:
     - sshpass -p $LOGIN_KEY ssh igor@$PROD_SERVER "cd docker && cd Privat && cd defichain-income && docker login -u $REGISTRY_LOGIN -p $REGISTRY_KEY registry.gitlab.com && ./deploy.sh && exit"
   only:
      - tags
+
+# deploy to next level server
+deploy-next:
+  stage: deploy
+  dependencies:
+    - dockerize
+  image: ictu/sshpass:latest
+  services:
+    - docker:dind
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H $PROD_SERVER_NEXT >> ~/.ssh/known_hosts
+  script:
+    - sshpass -p $LOGIN_KEY ssh igor@$PROD_SERVER_NEXT "cd docker/Defichain/Backend && docker login -u $REGISTRY_LOGIN -p $REGISTRY_KEY registry.gitlab.com && ./deploy.sh && exit"
+  only:
+    - tags
+    - master
