@@ -20,7 +20,7 @@ export const environment = {
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   burninfo: 'https://api.mydeficha.in/v1/getburninfo/',
   version: '8.15.6',
-  graphql: 'https://graphql.defichain-income.com/graphql',
+  graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id
   matomoId: 25,

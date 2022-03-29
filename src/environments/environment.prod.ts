@@ -18,7 +18,7 @@ export const environment = {
   version: '8.15.6',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
-  graphql: 'https://graphql.defichain-income.com/graphql',
+  graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   matomoId: 6,
   matomoUrl: 'https://analytics.topiet.de/'

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.15.7 - 29.3.2022';
+    this.log.comment = 'Move to next level backend';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.15.6 - 28.3.2022';
     this.log.comment = 'Fix no full reload of page on refresh';
     this.logs.push(this.log);
