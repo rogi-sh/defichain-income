@@ -858,8 +858,29 @@ export class AppComponent implements OnInit {
 
   }
 
+  /*
+   * Careful not change to window.location.reload();!!!
+   */
   async refresh(): Promise<void> {
-    window.location.reload();
+    this.dataLoaded = false;
+    await this.computeMeta();
+    if (this.autoLoadData) {
+      // only clear when not manual
+      this.clearWallet();
+      this.loadAllAccounts();
+      this.loadHistoryUser();
+    } else {
+      // if logged in not necessary because already loaded
+      if (!this.loggedIn) {
+        this.loadLocalStorageForManuel();
+      }
+      this.loadDexManual();
+
+    }
+    this.sCountdownShow = this.sCountdown;
+    this.countdown?.restart();
+
+    this.timestamp = new Date().toLocaleTimeString();
   }
 
   register(): void {
@@ -1355,6 +1376,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.sCountdownKey, JSON.stringify(this.sCountdown));
     this.sCountdownShow = this.sCountdown;
     this.countdown?.restart();
+    clearInterval(this.timer[Symbol.toPrimitive]);
     clearInterval(this.timer[Symbol.toPrimitive]);
     this.timer = setInterval(() => {
       this.refresh();

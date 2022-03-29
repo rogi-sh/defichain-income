@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.15.6 - 28.3.2022';
+    this.log.comment = 'Fix no full reload of page on refresh';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.15.5 - 28.3.2022';
     this.log.comment = 'Fix routing when change views, Reload hole page if refresh';
     this.logs.push(this.log);
