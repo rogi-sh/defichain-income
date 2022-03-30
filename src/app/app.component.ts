@@ -1071,6 +1071,11 @@ export class AppComponent implements OnInit {
   }
 
   update(): void {
+
+    if (!this.loggedInAuth || this.loggedInAuth.length === 0) {
+      return;
+    }
+
     this.apollo.mutate({
       mutation: UPDATE,
       variables: {
