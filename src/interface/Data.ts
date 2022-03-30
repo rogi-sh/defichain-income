@@ -245,6 +245,11 @@ export interface WalletDto {
   nflxusd: number;
   voousd: number;
 
+  disusd: number;
+  mchiusd: number;
+  mstusd: number;
+  intcusd: number;
+
   // User Infos
   // BTC Pool
   btcInBtcPool: number;
@@ -401,6 +406,26 @@ export interface WalletDto {
   voo: number;
   usdInVooPool: number;
 
+  // DIS Pool
+  disInDisPool: number;
+  dis: number;
+  usdInDisPool: number;
+
+  // MCHI Pool
+  mchiInMchiPool: number;
+  mchi: number;
+  usdInMchiPool: number;
+
+  // MST Pool
+  mstInMstPool: number;
+  mst: number;
+  usdInMstPool: number;
+
+  // INTC Pool
+  intcInIntcPool: number;
+  intc: number;
+  usdInIntcPool: number;
+
 }
 
 export class Newsletter {
@@ -454,6 +479,11 @@ export class Wallet {
   fbusd = 0;
   nflxusd = 0;
   voousd = 0;
+
+  disusd = 0;
+  mchiusd = 0;
+  mstusd = 0;
+  intcusd = 0;
 
   // User Infos
   // BTC Pool
@@ -703,6 +733,38 @@ export class Wallet {
   vooKey = 'vooKey';
   usdInVooPoolKey = 'usdInVooPoolKey';
   usdInVooPool = 0;
+
+  // DIS Pool
+  disInDisPool = 0;
+  disInDisPoolKey = 'disInDisPoolKey';
+  dis = 0;
+  disKey = 'disKey';
+  usdInDisPoolKey = 'usdInDisPoolKey';
+  usdInDisPool = 0;
+
+  // MCHI Pool
+  mchiInMchiPool = 0;
+  mchiInMchiPoolKey = 'mchiInMchiPoolKey';
+  mchi = 0;
+  mchiKey = 'mchiKey';
+  usdInMchiPoolKey = 'usdInMchiPoolKey';
+  usdInMchiPool = 0;
+
+  // MST Pool
+  mstInMstPool = 0;
+  mstInMstPoolKey = 'mstInMstPoolKey';
+  mst = 0;
+  mstKey = 'mstKey';
+  usdInMstPoolKey = 'usdInMstPoolKey';
+  usdInMstPool = 0;
+
+  // INTC Pool
+  intcInIntcPool = 0;
+  intcInIntcPoolKey = 'intcInIntcPoolKey';
+  intc = 0;
+  intcKey = 'intcKey';
+  usdInIntcPoolKey = 'usdInIntcPoolKey';
+  usdInIntcPool = 0;
 
 }
 

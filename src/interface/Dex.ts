@@ -144,6 +144,11 @@ export class AddressBalance {
   vooToken: number;
   nflxToken: number;
 
+  disToken: number;
+  mchiToken: number;
+  mstToken: number;
+  intcToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -178,6 +183,11 @@ export class AddressBalance {
   fbusdToken: number;
   voousdToken: number;
   nflxusdToken: number;
+
+  disusdToken: number;
+  mchiusdToken: number;
+  mstusdToken: number;
+  intcusdToken: number;
 
 }
 
