@@ -113,6 +113,18 @@ export class CalculatorComponent implements OnInit {
   poolVoo!: Pool;
 
   @Input()
+  poolDis!: Pool;
+
+  @Input()
+  poolMchi!: Pool;
+
+  @Input()
+  poolMstr!: Pool;
+
+  @Input()
+  poolIntc!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -204,6 +216,18 @@ export class CalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockVoo;
+
+  @Input()
+  dfiProBlockDis;
+
+  @Input()
+  dfiProBlockMchi;
+
+  @Input()
+  dfiProBlockMstr;
+
+  @Input()
+  dfiProBlockIntc;
 
   @Input()
   blocktimeInS;

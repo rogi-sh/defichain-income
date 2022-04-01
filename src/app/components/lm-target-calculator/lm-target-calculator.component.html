@@ -41,6 +41,10 @@
           <option>NFLX</option>
           <option>FB</option>
           <option>VOO</option>
+          <option>DIS</option>
+          <option>MCHI</option>
+          <option>MSTR</option>
+          <option>INTC</option>
         </select>
       </div>
 
@@ -134,7 +138,7 @@
           DFI per {{ 'month' | translate }}
         </div>
         <div class="text-xl text-center">
-          {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }} DUSD / DFI
+          {{dfiNeededForAimReturnMonthPool | number: '1.2-2' }} {{isCrypto()? 'DFI' : 'DUSD'}}
         </div>
         <div class="text-xl text-center">
           {{btcNeededForAimReturnMonthPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
@@ -152,7 +156,7 @@
         DFI per {{ 'day' | translate }}
       </div>
         <div class="text-xl text-center">
-          {{dfiNeededForAimReturnDayPool | number: '1.2-2' }} dUSD / DFI
+          {{dfiNeededForAimReturnDayPool | number: '1.2-2' }} {{isCrypto()? 'DFI' : 'DUSD'}}
         </div>
         <div class="text-xl text-center">
           {{btcNeededForAimReturnDayPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
@@ -170,7 +174,7 @@
           DFI per {{ 'hour' | translate }}
         </div>
         <div class="text-xl text-center">
-          {{dfiNeededForAimReturnHourPool | number: '1.2-2' }} dUSD / DFI
+          {{dfiNeededForAimReturnHourPool | number: '1.2-2' }} {{isCrypto()? 'DFI' : 'DUSD'}}
         </div>
         <div class="text-xl text-center">
           {{btcNeededForAimReturnHourPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}
@@ -188,7 +192,7 @@
           DFI per {{ 'Min' | translate }}
         </div>
         <div class="text-xl text-center">
-          {{dfiNeededForAimReturnMinPool | number: '1.2-2' }} dUSD / DFI
+          {{dfiNeededForAimReturnMinPool | number: '1.2-2' }} {{isCrypto()? 'DFI' : 'DUSD'}}
         </div>
         <div class="text-xl text-center">
           {{btcNeededForAimReturnMinPool | number: '1.3-3' }} {{poolLmCalculationTargetReturn}}

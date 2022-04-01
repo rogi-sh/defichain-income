@@ -102,6 +102,18 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolVoo!: Pool;
 
   @Input()
+  poolDis!: Pool;
+
+  @Input()
+  poolMchi!: Pool;
+
+  @Input()
+  poolMstr!: Pool;
+
+  @Input()
+  poolIntc!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -193,6 +205,18 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockVoo;
+
+  @Input()
+  dfiProBlockDis;
+
+  @Input()
+  dfiProBlockMchi;
+
+  @Input()
+  dfiProBlockMstr;
+
+  @Input()
+  dfiProBlockIntc;
 
   @Input()
   blocktimeInS;
@@ -358,15 +382,34 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'FB'){
       pool = this.poolFb;
       dfiPerBlock = this.dfiProBlockFb;
-    } else if (this.poolLmCalculationTargetReturn === 'VOO'){
+    } else if (this.poolLmCalculationTargetReturn === 'VOO') {
       pool = this.poolVoo;
       dfiPerBlock = this.dfiProBlockVoo;
+    } else if (this.poolLmCalculationTargetReturn === 'DIS') {
+      pool = this.poolDis;
+      dfiPerBlock = this.dfiProBlockDis;
+    } else if (this.poolLmCalculationTargetReturn === 'MCHI') {
+      pool = this.poolMchi;
+      dfiPerBlock = this.dfiProBlockMchi;
+    } else if (this.poolLmCalculationTargetReturn === 'MSTR') {
+      pool = this.poolMstr;
+      dfiPerBlock = this.dfiProBlockMstr;
+    } else if (this.poolLmCalculationTargetReturn === 'INTC') {
+      pool = this.poolIntc;
+      dfiPerBlock = this.dfiProBlockIntc;
     } else {
       pool = this.poolUsdc;
       dfiPerBlock = this.dfiProBlockUsdc;
 
     }
     return {pool, dfiPerBlock};
+  }
+
+  isCrypto(): boolean {
+    return this.poolLmCalculationTargetReturn === 'BTC' || this.poolLmCalculationTargetReturn === 'ETH'
+      || this.poolLmCalculationTargetReturn === 'LTC' || this.poolLmCalculationTargetReturn === 'DOGE'
+      || this.poolLmCalculationTargetReturn === 'BCH' || this.poolLmCalculationTargetReturn === 'USDT'
+      || this.poolLmCalculationTargetReturn === 'USDC' || this.poolLmCalculationTargetReturn === 'DUSD';
   }
 
   private getDfiPerMin(dfiProBlock: number): number {
