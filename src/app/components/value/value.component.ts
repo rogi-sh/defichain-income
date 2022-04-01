@@ -158,6 +158,12 @@ export class ValueComponent implements OnInit, OnChanges {
   vaultsOfAllAddresses!: Array<AddressVaults>;
 
   @Input()
+  autoLoadData: boolean;
+
+  @Input()
+  currentPage: string;
+
+  @Input()
   cexPrice!: number;
 
   detailsOpen = false;
@@ -169,6 +175,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   loanValues = new Array<LoanValue>();
   holdingValues = new Array<HoldingValue>();
+  walletValues = new Array<HoldingValue>();
+  lpTokensValues = new Array<HoldingValue>();
 
   constructor(private dataService: DataService) {
   }
@@ -176,6 +184,8 @@ export class ValueComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createLoanTokens();
     this.createHoldingTokens();
+    this.createWalletTokens();
+    this.createLpTokens();
     this.buildDataForChart();
     this.buildDataForChartValue();
 
@@ -554,7 +564,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getEthValueUsd(): number {
-    return (this.wallet.ethInEthPool + this.wallet.eth) * this.poolEth?.priceA;
+    return (this.wallet.ethInEthPool + this.wallet.eth + this.getCollateralCountVaults('ETH')) * this.poolEth?.priceA;
   }
 
   getUsdtValueUsd(): number {
@@ -916,12 +926,22 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getLoanTokens(): Array<LoanValue> {
 
-    return this.loanValues;
+    return this.loanValues.sort((a, b) => (this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool) > this.getLoanCountVaults(b.token) * this.getUsdPriceOfStockPools(b.pool)) ? -1 : ((this.getLoanCountVaults(b.token) * this.getUsdPriceOfStockPools(b.pool) > this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool)) ? 1 : 0));
   }
 
   getHoldingTokens(): Array<HoldingValue> {
 
-    return this.holdingValues;
+    return this.holdingValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+  }
+
+  getWalletTokens(): Array<HoldingValue> {
+
+    return this.walletValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+  }
+
+  getLpTokens(): Array<HoldingValue> {
+
+    return this.lpTokensValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
   }
 
   createLoanTokens(): void {
@@ -1189,6 +1209,366 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.intc + this.wallet?.intcInIntcPool, this.getIntcValueUsd()));
     }
 
+  }
+
+  createWalletTokens(): void {
+
+    if (this.wallet?.btc > 0) {
+      this.walletValues.push(new HoldingValue('BTC',
+        this.wallet?.btc, this.wallet?.btc * this.poolBtc?.priceA));
+    }
+
+    if (this.wallet?.eth > 0) {
+      this.walletValues.push(new HoldingValue('ETH',
+        this.wallet?.eth, this.wallet?.eth * this.poolEth.priceA));
+    }
+
+    if (this.wallet?.usdt > 0) {
+      this.walletValues.push(new HoldingValue('USDT',
+        this.wallet?.usdt, this.wallet?.usdt * this.poolUsdt?.priceA));
+    }
+
+    if (this.wallet?.usdc > 0) {
+      this.walletValues.push(new HoldingValue('USDC',
+        this.wallet?.usdc , this.wallet?.usdc * this.poolUsdc?.priceA));
+    }
+
+    if (this.isUsdInPortfolio()) {
+      this.walletValues.push(new HoldingValue('DUSD',
+        this.wallet?.usd, this.wallet?.usd * this.getUsdPriceOfStockPools(this.poolUsd)));
+    }
+
+    if (this.wallet?.ltc > 0) {
+      this.walletValues.push(new HoldingValue('LTC',
+        this.wallet?.ltc, this.wallet?.ltc * this.poolLtc?.priceA));
+    }
+
+    if (this.wallet?.doge > 0) {
+      this.walletValues.push(new HoldingValue('DOGE',
+        this.wallet?.doge , this.wallet?.doge * this.poolDoge?.priceA));
+    }
+
+    if (this.wallet?.bch > 0) {
+      this.walletValues.push(new HoldingValue('BCH',
+        this.wallet?.bch, this.wallet?.bch * this.poolBch?.priceA));
+    }
+
+    if (this.wallet?.tsla > 0) {
+      this.walletValues.push(new HoldingValue('TSLA',
+        this.wallet?.tsla , this.wallet?.tsla * this.getUsdPriceOfStockPools(this.poolTsla)));
+    }
+
+    if (this.wallet?.qqq > 0) {
+      this.walletValues.push(new HoldingValue('QQQ',
+        this.wallet?.qqq, this.wallet?.qqq * this.getUsdPriceOfStockPools(this.poolQqq)));
+    }
+
+    if (this.wallet?.spy > 0 ) {
+      this.walletValues.push(new HoldingValue('SPY',
+        this.wallet?.spy, this.wallet?.spy * this.getUsdPriceOfStockPools(this.poolSpy)));
+    }
+
+    if (this.wallet?.pltr > 0  ) {
+      this.walletValues.push(new HoldingValue('PLTR',
+        this.wallet?.pltr, this.wallet?.pltr * this.getUsdPriceOfStockPools(this.poolPltr)));
+    }
+
+    if (this.wallet?.slv > 0 ) {
+      this.walletValues.push(new HoldingValue('SLV',
+        this.wallet?.slv, this.wallet?.slv * this.getUsdPriceOfStockPools(this.poolSlv)));
+    }
+
+    if (this.wallet?.aapl > 0 ) {
+      this.walletValues.push(new HoldingValue('AAPL',
+        this.wallet?.aapl, this.wallet?.aapl * this.getUsdPriceOfStockPools(this.poolAapl)));
+    }
+
+    if (this.wallet?.gld > 0 ) {
+      this.walletValues.push(new HoldingValue('GLD',
+        this.wallet?.gld, this.wallet?.gld * this.getUsdPriceOfStockPools(this.poolGld)));
+    }
+
+    if (this.wallet?.gme > 0 ) {
+      this.walletValues.push(new HoldingValue('GME',
+        this.wallet?.gme, this.wallet?.gme * this.getUsdPriceOfStockPools(this.poolGme)));
+    }
+
+    if (this.wallet?.googl > 0) {
+      this.walletValues.push(new HoldingValue('GOOGL',
+        this.wallet?.googl, this.wallet?.googl * this.getUsdPriceOfStockPools(this.poolGoogl)));
+    }
+
+    if (this.wallet?.arkk > 0  ) {
+      this.walletValues.push(new HoldingValue('ARKK',
+        this.wallet?.arkk , this.wallet?.arkk * this.getUsdPriceOfStockPools(this.poolArkk)));
+    }
+
+    if (this.wallet?.baba > 0  ) {
+      this.walletValues.push(new HoldingValue('BABA',
+        this.wallet?.baba , this.wallet?.baba * this.getUsdPriceOfStockPools(this.poolBaba)));
+    }
+
+    if (this.wallet?.vnq > 0 ) {
+      this.walletValues.push(new HoldingValue('VNQ',
+        this.wallet?.vnq , this.wallet?.vnq * this.getUsdPriceOfStockPools(this.poolVnq)));
+    }
+
+    if (this.wallet?.urth > 0 ) {
+      this.walletValues.push(new HoldingValue('URTH',
+        this.wallet?.urth , this.wallet?.urth * this.getUsdPriceOfStockPools(this.poolUrth)));
+    }
+
+    if (this.wallet?.tlt > 0 ) {
+      this.walletValues.push(new HoldingValue('TLT',
+        this.wallet?.tlt , this.wallet?.tlt * this.getUsdPriceOfStockPools(this.poolTlt)));
+    }
+
+    if (this.wallet?.pdbc > 0  ) {
+      this.walletValues.push(new HoldingValue('PDBC',
+        this.wallet?.pdbc , this.wallet?.pdbc * this.getUsdPriceOfStockPools(this.poolPdbc)));
+    }
+
+    if (this.wallet?.amzn > 0 ) {
+      this.walletValues.push(new HoldingValue('AMZN',
+        this.wallet?.amzn , this.wallet?.amzn * this.getUsdPriceOfStockPools(this.poolAmzn)));
+    }
+
+    if (this.wallet?.nvda > 0) {
+      this.walletValues.push(new HoldingValue('NVDA',
+        this.wallet?.nvda, this.wallet?.nvda * this.getUsdPriceOfStockPools(this.poolNvda)));
+    }
+
+    if (this.wallet?.coin > 0 ) {
+      this.walletValues.push(new HoldingValue('COIN',
+        this.wallet?.coin , this.wallet?.coin * this.getUsdPriceOfStockPools(this.poolCoin)));
+    }
+
+    if (this.wallet?.eem > 0  ) {
+      this.walletValues.push(new HoldingValue('EEM',
+        this.wallet?.eem, this.wallet?.eem * this.getUsdPriceOfStockPools(this.poolEem)));
+    }
+
+    if (this.wallet?.msft > 0 ) {
+      this.walletValues.push(new HoldingValue('MSFT',
+        this.wallet?.msft, this.wallet?.msft * this.getUsdPriceOfStockPools(this.poolMsft)));
+    }
+
+    if (this.wallet?.nflx > 0 ) {
+      this.walletValues.push(new HoldingValue('NFLX',
+        this.wallet?.nflx, this.wallet?.nflx * this.getUsdPriceOfStockPools(this.poolNflx)));
+    }
+
+    if (this.wallet?.fb > 0  ) {
+      this.walletValues.push(new HoldingValue('FB',
+        this.wallet?.fb, this.wallet?.fb * this.getUsdPriceOfStockPools(this.poolFb)));
+    }
+    if (this.wallet?.voo > 0 ) {
+      this.walletValues.push(new HoldingValue('VOO',
+        this.wallet?.voo, this.wallet?.voo * this.getUsdPriceOfStockPools(this.poolVoo)));
+    }
+
+    if (this.wallet?.dis > 0 ) {
+      this.walletValues.push(new HoldingValue('DIS',
+        this.wallet?.dis, this.wallet?.dis * this.getUsdPriceOfStockPools(this.poolDis)));
+    }
+
+    if (this.wallet?.mchi > 0 ) {
+      this.walletValues.push(new HoldingValue('MCHI',
+        this.wallet?.mchi, this.wallet?.mchi * this.getUsdPriceOfStockPools(this.poolMchi)));
+    }
+
+    if (this.wallet?.mstr > 0) {
+      this.walletValues.push(new HoldingValue('MSTR',
+        this.wallet?.mstr, this.wallet?.mstr * this.getUsdPriceOfStockPools(this.poolMstr)));
+    }
+
+    if (this.wallet?.intc > 0) {
+      this.walletValues.push(new HoldingValue('INTC',
+        this.wallet?.intc , this.wallet?.intc * this.getUsdPriceOfStockPools(this.poolIntc)));
+    }
+
+  }
+
+  createLpTokens(): void {
+
+    if (this.wallet?.btcdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('BTC-DFI',
+        this.wallet?.btcdfi, this.wallet?.btcdfi * this.getPlTokenValue(this.poolBtc)));
+    }
+
+    if (this.wallet?.ethdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('ETH-DFI',
+        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getPlTokenValue(this.poolBtc)));
+    }
+
+    if (this.wallet?.usdtdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('USDT-DFI',
+        this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getPlTokenValue(this.poolUsdt)));
+    }
+
+    if (this.wallet?.usdcdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('USDC-DFI',
+        this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getPlTokenValue(this.poolUsdc)));
+    }
+
+    if (this.wallet?.usddfi) {
+      this.lpTokensValues.push(new HoldingValue('DUSD-DFI',
+        this.wallet?.usddfi, this.wallet?.usddfi * this.getPlTokenValue(this.poolUsd)));
+    }
+
+    if (this.wallet?.ltcdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('LTC-DFI',
+        this.wallet?.ltcdfi, this.wallet?.ltc * this.getPlTokenValue(this.poolLtc)));
+    }
+
+    if (this.wallet?.dogedfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('DOGE-DFI',
+        this.wallet?.dogedfi , this.wallet?.dogedfi * this.getPlTokenValue(this.poolDoge)));
+    }
+
+    if (this.wallet?.bchdfi > 0) {
+      this.lpTokensValues.push(new HoldingValue('BCH-DFI',
+        this.wallet?.bchdfi, this.wallet?.bchdfi * this.getPlTokenValue(this.poolBch)));
+    }
+
+    if (this.wallet?.tslausd > 0) {
+      this.lpTokensValues.push(new HoldingValue('TSLA-DUSD',
+        this.wallet?.tslausd , this.wallet?.tslausd * this.getPlTokenValue(this.poolTsla)));
+    }
+
+    if (this.wallet?.qqqusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('QQQ-DUSD',
+        this.wallet?.qqqusd, this.wallet?.qqqusd * this.getPlTokenValue(this.poolQqq)));
+    }
+
+    if (this.wallet?.spyusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('SPY-DUSD',
+        this.wallet?.spyusd, this.wallet?.spyusd * this.getPlTokenValue(this.poolSpy)));
+    }
+
+    if (this.wallet?.pltr > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('PLTR-DUSD',
+        this.wallet?.pltr, this.wallet?.pltrusd * this.getPlTokenValue(this.poolPltr)));
+    }
+
+    if (this.wallet?.slvusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('SLV-DUSD',
+        this.wallet?.slvusd, this.wallet?.slvusd * this.getPlTokenValue(this.poolSlv)));
+    }
+
+    if (this.wallet?.aaplusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('AAPL-DUSD',
+        this.wallet?.aaplusd, this.wallet?.aaplusd * this.getPlTokenValue(this.poolAapl)));
+    }
+
+    if (this.wallet?.gldusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('GLD-DUSD',
+        this.wallet?.gldusd, this.wallet?.gldusd * this.getPlTokenValue(this.poolGld)));
+    }
+
+    if (this.wallet?.gmeusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('GME-DUSD',
+        this.wallet?.gmeusd, this.wallet?.gmeusd * this.getPlTokenValue(this.poolGme)));
+    }
+
+    if (this.wallet?.googlusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('GOOGL-DUSD',
+        this.wallet?.googlusd, this.wallet?.googlusd * this.getPlTokenValue(this.poolGoogl)));
+    }
+
+    if (this.wallet?.arkkusd > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('ARKK-DUSD',
+        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getPlTokenValue(this.poolArkk)));
+    }
+
+    if (this.wallet?.babausd > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('BABA-DUSD',
+        this.wallet?.babausd , this.wallet?.baba * this.getPlTokenValue(this.poolBaba)));
+    }
+
+    if (this.wallet?.vnq > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('VNQ-DUSD',
+        this.wallet?.vnq , this.wallet?.vnq * this.getPlTokenValue(this.poolVnq)));
+    }
+
+    if (this.wallet?.urthusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('URTH-DUSD',
+        this.wallet?.urthusd , this.wallet?.urthusd * this.getPlTokenValue(this.poolUrth)));
+    }
+
+    if (this.wallet?.tltusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('TLT-DUSD',
+        this.wallet?.tltusd , this.wallet?.tltusd * this.getPlTokenValue(this.poolTlt)));
+    }
+
+    if (this.wallet?.pdbcusd > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('PDBC-DUSD',
+        this.wallet?.pdbcusd, this.wallet?.pdbcusd * this.getPlTokenValue(this.poolPdbc)));
+    }
+
+    if (this.wallet?.amznusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('AMZN-DUSD',
+        this.wallet?.amznusd , this.wallet?.amznusd * this.getPlTokenValue(this.poolAmzn)));
+    }
+
+    if (this.wallet?.nvdausd > 0) {
+      this.lpTokensValues.push(new HoldingValue('NVDA-DUSD',
+        this.wallet?.nvdausd, this.wallet?.nvdausd * this.getPlTokenValue(this.poolNvda)));
+    }
+
+    if (this.wallet?.coinusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('COIN-DUSD',
+        this.wallet?.coinusd , this.wallet?.coinusd * this.getPlTokenValue(this.poolCoin)));
+    }
+
+    if (this.wallet?.eemusd > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('EEM-DUSD',
+        this.wallet?.eemusd, this.wallet?.eemusd * this.getPlTokenValue(this.poolEem)));
+    }
+
+    if (this.wallet?.msftusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('MSFT-DUSD',
+        this.wallet?.msftusd, this.wallet?.msftusd * this.getPlTokenValue(this.poolMsft)));
+    }
+
+    if (this.wallet?.nflxusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('NFLX-DUSD',
+        this.wallet?.nflxusd, this.wallet?.nflxusd * this.getPlTokenValue(this.poolNflx)));
+    }
+
+    if (this.wallet?.fbusd > 0  ) {
+      this.lpTokensValues.push(new HoldingValue('FB-DUSD',
+        this.wallet?.fbusd, this.wallet?.fbusd * this.getPlTokenValue(this.poolFb)));
+    }
+    if (this.wallet?.voousd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('VOO-DUSD',
+        this.wallet?.voousd, this.wallet?.voousd * this.getPlTokenValue(this.poolVoo)));
+    }
+
+    if (this.wallet?.disusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('DIS-DUSD',
+        this.wallet?.disusd, this.wallet?.disusd * this.getPlTokenValue(this.poolDis)));
+    }
+
+    if (this.wallet?.mchiusd > 0 ) {
+      this.lpTokensValues.push(new HoldingValue('MCHI-DUSD',
+        this.wallet?.mchiusd, this.wallet?.mchiusd * this.getPlTokenValue(this.poolMchi)));
+    }
+
+    if (this.wallet?.mstrusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('MSTR-DUSD',
+        this.wallet?.mstrusd, this.wallet?.mstrusd * this.getPlTokenValue(this.poolMstr)));
+    }
+
+    if (this.wallet?.intcusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('INTC-DUSD',
+        this.wallet?.intcusd , this.wallet?.intcusd * this.getPlTokenValue(this.poolIntc)));
+    }
+
+  }
+
+  getPlTokenValue(pool: Pool): number {
+   return pool?.totalLiquidityUsd / pool?.totalLiquidityLpToken;
   }
 
   getFreezerDfiCount(): number {

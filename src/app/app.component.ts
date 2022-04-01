@@ -2049,9 +2049,15 @@ export class AppComponent implements OnInit {
     }
 
     const poolOcean = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr;
-    commission = blockreward / (poolOcean.reward * 100) * (poolOcean.commission * 100);
+    commission = blockreward / ((poolOcean.reward === 0 ? this.getFallBackDfiReward()
+      : poolOcean.reward) * 100) * (poolOcean.commission * 100);
 
     return commission;
+  }
+
+  getFallBackDfiReward(): number {
+    const poolOcean = this.poolPairsOcean?.data.find(p => p.id === '5')?.apr;
+    return this.poolBtc.rewardPct * this.rewards?.rewards?.liquidity / poolOcean.reward;
   }
 
   loadDexManual(): void {
