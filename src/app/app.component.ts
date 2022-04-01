@@ -48,9 +48,8 @@ import {
 import {CountdownComponent} from 'ngx-countdown';
 import {
   AddressVaults,
-  ChartOptions6,
-  IncomePoolDto,
-  Newsletter, PoolPairsOcean,
+  ChartOptions6, HoldingValue,
+  Newsletter, PoolIncomeValue, PoolPairsOcean,
   UserHistory,
   Vault,
   Wallet,
@@ -382,7 +381,7 @@ export class AppComponent implements OnInit {
   poolAllOut: PoolAllOut = new PoolAllOut();
   poolMasternodeOut: MasternodeOutcome = new MasternodeOutcome();
 
-  poolForIncome: Array<IncomePoolDto>;
+  poolIncomeList = new Array<PoolIncomeValue>();
 
   sCountdown = 300;
   sCountdownShow = 300;
@@ -1765,6 +1764,7 @@ export class AppComponent implements OnInit {
     this.berechneMNOut();
     this.berechnePoolOut();
     this.berechneAllOut();
+    this.createIncomePools();
     this.dataService.setBtcUsd(this.poolBtc.priceA);
     this.dataService.setEthUsd(this.poolEth.priceA);
     this.dataService.setDfiUsd(this.poolBtc.priceB);
@@ -2039,6 +2039,156 @@ export class AppComponent implements OnInit {
 
     this.dfiProBlockIntc = 0.011 * this.dfiPorBlockStock;
     this.dfiProBlockIntc += this.getCommission(this.poolIntc, this.dfiProBlockIntc);
+  }
+
+  getIncomePools(): Array<PoolIncomeValue> {
+    return this.poolIncomeList.sort((a, b) => (a.poolOut.dfiPerMonth > b.poolOut.dfiPerMonth) ? -1
+      : ((b.poolOut.dfiPerMonth > a.poolOut.dfiPerMonth) ? 1 : 0));
+  }
+
+  createIncomePools(): void {
+    // CRYPTO
+    if (this.anteilAmPoolBtc > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolBtc,
+        this.poolBtc, this.poolBtcOut, this.dfiProBlockBtc));
+    }
+    if (this.anteilAmPoolEth > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolEth,
+        this.poolEth, this.poolEthOut, this.dfiProBlockEth));
+    }
+    if (this.anteilAmPoolUsdt > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolUsdt,
+        this.poolUsdt, this.poolUsdtOut, this.dfiProBlockUsdt));
+    }
+    if (this.anteilAmPoolUsdc > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolUsdc,
+        this.poolUsdc, this.poolUsdcOut, this.dfiProBlockUsdc));
+    }
+    if (this.anteilAmPoolUsd > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolUsd,
+        this.poolUsd, this.poolUsdOut, this.dfiProBlockUsd));
+    }
+    if (this.anteilAmPoolLtc > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolLtc,
+        this.poolLtc, this.poolLtcOut, this.dfiProBlockLtc));
+    }
+    if (this.anteilAmPoolDoge > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolDoge,
+        this.poolDoge, this.poolDogeOut, this.dfiProBlockDoge));
+    }
+    if (this.anteilAmPoolBch > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolBch,
+        this.poolBch, this.poolBchOut, this.dfiProBlockBch));
+    }
+    // STOCKS
+    if (this.anteilAmPoolTsla > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolTsla,
+        this.poolTsla, this.poolTslaOut, this.dfiProBlockTsla));
+    }
+    if (this.anteilAmPoolSpy > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolSpy,
+        this.poolSpy, this.poolSpyOut, this.dfiProBlockSpy));
+    }
+    if (this.anteilAmPoolQqq > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolQqq,
+        this.poolQqq, this.poolQqqOut, this.dfiProBlockQqq));
+    }
+    if (this.anteilAmPoolPltr > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolPltr,
+        this.poolPltr, this.poolPltrOut, this.dfiProBlockPltr));
+    }
+    if (this.anteilAmPoolSlv > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolSlv,
+        this.poolSlv, this.poolSlvOut, this.dfiProBlockSlv));
+    }
+    if (this.anteilAmPoolAapl > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolAapl,
+        this.poolAapl, this.poolAaplOut, this.dfiProBlockAapl));
+    }
+    if (this.anteilAmPoolGld > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolGld,
+        this.poolGld, this.poolGldOut, this.dfiProBlockGld));
+    }
+    if (this.anteilAmPoolGme > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolGme,
+        this.poolGme, this.poolGmeOut, this.dfiProBlockGme));
+    }
+    if (this.anteilAmPoolGoogl > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolGoogl,
+        this.poolGoogl, this.poolGooglOut, this.dfiProBlockGoogle));
+    }
+    if (this.anteilAmPoolArkk > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolArkk,
+        this.poolArkk, this.poolArkkOut, this.dfiProBlockArkk));
+    }
+    if (this.anteilAmPoolBaba > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolBaba,
+        this.poolBaba, this.poolBabaOut, this.dfiProBlockBaba));
+    }
+    if (this.anteilAmPoolVnq > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolVnq,
+        this.poolVnq, this.poolVnqOut, this.dfiProBlockVnq));
+    }
+    if (this.anteilAmPoolUrth > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolUrth,
+        this.poolUrth, this.poolUrthOut, this.dfiProBlockUrth));
+    }
+    if (this.anteilAmPoolTlt > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolTlt,
+        this.poolTlt, this.poolTltOut, this.dfiProBlockTlt));
+    }
+    if (this.anteilAmPoolPdbc > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolPdbc,
+        this.poolPdbc, this.poolPdbcOut, this.dfiProBlockPdbc));
+    }
+    if (this.anteilAmPoolAmzn > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolAmzn,
+        this.poolAmzn, this.poolAmznOut, this.dfiProBlockAmzn));
+    }
+    if (this.anteilAmPoolNvda > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolNvda,
+        this.poolNvda, this.poolNvdaOut, this.dfiProBlockNvda));
+    }
+    if (this.anteilAmPoolCoin > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolCoin,
+        this.poolCoin, this.poolCoinOut, this.dfiProBlockCoin));
+    }
+    if (this.anteilAmPoolEem > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolEem,
+        this.poolEem, this.poolEemOut, this.dfiProBlockEem));
+    }
+    if (this.anteilAmPoolMsft > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolMsft,
+        this.poolMsft, this.poolMsftOut, this.dfiProBlockMsft));
+    }
+    if (this.anteilAmPoolNflx > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolNflx,
+        this.poolNflx, this.poolNflxOut, this.dfiProBlockNflx));
+    }
+    if (this.anteilAmPoolFb > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolFb,
+        this.poolFb, this.poolFbOut, this.dfiProBlockFb));
+    }
+    if (this.anteilAmPoolVoo > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolVoo,
+        this.poolVoo, this.poolVooOut, this.dfiProBlockVoo));
+    }
+    if (this.anteilAmPoolDis > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolDis,
+        this.poolDis, this.poolDisOut, this.dfiProBlockDis));
+    }
+    if (this.anteilAmPoolMchi > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolMchi,
+        this.poolMchi, this.poolMchiOut, this.dfiProBlockMchi));
+    }
+    if (this.anteilAmPoolMstr > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolMstr,
+        this.poolMstr, this.poolMstrOut, this.dfiProBlockMstr));
+    }
+    if (this.anteilAmPoolIntc > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolIntc,
+        this.poolIntc, this.poolIntcOut, this.dfiProBlockIntc));
+    }
   }
 
   getCommission(pool: Pool, blockreward: number): number {

@@ -13,8 +13,8 @@ import {
   ApexTooltip,
   ApexTitleSubtitle,
   ApexMarkers, ApexTheme,
-} from 'ng-apexcharts'
-import { Outcome, Pool } from './Dex'
+} from 'ng-apexcharts';
+import { Outcome, Pool } from './Dex';
 
 export class Data {
   name: string;
@@ -768,16 +768,6 @@ export class Wallet {
 
 }
 
-export class IncomePoolDto {
-  pool; Pool;
-  anteil: number;
-  poolOut: Outcome;
-  pairPoolTokenInWallet: number;
-  dfiOrUsdPoolTokenInWallet: number;
-  blockRewardPool: number;
-
-}
-
 export class StakingCalc extends Outcome {
   dfiAmount = 10000;
   apy = 38;
@@ -802,6 +792,20 @@ export class HoldingValue {
     this.name = name;
     this.holding = holding;
     this.holdingUsd = holdingUsd;
+  }
+}
+
+export class PoolIncomeValue {
+  anteil: number;
+  pool: Pool;
+  poolOut: Outcome;
+  blockReward: number;
+
+  constructor(anteil: number, pool: Pool, poolOut: Outcome, blockReward: number) {
+    this.anteil = anteil;
+    this.pool = pool;
+    this.poolOut = poolOut;
+    this.blockReward = blockReward;
   }
 }
 
