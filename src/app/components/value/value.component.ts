@@ -177,6 +177,7 @@ export class ValueComponent implements OnInit, OnChanges {
   holdingValues = new Array<HoldingValue>();
   walletValues = new Array<HoldingValue>();
   lpTokensValues = new Array<HoldingValue>();
+  colleteralTokensValues = new Array<HoldingValue>();
 
   constructor(private dataService: DataService) {
   }
@@ -185,6 +186,7 @@ export class ValueComponent implements OnInit, OnChanges {
     this.createLoanTokens();
     this.createHoldingTokens();
     this.createWalletTokens();
+    this.createCollaterallTokens();
     this.createLpTokens();
     this.buildDataForChart();
     this.buildDataForChartValue();
@@ -926,22 +928,34 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getLoanTokens(): Array<LoanValue> {
 
-    return this.loanValues.sort((a, b) => (this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool) > this.getLoanCountVaults(b.token) * this.getUsdPriceOfStockPools(b.pool)) ? -1 : ((this.getLoanCountVaults(b.token) * this.getUsdPriceOfStockPools(b.pool) > this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool)) ? 1 : 0));
+    return this.loanValues.sort((a, b) =>
+      (this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool) > this.getLoanCountVaults(b.token)
+        * this.getUsdPriceOfStockPools(b.pool)) ? -1 : ((this.getLoanCountVaults(b.token)
+        * this.getUsdPriceOfStockPools(b.pool) > this.getLoanCountVaults(a.token) * this.getUsdPriceOfStockPools(a.pool)) ? 1 : 0));
   }
 
   getHoldingTokens(): Array<HoldingValue> {
 
-    return this.holdingValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+    return this.holdingValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1
+      : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
   }
 
   getWalletTokens(): Array<HoldingValue> {
 
-    return this.walletValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+    return this.walletValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1
+      : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
   }
 
   getLpTokens(): Array<HoldingValue> {
 
-    return this.lpTokensValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1 : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+    return this.lpTokensValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1
+      : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
+  }
+
+  getCollateralTokens(): Array<HoldingValue> {
+
+    return this.colleteralTokensValues.sort((a, b) => (a.holdingUsd > b.holdingUsd) ? -1
+      : ((b.holdingUsd > a.holdingUsd) ? 1 : 0));
   }
 
   createLoanTokens(): void {
@@ -1385,6 +1399,35 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.wallet?.intc > 0) {
       this.walletValues.push(new HoldingValue('INTC',
         this.wallet?.intc , this.wallet?.intc * this.getUsdPriceOfStockPools(this.poolIntc)));
+    }
+
+  }
+
+  createCollaterallTokens(): void {
+
+    if (this.getCollateralCountVaults('BTC') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('BTC',
+        this.getCollateralCountVaults('BTC'), this.getCollateralCountVaults('BTC') * this.poolBtc.priceA));
+    }
+    if (this.getCollateralCountVaults('ETH') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('ETH',
+        this.getCollateralCountVaults('ETH'), this.getCollateralCountVaults('ETH') * this.poolEth.priceA));
+    }
+    if (this.getCollateralCountVaults('USDC') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('USDC',
+        this.getCollateralCountVaults('USDC'), this.getCollateralCountVaults('USDC') * this.poolUsdc.priceA));
+    }
+    if (this.getCollateralCountVaults('USDT') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('USDT',
+        this.getCollateralCountVaults('USDT'), this.getCollateralCountVaults('USDT') * this.poolUsdt.priceA));
+    }
+    if (this.getCollateralCountVaults('DFI') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('DFI',
+        this.getCollateralCountVaults('DFI'), this.getCollateralCountVaults('DFI') * this.poolBtc.priceB));
+    }
+    if (this.getCollateralCountVaults('DUSD') > 0) {
+      this.colleteralTokensValues.push(new HoldingValue('DUSD',
+        this.getCollateralCountVaults('DUSD'), this.getCollateralCountVaults('DUSD') * 0.99));
     }
 
   }
