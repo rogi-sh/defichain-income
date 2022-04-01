@@ -1,6 +1,15 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { AddressBalance, Pool, Stats } from '@interfaces/Dex';
-import { AddressVaults, ChartOptions, ChartOptions3, Data, Vault, Wallet } from '@interfaces/Data';
+import {
+  AddressVaults,
+  ChartOptions,
+  ChartOptions3,
+  Data,
+  HoldingValue,
+  LoanValue,
+  Vault,
+  Wallet,
+} from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { DataService } from '@services/data.service';
 
@@ -119,6 +128,18 @@ export class ValueComponent implements OnInit, OnChanges {
   poolVoo!: Pool;
 
   @Input()
+  poolDis!: Pool;
+
+  @Input()
+  poolMchi!: Pool;
+
+  @Input()
+  poolMstr!: Pool;
+
+  @Input()
+  poolIntc!: Pool;
+
+  @Input()
   hideHoldings: boolean;
 
   @Input()
@@ -146,10 +167,15 @@ export class ValueComponent implements OnInit, OnChanges {
   @Input()
   rewards: Stats;
 
+  loanValues = new Array<LoanValue>();
+  holdingValues = new Array<HoldingValue>();
+
   constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
+    this.createLoanTokens();
+    this.createHoldingTokens();
     this.buildDataForChart();
     this.buildDataForChartValue();
 
@@ -205,6 +231,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let gme = 0; let google = 0; let arkk = 0; let baba = 0; let vnq = 0; let urth = 0; let tlt = 0;
     let pdbc = 0; let amzn = 0; let nvda = 0; let coin = 0; let eem = 0;
     let msft = 0; let nflx = 0; let fb = 0; let voo = 0;
+    let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
 
     vault?.loanAmounts?.forEach(loan => {
         if ('DUSD' === loan.symbolKey) {
@@ -255,12 +282,20 @@ export class ValueComponent implements OnInit, OnChanges {
           fb = +loan.amount * +loan.activePrice.active.amount;
         } else if ('VOO' === loan.symbolKey) {
           voo = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('DIS' === loan.symbolKey) {
+          dis = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('MCHI' === loan.symbolKey) {
+          mchi = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('MSTR' === loan.symbolKey) {
+          mstr = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('INTC' === loan.symbolKey) {
+          intc = +loan.amount * +loan.activePrice.active.amount;
         }
       });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
-      + fb + voo;
+      + fb + voo + dis + mchi + mstr + intc;
   }
 
   getNextLoanFromVaultUsd(vault: Vault): number {
@@ -269,6 +304,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let gme = 0; let google = 0; let arkk = 0; let baba = 0; let vnq = 0; let urth = 0; let tlt = 0;
     let pdbc = 0; let amzn = 0; let nvda = 0; let coin = 0; let eem = 0;
     let msft = 0; let nflx = 0; let fb = 0; let voo = 0;
+    let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
 
     vault?.loanAmounts?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
@@ -319,12 +355,20 @@ export class ValueComponent implements OnInit, OnChanges {
         fb = +loan.amount * +loan.activePrice.next.amount;
       } else if ('VOO' === loan.symbolKey) {
         voo = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('DIS' === loan.symbolKey) {
+        dis = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('MCHI' === loan.symbolKey) {
+        mchi = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('MSTR' === loan.symbolKey) {
+        mstr = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('INTC' === loan.symbolKey) {
+        intc = +loan.amount * +loan.activePrice.next.amount;
       }
     });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
-      + fb + voo;
+      + fb + voo + dis + mchi + mstr + intc;
   }
 
   getRatioNext(vault: Vault): number {
@@ -347,6 +391,8 @@ export class ValueComponent implements OnInit, OnChanges {
     let dfiActualPrice = 0;
     let btcInVaults = 0;
     let btcActualPrice = 0;
+    let ethInVaults = 0;
+    let ethActualPrice = 0;
     let usdcInVaults = 0;
     let usdcActualPrice = 0;
     let usdtInVaults = 0;
@@ -365,6 +411,9 @@ export class ValueComponent implements OnInit, OnChanges {
       } else if ('BTC' === vaultCollaterral.symbolKey) {
         btcInVaults += +vaultCollaterral.amount;
         btcActualPrice = +vaultCollaterral.activePrice?.active?.amount;
+      } else if ('ETH' === vaultCollaterral.symbolKey) {
+        ethInVaults += +vaultCollaterral.amount;
+        ethActualPrice = +vaultCollaterral.activePrice?.active?.amount;
       } else if ('USDC' === vaultCollaterral.symbolKey) {
         usdcInVaults += +vaultCollaterral.amount;
         usdcActualPrice = +vaultCollaterral.activePrice?.active?.amount;
@@ -378,7 +427,8 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return dfiInVaults * dfiActualPrice + btcInVaults * btcActualPrice + usdcInVaults * usdcActualPrice
-      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice;
+      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice + ethInVaults
+    * this.poolEth?.priceA;
   }
 
   getNextCollateralFromVaultUsd(vault: Vault): number {
@@ -387,6 +437,8 @@ export class ValueComponent implements OnInit, OnChanges {
     let dfiNextPrice = 0;
     let btcInVaults = 0;
     let btcNextPrice = 0;
+    let ethInVaults = 0;
+    let ethNextPrice = 0;
     let usdcInVaults = 0;
     let usdcNextPrice = 0;
     let usdtInVaults = 0;
@@ -405,6 +457,9 @@ export class ValueComponent implements OnInit, OnChanges {
       } else if ('BTC' === vaultCollaterral.symbolKey) {
         btcInVaults += +vaultCollaterral.amount;
         btcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
+      } else if ('ETH' === vaultCollaterral.symbolKey) {
+        ethInVaults += +vaultCollaterral.amount;
+        ethNextPrice = +vaultCollaterral.activePrice?.next?.amount;
       } else if ('USDC' === vaultCollaterral.symbolKey) {
         usdcInVaults += +vaultCollaterral.amount;
         usdcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
@@ -417,8 +472,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
     });
 
-    return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + usdcInVaults * usdcNextPrice
-      + usdtInVaults * usdtNextPrice + dusdInVaults * dusdActualPrice;
+    return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + ethInVaults * ethNextPrice
+      + usdcInVaults * usdcNextPrice + usdtInVaults * usdtNextPrice + dusdInVaults * dusdActualPrice;
   }
 
   getCollateralCountVaults(currency: string): number {
@@ -531,7 +586,10 @@ export class ValueComponent implements OnInit, OnChanges {
       || this.wallet?.usdInTltPool > 0 || this.wallet?.usdInPdbcPool > 0
       || this.wallet?.usdInAmznPool > 0 || this.wallet?.usdInNvdaPool > 0
       || this.wallet?.usdInCoinPool > 0 || this.wallet?.usdInEemPool > 0 || this.wallet?.usdInMsftPool > 0
-      || this.wallet?.usdInNflxPool > 0 || this.wallet?.usdInFbPool > 0 || this.wallet?.usdInVooPool > 0;
+      || this.wallet?.usdInNflxPool > 0 || this.wallet?.usdInFbPool > 0 || this.wallet?.usdInVooPool > 0
+      || this.wallet?.usdInDisPool > 0
+      || this.wallet?.usdInMchiPool > 0 || this.wallet?.usdInMstrPool > 0 || this.wallet?.usdInIntcPool > 0
+      || this.getCollateralCountVaults('DUSD') > 0 ;
   }
 
   getUsdCount(): number {
@@ -541,7 +599,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.wallet?.usdInBabaPool + this.wallet?.usdInVnqPool + this.wallet?.usdInUrthPool + this.wallet?.usdInTltPool
       + this.wallet?.usdInPdbcPool + this.wallet?.usdInAmznPool + this.wallet?.usdInNvdaPool + this.wallet?.usdInCoinPool
       + this.wallet?.usdInEemPool + this.wallet?.usdInMsftPool + this.wallet?.usdInNflxPool + this.wallet?.usdInFbPool
-      + this.wallet?.usdInVooPool + this.getCollateralCountVaults('DUSD');
+      + this.wallet?.usdInVooPool + this.wallet?.usdInDisPool + this.wallet?.usdInMchiPool + this.wallet?.usdInMstrPool
+      + this.wallet?.usdInIntcPool + this.getCollateralCountVaults('DUSD');
   }
 
   getUsdValueUsd(): number {
@@ -618,6 +677,18 @@ export class ValueComponent implements OnInit, OnChanges {
   getVooValueUsd(): number {
     return (this.wallet?.vooInVooPool + this.wallet?.voo) * this.getUsdPriceOfStockPools(this.poolVoo);
   }
+  getDisValueUsd(): number {
+    return (this.wallet?.disInDisPool + this.wallet?.dis) * this.getUsdPriceOfStockPools(this.poolDis);
+  }
+  getMchiValueUsd(): number {
+    return (this.wallet?.mchiInMchiPool + this.wallet?.mchi) * this.getUsdPriceOfStockPools(this.poolMchi);
+  }
+  getMstrValueUsd(): number {
+    return (this.wallet?.mstrInMstrPool + this.wallet?.mstr) * this.getUsdPriceOfStockPools(this.poolMstr);
+  }
+  getIntcValueUsd(): number {
+    return (this.wallet?.intcInIntcPool + this.wallet?.intc) * this.getUsdPriceOfStockPools(this.poolIntc);
+  }
 
   getUsdPriceOfStockPools(pool: Pool): number {
     return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
@@ -631,7 +702,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd()
       + this.getArkkValueUsd() + this.getBabaValueUsd() + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd()
       + this.getPdbcValueUsd() + this.getAmznValueUsd() + this.getNvdaValueUsd() + this.getCoinValueUsd() + this.getEemValueUsd()
-      + this.getMsftValueUsd() + this.getNflxValueUsd() + this.getFbValueUsd() + this.getVooValueUsd();
+      + this.getMsftValueUsd() + this.getNflxValueUsd() + this.getFbValueUsd() + this.getVooValueUsd()
+      + this.getDisValueUsd() + this.getMchiValueUsd() + this.getMstrValueUsd() + this.getIntcValueUsd();
        // Collateral
     const collateral = this.getVaultsCollateralUsd();
 
@@ -648,7 +720,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getGmeWalletValueUsd() + this.getGooglWalletValueUsd() + this.getArkkWalletValueUsd() + this.getBabaWalletValueUsd()
       + this.getVnqWalletValueUsd() + this.getUrthWalletValueUsd() + this.getTltWalletValueUsd() + this.getPdbcWalletValueUsd()
       + this.getAmznWalletValueUsd() + this.getNvdaWalletValueUsd() + this.getCoinWalletValueUsd() + this.getEemWalletValueUsd()
-      + this.getMsftWalletValueUsd() + this.getNflxWalletValueUsd() + this.getFbWalletValueUsd() + this.getVooWalletValueUsd();
+      + this.getMsftWalletValueUsd() + this.getNflxWalletValueUsd() + this.getFbWalletValueUsd() + this.getVooWalletValueUsd()
+      + this.getDisWalletValueUsd() + this.getMchiWalletValueUsd() + this.getMstrWalletValueUsd() + this.getIntcWalletValueUsd();
   }
 
   getDfiCountWalletUsd(): number {
@@ -761,6 +834,18 @@ export class ValueComponent implements OnInit, OnChanges {
   getVooWalletValueUsd(): number {
     return this.wallet?.voo * this.getUsdPriceOfStockPools(this.poolVoo);
   }
+  getDisWalletValueUsd(): number {
+    return this.wallet?.dis * this.getUsdPriceOfStockPools(this.poolDis);
+  }
+  getMchiWalletValueUsd(): number {
+    return this.wallet?.mchi * this.getUsdPriceOfStockPools(this.poolMchi);
+  }
+  getMstrWalletValueUsd(): number {
+    return this.wallet?.mstr * this.getUsdPriceOfStockPools(this.poolMstr);
+  }
+  getIntcWalletValueUsd(): number {
+    return this.wallet?.intc * this.getUsdPriceOfStockPools(this.poolIntc);
+  }
 
   getDfiValueUsd(): number {
     return this.getDfiCount() * this.poolBtc?.priceB;
@@ -807,7 +892,9 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAnteilLMOfUrthPoolValue() + this.getAnteilLMOfTltPoolValue() + this.getAnteilLMOfPdbcPoolValue()
       + this.getAnteilLMOfAmznPoolValue() + this.getAnteilLMOfNvdaPoolValue() + this.getAnteilLMOfCoinPoolValue()
       + this.getAnteilLMOfEemPoolValue() + this.getAnteilLMOfMsftPoolValue() + this.getAnteilLMOfNflxPoolValue()
-      + this.getAnteilLMOfFbPoolValue() + this.getAnteilLMOfVooPoolValue();
+      + this.getAnteilLMOfFbPoolValue() + this.getAnteilLMOfVooPoolValue() + this.getAnteilLMOfDisPoolValue()
+      + this.getAnteilLMOfMchiPoolValue() + this.getAnteilLMOfMstrPoolValue() + this.getAnteilLMOfMchiPoolValue()
+      + this.getAnteilLMOfIntcPoolValue();
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -825,6 +912,283 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCountLM(): number {
     return this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet.dfiInUsdPool;
+  }
+
+  getLoanTokens(): Array<LoanValue> {
+
+    return this.loanValues;
+  }
+
+  getHoldingTokens(): Array<HoldingValue> {
+
+    return this.holdingValues;
+  }
+
+  createLoanTokens(): void {
+    if (this.getLoanCountVaults('DUSD') > 0) {
+      this.loanValues.push(new LoanValue('DUSD', this.poolUsd));
+    }
+    if (this.getLoanCountVaults('TSLA') > 0) {
+      this.loanValues.push(new LoanValue('TSLA', this.poolTsla));
+    }
+    if (this.getLoanCountVaults('AAPL') > 0) {
+    this.loanValues.push(new LoanValue('AAPL', this.poolAapl));
+    }
+    if (this.getLoanCountVaults('ARKK') > 0) {
+    this.loanValues.push(new LoanValue('ARKK', this.poolArkk));
+    }
+    if (this.getLoanCountVaults('BABA') > 0) {
+    this.loanValues.push(new LoanValue('BABA', this.poolBaba));
+    }
+    if (this.getLoanCountVaults('GLD') > 0) {
+    this.loanValues.push(new LoanValue('GLD', this.poolGld));
+    }
+    if (this.getLoanCountVaults('GME') > 0) {
+    this.loanValues.push(new LoanValue('GME', this.poolGme));
+    }
+    if (this.getLoanCountVaults('GOOGL') > 0) {
+    this.loanValues.push(new LoanValue('GOOGL', this.poolGoogl));
+    }
+    if (this.getLoanCountVaults('PDBC') > 0) {
+    this.loanValues.push(new LoanValue('PDBC', this.poolPdbc));
+    }
+    if (this.getLoanCountVaults('PLTR') > 0) {
+    this.loanValues.push(new LoanValue('PLTR', this.poolPltr));
+    }
+    if (this.getLoanCountVaults('QQQ') > 0) {
+    this.loanValues.push(new LoanValue('QQQ', this.poolQqq));
+    }
+    if (this.getLoanCountVaults('SLV') > 0) {
+    this.loanValues.push(new LoanValue('SLV', this.poolSlv));
+    }
+    if (this.getLoanCountVaults('SPY') > 0) {
+    this.loanValues.push(new LoanValue('SPY', this.poolSpy));
+    }
+    if (this.getLoanCountVaults('TLT') > 0) {
+    this.loanValues.push(new LoanValue('TLT', this.poolTlt));
+    }
+    if (this.getLoanCountVaults('URTH') > 0) {
+    this.loanValues.push(new LoanValue('URTH', this.poolUrth));
+    }
+    if (this.getLoanCountVaults('VNQ') > 0) {
+    this.loanValues.push(new LoanValue('VNQ', this.poolVnq));
+    }
+    if (this.getLoanCountVaults('AMZN') > 0) {
+    this.loanValues.push(new LoanValue('AMZN', this.poolAmzn));
+    }
+    if (this.getLoanCountVaults('NVDA') > 0) {
+    this.loanValues.push(new LoanValue('NVDA', this.poolNvda));
+    }
+    if (this.getLoanCountVaults('COIN') > 0) {
+    this.loanValues.push(new LoanValue('COIN', this.poolCoin));
+    }
+    if (this.getLoanCountVaults('EEM') > 0) {
+    this.loanValues.push(new LoanValue('EEM', this.poolEem));
+    }
+    if (this.getLoanCountVaults('MSFT') > 0) {
+    this.loanValues.push(new LoanValue('MSFT', this.poolMsft));
+    }
+    if (this.getLoanCountVaults('NFLX') > 0) {
+    this.loanValues.push(new LoanValue('NFLX', this.poolNflx));
+    }
+    if (this.getLoanCountVaults('FB') > 0) {
+    this.loanValues.push(new LoanValue('FB', this.poolFb));
+    }
+    if (this.getLoanCountVaults('VOO') > 0) {
+    this.loanValues.push(new LoanValue('VOO', this.poolVoo));
+    }
+    if (this.getLoanCountVaults('DIS') > 0) {
+    this.loanValues.push(new LoanValue('DIS', this.poolDis));
+    }
+    if (this.getLoanCountVaults('MCHI') > 0) {
+    this.loanValues.push(new LoanValue('MCHI', this.poolMchi));
+    }
+    if (this.getLoanCountVaults('MSTR') > 0) {
+    this.loanValues.push(new LoanValue('MSTR', this.poolMstr));
+    }
+    if (this.getLoanCountVaults('INTC') > 0) {
+    this.loanValues.push(new LoanValue('INTC', this.poolIntc));
+    }
+
+
+  }
+
+  createHoldingTokens(): void {
+
+    if (this.wallet?.btc > 0 || this.wallet?.btcInBtcPool > 0 || this.getCollateralCountVaults('BTC')) {
+      this.holdingValues.push(new HoldingValue('BTC',
+        this.wallet?.btc + this.wallet?.btcInBtcPool  + this.getCollateralCountVaults('BTC'), this.getBtcValueUsd()));
+    }
+
+    if (this.wallet?.eth > 0 || this.wallet?.ethInEthPool > 0 || this.getCollateralCountVaults('ETH')) {
+      this.holdingValues.push(new HoldingValue('ETH',
+        this.wallet?.eth + this.wallet?.ethInEthPool  + this.getCollateralCountVaults('ETH'), this.getEthValueUsd()));
+    }
+
+    if (this.wallet?.usdt > 0 || this.wallet?.usdtInUsdtPool > 0 || this.getCollateralCountVaults('USDT')) {
+      this.holdingValues.push(new HoldingValue('USDT',
+        this.wallet?.usdt + this.wallet?.usdtInUsdtPool  + this.getCollateralCountVaults('USDT'), this.getUsdtValueUsd()));
+    }
+
+    if (this.wallet?.usdc > 0 || this.wallet?.usdcInUsdcPool > 0 || this.getCollateralCountVaults('USDC')) {
+      this.holdingValues.push(new HoldingValue('USDC',
+        this.wallet?.usdc + this.wallet?.usdcInUsdcPool  + this.getCollateralCountVaults('USDC'), this.getUsdcValueUsd()));
+    }
+
+    if (this.isUsdInPortfolio()) {
+      this.holdingValues.push(new HoldingValue('DUSD',
+        this.getUsdCount(), this.getUsdValueUsd()));
+    }
+
+    if (this.wallet?.ltc > 0 || this.wallet?.ltcInLtcPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('LTC',
+        this.wallet?.ltc + this.wallet?.ltcInLtcPool, this.getLtcValueUsd()));
+    }
+
+    if (this.wallet?.doge > 0 || this.wallet?.dogeInDogePool > 0 ) {
+      this.holdingValues.push(new HoldingValue('DOGE',
+        this.wallet?.doge + this.wallet?.dogeInDogePool, this.getDogeValueUsd()));
+    }
+
+    if (this.wallet?.bch > 0 || this.wallet?.bchInBchPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('BCH',
+        this.wallet?.bch + this.wallet?.bchInBchPool, this.getBchValueUsd()));
+    }
+
+    if (this.wallet?.tsla > 0 || this.wallet?.tslaInTslaPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('TSLA',
+        this.wallet?.tsla + this.wallet?.tslaInTslaPool, this.getTslaValueUsd()));
+    }
+
+    if (this.wallet?.qqq > 0 || this.wallet?.qqqInQqqPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('QQQ',
+        this.wallet?.qqq + this.wallet?.qqqInQqqPool, this.getQqqValueUsd()));
+    }
+
+    if (this.wallet?.spy > 0 || this.wallet?.spyInSpyPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('SPY',
+        this.wallet?.spy + this.wallet?.spyInSpyPool, this.getSpyValueUsd()));
+    }
+
+    if (this.wallet?.pltr > 0 || this.wallet?.pltrInPltrPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('PLTR',
+        this.wallet?.pltr + this.wallet?.pltrInPltrPool, this.getPltrValueUsd()));
+    }
+
+    if (this.wallet?.slv > 0 || this.wallet?.slvInSlvPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('SLV',
+        this.wallet?.slv + this.wallet?.slvInSlvPool, this.getSlvValueUsd()));
+    }
+
+    if (this.wallet?.aapl > 0 || this.wallet?.aaplInAaplPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('AAPL',
+        this.wallet?.aapl + this.wallet?.aaplInAaplPool, this.getAaplValueUsd()));
+    }
+
+    if (this.wallet?.gld > 0 || this.wallet?.gldInGldPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('GLD',
+        this.wallet?.gld + this.wallet?.gldInGldPool, this.getGldValueUsd()));
+    }
+
+    if (this.wallet?.gme > 0 || this.wallet?.gmeInGmePool > 0 ) {
+      this.holdingValues.push(new HoldingValue('GME',
+        this.wallet?.gme + this.wallet?.gmeInGmePool, this.getGmeValueUsd()));
+    }
+
+    if (this.wallet?.googl > 0 || this.wallet?.googlInGooglPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('GOOGL',
+        this.wallet?.googl + this.wallet?.googlInGooglPool, this.getGooglValueUsd()));
+    }
+
+    if (this.wallet?.arkk > 0 || this.wallet?.arkkInArkkPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('ARKK',
+        this.wallet?.arkk + this.wallet?.arkkInArkkPool, this.getArkkValueUsd()));
+    }
+
+    if (this.wallet?.baba > 0 || this.wallet?.babaInBabaPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('BABA',
+        this.wallet?.baba + this.wallet?.babaInBabaPool, this.getBabaValueUsd()));
+    }
+
+    if (this.wallet?.vnq > 0 || this.wallet?.vnqInVnqPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('VNQ',
+        this.wallet?.vnq + this.wallet?.vnqInVnqPool, this.getVnqValueUsd()));
+    }
+
+    if (this.wallet?.urth > 0 || this.wallet?.urthInUrthPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('URTH',
+        this.wallet?.urth + this.wallet?.urthInUrthPool, this.getUrthValueUsd()));
+    }
+
+    if (this.wallet?.tlt > 0 || this.wallet?.tltInTltPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('TLT',
+        this.wallet?.tlt + this.wallet?.tltInTltPool, this.getTltValueUsd()));
+    }
+
+    if (this.wallet?.pdbc > 0 || this.wallet?.pdbcInPdbcPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('PDBC',
+        this.wallet?.pdbc + this.wallet?.pdbcInPdbcPool, this.getPdbcValueUsd()));
+    }
+
+    if (this.wallet?.amzn > 0 || this.wallet?.amznInAmznPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('AMZN',
+        this.wallet?.amzn + this.wallet?.amznInAmznPool, this.getAmznValueUsd()));
+    }
+
+    if (this.wallet?.nvda > 0 || this.wallet?.nvdaInNvdaPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('NVDA',
+        this.wallet?.nvda + this.wallet?.nvdaInNvdaPool, this.getAmznValueUsd()));
+    }
+
+    if (this.wallet?.coin > 0 || this.wallet?.coinInCoinPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('COIN',
+        this.wallet?.coin + this.wallet?.coinInCoinPool, this.getCoinValueUsd()));
+    }
+
+    if (this.wallet?.eem > 0 || this.wallet?.eemInEemPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('EEM',
+        this.wallet?.eem + this.wallet?.eemInEemPool, this.getEemValueUsd()));
+    }
+
+    if (this.wallet?.msft > 0 || this.wallet?.mstrInMstrPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('MSFT',
+        this.wallet?.msft + this.wallet?.mstrInMstrPool, this.getMsftValueUsd()));
+    }
+
+    if (this.wallet?.nflx > 0 || this.wallet?.nflxInNflxPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('NFLX',
+        this.wallet?.nflx + this.wallet?.nflxInNflxPool, this.getNflxValueUsd()));
+    }
+
+    if (this.wallet?.fb > 0 || this.wallet?.fbInFbPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('FB',
+        this.wallet?.fb + this.wallet?.fbInFbPool, this.getFbValueUsd()));
+    }
+    if (this.wallet?.voo > 0 || this.wallet?.vooInVooPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('VOO',
+        this.wallet?.voo + this.wallet?.vooInVooPool, this.getVooValueUsd()));
+    }
+
+    if (this.wallet?.dis > 0 || this.wallet?.disInDisPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('DIS',
+        this.wallet?.dis + this.wallet?.disInDisPool, this.getDisValueUsd()));
+    }
+
+    if (this.wallet?.mchi > 0 || this.wallet?.mchiInMchiPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('MCHI',
+        this.wallet?.mchi + this.wallet?.mchiInMchiPool, this.getMchiValueUsd()));
+    }
+
+    if (this.wallet?.mstr > 0 || this.wallet?.mstrInMstrPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('MSTR',
+        this.wallet?.mstr + this.wallet?.mstrInMstrPool, this.getMstrValueUsd()));
+    }
+
+    if (this.wallet?.intc > 0 || this.wallet?.intcInIntcPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('INTC',
+        this.wallet?.intc + this.wallet?.intcInIntcPool, this.getIntcValueUsd()));
+    }
+
   }
 
   getFreezerDfiCount(): number {
@@ -999,6 +1363,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.getAnteilLMOfVooPoolValue() > 0) {
       incomeNumbers.push(Math.round(this.getAnteilLMOfVooPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
     }
+    if (this.getAnteilLMOfDisPoolValue() > 0) {
+      incomeNumbers.push(Math.round(this.getAnteilLMOfDisPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
+    }
+    if (this.getAnteilLMOfMchiPoolValue() > 0) {
+      incomeNumbers.push(Math.round(this.getAnteilLMOfMchiPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
+    }
+    if (this.getAnteilLMOfMstrPoolValue() > 0) {
+      incomeNumbers.push(Math.round(this.getAnteilLMOfMstrPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
+    }
+    if (this.getAnteilLMOfIntcPoolValue() > 0) {
+      incomeNumbers.push(Math.round(this.getAnteilLMOfIntcPoolValue() * this.dataService.getPrice(this.fiat) * 100) / 100);
+    }
 
     return incomeNumbers;
   }
@@ -1120,6 +1496,22 @@ export class ValueComponent implements OnInit, OnChanges {
   getAnteilLMOfVooPoolValue(): number {
     return ((this.wallet.usdInVooPool * this.getUsdPriceOfStockPools(this.poolUsd))
       + (this.wallet.vooInVooPool * this.getUsdPriceOfStockPools(this.poolVoo)));
+  }
+  getAnteilLMOfDisPoolValue(): number {
+    return ((this.wallet.usdInDisPool * this.getUsdPriceOfStockPools(this.poolUsd))
+      + (this.wallet.disInDisPool * this.getUsdPriceOfStockPools(this.poolDis)));
+  }
+  getAnteilLMOfMchiPoolValue(): number {
+    return ((this.wallet.usdInMchiPool * this.getUsdPriceOfStockPools(this.poolUsd))
+      + (this.wallet.mchiInMchiPool * this.getUsdPriceOfStockPools(this.poolMchi)));
+  }
+  getAnteilLMOfMstrPoolValue(): number {
+    return ((this.wallet.usdInMstrPool * this.getUsdPriceOfStockPools(this.poolUsd))
+      + (this.wallet.mstrInMstrPool * this.getUsdPriceOfStockPools(this.poolMstr)));
+  }
+  getAnteilLMOfIntcPoolValue(): number {
+    return ((this.wallet.usdInIntcPool * this.getUsdPriceOfStockPools(this.poolUsd))
+      + (this.wallet.intcInIntcPool * this.getUsdPriceOfStockPools(this.poolIntc)));
   }
 
   getLabelsValue(): Array<string> {
@@ -1274,6 +1666,22 @@ export class ValueComponent implements OnInit, OnChanges {
       incomeNumbers.push('VOO-Pool ' + ' - ' + Math.round(this.getAnteilLMOfVooPoolValue()
         * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
     }
+    if (this.getAnteilLMOfDisPoolValue() > 0) {
+      incomeNumbers.push('DIS-Pool ' + ' - ' + Math.round(this.getAnteilLMOfDisPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
+    }
+    if (this.getAnteilLMOfMchiPoolValue() > 0) {
+      incomeNumbers.push('MCHI-Pool ' + ' - ' + Math.round(this.getAnteilLMOfMchiPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
+    }
+    if (this.getAnteilLMOfMstrPoolValue() > 0) {
+      incomeNumbers.push('MSTR-Pool ' + ' - ' + Math.round(this.getAnteilLMOfMstrPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
+    }
+    if (this.getAnteilLMOfIntcPoolValue() > 0) {
+      incomeNumbers.push('INTC-Pool ' + ' - ' + Math.round(this.getAnteilLMOfIntcPoolValue()
+        * this.dataService.getPrice(this.fiat) / 100 * 100) + this.fiat);
+    }
 
     return incomeNumbers;
   }
@@ -1392,6 +1800,18 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getAnteilLMOfVooPoolValue() > 0) {
       incomeNumbers.push('#6082B6');
+    }
+    if (this.getAnteilLMOfDisPoolValue() > 0) {
+      incomeNumbers.push('#113CCF');
+    }
+    if (this.getAnteilLMOfMchiPoolValue() > 0) {
+      incomeNumbers.push('#D1EAF0');
+    }
+    if (this.getAnteilLMOfMstrPoolValue() > 0) {
+      incomeNumbers.push('#df3741');
+    }
+    if (this.getAnteilLMOfIntcPoolValue() > 0) {
+      incomeNumbers.push('#0071c5');
     }
 
     return incomeNumbers;
@@ -1523,6 +1943,22 @@ export class ValueComponent implements OnInit, OnChanges {
     dataVOO.name = 'VOO';
     dataVOO.value = this.getVooValueUsd() * this.dataService.getPrice(this.fiat);
 
+    const dataDIS = new Data();
+    dataDIS.name = 'DIS';
+    dataDIS.value = this.getDisValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataMCHI = new Data();
+    dataMCHI.name = 'MCHI';
+    dataMCHI.value = this.getMchiValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataMSTR = new Data();
+    dataMSTR.name = 'MSTR';
+    dataMSTR.value = this.getMstrValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataINTC = new Data();
+    dataINTC.name = 'INTC';
+    dataINTC.value = this.getIntcValueUsd() * this.dataService.getPrice(this.fiat);
+
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
     dataDfi.value = this.getDfiValueUsd() * this.dataService.getPrice(this.fiat);
@@ -1531,18 +1967,22 @@ export class ValueComponent implements OnInit, OnChanges {
       dataDoge.value + dataBch.value + dataTsla.value + dataSpy.value + dataQqq.value + dataPltr.value + dataSLV.value +
       dataAAPL.value + dataGLD.value + dataGME.value + dataGOOGL.value + dataARKK.value + dataBABA.value + dataVNQ.value +
       dataURTH.value + dataTLT.value + dataPDBC.value  + dataAMZN.value + dataNVDA.value + dataCOIN.value + dataEEM.value +
-      dataMSFT.value + dataNFLX.value + dataFB.value + dataVOO.value + dataDfi.value;
+      dataMSFT.value + dataNFLX.value + dataFB.value + dataVOO.value + dataDfi.value +
+      dataDIS.value + dataMCHI.value + dataMSTR.value + dataINTC.value;
 
     this.chartOptions = {
       series: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
         dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA, dataVNQ, dataURTH,
-        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO, dataDfi),
+        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
       colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
         dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA, dataVNQ, dataURTH,
-        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO, dataDfi),
+        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
       labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge,
         dataBch, dataTsla, dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA,
-        dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO, dataDfi),
+        dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
       chart: {
         width: '100%',
         type: 'donut',
@@ -1586,6 +2026,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataURTH: Data, dataTLT: Data, dataPDBC: Data,
                                 dataAMZN: Data, dataNVDA: Data, dataCOIN: Data, dataEEM: Data,
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
+                                dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataDfi: Data): Array<number> {
     const incomeNumbers = new Array<number>();
 
@@ -1682,6 +2123,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataVOO.value > 0) {
       incomeNumbers.push(+dataVOO.value.toFixed(2));
     }
+    if (dataDIS.value > 0) {
+      incomeNumbers.push(+dataDIS.value.toFixed(2));
+    }
+    if (dataMCHI.value > 0) {
+      incomeNumbers.push(+dataMCHI.value.toFixed(2));
+    }
+    if (dataMSTR.value > 0) {
+      incomeNumbers.push(+dataMSTR.value.toFixed(2));
+    }
+    if (dataINTC.value > 0) {
+      incomeNumbers.push(+dataINTC.value.toFixed(2));
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push(+dataDfi.value.toFixed(2));
     }
@@ -1695,6 +2148,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataBABA: Data, dataVNQ: Data, dataURTH: Data, dataTLT: Data, dataPDBC: Data,
                                 dataAMZN: Data, dataNVDA: Data, dataCOIN: Data, dataEEM: Data,
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
+                                dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataDfi: Data): Array<string> {
     const incomeNumbers = new Array<string>();
 
@@ -1791,6 +2245,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataVOO.value  > 0) {
       incomeNumbers.push('#6082B6');
     }
+    if (dataDIS.value > 0) {
+      incomeNumbers.push('#113CCF');
+    }
+    if (dataMCHI.value  > 0) {
+      incomeNumbers.push('#D1EAF0');
+    }
+    if (dataMSTR.value > 0) {
+      incomeNumbers.push('#df3741');
+    }
+    if (dataINTC.value > 0) {
+      incomeNumbers.push('#0071c5');
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push('#ff00af');
     }
@@ -1805,6 +2271,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataURTH: Data, dataTLT: Data, dataPDBC: Data,
                                 dataAMZN: Data, dataNVDA: Data, dataCOIN: Data, dataEEM: Data,
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
+                                dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataDfi: Data): Array<string> {
 
     const incomeNumbers = new Array<string>();
@@ -1900,6 +2367,18 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getAnteilPortfolioForChart(dataVOO, allValue) > 0) {
       incomeNumbers.push('VOO ' + this.getAnteilPortfolioForChart(dataVOO, allValue).toFixed(5) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataDIS, allValue) > 0) {
+      incomeNumbers.push('DIS ' + this.getAnteilPortfolioForChart(dataDIS, allValue).toFixed(5) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataMCHI, allValue) > 0) {
+      incomeNumbers.push('MCHI ' + this.getAnteilPortfolioForChart(dataMCHI, allValue).toFixed(5) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataMSTR, allValue) > 0) {
+      incomeNumbers.push('MSTR ' + this.getAnteilPortfolioForChart(dataMSTR, allValue).toFixed(5) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataINTC, allValue) > 0) {
+      incomeNumbers.push('INTC ' + this.getAnteilPortfolioForChart(dataINTC, allValue).toFixed(5) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
       incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(5) + '%');

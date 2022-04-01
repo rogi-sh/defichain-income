@@ -146,7 +146,7 @@ export class AddressBalance {
 
   disToken: number;
   mchiToken: number;
-  mstToken: number;
+  mstrToken: number;
   intcToken: number;
 
   btcdfiToken: number;
@@ -186,7 +186,7 @@ export class AddressBalance {
 
   disusdToken: number;
   mchiusdToken: number;
-  mstusdToken: number;
+  mstrusdToken: number;
   intcusdToken: number;
 
 }
@@ -261,6 +261,14 @@ export class PoolNflxOut extends Outcome {}
 export class PoolFbOut extends Outcome {}
 
 export class PoolVooOut extends Outcome {}
+
+export class PoolDisOut extends Outcome {}
+
+export class PoolMchiOut extends Outcome {}
+
+export class PoolMstrOut extends Outcome {}
+
+export class PoolIntcOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

@@ -14,7 +14,7 @@ import {
   ApexTitleSubtitle,
   ApexMarkers, ApexTheme,
 } from 'ng-apexcharts'
-import {Outcome} from './Dex';
+import { Outcome, Pool } from './Dex'
 
 export class Data {
   name: string;
@@ -247,7 +247,7 @@ export interface WalletDto {
 
   disusd: number;
   mchiusd: number;
-  mstusd: number;
+  mstrusd: number;
   intcusd: number;
 
   // User Infos
@@ -416,10 +416,10 @@ export interface WalletDto {
   mchi: number;
   usdInMchiPool: number;
 
-  // MST Pool
-  mstInMstPool: number;
-  mst: number;
-  usdInMstPool: number;
+  // MSTR Pool
+  mstrInMstrPool: number;
+  mstr: number;
+  usdInMstrPool: number;
 
   // INTC Pool
   intcInIntcPool: number;
@@ -482,7 +482,7 @@ export class Wallet {
 
   disusd = 0;
   mchiusd = 0;
-  mstusd = 0;
+  mstrusd = 0;
   intcusd = 0;
 
   // User Infos
@@ -750,13 +750,13 @@ export class Wallet {
   usdInMchiPoolKey = 'usdInMchiPoolKey';
   usdInMchiPool = 0;
 
-  // MST Pool
-  mstInMstPool = 0;
-  mstInMstPoolKey = 'mstInMstPoolKey';
-  mst = 0;
-  mstKey = 'mstKey';
-  usdInMstPoolKey = 'usdInMstPoolKey';
-  usdInMstPool = 0;
+  // MSTR Pool
+  mstrInMstrPool = 0;
+  mstrInMstrPoolKey = 'mstrInMstrPoolKey';
+  mstr = 0;
+  mstrKey = 'mstrKey';
+  usdInMstrPoolKey = 'usdInMstrPoolKey';
+  usdInMstrPool = 0;
 
   // INTC Pool
   intcInIntcPool = 0;
@@ -781,6 +781,28 @@ export class IncomePoolDto {
 export class StakingCalc extends Outcome {
   dfiAmount = 10000;
   apy = 38;
+}
+
+export class LoanValue {
+  token: string;
+  pool: Pool;
+
+  constructor(token: string, pool: Pool) {
+    this.token = token;
+    this.pool = pool;
+  }
+}
+
+export class HoldingValue {
+  name: string;
+  holding: number;
+  holdingUsd: number;
+
+  constructor(name: string, holding: number, holdingUsd: number) {
+    this.name = name;
+    this.holding = holding;
+    this.holdingUsd = holdingUsd;
+  }
 }
 
 export class StakingCake extends Outcome {
