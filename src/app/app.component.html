@@ -1005,7 +1005,50 @@
                                  [isIncognitoModeOn]=isIncognitoModeOn
 
                 ></app-pool-income>
+                <app-pool-income *ngIf=' anteilAmPoolDis > 0'
+                                 [poolPairsOcean]='poolPairsOcean'
+                                 [pool]='poolDis'
+                                 [poolOut]='poolDisOut'
+                                 [poolBtc]='poolBtc'
+                                 [anteilAmPool]='anteilAmPoolDis'
+                                 [dfiProBlock]='dfiProBlockDis'
+                                 [fiat]='fiat'
+                                 [isIncognitoModeOn]=isIncognitoModeOn
 
+                ></app-pool-income>
+                <app-pool-income *ngIf=' anteilAmPoolMchi > 0'
+                                 [poolPairsOcean]='poolPairsOcean'
+                                 [pool]='poolMchi'
+                                 [poolOut]='poolMchiOut'
+                                 [poolBtc]='poolBtc'
+                                 [anteilAmPool]='anteilAmPoolMchi'
+                                 [dfiProBlock]='dfiProBlockMchi'
+                                 [fiat]='fiat'
+                                 [isIncognitoModeOn]=isIncognitoModeOn
+
+                ></app-pool-income>
+                <app-pool-income *ngIf=' anteilAmPoolMstr > 0'
+                                 [poolPairsOcean]='poolPairsOcean'
+                                 [pool]='poolMstr'
+                                 [poolOut]='poolMstrOut'
+                                 [poolBtc]='poolBtc'
+                                 [anteilAmPool]='anteilAmPoolMstr'
+                                 [dfiProBlock]='dfiProBlockMstr'
+                                 [fiat]='fiat'
+                                 [isIncognitoModeOn]=isIncognitoModeOn
+
+                ></app-pool-income>
+                <app-pool-income *ngIf=' anteilAmPoolIntc > 0'
+                                 [poolPairsOcean]='poolPairsOcean'
+                                 [pool]='poolIntc'
+                                 [poolOut]='poolIntcOut'
+                                 [poolBtc]='poolBtc'
+                                 [anteilAmPool]='anteilAmPoolIntc'
+                                 [dfiProBlock]='dfiProBlockIntc'
+                                 [fiat]='fiat'
+                                 [isIncognitoModeOn]=isIncognitoModeOn
+
+                ></app-pool-income>
               </div>
               <br>
               <div class="bg-gray-100 rounded-md p-2 dark:bg-gray-600 dark:text-gray-100">
