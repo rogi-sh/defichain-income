@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.0 - 2.4.2022';
+    this.log.comment = 'New pools added, values (holding, loan tokens, collateral tokens, wallet holdings) are now sorted ASC, massive refactorings on the technical side';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.15.8 - 29.3.2022';
     this.log.comment = 'Fix Graphql Link in info';
     this.logs.push(this.log);
