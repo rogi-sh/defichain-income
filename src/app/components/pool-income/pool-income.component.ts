@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { Outcome, Pool, PoolEemOut, PoolPair } from '@interfaces/Dex'
-import { PoolPairsOcean } from '@interfaces/Data'
+import { Component, Input, OnInit } from '@angular/core';
+import { Outcome, Pool, PoolEemOut, PoolPair } from '@interfaces/Dex';
+import { PoolPairsOcean } from '@interfaces/Data';
 
 @Component({
   selector: 'app-pool-income',
@@ -38,17 +38,16 @@ export class PoolIncomeComponent implements OnInit {
   }
 
 
-  getCommissionFromTotalBlockreward(pool: Pool, blockreward: number): number {
-    let commission = 0;
+  getCommissionFromTotalBlockreward(pool: Pool): number {
 
-    if (pool === undefined || pool === null || blockreward === null) {
-      return commission;
+    if (pool === undefined || pool === null) {
+      return 0;
     }
 
-    const poolOcean = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr;
-    commission = blockreward / (poolOcean.reward * 100 + poolOcean.commission * 100) * poolOcean.commission * 100;
+    const poolVolumen24 = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.volume.h24;
+    const dfiPriceDex = this.poolBtc.priceB;
+    return poolVolumen24 * 0.002 / dfiPriceDex / 2880;
 
-    return commission;
   }
 
   getAprRewards(pool: Pool): number {
