@@ -953,6 +953,9 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   createLoanTokens(): void {
+
+    this.loanValues = new Array<LoanValue>();
+
     if (this.getLoanCountVaults('DUSD') > 0) {
       this.loanValues.push(new LoanValue('DUSD', this.poolUsd));
     }
@@ -1042,6 +1045,8 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   createHoldingTokens(): void {
+
+    this.holdingValues = new Array<HoldingValue>();
 
     if (this.wallet?.btc > 0 || this.wallet?.btcInBtcPool > 0 || this.getCollateralCountVaults('BTC')) {
       this.holdingValues.push(new HoldingValue('BTC',
@@ -1221,6 +1226,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   createWalletTokens(): void {
 
+    this.walletValues = new Array<HoldingValue>();
+
     if (this.wallet?.btc > 0) {
       this.walletValues.push(new HoldingValue('BTC',
         this.wallet?.btc, this.wallet?.btc * this.poolBtc?.priceA));
@@ -1399,6 +1406,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   createCollaterallTokens(): void {
 
+    this.colleteralTokensValues = new Array<HoldingValue>();
+
     if (this.getCollateralCountVaults('BTC') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('BTC',
         this.getCollateralCountVaults('BTC'), this.getCollateralCountVaults('BTC') * this.poolBtc.priceA));
@@ -1427,6 +1436,8 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   createLpTokens(): void {
+
+    this.lpTokensValues = new Array<HoldingValue>();
 
     if (this.wallet?.btcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('BTC-DFI',

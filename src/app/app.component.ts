@@ -2047,6 +2047,9 @@ export class AppComponent implements OnInit {
   }
 
   createIncomePools(): void {
+
+    this.poolIncomeList = new Array<PoolIncomeValue>();
+
     // CRYPTO
     if (this.anteilAmPoolBtc > 0 ) {
       this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolBtc,

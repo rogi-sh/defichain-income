@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.1 - 2.4.2022';
+    this.log.comment = 'Fix duplicated items in income, values';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.0 - 2.4.2022';
     this.log.comment = 'New pools added, values (holding, loan tokens, collateral tokens, wallet holdings) are now sorted ASC, remove unusefull value chart, transofrm chart to bars chart, massive refactorings on the technical side';
     this.logs.push(this.log);
