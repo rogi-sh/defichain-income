@@ -1914,51 +1914,67 @@ export class ValueComponent implements OnInit, OnChanges {
       dataDIS.value + dataMCHI.value + dataMSTR.value + dataINTC.value;
 
     this.chartOptions = {
-      series: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
-        dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA, dataVNQ, dataURTH,
-        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
-      colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
-        dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA, dataVNQ, dataURTH,
-        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
-      labels: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge,
-        dataBch, dataTsla, dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA,
-        dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
+      series: [{
+        name: this.fiat,
+        data: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
+          dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
+          dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+          dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi)
+      }],
       chart: {
-        width: '100%',
-        type: 'donut',
+        width: '90%',
+        height: '600',
+        type: 'bar',
         background: 'transparent',
         animations: {
           enabled: false
         }
       },
+      legend: {
+        show: false,
+
+      },
+      colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
+        dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
+        dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
+      xaxis: {
+        type: 'category',
+        categories: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge,
+        dataBch, dataTsla, dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA,
+        dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
+        position: 'bottom',
+        labels: {
+          style: {
+            colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
+              dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
+              dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+              dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi),
+            fontSize: '16px',
+            fontWeight: 800
+          },
+        }
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: 'top' // top, center, bottom
+          },
+          columnWidth: '45%',
+          distributed: true,
+        }
+      },
       dataLabels: {
-        enabled: true
+        enabled: false
       },
       fill: {
-        type: 'gradient'
+        opacity: 0.9,
+        colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
+          dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
+          dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
+          dataDIS, dataMCHI, dataMSTR, dataINTC, dataDfi)
       },
-      legend: {
-        // tslint:disable-next-line:only-arrow-functions typedef
-        formatter(val, opts) {
-          return '55';
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: '100%'
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
     };
   }
 
@@ -1974,10 +1990,10 @@ export class ValueComponent implements OnInit, OnChanges {
     const incomeNumbers = new Array<number>();
 
     if (dataBtc.value > 0) {
-      incomeNumbers.push(+dataBtc.value.toFixed(2));
+      incomeNumbers.push( +dataBtc.value.toFixed(2));
     }
     if (dataEth.value > 0) {
-      incomeNumbers.push(+dataEth.value.toFixed(2));
+      incomeNumbers.push( +dataEth.value.toFixed(2));
     }
     if (dataUsdt.value > 0) {
       incomeNumbers.push(+dataUsdt.value.toFixed(2));
@@ -2219,112 +2235,112 @@ export class ValueComponent implements OnInit, OnChanges {
 
     const incomeNumbers = new Array<string>();
     if (this.getAnteilPortfolioForChart(dataBtc, allValue) > 0) {
-      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue).toFixed(5) + '%');
+      incomeNumbers.push('BTC ' + this.getAnteilPortfolioForChart(dataBtc, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataEth, allValue) > 0) {
-      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue).toFixed(5) + '%');
+      incomeNumbers.push('ETH ' + this.getAnteilPortfolioForChart(dataEth, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsdt, allValue) > 0) {
-      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue).toFixed(5) + '%');
+      incomeNumbers.push('USDT ' + this.getAnteilPortfolioForChart(dataUsdt, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsdc, allValue) > 0) {
-      incomeNumbers.push('USDC ' + this.getAnteilPortfolioForChart(dataUsdc, allValue).toFixed(5) + '%');
+      incomeNumbers.push('USDC ' + this.getAnteilPortfolioForChart(dataUsdc, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataUsd, allValue) > 0) {
-      incomeNumbers.push('DUSD ' + this.getAnteilPortfolioForChart(dataUsd, allValue).toFixed(5) + '%');
+      incomeNumbers.push('DUSD ' + this.getAnteilPortfolioForChart(dataUsd, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataLtc, allValue) > 0) {
-      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue).toFixed(5) + '%');
+      incomeNumbers.push('LTC ' + this.getAnteilPortfolioForChart(dataLtc, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDoge, allValue) > 0) {
-      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue).toFixed(5) + '%');
+      incomeNumbers.push('DOGE ' + this.getAnteilPortfolioForChart(dataDoge, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataBch, allValue) > 0) {
-      incomeNumbers.push('BCH ' + this.getAnteilPortfolioForChart(dataBch, allValue).toFixed(5) + '%');
+      incomeNumbers.push('BCH ' + this.getAnteilPortfolioForChart(dataBch, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataTsla, allValue) > 0) {
-      incomeNumbers.push('TSLA ' + this.getAnteilPortfolioForChart(dataTsla, allValue).toFixed(5) + '%');
+      incomeNumbers.push('TSLA ' + this.getAnteilPortfolioForChart(dataTsla, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataSpy, allValue) > 0) {
-      incomeNumbers.push('SPY ' + this.getAnteilPortfolioForChart(dataSpy, allValue).toFixed(5) + '%');
+      incomeNumbers.push('SPY ' + this.getAnteilPortfolioForChart(dataSpy, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataQqq, allValue) > 0) {
-      incomeNumbers.push('QQQ ' + this.getAnteilPortfolioForChart(dataQqq, allValue).toFixed(5) + '%');
+      incomeNumbers.push('QQQ ' + this.getAnteilPortfolioForChart(dataQqq, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataPltr, allValue) > 0) {
-      incomeNumbers.push('PLTR ' + this.getAnteilPortfolioForChart(dataPltr, allValue).toFixed(5) + '%');
+      incomeNumbers.push('PLTR ' + this.getAnteilPortfolioForChart(dataPltr, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataSLV, allValue) > 0) {
-      incomeNumbers.push('SLV ' + this.getAnteilPortfolioForChart(dataSLV, allValue).toFixed(5) + '%');
+      incomeNumbers.push('SLV ' + this.getAnteilPortfolioForChart(dataSLV, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataAAPL, allValue) > 0) {
-      incomeNumbers.push('AAPL ' + this.getAnteilPortfolioForChart(dataAAPL, allValue).toFixed(5) + '%');
+      incomeNumbers.push('AAPL ' + this.getAnteilPortfolioForChart(dataAAPL, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataGLD, allValue) > 0) {
-      incomeNumbers.push('GLD ' + this.getAnteilPortfolioForChart(dataGLD, allValue).toFixed(5) + '%');
+      incomeNumbers.push('GLD ' + this.getAnteilPortfolioForChart(dataGLD, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataGME, allValue) > 0) {
-      incomeNumbers.push('GME ' + this.getAnteilPortfolioForChart(dataGME, allValue).toFixed(5) + '%');
+      incomeNumbers.push('GME ' + this.getAnteilPortfolioForChart(dataGME, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataGOOGL, allValue) > 0) {
-      incomeNumbers.push('GOOGL ' + this.getAnteilPortfolioForChart(dataGOOGL, allValue).toFixed(5) + '%');
+      incomeNumbers.push('GOOGL ' + this.getAnteilPortfolioForChart(dataGOOGL, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataARKK, allValue) > 0) {
-      incomeNumbers.push('ARKK ' + this.getAnteilPortfolioForChart(dataARKK, allValue).toFixed(5) + '%');
+      incomeNumbers.push('ARKK ' + this.getAnteilPortfolioForChart(dataARKK, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataBABA, allValue) > 0) {
-      incomeNumbers.push('BABA ' + this.getAnteilPortfolioForChart(dataBABA, allValue).toFixed(5) + '%');
+      incomeNumbers.push('BABA ' + this.getAnteilPortfolioForChart(dataBABA, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataVNQ, allValue) > 0) {
-      incomeNumbers.push('VNQ ' + this.getAnteilPortfolioForChart(dataVNQ, allValue).toFixed(5) + '%');
+      incomeNumbers.push('VNQ ' + this.getAnteilPortfolioForChart(dataVNQ, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataURTH, allValue) > 0) {
-      incomeNumbers.push('URTH ' + this.getAnteilPortfolioForChart(dataURTH, allValue).toFixed(5) + '%');
+      incomeNumbers.push('URTH ' + this.getAnteilPortfolioForChart(dataURTH, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataTLT, allValue) > 0) {
-      incomeNumbers.push('TLT ' + this.getAnteilPortfolioForChart(dataTLT, allValue).toFixed(5) + '%');
+      incomeNumbers.push('TLT ' + this.getAnteilPortfolioForChart(dataTLT, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataPDBC, allValue) > 0) {
-      incomeNumbers.push('PDBC ' + this.getAnteilPortfolioForChart(dataPDBC, allValue).toFixed(5) + '%');
+      incomeNumbers.push('PDBC ' + this.getAnteilPortfolioForChart(dataPDBC, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataAMZN, allValue) > 0) {
-      incomeNumbers.push('AMZN ' + this.getAnteilPortfolioForChart(dataAMZN, allValue).toFixed(5) + '%');
+      incomeNumbers.push('AMZN ' + this.getAnteilPortfolioForChart(dataAMZN, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataNVDA, allValue) > 0) {
-      incomeNumbers.push('NVDA ' + this.getAnteilPortfolioForChart(dataNVDA, allValue).toFixed(5) + '%');
+      incomeNumbers.push('NVDA ' + this.getAnteilPortfolioForChart(dataNVDA, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataCOIN, allValue) > 0) {
-      incomeNumbers.push('COIN ' + this.getAnteilPortfolioForChart(dataCOIN, allValue).toFixed(5) + '%');
+      incomeNumbers.push('COIN ' + this.getAnteilPortfolioForChart(dataCOIN, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataEEM, allValue) > 0) {
-      incomeNumbers.push('EEM ' + this.getAnteilPortfolioForChart(dataEEM, allValue).toFixed(5) + '%');
+      incomeNumbers.push('EEM ' + this.getAnteilPortfolioForChart(dataEEM, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataMSFT, allValue) > 0) {
-      incomeNumbers.push('MSFT ' + this.getAnteilPortfolioForChart(dataMSFT, allValue).toFixed(5) + '%');
+      incomeNumbers.push('MSFT ' + this.getAnteilPortfolioForChart(dataMSFT, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataNFLX, allValue) > 0) {
-      incomeNumbers.push('NFLX ' + this.getAnteilPortfolioForChart(dataNFLX, allValue).toFixed(5) + '%');
+      incomeNumbers.push('NFLX ' + this.getAnteilPortfolioForChart(dataNFLX, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataFB, allValue) > 0) {
-      incomeNumbers.push('FB ' + this.getAnteilPortfolioForChart(dataFB, allValue).toFixed(5) + '%');
+      incomeNumbers.push('FB ' + this.getAnteilPortfolioForChart(dataFB, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataVOO, allValue) > 0) {
-      incomeNumbers.push('VOO ' + this.getAnteilPortfolioForChart(dataVOO, allValue).toFixed(5) + '%');
+      incomeNumbers.push('VOO ' + this.getAnteilPortfolioForChart(dataVOO, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDIS, allValue) > 0) {
-      incomeNumbers.push('DIS ' + this.getAnteilPortfolioForChart(dataDIS, allValue).toFixed(5) + '%');
+      incomeNumbers.push('DIS ' + this.getAnteilPortfolioForChart(dataDIS, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataMCHI, allValue) > 0) {
-      incomeNumbers.push('MCHI ' + this.getAnteilPortfolioForChart(dataMCHI, allValue).toFixed(5) + '%');
+      incomeNumbers.push('MCHI ' + this.getAnteilPortfolioForChart(dataMCHI, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataMSTR, allValue) > 0) {
-      incomeNumbers.push('MSTR ' + this.getAnteilPortfolioForChart(dataMSTR, allValue).toFixed(5) + '%');
+      incomeNumbers.push('MSTR ' + this.getAnteilPortfolioForChart(dataMSTR, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataINTC, allValue) > 0) {
-      incomeNumbers.push('INTC ' + this.getAnteilPortfolioForChart(dataINTC, allValue).toFixed(5) + '%');
+      incomeNumbers.push('INTC ' + this.getAnteilPortfolioForChart(dataINTC, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
-      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(5) + '%');
+      incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(1) + '%');
     }
     return incomeNumbers;
   }

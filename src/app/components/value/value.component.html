@@ -5,16 +5,16 @@
   <div class='mb-4 lg:mb-0 order-2 lg:order-1 flex-1' *ngIf='!hideHoldings'>
     <h2 class='text-lg dark:text-gray-100'>{{ 'value.dist' | translate }}</h2>
     <br>
-    <div class='w-full max-w-lg mx-auto mb-2' *ngIf='chartOptions && chartOptions.series.length > 0'>
+    <div class='order-2 lg:order-1' *ngIf='chartOptions && chartOptions.series.length > 0'>
       <apx-chart *ngIf='chartOptions && chartOptions.series.length > 0'
-                 class='w-full'
                  [series]='chartOptions?.series'
                  [chart]='chartOptions?.chart'
-                 [labels]='chartOptions?.labels'
+                 [xaxis]='chartOptions?.xaxis'
                  [colors]='chartOptions?.colors'
-                 [fill]='chartOptions?.fill'
+                 [plotOptions]='chartOptions?.plotOptions'
+                 [fill]="chartOptions?.fill"
                  [dataLabels]='chartOptions?.dataLabels'
-                 [responsive]='chartOptions?.responsive'
+                 [legend]='chartOptions?.legend'
                  [theme]='{ mode: getTheme() }'
       ></apx-chart>
     </div>

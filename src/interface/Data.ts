@@ -131,14 +131,16 @@ export class Price {
 }
 
 export type ChartOptions = {
-  series: ApexNonAxisChartSeries;
+  series: ApexAxisChartSeries;
   chart: ApexChart;
-  responsive: ApexResponsive[];
-  labels: any;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
   colors: string[];
   fill: ApexFill;
   legend: ApexLegend;
-  dataLabels: ApexDataLabels;
+  title: ApexTitleSubtitle;
   theme: ApexTheme;
 };
 
