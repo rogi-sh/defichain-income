@@ -152,18 +152,6 @@ export type ChartOptions2 = {
   fill: ApexFill;
 };
 
-export type ChartOptions3 = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: ApexResponsive[];
-  labels: any;
-  colors: string[];
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  fill: ApexFill;
-  theme: ApexTheme;
-};
-
 export type ChartOptions4 = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;

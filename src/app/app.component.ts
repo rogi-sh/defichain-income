@@ -4005,17 +4005,11 @@ export class AppComponent implements OnInit {
     this.berechneAllOut();
     this.buildDataForChart();
     this.buildDataForChartIncome();
-    this.buildDataForChartValue();
   }
 
   buildDataForChart(): void {
 
     this.valueComponent?.buildDataForChart();
-  }
-
-  buildDataForChartValue(): void {
-
-    this.valueComponent?.buildDataForChartValue();
   }
 
   buildDataForChartIncome(): void {
@@ -4852,7 +4846,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4863,7 +4856,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4874,7 +4866,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4886,7 +4877,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4898,7 +4888,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4910,7 +4899,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4921,7 +4909,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4932,7 +4919,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4942,7 +4928,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.btc)) {
       localStorage.setItem(this.wallet.btcKey, JSON.stringify(this.wallet.btc));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4950,7 +4935,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.doge)) {
       localStorage.setItem(this.wallet.dogeKey, JSON.stringify(this.wallet.doge));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4958,7 +4942,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.bch)) {
       localStorage.setItem(this.wallet.bchKey, JSON.stringify(this.wallet.bch));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4966,7 +4949,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.ltc)) {
       localStorage.setItem(this.wallet.ltcKey, JSON.stringify(this.wallet.ltc));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4974,7 +4956,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.usdt)) {
       localStorage.setItem(this.wallet.usdtKey, JSON.stringify(this.wallet.usdt));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4982,7 +4963,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.usdc)) {
       localStorage.setItem(this.wallet.usdcKey, JSON.stringify(this.wallet.usdc));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4990,7 +4970,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.eth)) {
       localStorage.setItem(this.wallet.ethKey, JSON.stringify(this.wallet.eth));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -4998,7 +4977,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.usd)) {
       localStorage.setItem(this.wallet.usdKey, JSON.stringify(this.wallet.usd));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5006,7 +4984,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.tsla)) {
       localStorage.setItem(this.wallet.tslaKey, JSON.stringify(this.wallet.tsla));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5014,7 +4991,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.spy)) {
       localStorage.setItem(this.wallet.spyKey, JSON.stringify(this.wallet.spy));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5022,7 +4998,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.qqq)) {
       localStorage.setItem(this.wallet.qqqKey, JSON.stringify(this.wallet.qqq));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5030,7 +5005,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.pltr)) {
       localStorage.setItem(this.wallet.pltrKey, JSON.stringify(this.wallet.pltr));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5038,7 +5012,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.slv)) {
       localStorage.setItem(this.wallet.slvKey, JSON.stringify(this.wallet.slv));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5046,7 +5019,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.aapl)) {
       localStorage.setItem(this.wallet.aaplKey, JSON.stringify(this.wallet.aapl));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5054,7 +5026,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.gld)) {
       localStorage.setItem(this.wallet.gldKey, JSON.stringify(this.wallet.gld));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5062,7 +5033,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.gme)) {
       localStorage.setItem(this.wallet.gmeKey, JSON.stringify(this.wallet.gme));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5070,7 +5040,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.googl)) {
       localStorage.setItem(this.wallet.googlKey, JSON.stringify(this.wallet.googl));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5078,7 +5047,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.arkk)) {
       localStorage.setItem(this.wallet.arkkKey, JSON.stringify(this.wallet.arkk));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5086,7 +5054,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.baba)) {
       localStorage.setItem(this.wallet.babaKey, JSON.stringify(this.wallet.baba));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5094,7 +5061,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.vnq)) {
       localStorage.setItem(this.wallet.vnqKey, JSON.stringify(this.wallet.vnq));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5102,7 +5068,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.urth)) {
       localStorage.setItem(this.wallet.urthKey, JSON.stringify(this.wallet.urth));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5110,7 +5075,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.tlt)) {
       localStorage.setItem(this.wallet.tltKey, JSON.stringify(this.wallet.tlt));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5118,7 +5082,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.pdbc)) {
       localStorage.setItem(this.wallet.pdbcKey, JSON.stringify(this.wallet.pdbc));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5127,7 +5090,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.amzn)) {
       localStorage.setItem(this.wallet.amznKey, JSON.stringify(this.wallet.amzn));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5135,7 +5097,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.nvda)) {
       localStorage.setItem(this.wallet.nvdaKey, JSON.stringify(this.wallet.nvda));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5143,7 +5104,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.coin)) {
       localStorage.setItem(this.wallet.coinKey, JSON.stringify(this.wallet.coin));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5151,7 +5111,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.eem)) {
       localStorage.setItem(this.wallet.eemKey, JSON.stringify(this.wallet.eem));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5159,7 +5118,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.msft)) {
       localStorage.setItem(this.wallet.msftKey, JSON.stringify(this.wallet.msft));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5167,7 +5125,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.nflx)) {
       localStorage.setItem(this.wallet.nflxKey, JSON.stringify(this.wallet.nflx));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5175,7 +5132,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.fb)) {
       localStorage.setItem(this.wallet.fbKey, JSON.stringify(this.wallet.fb));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5184,7 +5140,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.voo)) {
       localStorage.setItem(this.wallet.vooKey, JSON.stringify(this.wallet.voo));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5193,7 +5148,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.dis)) {
       localStorage.setItem(this.wallet.disKey, JSON.stringify(this.wallet.dis));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5201,7 +5155,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.mchi)) {
       localStorage.setItem(this.wallet.mchiKey, JSON.stringify(this.wallet.mchi));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5209,7 +5162,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.mstr)) {
       localStorage.setItem(this.wallet.mstrKey, JSON.stringify(this.wallet.mstr));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5217,7 +5169,6 @@ export class AppComponent implements OnInit {
     if (this.checkInputNumber(this.wallet.intc)) {
       localStorage.setItem(this.wallet.intcKey, JSON.stringify(this.wallet.intc));
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5230,7 +5181,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5242,7 +5192,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5254,7 +5203,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5266,7 +5214,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5278,7 +5225,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5290,7 +5236,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5302,7 +5247,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5314,7 +5258,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5327,7 +5270,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5338,7 +5280,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5349,7 +5290,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5360,7 +5300,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5371,7 +5310,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5382,7 +5320,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5393,7 +5330,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5404,7 +5340,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5415,7 +5350,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5426,7 +5360,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5437,8 +5370,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
-      this.buildDataForChartIncome();
     }
   }
   onChangeUsdAaplPool(): void {
@@ -5448,7 +5379,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5459,7 +5389,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5470,7 +5399,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5481,7 +5409,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5492,7 +5419,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5503,7 +5429,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5514,7 +5439,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5525,7 +5449,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5536,7 +5459,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5547,7 +5469,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5558,7 +5479,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5569,7 +5489,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5580,7 +5499,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5591,7 +5509,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5602,7 +5519,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5613,7 +5529,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5624,7 +5539,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5635,7 +5549,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5646,7 +5559,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5657,7 +5569,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5668,7 +5579,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5679,7 +5589,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5690,7 +5599,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5701,7 +5609,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5712,7 +5619,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5723,7 +5629,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5734,7 +5639,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5745,7 +5649,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5756,7 +5659,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5767,7 +5669,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5778,7 +5679,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5789,7 +5689,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5800,7 +5699,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5811,7 +5709,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5822,7 +5719,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5833,7 +5729,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5844,7 +5739,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5855,7 +5749,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5866,7 +5759,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5877,7 +5769,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5888,7 +5779,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5899,7 +5789,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
@@ -5910,7 +5799,6 @@ export class AppComponent implements OnInit {
       this.berechnePoolOut();
       this.berechneAllOut();
       this.buildDataForChart();
-      this.buildDataForChartValue();
       this.buildDataForChartIncome();
     }
   }
