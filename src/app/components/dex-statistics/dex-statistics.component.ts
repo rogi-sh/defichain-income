@@ -119,6 +119,9 @@ export class DexStatisticsComponent implements OnInit {
   statisticsOn = true;
   statisticsOnKey = 'statisticsOnKey';
 
+  asc = true;
+  sortColumn = 'tvl';
+
   constructor(private apollo: Apollo, private dex: Dex, private dexService: Dex) {
   }
 
@@ -139,6 +142,8 @@ export class DexStatisticsComponent implements OnInit {
     this.calculateBlockTime();
     this.calculateExchangesStatus();
 
+    this.stocksPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
+    this.cryptoPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
   }
 
   loadMilestones(): void {
@@ -205,11 +210,71 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getStockPools(): Array<Pool> {
-    return this.stocksPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
+    return this.stocksPools;
   }
 
   getCryptoPools(): Array<Pool> {
-    return this.cryptoPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
+    return this.cryptoPools;
+  }
+
+  sortOn(column: string): void {
+    if (column === 'premium') {
+      this.sortColumn = 'premium';
+      if (!this.asc) {
+        this.stocksPools.sort((a, b) =>
+          (this.isDUSDPool(b) ? this.getArb(this.priceDFICEX, b?.totalLiquidityUsd / 2 / +b?.reserveB) :
+            this.getArb(this.getStockPrice(b?.symbol), b?.totalLiquidityUsd / 2 / +b?.reserveA))
+          - (this.isDUSDPool(a) ? this.getArb(this.priceDFICEX, a?.totalLiquidityUsd / 2 / +a?.reserveB) :
+            this.getArb(this.getStockPrice(a?.symbol), a?.totalLiquidityUsd / 2 / +a?.reserveA)));
+
+        this.cryptoPools.sort((a, b) =>
+          (this.getArb(b?.priceA, b?.totalLiquidityUsd / 2 / +b?.reserveA))
+          - (this.getArb(a?.priceA, a?.totalLiquidityUsd / 2 / +a?.reserveA)));
+      } else {
+        this.stocksPools.sort((a, b) =>
+          (this.isDUSDPool(a) ? this.getArb(this.priceDFICEX, a.totalLiquidityUsd / 2 / +a?.reserveB) :
+            this.getArb(this.getStockPrice(a?.symbol), a?.totalLiquidityUsd / 2 / +a?.reserveA))
+          - (this.isDUSDPool(b) ? this.getArb(this.priceDFICEX, b?.totalLiquidityUsd / 2 / +b?.reserveB) :
+            this.getArb(this.getStockPrice(b?.symbol), b?.totalLiquidityUsd / 2 / +b?.reserveA)));
+
+        this.cryptoPools.sort((a, b) =>
+          (this.getArb(a?.priceA, a?.totalLiquidityUsd / 2 / +a?.reserveA))
+          - (this.getArb(b?.priceA, b?.totalLiquidityUsd / 2 / +b?.reserveA)));
+      }
+    } else if (column === 'tvl') {
+      this.sortColumn = 'tvl';
+      if (!this.asc) {
+        this.stocksPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
+        this.cryptoPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
+      } else {
+        this.stocksPools.sort((a, b) => a.totalLiquidityUsd - b.totalLiquidityUsd);
+        this.cryptoPools.sort((a, b) => a.totalLiquidityUsd - b.totalLiquidityUsd);
+      }
+    } else if (column === 'apr') {
+      this.sortColumn = 'apr';
+      if (!this.asc) {
+        this.stocksPools.sort((a, b) => this.getPoolFromOceanPoolPairs(b.id)?.apr.total - this.getPoolFromOceanPoolPairs(a.id)?.apr.total);
+        this.cryptoPools.sort((a, b) => this.getPoolFromOceanPoolPairs(b.id)?.apr.total - this.getPoolFromOceanPoolPairs(a.id)?.apr.total);
+      } else {
+        this.stocksPools.sort((a, b) => this.getPoolFromOceanPoolPairs(a.id)?.apr.total - this.getPoolFromOceanPoolPairs(b.id)?.apr.total);
+        this.cryptoPools.sort((a, b) => this.getPoolFromOceanPoolPairs(a.id)?.apr.total - this.getPoolFromOceanPoolPairs(b.id)?.apr.total);
+      }
+    } else if (column === 'volume') {
+      this.sortColumn = 'volume';
+      if (!this.asc) {
+        this.stocksPools.sort((a, b) =>
+          this.getPoolFromOceanPoolPairs(b.id)?.volume.h24 - this.getPoolFromOceanPoolPairs(a.id)?.volume.h24);
+        this.cryptoPools.sort((a, b) =>
+          this.getPoolFromOceanPoolPairs(b.id)?.volume.h24 - this.getPoolFromOceanPoolPairs(a.id)?.volume.h24);
+      } else {
+        this.stocksPools.sort((a, b) =>
+          this.getPoolFromOceanPoolPairs(a.id)?.volume.h24 - this.getPoolFromOceanPoolPairs(b.id)?.volume.h24);
+        this.cryptoPools.sort((a, b) =>
+          this.getPoolFromOceanPoolPairs(a.id)?.volume.h24 - this.getPoolFromOceanPoolPairs(b.id)?.volume.h24);
+      }
+    }
+
+    this.asc = !this.asc;
   }
 
   getLatestReleaseApp(): Release {

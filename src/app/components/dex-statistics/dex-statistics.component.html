@@ -624,12 +624,27 @@
           <th class='text-left p-2'>Pool</th>
           <th class='text-right p-2'>Dex </th>
           <th class='text-right p-2'>Oracle</th>
-          <th class='text-right p-2'>Premium</th>
-          <th class='text-right p-2'>Volume</th>
-          <th class='text-right p-2'>{{ 'Pool TVL' | translate }}</th>
+          <th (click)="sortOn('premium')" class='text-right p-2 no-underline hover:underline cursor-pointer'>Premium
+            <span *ngIf="sortColumn === 'premium' && asc" class="material-icons md-18">arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'premium' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          </th>
+          <th (click)="sortOn('volume')" class='text-right p-2 no-underline hover:underline cursor-pointer'>Volume
+            <span *ngIf="sortColumn === 'volume' && asc" class="material-icons md-18">arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'volume' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          </th>
+          <th (click)="sortOn('tvl')" class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'Pool TVL' | translate }}
+            <span *ngIf="sortColumn === 'tvl' && asc" class="material-icons md-18">arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'tvl' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          </th>
           <th class='text-right p-2'>{{ 'LP Token' | translate }}</th>
-          <th class='text-right p-2'>{{ 'APR' | translate }}</th>
-          <th class='text-right p-2'>{{ 'APY (Weekly)' | translate }}</th>
+          <th (click)="sortOn('apr')" class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'APR' | translate }}
+            <span *ngIf="sortColumn === 'apr' && asc" class="material-icons md-18">arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'apr' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          </th>
+          <th (click)="sortOn('apy')"  class='text-right p-2'>{{ 'APY (Weekly)' | translate }}
+            <span *ngIf="sortColumn === 'apy' && asc" class="material-icons md-18">arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'apy' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          </th>
           <th class='text-right p-2'>Pool {{ 'correlation' | translate}}
             ({{correlationDays}} {{ 'correlationDay' | translate}})
           </th>

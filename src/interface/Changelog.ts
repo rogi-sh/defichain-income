@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.3 - 3.4.2022';
+    this.log.comment = 'Dex table columns premium, volume, tvl and apr are sortable';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.2 - 3.4.2022';
     this.log.comment = 'Fix msft holdings, split dex, oracle price and premium in dex table';
     this.logs.push(this.log);
