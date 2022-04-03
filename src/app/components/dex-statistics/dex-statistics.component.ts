@@ -4,7 +4,7 @@ import {Apollo} from 'apollo-angular';
 import { CORRELATION, EXCHANGE, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
-import { DfxStaking, OceanStats } from '@interfaces/Staking'
+import { DfxStaking, OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
 import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
@@ -21,9 +21,6 @@ export class DexStatisticsComponent implements OnInit {
 
   @ViewChild('chart7', { static: false }) chart2: ChartComponent;
   public chartOptions2: Partial<ChartOptions6>;
-
-  @ViewChild('chart8', { static: false }) chart3: ChartComponent;
-  public chartOptions3: Partial<ChartOptions6>;
 
   @Input()
   fiat: string;
@@ -107,7 +104,6 @@ export class DexStatisticsComponent implements OnInit {
   incomeStatistics: IncomeStatistics;
 
   history = new Array<History>();
-  historyNumbers = new Array<HistoryPrice>();
 
   curentStock = 'BTC';
 
@@ -383,7 +379,8 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getArb(cex: number, dex: number): number {
-    return Math.round(dex / cex  * 100) - 100;
+    // round 1 digit
+    return Math.round(dex / cex  * 1000 - 1000) / 10;
   }
 
   isDUSDPool(pool: Pool): boolean {

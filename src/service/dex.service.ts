@@ -3,7 +3,7 @@ import {environment} from '@environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { DexPoolPair, Pool, Prices } from '@interfaces/Dex';
 import {Observable} from 'rxjs';
-import { Blocks, Burn, PoolPairsOcean, StockOracles } from '@interfaces/Data'
+import { Blocks, Burn, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import {OceanStats} from '@interfaces/Staking';
 
 @Injectable({

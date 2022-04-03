@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
-import { AddressVaults, Currencies, USD } from '@interfaces/Data'
+import { AddressVaults, Currencies, USD } from '@interfaces/Data';
 import {Observable} from 'rxjs';
 import {SupernodeAccount} from '@interfaces/Supernode';
 import {MamonAccountNode} from '@interfaces/Mamon';
