@@ -1183,9 +1183,9 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.eem + this.wallet?.eemInEemPool, this.getEemValueUsd()));
     }
 
-    if (this.wallet?.msft > 0 || this.wallet?.mstrInMstrPool > 0 ) {
+    if (this.wallet?.msft > 0 || this.wallet?.msftInMsftPool > 0 ) {
       this.holdingValues.push(new HoldingValue('MSFT',
-        this.wallet?.msft + this.wallet?.mstrInMstrPool, this.getMsftValueUsd()));
+        this.wallet?.msft + this.wallet?.msftInMsftPool, this.getMsftValueUsd()));
     }
 
     if (this.wallet?.nflx > 0 || this.wallet?.nflxInNflxPool > 0 ) {

@@ -396,7 +396,7 @@ export class DexStatisticsComponent implements OnInit {
       return 0;
     }
 
-    return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD')).price.aggregated.amount;
+    return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD'))?.price.aggregated.amount;
   }
 
   calculateBlockTime(): void {
