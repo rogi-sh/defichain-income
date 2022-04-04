@@ -1446,7 +1446,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.ethdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('ETH-DFI',
-        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getPlTokenValue(this.poolBtc)));
+        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getPlTokenValue(this.poolEth)));
     }
 
     if (this.wallet?.usdtdfi > 0) {
