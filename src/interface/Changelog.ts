@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.4 - 4.4.2022';
+    this.log.comment = 'Fix eth-dfi lp tokens value';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.3 - 3.4.2022';
     this.log.comment = 'Dex table columns premium, volume, tvl and apr are sortable';
     this.logs.push(this.log);
