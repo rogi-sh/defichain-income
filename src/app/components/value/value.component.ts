@@ -1441,181 +1441,181 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.btcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('BTC-DFI',
-        this.wallet?.btcdfi, this.wallet?.btcdfi * this.getPlTokenValue(this.poolBtc)));
+        this.wallet?.btcdfi, this.wallet?.btcdfi * this.getLpTokenValue(this.poolBtc)));
     }
 
     if (this.wallet?.ethdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('ETH-DFI',
-        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getPlTokenValue(this.poolEth)));
+        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getLpTokenValue(this.poolEth)));
     }
 
     if (this.wallet?.usdtdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('USDT-DFI',
-        this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getPlTokenValue(this.poolUsdt)));
+        this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getLpTokenValue(this.poolUsdt)));
     }
 
     if (this.wallet?.usdcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('USDC-DFI',
-        this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getPlTokenValue(this.poolUsdc)));
+        this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getLpTokenValue(this.poolUsdc)));
     }
 
     if (this.wallet?.usddfi) {
       this.lpTokensValues.push(new HoldingValue('DUSD-DFI',
-        this.wallet?.usddfi, this.wallet?.usddfi * this.getPlTokenValue(this.poolUsd)));
+        this.wallet?.usddfi, this.wallet?.usddfi * this.getLpTokenValue(this.poolUsd)));
     }
 
     if (this.wallet?.ltcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('LTC-DFI',
-        this.wallet?.ltcdfi, this.wallet?.ltc * this.getPlTokenValue(this.poolLtc)));
+        this.wallet?.ltcdfi, this.wallet?.ltc * this.getLpTokenValue(this.poolLtc)));
     }
 
     if (this.wallet?.dogedfi > 0) {
       this.lpTokensValues.push(new HoldingValue('DOGE-DFI',
-        this.wallet?.dogedfi , this.wallet?.dogedfi * this.getPlTokenValue(this.poolDoge)));
+        this.wallet?.dogedfi , this.wallet?.dogedfi * this.getLpTokenValue(this.poolDoge)));
     }
 
     if (this.wallet?.bchdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('BCH-DFI',
-        this.wallet?.bchdfi, this.wallet?.bchdfi * this.getPlTokenValue(this.poolBch)));
+        this.wallet?.bchdfi, this.wallet?.bchdfi * this.getLpTokenValue(this.poolBch)));
     }
 
     if (this.wallet?.tslausd > 0) {
       this.lpTokensValues.push(new HoldingValue('TSLA-DUSD',
-        this.wallet?.tslausd , this.wallet?.tslausd * this.getPlTokenValue(this.poolTsla)));
+        this.wallet?.tslausd , this.wallet?.tslausd * this.getLpTokenValue(this.poolTsla)));
     }
 
     if (this.wallet?.qqqusd > 0) {
       this.lpTokensValues.push(new HoldingValue('QQQ-DUSD',
-        this.wallet?.qqqusd, this.wallet?.qqqusd * this.getPlTokenValue(this.poolQqq)));
+        this.wallet?.qqqusd, this.wallet?.qqqusd * this.getLpTokenValue(this.poolQqq)));
     }
 
     if (this.wallet?.spyusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('SPY-DUSD',
-        this.wallet?.spyusd, this.wallet?.spyusd * this.getPlTokenValue(this.poolSpy)));
+        this.wallet?.spyusd, this.wallet?.spyusd * this.getLpTokenValue(this.poolSpy)));
     }
 
     if (this.wallet?.pltr > 0  ) {
       this.lpTokensValues.push(new HoldingValue('PLTR-DUSD',
-        this.wallet?.pltr, this.wallet?.pltrusd * this.getPlTokenValue(this.poolPltr)));
+        this.wallet?.pltr, this.wallet?.pltrusd * this.getLpTokenValue(this.poolPltr)));
     }
 
     if (this.wallet?.slvusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('SLV-DUSD',
-        this.wallet?.slvusd, this.wallet?.slvusd * this.getPlTokenValue(this.poolSlv)));
+        this.wallet?.slvusd, this.wallet?.slvusd * this.getLpTokenValue(this.poolSlv)));
     }
 
     if (this.wallet?.aaplusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('AAPL-DUSD',
-        this.wallet?.aaplusd, this.wallet?.aaplusd * this.getPlTokenValue(this.poolAapl)));
+        this.wallet?.aaplusd, this.wallet?.aaplusd * this.getLpTokenValue(this.poolAapl)));
     }
 
     if (this.wallet?.gldusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('GLD-DUSD',
-        this.wallet?.gldusd, this.wallet?.gldusd * this.getPlTokenValue(this.poolGld)));
+        this.wallet?.gldusd, this.wallet?.gldusd * this.getLpTokenValue(this.poolGld)));
     }
 
     if (this.wallet?.gmeusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('GME-DUSD',
-        this.wallet?.gmeusd, this.wallet?.gmeusd * this.getPlTokenValue(this.poolGme)));
+        this.wallet?.gmeusd, this.wallet?.gmeusd * this.getLpTokenValue(this.poolGme)));
     }
 
     if (this.wallet?.googlusd > 0) {
       this.lpTokensValues.push(new HoldingValue('GOOGL-DUSD',
-        this.wallet?.googlusd, this.wallet?.googlusd * this.getPlTokenValue(this.poolGoogl)));
+        this.wallet?.googlusd, this.wallet?.googlusd * this.getLpTokenValue(this.poolGoogl)));
     }
 
     if (this.wallet?.arkkusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('ARKK-DUSD',
-        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getPlTokenValue(this.poolArkk)));
+        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getLpTokenValue(this.poolArkk)));
     }
 
     if (this.wallet?.babausd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('BABA-DUSD',
-        this.wallet?.babausd , this.wallet?.baba * this.getPlTokenValue(this.poolBaba)));
+        this.wallet?.babausd , this.wallet?.baba * this.getLpTokenValue(this.poolBaba)));
     }
 
     if (this.wallet?.vnq > 0 ) {
       this.lpTokensValues.push(new HoldingValue('VNQ-DUSD',
-        this.wallet?.vnq , this.wallet?.vnq * this.getPlTokenValue(this.poolVnq)));
+        this.wallet?.vnq , this.wallet?.vnq * this.getLpTokenValue(this.poolVnq)));
     }
 
     if (this.wallet?.urthusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('URTH-DUSD',
-        this.wallet?.urthusd , this.wallet?.urthusd * this.getPlTokenValue(this.poolUrth)));
+        this.wallet?.urthusd , this.wallet?.urthusd * this.getLpTokenValue(this.poolUrth)));
     }
 
     if (this.wallet?.tltusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('TLT-DUSD',
-        this.wallet?.tltusd , this.wallet?.tltusd * this.getPlTokenValue(this.poolTlt)));
+        this.wallet?.tltusd , this.wallet?.tltusd * this.getLpTokenValue(this.poolTlt)));
     }
 
     if (this.wallet?.pdbcusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('PDBC-DUSD',
-        this.wallet?.pdbcusd, this.wallet?.pdbcusd * this.getPlTokenValue(this.poolPdbc)));
+        this.wallet?.pdbcusd, this.wallet?.pdbcusd * this.getLpTokenValue(this.poolPdbc)));
     }
 
     if (this.wallet?.amznusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('AMZN-DUSD',
-        this.wallet?.amznusd , this.wallet?.amznusd * this.getPlTokenValue(this.poolAmzn)));
+        this.wallet?.amznusd , this.wallet?.amznusd * this.getLpTokenValue(this.poolAmzn)));
     }
 
     if (this.wallet?.nvdausd > 0) {
       this.lpTokensValues.push(new HoldingValue('NVDA-DUSD',
-        this.wallet?.nvdausd, this.wallet?.nvdausd * this.getPlTokenValue(this.poolNvda)));
+        this.wallet?.nvdausd, this.wallet?.nvdausd * this.getLpTokenValue(this.poolNvda)));
     }
 
     if (this.wallet?.coinusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('COIN-DUSD',
-        this.wallet?.coinusd , this.wallet?.coinusd * this.getPlTokenValue(this.poolCoin)));
+        this.wallet?.coinusd , this.wallet?.coinusd * this.getLpTokenValue(this.poolCoin)));
     }
 
     if (this.wallet?.eemusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('EEM-DUSD',
-        this.wallet?.eemusd, this.wallet?.eemusd * this.getPlTokenValue(this.poolEem)));
+        this.wallet?.eemusd, this.wallet?.eemusd * this.getLpTokenValue(this.poolEem)));
     }
 
     if (this.wallet?.msftusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('MSFT-DUSD',
-        this.wallet?.msftusd, this.wallet?.msftusd * this.getPlTokenValue(this.poolMsft)));
+        this.wallet?.msftusd, this.wallet?.msftusd * this.getLpTokenValue(this.poolMsft)));
     }
 
     if (this.wallet?.nflxusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('NFLX-DUSD',
-        this.wallet?.nflxusd, this.wallet?.nflxusd * this.getPlTokenValue(this.poolNflx)));
+        this.wallet?.nflxusd, this.wallet?.nflxusd * this.getLpTokenValue(this.poolNflx)));
     }
 
     if (this.wallet?.fbusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('FB-DUSD',
-        this.wallet?.fbusd, this.wallet?.fbusd * this.getPlTokenValue(this.poolFb)));
+        this.wallet?.fbusd, this.wallet?.fbusd * this.getLpTokenValue(this.poolFb)));
     }
     if (this.wallet?.voousd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('VOO-DUSD',
-        this.wallet?.voousd, this.wallet?.voousd * this.getPlTokenValue(this.poolVoo)));
+        this.wallet?.voousd, this.wallet?.voousd * this.getLpTokenValue(this.poolVoo)));
     }
 
     if (this.wallet?.disusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('DIS-DUSD',
-        this.wallet?.disusd, this.wallet?.disusd * this.getPlTokenValue(this.poolDis)));
+        this.wallet?.disusd, this.wallet?.disusd * this.getLpTokenValue(this.poolDis)));
     }
 
     if (this.wallet?.mchiusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('MCHI-DUSD',
-        this.wallet?.mchiusd, this.wallet?.mchiusd * this.getPlTokenValue(this.poolMchi)));
+        this.wallet?.mchiusd, this.wallet?.mchiusd * this.getLpTokenValue(this.poolMchi)));
     }
 
     if (this.wallet?.mstrusd > 0) {
       this.lpTokensValues.push(new HoldingValue('MSTR-DUSD',
-        this.wallet?.mstrusd, this.wallet?.mstrusd * this.getPlTokenValue(this.poolMstr)));
+        this.wallet?.mstrusd, this.wallet?.mstrusd * this.getLpTokenValue(this.poolMstr)));
     }
 
     if (this.wallet?.intcusd > 0) {
       this.lpTokensValues.push(new HoldingValue('INTC-DUSD',
-        this.wallet?.intcusd , this.wallet?.intcusd * this.getPlTokenValue(this.poolIntc)));
+        this.wallet?.intcusd , this.wallet?.intcusd * this.getLpTokenValue(this.poolIntc)));
     }
 
   }
 
-  getPlTokenValue(pool: Pool): number {
+  getLpTokenValue(pool: Pool): number {
    return pool?.totalLiquidityUsd / pool?.totalLiquidityLpToken;
   }
 
