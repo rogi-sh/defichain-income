@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.5 - 5.4.2022';
+    this.log.comment = 'Fix tauri icon on desktop app, better ui for vaults';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.4 - 4.4.2022';
     this.log.comment = 'Fix eth-dfi lp tokens value';
     this.logs.push(this.log);
