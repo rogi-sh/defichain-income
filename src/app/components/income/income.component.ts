@@ -269,6 +269,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   @Input()
   isIncognitoModeOn: boolean;
 
+  @Input()
+  showReducedByFees: boolean;
+
   constructor()  { }
 
   ngOnInit(): void {
@@ -283,8 +286,8 @@ export class IncomeComponent implements OnInit, OnChanges {
     return this.stakingOut.dfiPerYear / this.getAllIncome() * 100;
   }
 
-  getAnteilLMOfIncome(): number {
-    return this.poolOut.dfiPerYear / this.getAllIncome() * 100;
+  getAnteilLMOfIncome(reducedByFee: number): number {
+    return this.poolOut.dfiPerYear / this.getAllIncome() * 100 * (1 - (reducedByFee > 0 ? reducedByFee : 0));
   }
 
   getAnteilMasternodeOfIncome(): number {

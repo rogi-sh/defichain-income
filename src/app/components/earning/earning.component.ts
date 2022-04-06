@@ -20,6 +20,9 @@ export class EarningComponent implements OnInit {
   @Input()
   isIncognitoModeOn: boolean;
 
+  @Input()
+  showReducedByFees: boolean;
+
   constructor() {
   }
 
@@ -45,6 +48,10 @@ export class EarningComponent implements OnInit {
 
   getOutcomeOfPoolPerMonthUsd(out: Outcome): number {
     return out?.dfiPerMonth * this.pool?.priceB;
+  }
+
+  getOutcomeOfPoolPerMonthDfi(out: Outcome, cost: number): number {
+    return out?.dfiPerMonth * (1-cost);
   }
 
   getOutcomeOfPoolPerYearUsd(out: Outcome): number {

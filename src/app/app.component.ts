@@ -219,6 +219,7 @@ export class AppComponent implements OnInit {
   adressesMasternodesKey = 'adressesMasternodesKey';
   masternodeAdress = false;
   isIncognitoModeOn = false;
+  isShowReducedByFeeOn = false;
   masternodeFreezer5 = false;
   masternodeFreezer10 = false;
   mamonKey: string;

@@ -12,6 +12,9 @@ export class PoolIncomeComponent implements OnInit {
   isIncognitoModeOn: boolean;
 
   @Input()
+  showReducedByFees: boolean;
+
+  @Input()
   poolPairsOcean: PoolPairsOcean;
 
   @Input()
@@ -82,7 +85,7 @@ export class PoolIncomeComponent implements OnInit {
 
     const poolOceanReward = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.total;
 
-    return poolOceanReward * 100;
+    return poolOceanReward * 100 * (1 - (this.showReducedByFees ? 0.15 : 0));
 
   }
 

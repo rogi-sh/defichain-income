@@ -46,7 +46,7 @@
     </div>
     <div class="col-span-2 lg:col-span-3">
       <span class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 cursor-pointer">
-        {{isIncognitoModeOn ? '****' : out?.dfiPerMonth| number: '1.2-2'}} DFI -
+        {{isIncognitoModeOn ? '****' : ( showReducedByFees ? (this.getOutcomeOfPoolPerMonthDfi(out, 0.15)| number: '1.2-2') : (out?.dfiPerMonth| number: '1.2-2'))}} DFI -
         <div *ngIf="isIncognitoModeOn" class="inline-block">****</div>
         <app-price *ngIf="!isIncognitoModeOn" [fiat]="fiat" [usdPrice]="getOutcomeOfPoolPerMonthUsd(out)"></app-price>
       </span>

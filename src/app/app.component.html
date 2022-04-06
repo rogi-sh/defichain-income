@@ -546,6 +546,7 @@
            <div *ngSwitchCase="'income'">
               <app-income
                 [isIncognitoModeOn]="isIncognitoModeOn"
+                [showReducedByFees]="isShowReducedByFeeOn"
                 [poolBtc]="poolBtc"
                 [fiat]="fiat"
                 [poolBchOut]="poolBchOut"
@@ -643,7 +644,7 @@
                                  [poolOut]='l.poolOut'
                                  [poolBtc]='poolBtc'
                                  [anteilAmPool]='l.anteil'
-
+                                 [showReducedByFees]="isShowReducedByFeeOn"
                                  [dfiProBlock]='l.blockReward'
                                  [fiat]='fiat'
                                  [isIncognitoModeOn]=isIncognitoModeOn
@@ -964,6 +965,25 @@
                           />
                           <label
                             for="incognito"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-row gap-2">
+                        <div class="dark:text-gray-100">
+                          Reduce LM Rewards by Cake fees:
+                        </div>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="reduceByCakeFee"
+                            [(ngModel)]="isShowReducedByFeeOn"
+                            [ngClass]="{ 'isChecked': isShowReducedByFeeOn }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="reduceByCakeFee"
                             class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
                           ></label>
                         </div>

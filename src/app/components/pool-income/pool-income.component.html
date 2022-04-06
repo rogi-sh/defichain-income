@@ -4,7 +4,7 @@
                       {{getSymbolA(pool)}}/{{getSymbolB(pool)}} -
                       {{isIncognitoModeOn ? '****' : getAprTotal(pool)| number: '1.2-2' }}% Total
                     <span class="text-xs"> ({{isIncognitoModeOn ? '****' : getAprRewards(pool)| number: '1.1-1' }}% Reward
-                      / {{isIncognitoModeOn ? '****' : getAprFees(pool)| number: '1.3-3' }}% Fees)</span>
+                      / {{isIncognitoModeOn ? '****' : getAprFees(pool)| number: '1.3-3' }}% Fees {{showReducedByFees ? "-" +(isIncognitoModeOn ? '****' : 0.15 * 100 | number: '1.2-2') + "% Cake fee" : "" }})</span>
                          - {{isIncognitoModeOn ? '****' : dfiProBlock | number: '1.3-3'}} DFI Block
                       <span class="text-xs">  (incl. Fees {{isIncognitoModeOn ? '****' : getCommissionFromTotalBlockreward(pool) | number: '1.5-5'}})
                         </span>
@@ -28,6 +28,7 @@
   <br>
   <app-earning
     [isIncognitoModeOn]="isIncognitoModeOn"
+    [showReducedByFees]="showReducedByFees"
     [out]="poolOut"
     [pool]="poolBtc"
     [fiat]="fiat"
