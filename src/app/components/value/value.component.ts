@@ -1170,7 +1170,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.nvda > 0 || this.wallet?.nvdaInNvdaPool > 0 ) {
       this.holdingValues.push(new HoldingValue('NVDA',
-        this.wallet?.nvda + this.wallet?.nvdaInNvdaPool, this.getAmznValueUsd()));
+        this.wallet?.nvda + this.wallet?.nvdaInNvdaPool, this.getNvdaValueUsd()));
     }
 
     if (this.wallet?.coin > 0 || this.wallet?.coinInCoinPool > 0 ) {

@@ -5,7 +5,7 @@ export const REGISTER = gql`
     $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float, $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float,  $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float,
-    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,    $vnq: Float,    $urth: Float,
+    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $arkk: Float, $baba: Float,    $vnq: Float,    $urth: Float,
     $amzn: Float, $nvda: Float, $coin: Float, $eem: Float, $msft: Float, $nflx: Float, $fb: Float, $voo: Float, $dis: Float, $mchi: Float, $mstr: Float, $intc: Float,
     $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
     $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float,   $pdbcusd: Float,
@@ -64,7 +64,7 @@ export const REGISTER = gql`
           gld: $gld
           gme: $gme
           googl: $googl
-          arkk: $ark
+          arkk: $arkk
           baba: $baba
           vnq: $vnq
           urth: $urth
@@ -211,7 +211,7 @@ export const UPDATE = gql`
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
     $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float,
     $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float
-    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $ark: Float, $baba: Float,  $vnq: Float,    $urth: Float,
+    $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $arkk: Float, $baba: Float,  $vnq: Float,    $urth: Float,
     $tlt: Float, $pdbc: Float, $amzn: Float, $nvda: Float, $coin: Float, $eem: Float, $msft: Float, $nflx: Float, $fb: Float, $voo: Float, $dis: Float, $mchi: Float, $mstr: Float, $intc: Float,
     $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
     $arkkusd: Float, $babausd: Float,  $vnqusd: Float,  $urthusd: Float,  $tltusd: Float, $pdbcusd: Float,
@@ -271,7 +271,7 @@ export const UPDATE = gql`
           gld: $gld
           gme: $gme
           googl: $googl
-          arkk: $ark
+          arkk: $arkk
           baba: $baba
           vnq: $vnq
           urth: $urth
@@ -421,9 +421,9 @@ export const LOGIN = gql`
        wallet {
         dfi, dfiInStaking, btc, eth, doge, usdt, usdc, usd, ltc, bch, tsla,
         qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc, amzn, nvda, coin, eem,
-        msft, nflx, fb, voo,
+        msft, nflx, fb, voo, dis, mchi, mstr, intc,
         spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
-        amznusd,nvdausd,coinusd, eemusd, msftusd, nflxusd, fbusd, voousd,
+        amznusd,nvdausd,coinusd, eemusd, msftusd, nflxusd, fbusd, voousd, disusd, mchiusd, mstrusd, intcusd,
         btcdfi, ethdfi,dogedfi, ltcdfi, usdtdfi, usdcdfi, usddfi, bchdfi, tslausd,
         btcInBtcPool, dfiInBtcPool,ethInEthPool,dfiInEthPool,usdtInUsdtPool,usdcInUsdcPool
         dfiInUsdtPool, dfiInUsdcPool, ltcInLtcPool,dfiInLtcPool,dogeInDogePool,dfiInDogePool,
@@ -435,7 +435,8 @@ export const LOGIN = gql`
         amznInAmznPool, usdInAmznPool,nvdaInNvdaPool,usdInNvdaPool,
         coinInCoinPool,usdInCoinPool,eemInEemPool, usdInEemPool,
         msftInMsftPool, usdInMsftPool,nflxInNflxPool,usdInNflxPool,
-        fbInFbPool,usdInFbPool,vooInVooPool, usdInVooPool
+        fbInFbPool,usdInFbPool,vooInVooPool, usdInVooPool,
+        disInDisPool, usdInDisPool, mchiInMchiPool, usdInMchiPool, mstrInMstrPool, usdInMstrPool, intcInIntcPool, usdInIntcPool
       }
     }
   }
