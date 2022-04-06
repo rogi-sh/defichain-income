@@ -53,6 +53,7 @@ export class EarningComponent implements OnInit {
   getOutcomeOfPoolPerMonthDfi(out: Outcome, cost: number): number {
     return out?.dfiPerMonth * (1-cost);
   }
+  // TODO: also add methods for reduced dfi per h, day, week, year
 
   getOutcomeOfPoolPerYearUsd(out: Outcome): number {
     return out?.dfiPerYear * this.pool?.priceB;
