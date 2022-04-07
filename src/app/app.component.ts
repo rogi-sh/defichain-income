@@ -57,8 +57,6 @@ import {
 } from '@interfaces/Data';
 import { environment } from '@environments/environment';
 import { filter, forkJoin } from 'rxjs';
-// @ts-ignore
-import Timer = NodeJS.Timer;
 import { TranslateService } from '@ngx-translate/core';
 import { IncomeComponent } from '@components/income/income.component';
 import { ValueComponent } from '@components/value/value.component';
@@ -383,10 +381,10 @@ export class AppComponent implements OnInit {
 
   poolIncomeList = new Array<PoolIncomeValue>();
 
-  sCountdown = 300;
-  sCountdownShow = 300;
+  sCountdown = 600;
+  sCountdownShow = 600;
   sCountdownKey = 'sCountdownKey';
-  timer: Timer;
+  timer: number;
 
   autoLoadData = true;
   autoLoadDataKey = 'autoLoadDataKey';
@@ -886,6 +884,10 @@ export class AppComponent implements OnInit {
       this.correlationDays = JSON.parse(localStorage.getItem(this.correlationDaysKey));
     }
 
+  }
+
+  reload(): void {
+    window.location.reload();
   }
 
   /*
@@ -1449,8 +1451,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem(this.sCountdownKey, JSON.stringify(this.sCountdown));
     this.sCountdownShow = this.sCountdown;
     this.countdown?.restart();
-    clearInterval(this.timer[Symbol.toPrimitive]);
-    clearInterval(this.timer[Symbol.toPrimitive]);
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       this.refresh();
     }, this.sCountdown * 1000);
@@ -1764,6 +1765,8 @@ export class AppComponent implements OnInit {
     this.berechneMNOut();
     this.berechnePoolOut();
     this.berechneAllOut();
+
+
     this.createIncomePools();
     this.dataService.setBtcUsd(this.poolBtc.priceA);
     this.dataService.setEthUsd(this.poolEth.priceA);

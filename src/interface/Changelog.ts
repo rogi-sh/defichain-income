@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.7 - 7.4.2022';
+    this.log.comment = 'Reload button reload the hole page';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.6 - 6.4.2022';
     this.log.comment = 'Fix new pools in manual inputs, fix nvda valueusd';
     this.logs.push(this.log);
