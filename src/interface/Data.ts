@@ -819,6 +819,7 @@ export class USD {
   cad: number;
   cny: number;
   sgd: number;
+  hkd: number;
 }
 
 export class Exchange {
@@ -843,6 +844,11 @@ export class UserHistoryItem {
 export class UserHistory {
   key: string;
   values: Array<UserHistoryItem>;
+}
+
+export class PriceHistory {
+  price: number;
+  dateTime: Date;
 }
 
 export class UserHistoryDelete {

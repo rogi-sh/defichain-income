@@ -500,6 +500,15 @@ export const HISTORY_USER = gql`
 }
 `;
 
+export const HISTORY_ORACLE = gql`
+  query ($token: String!, $date: Date) {
+  getOracleHistory(token: $token, date: $date) {
+    price
+    dateTime
+  }
+}
+`;
+
 export const UPDATE_NEWSLETTER = gql`
   mutation ($key: String!, $email: String!, $payingAddress: String) {
   updateUserNewsletter(

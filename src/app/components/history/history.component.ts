@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartOptions6 } from '@interfaces/Data';
+import { ChartOptions6, PriceHistory } from '@interfaces/Data';
 import { History, HistoryPrice, Pool } from '@interfaces/Dex';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HISTORY } from '@interfaces/Graphql';
+import { HISTORY, HISTORY_ORACLE } from '@interfaces/Graphql';
 import { Apollo } from 'apollo-angular';
 
 @Component({
@@ -26,6 +26,7 @@ export class HistoryComponent implements OnInit {
 
   history = new Array<History>();
   historyNumbers = new Array<HistoryPrice>();
+  historyOracleNumbers = new Array<PriceHistory>();
 
   curentStock = 'BTC';
 
@@ -36,6 +37,12 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHistory();
+    this.loadHistoryOracle();
+  }
+
+  loadAll(): void {
+    this.loadHistory();
+    this.loadHistoryOracle();
   }
 
   async loadHistory(): Promise<void> {
@@ -71,12 +78,37 @@ export class HistoryComponent implements OnInit {
     });
   }
 
+  async loadHistoryOracle(): Promise<void> {
+    this.apollo.query({
+      query: HISTORY_ORACLE,
+      variables: {
+       token: this.curentStock,
+        date: this.fromDate
+      }
+    }).subscribe((result: any) => {
+      if (result?.data?.getOracleHistory) {
+        this.historyOracleNumbers = result?.data?.getOracleHistory;
+        this.buildChartPrice();
+      } else {
+        console.log('No Date for History oracle');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   async buildChartPrice(): Promise<void> {
     this.chartOptions = {
       series: [
         {
-          name: 'Price',
-          data: this.getPrices()
+          name: 'Dex Price',
+          data: this.getPrices(),
+          color: '#00f700'
+        },
+        {
+          name: 'Oracle Price',
+          data: this.getOraclePrices(),
+          color: '#ff0000'
         }
       ],
       chart: {
@@ -97,7 +129,7 @@ export class HistoryComponent implements OnInit {
         width: 4,
         curve: 'smooth',
         dashArray: [0, 8, 5],
-        colors: ['#00f700']
+        colors: ['#00f700', '#ff0000']
       },
       title: {
         text: 'Pool Price - ' + this.curentStock,
@@ -136,7 +168,15 @@ export class HistoryComponent implements OnInit {
             title: {
               // tslint:disable-next-line:typedef
               formatter(val) {
-                return val + ' dUSD/USD';
+                return val + ' dUSD';
+              }
+            }
+          },
+          {
+            title: {
+              // tslint:disable-next-line:typedef
+              formatter(val) {
+                return val + ' USD';
               }
             }
           }
@@ -469,6 +509,28 @@ export class HistoryComponent implements OnInit {
     return prices;
   }
 
+  getOraclePrices(): Array<number> {
+    const prices = new Array<number>();
+    if (!this.historyOracleNumbers || this.historyOracleNumbers.length === 0) {
+      return prices;
+    }
+
+    this.historyNumbers.forEach(h => {
+      const price = this.historyOracleNumbers.find(
+        a => {
+          const aDate = new Date(a.dateTime);
+          const bDate = new Date(h.date);
+          return aDate.getDate() === bDate.getDate()
+          && aDate.getUTCHours() === bDate.getUTCHours();
+        }
+      )?.price;
+      const endPrice = price !== undefined ? price : prices[prices.length - 1];
+      prices.push(Math.round(endPrice * 100) / 100);
+    });
+
+    return prices;
+  }
+
   getReserves(): Array<number> {
     const reserves = new Array<number>();
     if (!this.historyNumbers || this.historyNumbers.length === 0) {
@@ -525,6 +587,7 @@ export class HistoryComponent implements OnInit {
     this.spinner.show('historySpinner');
     this.curentStock = newValue;
     this.computeNumbers(this.curentStock);
+    this.loadHistoryOracle();
     this.buildChartPrice();
     this.buildChartReserve();
     this.buildChartVolume();

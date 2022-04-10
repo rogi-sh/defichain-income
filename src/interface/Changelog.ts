@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.16.8 - 10.4.2022';
+    this.log.comment = 'Add oracle price history to price history chart in history view on defichain-income/history, HKD added as currency';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.7 - 7.4.2022';
     this.log.comment = 'Reload button reload the hole page';
     this.logs.push(this.log);

@@ -101,6 +101,8 @@ export class DataService {
       return this.getUsdCur().cny;
     } else if (fiat === 'SGD') {
       return this.getUsdCur().sgd;
+    } else if (fiat === 'HKD') {
+      return this.getUsdCur().hkd;
     } else if (fiat === 'BTC') {
       return this.getBtcUsd();
     } else if (fiat === 'ETH') {
