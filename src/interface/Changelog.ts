@@ -13,7 +13,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '8.16.9 - 11.4.2022';
-    this.log.comment = 'Lib Updates, api url changes ofr burn info';
+    this.log.comment = 'Lib Updates, api url changes of burn info';
     this.logs.push(this.log);
 
     this.log = new Log();
