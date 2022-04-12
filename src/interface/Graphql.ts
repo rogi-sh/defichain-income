@@ -4,7 +4,7 @@ export const REGISTER = gql`
   mutation ($addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],
     $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
-    $usdtdfi: Float, $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float,  $dfi: Float, $dfiInStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float,
+    $usdtdfi: Float, $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float,  $dfi: Float, $dfiInStaking: Float, $dfiInDfxStaking: Float, $btc: Float, $bch: Float, $eth: Float, $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float,
     $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $arkk: Float, $baba: Float,    $vnq: Float,    $urth: Float,
     $amzn: Float, $nvda: Float, $coin: Float, $eem: Float, $msft: Float, $nflx: Float, $fb: Float, $voo: Float, $dis: Float, $mchi: Float, $mstr: Float, $intc: Float,
     $tlt: Float, $pdbc: Float, $spyusd: Float,  $qqqusd: Float, $pltrusd: Float, $slvusd: Float, $aaplusd: Float,  $gldusd: Float,  $gmeusd: Float,   $googlusd: Float,
@@ -47,6 +47,7 @@ export const REGISTER = gql`
           tslausd: $tslausd
           dfi: $dfi
           dfiInStaking: $dfiInStaking
+          dfiInDfxStaking: $dfiInDfxStaking
           btc: $btc
           eth: $eth
           doge: $doge
@@ -182,7 +183,7 @@ export const REGISTER = gql`
       }
     )
     {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10, wallet {
-      dfi, dfiInStaking, btc, bch, eth, doge, usdt, usdc, usd, ltc, tsla,
+      dfi, dfiInStaking, dfiInDfxStaking, btc, bch, eth, doge, usdt, usdc, usd, ltc, tsla,
       qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc,
       amzn, nvda, coin, eem, msft, nflx, fb, voo, dis, mchi, mstr, intc,
       spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
@@ -209,7 +210,7 @@ export const UPDATE = gql`
   mutation ($key: String!, $addresses: [String], $addressesMasternodes: [String], $adressesMasternodesFreezer5: [String], $adressesMasternodesFreezer10: [String],
     $totalValue: Float, $totalValueIncomeDfi: Float, $totalValueIncomeUsd: Float,
     $btcdfi: Float, $ethdfi: Float, $dogedfi: Float, $ltcdfi: Float
-    $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $bch: Float, $btc: Float, $eth: Float,
+    $usdtdfi: Float,  $usdcdfi: Float, $usddfi: Float, $bchdfi: Float, $tslausd: Float, $dfi: Float, $dfiInStaking: Float, $dfiInDfxStaking: Float, $bch: Float, $btc: Float, $eth: Float,
     $doge: Float, $usdt: Float, $usdc: Float, $usd: Float, $ltc: Float, $tsla: Float
     $qqq: Float, $spy: Float, $pltr: Float, $slv: Float, $aapl: Float, $gld: Float, $gme: Float, $googl: Float,  $arkk: Float, $baba: Float,  $vnq: Float,    $urth: Float,
     $tlt: Float, $pdbc: Float, $amzn: Float, $nvda: Float, $coin: Float, $eem: Float, $msft: Float, $nflx: Float, $fb: Float, $voo: Float, $dis: Float, $mchi: Float, $mstr: Float, $intc: Float,
@@ -254,6 +255,7 @@ export const UPDATE = gql`
           tslausd: $tslausd
           dfi: $dfi
           dfiInStaking: $dfiInStaking
+          dfiInDfxStaking: $dfiInDfxStaking
           btc: $btc
           eth: $eth
           doge: $doge
@@ -389,7 +391,7 @@ export const UPDATE = gql`
       }
     )
     {id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10,  wallet {
-      dfi, dfiInStaking, btc,eth, doge, usdt, usdc, usd, ltc, bch, tsla,
+      dfi, dfiInStaking, dfiInDfxStaking, btc,eth, doge, usdt, usdc, usd, ltc, bch, tsla,
       qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc, amzn, nvda, coin, eem,
        msft, nflx, fb, voo, dis, mchi, mstr, intc,
       spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
@@ -419,7 +421,7 @@ export const LOGIN = gql`
       id, key, addresses, addressesMasternodes, adressesMasternodesFreezer5, adressesMasternodesFreezer10,
        newsletter {email, payingAddress, status, subscribed },
        wallet {
-        dfi, dfiInStaking, btc, eth, doge, usdt, usdc, usd, ltc, bch, tsla,
+        dfi, dfiInStaking, dfiInDfxStaking, btc, eth, doge, usdt, usdc, usd, ltc, bch, tsla,
         qqq, spy, pltr, slv, aapl, gld, gme, googl, arkk, baba, vnq, urth, tlt, pdbc, amzn, nvda, coin, eem,
         msft, nflx, fb, voo, dis, mchi, mstr, intc,
         spyusd, qqqusd, pltrusd, slvusd, aaplusd, gldusd, gmeusd,googlusd,arkkusd, babausd,vnqusd,urthusd,tltusd, pdbcusd,
@@ -506,6 +508,12 @@ export const HISTORY_ORACLE = gql`
     price
     dateTime
   }
+}
+`;
+
+export const DFX_STAKING = gql`
+  query ($addresses: [String]!) {
+  getDfxStakingAmounts(addresses: $addresses)
 }
 `;
 

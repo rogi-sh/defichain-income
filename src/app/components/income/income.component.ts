@@ -141,7 +141,13 @@ export class IncomeComponent implements OnInit, OnChanges {
   dfiInStaking!: number;
 
   @Input()
+  dfiInDfxStaking!: number;
+
+  @Input()
   stakingApy!: number;
+
+  @Input()
+  stakingDfxApy!: number;
 
   @Input()
   masternodesApr!: number;
@@ -415,7 +421,7 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getDfiCountStakingUsd(): number {
-    return this.dfiInStaking * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
   }
 
   getDfiCountMasternodesUsd(): number {

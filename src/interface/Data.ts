@@ -199,6 +199,7 @@ export interface WalletDto {
   dfi: number;
 
   dfiInStaking: number;
+  dfiInDfxStaking: number;
 
   btcdfi: number;
   ethdfi: number;
@@ -431,6 +432,7 @@ export class Wallet {
   dfiKey = 'dfiKey';
 
   dfiInStaking = 0;
+  dfiInDfxStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
 
   dfiInMasternodes = 0;

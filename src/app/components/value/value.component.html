@@ -45,7 +45,7 @@
           </div>
           <div *ngIf='dfiInStaking > 0' class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : dfiInStaking | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : dfiInStaking + dfiInDfxStaking | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400 dark:text-gray-300'
@@ -298,7 +298,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div *ngIf='dfiInStaking > 0'>
         <div *ngIf='dfiInStaking > 0'>DFI in Cake Staking</div>
         <div *ngIf='dfiInStaking > 0'>
           <div
@@ -306,6 +306,19 @@
             <div *ngIf='!isIncognitoModeOn'>{{dfiInStaking | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
                          [usdPrice]='dfiInStaking * poolBtc?.priceB'></app-price>
+            </div>
+            <div *ngIf='isIncognitoModeOn'>****</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf='dfiInDfxStaking > 0'>
+        <div *ngIf='dfiInDfxStaking > 0'>DFI in DFX Staking</div>
+        <div *ngIf='dfiInDfxStaking > 0'>
+          <div
+            class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
+            <div *ngIf='!isIncognitoModeOn'>{{dfiInDfxStaking | number: '1.1-1'}} ~
+              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                         [usdPrice]='dfiInDfxStaking * poolBtc?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>

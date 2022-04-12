@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.17.0 - 12.4.2022';
+    this.log.comment = 'DFX Staking Integration, just add your address and your staked DFI will be loaded automatically';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.16.9 - 11.4.2022';
     this.log.comment = 'Lib Updates, api url changes of burn info';
     this.logs.push(this.log);

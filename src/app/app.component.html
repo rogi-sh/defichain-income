@@ -306,6 +306,7 @@
           <option class="text-center" value="BTC">&#x20BF;</option>
           <option class="text-center" value="ETH">ETH</option>
           <option class="text-center" value="USD" selected>$</option>
+          <option class="text-center" value="DFI">DFI</option>
           <option class="text-center" value="EUR">€</option>
           <option class="text-center" value="GBP">£</option>
           <option class="text-center" value="CHF">CHF</option>
@@ -315,6 +316,7 @@
           <option class="text-center" value="CAD">C$</option>
           <option class="text-center" value="CNY">&#20803;</option>
           <option class="text-center" value="SGD">S$</option>
+          <option class="text-center" value="HKD">H$</option>
         </select>
 
         <div *ngIf="timestamp" class="dark:text-gray-400 text-xs -mb-2 mt-2">
@@ -492,7 +494,8 @@
                     [poolMchi]='poolMchi'
                     [poolMstr]='poolMstr'
                     [poolIntc]='poolIntc'
-                    [dfiInStaking]="dfiInStaking"
+                    [dfiInStaking]='dfiInStaking'
+                    [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"
                     [freezer5]="adressesMasternodesFreezer5"
@@ -587,7 +590,9 @@
                 [poolIntcOut]='poolIntcOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
+                [dfiInDfxStaking]='dfiInDfxStaking'
                 [stakingApy]="stakingApy"
+                [stakingDfxApy]='stakingDfx?.staking?.yield?.apy'
                 [masternodesApr]="stakingApyMN"
                 [masternodesCount]="adressesMasternodes?.length"
                 [masternodeOut]="poolMasternodeOut"
@@ -3972,7 +3977,9 @@
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
+                    [dfiInDfxStaking]='dfiInDfxStaking'
                     [stakingApy]="stakingApy"
+                    [stakingDfxApy]='stakingDfx?.staking?.yield?.apy'
                     [masternodesApr]="stakingApyMN"
                     [masternodesCount]="adressesMasternodes?.length"
                     [wallet]="wallet"
@@ -4056,6 +4063,7 @@
                     [poolMstr]='poolMstr'
                     [poolIntc]='poolIntc'
                     [dfiInStaking]="dfiInStaking"
+                    [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"
                     [adressBalances]="adressBalances"
                     [freezer5]="adressesMasternodesFreezer5"

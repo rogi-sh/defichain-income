@@ -28,6 +28,9 @@ export class ValueComponent implements OnInit, OnChanges {
   dfiInStaking!: number;
 
   @Input()
+  dfiInDfxStaking!: number;
+
+  @Input()
   fiat!: string;
 
   @Input()
@@ -703,8 +706,8 @@ export class ValueComponent implements OnInit, OnChanges {
   getAllValuesUsdPrice(): number {
     // All Crypto and Stock values
     const allCryptoAndStocks = this.getBtcValueUsd() + this.getEthValueUsd() + this.getUsdtValueUsd() + this.getUsdcValueUsd()
-      + this.getLtcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd() +  this.getDfiInVaultUsd()
-      + this.getTslaValueUsd() + this.getUsdValueUsd() + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd()
+      + this.getLtcValueUsd() + this.getDogeValueUsd() + this.getBchValueUsd() + this.getDfiValueUsd()  + this.getTslaValueUsd()
+      + this.getUsdValueUsd() + this.getSpyValueUsd() + this.getQqqValueUsd() + this.getPltrValueUsd()
       + this.getSlvValueUsd() + this.getAaplValueUsd() + this.getGldValueUsd() + this.getGmeValueUsd() + this.getGooglValueUsd()
       + this.getArkkValueUsd() + this.getBabaValueUsd() + this.getVnqValueUsd() + this.getUrthValueUsd() + this.getTltValueUsd()
       + this.getPdbcValueUsd() + this.getAmznValueUsd() + this.getNvdaValueUsd() + this.getCoinValueUsd() + this.getEemValueUsd()
@@ -868,7 +871,7 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet.dfiInUsdPool
-      + this.dfiInStaking + this.wallet.dfiInMasternodes + this.getCollateralCountVaults('DFI');
+      + this.dfiInStaking + this.dfiInDfxStaking + this.wallet.dfiInMasternodes + this.getCollateralCountVaults('DFI');
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -880,7 +883,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getStakingValueUsd(): number {
-    return this.dfiInStaking * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
   }
 
   getAnteilLMOfAllValue(): number {
