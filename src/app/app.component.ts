@@ -822,7 +822,12 @@ export class AppComponent implements OnInit {
     this.currentPage = pageTag;
     this.menu = false;
     localStorage.setItem(this.currentPageKey, this.currentPage);
-    this.location.replaceState(pageTag);
+    const url = this.router.url;
+    const includesAddress = url.includes('address/');
+    const includesAuthKey = url.includes('authKey/');
+    if (!includesAddress && !includesAuthKey) {
+      this.location.replaceState(pageTag);
+    }
   }
 
   loadAddressesAndDexData(): void {
@@ -1332,20 +1337,23 @@ export class AppComponent implements OnInit {
   }
 
   loadDataFromServerForOneAdress(): void {
-        this.loggedIn = true;
-        localStorage.setItem(this.loggedInKey, this.loggedInAuth);
+    this.loggedIn = true;
+    this.loggedInAuth = 'ADDRESS';
+    localStorage.setItem(this.loggedInKey, this.loggedInAuth);
 
-        this.addressesDto = new Array(this.oneTrackingAddress);
-        this.adresses = this.addressesDto.slice();
+    this.addressesDto = new Array(this.oneTrackingAddress);
+    this.adresses = this.addressesDto.slice();
 
-        this.loadAddressesAndDexData();
+    this.loadAddressesAndDexData();
 
-        this.handlePage('dashboard');
+    if (!this.currentPage) {
+      this.handlePage('dashboard');
+    }
 
-        this.successBackend = 'Data Loaded!';
-        setInterval(() => {
-          this.successBackend = null;
-        }, 5000);
+    this.successBackend = 'Data Loaded!';
+    setInterval(() => {
+      this.successBackend = null;
+    }, 5000);
 
   }
 

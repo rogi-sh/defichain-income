@@ -53,8 +53,8 @@ const appRoutes: Routes = [
   { path: 'newsletter', component: AppComponent },
   { path: 'info', component: AppComponent },
   { path: 'settings', component: AppComponent },
-  { path: '', component: AppComponent
-  }
+  { path: '', component: AppComponent},
+  { path: '**', component: AppComponent},
 ];
 
 @NgModule({

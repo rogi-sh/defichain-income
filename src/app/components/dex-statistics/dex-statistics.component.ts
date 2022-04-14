@@ -84,6 +84,8 @@ export class DexStatisticsComponent implements OnInit {
 
   oracleBlockBase = 1528800;
 
+  futureBlockBase = 1794240;
+
   octokit = new Octokit();
 
   milestones = new Array<Milestone>();
@@ -382,6 +384,17 @@ export class DexStatisticsComponent implements OnInit {
     const blocks = 120 - (this.rewards?.blockHeight - this.oracleBlockBase) % 120;
     const time = blocks * this.blockTimeUsed / 60;
     return String(blocks) + ' ~ ' + Math.round(time) + ' min';
+  }
+
+  getBlockToNextFutureSwap(): string {
+    if (!this.rewards || !this.blockTimeUsed) {
+      return '0';
+    }
+
+    const blocks = 20160 - (this.rewards?.blockHeight - this.futureBlockBase) % 20160;
+    const timeD = blocks * this.blockTimeUsed / 60 / 60 / 24;
+    const timeH = blocks * this.blockTimeUsed / 60 / 60;
+    return String(blocks) + ' ~ ' + Math.round(timeD) + 'd, ' + Math.round(timeH) + 'h' ;
   }
 
   getDexDFI(): number {
