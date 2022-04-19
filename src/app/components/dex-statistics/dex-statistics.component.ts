@@ -394,7 +394,7 @@ export class DexStatisticsComponent implements OnInit {
     const blocks = 20160 - (this.rewards?.blockHeight - this.futureBlockBase) % 20160;
     const timeD = blocks * this.blockTimeUsed / 60 / 60 / 24;
     const timeH = blocks * this.blockTimeUsed / 60 / 60;
-    return String(blocks) + ' ~ ' + Math.round(timeD) + 'd, ' + Math.round(timeH) + 'h' ;
+    return String(blocks) + ' ~ ' + Math.round(timeD) + 'd ~ ' + Math.round(timeH) + 'h' ;
   }
 
   getDexDFI(): number {
