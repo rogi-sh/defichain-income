@@ -1469,7 +1469,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.ltcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('LTC-DFI',
-        this.wallet?.ltcdfi, this.wallet?.ltc * this.getLpTokenValue(this.poolLtc)));
+        this.wallet?.ltcdfi, this.wallet?.ltcdfi * this.getLpTokenValue(this.poolLtc)));
     }
 
     if (this.wallet?.dogedfi > 0) {
@@ -1497,9 +1497,9 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.spyusd, this.wallet?.spyusd * this.getLpTokenValue(this.poolSpy)));
     }
 
-    if (this.wallet?.pltr > 0  ) {
+    if (this.wallet?.pltrusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('PLTR-DUSD',
-        this.wallet?.pltr, this.wallet?.pltrusd * this.getLpTokenValue(this.poolPltr)));
+        this.wallet?.pltrusd, this.wallet?.pltrusd * this.getLpTokenValue(this.poolPltr)));
     }
 
     if (this.wallet?.slvusd > 0 ) {
@@ -1534,12 +1534,12 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.babausd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('BABA-DUSD',
-        this.wallet?.babausd , this.wallet?.baba * this.getLpTokenValue(this.poolBaba)));
+        this.wallet?.babausd , this.wallet?.babausd * this.getLpTokenValue(this.poolBaba)));
     }
 
-    if (this.wallet?.vnq > 0 ) {
+    if (this.wallet?.vnqusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('VNQ-DUSD',
-        this.wallet?.vnq , this.wallet?.vnq * this.getLpTokenValue(this.poolVnq)));
+        this.wallet?.vnqusd , this.wallet?.vnqusd * this.getLpTokenValue(this.poolVnq)));
     }
 
     if (this.wallet?.urthusd > 0 ) {

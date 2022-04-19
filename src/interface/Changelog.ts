@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.17.2 - 19.4.2022';
+    this.log.comment = 'Fix LP Tokens value in Value View';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.17.1 - 14.4.2022';
     this.log.comment = 'Blocks to future swap in dex view, fix url with address and authKey';
     this.logs.push(this.log);
