@@ -219,6 +219,34 @@ export class DexStatisticsComponent implements OnInit {
     return this.cryptoPools;
   }
 
+  getVolumeAllPools(): number {
+    let volume = 0;
+    this.poolPairsOcean.data.forEach(p => volume = volume + p.volume.h24);
+    return Math.round(volume * 100) / 100;
+  }
+
+  getCommissionsAprAllPools(): number {
+    let com = 0;
+    this.poolPairsOcean.data.forEach(p => com = com + p.apr.commission * 100);
+    return Math.round(com * 100) / 100;
+  }
+
+  getRewardsAprAllPools(): number {
+    let com = 0;
+    this.poolPairsOcean.data.forEach(p => com = com + p.apr.reward * 100);
+    return Math.round(com * 100) / 100;
+  }
+
+  getAvgCommissionsAllPools(): number {
+    return Math.round(this.getCommissionsAprAllPools() / this.poolPairsOcean?.data?.length * 100) / 100;
+  }
+
+  getRatioCommissionToRewardAllPools(): number {
+   const com = this.getCommissionsAprAllPools();
+   const reward = this.getRewardsAprAllPools();
+   return Math.round(com / reward * 1000) / 1000;
+  }
+
   sortOn(column: string): void {
     if (column === 'premium') {
       this.sortColumn = 'premium';

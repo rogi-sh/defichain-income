@@ -56,6 +56,43 @@
     </div>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
+        <h1 class='text-lg font-bold'>Volume DEX</h1>
+        <a class='text-pink-500 hover:underline mb-4'
+           target='_blank'
+           href='https://defiscan.live/dex'>Defiscan</a>
+        <br>
+        <div class='my-2 dark:text-gray-100 grid grid-cols-2 gap-2'>
+          <div>
+            <p class='mr-2 mb-3'>24H Volume Total:</p>
+            <p class='mr-2 mb-3'>Total Commission APR of all Pools:</p>
+            <p class='mr-2 mb-3'> ⌀ Commission APR:</p>
+            <p class='mr-2'>Comissions to Reward Ratio:</p>
+          </div>
+          <div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4  py-1 mb-3 cursor-pointer text-center'>
+              <app-price [fiat]='fiat' [usdPrice]='getVolumeAllPools()'></app-price>
+            </div>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-6 cursor-pointer text-center'>
+              {{getCommissionsAprAllPools()}} %
+            </div>
+            <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-5 cursor-pointer text-center'>
+              {{getAvgCommissionsAllPools()}} %
+            </div>
+            <br>
+            <div
+              class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4  py-1 cursor-pointer text-center'>
+              {{getRatioCommissionToRewardAllPools()}} %
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
+      <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>DFI Locked</h1>
         <a class='text-pink-500 hover:underline mb-4'
            target='_blank'
@@ -259,9 +296,9 @@
       <br>
       <div class='my-2 dark:text-gray-100 grid grid-cols-3 gap-2'>
         <div>
-          <p class='mr-2 mb-10'> Total:</p>
-          <p class='mr-2 mb-9'> 5Y Freezer:</p>
-          <p class='mr-2 mb-8'> 10Y Freezer:</p>
+          <p class='mr-2 mb-8'> Total:</p>
+          <p class='mr-2 mb-4'> 5Y Freezer:</p>
+          <p class='mr-2 mb-4'> 10Y Freezer:</p>
           <p class='mr-2 mb-4'> Regular MN:</p>
         </div>
         <div class='col-span-2'>

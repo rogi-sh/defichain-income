@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.19.0 - 22.4.2022';
+    this.log.comment = 'Add new Card for Volume and Commissions statistics in dex view';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '8.18.0 - 22.4.2022';
     this.log.comment = 'Next Stock price added to dex view table';
     this.logs.push(this.log);
