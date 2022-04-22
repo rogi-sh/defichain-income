@@ -225,9 +225,9 @@ export class DexStatisticsComponent implements OnInit {
       if (!this.asc) {
         this.stocksPools.sort((a, b) =>
           (this.isDUSDPool(b) ? this.getArb(this.priceDFICEX, b?.totalLiquidityUsd / 2 / +b?.reserveB) :
-            this.getArb(this.getStockPrice(b?.symbol), b?.totalLiquidityUsd / 2 / +b?.reserveA))
+            this.getArb(this.getStockPrice(b?.tokenASymbol), b?.totalLiquidityUsd / 2 / +b?.reserveA))
           - (this.isDUSDPool(a) ? this.getArb(this.priceDFICEX, a?.totalLiquidityUsd / 2 / +a?.reserveB) :
-            this.getArb(this.getStockPrice(a?.symbol), a?.totalLiquidityUsd / 2 / +a?.reserveA)));
+            this.getArb(this.getStockPrice(a?.tokenASymbol), a?.totalLiquidityUsd / 2 / +a?.reserveA)));
 
         this.cryptoPools.sort((a, b) =>
           (this.getArb(b?.priceA, b?.totalLiquidityUsd / 2 / +b?.reserveA))
@@ -235,9 +235,9 @@ export class DexStatisticsComponent implements OnInit {
       } else {
         this.stocksPools.sort((a, b) =>
           (this.isDUSDPool(a) ? this.getArb(this.priceDFICEX, a.totalLiquidityUsd / 2 / +a?.reserveB) :
-            this.getArb(this.getStockPrice(a?.symbol), a?.totalLiquidityUsd / 2 / +a?.reserveA))
+            this.getArb(this.getStockPrice(a?.tokenASymbol), a?.totalLiquidityUsd / 2 / +a?.reserveA))
           - (this.isDUSDPool(b) ? this.getArb(this.priceDFICEX, b?.totalLiquidityUsd / 2 / +b?.reserveB) :
-            this.getArb(this.getStockPrice(b?.symbol), b?.totalLiquidityUsd / 2 / +b?.reserveA)));
+            this.getArb(this.getStockPrice(b?.tokenASymbol), b?.totalLiquidityUsd / 2 / +b?.reserveA)));
 
         this.cryptoPools.sort((a, b) =>
           (this.getArb(a?.priceA, a?.totalLiquidityUsd / 2 / +a?.reserveA))
@@ -471,7 +471,17 @@ export class DexStatisticsComponent implements OnInit {
       return 0;
     }
 
-    return +this.oraclePrices.data.find(o => o.id === key.replace('DUSD', 'USD'))?.price.aggregated.amount;
+    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice.active.amount;
+    return Math.round(price * 100) / 100;
+  }
+
+  getStockPriceNext(key: string): number {
+
+    if (!this.oraclePrices || this.oraclePrices.data.length === 0) {
+      return 0;
+    }
+    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice.next.amount;
+    return Math.round(price * 100) / 100;
   }
 
   calculateBlockTime(): void {

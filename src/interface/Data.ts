@@ -66,16 +66,23 @@ export class Burn {
 }
 
 export class StockOracle {
-  id: string;
-  price: OrcalePrice;
+  activePrice: OraclePriceActive;
+  token: OrcalePrice;
 }
 
 export class OrcalePrice {
-    aggregated: OraclePriceAggregated;
+    id: string;
+    symbol: string;
+    symbolKey: string;
 }
 
-export class OraclePriceAggregated {
-  amount: string;
+export class OraclePriceActive {
+  active: OraclePriceActiveAmount;
+  next: OraclePriceActiveAmount;
+}
+
+export class OraclePriceActiveAmount {
+    amount: string;
 }
 
 export class Balance {

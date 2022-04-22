@@ -3423,17 +3423,17 @@ export class AppComponent implements OnInit {
 
   berechneStakingOut(): void {
     this.stakingOut.dfiPerDay = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 365) - this.dfiInStaking)
-    + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr / 356);
+    + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 356);
     this.stakingOut.dfiPerHour = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 8760) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr / 8760);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 8760);
     this.stakingOut.dfiPerMin = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 525600) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr / 525600);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 525600);
     this.stakingOut.dfiPerWeek = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 52.1429) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr / 52.1429);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 52.1429);
     this.stakingOut.dfiPerMonth = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr / 12);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 12);
     this.stakingOut.dfiPerYear = (this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx.staking.yield.apr);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr);
   }
 
   berechneAllOut(): void {

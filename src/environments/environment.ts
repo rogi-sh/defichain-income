@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   prices: 'https://supernode.saiive.live/api/v1/mainnet/DFI/coin-price/USD',
-  oraclePrices: 'https://ocean.defichain.com/v0/mainnet/prices?size=1000',
+  oraclePrices: 'https://ocean.defichain.com/v0/mainnet/loans/tokens?size=1000',
   listpoolpairs: 'https://supernode.saiive.live/api/v1/mainnet/DFI/listpoolpairs?size=200',
   poolpairsocean: 'https://ocean.defichain.com/v0/mainnet/poolpairs?size=200',
   health: 'https://supernode.saiive.live/api/v1/health',
@@ -19,7 +19,7 @@ export const environment = {
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
-  version: '8.17.2',
+  version: '8.18.0',
   graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

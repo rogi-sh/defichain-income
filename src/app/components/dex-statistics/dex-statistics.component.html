@@ -671,14 +671,14 @@
           <td class='text-right text-sm p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.priceA '></app-price>
             <br>
-            <app-price [fiat]='fiat' [usdPrice]='getStockPrice("DFI-USD")'></app-price>
+            <app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
           </td>
           <td class='text-right text-sm p-2'>
             <span
               class='font-bold'><span>{{getArb(cryptoPool?.priceA, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %</span>
             <br>
             <span
-              class='font-bold'><span>{{getArb(getStockPrice("DFI-USD"), cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
+              class='font-bold'><span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
@@ -744,9 +744,16 @@
             <app-price *ngIf='isDUSDPool(stockPool)' [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
           </td>
           <td class='text-right text-sm p-2'>
-            <span *ngIf='!isDUSDPool(stockPool)'>
-              <app-price [fiat]='fiat' [usdPrice]='getStockPrice(stockPool?.symbol)'></app-price>
+            <span *ngIf='!isDUSDPool(stockPool)' >
+              <app-price class='font-bold' [fiat]='fiat' [usdPrice]='getStockPrice(stockPool?.tokenASymbol)'></app-price>
             <br>
+              <span class='text-xs'>
+                 Next:
+                <app-price [fiat]='fiat' [usdPrice]='getStockPriceNext(stockPool?.tokenASymbol)'></app-price>
+                <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) < getStockPrice(stockPool?.tokenASymbol)'>&#8600;</span>
+                <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) === getStockPrice(stockPool?.tokenASymbol)'>&#8594;</span>
+              <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) > getStockPrice(stockPool?.tokenASymbol)'>&#8599;</span>
+            </span>
             </span>
             <span *ngIf='isDUSDPool(stockPool)'>
               <app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
@@ -754,7 +761,7 @@
           </td>
           <td class='text-right text-sm p-2'>
             <span *ngIf='!isDUSDPool(stockPool)' class='font-bold'>
-              <span>{{getArb(getStockPrice(stockPool?.symbol), stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA)}}</span> %
+              <span>{{getArb(getStockPrice(stockPool?.tokenASymbol), stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA)}}</span> %
               <br>
             </span>
 
