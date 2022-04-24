@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Correlation, History, HistoryPrice, IncomeStatistics, Pool, Stats } from '@interfaces/Dex';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Correlation, History, IncomeStatistics, Pool, Stats, StockLongName } from '@interfaces/Dex';
 import {Apollo} from 'apollo-angular';
 import { CORRELATION, EXCHANGE, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
@@ -8,6 +8,7 @@ import { DfxStaking, OceanStats } from '@interfaces/Staking';
 import { Dex } from '@services/dex.service';
 import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
+
 
 @Component({
   selector: 'app-dex-statistics',
@@ -77,6 +78,9 @@ export class DexStatisticsComponent implements OnInit {
 
   @Input()
   stakingDfx: DfxStaking;
+
+  @Output()
+  callDefiView = new EventEmitter<string>();
 
   corr: Correlation;
 
@@ -177,6 +181,10 @@ export class DexStatisticsComponent implements OnInit {
     return this.releasesNode[0];
   }
 
+  routeToDfiView(asset: string): void {
+    this.callDefiView.emit(asset);
+  }
+
   loadAppRelease(): void {
     this.octokit.rest.repos.listReleases({
       owner: 'DeFiCh',
@@ -213,6 +221,116 @@ export class DexStatisticsComponent implements OnInit {
 
   getStockPools(): Array<Pool> {
     return this.stocksPools;
+  }
+
+  getLongName(name: string): StockLongName {
+    switch (name) {
+      case 'BTC-DFI': {
+        return new StockLongName('Bitcoin', 'Bitcoin');
+      }
+      case 'ETH-DFI': {
+        return new StockLongName('Ethereum', 'Ethereum');
+      }
+      case 'LTC-DFI': {
+        return new StockLongName('Litecoin', 'Litecoin');
+      }
+      case 'BCH-DFI': {
+        return new StockLongName('BitcoinCash', 'BitcoinCash');
+      }
+      case 'DOGE-DFI': {
+        return new StockLongName('Doge', 'Doge');
+      }
+      case 'USDT-DFI': {
+        return new StockLongName('Tether $', '');
+      }
+      case 'USDC-DFI': {
+        return new StockLongName('USD Coin', '');
+      }
+      case 'SPY-DUSD': {
+        return new StockLongName('SPDR S&P 500 Trust', 'SPY');
+      }
+      case 'TSLA-DUSD': {
+        return new StockLongName('Tesla Inc.', 'TSLA');
+      }
+      case 'QQQ-DUSD': {
+        return new StockLongName('Invesco QQQ ETF (Nasdaq-100 Index)', 'QQQ');
+      }
+      case 'GME-DUSD': {
+        return new StockLongName('Gamestop', 'GME');
+      }
+      case 'NVDA-DUSD': {
+        return new StockLongName('Nvidia Corp.', 'NVDA');
+      }
+      case 'AAPL-DUSD': {
+        return new StockLongName('Apple Inc.', 'AAPL');
+      }
+      case 'FB-DUSD': {
+        return new StockLongName('Meta Platforms, Inc.', 'FB');
+      }
+      case 'MSFT-DUSD': {
+        return new StockLongName('Microsoft Inc.', 'MSFT');
+      }
+      case 'BABA-DUSD': {
+        return new StockLongName('Alibaba Group Holding Limited', 'BABA');
+      }
+      case 'MSTR-DUSD': {
+        return new StockLongName('MicroStrategy Incorporated', 'MSTR');
+      }
+      case 'COIN-DUSD': {
+        return new StockLongName('Coinbase Global, Inc.', 'COIN');
+      }
+      case 'NFLX-DUSD': {
+        return new StockLongName('Netflix, Inc.', 'NFLX');
+      }
+      case 'ARKK-DUSD': {
+        return new StockLongName('ARK Innovation ETF', 'ARKK');
+      }
+      case 'PLTR-DUSD': {
+        return new StockLongName('Palantir Technologies Inc.', 'PLTR');
+      }
+      case 'PLTR-DUSD': {
+        return new StockLongName('Palantir Technologies Inc.', 'PLTR');
+      }
+      case 'GOOGL-DUSD': {
+        return new StockLongName('Alphabet Inc.', 'GOOGL');
+      }
+      case 'GLD-DUSD': {
+        return new StockLongName('SPDR Gold Shares', 'GLD');
+      }
+      case 'INTC-DUSD': {
+        return new StockLongName('Intel Corporation', 'INTC');
+      }
+      case 'TLT-DUSD': {
+        return new StockLongName('iShares 20+ Year Treasury Bond ETF', 'TLT');
+      }
+      case 'SLV-DUSD': {
+        return new StockLongName('iShares Silver Trust', 'SLV');
+      }
+      case 'PDBC-DUSD': {
+        return new StockLongName('Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF', 'PDBC');
+      }
+      case 'MCHI-DUSD': {
+        return new StockLongName('iShares MSCI China ETF', 'MCHI');
+      }
+      case 'EEM-DUSD': {
+        return new StockLongName('iShares MSCI Emerging Markets ETF', 'EEM');
+      }
+      case 'VOO-DUSD': {
+        return new StockLongName('Vanguard 500 Index Fund', 'VOO');
+      }
+      case 'DIS-DUSD': {
+        return new StockLongName('The Walt Disney Company', 'DIS');
+      }
+      case 'URTH-DUSD': {
+        return new StockLongName('iShares MSCI World ETF', 'URTH');
+      }
+      case 'VNQ-DUSD': {
+        return new StockLongName('Vanguard Real Estate Index Fund', 'VNQ');
+      }
+      default: {
+        return new StockLongName('', '');
+      }
+    }
   }
 
   getCryptoPools(): Array<Pool> {

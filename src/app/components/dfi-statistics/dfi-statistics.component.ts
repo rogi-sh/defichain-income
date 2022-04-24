@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {MatomoTracker} from 'ngx-matomo-v9';
+import { ActivatedRoute } from '@angular/router'
+import { Pool } from '@interfaces/Dex'
 declare const TradingView: any;
 
 @Component({
@@ -7,13 +9,19 @@ declare const TradingView: any;
   templateUrl: './dfi-statistics.component.html',
 })
 export class DfiStatisticsComponent implements OnInit, AfterViewInit {
+
   @Input()
-  lang: string
+  lang: string;
+
+  // Stocks
+  @Input()
+  stocksPools!: Array<Pool>;
 
   coinpaprikaCurrency = 'USD';
   coinpaprikaCurrencyKey = 'coinpaprikaCurrencyKey';
 
-  constructor(private matomoTracker: MatomoTracker) { }
+  constructor(private matomoTracker: MatomoTracker,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     if (localStorage.getItem(this.coinpaprikaCurrencyKey) !== null) {
@@ -63,6 +71,24 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
       case 'DOGE':  {
         return 'BITTREX:DFIUSDT/BITTREX:DOGEUSDT';
       }
+      case 'Bitcoin': {
+        return 'BINANCE:BTCUSDT';
+      }
+      case 'Ethereum': {
+        return 'BINANCE:ETHUSDT';
+      }
+      case 'Litecoin': {
+        return 'BINANCE:LTCUSDT';
+      }
+      case 'BitcoinCash': {
+        return 'BINANCE:BCHUSDT';
+      }
+      case 'Doge': {
+        return 'BINANCE:DOGEUSDT';
+      }
+      default:  {
+        return this.coinpaprikaCurrency;
+      }
     }
   }
 
@@ -73,9 +99,9 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
   getSelectedLanguage(): string {
     switch(this.lang) {
       case 'de':
-        return 'de_DE'
+        return 'de_DE';
       default:
-        return this.lang
+        return this.lang;
     }
   }
 

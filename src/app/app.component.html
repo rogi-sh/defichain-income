@@ -783,14 +783,15 @@
                                     [correlationDays]='correlationDays'
                                     [priceDFICEX]='priceDFICEX'
                                     [poolPairsOcean]='poolPairsOcean'
-                                    [stakingDfx]='stakingDfx'>
+                                    [stakingDfx]='stakingDfx'
+                                    (callDefiView)="callDefiView($event)">
                 </app-dex-statistics>
               </div>
             </div>
             <div *ngSwitchCase="'defi'" class="max-h-screen h-full contents min-h-screen">
               <h1 class="text-3xl mb-4 text-pink-500">DFI TradingView Charts</h1>
 
-              <app-dfi-statistics [lang]="lang"></app-dfi-statistics>
+              <app-dfi-statistics [lang]="lang" [stocksPools]='stocksPools'></app-dfi-statistics>
             </div>
             <div *ngSwitchCase="'calculator'">
               <app-calculator-page
@@ -4096,6 +4097,7 @@
                     [priceDFICEX]='priceDFICEX'
                     [poolPairsOcean]='poolPairsOcean'
                                       [stakingDfx]='stakingDfx'
+                                      (callDefiView)="callDefiView($event)"
                   >
                   </app-dex-statistics>
                 </div>

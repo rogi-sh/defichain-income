@@ -818,6 +818,11 @@ export class AppComponent implements OnInit {
     };
   }
 
+  callDefiView($event): void {
+    localStorage.setItem('coinpaprikaCurrencyKey', $event);
+    this.handlePage('defi');
+  }
+
   handlePage(pageTag: string): void {
     this.currentPage = pageTag;
     this.menu = false;

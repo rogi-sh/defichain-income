@@ -74,6 +74,17 @@ export interface Pool {
   id: string;
   symbol: string;
   volume24h: number;
+
+}
+
+export class StockLongName {
+  longName: string;
+  tradeViewCode: string;
+
+  constructor(longName: string, tradeViewCode: string) {
+    this.longName = longName;
+    this.tradeViewCode = tradeViewCode;
+  }
 }
 
 export class Stats {
