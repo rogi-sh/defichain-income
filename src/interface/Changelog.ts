@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.20.1 - 27.4.2022';
+    this.log.comment = 'Missing AMZN full name of stocks and crypto in dex view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.20.0 - 24.4.2022';
     this.log.comment = 'Add full name of stocks and crypto in dex view with link to the chart (clickable)';
     this.logs.push(this.log);

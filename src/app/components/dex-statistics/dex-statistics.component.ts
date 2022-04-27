@@ -288,8 +288,8 @@ export class DexStatisticsComponent implements OnInit {
       case 'PLTR-DUSD': {
         return new StockLongName('Palantir Technologies Inc.', 'PLTR');
       }
-      case 'PLTR-DUSD': {
-        return new StockLongName('Palantir Technologies Inc.', 'PLTR');
+      case 'AMZN-DUSD': {
+        return new StockLongName('Amazon.com Inc.', 'AMZN');
       }
       case 'GOOGL-DUSD': {
         return new StockLongName('Alphabet Inc.', 'GOOGL');
