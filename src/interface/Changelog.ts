@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.21.0 - 1.5.2022';
+    this.log.comment = 'Add new pools PYPL, BRKB, KO and PG';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.20.1 - 27.4.2022';
     this.log.comment = 'Missing AMZN full name of stocks and crypto in dex view';
     this.logs.push(this.log);

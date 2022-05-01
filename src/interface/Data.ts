@@ -248,6 +248,11 @@ export interface WalletDto {
   mstrusd: number;
   intcusd: number;
 
+  pyplusd: number;
+  brkbusd: number;
+  kousd: number;
+  pgusd: number;
+
   // User Infos
   // BTC Pool
   btcInBtcPool: number;
@@ -424,6 +429,25 @@ export interface WalletDto {
   intc: number;
   usdInIntcPool: number;
 
+  // PYPL Pool
+  pyplInPyplPool: number;
+  pypl: number;
+  usdInPyplPool: number;
+
+  // BRKB Pool
+  brkbInBrkbPool: number;
+  brkb: number;
+  usdInBrkbPool: number;
+
+  // KO Pool
+  koInKoPool: number;
+  ko: number;
+  usdInKoPool: number;
+
+  // PG Pool
+  pgInPgPool: number;
+  pg: number;
+  usdInPgPool: number;
 }
 
 export class Newsletter {
@@ -483,6 +507,11 @@ export class Wallet {
   mchiusd = 0;
   mstrusd = 0;
   intcusd = 0;
+
+  pyplusd = 0;
+  brkbusd = 0;
+  kousd = 0;
+  pgusd = 0;
 
   // User Infos
   // BTC Pool
@@ -764,6 +793,38 @@ export class Wallet {
   intcKey = 'intcKey';
   usdInIntcPoolKey = 'usdInIntcPoolKey';
   usdInIntcPool = 0;
+
+  // PYPL Pool
+  pyplInPyplPool = 0;
+  pyplInPyplPoolKey = 'pyplInPyplPoolKey';
+  pypl = 0;
+  pyplKey = 'pyplKey';
+  usdInPyplPoolKey = 'usdInPyplPoolKey';
+  usdInPyplPool = 0;
+
+  // BRKB Pool
+  brkbInBrkbPool = 0;
+  brkbInBrkbPoolKey = 'brkbInBrkbPoolKey';
+  brkb = 0;
+  brkbKey = 'brkbKey';
+  usdInBrkbPoolKey = 'usdInBrkbPoolKey';
+  usdInBrkbPool = 0;
+
+  // KO Pool
+  koInKoPool = 0;
+  koInKoPoolKey = 'koInKoPoolKey';
+  ko = 0;
+  koKey = 'koKey';
+  usdInKoPoolKey = 'usdInKoPoolKey';
+  usdInKoPool = 0;
+
+  // PG Pool
+  pgInPgPool = 0;
+  pgInPgPoolKey = 'pgInPgPoolKey';
+  pg = 0;
+  pgKey = 'pgKey';
+  usdInPgPoolKey = 'usdInPgPoolKey';
+  usdInPgPool = 0;
 
 }
 

@@ -494,6 +494,10 @@
                     [poolMchi]='poolMchi'
                     [poolMstr]='poolMstr'
                     [poolIntc]='poolIntc'
+                    [poolBrkb]='poolBrkb'
+                    [poolPypl]='poolPypl'
+                    [poolKo]='poolKo'
+                    [poolPg]='poolPg'
                     [dfiInStaking]='dfiInStaking'
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"
@@ -588,6 +592,10 @@
                 [poolMchiOut]='poolMchiOut'
                 [poolMsrtOut]='poolMstrOut'
                 [poolIntcOut]='poolIntcOut'
+                [poolBrkbOut]='poolBrkbOut'
+                [poolPyplOut]='poolPyplOut'
+                [poolKoOut]='poolKoOut'
+                [poolPgOut]='poolPgOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [dfiInDfxStaking]='dfiInDfxStaking'
@@ -632,6 +640,10 @@
                 [getAnteilIntcPoolAnGesamtLM]='getAnteilIntcPoolAnGesamtLM()'
                 [getAnteilMchiPoolAnGesamtLM]='getAnteilMchiPoolAnGesamtLM()'
                 [getAnteilMstrPoolAnGesamtLM]='getAnteilMstrPoolAnGesamtLM()'
+                [getAnteilPyplPoolAnGesamtLM]='getAnteilPyplPoolAnGesamtLM()'
+                [getAnteilBrkbPoolAnGesamtLM]='getAnteilBrkbPoolAnGesamtLM()'
+                [getAnteilKoPoolAnGesamtLM]='getAnteilKoPoolAnGesamtLM()'
+                [getAnteilPgPoolAnGesamtLM]='getAnteilPgPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -739,6 +751,10 @@
                   [poolMstr]='poolMstr'
                   [poolMchi]='poolMchi'
                   [poolDis]='poolDis'
+                  [poolBrkb]='poolBrkb'
+                  [poolPypl]='poolPypl'
+                  [poolKo]='poolKo'
+                  [poolPg]='poolPg'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -834,6 +850,10 @@
                 [poolMstr]='poolMstr'
                 [poolMchi]='poolMchi'
                 [poolDis]='poolDis'
+                [poolPg]='poolPg'
+                [poolKo]='poolKo'
+                [poolBrkb]='poolBrkb'
+                [poolPypl]='poolPypl'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -870,6 +890,10 @@
                 [dfiProBlockIntc]='dfiProBlockIntc'
                 [dfiProBlockMchi]='dfiProBlockMchi'
                 [dfiProBlockMstr]='dfiProBlockMstr'
+                [dfiProBlockBrkb]='dfiProBlockBrkb'
+                [dfiProBlockKo]='dfiProBlockKo'
+                [dfiProBlockPg]='dfiProBlockPg'
+                [dfiProBlockPypl]='dfiProBlockPypl'
               ></app-calculator-page>
             </div>
             <div *ngSwitchCase="'info'">
@@ -1754,10 +1778,10 @@
                                 [(ngModel)]='wallet.dis'
                                 (ngModelChange)='onChangeDisWallet()'
                                 type='number'
-                                id='onChangeVooWallet'
+                                id='onChangeDisWallet'
                                 class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
                               >
-                              <label for='onChangeVooWallet'
+                              <label for='onChangeDisWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 DIS
                               </label>
@@ -1774,10 +1798,10 @@
                                 [(ngModel)]='wallet.mchi'
                                 (ngModelChange)='onChangeMchiWallet()'
                                 type='number'
-                                id='onChangeVooWallet'
+                                id='onChangeMchiWallet'
                                 class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
                               >
-                              <label for='onChangeVooWallet'
+                              <label for='onChangeMchiWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 MCHI
                               </label>
@@ -1794,10 +1818,10 @@
                                 [(ngModel)]='wallet.mstr'
                                 (ngModelChange)='onChangeMstrWallet()'
                                 type='number'
-                                id='onChangeVooWallet'
+                                id='onChangeMstrWallet'
                                 class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
                               >
-                              <label for='onChangeVooWallet'
+                              <label for='onChangeMstrWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 MSTR
                               </label>
@@ -1814,12 +1838,92 @@
                                 [(ngModel)]='wallet.intc'
                                 (ngModelChange)='onChangeIntcWallet()'
                                 type='number'
-                                id='onChangeVooWallet'
+                                id='onChangeIntcWallet'
                                 class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
                               >
-                              <label for='onChangeVooWallet'
+                              <label for='onChangeIntcWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 INTC
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.pypl === null || wallet.pypl === undefined  ? 'empty' : ''"
+                              title='PYPL'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.pypl'
+                                (ngModelChange)='onChangePyplWallet()'
+                                type='number'
+                                id='onChangePyplWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangePyplWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                PYPL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.brkb === null || wallet.brkb === undefined  ? 'empty' : ''"
+                              title='BRK.B'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.brkb'
+                                (ngModelChange)='onChangeBrkbWallet()'
+                                type='number'
+                                id='onChangeBrkbWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeBrkbWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                BRK.B
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.ko === null || wallet.ko === undefined  ? 'empty' : ''"
+                              title='KO'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.ko'
+                                (ngModelChange)='onChangeKoWallet()'
+                                type='number'
+                                id='onChangeKoWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeKoWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                KO
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.pg === null || wallet.pg === undefined  ? 'empty' : ''"
+                              title='KO'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.pg'
+                                (ngModelChange)='onChangePgWallet()'
+                                type='number'
+                                id='onChangePgWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangePgWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                PG
                               </label>
                             </div>
                           </div>
@@ -3338,6 +3442,166 @@
                               </label>
                             </div>
                           </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pyplInPyplPool === null || wallet.pyplInPyplPool === undefined  ? 'empty' : ''"
+                              title="PYPL"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pyplInPyplPool"
+                                (ngModelChange)="onChangePyplPyplPool()"
+                                type="number"
+                                id="onChangePyplPyplPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePyplPyplPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PYPL
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInPyplPool === null || wallet.usdInPyplPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInPyplPool"
+                                (ngModelChange)="onChangeUsdPyplPool()"
+                                type="number"
+                                id="onChangeUsdPyplPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdPyplPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.brkbInBrkbPool === null || wallet.brkbInBrkbPool === undefined  ? 'empty' : ''"
+                              title="BRK.B"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.brkbInBrkbPool"
+                                (ngModelChange)="onChangeBrkbBrkbPool()"
+                                type="number"
+                                id="onChangeBrkbBrkbPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeBrkbBrkbPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                BRK.B
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInBrkbPool === null || wallet.usdInBrkbPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInBrkbPool"
+                                (ngModelChange)="onChangeUsdBrkbPool()"
+                                type="number"
+                                id="onChangeUsdBrkbPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdBrkbPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.koInKoPool === null || wallet.koInKoPool === undefined  ? 'empty' : ''"
+                              title="KO"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.koInKoPool"
+                                (ngModelChange)="onChangeKoKoPool()"
+                                type="number"
+                                id="onChangeKoKoPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeKoKoPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                KO
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInKoPool === null || wallet.usdInKoPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInKoPool"
+                                (ngModelChange)="onChangeUsdKoPool()"
+                                type="number"
+                                id="onChangeUsdKoPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdKoPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.pgInPgPool === null || wallet.pgInPgPool === undefined  ? 'empty' : ''"
+                              title="PG"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.pgInPgPool"
+                                (ngModelChange)="onChangePgPgPool()"
+                                type="number"
+                                id="onChangePgPgPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangePgPgPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                PG
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInPgPool === null || wallet.usdInPgPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInPgPool"
+                                (ngModelChange)="onChangeUsdPgPool()"
+                                type="number"
+                                id="onChangeUsdPgPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdPgPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -3803,6 +4067,18 @@
                                   <div *ngIf="getAddressBalance(a)?.intcToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     INTC: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.intcToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pyplToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PYPL: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pyplToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.brkbToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BRK.B: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.brkbToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.koToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    KO: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.koToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pgToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PG: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pgToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -3908,6 +4184,18 @@
                                   <div *ngIf="getAddressBalance(a)?.intcusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     INTCUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.intcusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pyplusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PYPLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pyplusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.brkbusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    BRK.BUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.brkbusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.kousdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    KOUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.kousdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.pgusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PGUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pgusdToken }}</div>
                                 </div>
                               </div>
 
@@ -3975,6 +4263,10 @@
                     [poolMchiOut]='poolMchiOut'
                     [poolMsrtOut]='poolMstrOut'
                     [poolIntcOut]='poolIntcOut'
+                    [poolBrkbOut]='poolBrkbOut'
+                    [poolPyplOut]='poolPyplOut'
+                    [poolKoOut]='poolKoOut'
+                    [poolPgOut]='poolPgOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4019,6 +4311,10 @@
                     [getAnteilIntcPoolAnGesamtLM]='getAnteilIntcPoolAnGesamtLM()'
                     [getAnteilMchiPoolAnGesamtLM]='getAnteilMchiPoolAnGesamtLM()'
                     [getAnteilMstrPoolAnGesamtLM]='getAnteilMstrPoolAnGesamtLM()'
+                    [getAnteilPyplPoolAnGesamtLM]='getAnteilPyplPoolAnGesamtLM()'
+                    [getAnteilBrkbPoolAnGesamtLM]='getAnteilBrkbPoolAnGesamtLM()'
+                    [getAnteilKoPoolAnGesamtLM]='getAnteilKoPoolAnGesamtLM()'
+                    [getAnteilPgPoolAnGesamtLM]='getAnteilPgPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>
@@ -4063,6 +4359,10 @@
                     [poolMchi]='poolMchi'
                     [poolMstr]='poolMstr'
                     [poolIntc]='poolIntc'
+                    [poolBrkb]='poolBrkb'
+                    [poolPypl]='poolPypl'
+                    [poolKo]='poolKo'
+                    [poolPg]='poolPg'
                     [dfiInStaking]="dfiInStaking"
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"

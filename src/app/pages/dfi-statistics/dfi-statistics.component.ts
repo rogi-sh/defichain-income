@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {MatomoTracker} from 'ngx-matomo-v9';
-import { ActivatedRoute } from '@angular/router'
-import { Pool } from '@interfaces/Dex'
+import { ActivatedRoute } from '@angular/router';
+import { Pool } from '@interfaces/Dex';
 declare const TradingView: any;
 
 @Component({
@@ -97,7 +97,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
   }
 
   getSelectedLanguage(): string {
-    switch(this.lang) {
+    switch (this.lang) {
       case 'de':
         return 'de_DE';
       default:

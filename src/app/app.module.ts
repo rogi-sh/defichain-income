@@ -14,13 +14,9 @@ import { MatomoModule } from 'ngx-matomo-v9';
 import { GraphQLModule } from './graphql.module';
 import { ApyCalculatorComponent } from '@components/apy-calculator/apy-calculator.component';
 import { ChangelogComponent } from '@components/changelog/changelog.component';
-import { DexStatisticsComponent } from '@components/dex-statistics/dex-statistics.component';
-import { DfiStatisticsComponent } from '@components/dfi-statistics/dfi-statistics.component';
 import { EarningComponent } from '@components/earning/earning.component';
-import { IncomeComponent } from '@components/income/income.component';
 import { LmTargetCalculatorComponent } from '@components/lm-target-calculator/lm-target-calculator.component';
 import { StakingTargetCalculatorComponent } from '@components/staking-target-calculator/staking-target-calculator.component';
-import { ValueComponent } from '@components/value/value.component';
 import { IconComponent } from '@components/icon/icon.component';
 import { CalculatorComponent } from '@pages/calculator/calculator.component';
 import { InfoComponent } from '@pages/info/info.component';
@@ -33,11 +29,15 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
 import { RouterModule, Routes } from '@angular/router';
-import { HistoryComponent } from '@components/history/history.component';
 import { NewsletterComponent } from '@pages/newsletter/newsletter.component';
 import { ApolloModule } from 'apollo-angular';
 import { PoolIncomeComponent } from '@components/pool-income/pool-income.component';
 import { HistoryModalComponent } from '@components/history-modal/history-modal.component';
+import { DfiStatisticsComponent } from '@pages/dfi-statistics/dfi-statistics.component';
+import { HistoryComponent } from '@pages/history/history.component';
+import { ValueComponent } from '@pages/value/value.component';
+import { DexStatisticsComponent } from '@pages/dex-statistics/dex-statistics.component';
+import { IncomeComponent } from '@pages/income/income.component';
 
 const appRoutes: Routes = [
   { path: 'address/:address', component: AppComponent },

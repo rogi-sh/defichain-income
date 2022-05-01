@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pool} from '../../../interface/Dex';
+import {Pool} from '@interfaces/Dex';
 
 @Component({
   selector: 'app-lm-target-calculator',
@@ -114,6 +114,18 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolIntc!: Pool;
 
   @Input()
+  poolPypl!: Pool;
+
+  @Input()
+  poolBrkb!: Pool;
+
+  @Input()
+  poolKo!: Pool;
+
+  @Input()
+  poolPg!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -217,6 +229,18 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockIntc;
+
+  @Input()
+  dfiProBlockPypl;
+
+  @Input()
+  dfiProBlockBrkb;
+
+  @Input()
+  dfiProBlockKo;
+
+  @Input()
+  dfiProBlockPg;
 
   @Input()
   blocktimeInS;
@@ -397,7 +421,20 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'INTC') {
       pool = this.poolIntc;
       dfiPerBlock = this.dfiProBlockIntc;
-    } else {
+    } else if (this.poolLmCalculationTargetReturn === 'PYPL') {
+      pool = this.poolPypl;
+      dfiPerBlock = this.dfiProBlockPypl;
+    } else if (this.poolLmCalculationTargetReturn === 'BRK.B') {
+      pool = this.poolBrkb;
+      dfiPerBlock = this.dfiProBlockBrkb;
+    } else if (this.poolLmCalculationTargetReturn === 'KO') {
+      pool = this.poolKo;
+      dfiPerBlock = this.dfiProBlockKo;
+    } else if (this.poolLmCalculationTargetReturn === 'PG') {
+      pool = this.poolPg;
+      dfiPerBlock = this.dfiProBlockPg;
+    }
+    else {
       pool = this.poolUsdc;
       dfiPerBlock = this.dfiProBlockUsdc;
 

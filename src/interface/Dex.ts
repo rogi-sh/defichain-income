@@ -24,6 +24,7 @@ export interface DexPoolPair {
   '44': Pool;
   '45': Pool;
   '40': Pool;
+
 }
 
 export interface Prices {
@@ -160,6 +161,11 @@ export class AddressBalance {
   mstrToken: number;
   intcToken: number;
 
+  pyplToken: number;
+  brkbToken: number;
+  koToken: number;
+  pgToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -199,6 +205,11 @@ export class AddressBalance {
   mchiusdToken: number;
   mstrusdToken: number;
   intcusdToken: number;
+
+  pyplusdToken: number;
+  brkbusdToken: number;
+  kousdToken: number;
+  pgusdToken: number;
 
 }
 
@@ -280,6 +291,14 @@ export class PoolMchiOut extends Outcome {}
 export class PoolMstrOut extends Outcome {}
 
 export class PoolIntcOut extends Outcome {}
+
+export class PoolPyplOut extends Outcome {}
+
+export class PoolBrkbOut extends Outcome {}
+
+export class PoolKoOut extends Outcome {}
+
+export class PoolPgOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

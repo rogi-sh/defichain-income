@@ -327,6 +327,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'VNQ-DUSD': {
         return new StockLongName('Vanguard Real Estate Index Fund', 'VNQ');
       }
+      case 'PYPL-DUSD': {
+        return new StockLongName('PayPal Holdings, Inc.', 'PYPL');
+      }
+      case 'BRK.B-DUSD': {
+        return new StockLongName('Berkshire Hathaway Inc. New', 'BRK.B');
+      }
+      case 'KO-DUSD': {
+        return new StockLongName('The Coca-Cola Company', 'KO');
+      }
+      case 'PG-DUSD': {
+        return new StockLongName('The Procter & Gamble Company', 'PG');
+      }
       default: {
         return new StockLongName('', '');
       }

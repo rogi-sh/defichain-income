@@ -394,7 +394,30 @@
               </span>
               INTC
             </span>
-
+              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pyplInPyplPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilPyplPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              PYPL
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.brkbInBrkbPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilBrkbPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              BRK.B
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.koInKoPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilKoPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              KO
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.pgInPgPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilPgPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              PG
+            </span>
           </span>
         </div>
 
