@@ -619,6 +619,10 @@ export class DexStatisticsComponent implements OnInit {
     return Math.round(dex / cex  * 1000 - 1000) / 10;
   }
 
+  getRound3(num: number): number {
+    return Math.round((num) * 1000) / 1000;
+  }
+
   isDUSDPool(pool: Pool): boolean {
     return pool?.symbol === 'DUSD-DFI';
   }
