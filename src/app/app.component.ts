@@ -182,7 +182,7 @@ export class AppComponent implements OnInit {
   fiatKey = 'fiatKey';
   detailsKey = 'detailsKey';
 
-  priceDFICEX: number;
+  priceDFICEX = 0;
 
   pools: Array<Pool>;
   oceanStats: OceanStats;
@@ -468,6 +468,15 @@ export class AppComponent implements OnInit {
 
   isLangSet(lang: string): boolean {
     return this.lang === lang;
+  }
+
+  getArb(cex: number, dex: number): number {
+    // round 1 digit
+    return Math.round(dex / cex  * 1000 - 1000) / 10;
+  }
+
+  getRound2(num: number): number {
+    return Math.round((num) * 100) / 100;
   }
 
   async ngOnInit(): Promise<void> {
