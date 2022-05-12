@@ -10,7 +10,7 @@
         dUSD
         {{!poolUsd ? 0: getRound2((100 + getArb(priceDFICEX, poolUsd?.totalLiquidityUsd / 2 / poolUsd?.reserveB) * -1 ) / 100)}} $ /
         DEX
-        <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+        <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> /
         CEX
         <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
         /
@@ -88,7 +88,7 @@
           dUSD
           {{!poolUsd ? 0: getRound2((100 + getArb(priceDFICEX, poolUsd?.totalLiquidityUsd / 2 / poolUsd?.reserveB) * -1 ) / 100)}} $ /
           DEX
-          <app-price [fiat]="fiat" [usdPrice]="poolBtc?.priceB"></app-price> /
+           <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> /
           CEX
           <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           /
