@@ -21,7 +21,7 @@
     <option [selected]="coinpaprikaCurrency === 'BitcoinCash'" value='BitcoinCash'>BCH</option>
     <option [selected]="coinpaprikaCurrency === 'Doge'" value='Doge'>DOGE</option>
 
-    <option *ngFor='let stock of stocksPools'
+    <option *ngFor='let stock of getToken()'
             [selected]="coinpaprikaCurrency === stock.tokenASymbol"
             [value]="stock.tokenASymbol">
             {{stock.tokenASymbol}}

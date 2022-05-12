@@ -38,6 +38,10 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
     this.generateChart();
   }
 
+  getToken(): Array<Pool> {
+    return this.stocksPools.filter(a => a.tokenASymbol !== 'DUSD');
+  }
+
   getPair(): string {
     switch (this.coinpaprikaCurrency) {
 
