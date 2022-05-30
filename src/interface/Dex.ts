@@ -166,6 +166,11 @@ export class AddressBalance {
   koToken: number;
   pgToken: number;
 
+  sapToken: number;
+  uraToken: number;
+  csToken: number;
+  gsgToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -210,6 +215,11 @@ export class AddressBalance {
   brkbusdToken: number;
   kousdToken: number;
   pgusdToken: number;
+
+  sapusdToken: number;
+  urausdToken: number;
+  csusdToken: number;
+  gsgusdToken: number;
 
 }
 
@@ -299,6 +309,14 @@ export class PoolBrkbOut extends Outcome {}
 export class PoolKoOut extends Outcome {}
 
 export class PoolPgOut extends Outcome {}
+
+export class PoolSapOut extends Outcome {}
+
+export class PoolGsgOut extends Outcome {}
+
+export class PoolUraOut extends Outcome {}
+
+export class PoolCsOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

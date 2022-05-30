@@ -126,6 +126,18 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolPg!: Pool;
 
   @Input()
+  poolSap!: Pool;
+
+  @Input()
+  poolUra!: Pool;
+
+  @Input()
+  poolCs!: Pool;
+
+  @Input()
+  poolGsg!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -241,6 +253,18 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockPg;
+
+  @Input()
+  dfiProBlockSap;
+
+  @Input()
+  dfiProBlockUra;
+
+  @Input()
+  dfiProBlockCs;
+
+  @Input()
+  dfiProBlockGsg;
 
   @Input()
   blocktimeInS;
@@ -433,6 +457,18 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'PG') {
       pool = this.poolPg;
       dfiPerBlock = this.dfiProBlockPg;
+    } else if (this.poolLmCalculationTargetReturn === 'SAP') {
+      pool = this.poolSap;
+      dfiPerBlock = this.dfiProBlockSap;
+    } else if (this.poolLmCalculationTargetReturn === 'URA') {
+      pool = this.poolUra;
+      dfiPerBlock = this.dfiProBlockUra;
+    } else if (this.poolLmCalculationTargetReturn === 'CS') {
+      pool = this.poolCs;
+      dfiPerBlock = this.dfiProBlockCs;
+    } else if (this.poolLmCalculationTargetReturn === 'GSG') {
+      pool = this.poolGsg;
+      dfiPerBlock = this.dfiProBlockGsg;
     }
     else {
       pool = this.poolUsdc;

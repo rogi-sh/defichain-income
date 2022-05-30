@@ -1,14 +1,14 @@
 <span *ngIf="fiat === 'USD'">{{usdPrice | currency: "USD"}}</span>
-<span *ngIf="fiat === 'EUR'">{{usdPrice * usd?.eur | currency: "EUR"}}</span>
-<span *ngIf="fiat === 'CHF'">{{usdPrice * usd?.chf | currency: "CHF"}}</span>
-<span *ngIf="fiat === 'GBP'">{{usdPrice * usd?.gbp | currency: "GBP"}}</span>
-<span *ngIf="fiat === 'AUD'">{{usdPrice * usd?.aud | currency: "AUD"}}</span>
-<span *ngIf="fiat === 'RUB'">{{usdPrice * usd?.rub | currency: "RUB"}}</span>
-<span *ngIf="fiat === 'JPY'">{{usdPrice * usd?.jpy | currency: "JPY"}}</span>
-<span *ngIf="fiat === 'CAD'">{{usdPrice * usd?.cad | currency: "CAD"}}</span>
-<span *ngIf="fiat === 'CNY'">{{usdPrice * usd?.cny | currency: "CNY"}}</span>
-<span *ngIf="fiat === 'SGD'">{{usdPrice * usd?.sgd | currency: "SGD"}}</span>
-<span *ngIf="fiat === 'HKD'">{{usdPrice * usd?.hkd | currency: "HKD"}}</span>
+<span *ngIf="fiat === 'EUR'">{{usdPrice * service?.getUsdCur().eur | currency: "EUR"}}</span>
+<span *ngIf="fiat === 'CHF'">{{usdPrice * service?.getUsdCur()?.chf | currency: "CHF"}}</span>
+<span *ngIf="fiat === 'GBP'">{{usdPrice * service?.getUsdCur()?.gbp | currency: "GBP"}}</span>
+<span *ngIf="fiat === 'AUD'">{{usdPrice * service?.getUsdCur()?.aud | currency: "AUD"}}</span>
+<span *ngIf="fiat === 'RUB'">{{usdPrice * service?.getUsdCur()?.rub | currency: "RUB"}}</span>
+<span *ngIf="fiat === 'JPY'">{{usdPrice * service?.getUsdCur()?.jpy | currency: "JPY"}}</span>
+<span *ngIf="fiat === 'CAD'">{{usdPrice * service?.getUsdCur()?.cad | currency: "CAD"}}</span>
+<span *ngIf="fiat === 'CNY'">{{usdPrice * service?.getUsdCur()?.cny | currency: "CNY"}}</span>
+<span *ngIf="fiat === 'SGD'">{{usdPrice * service?.getUsdCur()?.sgd | currency: "SGD"}}</span>
+<span *ngIf="fiat === 'HKD'">{{usdPrice * service?.getUsdCur()?.hkd | currency: "HKD"}}</span>
 <span *ngIf="fiat === 'BTC'">{{usdPrice / service?.getBtcUsd()  | currency: "BTC" : 'symbol': '1.8-8' }}</span>
 <span *ngIf="fiat === 'ETH'">{{usdPrice / service?.getEthUsd()  | currency: "ETH" : 'symbol': '1.8-8' }}</span>
 <span *ngIf="fiat === 'DFI'">{{usdPrice / service?.getDfiUsd()  | currency: "DFI" : 'symbol': '1.2-2' }}</span>

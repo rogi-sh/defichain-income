@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.22.0 - 30.5.2022';
+    this.log.comment = 'Add new pools SAP, URA, CS and GSG';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.21.2 - 11.5.2022';
     this.log.comment = 'Add dUSD current price in dex view in $ to see more easy if the peg is correct';
     this.logs.push(this.log);

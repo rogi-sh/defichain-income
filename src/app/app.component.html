@@ -462,46 +462,8 @@
                 <div *ngIf="wallet && poolBtc">
                   <app-value
                     [isIncognitoModeOn]="isIncognitoModeOn"
-                    [poolBtc]="poolBtc"
                     [fiat]="fiat"
-                    [poolEth]="poolEth"
-                    [poolUsdt]="poolUsdt"
-                    [poolUsdc]="poolUsdc"
-                    [poolLtc]="poolLtc"
-                    [poolDoge]="poolDoge"
-                    [poolBch]="poolBch"
-                    [poolUsd]='poolUsd'
-                    [poolTsla]='poolTsla'
-                    [poolAapl]='poolAapl'
-                    [poolArkk]='poolArkk'
-                    [poolBaba]='poolBaba'
-                    [poolGld]='poolGld'
-                    [poolGme]='poolGme'
-                    [poolGoogl]='poolGoogl'
-                    [poolPdbc]='poolPdbc'
-                    [poolPltr]='poolPltr'
-                    [poolQqq]='poolQqq'
-                    [poolSlv]='poolSlv'
-                    [poolSpy]='poolSpy'
-                    [poolTlt]='poolTlt'
-                    [poolUrth]='poolUrth'
-                    [poolVnq]='poolVnq'
-                    [poolAmzn]='poolAmzn'
-                    [poolNvda]='poolNvda'
-                    [poolCoin]='poolCoin'
-                    [poolEem]='poolEem'
-                    [poolMsft]='poolMsft'
-                    [poolNflx]='poolNflx'
-                    [poolFb]='poolFb'
-                    [poolVoo]='poolVoo'
-                    [poolDis]='poolDis'
-                    [poolMchi]='poolMchi'
-                    [poolMstr]='poolMstr'
-                    [poolIntc]='poolIntc'
-                    [poolBrkb]='poolBrkb'
-                    [poolPypl]='poolPypl'
-                    [poolKo]='poolKo'
-                    [poolPg]='poolPg'
+                    [pools]='pools'
                     [dfiInStaking]='dfiInStaking'
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"
@@ -600,6 +562,10 @@
                 [poolPyplOut]='poolPyplOut'
                 [poolKoOut]='poolKoOut'
                 [poolPgOut]='poolPgOut'
+                [poolSapOut]='poolSapOut'
+                [poolUraOut]='poolUraOut'
+                [poolCsOut]='poolCsOut'
+                [poolGsgOut]='poolGsgOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [dfiInDfxStaking]='dfiInDfxStaking'
@@ -648,6 +614,10 @@
                 [getAnteilBrkbPoolAnGesamtLM]='getAnteilBrkbPoolAnGesamtLM()'
                 [getAnteilKoPoolAnGesamtLM]='getAnteilKoPoolAnGesamtLM()'
                 [getAnteilPgPoolAnGesamtLM]='getAnteilPgPoolAnGesamtLM()'
+                [getAnteilSapPoolAnGesamtLM]='getAnteilSapPoolAnGesamtLM()'
+                [getAnteilUraPoolAnGesamtLM]='getAnteilUraPoolAnGesamtLM()'
+                [getAnteilCsPoolAnGesamtLM]='getAnteilCsPoolAnGesamtLM()'
+                [getAnteilGsgPoolAnGesamtLM]='getAnteilGsgPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -759,6 +729,10 @@
                   [poolPypl]='poolPypl'
                   [poolKo]='poolKo'
                   [poolPg]='poolPg'
+                  [poolSap]='poolSap'
+                  [poolUra]='poolUra'
+                  [poolCs]='poolCs'
+                  [poolGsg]='poolGsg'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -858,6 +832,10 @@
                 [poolKo]='poolKo'
                 [poolBrkb]='poolBrkb'
                 [poolPypl]='poolPypl'
+                [poolSap]='poolSap'
+                [poolUra]='poolUra'
+                [poolCs]='poolCs'
+                [poolGsg]='poolGsg'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -1915,7 +1893,7 @@
                             <div
                               class='relative h-14 input-component'
                               [ngClass]="wallet.pg === null || wallet.pg === undefined  ? 'empty' : ''"
-                              title='KO'
+                              title='PG'
                             >
                               <input
                                 required
@@ -1928,6 +1906,86 @@
                               <label for='onChangePgWallet'
                                      class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
                                 PG
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.sap === null || wallet.sap === undefined  ? 'empty' : ''"
+                              title='SAP'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.sap'
+                                (ngModelChange)='onChangeSapWallet()'
+                                type='number'
+                                id='onChangeSapWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeSapWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                SAP
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.ura === null || wallet.ura === undefined  ? 'empty' : ''"
+                              title='URA'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.ura'
+                                (ngModelChange)='onChangeUraWallet()'
+                                type='number'
+                                id='onChangeUraWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeUraWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                URA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.cs === null || wallet.cs === undefined  ? 'empty' : ''"
+                              title='CS'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.cs'
+                                (ngModelChange)='onChangeCsWallet()'
+                                type='number'
+                                id='onChangeCsWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeCsWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                CS
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class='relative h-14 input-component'
+                              [ngClass]="wallet.gsg === null || wallet.gsg === undefined  ? 'empty' : ''"
+                              title='GSG'
+                            >
+                              <input
+                                required
+                                [(ngModel)]='wallet.gsg'
+                                (ngModelChange)='onChangeGsgWallet()'
+                                type='number'
+                                id='onChangeGsgWallet'
+                                class='h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none'
+                              >
+                              <label for='onChangeGsgWallet'
+                                     class='absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100'>
+                                GSG
                               </label>
                             </div>
                           </div>
@@ -3606,6 +3664,166 @@
                               </label>
                             </div>
                           </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.sapInSapPool === null || wallet.sapInSapPool === undefined  ? 'empty' : ''"
+                              title="SAP"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.sapInSapPool"
+                                (ngModelChange)="onChangeSapSapPool()"
+                                type="number"
+                                id="onChangeSapSapPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeSapSapPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                SAP
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInSapPool === null || wallet.usdInSapPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInSapPool"
+                                (ngModelChange)="onChangeUsdSapPool()"
+                                type="number"
+                                id="onChangeUsdSapPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdSapPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.uraInUraPool === null || wallet.uraInUraPool === undefined  ? 'empty' : ''"
+                              title="URA"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.uraInUraPool"
+                                (ngModelChange)="onChangeUraUraPool()"
+                                type="number"
+                                id="onChangeUraUraPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUraUraPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                URA
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInUraPool === null || wallet.usdInUraPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInUraPool"
+                                (ngModelChange)="onChangeUsdUraPool()"
+                                type="number"
+                                id="onChangeUsdUraPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdUraPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.csInCsPool === null || wallet.csInCsPool === undefined  ? 'empty' : ''"
+                              title="CS"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.csInCsPool"
+                                (ngModelChange)="onChangeCsCsPool()"
+                                type="number"
+                                id="onChangeCsCsPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeCsCsPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                CS
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInCsPool === null || wallet.usdInCsPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInCsPool"
+                                (ngModelChange)="onChangeUsdCsPool()"
+                                type="number"
+                                id="onChangeUsdCsPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdCsPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
+                          <div class="md:col-start-1">
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.gsgInGsgPool === null || wallet.gsgInGsgPool === undefined  ? 'empty' : ''"
+                              title="GSG"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.gsgInGsgPool"
+                                (ngModelChange)="onChangeGsgGsgPool()"
+                                type="number"
+                                id="onChangeGsgGsgPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeGsgGsgPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                GSG
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="relative h-14 input-component"
+                              [ngClass]="wallet.usdInGsgPool === null || wallet.usdInGsgPool === undefined  ? 'empty' : ''"
+                              title="USD"
+                            >
+                              <input
+                                required
+                                [(ngModel)]="wallet.usdInGsgPool"
+                                (ngModelChange)="onChangeUsdGsgPool()"
+                                type="number"
+                                id="onChangeUsdGsgPool"
+                                class="h-full w-full bg-gray-100 px-2 pt-2 transition-all rounded dark:bg-gray-700 dark:text-gray-100 dark:border-none"
+                              >
+                              <label for="onChangeUsdGsgPool"
+                                     class="absolute left-2 transition-all px-1 pointer-events-none dark:text-gray-100">
+                                DUSD
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -4083,6 +4301,18 @@
                                   <div *ngIf="getAddressBalance(a)?.pgToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     PG: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pgToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.sapToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SAP: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.sapToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.uraToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    URA: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.uraToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.csToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    CS: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.csToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gsgToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GSG: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsgToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -4200,6 +4430,18 @@
                                   <div *ngIf="getAddressBalance(a)?.pgusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     PGUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.pgusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.sapusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    SAPUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.sapusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.urausdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    URAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.urausdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.csusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    CSUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.csusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gsgusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GSGUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsgusdToken }}</div>
                                 </div>
                               </div>
 
@@ -4271,6 +4513,10 @@
                     [poolPyplOut]='poolPyplOut'
                     [poolKoOut]='poolKoOut'
                     [poolPgOut]='poolPgOut'
+                    [poolSapOut]='poolSapOut'
+                    [poolUraOut]='poolUraOut'
+                    [poolCsOut]='poolCsOut'
+                    [poolGsgOut]='poolGsgOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4319,6 +4565,10 @@
                     [getAnteilBrkbPoolAnGesamtLM]='getAnteilBrkbPoolAnGesamtLM()'
                     [getAnteilKoPoolAnGesamtLM]='getAnteilKoPoolAnGesamtLM()'
                     [getAnteilPgPoolAnGesamtLM]='getAnteilPgPoolAnGesamtLM()'
+                    [getAnteilSapPoolAnGesamtLM]='getAnteilSapPoolAnGesamtLM()'
+                    [getAnteilUraPoolAnGesamtLM]='getAnteilUraPoolAnGesamtLM()'
+                    [getAnteilCsPoolAnGesamtLM]='getAnteilCsPoolAnGesamtLM()'
+                    [getAnteilGsgPoolAnGesamtLM]='getAnteilGsgPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>
@@ -4327,46 +4577,8 @@
                   <app-value
                     [isIncognitoModeOn]="isIncognitoModeOn"
                     [hideHoldings]="true"
-                    [poolBtc]="poolBtc"
+                    [pools]='pools'
                     [fiat]="fiat"
-                    [poolEth]="poolEth"
-                    [poolUsdt]="poolUsdt"
-                    [poolUsdc]="poolUsdc"
-                    [poolUsd]="poolUsd"
-                    [poolTsla]="poolTsla"
-                    [poolLtc]="poolLtc"
-                    [poolDoge]="poolDoge"
-                    [poolBch]="poolBch"
-                    [poolAapl]='poolAapl'
-                    [poolArkk]='poolArkk'
-                    [poolBaba]='poolBaba'
-                    [poolGld]='poolGld'
-                    [poolGme]='poolGme'
-                    [poolGoogl]='poolGoogl'
-                    [poolPdbc]='poolPdbc'
-                    [poolPltr]='poolPltr'
-                    [poolQqq]='poolQqq'
-                    [poolSlv]='poolSlv'
-                    [poolSpy]='poolSpy'
-                    [poolTlt]='poolTlt'
-                    [poolUrth]='poolUrth'
-                    [poolVnq]='poolVnq'
-                    [poolAmzn]='poolAmzn'
-                    [poolNvda]='poolNvda'
-                    [poolCoin]='poolCoin'
-                    [poolEem]='poolEem'
-                    [poolMsft]='poolMsft'
-                    [poolNflx]='poolNflx'
-                    [poolFb]='poolFb'
-                    [poolVoo]='poolVoo'
-                    [poolDis]='poolDis'
-                    [poolMchi]='poolMchi'
-                    [poolMstr]='poolMstr'
-                    [poolIntc]='poolIntc'
-                    [poolBrkb]='poolBrkb'
-                    [poolPypl]='poolPypl'
-                    [poolKo]='poolKo'
-                    [poolPg]='poolPg'
                     [dfiInStaking]="dfiInStaking"
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [wallet]="wallet"

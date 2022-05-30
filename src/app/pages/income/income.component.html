@@ -418,6 +418,30 @@
               </span>
               PG
             </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.sapInSapPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilSapPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              SAP
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.uraInUraPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUraPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              URA
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.csInCsPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilCsPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              CS
+            </span>
+              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gsgInGsgPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGsgPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GSG
+            </span>
           </span>
         </div>
 

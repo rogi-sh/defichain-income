@@ -167,6 +167,18 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolPg!: Pool;
 
   @Input()
+  poolSap!: Pool;
+
+  @Input()
+  poolUra!: Pool;
+
+  @Input()
+  poolCs!: Pool;
+
+  @Input()
+  poolGsg!: Pool;
+
+  @Input()
   blockHeight!: number;
 
   @Input()
@@ -700,6 +712,10 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiBrkbPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBrkbPool) / dfiInLm;
     const dfiKoPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInKoPool) / dfiInLm;
     const dfiPgPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPgPool) / dfiInLm;
+    const dfiSapPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSapPool) / dfiInLm;
+    const dfiUraPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUraPool) / dfiInLm;
+    const dfiCsPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCsPool) / dfiInLm;
+    const dfiGsgPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsgPool) / dfiInLm;
 
     // Anteile berechnen je nachdem wie viel man in den Pools hat
     const average =
@@ -741,7 +757,11 @@ export class ForecastComponent implements OnInit, OnChanges {
         (dfiPyplPart * 100 * this.poolPypl?.apr) +
         (dfiBrkbPart * 100 * this.poolBrkb?.apr) +
         (dfiKoPart * 100 * this.poolKo?.apr) +
-        (dfiPgPart * 100 * this.poolPg?.apr)
+        (dfiPgPart * 100 * this.poolPg?.apr) +
+        (dfiSapPart * 100 * this.poolSap?.apr) +
+        (dfiUraPart * 100 * this.poolUra?.apr) +
+        (dfiCsPart * 100 * this.poolCs?.apr) +
+        (dfiGsgPart * 100 * this.poolGsg?.apr)
       ) / 100;
 
     return Math.round(average * 100) / 100;
@@ -777,7 +797,9 @@ export class ForecastComponent implements OnInit, OnChanges {
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDisPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMchiPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMstrPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInIntcPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPyplPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBrkbPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInKoPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPgPool);
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInKoPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPgPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSapPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUraPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCsPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsgPool);
   }
 
   getUsdPriceOfDfiInDFIUSDPool(): number {

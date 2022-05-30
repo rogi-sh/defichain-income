@@ -34,121 +34,7 @@ export class ValueComponent implements OnInit, OnChanges {
   fiat!: string;
 
   @Input()
-  poolBtc!: Pool;
-
-  @Input()
-  poolEth!: Pool;
-
-  @Input()
-  poolUsdt!: Pool;
-
-  @Input()
-  poolUsdc!: Pool;
-
-  @Input()
-  poolLtc!: Pool;
-
-  @Input()
-  poolDoge!: Pool;
-
-  @Input()
-  poolBch!: Pool;
-
-  @Input()
-  poolUsd!: Pool;
-
-  @Input()
-  poolTsla!: Pool;
-
-  @Input()
-  poolQqq!: Pool;
-
-  @Input()
-  poolSpy!: Pool;
-
-  @Input()
-  poolPltr!: Pool;
-
-  @Input()
-  poolSlv!: Pool;
-
-  @Input()
-  poolAapl!: Pool;
-
-  @Input()
-  poolGld!: Pool;
-
-  @Input()
-  poolGme!: Pool;
-
-  @Input()
-  poolGoogl!: Pool;
-
-  @Input()
-  poolArkk!: Pool;
-
-  @Input()
-  poolBaba!: Pool;
-
-  @Input()
-  poolVnq!: Pool;
-
-  @Input()
-  poolUrth!: Pool;
-
-  @Input()
-  poolTlt!: Pool;
-
-  @Input()
-  poolPdbc!: Pool;
-
-  @Input()
-  poolAmzn!: Pool;
-
-  @Input()
-  poolNvda!: Pool;
-
-  @Input()
-  poolCoin!: Pool;
-
-  @Input()
-  poolEem!: Pool;
-
-  @Input()
-  poolMsft!: Pool;
-
-  @Input()
-  poolNflx!: Pool;
-
-  @Input()
-  poolFb!: Pool;
-
-  @Input()
-  poolVoo!: Pool;
-
-  @Input()
-  poolDis!: Pool;
-
-  @Input()
-  poolMchi!: Pool;
-
-  @Input()
-  poolMstr!: Pool;
-
-  @Input()
-  poolIntc!: Pool;
-
-  @Input()
-  poolPypl!: Pool;
-
-  @Input()
-  poolBrkb!: Pool;
-
-  @Input()
-  poolKo!: Pool;
-
-  @Input()
-  poolPg!: Pool;
+  pools: Pool[];
 
   @Input()
   hideHoldings: boolean;
@@ -254,6 +140,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let msft = 0; let nflx = 0; let fb = 0; let voo = 0;
     let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
     let pypl = 0; let brkb = 0; let ko = 0; let pg = 0;
+    let sap = 0; let ura = 0; let cs = 0; let gsg = 0;
 
     vault?.loanAmounts?.forEach(loan => {
         if ('DUSD' === loan.symbolKey) {
@@ -320,12 +207,21 @@ export class ValueComponent implements OnInit, OnChanges {
           ko = +loan.amount * +loan.activePrice.active.amount;
         } else if ('PG' === loan.symbolKey) {
           pg = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('URA' === loan.symbolKey) {
+          ura = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('GSG' === loan.symbolKey) {
+          gsg = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('CS' === loan.symbolKey) {
+          cs = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('SAP' === loan.symbolKey) {
+          sap = +loan.amount * +loan.activePrice.active.amount;
         }
       });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
-      + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg;
+      + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg
+      + sap + ura + gsg + cs;
   }
 
   getNextLoanFromVaultUsd(vault: Vault): number {
@@ -336,6 +232,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let msft = 0; let nflx = 0; let fb = 0; let voo = 0;
     let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
     let pypl = 0; let brkb = 0; let ko = 0; let pg = 0;
+    let sap = 0; let ura = 0; let cs = 0; let gsg = 0;
 
     vault?.loanAmounts?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
@@ -402,12 +299,21 @@ export class ValueComponent implements OnInit, OnChanges {
         ko = +loan.amount * +loan.activePrice.next.amount;
       } else if ('PG' === loan.symbolKey) {
         pg = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('URA' === loan.symbolKey) {
+        ura = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('GSG' === loan.symbolKey) {
+        gsg = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('CS' === loan.symbolKey) {
+        cs = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('SAP' === loan.symbolKey) {
+        sap = +loan.amount * +loan.activePrice.next.amount;
       }
     });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
-      + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg;
+      + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg
+      + sap + ura + gsg + cs;
   }
 
   getRatioNext(vault: Vault): number {
@@ -466,8 +372,11 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return dfiInVaults * dfiActualPrice + btcInVaults * btcActualPrice + usdcInVaults * usdcActualPrice
-      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice + ethInVaults
-    * this.poolEth?.priceA;
+      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice + ethInVaults * this.getPool('ETH')?.priceA;
+  }
+
+  getPool(name: string): Pool {
+    return this.pools?.find(p => p.tokenASymbol === name);
   }
 
   getNextCollateralFromVaultUsd(vault: Vault): number {
@@ -580,40 +489,40 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getMasternodeDfiUsd(): number {
-    return (this.wallet?.dfiInMasternodes) * this.poolBtc?.priceB;
+    return (this.wallet?.dfiInMasternodes) * this.getPool('BTC')?.priceB;
   }
 
   getMasternodeDfiUsdWithoutFreeezer(): number {
-    return (this.wallet?.dfiInMasternodes - this.getFreezerDfiCount()) * this.poolBtc?.priceB;
+    return (this.wallet?.dfiInMasternodes - this.getFreezerDfiCount()) * this.getPool('BTC')?.priceB;
   }
 
   // CRYPTO IN WALLET AND POOLS
   getBtcValueUsd(): number {
-    return (this.wallet.btcInBtcPool + this.wallet.btc + this.getCollateralCountVaults('BTC')) * this.poolBtc?.priceA;
+    return (this.wallet.btcInBtcPool + this.wallet.btc + this.getCollateralCountVaults('BTC')) * this.getPool('BTC')?.priceA;
   }
 
   getEthValueUsd(): number {
-    return (this.wallet.ethInEthPool + this.wallet.eth + this.getCollateralCountVaults('ETH')) * this.poolEth?.priceA;
+    return (this.wallet.ethInEthPool + this.wallet.eth + this.getCollateralCountVaults('ETH')) * this.getPool('ETH')?.priceA;
   }
 
   getUsdtValueUsd(): number {
-    return (this.wallet.usdtInUsdtPool + this.wallet.usdt + this.getCollateralCountVaults('USDT')) * this.poolUsdt?.priceA;
+    return (this.wallet.usdtInUsdtPool + this.wallet.usdt + this.getCollateralCountVaults('USDT')) * this.getPool('USDT')?.priceA;
   }
 
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc + this.getCollateralCountVaults('USDC')) * this.poolUsdc?.priceA;
+    return (this.wallet.usdcInUsdcPool + this.wallet.usdc + this.getCollateralCountVaults('USDC')) * this.getPool('USDC')?.priceA;
   }
 
   getLtcValueUsd(): number {
-    return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.poolLtc?.priceA;
+    return (this.wallet.ltcInLtcPool + this.wallet.ltc) * this.getPool('LTC')?.priceA;
   }
 
   getDogeValueUsd(): number {
-    return (this.wallet.dogeInDogePool + this.wallet.doge) * this.poolDoge?.priceA;
+    return (this.wallet.dogeInDogePool + this.wallet.doge) * this.getPool('DOGE')?.priceA;
   }
 
   getBchValueUsd(): number {
-    return (this.wallet.bchInBchPool + this.wallet.bch) * this.poolBch?.priceA;
+    return (this.wallet.bchInBchPool + this.wallet.bch) * this.getPool('BCH')?.priceA;
   }
 
   isUsdInPortfolio(): boolean {
@@ -630,6 +539,8 @@ export class ValueComponent implements OnInit, OnChanges {
       || this.wallet?.usdInMchiPool > 0 || this.wallet?.usdInMstrPool > 0 || this.wallet?.usdInIntcPool > 0
       || this.wallet?.usdInPyplPool > 0
       || this.wallet?.usdInBrkbPool > 0 || this.wallet?.usdInKoPool > 0 || this.wallet?.usdInPgPool > 0
+      || this.wallet?.usdInSapPool > 0
+      || this.wallet?.usdInUraPool > 0 || this.wallet?.usdInCsPool > 0 || this.wallet?.usdInGsgPool > 0
       || this.getCollateralCountVaults('DUSD') > 0 ;
   }
 
@@ -642,106 +553,119 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.wallet?.usdInEemPool + this.wallet?.usdInMsftPool + this.wallet?.usdInNflxPool + this.wallet?.usdInFbPool
       + this.wallet?.usdInVooPool + this.wallet?.usdInDisPool + this.wallet?.usdInMchiPool + this.wallet?.usdInMstrPool
       + this.wallet?.usdInIntcPool + this.wallet?.usdInPyplPool + this.wallet?.usdInBrkbPool +  this.wallet?.usdInKoPool
+      + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInCsPool +  this.wallet?.usdInGsgPool
       + this.wallet?.usdInPgPool + this.getCollateralCountVaults('DUSD');
   }
 
   getUsdValueUsd(): number {
-    return this.getUsdCount() * this.getUsdPriceOfStockPools(this.poolUsd);
+    return this.getUsdCount() * this.getUsdPriceOfStockPools(this.getPool('DUSD'));
   }
 
   //  STOCKS VALUE IN WALLET AND POOLS
   getTslaValueUsd(): number {
-    return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.poolTsla);
+    return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.getPool('TSLA'));
   }
   getSpyValueUsd(): number {
-    return (this.wallet?.spyInSpyPool + this.wallet?.spy) * this.getUsdPriceOfStockPools(this.poolSpy);
+    return (this.wallet?.spyInSpyPool + this.wallet?.spy) * this.getUsdPriceOfStockPools(this.getPool('SPY'));
   }
   getQqqValueUsd(): number {
-    return (this.wallet?.qqqInQqqPool + this.wallet?.qqq) * this.getUsdPriceOfStockPools(this.poolQqq);
+    return (this.wallet?.qqqInQqqPool + this.wallet?.qqq) * this.getUsdPriceOfStockPools(this.getPool('QQQ'));
   }
   getPltrValueUsd(): number {
-    return (this.wallet?.pltrInPltrPool + this.wallet?.pltr) * this.getUsdPriceOfStockPools(this.poolPltr);
+    return (this.wallet?.pltrInPltrPool + this.wallet?.pltr) * this.getUsdPriceOfStockPools(this.getPool('PLTR'));
   }
   getSlvValueUsd(): number {
-    return (this.wallet?.slvInSlvPool + this.wallet?.slv) * this.getUsdPriceOfStockPools(this.poolSlv);
+    return (this.wallet?.slvInSlvPool + this.wallet?.slv) * this.getUsdPriceOfStockPools(this.getPool('SLV'));
   }
   getAaplValueUsd(): number {
-    return (this.wallet?.aaplInAaplPool + this.wallet?.aapl) * this.getUsdPriceOfStockPools(this.poolAapl);
+    return (this.wallet?.aaplInAaplPool + this.wallet?.aapl) * this.getUsdPriceOfStockPools(this.getPool('AAPL'));
   }
   getGldValueUsd(): number {
-    return (this.wallet?.gldInGldPool + this.wallet?.gld) * this.getUsdPriceOfStockPools(this.poolGld);
+    return (this.wallet?.gldInGldPool + this.wallet?.gld) * this.getUsdPriceOfStockPools(this.getPool('GLD'));
   }
   getGmeValueUsd(): number {
-    return (this.wallet?.gmeInGmePool + this.wallet?.gme) * this.getUsdPriceOfStockPools(this.poolGme);
+    return (this.wallet?.gmeInGmePool + this.wallet?.gme) * this.getUsdPriceOfStockPools(this.getPool('GME'));
   }
   getGooglValueUsd(): number {
-    return (this.wallet?.googlInGooglPool + this.wallet?.googl) * this.getUsdPriceOfStockPools(this.poolGoogl);
+    return (this.wallet?.googlInGooglPool + this.wallet?.googl) * this.getUsdPriceOfStockPools(this.getPool('GOOGL'));
   }
   getArkkValueUsd(): number {
-    return (this.wallet?.arkkInArkkPool + this.wallet?.arkk) * this.getUsdPriceOfStockPools(this.poolArkk);
+    return (this.wallet?.arkkInArkkPool + this.wallet?.arkk) * this.getUsdPriceOfStockPools(this.getPool('ARKK'));
   }
   getBabaValueUsd(): number {
-    return (this.wallet?.babaInBabaPool + this.wallet?.baba) * this.getUsdPriceOfStockPools(this.poolBaba);
+    return (this.wallet?.babaInBabaPool + this.wallet?.baba) * this.getUsdPriceOfStockPools(this.getPool('BABA'));
   }
   getVnqValueUsd(): number {
-    return (this.wallet?.vnqInVnqPool + this.wallet?.vnq) * this.getUsdPriceOfStockPools(this.poolVnq);
+    return (this.wallet?.vnqInVnqPool + this.wallet?.vnq) * this.getUsdPriceOfStockPools(this.getPool('VNQ'));
   }
   getUrthValueUsd(): number {
-    return (this.wallet?.urthInUrthPool + this.wallet?.urth) * this.getUsdPriceOfStockPools(this.poolUrth);
+    return (this.wallet?.urthInUrthPool + this.wallet?.urth) * this.getUsdPriceOfStockPools(this.getPool('URTH'));
   }
   getTltValueUsd(): number {
-    return (this.wallet?.tltInTltPool + this.wallet?.tlt) * this.getUsdPriceOfStockPools(this.poolTlt);
+    return (this.wallet?.tltInTltPool + this.wallet?.tlt) * this.getUsdPriceOfStockPools(this.getPool('TLT'));
   }
   getPdbcValueUsd(): number {
-    return (this.wallet?.pdbcInPdbcPool + this.wallet?.pdbc) * this.getUsdPriceOfStockPools(this.poolPdbc);
+    return (this.wallet?.pdbcInPdbcPool + this.wallet?.pdbc) * this.getUsdPriceOfStockPools(this.getPool('PDBC'));
   }
   getAmznValueUsd(): number {
-    return (this.wallet?.amznInAmznPool + this.wallet?.amzn) * this.getUsdPriceOfStockPools(this.poolAmzn);
+    return (this.wallet?.amznInAmznPool + this.wallet?.amzn) * this.getUsdPriceOfStockPools(this.getPool('AMZN'));
   }
   getNvdaValueUsd(): number {
-    return (this.wallet?.nvdaInNvdaPool + this.wallet?.nvda) * this.getUsdPriceOfStockPools(this.poolNvda);
+    return (this.wallet?.nvdaInNvdaPool + this.wallet?.nvda) * this.getUsdPriceOfStockPools(this.getPool('NVDA'));
   }
   getCoinValueUsd(): number {
-    return (this.wallet?.coinInCoinPool + this.wallet?.coin) * this.getUsdPriceOfStockPools(this.poolCoin);
+    return (this.wallet?.coinInCoinPool + this.wallet?.coin) * this.getUsdPriceOfStockPools(this.getPool('COIN'));
   }
   getEemValueUsd(): number {
-    return (this.wallet?.eemInEemPool + this.wallet?.eem) * this.getUsdPriceOfStockPools(this.poolEem);
+    return (this.wallet?.eemInEemPool + this.wallet?.eem) * this.getUsdPriceOfStockPools(this.getPool('EEM'));
   }
   getMsftValueUsd(): number {
-    return (this.wallet?.msftInMsftPool + this.wallet?.msft) * this.getUsdPriceOfStockPools(this.poolMsft);
+    return (this.wallet?.msftInMsftPool + this.wallet?.msft) * this.getUsdPriceOfStockPools(this.getPool('MSFT'));
   }
   getNflxValueUsd(): number {
-    return (this.wallet?.nflxInNflxPool + this.wallet?.nflx) * this.getUsdPriceOfStockPools(this.poolNflx);
+    return (this.wallet?.nflxInNflxPool + this.wallet?.nflx) * this.getUsdPriceOfStockPools(this.getPool('NFLX'));
   }
   getFbValueUsd(): number {
-    return (this.wallet?.fbInFbPool + this.wallet?.fb) * this.getUsdPriceOfStockPools(this.poolFb);
+    return (this.wallet?.fbInFbPool + this.wallet?.fb) * this.getUsdPriceOfStockPools(this.getPool('FB'));
   }
   getVooValueUsd(): number {
-    return (this.wallet?.vooInVooPool + this.wallet?.voo) * this.getUsdPriceOfStockPools(this.poolVoo);
+    return (this.wallet?.vooInVooPool + this.wallet?.voo) * this.getUsdPriceOfStockPools(this.getPool('VOO'));
   }
   getDisValueUsd(): number {
-    return (this.wallet?.disInDisPool + this.wallet?.dis) * this.getUsdPriceOfStockPools(this.poolDis);
+    return (this.wallet?.disInDisPool + this.wallet?.dis) * this.getUsdPriceOfStockPools(this.getPool('DIS'));
   }
   getMchiValueUsd(): number {
-    return (this.wallet?.mchiInMchiPool + this.wallet?.mchi) * this.getUsdPriceOfStockPools(this.poolMchi);
+    return (this.wallet?.mchiInMchiPool + this.wallet?.mchi) * this.getUsdPriceOfStockPools(this.getPool('MCHI'));
   }
   getMstrValueUsd(): number {
-    return (this.wallet?.mstrInMstrPool + this.wallet?.mstr) * this.getUsdPriceOfStockPools(this.poolMstr);
+    return (this.wallet?.mstrInMstrPool + this.wallet?.mstr) * this.getUsdPriceOfStockPools(this.getPool('MSTR'));
   }
   getIntcValueUsd(): number {
-    return (this.wallet?.intcInIntcPool + this.wallet?.intc) * this.getUsdPriceOfStockPools(this.poolIntc);
+    return (this.wallet?.intcInIntcPool + this.wallet?.intc) * this.getUsdPriceOfStockPools(this.getPool('INTC'));
   }
   getPyplValueUsd(): number {
-    return (this.wallet?.pyplInPyplPool + this.wallet?.pypl) * this.getUsdPriceOfStockPools(this.poolPypl);
+    return (this.wallet?.pyplInPyplPool + this.wallet?.pypl) * this.getUsdPriceOfStockPools(this.getPool('PYPL'));
   }
   getBrkbValueUsd(): number {
-    return (this.wallet?.brkbInBrkbPool + this.wallet?.brkb) * this.getUsdPriceOfStockPools(this.poolBrkb);
+    return (this.wallet?.brkbInBrkbPool + this.wallet?.brkb) * this.getUsdPriceOfStockPools(this.getPool('BRK.B'));
   }
   getKoValueUsd(): number {
-    return (this.wallet?.koInKoPool + this.wallet?.ko) * this.getUsdPriceOfStockPools(this.poolKo);
+    return (this.wallet?.koInKoPool + this.wallet?.ko) * this.getUsdPriceOfStockPools(this.getPool('KO'));
   }
   getPgValueUsd(): number {
-    return (this.wallet?.pgInPgPool + this.wallet?.pg) * this.getUsdPriceOfStockPools(this.poolPg);
+    return (this.wallet?.pgInPgPool + this.wallet?.pg) * this.getUsdPriceOfStockPools(this.getPool('PG'));
+  }
+  getSapValueUsd(): number {
+    return (this.wallet?.sapInSapPool + this.wallet?.sap) * this.getUsdPriceOfStockPools(this.getPool('SAP'));
+  }
+  getUraValueUsd(): number {
+    return (this.wallet?.uraInUraPool + this.wallet?.ura) * this.getUsdPriceOfStockPools(this.getPool('URA'));
+  }
+  getCsValueUsd(): number {
+    return (this.wallet?.csInCsPool + this.wallet?.cs) * this.getUsdPriceOfStockPools(this.getPool('CS'));
+  }
+  getGsgValueUsd(): number {
+    return (this.wallet?.gsgInGsgPool + this.wallet?.gsg) * this.getUsdPriceOfStockPools(this.getPool('GSG'));
   }
 
   getUsdPriceOfStockPools(pool: Pool): number {
@@ -758,7 +682,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getPdbcValueUsd() + this.getAmznValueUsd() + this.getNvdaValueUsd() + this.getCoinValueUsd() + this.getEemValueUsd()
       + this.getMsftValueUsd() + this.getNflxValueUsd() + this.getFbValueUsd() + this.getVooValueUsd()
       + this.getDisValueUsd() + this.getMchiValueUsd() + this.getMstrValueUsd() + this.getIntcValueUsd()
-      + this.getPyplValueUsd() + this.getBrkbValueUsd() + this.getKoValueUsd() + this.getPgValueUsd();
+      + this.getPyplValueUsd() + this.getBrkbValueUsd() + this.getKoValueUsd() + this.getPgValueUsd()
+      + this.getSapValueUsd() + this.getUraValueUsd() + this.getCsValueUsd() + this.getGsgValueUsd();
     // Collateral
     const collateral = this.getVaultsCollateralUsd();
 
@@ -769,7 +694,8 @@ export class ValueComponent implements OnInit, OnChanges {
   // WALLETS HOLDINGS
   getWalletValueUsd(): number {
     return this.getDfiCountWalletUsd() + this.getBtcWalletValueUsd() + this.getEthWalletValueUsd() +
-      this.getUsdtWalletValueUsd() + this.getLtcWalletValueUsd() + this.getDogeWalletValueUsd() + this.getBchWalletValueUsd()
+      this.getUsdtWalletValueUsd() + this.getUsdcWalletValueUsd() + this.getLtcWalletValueUsd() + this.getDogeWalletValueUsd()
+      + this.getBchWalletValueUsd()
       + this.getUsdWalletValueUsd() + this.getTslaWalletValueUsd() + this.getSpyWalletValueUsd() + this.getQqqWalletValueUsd()
       + this.getPltrWalletValueUsd() + this.getSlvWalletValueUsd() + this.getAaplWalletValueUsd() + this.getGldWalletValueUsd()
       + this.getGmeWalletValueUsd() + this.getGooglWalletValueUsd() + this.getArkkWalletValueUsd() + this.getBabaWalletValueUsd()
@@ -777,11 +703,12 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAmznWalletValueUsd() + this.getNvdaWalletValueUsd() + this.getCoinWalletValueUsd() + this.getEemWalletValueUsd()
       + this.getMsftWalletValueUsd() + this.getNflxWalletValueUsd() + this.getFbWalletValueUsd() + this.getVooWalletValueUsd()
       + this.getDisWalletValueUsd() + this.getMchiWalletValueUsd() + this.getMstrWalletValueUsd() + this.getIntcWalletValueUsd()
-      + this.getPyplWalletValueUsd() + this.getBrkbWalletValueUsd() + this.getKoWalletValueUsd() + this.getPgWalletValueUsd();
+      + this.getPyplWalletValueUsd() + this.getBrkbWalletValueUsd() + this.getKoWalletValueUsd() + this.getPgWalletValueUsd()
+      + this.getSapWalletValueUsd() + this.getUraWalletValueUsd() + this.getCsWalletValueUsd() + this.getGsgWalletValueUsd();
   }
 
   getDfiCountWalletUsd(): number {
-    return this.getDfiCountWallet() * this.poolBtc?.priceB;
+    return this.getDfiCountWallet() * this.getPool('BTC')?.priceB;
   }
 
   getDfiCountWallet(): number {
@@ -789,142 +716,154 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getEthWalletValueUsd(): number {
-    return  this.wallet.eth * this.poolEth?.priceA;
+    return  this.wallet.eth * this.getPool('ETH')?.priceA;
   }
 
   getBtcWalletValueUsd(): number {
-    return this.wallet.btc * this.poolBtc?.priceA;
+    return this.wallet.btc * this.getPool('BTC')?.priceA;
   }
 
   getBchWalletValueUsd(): number {
-    return this.wallet.bch * this.poolBch?.priceA;
+    return this.wallet.bch * this.getPool('BCH')?.priceA;
   }
 
   getUsdtWalletValueUsd(): number {
-    return this.wallet.usdt * this.poolUsdt?.priceA;
+    return this.wallet.usdt * this.getPool('USDT')?.priceA;
   }
 
   getUsdcWalletValueUsd(): number {
-    return this.wallet.usdc * this.poolUsdc?.priceA;
+    return this.wallet.usdc * this.getPool('USDC')?.priceA;
   }
 
   getDogeWalletValueUsd(): number {
-    return this.wallet.doge * this.poolDoge?.priceA;
+    return this.wallet.doge * this.getPool('DOGE')?.priceA;
   }
 
   getUsdWalletValueUsd(): number {
-    return this.wallet.usd * this.getUsdPriceOfStockPools(this.poolUsd);
+    return this.wallet.usd * this.getUsdPriceOfStockPools(this.getPool('DUSD'));
   }
 
   getLtcWalletValueUsd(): number {
-    return this.wallet.ltc * this.poolLtc?.priceA;
+    return this.wallet.ltc * this.getPool('LTC')?.priceA;
   }
 
   getTslaWalletValueUsd(): number {
-    return this.wallet.tsla * this.getUsdPriceOfStockPools(this.poolTsla);
+    return this.wallet.tsla * this.getUsdPriceOfStockPools(this.getPool('TSLA'));
   }
 
   getSpyWalletValueUsd(): number {
-    return this.wallet?.spy * this.getUsdPriceOfStockPools(this.poolSpy);
+    return this.wallet?.spy * this.getUsdPriceOfStockPools(this.getPool('SPY'));
   }
   getQqqWalletValueUsd(): number {
-    return  this.wallet?.qqq * this.getUsdPriceOfStockPools(this.poolQqq);
+    return  this.wallet?.qqq * this.getUsdPriceOfStockPools(this.getPool('QQQ'));
   }
   getPltrWalletValueUsd(): number {
-    return  this.wallet?.pltr * this.getUsdPriceOfStockPools(this.poolPltr);
+    return  this.wallet?.pltr * this.getUsdPriceOfStockPools(this.getPool('PLTR'));
   }
   getSlvWalletValueUsd(): number {
-    return this.wallet?.slv * this.getUsdPriceOfStockPools(this.poolSlv);
+    return this.wallet?.slv * this.getUsdPriceOfStockPools(this.getPool('SLV'));
   }
   getAaplWalletValueUsd(): number {
-    return  this.wallet?.aapl * this.getUsdPriceOfStockPools(this.poolAapl);
+    return  this.wallet?.aapl * this.getUsdPriceOfStockPools(this.getPool('AAPL'));
   }
   getGldWalletValueUsd(): number {
-    return this.wallet?.gld * this.getUsdPriceOfStockPools(this.poolGld);
+    return this.wallet?.gld * this.getUsdPriceOfStockPools(this.getPool('GLD'));
   }
   getGmeWalletValueUsd(): number {
-    return this.wallet?.gme * this.getUsdPriceOfStockPools(this.poolGme);
+    return this.wallet?.gme * this.getUsdPriceOfStockPools(this.getPool('GME'));
   }
   getGooglWalletValueUsd(): number {
-    return this.wallet?.googl * this.getUsdPriceOfStockPools(this.poolGoogl);
+    return this.wallet?.googl * this.getUsdPriceOfStockPools(this.getPool('GOOGL'));
   }
   getArkkWalletValueUsd(): number {
-    return this.wallet?.arkk * this.getUsdPriceOfStockPools(this.poolArkk);
+    return this.wallet?.arkk * this.getUsdPriceOfStockPools(this.getPool('ARKK'));
   }
   getBabaWalletValueUsd(): number {
-    return this.wallet?.baba * this.getUsdPriceOfStockPools(this.poolBaba);
+    return this.wallet?.baba * this.getUsdPriceOfStockPools(this.getPool('BABA'));
   }
   getVnqWalletValueUsd(): number {
-    return this.wallet?.vnq * this.getUsdPriceOfStockPools(this.poolVnq);
+    return this.wallet?.vnq * this.getUsdPriceOfStockPools(this.getPool('VNQ'));
   }
   getUrthWalletValueUsd(): number {
-    return this.wallet?.urth * this.getUsdPriceOfStockPools(this.poolUrth);
+    return this.wallet?.urth * this.getUsdPriceOfStockPools(this.getPool('URTH'));
   }
   getTltWalletValueUsd(): number {
-    return this.wallet?.tlt * this.getUsdPriceOfStockPools(this.poolTlt);
+    return this.wallet?.tlt * this.getUsdPriceOfStockPools(this.getPool('TLT'));
   }
   getPdbcWalletValueUsd(): number {
-    return this.wallet?.pdbc * this.getUsdPriceOfStockPools(this.poolPdbc);
+    return this.wallet?.pdbc * this.getUsdPriceOfStockPools(this.getPool('PDBC'));
   }
   getAmznWalletValueUsd(): number {
-    return this.wallet?.amzn * this.getUsdPriceOfStockPools(this.poolAmzn);
+    return this.wallet?.amzn * this.getUsdPriceOfStockPools(this.getPool('AMZN'));
   }
   getNvdaWalletValueUsd(): number {
-    return this.wallet?.nvda * this.getUsdPriceOfStockPools(this.poolNvda);
+    return this.wallet?.nvda * this.getUsdPriceOfStockPools(this.getPool('NVDA'));
   }
   getCoinWalletValueUsd(): number {
-    return this.wallet?.coin * this.getUsdPriceOfStockPools(this.poolCoin);
+    return this.wallet?.coin * this.getUsdPriceOfStockPools(this.getPool('COIN'));
   }
   getEemWalletValueUsd(): number {
-    return this.wallet?.eem * this.getUsdPriceOfStockPools(this.poolEem);
+    return this.wallet?.eem * this.getUsdPriceOfStockPools(this.getPool('EEM'));
   }
   getMsftWalletValueUsd(): number {
-    return this.wallet?.msft * this.getUsdPriceOfStockPools(this.poolMsft);
+    return this.wallet?.msft * this.getUsdPriceOfStockPools(this.getPool('MSFT'));
   }
   getNflxWalletValueUsd(): number {
-    return this.wallet?.nflx * this.getUsdPriceOfStockPools(this.poolNflx);
+    return this.wallet?.nflx * this.getUsdPriceOfStockPools(this.getPool('NFLX'));
   }
   getFbWalletValueUsd(): number {
-    return this.wallet?.fb * this.getUsdPriceOfStockPools(this.poolFb);
+    return this.wallet?.fb * this.getUsdPriceOfStockPools(this.getPool('FB'));
   }
   getVooWalletValueUsd(): number {
-    return this.wallet?.voo * this.getUsdPriceOfStockPools(this.poolVoo);
+    return this.wallet?.voo * this.getUsdPriceOfStockPools(this.getPool('VOO'));
   }
   getDisWalletValueUsd(): number {
-    return this.wallet?.dis * this.getUsdPriceOfStockPools(this.poolDis);
+    return this.wallet?.dis * this.getUsdPriceOfStockPools(this.getPool('DIS'));
   }
   getMchiWalletValueUsd(): number {
-    return this.wallet?.mchi * this.getUsdPriceOfStockPools(this.poolMchi);
+    return this.wallet?.mchi * this.getUsdPriceOfStockPools(this.getPool('MCHI'));
   }
   getMstrWalletValueUsd(): number {
-    return this.wallet?.mstr * this.getUsdPriceOfStockPools(this.poolMstr);
+    return this.wallet?.mstr * this.getUsdPriceOfStockPools(this.getPool('MSTR'));
   }
   getIntcWalletValueUsd(): number {
-    return this.wallet?.intc * this.getUsdPriceOfStockPools(this.poolIntc);
+    return this.wallet?.intc * this.getUsdPriceOfStockPools(this.getPool('INTC'));
   }
   getPyplWalletValueUsd(): number {
-    return this.wallet?.pypl * this.getUsdPriceOfStockPools(this.poolPypl);
+    return this.wallet?.pypl * this.getUsdPriceOfStockPools(this.getPool('PYPL'));
   }
   getBrkbWalletValueUsd(): number {
-    return this.wallet?.brkb * this.getUsdPriceOfStockPools(this.poolBrkb);
+    return this.wallet?.brkb * this.getUsdPriceOfStockPools(this.getPool('BRK.B'));
   }
   getKoWalletValueUsd(): number {
-    return this.wallet?.ko * this.getUsdPriceOfStockPools(this.poolKo);
+    return this.wallet?.ko * this.getUsdPriceOfStockPools(this.getPool('KO'));
   }
   getPgWalletValueUsd(): number {
-    return this.wallet?.pg * this.getUsdPriceOfStockPools(this.poolPg);
+    return this.wallet?.pg * this.getUsdPriceOfStockPools(this.getPool('PG'));
+  }
+  getSapWalletValueUsd(): number {
+    return this.wallet?.sap * this.getUsdPriceOfStockPools(this.getPool('SAP'));
+  }
+  getUraWalletValueUsd(): number {
+    return this.wallet?.ura * this.getUsdPriceOfStockPools(this.getPool('URA'));
+  }
+  getGsgWalletValueUsd(): number {
+    return this.wallet?.gsg * this.getUsdPriceOfStockPools(this.getPool('GSG'));
+  }
+  getCsWalletValueUsd(): number {
+    return this.wallet?.cs * this.getUsdPriceOfStockPools(this.getPool('CS'));
   }
 
   getDfiValueUsd(): number {
-    return this.getDfiCount() * this.poolBtc?.priceB;
+    return this.getDfiCount() * this.getPool('BTC')?.priceB;
   }
 
   getDfiInVaultUsd(): number {
-    return this.getCollateralCountVaults('DFI') * this.poolBtc?.priceB;
+    return this.getCollateralCountVaults('DFI') * this.getPool('BTC')?.priceB;
   }
 
   getBtcInVaultUsd(): number {
-    return this.getCollateralCountVaults('BTC') * this.poolBtc?.priceA;
+    return this.getCollateralCountVaults('BTC') * this.getPool('BTC')?.priceA;
   }
 
   getDfiCount(): number {
@@ -942,7 +881,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getStakingValueUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking) * this.getPool('BTC')?.priceB;
   }
 
   getAnteilLMOfAllValue(): number {
@@ -963,7 +902,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAnteilLMOfFbPoolValue() + this.getAnteilLMOfVooPoolValue() + this.getAnteilLMOfDisPoolValue()
       + this.getAnteilLMOfMchiPoolValue() + this.getAnteilLMOfMstrPoolValue() + this.getAnteilLMOfMchiPoolValue()
       + this.getAnteilLMOfIntcPoolValue() + this.getAnteilLMOfPyplPoolValue() + this.getAnteilLMOfBrkbPoolValue()
-      + this.getAnteilLMOfKoPoolValue() + this.getAnteilLMOfPgPoolValue();
+      + this.getAnteilLMOfKoPoolValue() + this.getAnteilLMOfPgPoolValue() + this.getAnteilLMOfSapPoolValue()
+      + this.getAnteilLMOfUraPoolValue() + this.getAnteilLMOfCsPoolValue() + this.getAnteilLMOfGsgPoolValue();
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -975,7 +915,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getDfiCountLMUsd(): number {
-    return this.getDfiCountLM() * this.poolBtc?.priceB;
+    return this.getDfiCountLM() * this.getPool('BTC')?.priceB;
   }
 
   getDfiCountLM(): number {
@@ -1020,100 +960,112 @@ export class ValueComponent implements OnInit, OnChanges {
     this.loanValues = new Array<LoanValue>();
 
     if (this.getLoanCountVaults('DUSD') > 0) {
-      this.loanValues.push(new LoanValue('DUSD', this.poolUsd));
+      this.loanValues.push(new LoanValue('DUSD', this.getPool('DUSD')));
     }
     if (this.getLoanCountVaults('TSLA') > 0) {
-      this.loanValues.push(new LoanValue('TSLA', this.poolTsla));
+      this.loanValues.push(new LoanValue('TSLA', this.getPool('TSLA')));
     }
     if (this.getLoanCountVaults('AAPL') > 0) {
-    this.loanValues.push(new LoanValue('AAPL', this.poolAapl));
+    this.loanValues.push(new LoanValue('AAPL', this.getPool('AAPL')));
     }
     if (this.getLoanCountVaults('ARKK') > 0) {
-    this.loanValues.push(new LoanValue('ARKK', this.poolArkk));
+    this.loanValues.push(new LoanValue('ARKK', this.getPool('Arkk')));
     }
     if (this.getLoanCountVaults('BABA') > 0) {
-    this.loanValues.push(new LoanValue('BABA', this.poolBaba));
+    this.loanValues.push(new LoanValue('BABA', this.getPool('BABA')));
     }
     if (this.getLoanCountVaults('GLD') > 0) {
-    this.loanValues.push(new LoanValue('GLD', this.poolGld));
+    this.loanValues.push(new LoanValue('GLD', this.getPool('GLD')));
     }
     if (this.getLoanCountVaults('GME') > 0) {
-    this.loanValues.push(new LoanValue('GME', this.poolGme));
+    this.loanValues.push(new LoanValue('GME', this.getPool('GME')));
     }
     if (this.getLoanCountVaults('GOOGL') > 0) {
-    this.loanValues.push(new LoanValue('GOOGL', this.poolGoogl));
+    this.loanValues.push(new LoanValue('GOOGL', this.getPool('GOOGL')));
     }
     if (this.getLoanCountVaults('PDBC') > 0) {
-    this.loanValues.push(new LoanValue('PDBC', this.poolPdbc));
+    this.loanValues.push(new LoanValue('PDBC', this.getPool('PDBC')));
     }
     if (this.getLoanCountVaults('PLTR') > 0) {
-    this.loanValues.push(new LoanValue('PLTR', this.poolPltr));
+    this.loanValues.push(new LoanValue('PLTR', this.getPool('PLTR')));
     }
     if (this.getLoanCountVaults('QQQ') > 0) {
-    this.loanValues.push(new LoanValue('QQQ', this.poolQqq));
+    this.loanValues.push(new LoanValue('QQQ', this.getPool('QQQ')));
     }
     if (this.getLoanCountVaults('SLV') > 0) {
-    this.loanValues.push(new LoanValue('SLV', this.poolSlv));
+    this.loanValues.push(new LoanValue('SLV', this.getPool('SLV')));
     }
     if (this.getLoanCountVaults('SPY') > 0) {
-    this.loanValues.push(new LoanValue('SPY', this.poolSpy));
+    this.loanValues.push(new LoanValue('SPY', this.getPool('SPY')));
     }
     if (this.getLoanCountVaults('TLT') > 0) {
-    this.loanValues.push(new LoanValue('TLT', this.poolTlt));
+    this.loanValues.push(new LoanValue('TLT', this.getPool('TLT')));
     }
     if (this.getLoanCountVaults('URTH') > 0) {
-    this.loanValues.push(new LoanValue('URTH', this.poolUrth));
+    this.loanValues.push(new LoanValue('URTH', this.getPool('URTH')));
     }
     if (this.getLoanCountVaults('VNQ') > 0) {
-    this.loanValues.push(new LoanValue('VNQ', this.poolVnq));
+    this.loanValues.push(new LoanValue('VNQ', this.getPool('VNQ')));
     }
     if (this.getLoanCountVaults('AMZN') > 0) {
-    this.loanValues.push(new LoanValue('AMZN', this.poolAmzn));
+    this.loanValues.push(new LoanValue('AMZN', this.getPool('AMZN')));
     }
     if (this.getLoanCountVaults('NVDA') > 0) {
-    this.loanValues.push(new LoanValue('NVDA', this.poolNvda));
+    this.loanValues.push(new LoanValue('NVDA', this.getPool('NVDA')));
     }
     if (this.getLoanCountVaults('COIN') > 0) {
-    this.loanValues.push(new LoanValue('COIN', this.poolCoin));
+    this.loanValues.push(new LoanValue('COIN', this.getPool('COIN')));
     }
     if (this.getLoanCountVaults('EEM') > 0) {
-    this.loanValues.push(new LoanValue('EEM', this.poolEem));
+    this.loanValues.push(new LoanValue('EEM', this.getPool('EEM')));
     }
     if (this.getLoanCountVaults('MSFT') > 0) {
-    this.loanValues.push(new LoanValue('MSFT', this.poolMsft));
+    this.loanValues.push(new LoanValue('MSFT', this.getPool('MSFT')));
     }
     if (this.getLoanCountVaults('NFLX') > 0) {
-    this.loanValues.push(new LoanValue('NFLX', this.poolNflx));
+    this.loanValues.push(new LoanValue('NFLX', this.getPool('NFLX')));
     }
     if (this.getLoanCountVaults('FB') > 0) {
-    this.loanValues.push(new LoanValue('FB', this.poolFb));
+    this.loanValues.push(new LoanValue('FB', this.getPool('FB')));
     }
     if (this.getLoanCountVaults('VOO') > 0) {
-    this.loanValues.push(new LoanValue('VOO', this.poolVoo));
+    this.loanValues.push(new LoanValue('VOO', this.getPool('VOO')));
     }
     if (this.getLoanCountVaults('DIS') > 0) {
-    this.loanValues.push(new LoanValue('DIS', this.poolDis));
+    this.loanValues.push(new LoanValue('DIS', this.getPool('DIS')));
     }
     if (this.getLoanCountVaults('MCHI') > 0) {
-    this.loanValues.push(new LoanValue('MCHI', this.poolMchi));
+    this.loanValues.push(new LoanValue('MCHI', this.getPool('MCHI')));
     }
     if (this.getLoanCountVaults('MSTR') > 0) {
-    this.loanValues.push(new LoanValue('MSTR', this.poolMstr));
+    this.loanValues.push(new LoanValue('MSTR', this.getPool('MSTR')));
     }
     if (this.getLoanCountVaults('INTC') > 0) {
-    this.loanValues.push(new LoanValue('INTC', this.poolIntc));
+    this.loanValues.push(new LoanValue('INTC', this.getPool('INTC')));
     }
     if (this.getLoanCountVaults('PYPL') > 0) {
-      this.loanValues.push(new LoanValue('PYPL', this.poolPypl));
+      this.loanValues.push(new LoanValue('PYPL', this.getPool('PYPL')));
     }
     if (this.getLoanCountVaults('BRK.B') > 0) {
-      this.loanValues.push(new LoanValue('BRK.B', this.poolBrkb));
+      this.loanValues.push(new LoanValue('BRK.B', this.getPool('BRK.B')));
     }
     if (this.getLoanCountVaults('KO') > 0) {
-      this.loanValues.push(new LoanValue('KO', this.poolKo));
+      this.loanValues.push(new LoanValue('KO', this.getPool('KO')));
     }
     if (this.getLoanCountVaults('PG') > 0) {
-      this.loanValues.push(new LoanValue('PG', this.poolPg));
+      this.loanValues.push(new LoanValue('PG', this.getPool('PG')));
+    }
+    if (this.getLoanCountVaults('SAP') > 0) {
+      this.loanValues.push(new LoanValue('SAP', this.getPool('SAP')));
+    }
+    if (this.getLoanCountVaults('URA') > 0) {
+      this.loanValues.push(new LoanValue('URA', this.getPool('URA')));
+    }
+    if (this.getLoanCountVaults('CS') > 0) {
+      this.loanValues.push(new LoanValue('CS', this.getPool('CS')));
+    }
+    if (this.getLoanCountVaults('GSG') > 0) {
+      this.loanValues.push(new LoanValue('GSG', this.getPool('GSG')));
     }
   }
 
@@ -1315,6 +1267,26 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.pg + this.wallet?.pgInPgPool, this.getPgValueUsd()));
     }
 
+    if (this.wallet?.sap > 0 || this.wallet?.sapInSapPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('SAP',
+        this.wallet?.sap + this.wallet?.sapInSapPool, this.getSapValueUsd()));
+    }
+
+    if (this.wallet?.ura > 0 || this.wallet?.uraInUraPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('URA',
+        this.wallet?.ura + this.wallet?.uraInUraPool, this.getUraValueUsd()));
+    }
+
+    if (this.wallet?.cs > 0 || this.wallet?.csInCsPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('CS',
+        this.wallet?.cs + this.wallet?.csInCsPool, this.getCsValueUsd()));
+    }
+
+    if (this.wallet?.gsg > 0 || this.wallet?.gsgInGsgPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('GSG',
+        this.wallet?.gsg + this.wallet?.gsgInGsgPool, this.getGsgValueUsd()));
+    }
+
   }
 
   createWalletTokens(): void {
@@ -1323,196 +1295,216 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.btc > 0) {
       this.walletValues.push(new HoldingValue('BTC',
-        this.wallet?.btc, this.wallet?.btc * this.poolBtc?.priceA));
+        this.wallet?.btc, this.wallet?.btc * this.getPool('BTC')?.priceA));
     }
 
     if (this.wallet?.eth > 0) {
       this.walletValues.push(new HoldingValue('ETH',
-        this.wallet?.eth, this.wallet?.eth * this.poolEth.priceA));
+        this.wallet?.eth, this.wallet?.eth * this.getPool('ETH')?.priceA));
     }
 
     if (this.wallet?.usdt > 0) {
       this.walletValues.push(new HoldingValue('USDT',
-        this.wallet?.usdt, this.wallet?.usdt * this.poolUsdt?.priceA));
+        this.wallet?.usdt, this.wallet?.usdt * this.getPool('USDT')?.priceA));
     }
 
     if (this.wallet?.usdc > 0) {
       this.walletValues.push(new HoldingValue('USDC',
-        this.wallet?.usdc , this.wallet?.usdc * this.poolUsdc?.priceA));
+        this.wallet?.usdc , this.wallet?.usdc * this.getPool('USDC')?.priceA));
     }
 
     if (this.isUsdInPortfolio()) {
       this.walletValues.push(new HoldingValue('DUSD',
-        this.wallet?.usd, this.wallet?.usd * this.getUsdPriceOfStockPools(this.poolUsd)));
+        this.wallet?.usd, this.wallet?.usd * this.getUsdPriceOfStockPools(this.getPool('DUSD'))));
     }
 
     if (this.wallet?.ltc > 0) {
       this.walletValues.push(new HoldingValue('LTC',
-        this.wallet?.ltc, this.wallet?.ltc * this.poolLtc?.priceA));
+        this.wallet?.ltc, this.wallet?.ltc * this.getPool('LTC')?.priceA));
     }
 
     if (this.wallet?.doge > 0) {
       this.walletValues.push(new HoldingValue('DOGE',
-        this.wallet?.doge , this.wallet?.doge * this.poolDoge?.priceA));
+        this.wallet?.doge , this.wallet?.doge * this.getPool('DOGE')?.priceA));
     }
 
     if (this.wallet?.bch > 0) {
       this.walletValues.push(new HoldingValue('BCH',
-        this.wallet?.bch, this.wallet?.bch * this.poolBch?.priceA));
+        this.wallet?.bch, this.wallet?.bch * this.getPool('BCH')?.priceA));
     }
 
     if (this.wallet?.tsla > 0) {
       this.walletValues.push(new HoldingValue('TSLA',
-        this.wallet?.tsla , this.wallet?.tsla * this.getUsdPriceOfStockPools(this.poolTsla)));
+        this.wallet?.tsla , this.wallet?.tsla * this.getUsdPriceOfStockPools(this.getPool('TSLA'))));
     }
 
     if (this.wallet?.qqq > 0) {
       this.walletValues.push(new HoldingValue('QQQ',
-        this.wallet?.qqq, this.wallet?.qqq * this.getUsdPriceOfStockPools(this.poolQqq)));
+        this.wallet?.qqq, this.wallet?.qqq * this.getUsdPriceOfStockPools(this.getPool('QQQ'))));
     }
 
     if (this.wallet?.spy > 0 ) {
       this.walletValues.push(new HoldingValue('SPY',
-        this.wallet?.spy, this.wallet?.spy * this.getUsdPriceOfStockPools(this.poolSpy)));
+        this.wallet?.spy, this.wallet?.spy * this.getUsdPriceOfStockPools(this.getPool('SPY'))));
     }
 
     if (this.wallet?.pltr > 0  ) {
       this.walletValues.push(new HoldingValue('PLTR',
-        this.wallet?.pltr, this.wallet?.pltr * this.getUsdPriceOfStockPools(this.poolPltr)));
+        this.wallet?.pltr, this.wallet?.pltr * this.getUsdPriceOfStockPools(this.getPool('PLTR'))));
     }
 
     if (this.wallet?.slv > 0 ) {
       this.walletValues.push(new HoldingValue('SLV',
-        this.wallet?.slv, this.wallet?.slv * this.getUsdPriceOfStockPools(this.poolSlv)));
+        this.wallet?.slv, this.wallet?.slv * this.getUsdPriceOfStockPools(this.getPool('SLV'))));
     }
 
     if (this.wallet?.aapl > 0 ) {
       this.walletValues.push(new HoldingValue('AAPL',
-        this.wallet?.aapl, this.wallet?.aapl * this.getUsdPriceOfStockPools(this.poolAapl)));
+        this.wallet?.aapl, this.wallet?.aapl * this.getUsdPriceOfStockPools(this.getPool('AAPL'))));
     }
 
     if (this.wallet?.gld > 0 ) {
       this.walletValues.push(new HoldingValue('GLD',
-        this.wallet?.gld, this.wallet?.gld * this.getUsdPriceOfStockPools(this.poolGld)));
+        this.wallet?.gld, this.wallet?.gld * this.getUsdPriceOfStockPools(this.getPool('GLD'))));
     }
 
     if (this.wallet?.gme > 0 ) {
       this.walletValues.push(new HoldingValue('GME',
-        this.wallet?.gme, this.wallet?.gme * this.getUsdPriceOfStockPools(this.poolGme)));
+        this.wallet?.gme, this.wallet?.gme * this.getUsdPriceOfStockPools(this.getPool('GME'))));
     }
 
     if (this.wallet?.googl > 0) {
       this.walletValues.push(new HoldingValue('GOOGL',
-        this.wallet?.googl, this.wallet?.googl * this.getUsdPriceOfStockPools(this.poolGoogl)));
+        this.wallet?.googl, this.wallet?.googl * this.getUsdPriceOfStockPools(this.getPool('GOOGL'))));
     }
 
     if (this.wallet?.arkk > 0  ) {
       this.walletValues.push(new HoldingValue('ARKK',
-        this.wallet?.arkk , this.wallet?.arkk * this.getUsdPriceOfStockPools(this.poolArkk)));
+        this.wallet?.arkk , this.wallet?.arkk * this.getUsdPriceOfStockPools(this.getPool('Arkk'))));
     }
 
     if (this.wallet?.baba > 0  ) {
       this.walletValues.push(new HoldingValue('BABA',
-        this.wallet?.baba , this.wallet?.baba * this.getUsdPriceOfStockPools(this.poolBaba)));
+        this.wallet?.baba , this.wallet?.baba * this.getUsdPriceOfStockPools(this.getPool('BABA'))));
     }
 
     if (this.wallet?.vnq > 0 ) {
       this.walletValues.push(new HoldingValue('VNQ',
-        this.wallet?.vnq , this.wallet?.vnq * this.getUsdPriceOfStockPools(this.poolVnq)));
+        this.wallet?.vnq , this.wallet?.vnq * this.getUsdPriceOfStockPools(this.getPool('VNQ'))));
     }
 
     if (this.wallet?.urth > 0 ) {
       this.walletValues.push(new HoldingValue('URTH',
-        this.wallet?.urth , this.wallet?.urth * this.getUsdPriceOfStockPools(this.poolUrth)));
+        this.wallet?.urth , this.wallet?.urth * this.getUsdPriceOfStockPools(this.getPool('URTH'))));
     }
 
     if (this.wallet?.tlt > 0 ) {
       this.walletValues.push(new HoldingValue('TLT',
-        this.wallet?.tlt , this.wallet?.tlt * this.getUsdPriceOfStockPools(this.poolTlt)));
+        this.wallet?.tlt , this.wallet?.tlt * this.getUsdPriceOfStockPools(this.getPool('TLT'))));
     }
 
     if (this.wallet?.pdbc > 0  ) {
       this.walletValues.push(new HoldingValue('PDBC',
-        this.wallet?.pdbc , this.wallet?.pdbc * this.getUsdPriceOfStockPools(this.poolPdbc)));
+        this.wallet?.pdbc , this.wallet?.pdbc * this.getUsdPriceOfStockPools(this.getPool('PDBC'))));
     }
 
     if (this.wallet?.amzn > 0 ) {
       this.walletValues.push(new HoldingValue('AMZN',
-        this.wallet?.amzn , this.wallet?.amzn * this.getUsdPriceOfStockPools(this.poolAmzn)));
+        this.wallet?.amzn , this.wallet?.amzn * this.getUsdPriceOfStockPools(this.getPool('AMZN'))));
     }
 
     if (this.wallet?.nvda > 0) {
       this.walletValues.push(new HoldingValue('NVDA',
-        this.wallet?.nvda, this.wallet?.nvda * this.getUsdPriceOfStockPools(this.poolNvda)));
+        this.wallet?.nvda, this.wallet?.nvda * this.getUsdPriceOfStockPools(this.getPool('NVDA'))));
     }
 
     if (this.wallet?.coin > 0 ) {
       this.walletValues.push(new HoldingValue('COIN',
-        this.wallet?.coin , this.wallet?.coin * this.getUsdPriceOfStockPools(this.poolCoin)));
+        this.wallet?.coin , this.wallet?.coin * this.getUsdPriceOfStockPools(this.getPool('COIN'))));
     }
 
     if (this.wallet?.eem > 0  ) {
       this.walletValues.push(new HoldingValue('EEM',
-        this.wallet?.eem, this.wallet?.eem * this.getUsdPriceOfStockPools(this.poolEem)));
+        this.wallet?.eem, this.wallet?.eem * this.getUsdPriceOfStockPools(this.getPool('EEM'))));
     }
 
     if (this.wallet?.msft > 0 ) {
       this.walletValues.push(new HoldingValue('MSFT',
-        this.wallet?.msft, this.wallet?.msft * this.getUsdPriceOfStockPools(this.poolMsft)));
+        this.wallet?.msft, this.wallet?.msft * this.getUsdPriceOfStockPools(this.getPool('MSFT'))));
     }
 
     if (this.wallet?.nflx > 0 ) {
       this.walletValues.push(new HoldingValue('NFLX',
-        this.wallet?.nflx, this.wallet?.nflx * this.getUsdPriceOfStockPools(this.poolNflx)));
+        this.wallet?.nflx, this.wallet?.nflx * this.getUsdPriceOfStockPools(this.getPool('NFLX'))));
     }
 
     if (this.wallet?.fb > 0  ) {
       this.walletValues.push(new HoldingValue('FB',
-        this.wallet?.fb, this.wallet?.fb * this.getUsdPriceOfStockPools(this.poolFb)));
+        this.wallet?.fb, this.wallet?.fb * this.getUsdPriceOfStockPools(this.getPool('FB'))));
     }
     if (this.wallet?.voo > 0 ) {
       this.walletValues.push(new HoldingValue('VOO',
-        this.wallet?.voo, this.wallet?.voo * this.getUsdPriceOfStockPools(this.poolVoo)));
+        this.wallet?.voo, this.wallet?.voo * this.getUsdPriceOfStockPools(this.getPool('VOO'))));
     }
 
     if (this.wallet?.dis > 0 ) {
       this.walletValues.push(new HoldingValue('DIS',
-        this.wallet?.dis, this.wallet?.dis * this.getUsdPriceOfStockPools(this.poolDis)));
+        this.wallet?.dis, this.wallet?.dis * this.getUsdPriceOfStockPools(this.getPool('DIS'))));
     }
 
     if (this.wallet?.mchi > 0 ) {
       this.walletValues.push(new HoldingValue('MCHI',
-        this.wallet?.mchi, this.wallet?.mchi * this.getUsdPriceOfStockPools(this.poolMchi)));
+        this.wallet?.mchi, this.wallet?.mchi * this.getUsdPriceOfStockPools(this.getPool('MCHI'))));
     }
 
     if (this.wallet?.mstr > 0) {
       this.walletValues.push(new HoldingValue('MSTR',
-        this.wallet?.mstr, this.wallet?.mstr * this.getUsdPriceOfStockPools(this.poolMstr)));
+        this.wallet?.mstr, this.wallet?.mstr * this.getUsdPriceOfStockPools(this.getPool('MSTR'))));
     }
 
     if (this.wallet?.intc > 0) {
       this.walletValues.push(new HoldingValue('INTC',
-        this.wallet?.intc , this.wallet?.intc * this.getUsdPriceOfStockPools(this.poolIntc)));
+        this.wallet?.intc , this.wallet?.intc * this.getUsdPriceOfStockPools(this.getPool('INTC'))));
     }
 
     if (this.wallet?.pypl > 0) {
       this.walletValues.push(new HoldingValue('PYPL',
-        this.wallet?.pypl , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.poolPypl)));
+        this.wallet?.pypl , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.getPool('PYPL'))));
     }
 
     if (this.wallet?.brkb > 0) {
       this.walletValues.push(new HoldingValue('BRK.B',
-        this.wallet?.brkb , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.poolBrkb)));
+        this.wallet?.brkb , this.wallet?.brkb * this.getUsdPriceOfStockPools(this.getPool('BRK.B'))));
     }
 
     if (this.wallet?.ko > 0) {
       this.walletValues.push(new HoldingValue('KO',
-        this.wallet?.ko , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.poolKo)));
+        this.wallet?.ko , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.getPool('KO'))));
     }
 
     if (this.wallet?.pg > 0) {
       this.walletValues.push(new HoldingValue('PG',
-        this.wallet?.pg , this.wallet?.pypl * this.getUsdPriceOfStockPools(this.poolPg)));
+        this.wallet?.pg , this.wallet?.pg * this.getUsdPriceOfStockPools(this.getPool('PG'))));
+    }
+
+    if (this.wallet?.sap > 0) {
+      this.walletValues.push(new HoldingValue('SAP',
+        this.wallet?.sap , this.wallet?.sap * this.getUsdPriceOfStockPools(this.getPool('SAP'))));
+    }
+
+    if (this.wallet?.ura > 0) {
+      this.walletValues.push(new HoldingValue('URA',
+        this.wallet?.ura , this.wallet?.ura * this.getUsdPriceOfStockPools(this.getPool('URA'))));
+    }
+
+    if (this.wallet?.cs > 0) {
+      this.walletValues.push(new HoldingValue('CS',
+        this.wallet?.cs , this.wallet?.cs * this.getUsdPriceOfStockPools(this.getPool('CS'))));
+    }
+
+    if (this.wallet?.gsg > 0) {
+      this.walletValues.push(new HoldingValue('GSG',
+        this.wallet?.gsg , this.wallet?.gsg * this.getUsdPriceOfStockPools(this.getPool('GSG'))));
     }
 
   }
@@ -1523,23 +1515,23 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.getCollateralCountVaults('BTC') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('BTC',
-        this.getCollateralCountVaults('BTC'), this.getCollateralCountVaults('BTC') * this.poolBtc.priceA));
+        this.getCollateralCountVaults('BTC'), this.getCollateralCountVaults('BTC') * this.getPool('BTC')?.priceA));
     }
     if (this.getCollateralCountVaults('ETH') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('ETH',
-        this.getCollateralCountVaults('ETH'), this.getCollateralCountVaults('ETH') * this.poolEth.priceA));
+        this.getCollateralCountVaults('ETH'), this.getCollateralCountVaults('ETH') * this.getPool('ETH')?.priceA));
     }
     if (this.getCollateralCountVaults('USDC') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('USDC',
-        this.getCollateralCountVaults('USDC'), this.getCollateralCountVaults('USDC') * this.poolUsdc.priceA));
+        this.getCollateralCountVaults('USDC'), this.getCollateralCountVaults('USDC') * this.getPool('USDC')?.priceA));
     }
     if (this.getCollateralCountVaults('USDT') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('USDT',
-        this.getCollateralCountVaults('USDT'), this.getCollateralCountVaults('USDT') * this.poolUsdt.priceA));
+        this.getCollateralCountVaults('USDT'), this.getCollateralCountVaults('USDT') * this.getPool('USDT')?.priceA));
     }
     if (this.getCollateralCountVaults('DFI') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('DFI',
-        this.getCollateralCountVaults('DFI'), this.getCollateralCountVaults('DFI') * this.poolBtc.priceB));
+        this.getCollateralCountVaults('DFI'), this.getCollateralCountVaults('DFI') * this.getPool('BTC')?.priceB));
     }
     if (this.getCollateralCountVaults('DUSD') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('DUSD',
@@ -1554,196 +1546,216 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.btcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('BTC-DFI',
-        this.wallet?.btcdfi, this.wallet?.btcdfi * this.getLpTokenValue(this.poolBtc)));
+        this.wallet?.btcdfi, this.wallet?.btcdfi * this.getLpTokenValue(this.getPool('BTC'))));
     }
 
     if (this.wallet?.ethdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('ETH-DFI',
-        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getLpTokenValue(this.poolEth)));
+        this.wallet?.ethdfi, this.wallet?.ethdfi * this.getLpTokenValue(this.getPool('ETH'))));
     }
 
     if (this.wallet?.usdtdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('USDT-DFI',
-        this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getLpTokenValue(this.poolUsdt)));
+        this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getLpTokenValue(this.getPool('USDT'))));
     }
 
     if (this.wallet?.usdcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('USDC-DFI',
-        this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getLpTokenValue(this.poolUsdc)));
+        this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getLpTokenValue(this.getPool('USDC'))));
     }
 
     if (this.wallet?.usddfi) {
       this.lpTokensValues.push(new HoldingValue('DUSD-DFI',
-        this.wallet?.usddfi, this.wallet?.usddfi * this.getLpTokenValue(this.poolUsd)));
+        this.wallet?.usddfi, this.wallet?.usddfi * this.getLpTokenValue(this.getPool('DUSD'))));
     }
 
     if (this.wallet?.ltcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('LTC-DFI',
-        this.wallet?.ltcdfi, this.wallet?.ltcdfi * this.getLpTokenValue(this.poolLtc)));
+        this.wallet?.ltcdfi, this.wallet?.ltcdfi * this.getLpTokenValue(this.getPool('LTC'))));
     }
 
     if (this.wallet?.dogedfi > 0) {
       this.lpTokensValues.push(new HoldingValue('DOGE-DFI',
-        this.wallet?.dogedfi , this.wallet?.dogedfi * this.getLpTokenValue(this.poolDoge)));
+        this.wallet?.dogedfi , this.wallet?.dogedfi * this.getLpTokenValue(this.getPool('DOGE'))));
     }
 
     if (this.wallet?.bchdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('BCH-DFI',
-        this.wallet?.bchdfi, this.wallet?.bchdfi * this.getLpTokenValue(this.poolBch)));
+        this.wallet?.bchdfi, this.wallet?.bchdfi * this.getLpTokenValue(this.getPool('BCH'))));
     }
 
     if (this.wallet?.tslausd > 0) {
       this.lpTokensValues.push(new HoldingValue('TSLA-DUSD',
-        this.wallet?.tslausd , this.wallet?.tslausd * this.getLpTokenValue(this.poolTsla)));
+        this.wallet?.tslausd , this.wallet?.tslausd * this.getLpTokenValue(this.getPool('TSLA'))));
     }
 
     if (this.wallet?.qqqusd > 0) {
       this.lpTokensValues.push(new HoldingValue('QQQ-DUSD',
-        this.wallet?.qqqusd, this.wallet?.qqqusd * this.getLpTokenValue(this.poolQqq)));
+        this.wallet?.qqqusd, this.wallet?.qqqusd * this.getLpTokenValue(this.getPool('QQQ'))));
     }
 
     if (this.wallet?.spyusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('SPY-DUSD',
-        this.wallet?.spyusd, this.wallet?.spyusd * this.getLpTokenValue(this.poolSpy)));
+        this.wallet?.spyusd, this.wallet?.spyusd * this.getLpTokenValue(this.getPool('SPY'))));
     }
 
     if (this.wallet?.pltrusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('PLTR-DUSD',
-        this.wallet?.pltrusd, this.wallet?.pltrusd * this.getLpTokenValue(this.poolPltr)));
+        this.wallet?.pltrusd, this.wallet?.pltrusd * this.getLpTokenValue(this.getPool('PLTR'))));
     }
 
     if (this.wallet?.slvusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('SLV-DUSD',
-        this.wallet?.slvusd, this.wallet?.slvusd * this.getLpTokenValue(this.poolSlv)));
+        this.wallet?.slvusd, this.wallet?.slvusd * this.getLpTokenValue(this.getPool('SLV'))));
     }
 
     if (this.wallet?.aaplusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('AAPL-DUSD',
-        this.wallet?.aaplusd, this.wallet?.aaplusd * this.getLpTokenValue(this.poolAapl)));
+        this.wallet?.aaplusd, this.wallet?.aaplusd * this.getLpTokenValue(this.getPool('AAPL'))));
     }
 
     if (this.wallet?.gldusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('GLD-DUSD',
-        this.wallet?.gldusd, this.wallet?.gldusd * this.getLpTokenValue(this.poolGld)));
+        this.wallet?.gldusd, this.wallet?.gldusd * this.getLpTokenValue(this.getPool('GLD'))));
     }
 
     if (this.wallet?.gmeusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('GME-DUSD',
-        this.wallet?.gmeusd, this.wallet?.gmeusd * this.getLpTokenValue(this.poolGme)));
+        this.wallet?.gmeusd, this.wallet?.gmeusd * this.getLpTokenValue(this.getPool('GME'))));
     }
 
     if (this.wallet?.googlusd > 0) {
       this.lpTokensValues.push(new HoldingValue('GOOGL-DUSD',
-        this.wallet?.googlusd, this.wallet?.googlusd * this.getLpTokenValue(this.poolGoogl)));
+        this.wallet?.googlusd, this.wallet?.googlusd * this.getLpTokenValue(this.getPool('GOOGL'))));
     }
 
     if (this.wallet?.arkkusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('ARKK-DUSD',
-        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getLpTokenValue(this.poolArkk)));
+        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getLpTokenValue(this.getPool('Arkk'))));
     }
 
     if (this.wallet?.babausd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('BABA-DUSD',
-        this.wallet?.babausd , this.wallet?.babausd * this.getLpTokenValue(this.poolBaba)));
+        this.wallet?.babausd , this.wallet?.babausd * this.getLpTokenValue(this.getPool('BABA'))));
     }
 
     if (this.wallet?.vnqusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('VNQ-DUSD',
-        this.wallet?.vnqusd , this.wallet?.vnqusd * this.getLpTokenValue(this.poolVnq)));
+        this.wallet?.vnqusd , this.wallet?.vnqusd * this.getLpTokenValue(this.getPool('VNQ'))));
     }
 
     if (this.wallet?.urthusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('URTH-DUSD',
-        this.wallet?.urthusd , this.wallet?.urthusd * this.getLpTokenValue(this.poolUrth)));
+        this.wallet?.urthusd , this.wallet?.urthusd * this.getLpTokenValue(this.getPool('URTH'))));
     }
 
     if (this.wallet?.tltusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('TLT-DUSD',
-        this.wallet?.tltusd , this.wallet?.tltusd * this.getLpTokenValue(this.poolTlt)));
+        this.wallet?.tltusd , this.wallet?.tltusd * this.getLpTokenValue(this.getPool('TLT'))));
     }
 
     if (this.wallet?.pdbcusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('PDBC-DUSD',
-        this.wallet?.pdbcusd, this.wallet?.pdbcusd * this.getLpTokenValue(this.poolPdbc)));
+        this.wallet?.pdbcusd, this.wallet?.pdbcusd * this.getLpTokenValue(this.getPool('PDBC'))));
     }
 
     if (this.wallet?.amznusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('AMZN-DUSD',
-        this.wallet?.amznusd , this.wallet?.amznusd * this.getLpTokenValue(this.poolAmzn)));
+        this.wallet?.amznusd , this.wallet?.amznusd * this.getLpTokenValue(this.getPool('AMZN'))));
     }
 
     if (this.wallet?.nvdausd > 0) {
       this.lpTokensValues.push(new HoldingValue('NVDA-DUSD',
-        this.wallet?.nvdausd, this.wallet?.nvdausd * this.getLpTokenValue(this.poolNvda)));
+        this.wallet?.nvdausd, this.wallet?.nvdausd * this.getLpTokenValue(this.getPool('NVDA'))));
     }
 
     if (this.wallet?.coinusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('COIN-DUSD',
-        this.wallet?.coinusd , this.wallet?.coinusd * this.getLpTokenValue(this.poolCoin)));
+        this.wallet?.coinusd , this.wallet?.coinusd * this.getLpTokenValue(this.getPool('COIN'))));
     }
 
     if (this.wallet?.eemusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('EEM-DUSD',
-        this.wallet?.eemusd, this.wallet?.eemusd * this.getLpTokenValue(this.poolEem)));
+        this.wallet?.eemusd, this.wallet?.eemusd * this.getLpTokenValue(this.getPool('EEM'))));
     }
 
     if (this.wallet?.msftusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('MSFT-DUSD',
-        this.wallet?.msftusd, this.wallet?.msftusd * this.getLpTokenValue(this.poolMsft)));
+        this.wallet?.msftusd, this.wallet?.msftusd * this.getLpTokenValue(this.getPool('MSFT'))));
     }
 
     if (this.wallet?.nflxusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('NFLX-DUSD',
-        this.wallet?.nflxusd, this.wallet?.nflxusd * this.getLpTokenValue(this.poolNflx)));
+        this.wallet?.nflxusd, this.wallet?.nflxusd * this.getLpTokenValue(this.getPool('NFLX'))));
     }
 
     if (this.wallet?.fbusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('FB-DUSD',
-        this.wallet?.fbusd, this.wallet?.fbusd * this.getLpTokenValue(this.poolFb)));
+        this.wallet?.fbusd, this.wallet?.fbusd * this.getLpTokenValue(this.getPool('FB'))));
     }
     if (this.wallet?.voousd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('VOO-DUSD',
-        this.wallet?.voousd, this.wallet?.voousd * this.getLpTokenValue(this.poolVoo)));
+        this.wallet?.voousd, this.wallet?.voousd * this.getLpTokenValue(this.getPool('VOO'))));
     }
 
     if (this.wallet?.disusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('DIS-DUSD',
-        this.wallet?.disusd, this.wallet?.disusd * this.getLpTokenValue(this.poolDis)));
+        this.wallet?.disusd, this.wallet?.disusd * this.getLpTokenValue(this.getPool('DIS'))));
     }
 
     if (this.wallet?.mchiusd > 0 ) {
       this.lpTokensValues.push(new HoldingValue('MCHI-DUSD',
-        this.wallet?.mchiusd, this.wallet?.mchiusd * this.getLpTokenValue(this.poolMchi)));
+        this.wallet?.mchiusd, this.wallet?.mchiusd * this.getLpTokenValue(this.getPool('MCHI'))));
     }
 
     if (this.wallet?.mstrusd > 0) {
       this.lpTokensValues.push(new HoldingValue('MSTR-DUSD',
-        this.wallet?.mstrusd, this.wallet?.mstrusd * this.getLpTokenValue(this.poolMstr)));
+        this.wallet?.mstrusd, this.wallet?.mstrusd * this.getLpTokenValue(this.getPool('MSTR'))));
     }
 
     if (this.wallet?.intcusd > 0) {
       this.lpTokensValues.push(new HoldingValue('INTC-DUSD',
-        this.wallet?.intcusd , this.wallet?.intcusd * this.getLpTokenValue(this.poolIntc)));
+        this.wallet?.intcusd , this.wallet?.intcusd * this.getLpTokenValue(this.getPool('INTC'))));
     }
 
     if (this.wallet?.pyplusd > 0) {
       this.lpTokensValues.push(new HoldingValue('PYPL-DUSD',
-        this.wallet?.pyplusd , this.wallet?.pyplusd * this.getLpTokenValue(this.poolPypl)));
+        this.wallet?.pyplusd , this.wallet?.pyplusd * this.getLpTokenValue(this.getPool('PYPL'))));
     }
 
     if (this.wallet?.brkbusd > 0) {
       this.lpTokensValues.push(new HoldingValue('BRK.B-DUSD',
-        this.wallet?.brkbusd , this.wallet?.brkbusd * this.getLpTokenValue(this.poolBrkb)));
+        this.wallet?.brkbusd , this.wallet?.brkbusd * this.getLpTokenValue(this.getPool('BRK.B'))));
     }
 
     if (this.wallet?.kousd > 0) {
       this.lpTokensValues.push(new HoldingValue('KO-DUSD',
-        this.wallet?.kousd , this.wallet?.kousd * this.getLpTokenValue(this.poolKo)));
+        this.wallet?.kousd , this.wallet?.kousd * this.getLpTokenValue(this.getPool('KO'))));
     }
 
     if (this.wallet?.pgusd > 0) {
       this.lpTokensValues.push(new HoldingValue('PG-DUSD',
-        this.wallet?.pgusd , this.wallet?.pgusd * this.getLpTokenValue(this.poolPg)));
+        this.wallet?.pgusd , this.wallet?.pgusd * this.getLpTokenValue(this.getPool('PG'))));
+    }
+
+    if (this.wallet?.sapusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('SAP-DUSD',
+        this.wallet?.sapusd , this.wallet?.sapusd * this.getLpTokenValue(this.getPool('SAP'))));
+    }
+
+    if (this.wallet?.urausd > 0) {
+      this.lpTokensValues.push(new HoldingValue('URA-DUSD',
+        this.wallet?.urausd , this.wallet?.urausd * this.getLpTokenValue(this.getPool('URA'))));
+    }
+
+    if (this.wallet?.gsgusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('GSG-DUSD',
+        this.wallet?.gsgusd , this.wallet?.gsgusd * this.getLpTokenValue(this.getPool('GSG'))));
+    }
+
+    if (this.wallet?.csusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('CS-DUSD',
+        this.wallet?.csusd , this.wallet?.csusd * this.getLpTokenValue(this.getPool('CS'))));
     }
   }
 
@@ -1765,164 +1777,184 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getFreezerDfiUsd(): number {
-    return this.getFreezerDfiCount() * this.poolBtc?.priceB;
+    return this.getFreezerDfiCount() * this.getPool('BTC')?.priceB;
   }
 
   // ANTEIL CRYPTO
   getAnteilLMOfBtcPoolValue(): number {
-    return ((this.wallet.dfiInBtcPool * this.poolBtc?.priceB) + (this.wallet.btcInBtcPool * this.poolBtc?.priceA));
+    return ((this.wallet.dfiInBtcPool * this.getPool('BTC')?.priceB) + (this.wallet.btcInBtcPool * this.getPool('BTC')?.priceA));
   }
   getAnteilLMOfEthPoolValue(): number {
-    return ((this.wallet.dfiInEthPool * this.poolBtc?.priceB) + (this.wallet.ethInEthPool * this.poolEth?.priceA));
+    return ((this.wallet.dfiInEthPool * this.getPool('BTC')?.priceB) + (this.wallet.ethInEthPool * this.getPool('ETH')?.priceA));
   }
   getAnteilLMOfLtcPoolValue(): number {
-    return ((this.wallet.dfiInLtcPool * this.poolBtc?.priceB) + (this.wallet.ltcInLtcPool * this.poolLtc?.priceA));
+    return ((this.wallet.dfiInLtcPool * this.getPool('BTC')?.priceB) + (this.wallet.ltcInLtcPool * this.getPool('LTC')?.priceA));
   }
   getAnteilLMOfUsdtPoolValue(): number {
-    return ((this.wallet.dfiInUsdtPool * this.poolBtc?.priceB) + (this.wallet.usdtInUsdtPool * this.poolUsdt?.priceA));
+    return ((this.wallet.dfiInUsdtPool * this.getPool('BTC')?.priceB) + (this.wallet.usdtInUsdtPool * this.getPool('USDT')?.priceA));
   }
   getAnteilLMOfUsdcPoolValue(): number {
-    return ((this.wallet.dfiInUsdcPool * this.poolBtc?.priceB) + (this.wallet.usdcInUsdcPool * this.poolUsdc?.priceA));
+    return ((this.wallet.dfiInUsdcPool * this.getPool('BTC')?.priceB) + (this.wallet.usdcInUsdcPool * this.getPool('USDC')?.priceA));
   }
   getAnteilLMOfDogePoolValue(): number {
-    return ((this.wallet.dfiInDogePool * this.poolBtc?.priceB) + (this.wallet.dogeInDogePool * this.poolDoge?.priceA));
+    return ((this.wallet.dfiInDogePool * this.getPool('BTC')?.priceB) + (this.wallet.dogeInDogePool * this.getPool('DOGE')?.priceA));
   }
   getAnteilLMOfBchPoolValue(): number {
-    return ((this.wallet.dfiInBchPool * this.poolBtc?.priceB) + (this.wallet.bchInBchPool * this.poolBch?.priceA));
+    return ((this.wallet.dfiInBchPool * this.getPool('BTC')?.priceB) + (this.wallet.bchInBchPool * this.getPool('BCH')?.priceA));
   }
   // ANTEIL STOCKS
   getAnteilLMOfUsdPoolValue(): number {
-    return ((this.wallet.dfiInUsdPool * this.poolBtc?.priceB) + (this.wallet.usdInUsdPool * this.getUsdPriceOfStockPools(this.poolUsd)));
+    return ((this.wallet.dfiInUsdPool * this.getPool('BTC')?.priceB) + (this.wallet.usdInUsdPool
+      * this.getUsdPriceOfStockPools(this.getPool('DUSD'))));
   }
   getAnteilLMOfTslaPoolValue(): number {
-    return ((this.wallet.usdInTslaPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.tslaInTslaPool * this.getUsdPriceOfStockPools(this.poolTsla)));
+    return ((this.wallet.usdInTslaPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.tslaInTslaPool * this.getUsdPriceOfStockPools(this.getPool('TSLA'))));
   }
   getAnteilLMOfSpyPoolValue(): number {
-    return ((this.wallet.usdInSpyPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.spyInSpyPool * this.getUsdPriceOfStockPools(this.poolSpy)));
+    return ((this.wallet.usdInSpyPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.spyInSpyPool * this.getUsdPriceOfStockPools(this.getPool('SPY'))));
   }
   getAnteilLMOfQqqPoolValue(): number {
-    return ((this.wallet.usdInQqqPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.qqqInQqqPool * this.getUsdPriceOfStockPools(this.poolQqq)));
+    return ((this.wallet.usdInQqqPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.qqqInQqqPool * this.getUsdPriceOfStockPools(this.getPool('QQQ'))));
   }
   getAnteilLMOfPltrPoolValue(): number {
-    return ((this.wallet.usdInPltrPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.pltrInPltrPool * this.getUsdPriceOfStockPools(this.poolPltr)));
+    return ((this.wallet.usdInPltrPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.pltrInPltrPool * this.getUsdPriceOfStockPools(this.getPool('PLTR'))));
   }
   getAnteilLMOfSlvPoolValue(): number {
-    return ((this.wallet.usdInSlvPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.slvInSlvPool * this.getUsdPriceOfStockPools(this.poolSlv)));
+    return ((this.wallet.usdInSlvPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.slvInSlvPool * this.getUsdPriceOfStockPools(this.getPool('SLV'))));
   }
   getAnteilLMOfAaplPoolValue(): number {
-    return ((this.wallet.usdInAaplPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.aaplInAaplPool * this.getUsdPriceOfStockPools(this.poolAapl)));
+    return ((this.wallet.usdInAaplPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.aaplInAaplPool * this.getUsdPriceOfStockPools(this.getPool('AAPL'))));
   }
   getAnteilLMOfGldPoolValue(): number {
-    return ((this.wallet.usdInGldPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.gldInGldPool * this.getUsdPriceOfStockPools(this.poolGld)));
+    return ((this.wallet.usdInGldPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.gldInGldPool * this.getUsdPriceOfStockPools(this.getPool('GLD'))));
   }
   getAnteilLMOfGmePoolValue(): number {
-    return ((this.wallet.usdInGmePool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.gmeInGmePool * this.getUsdPriceOfStockPools(this.poolGme)));
+    return ((this.wallet.usdInGmePool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.gmeInGmePool * this.getUsdPriceOfStockPools(this.getPool('GME'))));
   }
   getAnteilLMOfGooglPoolValue(): number {
-    return ((this.wallet.usdInGooglPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.googlInGooglPool * this.getUsdPriceOfStockPools(this.poolGoogl)));
+    return ((this.wallet.usdInGooglPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.googlInGooglPool * this.getUsdPriceOfStockPools(this.getPool('GOOGL'))));
   }
   getAnteilLMOfArkkPoolValue(): number {
-    return ((this.wallet.usdInArkkPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.arkkInArkkPool * this.getUsdPriceOfStockPools(this.poolArkk)));
+    return ((this.wallet.usdInArkkPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.arkkInArkkPool * this.getUsdPriceOfStockPools(this.getPool('Arkk'))));
   }
   getAnteilLMOfBabaPoolValue(): number {
-    return ((this.wallet.usdInBabaPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.babaInBabaPool * this.getUsdPriceOfStockPools(this.poolBaba)));
+    return ((this.wallet.usdInBabaPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.babaInBabaPool * this.getUsdPriceOfStockPools(this.getPool('BABA'))));
   }
   getAnteilLMOfVnqPoolValue(): number {
-    return ((this.wallet.usdInVnqPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.vnqInVnqPool * this.getUsdPriceOfStockPools(this.poolVnq)));
+    return ((this.wallet.usdInVnqPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.vnqInVnqPool * this.getUsdPriceOfStockPools(this.getPool('VNQ'))));
   }
   getAnteilLMOfUrthPoolValue(): number {
-    return ((this.wallet.usdInUrthPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.urthInUrthPool * this.getUsdPriceOfStockPools(this.poolUrth)));
+    return ((this.wallet.usdInUrthPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.urthInUrthPool * this.getUsdPriceOfStockPools(this.getPool('URTH'))));
   }
   getAnteilLMOfTltPoolValue(): number {
-    return ((this.wallet.usdInTltPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.tltInTltPool * this.getUsdPriceOfStockPools(this.poolTlt)));
+    return ((this.wallet.usdInTltPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.tltInTltPool * this.getUsdPriceOfStockPools(this.getPool('TLT'))));
   }
   getAnteilLMOfPdbcPoolValue(): number {
-    return ((this.wallet.usdInPdbcPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.pdbcInPdbcPool * this.getUsdPriceOfStockPools(this.poolPdbc)));
+    return ((this.wallet.usdInPdbcPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.pdbcInPdbcPool * this.getUsdPriceOfStockPools(this.getPool('PDBC'))));
   }
   getAnteilLMOfAmznPoolValue(): number {
-    return ((this.wallet.usdInAmznPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.amznInAmznPool * this.getUsdPriceOfStockPools(this.poolAmzn)));
+    return ((this.wallet.usdInAmznPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.amznInAmznPool * this.getUsdPriceOfStockPools(this.getPool('AMZN'))));
   }
   getAnteilLMOfNvdaPoolValue(): number {
-    return ((this.wallet.usdInNvdaPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.nvdaInNvdaPool * this.getUsdPriceOfStockPools(this.poolNvda)));
+    return ((this.wallet.usdInNvdaPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.nvdaInNvdaPool * this.getUsdPriceOfStockPools(this.getPool('NVDA'))));
   }
   getAnteilLMOfCoinPoolValue(): number {
-    return ((this.wallet.usdInCoinPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.coinInCoinPool * this.getUsdPriceOfStockPools(this.poolCoin)));
+    return ((this.wallet.usdInCoinPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.coinInCoinPool * this.getUsdPriceOfStockPools(this.getPool('COIN'))));
   }
   getAnteilLMOfEemPoolValue(): number {
-    return ((this.wallet.usdInEemPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.eemInEemPool * this.getUsdPriceOfStockPools(this.poolEem)));
+    return ((this.wallet.usdInEemPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.eemInEemPool * this.getUsdPriceOfStockPools(this.getPool('EEM'))));
   }
   getAnteilLMOfMsftPoolValue(): number {
-    return ((this.wallet.usdInMsftPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.msftInMsftPool * this.getUsdPriceOfStockPools(this.poolMsft)));
+    return ((this.wallet.usdInMsftPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.msftInMsftPool * this.getUsdPriceOfStockPools(this.getPool('MSFT'))));
   }
   getAnteilLMOfNflxPoolValue(): number {
-    return ((this.wallet.usdInNflxPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.nflxInNflxPool * this.getUsdPriceOfStockPools(this.poolNflx)));
+    return ((this.wallet.usdInNflxPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.nflxInNflxPool * this.getUsdPriceOfStockPools(this.getPool('NFLX'))));
   }
   getAnteilLMOfFbPoolValue(): number {
-    return ((this.wallet.usdInFbPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.fbInFbPool * this.getUsdPriceOfStockPools(this.poolFb)));
+    return ((this.wallet.usdInFbPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.fbInFbPool * this.getUsdPriceOfStockPools(this.getPool('FB'))));
   }
   getAnteilLMOfVooPoolValue(): number {
-    return ((this.wallet.usdInVooPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.vooInVooPool * this.getUsdPriceOfStockPools(this.poolVoo)));
+    return ((this.wallet.usdInVooPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.vooInVooPool * this.getUsdPriceOfStockPools(this.getPool('VOO'))));
   }
   getAnteilLMOfDisPoolValue(): number {
-    return ((this.wallet.usdInDisPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.disInDisPool * this.getUsdPriceOfStockPools(this.poolDis)));
+    return ((this.wallet.usdInDisPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.disInDisPool * this.getUsdPriceOfStockPools(this.getPool('DIS'))));
   }
   getAnteilLMOfMchiPoolValue(): number {
-    return ((this.wallet.usdInMchiPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.mchiInMchiPool * this.getUsdPriceOfStockPools(this.poolMchi)));
+    return ((this.wallet.usdInMchiPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.mchiInMchiPool * this.getUsdPriceOfStockPools(this.getPool('MCHI'))));
   }
   getAnteilLMOfMstrPoolValue(): number {
-    return ((this.wallet.usdInMstrPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.mstrInMstrPool * this.getUsdPriceOfStockPools(this.poolMstr)));
+    return ((this.wallet.usdInMstrPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.mstrInMstrPool * this.getUsdPriceOfStockPools(this.getPool('MSTR'))));
   }
   getAnteilLMOfIntcPoolValue(): number {
-    return ((this.wallet.usdInIntcPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.intcInIntcPool * this.getUsdPriceOfStockPools(this.poolIntc)));
+    return ((this.wallet.usdInIntcPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.intcInIntcPool * this.getUsdPriceOfStockPools(this.getPool('INTC'))));
   }
 
   getAnteilLMOfPyplPoolValue(): number {
-    return ((this.wallet.usdInPyplPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.pyplInPyplPool * this.getUsdPriceOfStockPools(this.poolPypl)));
+    return ((this.wallet.usdInPyplPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.pyplInPyplPool * this.getUsdPriceOfStockPools(this.getPool('PYPL'))));
   }
 
   getAnteilLMOfBrkbPoolValue(): number {
-    return ((this.wallet.usdInBrkbPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.brkbInBrkbPool * this.getUsdPriceOfStockPools(this.poolBrkb)));
+    return ((this.wallet.usdInBrkbPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.brkbInBrkbPool * this.getUsdPriceOfStockPools(this.getPool('BRK.B'))));
   }
 
   getAnteilLMOfKoPoolValue(): number {
-    return ((this.wallet.usdInKoPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.koInKoPool * this.getUsdPriceOfStockPools(this.poolKo)));
+    return ((this.wallet.usdInKoPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.koInKoPool * this.getUsdPriceOfStockPools(this.getPool('KO'))));
   }
 
   getAnteilLMOfPgPoolValue(): number {
-    return ((this.wallet.usdInPgPool * this.getUsdPriceOfStockPools(this.poolUsd))
-      + (this.wallet.pgInPgPool * this.getUsdPriceOfStockPools(this.poolPg)));
+    return ((this.wallet.usdInPgPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.pgInPgPool * this.getUsdPriceOfStockPools(this.getPool('PG'))));
   }
 
+  getAnteilLMOfSapPoolValue(): number {
+    return ((this.wallet.usdInSapPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.sapInSapPool * this.getUsdPriceOfStockPools(this.getPool('SAP'))));
+  }
+
+  getAnteilLMOfUraPoolValue(): number {
+    return ((this.wallet.usdInUraPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.uraInUraPool * this.getUsdPriceOfStockPools(this.getPool('URA'))));
+  }
+
+  getAnteilLMOfGsgPoolValue(): number {
+    return ((this.wallet.usdInGsgPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.gsgInGsgPool * this.getUsdPriceOfStockPools(this.getPool('GSG'))));
+  }
+
+  getAnteilLMOfCsPoolValue(): number {
+    return ((this.wallet.usdInCsPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.csInCsPool * this.getUsdPriceOfStockPools(this.getPool('CS'))));
+  }
   buildDataForChart(): void {
 
     const dataBtc = new Data();
@@ -2081,6 +2113,22 @@ export class ValueComponent implements OnInit, OnChanges {
     dataPG.name = 'PG';
     dataPG.value = this.getPgValueUsd() * this.dataService.getPrice(this.fiat);
 
+    const dataSAP = new Data();
+    dataSAP.name = 'SAP';
+    dataSAP.value = this.getSapValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataURA = new Data();
+    dataURA.name = 'URA';
+    dataURA.value = this.getUraValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataCS = new Data();
+    dataCS.name = 'CS';
+    dataCS.value = this.getCsValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataGSG = new Data();
+    dataGSG.name = 'GSG';
+    dataGSG.value = this.getGsgValueUsd() * this.dataService.getPrice(this.fiat);
+
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
     dataDfi.value = this.getDfiValueUsd() * this.dataService.getPrice(this.fiat);
@@ -2091,7 +2139,8 @@ export class ValueComponent implements OnInit, OnChanges {
       dataURTH.value + dataTLT.value + dataPDBC.value  + dataAMZN.value + dataNVDA.value + dataCOIN.value + dataEEM.value +
       dataMSFT.value + dataNFLX.value + dataFB.value + dataVOO.value + dataDfi.value +
       dataDIS.value + dataMCHI.value + dataMSTR.value + dataINTC.value +
-      dataPYPL.value + dataBRKB.value + dataKO.value + dataPG.value;
+      dataPYPL.value + dataBRKB.value + dataKO.value + dataPG.value +
+      dataSAP.value + dataURA.value + dataCS.value + dataGSG.value;
 
     this.chartOptions = {
       series: [{
@@ -2099,7 +2148,8 @@ export class ValueComponent implements OnInit, OnChanges {
         data: this.getSeriesOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
           dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
           dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataDfi)
+          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG,
+          dataSAP, dataURA, dataCS, dataGSG, dataDfi)
       }],
       chart: {
         width: '90%',
@@ -2117,20 +2167,20 @@ export class ValueComponent implements OnInit, OnChanges {
       colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
         dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
         dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataDfi),
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
       xaxis: {
         type: 'category',
         categories: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge,
         dataBch, dataTsla, dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA,
         dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataDfi),
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
         position: 'bottom',
         labels: {
           style: {
             colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
               dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
               dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-              dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataDfi),
+              dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
             fontSize: '16px',
             fontWeight: 800
           },
@@ -2153,7 +2203,7 @@ export class ValueComponent implements OnInit, OnChanges {
         colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
           dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
           dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataDfi)
+          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi)
       },
     };
   }
@@ -2167,6 +2217,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
+                                dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
                                 dataDfi: Data): Array<number> {
     const incomeNumbers = new Array<number>();
 
@@ -2287,6 +2338,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataPG.value > 0) {
       incomeNumbers.push(+dataPG.value.toFixed(2));
     }
+    if (dataSAP.value > 0) {
+      incomeNumbers.push(+dataSAP.value.toFixed(2));
+    }
+    if (dataURA.value > 0) {
+      incomeNumbers.push(+dataURA.value.toFixed(2));
+    }
+    if (dataCS.value > 0) {
+      incomeNumbers.push(+dataCS.value.toFixed(2));
+    }
+    if (dataGSG.value > 0) {
+      incomeNumbers.push(+dataGSG.value.toFixed(2));
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push(+dataDfi.value.toFixed(2));
     }
@@ -2302,6 +2365,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
+                                dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
                                 dataDfi: Data): Array<string> {
     const incomeNumbers = new Array<string>();
 
@@ -2422,6 +2486,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataPG.value > 0) {
       incomeNumbers.push('#003cae');
     }
+    if (dataSAP.value > 0) {
+      incomeNumbers.push('#019CE0');
+    }
+    if (dataURA.value > 0) {
+      incomeNumbers.push('#100A57');
+    }
+    if (dataCS.value > 0) {
+      incomeNumbers.push('#003662');
+    }
+    if (dataGSG.value > 0) {
+      incomeNumbers.push('#FFDE2E');
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push('#ff00af');
     }
@@ -2438,6 +2514,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataMSFT: Data, dataNFLX: Data, dataFB: Data, dataVOO: Data,
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
+                                dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
                                 dataDfi: Data): Array<string> {
 
     const incomeNumbers = new Array<string>();
@@ -2557,6 +2634,18 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getAnteilPortfolioForChart(dataPG, allValue) > 0) {
       incomeNumbers.push('PG ' + this.getAnteilPortfolioForChart(dataPG, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataSAP, allValue) > 0) {
+      incomeNumbers.push('SAP ' + this.getAnteilPortfolioForChart(dataSAP, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataURA, allValue) > 0) {
+      incomeNumbers.push('URA ' + this.getAnteilPortfolioForChart(dataURA, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataCS, allValue) > 0) {
+      incomeNumbers.push('CS ' + this.getAnteilPortfolioForChart(dataCS, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataGSG, allValue) > 0) {
+      incomeNumbers.push('GSG ' + this.getAnteilPortfolioForChart(dataGSG, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
       incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(1) + '%');

@@ -339,6 +339,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'PG-DUSD': {
         return new StockLongName('The Procter & Gamble Company', 'PG');
       }
+      case 'SAP-DUSD': {
+        return new StockLongName('SAP SE', 'SAP');
+      }
+      case 'CS-DUSD': {
+        return new StockLongName('Credit Suisse Group AG', 'CS');
+      }
+      case 'GSG-DUSD': {
+        return new StockLongName('iShares S&P GSCI Commodity-Indexed Trust', 'GSG');
+      }
+      case 'URA-DUSD': {
+        return new StockLongName('Global X Uranium ETF', 'URA');
+      }
       default: {
         return new StockLongName('', '');
       }
@@ -629,11 +641,12 @@ export class DexStatisticsComponent implements OnInit {
 
   getStockPrice(key: string): number {
 
-    if (!this.oraclePrices || this.oraclePrices.data.length === 0) {
+    if ( !key || !this.oraclePrices || this.oraclePrices.data.length === 0) {
       return 0;
     }
 
     const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice.active.amount;
+
     return Math.round(price * 100) / 100;
   }
 

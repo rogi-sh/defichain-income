@@ -144,6 +144,18 @@ export class IncomeComponent implements OnInit, OnChanges {
   poolPgOut!: Outcome;
 
   @Input()
+  poolSapOut!: Outcome;
+
+  @Input()
+  poolUraOut!: Outcome;
+
+  @Input()
+  poolCsOut!: Outcome;
+
+  @Input()
+  poolGsgOut!: Outcome;
+
+  @Input()
   poolBtc!: Pool;
 
   @Input()
@@ -283,6 +295,18 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   getAnteilPgPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilSapPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilUraPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilCsPoolAnGesamtLM: number;
+
+  @Input()
+  getAnteilGsgPoolAnGesamtLM: number;
 
   @Input()
   getDfiCountInLM: number;
@@ -452,6 +476,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolPgOut?.dfiPerMonth > 0) {
       incomeNumbers.push(Math.round(this.poolPgOut.dfiPerMonth * 100) / 100);
     }
+    if (this.poolSapOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolSapOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolUraOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolUraOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolCsOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolCsOut.dfiPerMonth * 100) / 100);
+    }
+    if (this.poolGsgOut?.dfiPerMonth > 0) {
+      incomeNumbers.push(Math.round(this.poolGsgOut.dfiPerMonth * 100) / 100);
+    }
 
     return incomeNumbers;
   }
@@ -595,6 +631,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     if (this.poolPgOut?.dfiPerMonth > 0) {
       incomeNumbers.push('#003cae');
     }
+    if (this.poolSapOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#019CE0');
+    }
+    if (this.poolUraOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#100A57');
+    }
+    if (this.poolCsOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#003662');
+    }
+    if (this.poolGsgOut?.dfiPerMonth > 0) {
+      incomeNumbers.push('#FFDE2E');
+    }
 
     return incomeNumbers;
   }
@@ -726,6 +774,18 @@ export class IncomeComponent implements OnInit, OnChanges {
     }
     if (this.poolPgOut.dfiPerMonth > 0) {
       incomeNumbers.push(`PG-Pool - ${this.isIncognitoModeOn ? '****' : this.poolPgOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolSapOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`SAP-Pool - ${this.isIncognitoModeOn ? '****' : this.poolSapOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolUraOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`URA-Pool - ${this.isIncognitoModeOn ? '****' : this.poolUraOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolCsOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`CS-Pool - ${this.isIncognitoModeOn ? '****' : this.poolCsOut.dfiPerMonth.toFixed(2)} DFI`);
+    }
+    if (this.poolGsgOut.dfiPerMonth > 0) {
+      incomeNumbers.push(`GSG-Pool - ${this.isIncognitoModeOn ? '****' : this.poolGsgOut.dfiPerMonth.toFixed(2)} DFI`);
     }
     return incomeNumbers;
   }

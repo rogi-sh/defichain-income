@@ -20,12 +20,7 @@ export class DataService {
   constructor(private http: HttpClient) {
 
     this.usd = new USD();
-
     this.getCurrencies();
-
-    setInterval(() => {
-      this.getCurrencies();
-    }, 60000);
 
   }
 
@@ -57,7 +52,7 @@ export class DataService {
     return this.poolDfiPrice;
   }
 
-  public getCurrencies = async () =>  {
+  public async getCurrencies(): Promise<void> {
     const promise = await this.http.get<Currencies>(environment.cur).toPromise();
     this.usd = promise.usd;
   }

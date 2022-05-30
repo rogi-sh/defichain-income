@@ -23,8 +23,6 @@ export class PriceComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.dataService.getCurrencies();
-    this.usd = await this.dataService.getUsdCur();
   }
 
 }

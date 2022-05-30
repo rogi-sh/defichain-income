@@ -253,6 +253,11 @@ export interface WalletDto {
   kousd: number;
   pgusd: number;
 
+  sapusd: number;
+  gsgusd: number;
+  csusd: number;
+  urausd: number;
+
   // User Infos
   // BTC Pool
   btcInBtcPool: number;
@@ -448,6 +453,26 @@ export interface WalletDto {
   pgInPgPool: number;
   pg: number;
   usdInPgPool: number;
+
+  // SAP Pool
+  sapInSapPool: number;
+  sap: number;
+  usdInSapPool: number;
+
+  // GSG Pool
+  gsgInGsgPool: number;
+  gsg: number;
+  usdInGsgPool: number;
+
+  // CS Pool
+  csInCsPool: number;
+  cs: number;
+  usdInCsPool: number;
+
+  // URA Pool
+  uraInUraPool: number;
+  ura: number;
+  usdInUraPool: number;
 }
 
 export class Newsletter {
@@ -508,10 +533,15 @@ export class Wallet {
   mstrusd = 0;
   intcusd = 0;
 
-  pyplusd = 0;
+    pyplusd = 0;
   brkbusd = 0;
   kousd = 0;
   pgusd = 0;
+
+  sapusd = 0;
+  urausd = 0;
+  csusd = 0;
+  gsgusd = 0;
 
   // User Infos
   // BTC Pool
@@ -825,6 +855,38 @@ export class Wallet {
   pgKey = 'pgKey';
   usdInPgPoolKey = 'usdInPgPoolKey';
   usdInPgPool = 0;
+
+  // SAP Pool
+  sapInSapPool = 0;
+  sapInSapPoolKey = 'sapInSapPoolKey';
+  sap = 0;
+  sapKey = 'sapKey';
+  usdInSapPoolKey = 'usdInSapPoolKey';
+  usdInSapPool = 0;
+
+  // URA Pool
+  uraInUraPool = 0;
+  uraInUraPoolKey = 'uraInUraPoolKey';
+  ura = 0;
+  uraKey = 'uraKey';
+  usdInUraPoolKey = 'usdInUraPoolKey';
+  usdInUraPool = 0;
+
+  // GSG Pool
+  gsgInGsgPool = 0;
+  gsgInGsgPoolKey = 'gsgInGsgPoolKey';
+  gsg = 0;
+  gsgKey = 'gsgKey';
+  usdInGsgPoolKey = 'usdInGsgPoolKey';
+  usdInGsgPool = 0;
+
+  // CS Pool
+  csInCsPool = 0;
+  csInCsPoolKey = 'csInCsPoolKey';
+  cs = 0;
+  csKey = 'csKey';
+  usdInCsPoolKey = 'usdInCsPoolKey';
+  usdInCsPool = 0;
 
 }
 
