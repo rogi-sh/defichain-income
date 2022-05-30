@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.22.1 - 30.5.2022';
+    this.log.comment = 'Dex Pool column sortable';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.22.0 - 30.5.2022';
     this.log.comment = 'Add new pools SAP, URA, CS and GSG';
     this.logs.push(this.log);

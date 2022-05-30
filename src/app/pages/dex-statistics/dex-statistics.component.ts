@@ -444,6 +444,15 @@ export class DexStatisticsComponent implements OnInit {
         this.cryptoPools.sort((a, b) =>
           this.getPoolFromOceanPoolPairs(a.id)?.volume.h24 - this.getPoolFromOceanPoolPairs(b.id)?.volume.h24);
       }
+    } else if (column === 'pool') {
+      this.sortColumn = 'pool';
+      if (!this.asc) {
+        this.stocksPools.sort((a, b) => b.symbol.localeCompare(a.symbol));
+        this.cryptoPools.sort((a, b) => b.symbol.localeCompare(a.symbol));
+      } else {
+        this.stocksPools.sort((a, b) => a.symbol.localeCompare(b.symbol));
+        this.cryptoPools.sort((a, b) => a.symbol.localeCompare(b.symbol));
+      }
     }
 
     this.asc = !this.asc;
