@@ -669,7 +669,22 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdPriceOfStockPools(pool: Pool): number {
+
+    if (pool.id === '17') {
+      return this.getCorrectDusdPrice();
+    }
+
     return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
+  }
+
+  getCorrectDusdPrice(): number {
+    return (100 + this.getArb(this.cexPrice,
+      this.getPool('DUSD')?.totalLiquidityUsd / 2 / +this.getPool('DUSD')?.reserveB) * -1 ) / 100;
+  }
+
+  getArb(cex: number, dex: number): number {
+    // round 1 digit
+    return Math.round(dex / cex  * 1000 - 1000) / 10;
   }
 
   getAllValuesUsdPrice(): number {

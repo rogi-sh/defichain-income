@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '8.22.2 - 31.5.2022';
+    this.log.comment = 'Calculations with correct DUSD Price';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '8.22.1 - 30.5.2022';
     this.log.comment = 'Dex Pool column sortable';
     this.logs.push(this.log);

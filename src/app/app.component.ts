@@ -5179,7 +5179,17 @@ export class AppComponent implements OnInit {
 
 
   getUsdPriceOfStockPools(pool: Pool): number {
+
+    if (pool.id === '17') {
+      return this.getCorrectDusdPrice();
+    }
+
     return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
+  }
+
+  getCorrectDusdPrice(): number {
+    return (100 + this.getArb(this.priceDFICEX,
+      this.poolUsd?.totalLiquidityUsd / 2 / +this.poolUsd?.reserveB) * -1 ) / 100;
   }
 
   getDfiCount(): number {
