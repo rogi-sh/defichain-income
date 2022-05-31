@@ -670,7 +670,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getUsdPriceOfStockPools(pool: Pool): number {
 
-    if (pool.id === '17') {
+    if (pool && pool.id === '17') {
       return this.getCorrectDusdPrice();
     }
 

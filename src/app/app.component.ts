@@ -5180,7 +5180,7 @@ export class AppComponent implements OnInit {
 
   getUsdPriceOfStockPools(pool: Pool): number {
 
-    if (pool.id === '17') {
+    if (pool && pool.id === '17') {
       return this.getCorrectDusdPrice();
     }
 

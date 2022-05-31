@@ -9,10 +9,9 @@
       <div class="mr-4">
         dUSD
         {{!poolUsd ? 0: getRound2((100 + getArb(priceDFICEX, poolUsd?.totalLiquidityUsd / 2 / poolUsd?.reserveB) * -1 ) / 100)}} $ /
-        DEX
-        <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> /
-        CEX
-        <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
+        DFI
+        <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price>
+        - <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
         /
         &Oslash; APR {{avgApr}} %
       </div>
@@ -87,9 +86,8 @@
           class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           dUSD
           {{!poolUsd ? 0: getRound2((100 + getArb(priceDFICEX, poolUsd?.totalLiquidityUsd / 2 / poolUsd?.reserveB) * -1 ) / 100)}} $ /
-          DEX
-           <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> /
-          CEX
+          DFI
+           <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> -
           <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           /
           &Oslash; APR {{avgApr}} %
