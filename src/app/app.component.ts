@@ -4738,10 +4738,6 @@ export class AppComponent implements OnInit {
     // Collateral
     const collateral = this.getVaultsValueUsd();
 
-
-
-    console.log("Bestand " + allCryptoAndStocks + " col" + collateral)
-
     return allCryptoAndStocks + collateral;
   }
 
