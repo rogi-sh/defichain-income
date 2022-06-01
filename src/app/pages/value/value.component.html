@@ -292,7 +292,7 @@
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
             <div *ngIf='!isIncognitoModeOn'>{{wallet?.dfi | number: '1.3-3'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='wallet?.dfi * poolBtc?.priceB'></app-price>
+                         [usdPrice]='wallet?.dfi * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
@@ -305,7 +305,7 @@
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
             <div *ngIf='!isIncognitoModeOn'>{{dfiInStaking | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='dfiInStaking * poolBtc?.priceB'></app-price>
+                         [usdPrice]='dfiInStaking * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
@@ -318,7 +318,7 @@
             class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block text-center'>
             <div *ngIf='!isIncognitoModeOn'>{{dfiInDfxStaking | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='dfiInDfxStaking * poolBtc?.priceB'></app-price>
+                         [usdPrice]='dfiInDfxStaking * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
@@ -331,7 +331,7 @@
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
             <div *ngIf='!isIncognitoModeOn'>{{wallet?.dfiInMasternodes  | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='wallet?.dfiInMasternodes * poolBtc?.priceB'></app-price>
+                         [usdPrice]='wallet?.dfiInMasternodes * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
@@ -344,7 +344,7 @@
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
             <div *ngIf='!isIncognitoModeOn'>{{getFreezerDfiCount() | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='getFreezerDfiCount()  * poolBtc?.priceB'></app-price>
+                         [usdPrice]='getFreezerDfiCount()  * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>

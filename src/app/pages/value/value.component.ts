@@ -1646,7 +1646,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.wallet?.arkkusd > 0  ) {
       this.lpTokensValues.push(new HoldingValue('ARKK-DUSD',
-        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getLpTokenValue(this.getPool('Arkk'))));
+        this.wallet?.arkkusd , this.wallet?.arkkusd * this.getLpTokenValue(this.getPool('ARKK'))));
     }
 
     if (this.wallet?.babausd > 0  ) {

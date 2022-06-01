@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '8.22.3 - 31.5.2022';
+    this.log.version = '8.22.5 - 31.5.2022';
+    this.log.comment = 'Fix DFI price in holdings wallet, Fix ARKK loan fiat value';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.22.4 - 31.5.2022';
     this.log.comment = 'Fix total value with CS Pool';
     this.logs.push(this.log);
 
