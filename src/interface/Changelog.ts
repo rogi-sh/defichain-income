@@ -13,6 +13,11 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '8.22.3 - 31.5.2022';
+    this.log.comment = 'Fix total value with CS Pool';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '8.22.3 - 31.5.2022';
     this.log.comment = 'Better UI for DFI in header';
     this.logs.push(this.log);
 

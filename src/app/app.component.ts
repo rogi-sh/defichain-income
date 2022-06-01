@@ -4738,6 +4738,10 @@ export class AppComponent implements OnInit {
     // Collateral
     const collateral = this.getVaultsValueUsd();
 
+
+
+    console.log("Bestand " + allCryptoAndStocks + " col" + collateral)
+
     return allCryptoAndStocks + collateral;
   }
 
@@ -4964,7 +4968,7 @@ export class AppComponent implements OnInit {
       + this.wallet?.usdInFbPool + this.wallet?.usdInDisPool + this.wallet?.usdInMchiPool + this.wallet?.usdInMstrPool
       + this.wallet?.usdInIntcPool + this.wallet?.usdInPyplPool + this.wallet?.usdInBrkbPool +  this.wallet?.usdInKoPool
       + this.wallet?.usdInPgPool + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInGsgPool
-      +  this.wallet?.usdInGsgPool) * this.getUsdPriceOfStockPools(this.poolUsd);
+      + this.wallet?.usdInCsPool) * this.getUsdPriceOfStockPools(this.poolUsd);
   }
   getTslaValueUsd(): number {
     return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.poolTsla);
