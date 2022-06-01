@@ -156,7 +156,7 @@
   </header>
 
   <div
-    class="fixed top-0 h-screen max-h-screen sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100 dark:bg-gray-800 dark:text-gray-100 overflow-y-auto"
+    class="fixed top-0 h-screen max-h-screen sm:hidden z-50 transition duration-1000 ease-in-out transform bg-gray-100 dark:bg-gray-800 dark:text-gray-100 overflow-y-auto mb-20"
     *ngIf="menu"
     [ngClass]="menu ? 'w-full' : ''"
   >
@@ -286,7 +286,7 @@
         </div>
       </div>
 
-      <div class="mx-8 mt-4">
+      <div class="mx-8 mt-4 mb-32">
         <select
           class="bg-gray-100 border-none pr-2 uppercase text-lg focus:outline-none h-10 mr-2 dark:bg-gray-700"
           (change)="useLanguage($event.target['value'])"
