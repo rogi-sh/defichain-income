@@ -11,6 +11,12 @@ export class Changelog {
 
     this.logs = new Array<Log>();
 
+
+    this.log = new Log();
+    this.log.version = '8.22.6 - 2.6.2022';
+    this.log.comment = 'Kucoin ERC 20 Status added in dex view';
+    this.logs.push(this.log);
+
     this.log = new Log();
     this.log.version = '8.22.5 - 31.5.2022';
     this.log.comment = 'Fix DFI price in holdings wallet, Fix ARKK loan fiat value';

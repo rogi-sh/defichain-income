@@ -568,6 +568,8 @@ export const EXCHANGE = gql`
     bittrexNotice
     kucoinStatusDeposit
     kucoinStatusWithdraw
+    kucoinStatusDepositErc20
+    kucoinStatusWithdrawErc20
     dfxBuy
     dfxSell
     dfxStaking

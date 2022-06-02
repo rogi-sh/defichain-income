@@ -959,6 +959,8 @@ export class Exchange {
   bittrexNotice: string;
   kucoinStatusDeposit: boolean;
   kucoinStatusWithdraw: boolean;
+  kucoinStatusDepositErc20: boolean;
+  kucoinStatusWithdrawErc20: boolean;
   dfxBuy: string;
   dfxSell: string;
   dfxStaking: string;
