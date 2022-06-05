@@ -457,7 +457,7 @@
               <div>
                 <h1 class="text-3xl mb-4 text-pink-500">{{ 'holdings.title' | translate }}</h1>
 
-                <div *ngIf="wallet && poolBtc">
+                <div *ngIf="wallet && poolBtc && pools && adressBalances && dataLoaded">
                   <app-value
                     [isIncognitoModeOn]="isIncognitoModeOn"
                     [fiat]="fiat"
@@ -4571,7 +4571,7 @@
                     [getLMUsd]="getLMUsd()"
                   ></app-income>
                 </div>
-                <div *ngIf="wallet && poolBtc">
+                <div *ngIf="wallet && poolBtc && pools && adressBalances && dataLoaded">
                   <app-value
                     [isIncognitoModeOn]="isIncognitoModeOn"
                     [hideHoldings]="true"

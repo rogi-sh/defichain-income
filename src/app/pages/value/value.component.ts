@@ -34,7 +34,7 @@ export class ValueComponent implements OnInit, OnChanges {
   fiat!: string;
 
   @Input()
-  pools: Pool[];
+  pools!: Pool[];
 
   @Input()
   hideHoldings: boolean;

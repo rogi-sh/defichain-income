@@ -458,7 +458,7 @@ export class AppComponent implements OnInit {
   successBackend = null;
   menu = false;
 
-  dataLoaded = true;
+  dataLoaded = false;
 
   isInfoOpen = false;
   selectedTab = 'manual';
@@ -2531,23 +2531,17 @@ export class AppComponent implements OnInit {
   }
 
   loadStackingMasternode(): void {
-    this.stakingService
-      .getMasternode().subscribe(
-      masternode => {
-        this.masternodeCount5Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 260).count;
-        this.masternodeCount10Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 520).count;
-        this.masternodeCount0Freezer = masternode.data.masternodes.locked.find(p => p.weeks === 0).count;
-        this.masternodeCount = this.masternodeCount5Freezer + this.masternodeCount10Freezer + this.masternodeCount0Freezer;
-        this.masternodeCountForAprCalc = this.masternodeCount5Freezer * 1.5 + this.masternodeCount10Freezer * 2
+
+     this.masternodeCount5Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 260).count;
+     this.masternodeCount10Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 520).count;
+     this.masternodeCount0Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 0).count;
+     this.masternodeCount = this.masternodeCount5Freezer + this.masternodeCount10Freezer + this.masternodeCount0Freezer;
+     this.masternodeCountForAprCalc = this.masternodeCount5Freezer * 1.5 + this.masternodeCount10Freezer * 2
           + this.masternodeCount0Freezer;
-        this.dfiBurned = masternode.data.burned.total;
-        this.berechneMNOut();
-        this.berechneAllOut();
-      },
-      err => {
-        console.error('Fehler beim loadStackingMasternode: ' + JSON.stringify(err.message));
-        this.apiOnline = false;
-      });
+     this.dfiBurned = this.oceanStats.data.burned.total;
+     this.berechneMNOut();
+     this.berechneAllOut();
+
   }
 
   getAddressForIteration(i: number): string {

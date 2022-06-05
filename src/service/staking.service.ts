@@ -21,7 +21,4 @@ export class StakingService {
     return this.http.get<DfxStaking>(environment.dfx);
   }
 
-  public getMasternode(): Observable<OceanStats> {
-    return this.http.get<OceanStats>(environment.oceanstats);
-  }
 }
