@@ -3,7 +3,6 @@ import { Dex } from '@services/dex.service';
 import {Location} from '@angular/common';
 import {
   AddressBalance,
-  DexPoolPair,
   MasternodeOutcome,
   Outcome,
   OutcomeStaking,
@@ -58,7 +57,7 @@ import {CountdownComponent} from 'ngx-countdown';
 import {
   AddressVaults,
   ChartOptions6, HoldingValue,
-  Newsletter, PoolIncomeValue, PoolPairsOcean,
+  Newsletter, PoolIncomeValue, PoolPairOcean, PoolPairsOcean,
   UserHistory,
   Vault,
   Wallet,
@@ -75,7 +74,7 @@ import { StakingService } from '@services/staking.service';
 import { Meta } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { SupernodeAccount } from '@interfaces/Supernode';
+import { TokenAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
 import { DfxStaking, OceanStats } from '@interfaces/Staking';
@@ -478,12 +477,32 @@ export class AppComponent implements OnInit {
   isIncomeChartOn = true;
   isIncomeChartOnKey = 'isIncomeChartOnKey';
 
-  private static setFromPoolPair(pool: Pool, poolPairs: DexPoolPair): void {
-    pool.totalLiquidityLpToken = poolPairs[pool.id].totalLiquidity;
-    const splitted = poolPairs[pool.id].symbol.split('-');
-    pool.tokenASymbol = splitted[0];
-    pool.tokenBSymbol = splitted[1];
+  private setFromPoolPair(id: string): Pool {
+
+    const pool = new Pool();
+    const poolFromOcean = this.getPoolOcean(id);
+
+    pool.id = poolFromOcean.id;
+    pool.poolPairId = poolFromOcean.id;
+    pool.apr = poolFromOcean.apr.total * 100;
+    pool.name = poolFromOcean.symbol;
+    pool.symbol = poolFromOcean.symbol;
+    pool.pair = poolFromOcean.symbol;
+    pool.rewardPct = +poolFromOcean.rewardPct;
+    pool.totalLiquidityLpToken = +poolFromOcean.totalLiquidity.token;
+    pool.totalLiquidityUsd = +poolFromOcean.totalLiquidity.usd;
+    pool.totalLiquidity = +poolFromOcean.totalLiquidity.token;
+    pool.tokenASymbol = poolFromOcean.tokenA.symbol;
+    pool.tokenBSymbol = poolFromOcean.tokenB.symbol;
+    pool.reserveB = poolFromOcean.tokenB.reserve;
+    pool.reserveA = poolFromOcean.tokenA.reserve;
+    pool.volume24h = poolFromOcean.volume.h24;
+
+
+    return pool;
   }
+
+
 
   updateDescription(description: string): void {
     this.translate.stream(description).subscribe((res: string) => {
@@ -602,8 +621,6 @@ export class AppComponent implements OnInit {
     this.clearWallet();
 
     this.loadFromLocalStorage();
-
-    this.testApi();
 
     await this.computeMeta();
 
@@ -1638,23 +1655,6 @@ export class AppComponent implements OnInit {
     this.matomoTracker.trackEvent('Klick', 'Change Show Input', JSON.stringify(this.showSettingsArea));
   }
 
-  testApi(): void {
-
-    this.dexService
-      .getHealthCheck()
-      .subscribe(response => {
-          if (response.status === 204) {
-            this.apiOnline = true;
-          }
-        },
-        err => {
-          console.error('Api down?' + err.message);
-          this.apiOnline = false;
-
-        });
-
-  }
-
   async computeMeta(): Promise<void> {
 
     // Stats
@@ -1667,6 +1667,9 @@ export class AppComponent implements OnInit {
       this.setStats(promiseStats);
 
       this.poolPairsOcean = await this.dexService.getPoolPairsOcean().toPromise();
+      this.extractPools();
+      const prices = await this.dexService.getPrices().toPromise();
+      this.computePrices(prices);
 
       // if fixed blocktime to 30 s
       this.blocktimeInS = 30;
@@ -1695,156 +1698,19 @@ export class AppComponent implements OnInit {
   }
 
   loadDex(): void {
-    forkJoin([
-      this.dexService.getPrices(),
-      this.dexService.getListpoolpairs()],
-    ).subscribe((([prices, poolPairs]: [Prices, DexPoolPair]) => {
-          this.parsePoolsAndComputeOutcome(prices, poolPairs);
-
-        }
-      ),
-      err => {
-        console.error('Fehler beim Load Dex Data wait: ' + JSON.stringify(err.message));
-        this.apiOnline = false;
-
-      });
-
+    this.parsePoolsAndComputeOutcome();
   }
 
-  private parsePoolsAndComputeOutcome(prices: Prices , poolPairs: DexPoolPair): void {
+  private parsePoolsAndComputeOutcome(): void {
 
     this.loadDfxStaking();
 
     this.cryptoPools = new Array<Pool>();
     this.stocksPools = new Array<Pool>();
-    this.extractPools(poolPairs);
-    this.computePrices(prices);
-
-    AppComponent.setFromPoolPair(this.poolBtc, poolPairs);
-    AppComponent.setFromPoolPair(this.poolEth, poolPairs);
-    AppComponent.setFromPoolPair(this.poolUsdc, poolPairs);
-    AppComponent.setFromPoolPair(this.poolUsdt, poolPairs);
-    AppComponent.setFromPoolPair(this.poolLtc, poolPairs);
-    AppComponent.setFromPoolPair(this.poolDoge, poolPairs);
-    AppComponent.setFromPoolPair(this.poolBch, poolPairs);
 
     this.createCryptoPoolsArray();
-
-    if (this.poolUsd) {
-      AppComponent.setFromPoolPair(this.poolUsd, poolPairs);
-    }
-    if (this.poolTsla) {
-      AppComponent.setFromPoolPair(this.poolTsla, poolPairs);
-    }
-    if (this.poolQqq) {
-      AppComponent.setFromPoolPair(this.poolQqq, poolPairs);
-    }
-    if (this.poolSpy) {
-      AppComponent.setFromPoolPair(this.poolSpy, poolPairs);
-    }
-    if (this.poolPltr) {
-      AppComponent.setFromPoolPair(this.poolPltr, poolPairs);
-    }
-    if (this.poolSlv) {
-      AppComponent.setFromPoolPair(this.poolSlv, poolPairs);
-    }
-    if (this.poolAapl) {
-      AppComponent.setFromPoolPair(this.poolAapl, poolPairs);
-    }
-    if (this.poolGld) {
-      AppComponent.setFromPoolPair(this.poolGld, poolPairs);
-    }
-    if (this.poolGme) {
-      AppComponent.setFromPoolPair(this.poolGme, poolPairs);
-    }
-    if (this.poolGoogl) {
-      AppComponent.setFromPoolPair(this.poolGoogl, poolPairs);
-    }
-    if (this.poolArkk) {
-      AppComponent.setFromPoolPair(this.poolArkk, poolPairs);
-    }
-    if (this.poolBaba) {
-      AppComponent.setFromPoolPair(this.poolBaba, poolPairs);
-    }
-    if (this.poolVnq) {
-      AppComponent.setFromPoolPair(this.poolVnq, poolPairs);
-    }
-    if (this.poolUrth) {
-      AppComponent.setFromPoolPair(this.poolUrth, poolPairs);
-    }
-    if (this.poolTlt) {
-      AppComponent.setFromPoolPair(this.poolTlt, poolPairs);
-    }
-    if (this.poolPdbc) {
-      AppComponent.setFromPoolPair(this.poolPdbc, poolPairs);
-    }
-    // new stocks 1.2.2022
-    if (this.poolEem) {
-      AppComponent.setFromPoolPair(this.poolEem, poolPairs);
-    }
-    if (this.poolAmzn) {
-      AppComponent.setFromPoolPair(this.poolAmzn, poolPairs);
-    }
-    if (this.poolNvda) {
-      AppComponent.setFromPoolPair(this.poolNvda, poolPairs);
-    }
-    if (this.poolCoin) {
-      AppComponent.setFromPoolPair(this.poolCoin, poolPairs);
-    }
-    // new stocks 3.3.2022
-    if (this.poolMsft) {
-      AppComponent.setFromPoolPair(this.poolMsft, poolPairs);
-    }
-    if (this.poolFb) {
-      AppComponent.setFromPoolPair(this.poolFb, poolPairs);
-    }
-    if (this.poolNflx) {
-      AppComponent.setFromPoolPair(this.poolNflx, poolPairs);
-    }
-    if (this.poolVoo) {
-      AppComponent.setFromPoolPair(this.poolVoo, poolPairs);
-    }
-    // new stocks 30.3.2022
-    if (this.poolDis) {
-      AppComponent.setFromPoolPair(this.poolDis, poolPairs);
-    }
-    if (this.poolMchi) {
-      AppComponent.setFromPoolPair(this.poolMchi, poolPairs);
-    }
-    if (this.poolMstr) {
-      AppComponent.setFromPoolPair(this.poolMstr, poolPairs);
-    }
-    if (this.poolIntc) {
-      AppComponent.setFromPoolPair(this.poolIntc, poolPairs);
-    }
-    // new stocks 28.4.2022
-    if (this.poolPypl) {
-      AppComponent.setFromPoolPair(this.poolPypl, poolPairs);
-    }
-    if (this.poolBrkb) {
-      AppComponent.setFromPoolPair(this.poolBrkb, poolPairs);
-    }
-    if (this.poolKo) {
-      AppComponent.setFromPoolPair(this.poolKo, poolPairs);
-    }
-    if (this.poolPg) {
-      AppComponent.setFromPoolPair(this.poolPg, poolPairs);
-    }
-    // new stocks 28.5.2022
-    if (this.poolSap) {
-      AppComponent.setFromPoolPair(this.poolSap, poolPairs);
-    }
-    if (this.poolUra) {
-      AppComponent.setFromPoolPair(this.poolUra, poolPairs);
-    }
-    if (this.poolCs) {
-      AppComponent.setFromPoolPair(this.poolCs, poolPairs);
-    }
-    if (this.poolGsg) {
-      AppComponent.setFromPoolPair(this.poolGsg, poolPairs);
-    }
-
     this.createStockArray();
+
     this.computeRewardsPerBlockInPools();
 
     this.berechnePoolOutBtc();
@@ -1991,74 +1857,74 @@ export class AppComponent implements OnInit {
   }
 
   private computePrices(prices: Prices): void {
-    this.priceDFICEX = prices.defichain.fiat;
-    this.poolBtc.priceA = prices.bitcoin.fiat;
+    this.priceDFICEX = +prices.data.find(p => p.price.token === 'DFI')?.price?.aggregated?.amount;
+    this.poolBtc.priceA = +prices.data.find(p => p.price.token === 'BTC')?.price?.aggregated?.amount;
     // compute correct price of dfi from btc pool
     this.poolBtc.priceB = this.poolBtc.totalLiquidityUsd / +this.poolBtc.reserveB / 2;
-    this.poolEth.priceA = prices.ethereum.fiat;
+    this.poolEth.priceA = +prices.data.find(p => p.price.token === 'ETH')?.price?.aggregated?.amount;
     this.poolEth.priceB = this.poolEth.totalLiquidityUsd / +this.poolEth.reserveB / 2;
-    this.poolLtc.priceA = prices.litecoin.fiat;
+    this.poolLtc.priceA = +prices.data.find(p => p.price.token === 'LTC')?.price?.aggregated?.amount;
     this.poolLtc.priceB = this.poolLtc.totalLiquidityUsd / +this.poolLtc.reserveB / 2;
-    this.poolDoge.priceA = prices.dogecoin.fiat;
+    this.poolDoge.priceA = +prices.data.find(p => p.price.token === 'DOGE')?.price?.aggregated?.amount;
     this.poolDoge.priceB = this.poolDoge.totalLiquidityUsd / +this.poolDoge.reserveB / 2;
-    this.poolUsdt.priceA = prices.tether.fiat;
+    this.poolUsdt.priceA = +prices.data.find(p => p.price.token === 'USDT')?.price?.aggregated?.amount;
     this.poolUsdt.priceB = this.poolUsdt.totalLiquidityUsd / +this.poolUsdt.reserveB / 2;
-    this.poolUsdc.priceA = prices.tether.fiat;
+    this.poolUsdc.priceA = +prices.data.find(p => p.price.token === 'USDC')?.price?.aggregated?.amount;
     this.poolUsdc.priceB = this.poolUsdc.totalLiquidityUsd / +this.poolUsdc.reserveB / 2;
-    this.poolBch.priceA = prices.bitcoincash.fiat;
+    this.poolBch.priceA = +prices.data.find(p => p.price.token === 'BCH')?.price?.aggregated?.amount;
     this.poolBch.priceB = this.poolBch.totalLiquidityUsd / +this.poolBch.reserveB / 2;
   }
 
-  private extractPools(pools: DexPoolPair): void {
-    this.poolBtc = pools['5'];
-    this.poolEth = pools['4'];
-    this.poolUsdt = pools['6'];
-    this.poolUsdc = pools['14'];
-    this.poolLtc = pools['10'];
-    this.poolDoge = pools['8'];
-    this.poolBch = pools['12'];
-    this.poolUsd = pools['17'];
+  private extractPools(): void {
+    this.poolBtc = this.setFromPoolPair('5');
+    this.poolEth = this.setFromPoolPair('4');
+    this.poolUsdt = this.setFromPoolPair('6');
+    this.poolUsdc = this.setFromPoolPair('14');
+    this.poolLtc = this.setFromPoolPair('10');
+    this.poolDoge = this.setFromPoolPair('8');
+    this.poolBch = this.setFromPoolPair('12');
+    this.poolUsd = this.setFromPoolPair('17');
 
-    this.poolTsla = pools['18'];
-    this.poolQqq = pools['39'];
-    this.poolSpy = pools['38'];
-    this.poolPltr = pools['35'];
-    this.poolSlv = pools['46'];
-    this.poolAapl = pools['36'];
-    this.poolGld = pools['43'];
-    this.poolGme = pools['25'];
-    this.poolGoogl = pools['32'];
-    this.poolArkk = pools['42'];
-    this.poolBaba = pools['33'];
-    this.poolVnq = pools['41'];
-    this.poolUrth = pools['44'];
-    this.poolTlt = pools['45'];
-    this.poolPdbc = pools['40'];
+    this.poolTsla = this.setFromPoolPair('18');
+    this.poolQqq = this.setFromPoolPair('39');
+    this.poolSpy = this.setFromPoolPair('38');
+    this.poolPltr = this.setFromPoolPair('35');
+    this.poolSlv = this.setFromPoolPair('46');
+    this.poolAapl = this.setFromPoolPair('36');
+    this.poolGld = this.setFromPoolPair('43');
+    this.poolGme = this.setFromPoolPair('25');
+    this.poolGoogl = this.setFromPoolPair('32');
+    this.poolArkk = this.setFromPoolPair('42');
+    this.poolBaba = this.setFromPoolPair('33');
+    this.poolVnq = this.setFromPoolPair('41');
+    this.poolUrth = this.setFromPoolPair('44');
+    this.poolTlt = this.setFromPoolPair('45');
+    this.poolPdbc = this.setFromPoolPair('40');
     // 1.2.2022
-    this.poolAmzn = pools['54'];
-    this.poolEem = pools['53'];
-    this.poolNvda = pools['55'];
-    this.poolCoin = pools['56'];
+    this.poolAmzn = this.setFromPoolPair('54');
+    this.poolEem = this.setFromPoolPair('53');
+    this.poolNvda = this.setFromPoolPair('55');
+    this.poolCoin = this.setFromPoolPair('56');
     // 3.3.2022
-    this.poolMsft = pools['61'];
-    this.poolFb = pools['64'];
-    this.poolNflx = pools['62'];
-    this.poolVoo = pools['63'];
+    this.poolMsft = this.setFromPoolPair('61');
+    this.poolFb = this.setFromPoolPair('64');
+    this.poolNflx = this.setFromPoolPair('62');
+    this.poolVoo = this.setFromPoolPair('63');
     // 30.3.2022
-    this.poolDis = pools['69'];
-    this.poolMchi = pools['70'];
-    this.poolMstr = pools['71'];
-    this.poolIntc = pools['72'];
+    this.poolDis = this.setFromPoolPair('69');
+    this.poolMchi = this.setFromPoolPair('70');
+    this.poolMstr = this.setFromPoolPair('71');
+    this.poolIntc = this.setFromPoolPair('72');
     // 28.4.2022
-    this.poolPypl = pools['77'];
-    this.poolBrkb = pools['78'];
-    this.poolKo = pools['80'];
-    this.poolPg = pools['79'];
+    this.poolPypl = this.setFromPoolPair('77');
+    this.poolBrkb = this.setFromPoolPair('78');
+    this.poolKo = this.setFromPoolPair('80');
+    this.poolPg = this.setFromPoolPair('79');
     // 28.5.2022
-    this.poolSap = pools['85'];
-    this.poolCs = pools['88'];
-    this.poolGsg = pools['86'];
-    this.poolUra = pools['87'];
+    this.poolSap = this.setFromPoolPair('85');
+    this.poolCs = this.setFromPoolPair('88');
+    this.poolGsg = this.setFromPoolPair('86');
+    this.poolUra = this.setFromPoolPair('87');
     this.pools = this.addAllPools();
   }
 
@@ -2521,17 +2387,7 @@ export class AppComponent implements OnInit {
   }
 
   loadDexManual(): void {
-    forkJoin([
-      this.dexService.getPrices(),
-      this.dexService.getListpoolpairs()],
-    ).subscribe((([prices, poolPairs]: [Prices, DexPoolPair]) => {
-          this.parsePoolsAndComputeOutcome(prices, poolPairs);
-        }
-      ),
-      err => {
-        console.error('Fehler beim loadDexManual: ' + JSON.stringify(err.message));
-        this.apiOnline = false;
-      });
+    this.parsePoolsAndComputeOutcome();
   }
 
   loadAllAccounts(): void {
@@ -2539,9 +2395,10 @@ export class AppComponent implements OnInit {
     this.vaultsOfAllAddresses = new Array<AddressVaults>();
     const requestArray = [];
 
-    // normal adresses
+    // TOKENS
+    // normal adresses tokens
     for (const ad of this.adresses) {
-      requestArray.push(this.dataService.getAdressAccount(ad));
+      requestArray.push(this.dataService.getAdressTokens(ad));
     }
 
     // vaults
@@ -2549,29 +2406,52 @@ export class AppComponent implements OnInit {
       requestArray.push(this.dataService.getAddressVaults(ad));
     }
 
-    // minter adresses
+    // minter adresses tokens
     for (const adM of this.adressesMasternodes) {
-      requestArray.push(this.dataService.getAdressAccount(adM));
+      requestArray.push(this.dataService.getAdressTokens(adM));
+    }
+
+    // COINS
+    // normal adresses coins
+    for (const ad of this.adresses) {
+      requestArray.push(this.dataService.getAdressBalance(ad));
+    }
+
+    // minter adresses coins
+    for (const adM of this.adressesMasternodes) {
+      requestArray.push(this.dataService.getAdressBalance(adM));
     }
 
     // if adresses exist
     if (requestArray.length > 0) {
       forkJoin(requestArray).subscribe(results => {
-          results.forEach((value, i) => {
+          results.forEach((values, i) => {
             // normal address
-             if (i <= this.adresses?.length - 1) {
-               this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, this.getAddressForIteration(i), false,
+            if (i <= this.adresses?.length - 1) {
+               this.addTokensToWallet(values.data as Array<TokenAccount>, this.getAddressForIteration(i), false,
                  false, false);
-               // vaults address
-             } else if (i > this.adresses?.length - 1 && i <= this.adresses?.length * 2 - 1) {
-               if ((value as AddressVaults)?.data?.length > 0) {
-                 this.vaultsOfAllAddresses.push(value as AddressVaults);
+            // vaults address
+            } else if (i > this.adresses?.length - 1 && i <= this.adresses?.length * 2 - 1) {
+               if ((values as AddressVaults)?.data?.length > 0) {
+                 this.vaultsOfAllAddresses.push(values as AddressVaults);
                }
-               // minter address
-             } else if (i > (this.adresses?.length * 2) - 1) {
+            // minter address
+            } else if (i > (this.adresses?.length * 2) - 1
+              && i <= (this.adresses?.length * 2 + this.adressesMasternodes.length) - 1) {
                const adress = this.getMasternodeAddressForIteration(i);
-               this.addCoinsAndTokensToWallet(value as Array<SupernodeAccount>, adress, true, this.isFrozen5(adress),
+               this.addTokensToWallet(values.data as Array<TokenAccount>, adress, true, this.isFrozen5(adress),
                  this.isFrozen10(adress));
+            // normal address coins
+            } else if (i > (this.adresses?.length * 2 + this.adressesMasternodes.length) - 1
+               && i <= (this.adresses?.length * 3 + this.adressesMasternodes.length) - 1) {
+                const adress = this.adresses[i - (this.adresses?.length * 2 + this.adressesMasternodes.length)];
+                this.wallet.dfi += +values.data;
+                this.getAddressBalance(adress).dfiCoins = +values.data;
+              // minter address coins
+            } else {
+               const adress = this.adressesMasternodes[i - (this.adresses?.length * 3 + this.adressesMasternodes.length)];
+               this.wallet.dfiInMasternodes += +values.data;
+               this.getAddressBalance(adress).dfiCoins = +values.data;
              }
           });
 
@@ -2730,8 +2610,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  addCoinsAndTokensToWallet(accounts: Array<SupernodeAccount>, address: string, masternode: boolean, freezed5: boolean,
-                            freezed10: boolean): void {
+  addTokensToWallet(accounts: Array<TokenAccount>, address: string, masternode: boolean, freezed5: boolean,
+                    freezed10: boolean): void {
 
     if (!this.getAddressBalance(address)) {
       const aB = new AddressBalance();
@@ -2743,450 +2623,440 @@ export class AppComponent implements OnInit {
     }
 
     accounts.forEach(account => {
-      const splitted = account.raw.split('@');
-      switch (account.token) {
-        case '$DFI': {
-          if (!masternode) {
-            this.wallet.dfi += +splitted[0];
-          } else {
-            this.wallet.dfiInMasternodes += +splitted[0];
-          }
-          this.getAddressBalance(address).dfiCoins = +splitted[0];
-          break;
-        }
+      switch (account.symbolKey) {
         case 'DFI': {
-          this.wallet.dfi += +splitted[0];
-          this.getAddressBalance(address).dfiTokens = +splitted[0];
+          this.wallet.dfi += +account.amount;
+          this.getAddressBalance(address).dfiTokens = +account.amount;
           break;
         }
         case 'BTC': {
-          this.wallet.btc += +splitted[0];
-          this.getAddressBalance(address).btcToken = +splitted[0];
+          this.wallet.btc += +account.amount;
+          this.getAddressBalance(address).btcToken = +account.amount;
           break;
         }
         case 'BCH': {
-          this.wallet.bch += +splitted[0];
-          this.getAddressBalance(address).bchToken = +splitted[0];
+          this.wallet.bch += +account.amount;
+          this.getAddressBalance(address).bchToken = +account.amount;
           break;
         }
         case 'ETH': {
-          this.wallet.eth += +splitted[0];
-          this.getAddressBalance(address).ethToken = +splitted[0];
+          this.wallet.eth += +account.amount;
+          this.getAddressBalance(address).ethToken = +account.amount;
           break;
         }
         case 'LTC': {
-          this.wallet.ltc += +splitted[0];
-          this.getAddressBalance(address).ltcToken = +splitted[0];
+          this.wallet.ltc += +account.amount;
+          this.getAddressBalance(address).ltcToken = +account.amount;
           break;
         }
         case 'DOGE': {
-          this.wallet.doge += +splitted[0];
-          this.getAddressBalance(address).dogeToken = +splitted[0];
+          this.wallet.doge += +account.amount;
+          this.getAddressBalance(address).dogeToken = +account.amount;
           break;
         }
         case 'USDT': {
-          this.wallet.usdt += +splitted[0];
-          this.getAddressBalance(address).usdtToken = +splitted[0];
+          this.wallet.usdt += +account.amount;
+          this.getAddressBalance(address).usdtToken = +account.amount;
           break;
         }
         case 'USDC': {
-          this.wallet.usdc += +splitted[0];
-          this.getAddressBalance(address).usdcToken = +splitted[0];
+          this.wallet.usdc += +account.amount;
+          this.getAddressBalance(address).usdcToken = +account.amount;
           break;
         }
         case 'DUSD': {
-          this.wallet.usd += +splitted[0];
-          this.getAddressBalance(address).usdToken = +splitted[0];
+          this.wallet.usd += +account.amount;
+          this.getAddressBalance(address).usdToken = +account.amount;
           break;
         }
         case 'TSLA': {
-          this.wallet.tsla += +splitted[0];
-          this.getAddressBalance(address).tslaToken = +splitted[0];
+          this.wallet.tsla += +account.amount;
+          this.getAddressBalance(address).tslaToken = +account.amount;
           break;
         }
         case 'QQQ': {
-          this.wallet.qqq += +splitted[0];
-          this.getAddressBalance(address).qqqToken = +splitted[0];
+          this.wallet.qqq += +account.amount;
+          this.getAddressBalance(address).qqqToken = +account.amount;
           break;
         }
         case 'SPY': {
-          this.wallet.spy += +splitted[0];
-          this.getAddressBalance(address).spyToken = +splitted[0];
+          this.wallet.spy += +account.amount;
+          this.getAddressBalance(address).spyToken = +account.amount;
           break;
         }
         case 'PLTR': {
-          this.wallet.pltr += +splitted[0];
-          this.getAddressBalance(address).pltrToken = +splitted[0];
+          this.wallet.pltr += +account.amount;
+          this.getAddressBalance(address).pltrToken = +account.amount;
           break;
         }
         case 'SLV': {
-          this.wallet.slv += +splitted[0];
-          this.getAddressBalance(address).slvToken = +splitted[0];
+          this.wallet.slv += +account.amount;
+          this.getAddressBalance(address).slvToken = +account.amount;
           break;
         }
         case 'AAPL': {
-          this.wallet.aapl += +splitted[0];
-          this.getAddressBalance(address).aaplToken = +splitted[0];
+          this.wallet.aapl += +account.amount;
+          this.getAddressBalance(address).aaplToken = +account.amount;
           break;
         }
         case 'GLD': {
-          this.wallet.gld += +splitted[0];
-          this.getAddressBalance(address).gldToken = +splitted[0];
+          this.wallet.gld += +account.amount;
+          this.getAddressBalance(address).gldToken = +account.amount;
           break;
         }
         case 'GME': {
-          this.wallet.gme += +splitted[0];
-          this.getAddressBalance(address).gmeToken = +splitted[0];
+          this.wallet.gme += +account.amount;
+          this.getAddressBalance(address).gmeToken = +account.amount;
           break;
         }
         case 'GOOGL': {
-          this.wallet.googl += +splitted[0];
-          this.getAddressBalance(address).googlToken = +splitted[0];
+          this.wallet.googl += +account.amount;
+          this.getAddressBalance(address).googlToken = +account.amount;
           break;
         }
         case 'ARKK': {
-          this.wallet.arkk += +splitted[0];
-          this.getAddressBalance(address).arkkToken = +splitted[0];
+          this.wallet.arkk += +account.amount;
+          this.getAddressBalance(address).arkkToken = +account.amount;
           break;
         }
         case 'BABA': {
-          this.wallet.baba += +splitted[0];
-          this.getAddressBalance(address).babaToken = +splitted[0];
+          this.wallet.baba += +account.amount;
+          this.getAddressBalance(address).babaToken = +account.amount;
           break;
         }
         case 'VNQ': {
-          this.wallet.vnq += +splitted[0];
-          this.getAddressBalance(address).vnqToken = +splitted[0];
+          this.wallet.vnq += +account.amount;
+          this.getAddressBalance(address).vnqToken = +account.amount;
           break;
         }
         case 'URTH': {
-          this.wallet.urth += +splitted[0];
-          this.getAddressBalance(address).urthToken = +splitted[0];
+          this.wallet.urth += +account.amount;
+          this.getAddressBalance(address).urthToken = +account.amount;
           break;
         }
         case 'TLT': {
-          this.wallet.tlt += +splitted[0];
-          this.getAddressBalance(address).tltToken = +splitted[0];
+          this.wallet.tlt += +account.amount;
+          this.getAddressBalance(address).tltToken = +account.amount;
           break;
         }
         case 'PDBC': {
-          this.wallet.pdbc += +splitted[0];
-          this.getAddressBalance(address).pdbcToken = +splitted[0];
+          this.wallet.pdbc += +account.amount;
+          this.getAddressBalance(address).pdbcToken = +account.amount;
           break;
         }
         case 'AMZN': {
-          this.wallet.amzn += +splitted[0];
-          this.getAddressBalance(address).amznToken = +splitted[0];
+          this.wallet.amzn += +account.amount;
+          this.getAddressBalance(address).amznToken = +account.amount;
           break;
         }
         case 'COIN': {
-          this.wallet.coin += +splitted[0];
-          this.getAddressBalance(address).coinToken = +splitted[0];
+          this.wallet.coin += +account.amount;
+          this.getAddressBalance(address).coinToken = +account.amount;
           break;
         }
         case 'NVDA': {
-          this.wallet.nvda += +splitted[0];
-          this.getAddressBalance(address).nvdaToken = +splitted[0];
+          this.wallet.nvda += +account.amount;
+          this.getAddressBalance(address).nvdaToken = +account.amount;
           break;
         }
         case 'EEM': {
-          this.wallet.eem += +splitted[0];
-          this.getAddressBalance(address).eemToken = +splitted[0];
+          this.wallet.eem += +account.amount;
+          this.getAddressBalance(address).eemToken = +account.amount;
           break;
         }
         case 'MSFT': {
-          this.wallet.msft += +splitted[0];
-          this.getAddressBalance(address).msftToken = +splitted[0];
+          this.wallet.msft += +account.amount;
+          this.getAddressBalance(address).msftToken = +account.amount;
           break;
         }
         case 'FB': {
-          this.wallet.fb += +splitted[0];
-          this.getAddressBalance(address).fbToken = +splitted[0];
+          this.wallet.fb += +account.amount;
+          this.getAddressBalance(address).fbToken = +account.amount;
           break;
         }
         case 'VOO': {
-          this.wallet.voo += +splitted[0];
-          this.getAddressBalance(address).vooToken = +splitted[0];
+          this.wallet.voo += +account.amount;
+          this.getAddressBalance(address).vooToken = +account.amount;
           break;
         }
         case 'NFLX': {
-          this.wallet.nflx += +splitted[0];
-          this.getAddressBalance(address).nflxToken = +splitted[0];
+          this.wallet.nflx += +account.amount;
+          this.getAddressBalance(address).nflxToken = +account.amount;
           break;
         }
         case 'DIS': {
-          this.wallet.dis += +splitted[0];
-          this.getAddressBalance(address).disToken = +splitted[0];
+          this.wallet.dis += +account.amount;
+          this.getAddressBalance(address).disToken = +account.amount;
           break;
         }
         case 'MCHI': {
-          this.wallet.mchi += +splitted[0];
-          this.getAddressBalance(address).mchiToken = +splitted[0];
+          this.wallet.mchi += +account.amount;
+          this.getAddressBalance(address).mchiToken = +account.amount;
           break;
         }
         case 'MSTR': {
-          this.wallet.mstr += +splitted[0];
-          this.getAddressBalance(address).mstrToken = +splitted[0];
+          this.wallet.mstr += +account.amount;
+          this.getAddressBalance(address).mstrToken = +account.amount;
           break;
         }
         case 'INTC': {
-          this.wallet.intc += +splitted[0];
-          this.getAddressBalance(address).intcToken = +splitted[0];
+          this.wallet.intc += +account.amount;
+          this.getAddressBalance(address).intcToken = +account.amount;
           break;
         }
         case 'PYPL': {
-          this.wallet.pypl += +splitted[0];
-          this.getAddressBalance(address).pyplToken = +splitted[0];
+          this.wallet.pypl += +account.amount;
+          this.getAddressBalance(address).pyplToken = +account.amount;
           break;
         }
         case 'BRK.B': {
-          this.wallet.brkb += +splitted[0];
-          this.getAddressBalance(address).brkbToken = +splitted[0];
+          this.wallet.brkb += +account.amount;
+          this.getAddressBalance(address).brkbToken = +account.amount;
           break;
         }
         case 'KO': {
-          this.wallet.ko += +splitted[0];
-          this.getAddressBalance(address).koToken = +splitted[0];
+          this.wallet.ko += +account.amount;
+          this.getAddressBalance(address).koToken = +account.amount;
           break;
         }
         case 'PG': {
-          this.wallet.pg += +splitted[0];
-          this.getAddressBalance(address).pgToken = +splitted[0];
+          this.wallet.pg += +account.amount;
+          this.getAddressBalance(address).pgToken = +account.amount;
           break;
         }
         case 'SAP': {
-          this.wallet.sap += +splitted[0];
-          this.getAddressBalance(address).sapToken = +splitted[0];
+          this.wallet.sap += +account.amount;
+          this.getAddressBalance(address).sapToken = +account.amount;
           break;
         }
         case 'URA': {
-          this.wallet.ura += +splitted[0];
-          this.getAddressBalance(address).uraToken = +splitted[0];
+          this.wallet.ura += +account.amount;
+          this.getAddressBalance(address).uraToken = +account.amount;
           break;
         }
         case 'GSG': {
-          this.wallet.gsg += +splitted[0];
-          this.getAddressBalance(address).gsgToken = +splitted[0];
+          this.wallet.gsg += +account.amount;
+          this.getAddressBalance(address).gsgToken = +account.amount;
           break;
         }
         case 'CS': {
-          this.wallet.cs += +splitted[0];
-          this.getAddressBalance(address).csToken = +splitted[0];
+          this.wallet.cs += +account.amount;
+          this.getAddressBalance(address).csToken = +account.amount;
           break;
         }
         case 'BTC-DFI': {
-          this.wallet.btcdfi += +splitted[0];
-          this.getAddressBalance(address).btcdfiToken = +splitted[0];
+          this.wallet.btcdfi += +account.amount;
+          this.getAddressBalance(address).btcdfiToken = +account.amount;
           break;
         }
         case 'BCH-DFI': {
-          this.wallet.bchdfi += +splitted[0];
-          this.getAddressBalance(address).bchdfiToken = +splitted[0];
+          this.wallet.bchdfi += +account.amount;
+          this.getAddressBalance(address).bchdfiToken = +account.amount;
           break;
         }
         case 'ETH-DFI': {
-          this.wallet.ethdfi += +splitted[0];
-          this.getAddressBalance(address).ethdfiToken = +splitted[0];
+          this.wallet.ethdfi += +account.amount;
+          this.getAddressBalance(address).ethdfiToken = +account.amount;
           break;
         }
         case 'LTC-DFI': {
-          this.wallet.ltcdfi += +splitted[0];
-          this.getAddressBalance(address).ltcdfiToken = +splitted[0];
+          this.wallet.ltcdfi += +account.amount;
+          this.getAddressBalance(address).ltcdfiToken = +account.amount;
           break;
         }
         case 'DOGE-DFI': {
-          this.wallet.dogedfi += +splitted[0];
-          this.getAddressBalance(address).dogedfiToken = +splitted[0];
+          this.wallet.dogedfi += +account.amount;
+          this.getAddressBalance(address).dogedfiToken = +account.amount;
           break;
         }
         case 'USDT-DFI': {
-          this.wallet.usdtdfi += +splitted[0];
-          this.getAddressBalance(address).usdtdfiToken = +splitted[0];
+          this.wallet.usdtdfi += +account.amount;
+          this.getAddressBalance(address).usdtdfiToken = +account.amount;
           break;
         }
         case 'USDC-DFI': {
-          this.wallet.usdcdfi += +splitted[0];
-          this.getAddressBalance(address).usdcdfiToken = +splitted[0];
+          this.wallet.usdcdfi += +account.amount;
+          this.getAddressBalance(address).usdcdfiToken = +account.amount;
           break;
         }
         case 'DUSD-DFI': {
-          this.wallet.usddfi += +splitted[0];
-          this.getAddressBalance(address).usddfiToken = +splitted[0];
+          this.wallet.usddfi += +account.amount;
+          this.getAddressBalance(address).usddfiToken = +account.amount;
           break;
         }
         case 'TSLA-DUSD': {
-          this.wallet.tslausd += +splitted[0];
-          this.getAddressBalance(address).tslausdToken = +splitted[0];
+          this.wallet.tslausd += +account.amount;
+          this.getAddressBalance(address).tslausdToken = +account.amount;
           break;
         }
         case 'QQQ-DUSD': {
-          this.wallet.qqqusd += +splitted[0];
-          this.getAddressBalance(address).qqqusdToken = +splitted[0];
+          this.wallet.qqqusd += +account.amount;
+          this.getAddressBalance(address).qqqusdToken = +account.amount;
           break;
         }
         case 'SPY-DUSD': {
-          this.wallet.spyusd += +splitted[0];
-          this.getAddressBalance(address).spyusdToken = +splitted[0];
+          this.wallet.spyusd += +account.amount;
+          this.getAddressBalance(address).spyusdToken = +account.amount;
           break;
         }
         case 'PLTR-DUSD': {
-          this.wallet.pltrusd += +splitted[0];
-          this.getAddressBalance(address).pltrusdToken = +splitted[0];
+          this.wallet.pltrusd += +account.amount;
+          this.getAddressBalance(address).pltrusdToken = +account.amount;
           break;
         }
         case 'SLV-DUSD': {
-          this.wallet.slvusd += +splitted[0];
-          this.getAddressBalance(address).slvusdToken = +splitted[0];
+          this.wallet.slvusd += +account.amount;
+          this.getAddressBalance(address).slvusdToken = +account.amount;
           break;
         }
         case 'AAPL-DUSD': {
-          this.wallet.aaplusd += +splitted[0];
-          this.getAddressBalance(address).aaplusdToken = +splitted[0];
+          this.wallet.aaplusd += +account.amount;
+          this.getAddressBalance(address).aaplusdToken = +account.amount;
           break;
         }
         case 'GLD-DUSD': {
-          this.wallet.gldusd += +splitted[0];
-          this.getAddressBalance(address).gldusdToken = +splitted[0];
+          this.wallet.gldusd += +account.amount;
+          this.getAddressBalance(address).gldusdToken = +account.amount;
           break;
         }
         case 'GME-DUSD': {
-          this.wallet.gmeusd += +splitted[0];
-          this.getAddressBalance(address).gmeusdToken = +splitted[0];
+          this.wallet.gmeusd += +account.amount;
+          this.getAddressBalance(address).gmeusdToken = +account.amount;
           break;
         }
         case 'GOOGL-DUSD': {
-          this.wallet.googlusd += +splitted[0];
-          this.getAddressBalance(address).googlToken = +splitted[0];
+          this.wallet.googlusd += +account.amount;
+          this.getAddressBalance(address).googlToken = +account.amount;
           break;
         }
         case 'ARKK-DUSD': {
-          this.wallet.arkkusd += +splitted[0];
-          this.getAddressBalance(address).arkkusdToken = +splitted[0];
+          this.wallet.arkkusd += +account.amount;
+          this.getAddressBalance(address).arkkusdToken = +account.amount;
           break;
         }
         case 'BABA-DUSD': {
-          this.wallet.babausd += +splitted[0];
-          this.getAddressBalance(address).babausdToken = +splitted[0];
+          this.wallet.babausd += +account.amount;
+          this.getAddressBalance(address).babausdToken = +account.amount;
           break;
         }
         case 'VNQ-DUSD': {
-          this.wallet.vnqusd += +splitted[0];
-          this.getAddressBalance(address).vnqusdToken = +splitted[0];
+          this.wallet.vnqusd += +account.amount;
+          this.getAddressBalance(address).vnqusdToken = +account.amount;
           break;
         }
         case 'URTH-DUSD': {
-          this.wallet.urthusd += +splitted[0];
-          this.getAddressBalance(address).urthusdToken = +splitted[0];
+          this.wallet.urthusd += +account.amount;
+          this.getAddressBalance(address).urthusdToken = +account.amount;
           break;
         }
         case 'TLT-DUSD': {
-          this.wallet.tltusd += +splitted[0];
-          this.getAddressBalance(address).tltusdToken = +splitted[0];
+          this.wallet.tltusd += +account.amount;
+          this.getAddressBalance(address).tltusdToken = +account.amount;
           break;
         }
         case 'PDBC-DUSD': {
-          this.wallet.pdbcusd += +splitted[0];
-          this.getAddressBalance(address).pdbcusdToken = +splitted[0];
+          this.wallet.pdbcusd += +account.amount;
+          this.getAddressBalance(address).pdbcusdToken = +account.amount;
           break;
         }
         case 'AMZN-DUSD': {
-          this.wallet.amznusd += +splitted[0];
-          this.getAddressBalance(address).amznusdToken = +splitted[0];
+          this.wallet.amznusd += +account.amount;
+          this.getAddressBalance(address).amznusdToken = +account.amount;
           break;
         }
         case 'NVDA-DUSD': {
-          this.wallet.nvdausd += +splitted[0];
-          this.getAddressBalance(address).nvdausdToken = +splitted[0];
+          this.wallet.nvdausd += +account.amount;
+          this.getAddressBalance(address).nvdausdToken = +account.amount;
           break;
         }
         case 'COIN-DUSD': {
-          this.wallet.coinusd += +splitted[0];
-          this.getAddressBalance(address).coinusdToken = +splitted[0];
+          this.wallet.coinusd += +account.amount;
+          this.getAddressBalance(address).coinusdToken = +account.amount;
           break;
         }
         case 'EEM-DUSD': {
-          this.wallet.eemusd += +splitted[0];
-          this.getAddressBalance(address).eemusdToken = +splitted[0];
+          this.wallet.eemusd += +account.amount;
+          this.getAddressBalance(address).eemusdToken = +account.amount;
           break;
         }
         case 'MSFT-DUSD': {
-          this.wallet.msftusd += +splitted[0];
-          this.getAddressBalance(address).msftusdToken = +splitted[0];
+          this.wallet.msftusd += +account.amount;
+          this.getAddressBalance(address).msftusdToken = +account.amount;
           break;
         }
         case 'VOO-DUSD': {
-          this.wallet.voousd += +splitted[0];
-          this.getAddressBalance(address).voousdToken = +splitted[0];
+          this.wallet.voousd += +account.amount;
+          this.getAddressBalance(address).voousdToken = +account.amount;
           break;
         }
         case 'NFLX-DUSD': {
-          this.wallet.nflxusd += +splitted[0];
-          this.getAddressBalance(address).nflxusdToken = +splitted[0];
+          this.wallet.nflxusd += +account.amount;
+          this.getAddressBalance(address).nflxusdToken = +account.amount;
           break;
         }
         case 'FB-DUSD': {
-          this.wallet.fbusd += +splitted[0];
-          this.getAddressBalance(address).fbusdToken = +splitted[0];
+          this.wallet.fbusd += +account.amount;
+          this.getAddressBalance(address).fbusdToken = +account.amount;
           break;
         }
         case 'DIS-DUSD': {
-          this.wallet.disusd += +splitted[0];
-          this.getAddressBalance(address).disusdToken = +splitted[0];
+          this.wallet.disusd += +account.amount;
+          this.getAddressBalance(address).disusdToken = +account.amount;
           break;
         }
         case 'MCHI-DUSD': {
-          this.wallet.mchiusd += +splitted[0];
-          this.getAddressBalance(address).mchiusdToken = +splitted[0];
+          this.wallet.mchiusd += +account.amount;
+          this.getAddressBalance(address).mchiusdToken = +account.amount;
           break;
         }
         case 'MSTR-DUSD': {
-          this.wallet.mstrusd += +splitted[0];
-          this.getAddressBalance(address).mstrusdToken = +splitted[0];
+          this.wallet.mstrusd += +account.amount;
+          this.getAddressBalance(address).mstrusdToken = +account.amount;
           break;
         }
         case 'INTC-DUSD': {
-          this.wallet.intcusd += +splitted[0];
-          this.getAddressBalance(address).intcusdToken = +splitted[0];
+          this.wallet.intcusd += +account.amount;
+          this.getAddressBalance(address).intcusdToken = +account.amount;
           break;
         }
         case 'PYPL-DUSD': {
-          this.wallet.pyplusd += +splitted[0];
-          this.getAddressBalance(address).pyplusdToken = +splitted[0];
+          this.wallet.pyplusd += +account.amount;
+          this.getAddressBalance(address).pyplusdToken = +account.amount;
           break;
         }
         case 'BRK.B-DUSD': {
-          this.wallet.brkbusd += +splitted[0];
-          this.getAddressBalance(address).brkbusdToken = +splitted[0];
+          this.wallet.brkbusd += +account.amount;
+          this.getAddressBalance(address).brkbusdToken = +account.amount;
           break;
         }
         case 'KO-DUSD': {
-          this.wallet.kousd += +splitted[0];
-          this.getAddressBalance(address).kousdToken = +splitted[0];
+          this.wallet.kousd += +account.amount;
+          this.getAddressBalance(address).kousdToken = +account.amount;
           break;
         }
         case 'PG-DUSD': {
-          this.wallet.pgusd += +splitted[0];
-          this.getAddressBalance(address).pgusdToken = +splitted[0];
+          this.wallet.pgusd += +account.amount;
+          this.getAddressBalance(address).pgusdToken = +account.amount;
           break;
         }
         case 'SAP-DUSD': {
-          this.wallet.sapusd += +splitted[0];
-          this.getAddressBalance(address).sapusdToken = +splitted[0];
+          this.wallet.sapusd += +account.amount;
+          this.getAddressBalance(address).sapusdToken = +account.amount;
           break;
         }
         case 'URA-DUSD': {
-          this.wallet.urausd += +splitted[0];
-          this.getAddressBalance(address).urausdToken = +splitted[0];
+          this.wallet.urausd += +account.amount;
+          this.getAddressBalance(address).urausdToken = +account.amount;
           break;
         }
         case 'GSG-DUSD': {
-          this.wallet.gsgusd += +splitted[0];
-          this.getAddressBalance(address).gsgusdToken = +splitted[0];
+          this.wallet.gsgusd += +account.amount;
+          this.getAddressBalance(address).gsgusdToken = +account.amount;
           break;
         }
         case 'CS-DUSD': {
-          this.wallet.csusd += +splitted[0];
-          this.getAddressBalance(address).csusdToken = +splitted[0];
+          this.wallet.csusd += +account.amount;
+          this.getAddressBalance(address).csusdToken = +account.amount;
           break;
         }
         default: {
@@ -3202,6 +3072,10 @@ export class AppComponent implements OnInit {
 
   getPool(id: string): Pool {
     return this.pools.find(x => x.poolPairId === id);
+  }
+
+  getPoolOcean(id: string): PoolPairOcean {
+    return this.poolPairsOcean.data.find(x => x.id === id);
   }
 
   berechnePoolOutBtc(): void {

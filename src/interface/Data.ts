@@ -42,8 +42,38 @@ export class PoolPairsOcean {
 export class PoolPairOcean {
   id: string;
   symbol: string;
+  rewardPct: string;
   volume: PoolPairVolume;
   apr: PoolPairApr;
+  totalLiquidity: Liquidity;
+  priceRatio: PriceRatio;
+  tokenA: Token;
+  tokenB: Token;
+}
+
+export class Fee {
+  pct: string;
+  inPct: string;
+  outPct: string;
+}
+
+export class Token {
+  symbol: string;
+  displaySymbol: string;
+  id: string;
+  reserve: string;
+  blockCommission: string;
+  fee: Fee;
+}
+
+export class PriceRatio {
+  ab: string;
+  ba: string;
+}
+
+export class Liquidity {
+  token: string;
+  usd: string;
 }
 
 export class PoolPairVolume {

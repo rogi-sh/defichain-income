@@ -1,51 +1,19 @@
-import { StockOracle } from '@interfaces/Data';
-
-export interface DexPoolPair {
-  '4': Pool;
-  '5': Pool;
-  '6': Pool;
-  '8': Pool;
-  '10': Pool;
-  '12': Pool;
-  '14': Pool;
-  '17': Pool;
-  '18': Pool;
-  '39': Pool;
-  '38': Pool;
-  '35': Pool;
-  '46': Pool;
-  '36': Pool;
-  '43': Pool;
-  '25': Pool;
-  '32': Pool;
-  '42': Pool;
-  '33': Pool;
-  '41': Pool;
-  '44': Pool;
-  '45': Pool;
-  '40': Pool;
-
-}
-
 export interface Prices {
-  bitcoin: PriceAsset;
-  tether: PriceAsset;
-  dogecoin: PriceAsset;
-  litecoin: PriceAsset;
-  ethereum: PriceAsset;
-  defichain: PriceAsset;
-  bitcoincash: PriceAsset;
+  data: Array<Price>;
 }
 
-export class PriceAsset {
-  coin: string;
-  fiat: number;
-  idToken: string;
-  currency: string;
+export interface Price {
+  price: Aggregated;
+}
+export interface Aggregated {
+  token: string;
+  aggregated: Amount;
+}
+export interface Amount {
+  amount: string;
 }
 
-
-export interface Pool {
+export class Pool {
   apr: number;
   name: string;
   pair: string;

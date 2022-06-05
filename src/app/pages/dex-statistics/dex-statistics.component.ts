@@ -587,7 +587,7 @@ export class DexStatisticsComponent implements OnInit {
       dfi += +c?.reserveB;
     });
 
-    dfi += +this.stocksPools?.find(a => a.symbol === 'DUSD-DFI').reserveB;
+    dfi += +this.stocksPools?.find(a => a.symbol === 'DUSD-DFI')?.reserveB;
 
     return dfi;
   }
@@ -654,7 +654,7 @@ export class DexStatisticsComponent implements OnInit {
       return 0;
     }
 
-    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice.active.amount;
+    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice?.active?.amount;
 
     return Math.round(price * 100) / 100;
   }
@@ -664,7 +664,7 @@ export class DexStatisticsComponent implements OnInit {
     if (!this.oraclePrices || this.oraclePrices.data.length === 0) {
       return 0;
     }
-    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice.next.amount;
+    const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice?.next?.amount;
     return Math.round(price * 100) / 100;
   }
 

@@ -95,10 +95,10 @@ export class PoolIncomeComponent implements OnInit {
   }
 
   getSymbolA(pool: Pool): string {
-    return pool.symbol?.split('-') [0];
+    return pool.tokenASymbol;
   }
 
   getSymbolB(pool: Pool): string {
-    return pool.symbol?.split('-') [1];
+    return pool.tokenBSymbol;
   }
 }

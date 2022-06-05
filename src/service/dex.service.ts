@@ -1,7 +1,7 @@
 import {Injectable } from '@angular/core';
 import {environment} from '@environments/environment';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { DexPoolPair, Pool, Prices } from '@interfaces/Dex';
+import { HttpClient } from '@angular/common/http';
+import { Prices } from '@interfaces/Dex';
 import {Observable} from 'rxjs';
 import { Blocks, Burn, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import {OceanStats} from '@interfaces/Staking';
@@ -33,17 +33,9 @@ export class Dex {
     return this.http.get<OceanStats>(environment.oceanstats);
   }
 
-  public getListpoolpairs(): Observable<DexPoolPair>  {
-    return this.http.get<DexPoolPair>(environment.listpoolpairs);
-  }
-
   public getLastBlocks(blocks: number): Observable<Blocks> {
     const url = environment.blocks.replace('2000', String(blocks));
     return this.http.get<Blocks>(url);
-  }
-
-  public getHealthCheck(): Observable<HttpResponse<any>> {
-    return this.http.get(environment.health, { observe: 'response' });
   }
 
 }

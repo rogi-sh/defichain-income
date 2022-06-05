@@ -1,7 +1,6 @@
 
-export class SupernodeAccount {
-  token: string;
-  address: string;
-  balance: number;
-  raw: string;
+export class TokenAccount {
+  symbolKey: string;
+  amount: string;
+  id: string;
 }
