@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.1.0 - 5.6.2022';
+    this.log.comment = 'Move to self hosted ocean';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.0.1 - 5.6.2022';
     this.log.comment = 'Fix Holdings View shown before data loaded';
     this.logs.push(this.log);
