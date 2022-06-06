@@ -1901,7 +1901,7 @@ export class AppComponent implements OnInit {
     this.poolTlt = this.setFromPoolPair('45');
     this.poolPdbc = this.setFromPoolPair('40');
     // 1.2.2022
-    this.poolAmzn = this.setFromPoolPair('54');
+    this.poolAmzn = this.setFromPoolPair('90');
     this.poolEem = this.setFromPoolPair('53');
     this.poolNvda = this.setFromPoolPair('55');
     this.poolCoin = this.setFromPoolPair('56');

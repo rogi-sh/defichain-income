@@ -363,19 +363,19 @@ export class DexStatisticsComponent implements OnInit {
 
   getVolumeAllPools(): number {
     let volume = 0;
-    this.poolPairsOcean.data.forEach(p => volume = volume + p.volume.h24);
+    this.poolPairsOcean.data.forEach(p => volume = volume + p.volume?.h24);
     return Math.round(volume * 100) / 100;
   }
 
   getCommissionsAprAllPools(): number {
     let com = 0;
-    this.poolPairsOcean.data.forEach(p => com = com + p.apr.commission * 100);
+    this.poolPairsOcean.data.forEach(p => com = com + p.apr?.commission * 100);
     return Math.round(com * 100) / 100;
   }
 
   getRewardsAprAllPools(): number {
     let com = 0;
-    this.poolPairsOcean.data.forEach(p => com = com + p.apr.reward * 100);
+    this.poolPairsOcean.data.forEach(p => com = com + p.apr?.reward * 100);
     return Math.round(com * 100) / 100;
   }
 
