@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '9.1.1 - 5.6.2022';
+    this.log.version = '9.1.2 - 6.6.2022';
+    this.log.comment = 'Fix dex volume with pool without commission apr';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '9.1.1 - 6.6.2022';
     this.log.comment = 'Fix missing tokens (increase size of response)';
     this.logs.push(this.log);
 
