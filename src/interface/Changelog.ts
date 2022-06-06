@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.1.1 - 5.6.2022';
+    this.log.comment = 'Fix missing tokens (increase size of response)';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.1.0 - 5.6.2022';
     this.log.comment = 'Move to self hosted ocean';
     this.logs.push(this.log);
