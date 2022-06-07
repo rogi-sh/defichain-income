@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.1.3 - 7.6.2022';
+    this.log.comment = 'Fallback to ocean from defichain';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.1.2 - 6.6.2022';
     this.log.comment = 'Fix dex volume with pool without commission apr';
     this.logs.push(this.log);
