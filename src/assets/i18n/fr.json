@@ -72,7 +72,8 @@
     "title": "Votre valorisation actuelle",
     "cur": "Choisissez votre devise",
     "dist": "Ventilation de la possession/dettes",
-    "hold": "Valorisation de la possession"
+    "hold": "Valorisation de la possession",
+    "interest": "Intérêt"
   },
   "income": {
     "all": "Total",

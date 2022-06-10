@@ -74,7 +74,8 @@
     "title": "Dein aktueller Wert",
     "cur": "Wähle deine Währung aus",
     "dist": "Verteilung deines Vermögens/Verbindlichkeit",
-    "hold": "Wert des Bestands"
+    "hold": "Wert des Bestands",
+    "interest": "Zinsen"
   },
   "income": {
     "all": "Gesamt",

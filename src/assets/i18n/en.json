@@ -72,7 +72,8 @@
     "title": "Your actual value",
     "cur": "Choose your currency",
     "dist": "Distribution of holdings/liabilities",
-    "hold": "Value of holdings"
+    "hold": "Value of holdings",
+    "interest": "Interest"
   },
   "income": {
     "all": "All",

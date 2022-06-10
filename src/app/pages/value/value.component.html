@@ -211,7 +211,12 @@
                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getNextLoanFromVaultUsd(v)'></app-price>
               </div>
               <div *ngIf='isIncognitoModeOn'>****</div>
-
+              <div *ngIf='v.collateralRatio > -1'
+                   class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mx-2 my-2 cursor-pointer inline-block text-center'>
+                {{ 'value.interest' | translate }} <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                                                              [usdPrice]='v.interestValue'>></app-price>
+                <div *ngIf='isIncognitoModeOn'>****</div>
+              </div>&nbsp;
             </div>
           </div>
 

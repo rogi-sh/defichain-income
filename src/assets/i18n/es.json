@@ -72,7 +72,8 @@
     "title": "Valor actual",
     "cur": "Elija su moneda",
     "dist": "Distribución de activos/pasivos",
-    "hold": "Valor de los activos"
+    "hold": "Valor de los activos",
+    "interest": "Interés"
   },
   "income": {
     "all": "Total",

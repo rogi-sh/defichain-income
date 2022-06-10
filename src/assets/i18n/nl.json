@@ -73,7 +73,8 @@
     "title": "Jouw huidige waarde",
     "cur": "Selecteer je munteenheid",
     "dist": "Verdeling van uw activa/passiva",
-    "hold": "Waarde van jouw holdings"
+    "hold": "Waarde van jouw holdings",
+    "interest": "Rente"
   },
   "income": {
     "all": "Total",
