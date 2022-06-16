@@ -466,6 +466,16 @@ export class DexStatisticsComponent implements OnInit {
     this.asc = !this.asc;
   }
 
+  getDUSDPrice(): number {
+    const dUsdPool = this.getPoolFromOceanPoolPairs('17');
+    const priceRateA = +dUsdPool.tokenB.reserve / +dUsdPool.tokenA.reserve;
+    return this.getRound2(priceRateA * this.cryptoPools.find(p => p.id === '5')?.priceB);
+  }
+
+  getRound2(num: number): number {
+    return Math.round((num) * 100) / 100;
+  }
+
   getLatestReleaseApp(): Release {
     return this.releasesApp[0];
   }

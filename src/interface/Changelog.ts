@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.1.7 - 16.6.2022';
+    this.log.comment = 'Fix dusd price';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.1.6 - 16.6.2022';
     this.log.comment = 'Fix lm calculator for new pools';
     this.logs.push(this.log);

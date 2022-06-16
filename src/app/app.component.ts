@@ -525,6 +525,11 @@ export class AppComponent implements OnInit {
     return Math.round(dex / cex  * 1000 - 1000) / 10;
   }
 
+  getDUSDPrice(): number {
+    const priceRateA = +this.poolUsd.reserveB / +this.poolUsd.reserveA;
+    return this.getRound2(priceRateA * this.poolBtc?.priceB);
+  }
+
   getRound2(num: number): number {
     return Math.round((num) * 100) / 100;
   }

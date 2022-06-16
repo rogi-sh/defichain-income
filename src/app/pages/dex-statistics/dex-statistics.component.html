@@ -842,8 +842,7 @@
             </span>
 
             <span *ngIf='isDUSDPool(stockPool)' class='font-bold'>
-              <span>{{getArb(priceDFICEX, stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB) * -1}} % <br>
-                {{getRound3((100 + getArb(priceDFICEX, stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB) * -1 ) / 100)}} </span> $
+              <span> {{ getRound2((1 - getDUSDPrice()) * -100)}}%</span>
             </span>
 
           </td>

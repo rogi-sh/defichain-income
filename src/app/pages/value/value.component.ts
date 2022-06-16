@@ -558,7 +558,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdValueUsd(): number {
-    return this.getUsdCount() * this.getUsdPriceOfStockPools(this.getPool('DUSD'));
+    return this.getUsdCount() * this.getDUSDPrice();
   }
 
   //  STOCKS VALUE IN WALLET AND POOLS
@@ -671,20 +671,20 @@ export class ValueComponent implements OnInit, OnChanges {
   getUsdPriceOfStockPools(pool: Pool): number {
 
     if (pool && pool.id === '17') {
-      return this.getCorrectDusdPrice();
+      return this.getDUSDPrice();
     }
 
     return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
   }
 
-  getCorrectDusdPrice(): number {
-    return (100 + this.getArb(this.cexPrice,
-      this.getPool('DUSD')?.totalLiquidityUsd / 2 / +this.getPool('DUSD')?.reserveB) * -1 ) / 100;
+  getDUSDPrice(): number {
+    const dUsdPool = this.getPool('DUSD');
+    const priceRateA = +dUsdPool.reserveB / +dUsdPool.reserveA;
+    return this.getRound2(priceRateA * this.getPool('BTC')?.priceB);
   }
 
-  getArb(cex: number, dex: number): number {
-    // round 1 digit
-    return Math.round(dex / cex  * 1000 - 1000) / 10;
+  getRound2(num: number): number {
+    return Math.round((num) * 100) / 100;
   }
 
   getAllValuesUsdPrice(): number {
@@ -755,7 +755,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdWalletValueUsd(): number {
-    return this.wallet.usd * this.getUsdPriceOfStockPools(this.getPool('DUSD'));
+    return this.wallet.usd * this.getDUSDPrice();
   }
 
   getLtcWalletValueUsd(): number {
@@ -1330,7 +1330,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
     if (this.isUsdInPortfolio()) {
       this.walletValues.push(new HoldingValue('DUSD',
-        this.wallet?.usd, this.wallet?.usd * this.getUsdPriceOfStockPools(this.getPool('DUSD'))));
+        this.wallet?.usd, this.wallet?.usd * this.getDUSDPrice()));
     }
 
     if (this.wallet?.ltc > 0) {
@@ -1820,7 +1820,7 @@ export class ValueComponent implements OnInit, OnChanges {
   // ANTEIL STOCKS
   getAnteilLMOfUsdPoolValue(): number {
     return ((this.wallet.dfiInUsdPool * this.getPool('BTC')?.priceB) + (this.wallet.usdInUsdPool
-      * this.getUsdPriceOfStockPools(this.getPool('DUSD'))));
+      * this.getDUSDPrice()));
   }
   getAnteilLMOfTslaPoolValue(): number {
     return ((this.wallet.usdInTslaPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
