@@ -679,6 +679,11 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getDUSDPrice(): number {
     const dUsdPool = this.getPool('DUSD');
+
+    if (!dUsdPool) {
+      return 1;
+    }
+
     const priceRateA = +dUsdPool.reserveB / +dUsdPool.reserveA;
     return this.getRound2(priceRateA * this.getPool('BTC')?.priceB);
   }

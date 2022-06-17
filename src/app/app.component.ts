@@ -526,6 +526,11 @@ export class AppComponent implements OnInit {
   }
 
   getDUSDPrice(): number {
+
+    if (!this.poolUsd) {
+      return 1;
+    }
+
     const priceRateA = +this.poolUsd.reserveB / +this.poolUsd.reserveA;
     return this.getRound2(priceRateA * this.poolBtc?.priceB);
   }
