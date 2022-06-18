@@ -709,7 +709,7 @@
             <span *ngIf="sortColumn === 'apy' && asc" class="material-icons md-18">arrow_drop_down</span>
             <span *ngIf="sortColumn === 'apy' && !asc" class="material-icons md-18">arrow_drop_up</span>
           </th>
-          <th class='text-right p-2'>Pool {{ 'correlation' | translate}}
+          <th class='text-right p-2'>{{ 'correlation' | translate}}
             ({{correlationDays}} {{ 'correlationDay' | translate}})
           </th>
         </tr>
@@ -770,8 +770,8 @@
             {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.total * 100 | number: '1.2-2' }}%
             <br>
             <span
-              class='text-xs'>Reward {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.reward * 100 | number: '1.2-2'}}
-              % - Commision {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.commission * 100 | number: '1.2-2'}}
+              class='text-xs'>R {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.reward * 100 | number: '1.2-2'}}
+              % + C {{getPoolFromOceanPoolPairs(cryptoPool.id)?.apr.commission * 100 | number: '1.2-2'}}
               %</span>
           </td>
           <td class='text-right p-2'>
@@ -842,7 +842,8 @@
             </span>
 
             <span *ngIf='isDUSDPool(stockPool)' class='font-bold'>
-              <span> {{ getRound2((1 - getDUSDPrice()) * -100)}}%</span>
+              <span> {{ getRound2((1 - getDUSDPrice()) * -100)}}%</span><br>
+              {{ 'value.interest' | translate}}    {{getInterest(stockPool?.tokenASymbol)}} %
             </span>
 
           </td>
@@ -868,14 +869,15 @@
           <td class='text-right p-2'>
             {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.total * 100 | number: '1.2-2' }}%
             <br>
-            <span class='text-xs'>Reward {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.reward * 100 | number: '1.2-2'}}
-              % - Commision {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.commission * 100 | number: '1.2-2'}} %</span>
+            <span class='text-xs'>R {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.reward * 100 | number: '1.2-2'}}
+              % + C {{getPoolFromOceanPoolPairs(stockPool.id)?.apr.commission * 100 | number: '1.2-2'}} %</span>
           </td>
           <td class='text-right p-2'>
             {{getApyWeeklyFromApr(stockPool?.apr) | number: '1.2-2' }}%
           </td>
+
           <td class='text-right p-2'>
-            {{getCorr(stockPool?.tokenASymbol)}}
+            {{getCorr(stockPool?.tokenASymbol) === -10 ? '-' : getCorr(stockPool?.tokenASymbol)}}
           </td>
         </tr>
         </tbody>

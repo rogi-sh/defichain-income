@@ -652,7 +652,7 @@ export class DexStatisticsComponent implements OnInit {
     } else if ('USDC' === pool) {
       return this.corr?.usdcPool;
     } else {
-      return this.corr?.tslaPool;
+      return -10;
     }
   }
 
@@ -678,6 +678,16 @@ export class DexStatisticsComponent implements OnInit {
     const price = +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.activePrice?.active?.amount;
 
     return Math.round(price * 100) / 100;
+  }
+
+  getInterest(key: string): number {
+
+    if ( !key || !this.oraclePrices || this.oraclePrices.data.length === 0) {
+      return 0;
+    }
+
+    return +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.interest;
+
   }
 
   getStockPriceNext(key: string): number {

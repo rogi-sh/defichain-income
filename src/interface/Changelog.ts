@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.1.8 - 18.6.2022';
+    this.log.comment = 'Interest of dUsd in dex table';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.1.7 - 16.6.2022';
     this.log.comment = 'Fix dusd price';
     this.logs.push(this.log);
