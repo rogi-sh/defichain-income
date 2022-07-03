@@ -141,6 +141,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
     let pypl = 0; let brkb = 0; let ko = 0; let pg = 0;
     let sap = 0; let ura = 0; let cs = 0; let gsg = 0;
+    let xom = 0; let govt = 0; let tan = 0; let pplt = 0;
 
     vault?.loanAmounts?.forEach(loan => {
         if ('DUSD' === loan.symbolKey) {
@@ -215,13 +216,21 @@ export class ValueComponent implements OnInit, OnChanges {
           cs = +loan.amount * +loan.activePrice.active.amount;
         } else if ('SAP' === loan.symbolKey) {
           sap = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('PPLT' === loan.symbolKey) {
+          pplt = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('GOVT' === loan.symbolKey) {
+          govt = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('TAN' === loan.symbolKey) {
+          tan = +loan.amount * +loan.activePrice.active.amount;
+        } else if ('XOM' === loan.symbolKey) {
+          xom = +loan.amount * +loan.activePrice.active.amount;
         }
       });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
       + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg
-      + sap + ura + gsg + cs;
+      + sap + ura + gsg + cs + pplt + xom + govt + tan;
   }
 
   getNextLoanFromVaultUsd(vault: Vault): number {
@@ -233,6 +242,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
     let pypl = 0; let brkb = 0; let ko = 0; let pg = 0;
     let sap = 0; let ura = 0; let cs = 0; let gsg = 0;
+    let xom = 0; let govt = 0; let tan = 0; let pplt = 0;
 
     vault?.loanAmounts?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
@@ -307,13 +317,21 @@ export class ValueComponent implements OnInit, OnChanges {
         cs = +loan.amount * +loan.activePrice.next.amount;
       } else if ('SAP' === loan.symbolKey) {
         sap = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('PPLT' === loan.symbolKey) {
+        pplt = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('GOVT' === loan.symbolKey) {
+        govt = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('TAN' === loan.symbolKey) {
+        tan = +loan.amount * +loan.activePrice.next.amount;
+      } else if ('XOM' === loan.symbolKey) {
+        xom = +loan.amount * +loan.activePrice.next.amount;
       }
     });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx
       + fb + voo + dis + mchi + mstr + intc + pypl + brkb + ko + pg
-      + sap + ura + gsg + cs;
+      + sap + ura + gsg + cs  + pplt + xom + govt + tan;
   }
 
   getRatioNext(vault: Vault): number {
@@ -541,6 +559,8 @@ export class ValueComponent implements OnInit, OnChanges {
       || this.wallet?.usdInBrkbPool > 0 || this.wallet?.usdInKoPool > 0 || this.wallet?.usdInPgPool > 0
       || this.wallet?.usdInSapPool > 0
       || this.wallet?.usdInUraPool > 0 || this.wallet?.usdInCsPool > 0 || this.wallet?.usdInGsgPool > 0
+      || this.wallet?.usdInPpltPool > 0
+      || this.wallet?.usdInGovtPool > 0 || this.wallet?.usdInTanPool > 0 || this.wallet?.usdInXomPool > 0
       || this.getCollateralCountVaults('DUSD') > 0 ;
   }
 
@@ -553,8 +573,9 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.wallet?.usdInEemPool + this.wallet?.usdInMsftPool + this.wallet?.usdInNflxPool + this.wallet?.usdInFbPool
       + this.wallet?.usdInVooPool + this.wallet?.usdInDisPool + this.wallet?.usdInMchiPool + this.wallet?.usdInMstrPool
       + this.wallet?.usdInIntcPool + this.wallet?.usdInPyplPool + this.wallet?.usdInBrkbPool +  this.wallet?.usdInKoPool
-      + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInCsPool +  this.wallet?.usdInGsgPool
-      + this.wallet?.usdInPgPool + this.getCollateralCountVaults('DUSD');
+      + this.wallet?.usdInPgPool + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInCsPool
+      + this.wallet?.usdInGsgPool + this.wallet?.usdInPpltPool + this.wallet?.usdInGovtPool + this.wallet?.usdInTanPool
+      + this.wallet?.usdInXomPool  + this.getCollateralCountVaults('DUSD');
   }
 
   getUsdValueUsd(): number {
@@ -667,6 +688,18 @@ export class ValueComponent implements OnInit, OnChanges {
   getGsgValueUsd(): number {
     return (this.wallet?.gsgInGsgPool + this.wallet?.gsg) * this.getUsdPriceOfStockPools(this.getPool('GSG'));
   }
+  getPpltValueUsd(): number {
+    return (this.wallet?.ppltInPpltPool + this.wallet?.pplt) * this.getUsdPriceOfStockPools(this.getPool('PPLT'));
+  }
+  getGovtValueUsd(): number {
+    return (this.wallet?.govtInGovtPool + this.wallet?.govt) * this.getUsdPriceOfStockPools(this.getPool('GOVT'));
+  }
+  getTanValueUsd(): number {
+    return (this.wallet?.tanInTanPool + this.wallet?.tan) * this.getUsdPriceOfStockPools(this.getPool('TAN'));
+  }
+  getXomValueUsd(): number {
+    return (this.wallet?.xomInXomPool + this.wallet?.xom) * this.getUsdPriceOfStockPools(this.getPool('XOM'));
+  }
 
   getUsdPriceOfStockPools(pool: Pool): number {
 
@@ -703,7 +736,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getMsftValueUsd() + this.getNflxValueUsd() + this.getFbValueUsd() + this.getVooValueUsd()
       + this.getDisValueUsd() + this.getMchiValueUsd() + this.getMstrValueUsd() + this.getIntcValueUsd()
       + this.getPyplValueUsd() + this.getBrkbValueUsd() + this.getKoValueUsd() + this.getPgValueUsd()
-      + this.getSapValueUsd() + this.getUraValueUsd() + this.getCsValueUsd() + this.getGsgValueUsd();
+      + this.getSapValueUsd() + this.getUraValueUsd() + this.getCsValueUsd() + this.getGsgValueUsd()
+      + this.getPpltValueUsd() + this.getGovtValueUsd() + this.getTanValueUsd() + this.getXomValueUsd();
     // Collateral
     const collateral = this.getVaultsCollateralUsd();
 
@@ -724,7 +758,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getMsftWalletValueUsd() + this.getNflxWalletValueUsd() + this.getFbWalletValueUsd() + this.getVooWalletValueUsd()
       + this.getDisWalletValueUsd() + this.getMchiWalletValueUsd() + this.getMstrWalletValueUsd() + this.getIntcWalletValueUsd()
       + this.getPyplWalletValueUsd() + this.getBrkbWalletValueUsd() + this.getKoWalletValueUsd() + this.getPgWalletValueUsd()
-      + this.getSapWalletValueUsd() + this.getUraWalletValueUsd() + this.getCsWalletValueUsd() + this.getGsgWalletValueUsd();
+      + this.getSapWalletValueUsd() + this.getUraWalletValueUsd() + this.getCsWalletValueUsd() + this.getGsgWalletValueUsd()
+      + this.getPpltWalletValueUsd() + this.getGovtWalletValueUsd() + this.getTanWalletValueUsd() + this.getXomWalletValueUsd();
   }
 
   getDfiCountWalletUsd(): number {
@@ -873,6 +908,18 @@ export class ValueComponent implements OnInit, OnChanges {
   getCsWalletValueUsd(): number {
     return this.wallet?.cs * this.getUsdPriceOfStockPools(this.getPool('CS'));
   }
+  getPpltWalletValueUsd(): number {
+    return this.wallet?.pplt * this.getUsdPriceOfStockPools(this.getPool('PPLT'));
+  }
+  getGovtWalletValueUsd(): number {
+    return this.wallet?.govt * this.getUsdPriceOfStockPools(this.getPool('GOVT'));
+  }
+  getTanWalletValueUsd(): number {
+    return this.wallet?.tan * this.getUsdPriceOfStockPools(this.getPool('TAN'));
+  }
+  getXomWalletValueUsd(): number {
+    return this.wallet?.xom * this.getUsdPriceOfStockPools(this.getPool('XOM'));
+  }
 
   getDfiValueUsd(): number {
     return this.getDfiCount() * this.getPool('BTC')?.priceB;
@@ -923,7 +970,9 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAnteilLMOfMchiPoolValue() + this.getAnteilLMOfMstrPoolValue() + this.getAnteilLMOfMchiPoolValue()
       + this.getAnteilLMOfIntcPoolValue() + this.getAnteilLMOfPyplPoolValue() + this.getAnteilLMOfBrkbPoolValue()
       + this.getAnteilLMOfKoPoolValue() + this.getAnteilLMOfPgPoolValue() + this.getAnteilLMOfSapPoolValue()
-      + this.getAnteilLMOfUraPoolValue() + this.getAnteilLMOfCsPoolValue() + this.getAnteilLMOfGsgPoolValue();
+      + this.getAnteilLMOfUraPoolValue() + this.getAnteilLMOfCsPoolValue() + this.getAnteilLMOfGsgPoolValue()
+      + this.getAnteilLMOfPpltPoolValue()
+      + this.getAnteilLMOfGovtPoolValue() + this.getAnteilLMOfTanPoolValue() + this.getAnteilLMOfXomPoolValue();
   }
 
   getAnteilCollaterallOfAllValue(): number {
@@ -1086,6 +1135,18 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getLoanCountVaults('GSG') > 0) {
       this.loanValues.push(new LoanValue('GSG', this.getPool('GSG')));
+    }
+    if (this.getLoanCountVaults('PPLT') > 0) {
+      this.loanValues.push(new LoanValue('PPLT', this.getPool('PPLT')));
+    }
+    if (this.getLoanCountVaults('GOVT') > 0) {
+      this.loanValues.push(new LoanValue('GOVT', this.getPool('GOVT')));
+    }
+    if (this.getLoanCountVaults('TAN') > 0) {
+      this.loanValues.push(new LoanValue('TAN', this.getPool('TAN')));
+    }
+    if (this.getLoanCountVaults('XOM') > 0) {
+      this.loanValues.push(new LoanValue('XOM', this.getPool('XOM')));
     }
   }
 
@@ -1307,6 +1368,26 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.gsg + this.wallet?.gsgInGsgPool, this.getGsgValueUsd()));
     }
 
+    if (this.wallet?.pplt > 0 || this.wallet?.ppltInPpltPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('PPLT',
+        this.wallet?.pplt + this.wallet?.ppltInPpltPool, this.getPpltValueUsd()));
+    }
+
+    if (this.wallet?.govt > 0 || this.wallet?.govtInGovtPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('GOVT',
+        this.wallet?.govt + this.wallet?.govtInGovtPool, this.getGovtValueUsd()));
+    }
+
+    if (this.wallet?.tan > 0 || this.wallet?.tanInTanPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('TAN',
+        this.wallet?.tan + this.wallet?.tanInTanPool, this.getTanValueUsd()));
+    }
+
+    if (this.wallet?.xom > 0 || this.wallet?.xomInXomPool > 0 ) {
+      this.holdingValues.push(new HoldingValue('XOM',
+        this.wallet?.xom + this.wallet?.xomInXomPool, this.getXomValueUsd()));
+    }
+
   }
 
   createWalletTokens(): void {
@@ -1525,6 +1606,25 @@ export class ValueComponent implements OnInit, OnChanges {
     if (this.wallet?.gsg > 0) {
       this.walletValues.push(new HoldingValue('GSG',
         this.wallet?.gsg , this.wallet?.gsg * this.getUsdPriceOfStockPools(this.getPool('GSG'))));
+    }
+    if (this.wallet?.pplt > 0) {
+      this.walletValues.push(new HoldingValue('PPLT',
+        this.wallet?.pplt , this.wallet?.pplt * this.getUsdPriceOfStockPools(this.getPool('PPLT'))));
+    }
+
+    if (this.wallet?.govt > 0) {
+      this.walletValues.push(new HoldingValue('GOVT',
+        this.wallet?.govt , this.wallet?.govt * this.getUsdPriceOfStockPools(this.getPool('GOVT'))));
+    }
+
+    if (this.wallet?.tan > 0) {
+      this.walletValues.push(new HoldingValue('TAN',
+        this.wallet?.tan , this.wallet?.tan * this.getUsdPriceOfStockPools(this.getPool('TAN'))));
+    }
+
+    if (this.wallet?.xom > 0) {
+      this.walletValues.push(new HoldingValue('XOM',
+        this.wallet?.xom , this.wallet?.xom * this.getUsdPriceOfStockPools(this.getPool('XOM'))));
     }
 
   }
@@ -1777,6 +1877,26 @@ export class ValueComponent implements OnInit, OnChanges {
       this.lpTokensValues.push(new HoldingValue('CS-DUSD',
         this.wallet?.csusd , this.wallet?.csusd * this.getLpTokenValue(this.getPool('CS'))));
     }
+
+    if (this.wallet?.ppltusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('PPLT-DUSD',
+        this.wallet?.ppltusd , this.wallet?.ppltusd * this.getLpTokenValue(this.getPool('PPLT'))));
+    }
+
+    if (this.wallet?.govtusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('GOVT-DUSD',
+        this.wallet?.govtusd , this.wallet?.govtusd * this.getLpTokenValue(this.getPool('GOVT'))));
+    }
+
+    if (this.wallet?.tanusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('TAN-DUSD',
+        this.wallet?.tanusd , this.wallet?.tanusd * this.getLpTokenValue(this.getPool('TAN'))));
+    }
+
+    if (this.wallet?.xomusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('XOM-DUSD',
+        this.wallet?.xomusd , this.wallet?.xomusd * this.getLpTokenValue(this.getPool('XOM'))));
+    }
   }
 
   getLpTokenValue(pool: Pool): number {
@@ -1975,6 +2095,24 @@ export class ValueComponent implements OnInit, OnChanges {
     return ((this.wallet.usdInCsPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
       + (this.wallet.csInCsPool * this.getUsdPriceOfStockPools(this.getPool('CS'))));
   }
+
+  getAnteilLMOfPpltPoolValue(): number {
+    return ((this.wallet.usdInPpltPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.ppltInPpltPool * this.getUsdPriceOfStockPools(this.getPool('PPLT'))));
+  }
+  getAnteilLMOfGovtPoolValue(): number {
+    return ((this.wallet.usdInGovtPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.govtInGovtPool * this.getUsdPriceOfStockPools(this.getPool('GOVT'))));
+  }
+  getAnteilLMOfTanPoolValue(): number {
+    return ((this.wallet.usdInTanPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.tanInTanPool * this.getUsdPriceOfStockPools(this.getPool('TAN'))));
+  }
+  getAnteilLMOfXomPoolValue(): number {
+    return ((this.wallet.usdInXomPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.xomInXomPool * this.getUsdPriceOfStockPools(this.getPool('XOM'))));
+  }
+
   buildDataForChart(): void {
 
     const dataBtc = new Data();
@@ -2149,6 +2287,22 @@ export class ValueComponent implements OnInit, OnChanges {
     dataGSG.name = 'GSG';
     dataGSG.value = this.getGsgValueUsd() * this.dataService.getPrice(this.fiat);
 
+    const dataPplt = new Data();
+    dataPplt.name = 'PPLT';
+    dataPplt.value = this.getPpltValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataGovt = new Data();
+    dataGovt.name = 'GOVT';
+    dataGovt.value = this.getGovtValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataTan = new Data();
+    dataTan.name = 'TAN';
+    dataTan.value = this.getTanValueUsd() * this.dataService.getPrice(this.fiat);
+
+    const dataXom = new Data();
+    dataXom.name = 'XOM';
+    dataXom.value = this.getXomValueUsd() * this.dataService.getPrice(this.fiat);
+
     const dataDfi = new Data();
     dataDfi.name = 'DFI';
     dataDfi.value = this.getDfiValueUsd() * this.dataService.getPrice(this.fiat);
@@ -2160,7 +2314,8 @@ export class ValueComponent implements OnInit, OnChanges {
       dataMSFT.value + dataNFLX.value + dataFB.value + dataVOO.value + dataDfi.value +
       dataDIS.value + dataMCHI.value + dataMSTR.value + dataINTC.value +
       dataPYPL.value + dataBRKB.value + dataKO.value + dataPG.value +
-      dataSAP.value + dataURA.value + dataCS.value + dataGSG.value;
+      dataSAP.value + dataURA.value + dataCS.value + dataGSG.value +
+      dataGovt.value + dataTan.value + dataXom.value + dataPplt.value;
 
     this.chartOptions = {
       series: [{
@@ -2169,7 +2324,7 @@ export class ValueComponent implements OnInit, OnChanges {
           dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
           dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
           dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG,
-          dataSAP, dataURA, dataCS, dataGSG, dataDfi)
+          dataSAP, dataURA, dataCS, dataGSG, dataPplt, dataGovt, dataTan, dataXom, dataDfi)
       }],
       chart: {
         width: '90%',
@@ -2187,20 +2342,23 @@ export class ValueComponent implements OnInit, OnChanges {
       colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
         dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
         dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG,
+        dataPplt, dataGovt, dataTan, dataXom, dataDfi),
       xaxis: {
         type: 'category',
         categories: this.getLabelsOverallValue(dataBtc, allValue, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge,
         dataBch, dataTsla, dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK,  dataBABA,
         dataVNQ, dataURTH, dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
+        dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG,
+          dataPplt, dataGovt, dataTan, dataXom, dataDfi),
         position: 'bottom',
         labels: {
           style: {
             colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
               dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
               dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-              dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi),
+              dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG,
+              dataPplt, dataGovt, dataTan, dataXom, dataDfi),
             fontSize: '16px',
             fontWeight: 800
           },
@@ -2223,7 +2381,8 @@ export class ValueComponent implements OnInit, OnChanges {
         colors: this.getColorsOverallValue(dataBtc, dataEth, dataUsdt, dataUsdc, dataUsd, dataLtc, dataDoge, dataBch, dataTsla,
           dataSpy, dataQqq, dataPltr, dataSLV, dataAAPL, dataGLD, dataGME, dataGOOGL, dataARKK, dataBABA, dataVNQ, dataURTH,
           dataTLT, dataPDBC, dataAMZN, dataNVDA, dataCOIN, dataEEM, dataMSFT, dataNFLX, dataFB, dataVOO,
-          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG, dataDfi)
+          dataDIS, dataMCHI, dataMSTR, dataINTC, dataPYPL, dataBRKB, dataKO, dataPG, dataSAP, dataURA, dataCS, dataGSG,
+          dataPplt, dataGovt, dataTan, dataXom, dataDfi)
       },
     };
   }
@@ -2238,6 +2397,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
                                 dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
+                                dataPplt: Data, dataGovt: Data, dataTan: Data, dataXom: Data,
                                 dataDfi: Data): Array<number> {
     const incomeNumbers = new Array<number>();
 
@@ -2370,6 +2530,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataGSG.value > 0) {
       incomeNumbers.push(+dataGSG.value.toFixed(2));
     }
+    if (dataPplt.value > 0) {
+      incomeNumbers.push(+dataPplt.value.toFixed(2));
+    }
+    if (dataGovt.value > 0) {
+      incomeNumbers.push(+dataGovt.value.toFixed(2));
+    }
+    if (dataTan.value > 0) {
+      incomeNumbers.push(+dataTan.value.toFixed(2));
+    }
+    if (dataXom.value > 0) {
+      incomeNumbers.push(+dataXom.value.toFixed(2));
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push(+dataDfi.value.toFixed(2));
     }
@@ -2386,6 +2558,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
                                 dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
+                                dataPplt: Data, dataGovt: Data, dataTan: Data, dataXom: Data,
                                 dataDfi: Data): Array<string> {
     const incomeNumbers = new Array<string>();
 
@@ -2518,6 +2691,18 @@ export class ValueComponent implements OnInit, OnChanges {
     if (dataGSG.value > 0) {
       incomeNumbers.push('#FFDE2E');
     }
+    if (dataPplt.value > 0) {
+      incomeNumbers.push('#E5E4E2');
+    }
+    if (dataGovt.value > 0) {
+      incomeNumbers.push('#40B5AD');
+    }
+    if (dataTan.value > 0) {
+      incomeNumbers.push('#FDB813');
+    }
+    if (dataXom.value > 0) {
+      incomeNumbers.push('#F01523');
+    }
     if (dataDfi.value > 0) {
       incomeNumbers.push('#ff00af');
     }
@@ -2535,6 +2720,7 @@ export class ValueComponent implements OnInit, OnChanges {
                                 dataDIS: Data, dataMCHI: Data, dataMSTR: Data, dataINTC: Data,
                                 dataPYPL: Data, dataBRKB: Data, dataKO: Data, dataPG: Data,
                                 dataSAP: Data, dataURA: Data, dataCS: Data, dataGSG: Data,
+                                dataPplt: Data, dataGovt: Data, dataTan: Data, dataXom: Data,
                                 dataDfi: Data): Array<string> {
 
     const incomeNumbers = new Array<string>();
@@ -2666,6 +2852,19 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getAnteilPortfolioForChart(dataGSG, allValue) > 0) {
       incomeNumbers.push('GSG ' + this.getAnteilPortfolioForChart(dataGSG, allValue).toFixed(1) + '%');
+    }
+
+    if (this.getAnteilPortfolioForChart(dataPplt, allValue) > 0) {
+      incomeNumbers.push('PPLT ' + this.getAnteilPortfolioForChart(dataPplt, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataGovt, allValue) > 0) {
+      incomeNumbers.push('GOVT ' + this.getAnteilPortfolioForChart(dataGovt, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataTan, allValue) > 0) {
+      incomeNumbers.push('TAN ' + this.getAnteilPortfolioForChart(dataTan, allValue).toFixed(1) + '%');
+    }
+    if (this.getAnteilPortfolioForChart(dataXom, allValue) > 0) {
+      incomeNumbers.push('XOM ' + this.getAnteilPortfolioForChart(dataXom, allValue).toFixed(1) + '%');
     }
     if (this.getAnteilPortfolioForChart(dataDfi, allValue) > 0) {
       incomeNumbers.push('DFI ' + this.getAnteilPortfolioForChart(dataDfi, allValue).toFixed(1) + '%');

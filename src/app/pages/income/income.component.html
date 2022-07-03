@@ -442,6 +442,30 @@
               </span>
               GSG
             </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ppltInPpltPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilPpltPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              PPLT
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.govtInGovtPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGovtPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GOVT
+            </span>
+            <span class="text-xl dark:text-gray-100" *ngIf="wallet?.tanInTanPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilTanPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              TAN
+            </span>
+              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.xomInXomPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilXomPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              XOM
+            </span>
           </span>
         </div>
 

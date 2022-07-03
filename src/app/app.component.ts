@@ -51,7 +51,7 @@ import {
   PoolKoOut,
   PoolPgOut,
   PoolSapOut,
-  PoolGsgOut, PoolUraOut, PoolCsOut,
+  PoolGsgOut, PoolUraOut, PoolCsOut, PoolPpltOut, PoolGovtOut, PoolXomOut, PoolTanOut,
 } from '@interfaces/Dex';
 import {CountdownComponent} from 'ngx-countdown';
 import {
@@ -182,6 +182,11 @@ export class AppComponent implements OnInit {
   dfiProBlockCs = 0;
   dfiProBlockUra = 0;
   dfiProBlockGsg = 0;
+
+  dfiProBlockPplt = 0;
+  dfiProBlockXom = 0;
+  dfiProBlockGovt = 0;
+  dfiProBlockTan = 0;
 
   dfiPorBlockStock = 77.8;
 
@@ -422,6 +427,23 @@ export class AppComponent implements OnInit {
   poolCs: Pool;
   poolCsOut: PoolCsOut = new PoolCsOut();
   anteilAmPoolCs: number;
+
+  // new stocks 27.6.2022
+  poolPplt: Pool;
+  poolPpltOut: PoolPpltOut = new PoolPpltOut();
+  anteilAmPoolPplt: number;
+
+  poolGovt: Pool;
+  poolGovtOut: PoolGovtOut = new PoolGovtOut();
+  anteilAmPoolGovt: number;
+
+  poolTan: Pool;
+  poolTanOut: PoolTanOut = new PoolTanOut();
+  anteilAmPoolTan: number;
+
+  poolXom: Pool;
+  poolXomOut: PoolXomOut = new PoolXomOut();
+  anteilAmPoolXom: number;
 
   cryptoPools: Array<Pool>;
   stocksPools: Array<Pool>;
@@ -1848,6 +1870,20 @@ export class AppComponent implements OnInit {
       this.berechnePoolOutGsg();
     }
 
+    // 28.6.2022
+    if (this.poolPplt) {
+      this.berechnePoolOutPplt();
+    }
+    if (this.poolGovt) {
+      this.berechnePoolOutGovt();
+    }
+    if (this.poolTan) {
+      this.berechnePoolOutTan();
+    }
+    if (this.poolXom) {
+      this.berechnePoolOutXom();
+    }
+
     this.berechneStakingOut();
     this.berechneMNOut();
     this.berechnePoolOut();
@@ -1935,6 +1971,11 @@ export class AppComponent implements OnInit {
     this.poolCs = this.setFromPoolPair('88');
     this.poolGsg = this.setFromPoolPair('86');
     this.poolUra = this.setFromPoolPair('87');
+    // 28.6.2022
+    this.poolPplt = this.setFromPoolPair('95');
+    this.poolGovt = this.setFromPoolPair('98');
+    this.poolTan = this.setFromPoolPair('96');
+    this.poolXom = this.setFromPoolPair('97');
     this.pools = this.addAllPools();
   }
 
@@ -1992,10 +2033,18 @@ export class AppComponent implements OnInit {
     pools.push(this.poolCs);
     pools.push(this.poolGsg);
     pools.push(this.poolUra);
+
+    // 28.6.2022
+    pools.push(this.poolXom);
+    pools.push(this.poolGovt);
+    pools.push(this.poolTan);
+    pools.push(this.poolPplt);
+
     return pools;
   }
 
   private createStockArray(): void {
+
     this.stocksPools.push(this.poolUsd);
     this.stocksPools.push(this.poolTsla);
     this.stocksPools.push(this.poolQqq);
@@ -2038,6 +2087,12 @@ export class AppComponent implements OnInit {
     this.stocksPools.push(this.poolCs);
     this.stocksPools.push(this.poolGsg);
     this.stocksPools.push(this.poolUra);
+
+    // 28.6.2022
+    this.stocksPools.push(this.poolXom);
+    this.stocksPools.push(this.poolGovt);
+    this.stocksPools.push(this.poolTan);
+    this.stocksPools.push(this.poolPplt);
   }
 
   private createCryptoPoolsArray(): void {
@@ -2078,115 +2133,128 @@ export class AppComponent implements OnInit {
     this.dfiProBlockUsd = 0.5 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCommission(this.poolUsd);
 
-    this.dfiProBlockTsla = 0.038 * this.dfiPorBlockStock;
+    this.dfiProBlockTsla = 0.046 * this.dfiPorBlockStock;
     this.dfiProBlockTsla += this.getCommission(this.poolTsla);
 
-    this.dfiProBlockQqq = 0.043 * this.dfiPorBlockStock;
+    this.dfiProBlockQqq = 0.0357 * this.dfiPorBlockStock;
     this.dfiProBlockQqq += this.getCommission(this.poolQqq);
 
-    this.dfiProBlockSpy = 0.0677 * this.dfiPorBlockStock;
+    this.dfiProBlockSpy = 0.0608 * this.dfiPorBlockStock;
     this.dfiProBlockSpy += this.getCommission(this.poolSpy);
 
-    this.dfiProBlockAapl = 0.0269 * this.dfiPorBlockStock;
+    this.dfiProBlockAapl = 0.0256 * this.dfiPorBlockStock;
     this.dfiProBlockAapl += this.getCommission(this.poolAapl);
 
-    this.dfiProBlockPltr = 0.0129 * this.dfiPorBlockStock;
+    this.dfiProBlockPltr = 0.01 * this.dfiPorBlockStock;
     this.dfiProBlockPltr += this.getCommission(this.poolPltr);
 
-    this.dfiProBlockSlv = 0.0051 * this.dfiPorBlockStock;
+    this.dfiProBlockSlv = 0.0046 * this.dfiPorBlockStock;
     this.dfiProBlockSlv += this.getCommission(this.poolSlv);
 
-    this.dfiProBlockGld = 0.0047 * this.dfiPorBlockStock;
+    this.dfiProBlockGld = 0.0041 * this.dfiPorBlockStock;
     this.dfiProBlockGld += this.getCommission(this.poolGld);
 
-    this.dfiProBlockGme = 0.02 * this.dfiPorBlockStock;
+    this.dfiProBlockGme = 0.0181 * this.dfiPorBlockStock;
     this.dfiProBlockGme += this.getCommission(this.poolGme);
 
-    this.dfiProBlockGoogle = 0.0119 * this.dfiPorBlockStock;
+    this.dfiProBlockGoogle = 0.0123 * this.dfiPorBlockStock;
     this.dfiProBlockGoogle += this.getCommission(this.poolGoogl);
 
-    this.dfiProBlockArkk = 0.0137 * this.dfiPorBlockStock;
+    this.dfiProBlockArkk = 0.0119 * this.dfiPorBlockStock;
     this.dfiProBlockArkk += this.getCommission(this.poolArkk);
 
-    this.dfiProBlockBaba = 0.0128 * this.dfiPorBlockStock;
+    this.dfiProBlockBaba = 0.0149 * this.dfiPorBlockStock;
     this.dfiProBlockBaba += this.getCommission(this.poolBaba);
 
-    this.dfiProBlockVnq = 0.0049 * this.dfiPorBlockStock;
+    this.dfiProBlockVnq = 0.0044 * this.dfiPorBlockStock;
     this.dfiProBlockVnq += this.getCommission(this.poolVnq);
 
-    this.dfiProBlockUrth = 0.0037 * this.dfiPorBlockStock;
+    this.dfiProBlockUrth = 0.0033 * this.dfiPorBlockStock;
     this.dfiProBlockUrth += this.getCommission(this.poolUrth);
 
-    this.dfiProBlockTlt = 0.0071 * this.dfiPorBlockStock;
+    this.dfiProBlockTlt = 0.0062 * this.dfiPorBlockStock;
     this.dfiProBlockTlt += this.getCommission(this.poolTlt);
 
-    this.dfiProBlockPdbc = 0.0042 * this.dfiPorBlockStock;
+    this.dfiProBlockPdbc = 0.004 * this.dfiPorBlockStock;
     this.dfiProBlockPdbc += this.getCommission(this.poolPdbc);
 
     // STOCKS 1.2.2022
-    this.dfiProBlockAmzn = 0.0223 * this.dfiPorBlockStock;
+    this.dfiProBlockAmzn = 0.0226 * this.dfiPorBlockStock;
     this.dfiProBlockAmzn += this.getCommission(this.poolAmzn);
 
-    this.dfiProBlockNvda = 0.0251 * this.dfiPorBlockStock;
+    this.dfiProBlockNvda = 0.0224 * this.dfiPorBlockStock;
     this.dfiProBlockNvda += this.getCommission(this.poolNvda);
 
-    this.dfiProBlockCoin = 0.0193 * this.dfiPorBlockStock;
+    this.dfiProBlockCoin = 0.0186 * this.dfiPorBlockStock;
     this.dfiProBlockCoin += this.getCommission(this.poolCoin);
 
-    this.dfiProBlockEem = 0.0069 * this.dfiPorBlockStock;
+    this.dfiProBlockEem = 0.0065 * this.dfiPorBlockStock;
     this.dfiProBlockEem += this.getCommission(this.poolEem);
 
     // STOCKS 3.3.2022
-    this.dfiProBlockMsft = 0.0182 * this.dfiPorBlockStock;
+    this.dfiProBlockMsft = 0.0173 * this.dfiPorBlockStock;
     this.dfiProBlockMsft += this.getCommission(this.poolMsft);
 
-    this.dfiProBlockNflx = 0.0137 * this.dfiPorBlockStock;
+    this.dfiProBlockNflx = 0.0135 * this.dfiPorBlockStock;
     this.dfiProBlockNflx += this.getCommission(this.poolNflx);
 
-    this.dfiProBlockVoo = 0.0075 * this.dfiPorBlockStock;
+    this.dfiProBlockVoo = 0.0066 * this.dfiPorBlockStock;
     this.dfiProBlockVoo += this.getCommission(this.poolVoo);
 
-    this.dfiProBlockFb = 0.0169 * this.dfiPorBlockStock;
+    this.dfiProBlockFb = 0.0159 * this.dfiPorBlockStock;
     this.dfiProBlockFb += this.getCommission(this.poolFb);
 
     // STOCKS 30.3.2022
-    this.dfiProBlockDis = this.getRewardIsOn(this.poolDis) ? 0.0077 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockDis = this.getRewardIsOn(this.poolDis) ? 0.0069 * this.dfiPorBlockStock : 0;
     this.dfiProBlockDis += this.getCommission(this.poolDis);
 
-    this.dfiProBlockMchi = this.getRewardIsOn(this.poolMchi) ? 0.0063 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockMchi = this.getRewardIsOn(this.poolMchi) ? 0.0056 * this.dfiPorBlockStock : 0;
     this.dfiProBlockMchi += this.getCommission(this.poolMchi);
 
-    this.dfiProBlockMstr = this.getRewardIsOn(this.poolMstr) ? 0.0225 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockMstr = this.getRewardIsOn(this.poolMstr) ? 0.0197 * this.dfiPorBlockStock : 0;
     this.dfiProBlockMstr += this.getCommission(this.poolMstr);
 
-    this.dfiProBlockIntc = this.getRewardIsOn(this.poolIntc) ? 0.0071 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockIntc = this.getRewardIsOn(this.poolIntc) ? 0.0069 * this.dfiPorBlockStock : 0;
     this.dfiProBlockIntc += this.getCommission(this.poolIntc);
 
     // STOCKS 28.4.2022
-    this.dfiProBlockPypl = this.getRewardIsOn(this.poolPypl) ? 0.0108 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPypl = this.getRewardIsOn(this.poolPypl) ? 0.0105 * this.dfiPorBlockStock : 0;
     this.dfiProBlockPypl += this.getCommission(this.poolPypl);
 
-    this.dfiProBlockBrkb = this.getRewardIsOn(this.poolBrkb) ? 0.0053 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockBrkb = this.getRewardIsOn(this.poolBrkb) ? 0.0055 * this.dfiPorBlockStock : 0;
     this.dfiProBlockBrkb += this.getCommission(this.poolBrkb);
 
-    this.dfiProBlockKo = this.getRewardIsOn(this.poolKo) ? 0.0052 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockKo = this.getRewardIsOn(this.poolKo) ? 0.0051 * this.dfiPorBlockStock : 0;
     this.dfiProBlockKo += this.getCommission(this.poolKo);
 
-    this.dfiProBlockPg = this.getRewardIsOn(this.poolPg) ? 0.0052 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPg = this.getRewardIsOn(this.poolPg) ? 0.0051 * this.dfiPorBlockStock : 0;
     this.dfiProBlockPg += this.getCommission(this.poolPg);
 
     // STOCKS 28.5.2022
-    this.dfiProBlockSap = this.getRewardIsOn(this.poolSap) ? 0.0047 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockSap = this.getRewardIsOn(this.poolSap) ? 0.0044 * this.dfiPorBlockStock : 0;
     this.dfiProBlockSap += this.getCommission(this.poolSap);
 
-    this.dfiProBlockUra = this.getRewardIsOn(this.poolUra) ? 0.008 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockUra = this.getRewardIsOn(this.poolUra) ? 0.0078 * this.dfiPorBlockStock : 0;
     this.dfiProBlockUra += this.getCommission(this.poolUra);
 
-    this.dfiProBlockCs = this.getRewardIsOn(this.poolCs) ? 0.0058 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockCs = this.getRewardIsOn(this.poolCs) ? 0.0068 * this.dfiPorBlockStock : 0;
     this.dfiProBlockCs += this.getCommission(this.poolCs);
 
-    this.dfiProBlockGsg = this.getRewardIsOn(this.poolGsg) ? 0.0049 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockGsg = this.getRewardIsOn(this.poolGsg) ? 0.0051 * this.dfiPorBlockStock : 0;
     this.dfiProBlockGsg += this.getCommission(this.poolGsg);
+
+    // STOCKS 28.6.2022
+    this.dfiProBlockGovt = this.getRewardIsOn(this.poolGovt) ? 0.0020 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockGovt += this.getCommission(this.poolGovt);
+
+    this.dfiProBlockPplt = this.getRewardIsOn(this.poolPplt) ? 0.0064 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPplt += this.getCommission(this.poolPplt);
+
+    this.dfiProBlockXom = this.getRewardIsOn(this.poolXom) ? 0.01 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockXom += this.getCommission(this.poolXom);
+
+    this.dfiProBlockTan = this.getRewardIsOn(this.poolTan) ? 0.007 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockTan += this.getCommission(this.poolTan);
   }
 
   getIncomePools(): Array<PoolIncomeValue> {
@@ -2374,6 +2442,24 @@ export class AppComponent implements OnInit {
     if (this.anteilAmPoolGsg > 0 ) {
       this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolGsg,
         this.poolGsg, this.poolGsgOut, this.dfiProBlockGsg));
+    }
+
+    // 28.´6.2022
+    if (this.anteilAmPoolPplt > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolPplt,
+        this.poolPplt, this.poolPpltOut, this.dfiProBlockPplt));
+    }
+    if (this.anteilAmPoolXom > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolXom,
+        this.poolXom, this.poolXomOut, this.dfiProBlockXom));
+    }
+    if (this.anteilAmPoolGovt > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolGovt,
+        this.poolGovt, this.poolGovtOut, this.dfiProBlockGovt));
+    }
+    if (this.anteilAmPoolTan > 0 ) {
+      this.poolIncomeList.push(new PoolIncomeValue(this.anteilAmPoolTan,
+        this.poolTan, this.poolTanOut, this.dfiProBlockTan));
     }
   }
 
@@ -2848,6 +2934,26 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).csToken = +account.amount;
           break;
         }
+        case 'PPLT': {
+          this.wallet.pplt += +account.amount;
+          this.getAddressBalance(address).ppltToken = +account.amount;
+          break;
+        }
+        case 'GOVT': {
+          this.wallet.govt += +account.amount;
+          this.getAddressBalance(address).govtToken = +account.amount;
+          break;
+        }
+        case 'XOM': {
+          this.wallet.xom += +account.amount;
+          this.getAddressBalance(address).xomToken = +account.amount;
+          break;
+        }
+        case 'TAN': {
+          this.wallet.tan += +account.amount;
+          this.getAddressBalance(address).tanToken = +account.amount;
+          break;
+        }
         case 'BTC-DFI': {
           this.wallet.btcdfi += +account.amount;
           this.getAddressBalance(address).btcdfiToken = +account.amount;
@@ -3063,6 +3169,26 @@ export class AppComponent implements OnInit {
           this.getAddressBalance(address).csusdToken = +account.amount;
           break;
         }
+        case 'PPLT-DUSD': {
+          this.wallet.ppltusd += +account.amount;
+          this.getAddressBalance(address).ppltusdToken = +account.amount;
+          break;
+        }
+        case 'GOVT-DUSD': {
+          this.wallet.govtusd += +account.amount;
+          this.getAddressBalance(address).govtusdToken = +account.amount;
+          break;
+        }
+        case 'TAN-DUSD': {
+          this.wallet.tanusd += +account.amount;
+          this.getAddressBalance(address).tanusdToken = +account.amount;
+          break;
+        }
+        case 'XOM-DUSD': {
+          this.wallet.xomusd += +account.amount;
+          this.getAddressBalance(address).xomusdToken = +account.amount;
+          break;
+        }
         default: {
           break;
         }
@@ -3252,6 +3378,22 @@ export class AppComponent implements OnInit {
 
   berechnePoolOutGsg(): void {
     this.berechnePool('GSG', this.poolGsg, this.poolGsgOut, this.dfiProBlockGsg);
+  }
+
+  berechnePoolOutXom(): void {
+    this.berechnePool('XOM', this.poolXom, this.poolXomOut, this.dfiProBlockXom);
+  }
+
+  berechnePoolOutPplt(): void {
+    this.berechnePool('PPLT', this.poolPplt, this.poolPpltOut, this.dfiProBlockPplt);
+  }
+
+  berechnePoolOutTan(): void {
+    this.berechnePool('TAN', this.poolTan, this.poolTanOut, this.dfiProBlockTan);
+  }
+
+  berechnePoolOutGovt(): void {
+    this.berechnePool('GOVT', this.poolGovt, this.poolGovtOut, this.dfiProBlockGovt);
   }
 
   private berechnePool(poolName: string, pool: Pool, outcome: Outcome, dfiProBlock: number): void {
@@ -3694,6 +3836,51 @@ export class AppComponent implements OnInit {
       }
     }
 
+    if (poolName === 'PPLT' && pool) {
+      if (this.autoLoadData) {
+        this.anteilAmPoolPplt = this.berechneAnteilAmPool(this.wallet.ppltusd, pool, outcome, dfiProBlock);
+        this.wallet.ppltInPpltPool = this.anteilAmPoolPplt * +pool.reserveA / 100;
+        this.wallet.usdInPpltPool = this.anteilAmPoolPplt * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolPplt =
+          this.berechneAnteilAmPoolManuel(this.wallet.ppltInPpltPool, this.wallet.usdInPpltPool, pool, outcome, dfiProBlock);
+      }
+    }
+
+    if (poolName === 'XOM' && pool) {
+      if (this.autoLoadData) {
+        this.anteilAmPoolXom = this.berechneAnteilAmPool(this.wallet.xomusd, pool, outcome, dfiProBlock);
+        this.wallet.xomInXomPool = this.anteilAmPoolXom * +pool.reserveA / 100;
+        this.wallet.usdInXomPool = this.anteilAmPoolXom * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolXom =
+          this.berechneAnteilAmPoolManuel(this.wallet.xomInXomPool, this.wallet.usdInXomPool, pool, outcome, dfiProBlock);
+      }
+    }
+
+
+    if (poolName === 'GOVT' && pool) {
+      if (this.autoLoadData) {
+        this.anteilAmPoolGovt = this.berechneAnteilAmPool(this.wallet.govtusd, pool, outcome, dfiProBlock);
+        this.wallet.govtInGovtPool = this.anteilAmPoolGovt * +pool.reserveA / 100;
+        this.wallet.usdInGovtPool = this.anteilAmPoolGovt * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolGovt =
+          this.berechneAnteilAmPoolManuel(this.wallet.govtInGovtPool, this.wallet.usdInGovtPool, pool, outcome, dfiProBlock);
+      }
+    }
+
+    if (poolName === 'TAN' && pool) {
+      if (this.autoLoadData) {
+        this.anteilAmPoolTan = this.berechneAnteilAmPool(this.wallet.tanusd, pool, outcome, dfiProBlock);
+        this.wallet.tanInTanPool = this.anteilAmPoolTan * +pool.reserveA / 100;
+        this.wallet.usdInTanPool = this.anteilAmPoolTan * +pool.reserveB / 100;
+      } else {
+        this.anteilAmPoolTan =
+          this.berechneAnteilAmPoolManuel(this.wallet.tanInTanPool, this.wallet.usdInTanPool, pool, outcome, dfiProBlock);
+      }
+    }
+
     outcome.dfiPerHour = outcome.dfiPerMin * 60;
     outcome.dfiPerDay = outcome.dfiPerHour * 24;
     outcome.dfiPerWeek = outcome.dfiPerDay * 7;
@@ -3732,7 +3919,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerMin + this.poolFbOut?.dfiPerMin + this.poolVooOut?.dfiPerMin + this.poolNflxOut?.dfiPerMin
       + this.poolDisOut?.dfiPerMin + this.poolMchiOut?.dfiPerMin + this.poolMstrOut?.dfiPerMin + this.poolIntcOut?.dfiPerMin
       + this.poolPyplOut?.dfiPerMin + this.poolBrkbOut?.dfiPerMin + this.poolKoOut?.dfiPerMin + this.poolPgOut?.dfiPerMin
-      + this.poolSapOut?.dfiPerMin + this.poolUraOut?.dfiPerMin + this.poolCsOut?.dfiPerMin + this.poolGsgOut?.dfiPerMin;
+      + this.poolSapOut?.dfiPerMin + this.poolUraOut?.dfiPerMin + this.poolCsOut?.dfiPerMin + this.poolGsgOut?.dfiPerMin
+      + this.poolPpltOut?.dfiPerMin + this.poolGovtOut?.dfiPerMin + this.poolTanOut?.dfiPerMin + this.poolXomOut?.dfiPerMin;
 
     this.poolOut.dfiPerHour = this.poolBtcOut.dfiPerHour + this.poolEthOut.dfiPerHour
       + this.poolUsdtOut.dfiPerHour + this.poolUsdcOut.dfiPerHour + this.poolLtcOut.dfiPerHour
@@ -3745,7 +3933,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerHour + this.poolFbOut?.dfiPerHour + this.poolVooOut?.dfiPerHour + this.poolNflxOut?.dfiPerHour
       + this.poolDisOut?.dfiPerHour + this.poolMchiOut?.dfiPerHour + this.poolMstrOut?.dfiPerHour + this.poolIntcOut?.dfiPerHour
       + this.poolPyplOut?.dfiPerHour + this.poolBrkbOut?.dfiPerHour + this.poolKoOut?.dfiPerHour + this.poolPgOut?.dfiPerHour
-      + this.poolSapOut?.dfiPerHour + this.poolUraOut?.dfiPerHour + this.poolCsOut?.dfiPerHour + this.poolGsgOut?.dfiPerHour;
+      + this.poolSapOut?.dfiPerHour + this.poolUraOut?.dfiPerHour + this.poolCsOut?.dfiPerHour + this.poolGsgOut?.dfiPerHour
+      + this.poolPpltOut?.dfiPerHour + this.poolGovtOut?.dfiPerHour + this.poolTanOut?.dfiPerHour + this.poolXomOut?.dfiPerHour;
 
     this.poolOut.dfiPerDay = this.poolBtcOut.dfiPerDay + this.poolEthOut.dfiPerDay
       + this.poolUsdtOut.dfiPerDay + this.poolUsdcOut.dfiPerDay + this.poolLtcOut.dfiPerDay
@@ -3758,7 +3947,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerDay + this.poolFbOut?.dfiPerDay + this.poolVooOut?.dfiPerDay + this.poolNflxOut?.dfiPerDay
       + this.poolDisOut?.dfiPerDay + this.poolMchiOut?.dfiPerDay + this.poolMstrOut?.dfiPerDay + this.poolIntcOut?.dfiPerDay
       + this.poolPyplOut?.dfiPerDay + this.poolBrkbOut?.dfiPerDay + this.poolKoOut?.dfiPerDay + this.poolPgOut?.dfiPerDay
-      + this.poolSapOut?.dfiPerDay + this.poolUraOut?.dfiPerDay + this.poolCsOut?.dfiPerDay + this.poolGsgOut?.dfiPerDay;
+      + this.poolSapOut?.dfiPerDay + this.poolUraOut?.dfiPerDay + this.poolCsOut?.dfiPerDay + this.poolGsgOut?.dfiPerDay
+      + this.poolPpltOut?.dfiPerDay + this.poolGovtOut?.dfiPerDay + this.poolTanOut?.dfiPerDay + this.poolXomOut?.dfiPerDay;
 
     this.poolOut.dfiPerWeek = this.poolBtcOut.dfiPerWeek + this.poolEthOut.dfiPerWeek
       + this.poolUsdtOut.dfiPerWeek + this.poolUsdcOut.dfiPerWeek + this.poolLtcOut.dfiPerWeek
@@ -3771,7 +3961,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerWeek + this.poolFbOut?.dfiPerWeek + this.poolVooOut?.dfiPerWeek + this.poolNflxOut?.dfiPerWeek
       + this.poolDisOut?.dfiPerWeek + this.poolMchiOut?.dfiPerWeek + this.poolMstrOut?.dfiPerWeek + this.poolIntcOut?.dfiPerWeek
       + this.poolPyplOut?.dfiPerWeek + this.poolBrkbOut?.dfiPerWeek + this.poolKoOut?.dfiPerWeek + this.poolPgOut?.dfiPerWeek
-      + this.poolSapOut?.dfiPerWeek + this.poolUraOut?.dfiPerWeek + this.poolCsOut?.dfiPerWeek + this.poolGsgOut?.dfiPerWeek;
+      + this.poolSapOut?.dfiPerWeek + this.poolUraOut?.dfiPerWeek + this.poolCsOut?.dfiPerWeek + this.poolGsgOut?.dfiPerWeek
+      + this.poolPpltOut?.dfiPerWeek + this.poolGovtOut?.dfiPerWeek + this.poolTanOut?.dfiPerWeek + this.poolXomOut?.dfiPerWeek;
 
 
     this.poolOut.dfiPerMonth = this.poolBtcOut.dfiPerMonth + this.poolEthOut.dfiPerMonth
@@ -3785,7 +3976,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerMonth + this.poolFbOut?.dfiPerMonth + this.poolVooOut?.dfiPerMonth + this.poolNflxOut?.dfiPerMonth
       + this.poolDisOut?.dfiPerMonth + this.poolMchiOut?.dfiPerMonth + this.poolMstrOut?.dfiPerMonth + this.poolIntcOut?.dfiPerMonth
       + this.poolPyplOut?.dfiPerMonth + this.poolBrkbOut?.dfiPerMonth + this.poolKoOut?.dfiPerMonth + this.poolPgOut?.dfiPerMonth
-      + this.poolSapOut?.dfiPerMonth + this.poolUraOut?.dfiPerMonth + this.poolCsOut?.dfiPerMonth + this.poolGsgOut?.dfiPerMonth;
+      + this.poolSapOut?.dfiPerMonth + this.poolUraOut?.dfiPerMonth + this.poolCsOut?.dfiPerMonth + this.poolGsgOut?.dfiPerMonth
+      + this.poolPpltOut?.dfiPerMonth + this.poolGovtOut?.dfiPerMonth + this.poolTanOut?.dfiPerMonth + this.poolXomOut?.dfiPerMonth;
 
     this.poolOut.dfiPerYear = this.poolBtcOut.dfiPerYear + this.poolEthOut.dfiPerYear
       + this.poolUsdtOut.dfiPerYear + this.poolUsdcOut.dfiPerYear + this.poolLtcOut.dfiPerYear
@@ -3798,7 +3990,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut?.dfiPerYear + this.poolFbOut?.dfiPerYear + this.poolVooOut?.dfiPerYear + this.poolNflxOut?.dfiPerYear
       + this.poolDisOut?.dfiPerYear + this.poolMchiOut?.dfiPerYear + this.poolMstrOut?.dfiPerYear + this.poolIntcOut?.dfiPerYear
       + this.poolPyplOut?.dfiPerYear + this.poolBrkbOut?.dfiPerYear + this.poolKoOut?.dfiPerYear + this.poolPgOut?.dfiPerYear
-      + this.poolSapOut?.dfiPerYear + this.poolUraOut?.dfiPerYear + this.poolCsOut?.dfiPerYear + this.poolGsgOut?.dfiPerYear;
+      + this.poolSapOut?.dfiPerYear + this.poolUraOut?.dfiPerYear + this.poolCsOut?.dfiPerYear + this.poolGsgOut?.dfiPerYear
+      + this.poolPpltOut?.dfiPerYear + this.poolGovtOut?.dfiPerYear + this.poolTanOut?.dfiPerYear + this.poolXomOut?.dfiPerYear;
   }
 
   berechneStakingOut(): void {
@@ -4611,7 +4804,8 @@ export class AppComponent implements OnInit {
       + this.getMsftValueUsd() + this.getNflxValueUsd() + this.getFbValueUsd() + this.getVooValueUsd()
       + this.getDisValueUsd() + this.getMchiValueUsd() + this.getMstrValueUsd() + this.getIntcValueUsd()
       + this.getPyplValueUsd() + this.getBrkbValueUsd() + this.getKoValueUsd() + this.getPgValueUsd()
-      + this.getSapValueUsd() + this.getUraValueUsd() + this.getGsgValueUsd() + this.getCsValueUsd();
+      + this.getSapValueUsd() + this.getUraValueUsd() + this.getGsgValueUsd() + this.getCsValueUsd()
+      + this.getXomValueUsd() + this.getPpltValueUsd() + this.getTanValueUsd() + this.getGovtValueUsd();
 
     // Collateral
     const collateral = this.getVaultsValueUsd();
@@ -4652,6 +4846,7 @@ export class AppComponent implements OnInit {
     let dis = 0; let mchi = 0; let mstr = 0; let intc = 0;
     let pypl = 0; let brkb = 0; let ko = 0; let pg = 0;
     let sap = 0; let ura = 0; let cs = 0; let gsg = 0;
+    let xom = 0; let govt = 0; let tan = 0; let pplt = 0;
 
     vault?.loanAmounts?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
@@ -4726,12 +4921,21 @@ export class AppComponent implements OnInit {
         cs = +loan.amount * this.getUsdPriceOfStockPools(this.poolCs);
       } else if ('SAP' === loan.symbolKey) {
         sap = +loan.amount * this.getUsdPriceOfStockPools(this.poolSap);
+      } else if ('PPLT' === loan.symbolKey) {
+        pplt = +loan.amount * this.getUsdPriceOfStockPools(this.poolPplt);
+      } else if ('GOVT' === loan.symbolKey) {
+        govt = +loan.amount * this.getUsdPriceOfStockPools(this.poolGovt);
+      } else if ('TAN' === loan.symbolKey) {
+        tan = +loan.amount * this.getUsdPriceOfStockPools(this.poolTan);
+      } else if ('XOM' === loan.symbolKey) {
+        xom = +loan.amount * this.getUsdPriceOfStockPools(this.poolXom);
       }
     });
 
     return usd + spy + tsla + qqq + pltr + slv + aapl + gld + gme + google + arkk
       + baba + vnq + urth + tlt + pdbc + amzn + nvda + coin + eem + msft + nflx + voo + fb
-      + dis + mchi + mstr + intc + pypl + brkb + ko + pg + sap + ura + gsg + cs;
+      + dis + mchi + mstr + intc + pypl + brkb + ko + pg + sap + ura + gsg + cs
+      + pplt + xom + govt + tan;
   }
 
   getVaultsValueUsd(): number {
@@ -4842,7 +5046,8 @@ export class AppComponent implements OnInit {
       + this.wallet?.usdInFbPool + this.wallet?.usdInDisPool + this.wallet?.usdInMchiPool + this.wallet?.usdInMstrPool
       + this.wallet?.usdInIntcPool + this.wallet?.usdInPyplPool + this.wallet?.usdInBrkbPool +  this.wallet?.usdInKoPool
       + this.wallet?.usdInPgPool + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInGsgPool
-      + this.wallet?.usdInCsPool) * this.getUsdPriceOfStockPools(this.poolUsd);
+      + this.wallet?.usdInCsPool + this.wallet?.usdInPpltPool + this.wallet?.usdInGovtPool + this.wallet?.usdInXomPool
+      + this.wallet?.usdInTanPool) * this.getUsdPriceOfStockPools(this.poolUsd);
   }
   getTslaValueUsd(): number {
     return (this.wallet?.tslaInTslaPool + this.wallet?.tsla) * this.getUsdPriceOfStockPools(this.poolTsla);
@@ -5055,6 +5260,33 @@ export class AppComponent implements OnInit {
     return (this.wallet?.csInCsPool) * this.getUsdPriceOfStockPools(this.poolCs);
   }
 
+  getPpltValueUsd(): number {
+    return (this.wallet?.ppltInPpltPool + this.wallet?.pplt) * this.getUsdPriceOfStockPools(this.poolPplt);
+  }
+  getPpltValueLmUsd(): number {
+    return (this.wallet?.ppltInPpltPool) * this.getUsdPriceOfStockPools(this.poolPplt);
+  }
+
+  getGovtValueUsd(): number {
+    return (this.wallet?.govtInGovtPool + this.wallet?.govt) * this.getUsdPriceOfStockPools(this.poolGovt);
+  }
+  getGovtValueLmUsd(): number {
+    return (this.wallet?.govtInGovtPool) * this.getUsdPriceOfStockPools(this.poolGovt);
+  }
+
+  getXomValueUsd(): number {
+    return (this.wallet?.xomInXomPool + this.wallet?.xom) * this.getUsdPriceOfStockPools(this.poolXom);
+  }
+  getXomValueLmUsd(): number {
+    return (this.wallet?.xomInXomPool) * this.getUsdPriceOfStockPools(this.poolXom);
+  }
+
+  getTanValueUsd(): number {
+    return (this.wallet?.tanInTanPool + this.wallet?.tan) * this.getUsdPriceOfStockPools(this.poolTan);
+  }
+  getTanValueLmUsd(): number {
+    return (this.wallet?.tanInTanPool) * this.getUsdPriceOfStockPools(this.poolTan);
+  }
 
   getUsdPriceOfStockPools(pool: Pool): number {
 
@@ -5103,7 +5335,8 @@ export class AppComponent implements OnInit {
       + this.getMsftValueLmUsd() + this.getFbValueLmUsd() + this.getVooValueLmUsd() + this.getNflxValueLmUsd()
       + this.getDisValueLmUsd() + this.getMchiValueLmUsd() + this.getMstrValueLmUsd() + this.getIntcValueLmUsd()
       + this.getPyplValueLmUsd() + this.getBrkbValueLmUsd() + this.getKoValueLmUsd() + this.getPgValueLmUsd()
-      + this.getGsgValueLmUsd() + this.getSapValueLmUsd() + this.getUraValueLmUsd() + this.getCsValueLmUsd();
+      + this.getGsgValueLmUsd() + this.getSapValueLmUsd() + this.getUraValueLmUsd() + this.getCsValueLmUsd()
+      + this.getXomValueLmUsd() + this.getPpltValueLmUsd() + this.getTanValueLmUsd() + this.getGovtValueLmUsd();
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -5134,7 +5367,8 @@ export class AppComponent implements OnInit {
       + this.poolMsftOut.dfiPerDay + this.poolFbOut.dfiPerDay + this.poolVooOut.dfiPerDay + this.poolNflxOut.dfiPerDay
       + this.poolDisOut.dfiPerDay + this.poolMchiOut.dfiPerDay + this.poolMstrOut.dfiPerDay + this.poolIntcOut.dfiPerDay
       + this.poolPyplOut.dfiPerDay + this.poolBrkbOut.dfiPerDay + this.poolKoOut.dfiPerDay + this.poolPgOut.dfiPerDay
-      + this.poolSapOut.dfiPerDay + this.poolUraOut.dfiPerDay + this.poolCsOut.dfiPerDay + this.poolGsgOut.dfiPerDay;
+      + this.poolSapOut.dfiPerDay + this.poolUraOut.dfiPerDay + this.poolCsOut.dfiPerDay + this.poolGsgOut.dfiPerDay
+      + this.poolXomOut.dfiPerDay + this.poolGovtOut.dfiPerDay + this.poolPpltOut.dfiPerDay + this.poolTanOut.dfiPerDay;
   }
 
   getAnteilBTCPoolAnGesamtLM(): number {
@@ -5265,6 +5499,18 @@ export class AppComponent implements OnInit {
   }
   getAnteilGsgPoolAnGesamtLM(): number {
     return this.poolGsgOut.dfiPerDay >  0 ? this.poolGsgOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
+  }
+  getAnteilXomPoolAnGesamtLM(): number {
+    return this.poolXomOut.dfiPerDay >  0 ? this.poolXomOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
+  }
+  getAnteilGovtPoolAnGesamtLM(): number {
+    return this.poolGovtOut.dfiPerDay >  0 ? this.poolGovtOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
+  }
+  getAnteilTanPoolAnGesamtLM(): number {
+    return this.poolTanOut.dfiPerDay >  0 ? this.poolTanOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
+  }
+  getAnteilPpltPoolAnGesamtLM(): number {
+    return this.poolPpltOut.dfiPerDay >  0 ? this.poolPpltOut.dfiPerDay / this.getAllPoolDfIncome() * 100 : 0;
   }
 
   allAddresses(): string [] {
@@ -6989,6 +7235,11 @@ export class AppComponent implements OnInit {
     const dfiCsPart = this.poolCsOut?.dfiPerYear / allIncome * 100;
     const dfiGsgPart = this.poolGsgOut?.dfiPerYear / allIncome * 100;
 
+    const dfiPpltPart = this.poolPpltOut?.dfiPerYear / allIncome * 100;
+    const dfiTanPart = this.poolTanOut?.dfiPerYear / allIncome * 100;
+    const dfiXomPart = this.poolXomOut?.dfiPerYear / allIncome * 100;
+    const dfiGovtPart = this.poolGovtOut?.dfiPerYear / allIncome * 100;
+
     const stakingPart = this.stakingOut?.dfiPerYear / allIncome * 100;
 
 
@@ -7043,6 +7294,11 @@ export class AppComponent implements OnInit {
     const csApr = dfiCsPart * this.poolCs?.apr;
     const gsgApr = dfiGsgPart * this.poolGsg?.apr;
 
+    const ppltApr = dfiPpltPart * this.poolPplt?.apr;
+    const xomApr = dfiXomPart * this.poolXom?.apr;
+    const govtApr = dfiGovtPart * this.poolGovt?.apr;
+    const tanApr = dfiTanPart * this.poolTan?.apr;
+
     const stakingApr = stakingPart * this.stakingApyMN * 0.85;
     const normalMnApr = rewardNormaleMnPart * this.stakingApyMN;
     const fiveFreezerMnApr = reward5MnPart * this.stakingApyMN * 1.5;
@@ -7057,6 +7313,7 @@ export class AppComponent implements OnInit {
       + disApr + mchiApr + mstrApr + intcApr
       + pyplApr + brkbApr + koApr + pgApr
       + sapApr + gsgApr + csApr + uraApr
+      + ppltApr + xomApr + tanApr + govtApr
       + stakingApr + normalMnApr + fiveFreezerMnApr + tenFreezerMnApr) / 100;
 
     return Math.round(average * 100) / 100;

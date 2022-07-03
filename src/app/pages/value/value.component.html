@@ -12,7 +12,7 @@
                  [xaxis]='chartOptions?.xaxis'
                  [colors]='chartOptions?.colors'
                  [plotOptions]='chartOptions?.plotOptions'
-                 [fill]="chartOptions?.fill"
+                 [fill]='chartOptions?.fill'
                  [dataLabels]='chartOptions?.dataLabels'
                  [legend]='chartOptions?.legend'
                  [theme]='{ mode: getTheme() }'
@@ -168,7 +168,7 @@
 
 
       </div>
-      <div *ngIf='getAllVaultsFromAllAddresses().length > 0' >
+      <div *ngIf='getAllVaultsFromAllAddresses().length > 0'>
         <h3
           class='text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
           {{ "balance" | translate }} Vaults (Oracle)
@@ -180,15 +180,16 @@
               &nbsp;<a class='text-pink-500 hover:underline'
                        target='_blank'
                        href='https://defiscan.live/vaults/{{v.vaultId}}'>{{isIncognitoModeOn ? '****' : getShortOfId(v.vaultId)}}
-              -  <span *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
-                 <span *ngIf='v.state.toUpperCase() === "EMPTY"'>&#10060;</span>
-                 <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span> - Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
+              - <span *ngIf='v.state.toUpperCase() === "IN LIQUIDATION"'>&#10060;</span>
+              <span *ngIf='v.state.toUpperCase() === "EMPTY"'>&#10060;</span>
+              <span *ngIf='v.state.toUpperCase() !== "IN LIQUIDATION"'>&#9989;</span> -
+              Ratio {{isIncognitoModeOn ? '****' : v.collateralRatio}}
               % - Min {{ isIncognitoModeOn ? '****' : v.loanScheme?.minColRatio}} %
               - {{ isIncognitoModeOn ? '****' : v.loanScheme?.interestRate}} %</a> &nbsp;
 
               <br />
               <div *ngIf='v.collateralRatio > -1'
-                class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mx-2 my-2 cursor-pointer inline-block text-center'>
+                   class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mx-2 my-2 cursor-pointer inline-block text-center'>
                 Next In {{getBlockToNextOracle()}} ~
                 <span class='text-xl'>{{isIncognitoModeOn ? '****' : getRatioNext(v)}} % </span>
                 <div *ngIf='isIncognitoModeOn'>****</div>
@@ -197,14 +198,14 @@
               <span *ngIf='getRatioNext(v) >= v.collateralRatio'>📈</span>
               <br>
               <div *ngIf='v.collateralRatio > -1'
-                class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 mx-2 my-2 py-1 cursor-pointer'>
+                   class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 mx-2 my-2 py-1 cursor-pointer'>
                 <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
                                                 [usdPrice]='getCollateralFromVaultUsd(v)'></app-price></span>
                 -> Next <span class='text-l'><app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
                                                         [usdPrice]='getNextCollateralFromVaultUsd(v)'></app-price></span>
               </div>
               <div *ngIf='v.collateralRatio > -1'
-                class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 mx-2 py-1 my-2 cursor-pointer'>
+                   class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 mx-2 py-1 my-2 cursor-pointer'>
                 <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getLoanFromVaultUsd(v)'></app-price>
                 ->
                 Next
@@ -213,73 +214,79 @@
               <div *ngIf='isIncognitoModeOn'>****</div>
               <div *ngIf='v.collateralRatio > -1'
                    class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 mx-2 my-2 cursor-pointer inline-block text-center'>
-                {{ 'value.interest' | translate }} <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                                                              [usdPrice]='v.interestValue'>></app-price>
+                {{ 'value.interest' | translate }}
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]='v.interestValue'>>
+                </app-price>
                 <div *ngIf='isIncognitoModeOn'>****</div>
               </div>&nbsp;
             </div>
           </div>
 
         </div>
-        <h3
-          class='border-t text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
-          Collaterals
-        </h3>
-        <div
-          class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
-          <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsCollateralUsd()'></app-price>
-          <span class='text-sm'></span>
+        <div *ngIf='getVaultsCollateralUsd() > 0'>
+          <h3
+            class='border-t text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+            Collaterals
+          </h3>
+          <div
+            class='min-h-7 inline-block rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
+            <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsCollateralUsd()'></app-price>
+            <span class='text-sm'></span>
 
-        </div>
-        <br>
+          </div>
+          <br>
 
-        <div
-          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3  pb-2 col-span-2 mb-2'>
-          <div *ngFor='let l of getCollateralTokens()'  class='text-xl relative'>
-            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : l.holding | number: '1.2-2' }}
-              <br />
-              <div
-                class='text-xs text-gray-400 dark:text-gray-300'
-              >
-                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                           [usdPrice]="l.holdingUsd"></app-price>
-                <div *ngIf='isIncognitoModeOn'>****</div>
+          <div
+            class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3  pb-2 col-span-2 mb-2'>
+            <div *ngFor='let l of getCollateralTokens()' class='text-xl relative'>
+              <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
+                {{isIncognitoModeOn ? '****' : l.holding | number: '1.2-2' }}
+                <br />
+                <div
+                  class='text-xs text-gray-400 dark:text-gray-300'
+                >
+                  <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                             [usdPrice]='l.holdingUsd'></app-price>
+                  <div *ngIf='isIncognitoModeOn'>****</div>
+                </div>
+              </div>
+              <div class='inline-block h-full align-middle dark:text-gray-100'>
+                {{l.name}}
               </div>
             </div>
-            <div class='inline-block h-full align-middle dark:text-gray-100'>
-              {{l.name}}
-            </div>
           </div>
         </div>
-        <h3
-          class='border-t text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
-          Loans
-        </h3>
+        <div *ngIf='getVaultsLoansValueUsd() > 0'>
+          <h3
+            class='border-t text-lg font-semibold mt-4 mb-1 dark:text-gray-100'>
+            Loans
+          </h3>
+          <div
+            class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
+            <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsLoansValueUsd()'></app-price>
+            <span class='text-sm'></span></div>
+          <div *ngIf='isIncognitoModeOn'>****</div>
+
+        </div>
         <div
-          class='min-h-7 inline-block rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-xl px-2 py-1 cursor-pointer'>
-          <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='getVaultsLoansValueUsd()'></app-price>
-          <span class='text-sm'></span></div>
-        <div *ngIf='isIncognitoModeOn'>****</div>
+          class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 pb-2 col-span-2 mb-2'>
 
-      </div>
-      <div
-        class='grid grid-flow-row auto-rows-max grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 pb-2 col-span-2 mb-2'>
-
-        <div *ngFor='let l of getLoanTokens()' class='text-lg dark:text-gray-100 flex'>
-          <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
-            {{l.token}}
-          </div>
-          <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
-            {{isIncognitoModeOn ? '****' : getLoanCountVaults(l.token) | number: '1.5-5'}}
-            <div class='text-xs text-gray-400'>
-              <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='getLoanCountVaults(l.token) * getUsdPriceOfStockPools(l.pool) '></app-price>
-              <div *ngIf='isIncognitoModeOn'>*****</div>
+          <div *ngFor='let l of getLoanTokens()' class='text-lg dark:text-gray-100 flex'>
+            <div class='inline-block h-full align-middle dark:text-gray-100 pr-3'>
+              {{l.token}}
+            </div>
+            <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis'>
+              {{isIncognitoModeOn ? '****' : getLoanCountVaults(l.token) | number: '1.5-5'}}
+              <div class='text-xs text-gray-400'>
+                <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
+                           [usdPrice]='getLoanCountVaults(l.token) * getUsdPriceOfStockPools(l.pool) '></app-price>
+                <div *ngIf='isIncognitoModeOn'>*****</div>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
@@ -374,7 +381,8 @@
       <div *ngFor='let w of getLpTokens()'>
         <div>{{w.name}}</div>
         <div>
-             <span class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
+             <span
+               class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
                {{isIncognitoModeOn ? '****' : w.holding| number: '1.3-3'}}
                ~  <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat' [usdPrice]='w.holdingUsd'></app-price>
              </span>

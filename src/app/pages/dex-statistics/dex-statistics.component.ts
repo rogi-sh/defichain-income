@@ -351,6 +351,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'URA-DUSD': {
         return new StockLongName('Global X Uranium ETF', 'URA');
       }
+      case 'PPLT-DUSD': {
+        return new StockLongName('abrdn Physical Platinum Shares ETF', 'PPLT');
+      }
+      case 'XOM-DUSD': {
+        return new StockLongName('Exxon Mobil', 'XOM');
+      }
+      case 'GOVT-DUSD': {
+        return new StockLongName('iShares US Treasury Bond ETF', 'GOVT');
+      }
+      case 'TAN-DUSD': {
+        return new StockLongName('Invesco Solar ETF', 'TAN');
+      }
       default: {
         return new StockLongName('', '');
       }

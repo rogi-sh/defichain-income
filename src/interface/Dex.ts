@@ -139,6 +139,11 @@ export class AddressBalance {
   csToken: number;
   gsgToken: number;
 
+  ppltToken: number;
+  tanToken: number;
+  govtToken: number;
+  xomToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -188,6 +193,11 @@ export class AddressBalance {
   urausdToken: number;
   csusdToken: number;
   gsgusdToken: number;
+
+  ppltusdToken: number;
+  govtusdToken: number;
+  xomusdToken: number;
+  tanusdToken: number;
 
 }
 
@@ -285,6 +295,14 @@ export class PoolGsgOut extends Outcome {}
 export class PoolUraOut extends Outcome {}
 
 export class PoolCsOut extends Outcome {}
+
+export class PoolPpltOut extends Outcome {}
+
+export class PoolGovtOut extends Outcome {}
+
+export class PoolXomOut extends Outcome {}
+
+export class PoolTanOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

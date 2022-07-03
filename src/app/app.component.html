@@ -564,6 +564,10 @@
                 [poolUraOut]='poolUraOut'
                 [poolCsOut]='poolCsOut'
                 [poolGsgOut]='poolGsgOut'
+                [poolGovtOut]='poolGovtOut'
+                [poolPpltOut]='poolPpltOut'
+                [poolTanOut]='poolTanOut'
+                [poolXomOut]='poolXomOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [dfiInDfxStaking]='dfiInDfxStaking'
@@ -616,6 +620,10 @@
                 [getAnteilUraPoolAnGesamtLM]='getAnteilUraPoolAnGesamtLM()'
                 [getAnteilCsPoolAnGesamtLM]='getAnteilCsPoolAnGesamtLM()'
                 [getAnteilGsgPoolAnGesamtLM]='getAnteilGsgPoolAnGesamtLM()'
+                [getAnteilGovtPoolAnGesamtLM]='getAnteilGovtPoolAnGesamtLM()'
+                [getAnteilPpltPoolAnGesamtLM]='getAnteilPpltPoolAnGesamtLM()'
+                [getAnteilTanPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
+                [getAnteilXomPoolAnGesamtLM]='getAnteilXomPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -731,6 +739,10 @@
                   [poolUra]='poolUra'
                   [poolCs]='poolCs'
                   [poolGsg]='poolGsg'
+                  [poolPplt]='poolPplt'
+                  [poolXom]='poolXom'
+                  [poolTan]='poolTan'
+                  [poolGovt]='poolGovt'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -834,6 +846,10 @@
                 [poolUra]='poolUra'
                 [poolCs]='poolCs'
                 [poolGsg]='poolGsg'
+                [poolGovt]='poolGovt'
+                [poolPplt]='poolPplt'
+                [poolTan]='poolTan'
+                [poolXom]='poolXom'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -878,6 +894,10 @@
                 [dfiProBlockGsg]='dfiProBlockGsg'
                 [dfiProBlockUra]='dfiProBlockUra'
                 [dfiProBlockCs]='dfiProBlockCs'
+                [dfiProBlockPplt]='dfiProBlockPplt'
+                [dfiProBlockGovt]='dfiProBlockGovt'
+                [dfiProBlockTan]='dfiProBlockTan'
+                [dfiProBlockXom]='dfiProBlockXom'
               ></app-calculator-page>
             </div>
             <div *ngSwitchCase="'info'">
@@ -4315,6 +4335,18 @@
                                   <div *ngIf="getAddressBalance(a)?.gsgToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     GSG: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsgToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ppltToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PPTL: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ppltToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.govtToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GOVT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.govtToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tanToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TAN: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tanToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.xomToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    XOM: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.xomToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -4444,6 +4476,18 @@
                                   <div *ngIf="getAddressBalance(a)?.gsgusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     GSGUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsgusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ppltusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PPLTLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ppltusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.govtusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GOVTLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.govtusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tanusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TANUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tanusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.xomusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    XOMUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.xomusdToken }}</div>
                                 </div>
                               </div>
 
@@ -4519,6 +4563,10 @@
                     [poolUraOut]='poolUraOut'
                     [poolCsOut]='poolCsOut'
                     [poolGsgOut]='poolGsgOut'
+                    [poolGovtOut]='poolGovtOut'
+                    [poolPpltOut]='poolPpltOut'
+                    [poolTanOut]='poolTanOut'
+                    [poolXomOut]='poolXomOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4571,6 +4619,10 @@
                     [getAnteilUraPoolAnGesamtLM]='getAnteilUraPoolAnGesamtLM()'
                     [getAnteilCsPoolAnGesamtLM]='getAnteilCsPoolAnGesamtLM()'
                     [getAnteilGsgPoolAnGesamtLM]='getAnteilGsgPoolAnGesamtLM()'
+                    [getAnteilGovtPoolAnGesamtLM]='getAnteilGovtPoolAnGesamtLM()'
+                    [getAnteilPpltPoolAnGesamtLM]='getAnteilPpltPoolAnGesamtLM()'
+                    [getAnteilTanPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
+                    [getAnteilXomPoolAnGesamtLM]='getAnteilXomPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>

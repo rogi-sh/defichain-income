@@ -574,6 +574,11 @@ export class Wallet {
   csusd = 0;
   gsgusd = 0;
 
+  ppltusd = 0;
+  xomusd = 0;
+  govtusd = 0;
+  tanusd = 0;
+
   // User Infos
   // BTC Pool
   btcInBtcPool = 0;
@@ -918,6 +923,38 @@ export class Wallet {
   csKey = 'csKey';
   usdInCsPoolKey = 'usdInCsPoolKey';
   usdInCsPool = 0;
+
+  // PPLT Pool
+  ppltInPpltPool = 0;
+  ppltInPpltPoolKey = 'ppltInPpltPoolKey';
+  pplt = 0;
+  ppltKey = 'ppltKey';
+  usdInPpltPoolKey = 'usdInPpltPoolKey';
+  usdInPpltPool = 0;
+
+  // XOM Pool
+  xomInXomPool = 0;
+  xomInXomPoolKey = 'xomInXomPoolKey';
+  xom = 0;
+  xomKey = 'xomKey';
+  usdInXomPoolKey = 'usdInXomPoolKey';
+  usdInXomPool = 0;
+
+  // GOVT Pool
+  govtInGovtPool = 0;
+  govtInGovtPoolKey = 'govtInGovtPoolKey';
+  govt = 0;
+  govtKey = 'govtKey';
+  usdInGovtPoolKey = 'usdInGovtPoolKey';
+  usdInGovtPool = 0;
+
+  // TAN Pool
+  tanInTanPool = 0;
+  tanInTanPoolKey = 'tanInTanPoolKey';
+  tan = 0;
+  tanKey = 'tanKey';
+  usdInTanPoolKey = 'usdInTanPoolKey';
+  usdInTanPool = 0;
 
 }
 
