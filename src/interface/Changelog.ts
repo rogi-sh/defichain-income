@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.2.1 - 3.7.2022';
+    this.log.comment = 'Income Chart fixed for new pools';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.2.0 - 3.7.2022';
     this.log.comment = 'Add new dTokens';
     this.logs.push(this.log);
