@@ -1101,6 +1101,11 @@ export class AppComponent implements OnInit {
         cs : this.wallet.cs,
         gsg  : this.wallet.gsg,
 
+        pplt  : this.wallet.pplt,
+        govt  : this.wallet.govt,
+        tan : this.wallet.tan,
+        xom  : this.wallet.xom,
+
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -1148,6 +1153,11 @@ export class AppComponent implements OnInit {
         urausd  : this.wallet.urausd,
         csusd  : this.wallet.csusd,
         gsgusd  : this.wallet.gsgusd,
+
+        ppltusd  : this.wallet.ppltusd,
+        govtusd  : this.wallet.govtusd,
+        tanusd  : this.wallet.tanusd,
+        xomusd  : this.wallet.xomusd,
 
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
@@ -1239,7 +1249,16 @@ export class AppComponent implements OnInit {
         csInCsPool : this.wallet.csInCsPool,
         usdInCsPool : this.wallet.usdInCsPool,
         gsgInGsgPool : this.wallet.gsgInGsgPool,
-        usdInGsgPool : this.wallet.usdInGsgPool
+        usdInGsgPool : this.wallet.usdInGsgPool,
+
+        ppltInPpltPool : this.wallet.ppltInPpltPool,
+        usdInPpltPool : this.wallet.usdInPpltPool,
+        govtInGovtPool : this.wallet.govtInGovtPool,
+        usdInGovtPool : this.wallet.usdInGovtPool,
+        tanInTanPool : this.wallet.tanInTanPool,
+        usdInTanPool : this.wallet.usdInTanPool,
+        xomInXomPool : this.wallet.xomInXomPool,
+        usdInXomPool : this.wallet.usdInXomPool
 
       },
     }).subscribe((result: any) => {
@@ -1351,6 +1370,11 @@ export class AppComponent implements OnInit {
         cs : this.wallet.cs,
         gsg  : this.wallet.gsg,
 
+        pplt  : this.wallet.pplt,
+        govt  : this.wallet.govt,
+        tan : this.wallet.tan,
+        xom  : this.wallet.xom,
+
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -1399,6 +1423,11 @@ export class AppComponent implements OnInit {
         urausd  : this.wallet.urausd,
         csusd  : this.wallet.csusd,
         gsgusd  : this.wallet.gsgusd,
+
+        ppltusd  : this.wallet.ppltusd,
+        govtusd  : this.wallet.govtusd,
+        tanusd  : this.wallet.tanusd,
+        xomusd  : this.wallet.xomusd,
 
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
@@ -1490,7 +1519,16 @@ export class AppComponent implements OnInit {
         csInCsPool : this.wallet.csInCsPool,
         usdInCsPool : this.wallet.usdInCsPool,
         gsgInGsgPool : this.wallet.gsgInGsgPool,
-        usdInGsgPool : this.wallet.usdInGsgPool
+        usdInGsgPool : this.wallet.usdInGsgPool,
+
+        ppltInPpltPool : this.wallet.ppltInPpltPool,
+        usdInPpltPool : this.wallet.usdInPpltPool,
+        govtInGovtPool : this.wallet.govtInGovtPool,
+        usdInGovtPool : this.wallet.usdInGovtPool,
+        tanInTanPool : this.wallet.tanInTanPool,
+        usdInTanPool : this.wallet.usdInTanPool,
+        xomInXomPool : this.wallet.xomInXomPool,
+        usdInXomPool : this.wallet.usdInXomPool
 
       },
     }).subscribe((result: any) => {
