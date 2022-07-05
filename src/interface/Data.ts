@@ -88,7 +88,7 @@ export class PoolPairApr {
 }
 
 export class Burn {
-  paybackburn: number;
+  paybackburn: Array<string>;
   dfipaybackfee: number;
   auctionburn: number;
   feeburn: number;

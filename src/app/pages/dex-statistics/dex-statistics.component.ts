@@ -609,6 +609,10 @@ export class DexStatisticsComponent implements OnInit {
     return String(blocks) + ' ~ ' + Math.round(timeD) + 'd ~ ' + Math.round(timeH) + 'h' ;
   }
 
+  getSplitDfi(payback: string): number {
+    return +(payback.split('@') [0]);
+  }
+
   getDexDFI(): number {
     let dfi = 0;
 

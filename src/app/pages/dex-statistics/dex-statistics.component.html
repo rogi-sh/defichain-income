@@ -148,9 +148,9 @@
           <div class='col-span-2'>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
-              {{burnDfi?.paybackburn |  number: '1.1-1'}} ~
+              {{getSplitDfi(burnDfi.paybackburn[0])|  number: '1.1-1'}} ~
               <app-price *ngIf='burnDfi' [fiat]='fiat'
-                         [usdPrice]='burnDfi.paybackburn * this.getCryptoPools()[0]?.priceB'></app-price>
+                         [usdPrice]='getSplitDfi(burnDfi.paybackburn[0]) * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>

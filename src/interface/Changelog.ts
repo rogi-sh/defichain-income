@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.2.3 - 5.7.2022';
+    this.log.comment = 'Fix DFI Burned';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.2.2 - 4.7.2022';
     this.log.comment = 'Added backend support for new pools';
     this.logs.push(this.log);
