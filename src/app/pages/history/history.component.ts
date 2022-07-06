@@ -37,12 +37,10 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHistory();
-    this.loadHistoryOracle();
   }
 
   loadAll(): void {
     this.loadHistory();
-    this.loadHistoryOracle();
   }
 
   async loadHistory(): Promise<void> {
@@ -62,11 +60,7 @@ export class HistoryComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.getFarmingHistory) {
         this.history = result?.data?.getFarmingHistory;
-        this.computeNumbers(this.curentStock);
-        this.buildChartPrice();
-        this.buildChartReserve();
-        this.buildChartVolume();
-        this.buildChartApr();
+        this.loadHistoryOracle();
         this.spinner.hide('historySpinner');
       } else {
         this.spinner.hide('historySpinner');
@@ -88,7 +82,12 @@ export class HistoryComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.getOracleHistory) {
         this.historyOracleNumbers = result?.data?.getOracleHistory;
+        this.computeNumbers(this.curentStock);
+        this.buildChartReserve();
+        this.buildChartVolume();
+        this.buildChartApr();
         this.buildChartPrice();
+
       } else {
         console.log('No Date for History oracle');
       }
@@ -506,6 +505,7 @@ export class HistoryComponent implements OnInit {
       prices.push(h.price);
     });
 
+    console.log("Anzahl dex preise" + prices.length);
     return prices;
   }
 
@@ -516,17 +516,23 @@ export class HistoryComponent implements OnInit {
     }
 
     this.historyNumbers.forEach(h => {
-      const price = this.historyOracleNumbers.find(
+      const oracle = this.historyOracleNumbers.find(
         a => {
           const aDate = new Date(a.dateTime);
           const bDate = new Date(h.date);
-          return aDate.getDate() === bDate.getDate()
-          && aDate.getUTCHours() === bDate.getUTCHours();
+          return aDate.getUTCMonth() === bDate.getUTCMonth()
+            && aDate.getUTCDate() === bDate.getUTCDate()
+            && aDate.getUTCFullYear() === bDate.getUTCFullYear()
+            && aDate.getUTCHours() === bDate.getUTCHours();
         }
-      )?.price;
-      const endPrice = price !== undefined ? price : prices[prices.length - 1];
+      );
+      console.log("searched " + new Date(h.date));
+      console.log("Found " + new Date(oracle?.dateTime));
+      const endPrice = oracle?.price !== undefined ? oracle?.price : prices[prices.length - 1];
       prices.push(Math.round(endPrice * 100) / 100);
     });
+
+    console.log("Anzahl oracles " + prices.length);
 
     return prices;
   }

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.2.7 - 6.7.2022';
+    this.log.comment = 'Fix history >= 3m preiod oracle price';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.2.6 - 6.7.2022';
     this.log.comment = 'Fix linebreaks';
     this.logs.push(this.log);
