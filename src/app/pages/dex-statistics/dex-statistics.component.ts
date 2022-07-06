@@ -610,7 +610,7 @@ export class DexStatisticsComponent implements OnInit {
   }
 
   getSplitDfi(payback: string): number {
-    return +(payback.split('@') [0]);
+    return +(payback?.split('@') [0]);
   }
 
   getDexDFI(): number {
@@ -624,7 +624,7 @@ export class DexStatisticsComponent implements OnInit {
       dfi += +c?.reserveB;
     });
 
-    dfi += +this.stocksPools?.find(a => a.symbol === 'DUSD-DFI')?.reserveB;
+    dfi += +this.stocksPools?.find(a => a?.symbol === 'DUSD-DFI')?.reserveB;
 
     return dfi;
   }

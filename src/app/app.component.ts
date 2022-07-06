@@ -267,6 +267,7 @@ export class AppComponent implements OnInit {
   poolUsdc: Pool;
   anteilAmPoolUsdc: number;
 
+
   poolLtcOut: PoolLtcOut = new PoolLtcOut();
   poolLtc: Pool;
   anteilAmPoolLtc: number;
@@ -519,7 +520,8 @@ export class AppComponent implements OnInit {
     pool.reserveB = poolFromOcean.tokenB.reserve;
     pool.reserveA = poolFromOcean.tokenA.reserve;
     pool.volume24h = poolFromOcean.volume.h24;
-
+    pool.feeA = +poolFromOcean.tokenA?.fee?.pct;
+    pool.feeB = +poolFromOcean.tokenB?.fee?.pct;
 
     return pool;
   }
@@ -555,6 +557,13 @@ export class AppComponent implements OnInit {
 
     const priceRateA = +this.poolUsd.reserveB / +this.poolUsd.reserveA;
     return this.getRound2(priceRateA * this.poolBtc?.priceB);
+  }
+
+  getDUSDFee(): number {
+    if (!this.poolUsd) {
+      return 0;
+    }
+    return this.poolUsd?.feeA * 100;
   }
 
   getRound2(num: number): number {

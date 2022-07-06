@@ -43,7 +43,8 @@ export class Pool {
   id: string;
   symbol: string;
   volume24h: number;
-
+  feeA: number;
+  feeB: number;
 }
 
 export class StockLongName {

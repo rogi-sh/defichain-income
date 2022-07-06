@@ -8,8 +8,8 @@
     <div class="flex items-center justify-center whitespace-nowrap sitemessage">
       <div class="mr-4">
         dUSD
-        {{getDUSDPrice()}} $
-        DFI
+        {{getDUSDPrice()}} $ - Fee {{getDUSDFee()}} %
+         / DFI
         <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price>
         - <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
         /
@@ -85,8 +85,8 @@
         <span
           class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
           dUSD
-          {{getDUSDPrice()}} $
-          DFI
+          {{getDUSDPrice()}} $ - Fee {{getDUSDFee()}} %
+           / DFI
            <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> -
           <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
           /
