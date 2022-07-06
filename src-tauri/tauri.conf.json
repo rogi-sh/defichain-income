@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "DefiChain-Income",
-    "version": "9.2.5"
+    "version": "9.2.6"
   },
   "build": {
     "distDir": "../dist/defichain-income",

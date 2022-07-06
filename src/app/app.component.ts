@@ -7363,6 +7363,10 @@ export class AppComponent implements OnInit {
       + ppltApr + xomApr + tanApr + govtApr
       + stakingApr + normalMnApr + fiveFreezerMnApr + tenFreezerMnApr) / 100;
 
+    if (!average) {
+      return 0;
+    }
+
     return Math.round(average * 100) / 100;
   }
 

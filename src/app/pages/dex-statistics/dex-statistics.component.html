@@ -38,14 +38,17 @@
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4  py-1 mb-2 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.total'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.tvl?.masternodes'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='oceanStats?.data?.tvl?.dex'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4  py-1 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='oceanStats?.data?.tvl?.loan'></app-price>
@@ -117,7 +120,7 @@
               {{getDexDFI()  |  number: '1.2-2'}} ~
               <app-price [fiat]='fiat' [usdPrice]='getDexDFI() * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
-
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-3 py-1 cursor-pointer text-center'>
               {{getTotalMasternodesDfiLocked() |  number: '1.2-2'}} ~
@@ -152,6 +155,7 @@
               <app-price *ngIf='burnDfi' [fiat]='fiat'
                          [usdPrice]='getSplitDfi(burnDfi?.paybackburn[0]) * this.getCryptoPools()[0]?.priceB'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
               {{burnDfi?.auctionburn |  number: '1.1-1'}} ~
@@ -210,10 +214,12 @@
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.loan?.value?.collateral'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
               <app-price [fiat]='fiat' [usdPrice]='this.oceanStats?.data?.loan?.value?.loan'></app-price>
             </div>
+            <br>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-3 cursor-pointer text-center'>
               {{this.oceanStats?.data?.loan?.value?.collateral / this.oceanStats?.data?.loan?.value?.loan * 100 |  number: '1.2-2'}}
@@ -254,6 +260,7 @@
             - {{ stakingDfx?.staking.masternodes }} MNs
         </span>
           </div>
+
           <div class='w-full dark:text-gray-100  mb-4'>
 
           <span
@@ -263,6 +270,7 @@
             % APR  ~  {{ this.stakingApyCake | number: '1.1-1' }}% APY
         </span>
           </div>
+
           <div class='w-full dark:text-gray-100 mb-2'>
 
             <div
@@ -273,6 +281,7 @@
               APY
             </div>
           </div>
+
           <div class='w-full dark:text-gray-100  mb-2'>
 
             <div
@@ -282,6 +291,7 @@
               ~   {{ getApyWeeklyFromApr(this.stakingApyMN * 1.5) | number: '1.1-1' }}% APY
             </div>
           </div>
+
           <div class='w-full dark:text-gray-100'>
 
             <div
@@ -439,10 +449,12 @@
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-4 cursor-pointer text-center'>
             {{getBlockToNextDiffChange()}}
           </div>
+          <br>
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
             {{getBlockToNextOracle()}}
           </div>
+          <br>
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
             {{getBlockToNextFutureSwap()}}
@@ -467,28 +479,37 @@
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'ONLINE'"
                class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Online
+              <br>
             </p>
+
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'OFFLINE'"
                class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Offline
+              <br>
             </p>
             <br>
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'ONLINE'"
                class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Online
+              <br>
             </p>
+
             <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'OFFLINE'"
                class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
               Offline
+              <br>
             </p>
             <br>
             <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'ONLINE'"
                class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Online
+              <br>
             </p>
+            <br>
             <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'OFFLINE'"
                class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Offline
+              <br>
             </p>
           </div>
         </div>
@@ -519,6 +540,7 @@
                  class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-2  cursor-pointer text-center'>
               Offline
             </div>
+            <br>
             <p *ngIf='exchange && exchange?.kucoinStatusDepositErc20'
                class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-2 cursor-pointer text-center'>
               Online
@@ -573,7 +595,7 @@
             <p class='mr-2 mb-3'>Monitored Adresses:</p>
             <p class='mr-2 mb-3'>Monitored Masternodes:</p>
             <p class='mr-2 mb-3'>⌀ Visitors per Day:</p>
-           </div>
+          </div>
           <div>
             <div
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1 mb-2 cursor-pointer text-center'>
@@ -690,32 +712,34 @@
         <thead class='bg-gray-200 dark:bg-gray-800 dark:text-pink-500 dark:border-pink-500 border-b'>
         <tr>
           <th (click)="sortOn('pool')" class='text-left p-2 no-underline hover:underline cursor-pointer'>Pool
-            <span *ngIf="sortColumn === 'pool' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'pool' && !asc" class="material-icons md-18">arrow_drop_up</span>
+            <span *ngIf="sortColumn === 'pool' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'pool' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
-          <th class='text-right p-2'>Dex </th>
+          <th class='text-right p-2'>Dex</th>
           <th class='text-right p-2'>Oracle</th>
           <th (click)="sortOn('premium')" class='text-right p-2 no-underline hover:underline cursor-pointer'>Premium
-            <span *ngIf="sortColumn === 'premium' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'premium' && !asc" class="material-icons md-18">arrow_drop_up</span>
+            <span *ngIf="sortColumn === 'premium' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'premium' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
           <th class='text-right p-2'>Fee</th>
           <th (click)="sortOn('volume')" class='text-right p-2 no-underline hover:underline cursor-pointer'>Volume
-            <span *ngIf="sortColumn === 'volume' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'volume' && !asc" class="material-icons md-18">arrow_drop_up</span>
+            <span *ngIf="sortColumn === 'volume' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'volume' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
-          <th (click)="sortOn('tvl')" class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'Pool TVL' | translate }}
-            <span *ngIf="sortColumn === 'tvl' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'tvl' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          <th (click)="sortOn('tvl')"
+              class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'Pool TVL' | translate }}
+            <span *ngIf="sortColumn === 'tvl' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'tvl' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
           <th class='text-right p-2'>{{ 'LP Token' | translate }}</th>
-          <th (click)="sortOn('apr')" class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'APR' | translate }}
-            <span *ngIf="sortColumn === 'apr' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'apr' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          <th (click)="sortOn('apr')"
+              class='text-right p-2 no-underline hover:underline cursor-pointer'>{{ 'APR' | translate }}
+            <span *ngIf="sortColumn === 'apr' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'apr' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
-          <th (click)="sortOn('apy')"  class='text-right p-2'>{{ 'APY (Weekly)' | translate }}
-            <span *ngIf="sortColumn === 'apy' && asc" class="material-icons md-18">arrow_drop_down</span>
-            <span *ngIf="sortColumn === 'apy' && !asc" class="material-icons md-18">arrow_drop_up</span>
+          <th (click)="sortOn('apy')" class='text-right p-2'>{{ 'APY (Weekly)' | translate }}
+            <span *ngIf="sortColumn === 'apy' && asc" class='material-icons md-18'>arrow_drop_down</span>
+            <span *ngIf="sortColumn === 'apy' && !asc" class='material-icons md-18'>arrow_drop_up</span>
           </th>
           <th class='text-right p-2'>{{ 'correlation' | translate}}
             ({{correlationDays}} {{ 'correlationDay' | translate}})
@@ -732,8 +756,9 @@
           <td class='p-2'>
             {{cryptoPool?.symbol}}
             <br>
-            <span *ngIf='getLongName(cryptoPool?.symbol)?.tradeViewCode' class='text-xs'>    <a class='cursor-pointer text-pink-500 hover:underline'
-                                         (click)='routeToDfiView(getLongName(cryptoPool?.symbol)?.tradeViewCode)'>
+            <span *ngIf='getLongName(cryptoPool?.symbol)?.tradeViewCode' class='text-xs'>    <a
+              class='cursor-pointer text-pink-500 hover:underline'
+              (click)='routeToDfiView(getLongName(cryptoPool?.symbol)?.tradeViewCode)'>
               {{getLongName(cryptoPool?.symbol)?.longName}}</a></span>
             <span *ngIf='!getLongName(cryptoPool?.symbol)?.tradeViewCode' class='text-xs text-pink-500'>
               {{getLongName(cryptoPool?.symbol)?.longName}}</span>
@@ -825,25 +850,29 @@
             <br>
             <span class='text-xs'>
                 <a class='cursor-pointer text-pink-500 hover:underline'
-                    (click)='routeToDfiView(getLongName(stockPool?.symbol)?.tradeViewCode)'>
+                   (click)='routeToDfiView(getLongName(stockPool?.symbol)?.tradeViewCode)'>
                   {{getLongName(stockPool?.symbol)?.longName}}</a>
             </span>
 
           </td>
           <td class='text-right text-sm p-2'>
-            <app-price *ngIf='!isDUSDPool(stockPool)' [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
-            <app-price *ngIf='isDUSDPool(stockPool)' [fiat]='fiat' [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
+            <app-price *ngIf='!isDUSDPool(stockPool)' [fiat]='fiat'
+                       [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveA '></app-price>
+            <app-price *ngIf='isDUSDPool(stockPool)' [fiat]='fiat'
+                       [usdPrice]='stockPool?.totalLiquidityUsd / 2 / stockPool?.reserveB '></app-price>
           </td>
           <td class='text-right text-sm p-2'>
-            <span *ngIf='!isDUSDPool(stockPool)' >
-              <app-price class='font-bold' [fiat]='fiat' [usdPrice]='getStockPrice(stockPool?.tokenASymbol)'></app-price>
+            <span *ngIf='!isDUSDPool(stockPool)'>
+              <app-price class='font-bold' [fiat]='fiat'
+                         [usdPrice]='getStockPrice(stockPool?.tokenASymbol)'></app-price>
             <br>
               <span class='text-xs'>
                  Next:
                 <app-price [fiat]='fiat' [usdPrice]='getStockPriceNext(stockPool?.tokenASymbol)'></app-price>
                 <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) < getStockPrice(stockPool?.tokenASymbol)'>&#8600;</span>
                 <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) === getStockPrice(stockPool?.tokenASymbol)'>&#8594;</span>
-              <span *ngIf='getStockPriceNext(stockPool?.tokenASymbol) > getStockPrice(stockPool?.tokenASymbol)'>&#8599;</span>
+              <span
+                *ngIf='getStockPriceNext(stockPool?.tokenASymbol) > getStockPrice(stockPool?.tokenASymbol)'>&#8599;</span>
             </span>
             </span>
             <span *ngIf='isDUSDPool(stockPool)'>
