@@ -699,6 +699,7 @@
             <span *ngIf="sortColumn === 'premium' && asc" class="material-icons md-18">arrow_drop_down</span>
             <span *ngIf="sortColumn === 'premium' && !asc" class="material-icons md-18">arrow_drop_up</span>
           </th>
+          <th class='text-right p-2'>Fee</th>
           <th (click)="sortOn('volume')" class='text-right p-2 no-underline hover:underline cursor-pointer'>Volume
             <span *ngIf="sortColumn === 'volume' && asc" class="material-icons md-18">arrow_drop_down</span>
             <span *ngIf="sortColumn === 'volume' && !asc" class="material-icons md-18">arrow_drop_up</span>
@@ -753,6 +754,11 @@
             <br>
             <span
               class='font-bold'><span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
+          </td>
+          <td class='text-right text-sm p-2'>
+            <span> {{cryptoPool?.feeA ? cryptoPool?.feeA * 100 : 0}}  % </span>
+            <br>
+            <span> {{cryptoPool?.feeB ? cryptoPool?.feeB * 100 : 0}}  % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
@@ -853,6 +859,11 @@
               {{ 'value.interest' | translate}}    {{getInterest(stockPool?.tokenASymbol)}} %
             </span>
 
+          </td>
+          <td class='text-right text-sm p-2'>
+            <span> {{stockPool?.feeA ? stockPool?.feeA * 100 : 0}}  % </span>
+            <br>
+            <span> {{stockPool?.feeB ? stockPool?.feeB * 100 : 0}}  % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
