@@ -781,9 +781,9 @@
               class='font-bold'><span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>
-            <span> {{cryptoPool?.feeA ? cryptoPool?.feeA * 100 : 0}}  % </span>
+            <span> {{cryptoPool?.feeA ? getRound2(cryptoPool?.feeA * 100) : 0}}  % </span>
             <br>
-            <span> {{cryptoPool?.feeB ? cryptoPool?.feeB * 100 : 0}}  % </span>
+            <span> {{cryptoPool?.feeB ? getRound2(cryptoPool?.feeB * 100) : 0}}  % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
