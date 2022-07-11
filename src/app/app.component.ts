@@ -563,7 +563,7 @@ export class AppComponent implements OnInit {
     if (!this.poolUsd) {
       return 0;
     }
-    return this.poolUsd?.feeA * 100;
+    return this.getRound2(this.poolUsd?.feeA * 100);
   }
 
   getRound2(num: number): number {
