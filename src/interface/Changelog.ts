@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.2.9 - 18.7.2022';
+    this.log.comment = 'Google split fix id';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.2.8 - 11.7.2022';
     this.log.comment = 'Fix Fee round';
     this.logs.push(this.log);

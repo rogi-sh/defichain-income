@@ -507,7 +507,7 @@ export class AppComponent implements OnInit {
 
     pool.id = poolFromOcean.id;
     pool.poolPairId = poolFromOcean.id;
-    pool.apr = poolFromOcean.apr.total * 100;
+    pool.apr = poolFromOcean.apr?.total * 100;
     pool.name = poolFromOcean.symbol;
     pool.symbol = poolFromOcean.symbol;
     pool.pair = poolFromOcean.symbol;
@@ -1986,7 +1986,7 @@ export class AppComponent implements OnInit {
     this.poolAapl = this.setFromPoolPair('36');
     this.poolGld = this.setFromPoolPair('43');
     this.poolGme = this.setFromPoolPair('25');
-    this.poolGoogl = this.setFromPoolPair('32');
+    this.poolGoogl = this.setFromPoolPair('100');
     this.poolArkk = this.setFromPoolPair('42');
     this.poolBaba = this.setFromPoolPair('33');
     this.poolVnq = this.setFromPoolPair('41');
