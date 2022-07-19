@@ -892,9 +892,9 @@
 
           </td>
           <td class='text-right text-sm p-2'>
-            <span> {{stockPool?.feeA ? stockPool?.feeA * 100 : 0}}  % </span>
+            <span> {{getRound2(stockPool?.feeA ? stockPool?.feeA * 100 : 0)}}  % </span>
             <br>
-            <span> {{stockPool?.feeB ? stockPool?.feeB * 100 : 0}}  % </span>
+            <span> {{getRound2(stockPool?.feeB ? stockPool?.feeB * 100 : 0)}}  % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span class='font-bold'>24H</span> &nbsp;<app-price [fiat]='fiat'
