@@ -1985,7 +1985,7 @@ export class AppComponent implements OnInit {
     this.poolSlv = this.setFromPoolPair('46');
     this.poolAapl = this.setFromPoolPair('36');
     this.poolGld = this.setFromPoolPair('43');
-    this.poolGme = this.setFromPoolPair('25');
+    this.poolGme = this.setFromPoolPair('104');
     this.poolGoogl = this.setFromPoolPair('100');
     this.poolArkk = this.setFromPoolPair('42');
     this.poolBaba = this.setFromPoolPair('33');
