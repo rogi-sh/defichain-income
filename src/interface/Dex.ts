@@ -152,6 +152,8 @@ export class AddressBalance {
   bchdfiToken: number;
   usdtdfiToken: number;
   usdcdfiToken: number;
+  usdtdusdToken: number;
+  usdcdusdToken: number;
   usddfiToken: number;
 
   tslausdToken: number;
@@ -226,6 +228,10 @@ export class PoolLtcOut extends Outcome {}
 export class PoolDogeOut extends Outcome {}
 
 export class PoolUsdOut extends Outcome {}
+
+export class PoolUsdUsdcOut extends Outcome {}
+
+export class PoolUsdUsdtOut extends Outcome {}
 
 export class PoolTslaOut extends Outcome {}
 

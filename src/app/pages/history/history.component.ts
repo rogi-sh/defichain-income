@@ -3,7 +3,7 @@ import { ChartComponent } from 'ng-apexcharts';
 import { ChartOptions6, PriceHistory } from '@interfaces/Data';
 import { History, HistoryPrice, Pool } from '@interfaces/Dex';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DFX_STAKING, HISTORY, HISTORY_ORACLE } from '@interfaces/Graphql'
+import { DFX_STAKING, HISTORY, HISTORY_ORACLE } from '@interfaces/Graphql';
 import { Apollo } from 'apollo-angular';
 
 @Component({

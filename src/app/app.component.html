@@ -528,6 +528,8 @@
                 [poolAllOut]="poolAllOut"
                 [poolUsdtOut]="poolUsdtOut"
                 [poolUsdcOut]="poolUsdcOut"
+                [poolUsdUsdcOut]='poolUsdUsdcOut'
+                [poolUsdUsdtOut]='poolUsdUsdtOut'
                 [poolUsdOut]="poolUsdOut"
                 [poolTslaOut]="poolTslaOut"
                 [poolAaplOut]='poolAaplOut'
@@ -582,6 +584,8 @@
                 [getAnteilLTCPoolAnGesamtLM]="getAnteilLTCPoolAnGesamtLM()"
                 [getAnteilUSDTPoolAnGesamtLM]="getAnteilUSDTPoolAnGesamtLM()"
                 [getAnteilUSDCPoolAnGesamtLM]="getAnteilUSDCPoolAnGesamtLM()"
+                [getAnteilUSDCDusdPoolAnGesamtLM]='getAnteilUSDCDusdPoolAnGesamtLM()'
+                [getAnteilUSDTDusdPoolAnGesamtLM]='getAnteilUSDTDusdPoolAnGesamtLM()'
                 [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM()"
                 [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM()"
                 [getAnteilUsdPoolAnGesamtLM]='getAnteilUsdPoolAnGesamtLM()'
@@ -809,6 +813,8 @@
                 [poolLtc]="poolLtc"
                 [poolUsdt]="poolUsdt"
                 [poolUsdc]="poolUsdc"
+                [poolUsdcDusd]='poolUsdUsdc'
+                [poolUsdtDusd]='poolUsdUsdt'
                 [poolEth]="poolEth"
                 [poolUsd]='poolUsd'
                 [poolTsla]='poolTsla'
@@ -858,6 +864,8 @@
                 [dfiProBlockLtc]="dfiProBlockLtc"
                 [dfiProBlockUsdt]="dfiProBlockUsdt"
                 [dfiProBlockUsdc]="dfiProBlockUsdc"
+                [dfiProBlockUsdcDusd]='dfiProBlockUsdUsdc'
+                [dfiProBlockUsdtDusd]='dfiProBlockUsdUsdt'
                 [dfiProBlockUsd]="dfiProBlockUsd"
                 [dfiProBlockTsla]="dfiProBlockTsla"
                 [dfiProBlockAapl]='dfiProBlockAapl'
@@ -4365,12 +4373,18 @@
                                   <div *ngIf="getAddressBalance(a)?.usdtdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     USDTDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdtdusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDTUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdtdusdToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.usdcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     USDCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcdfiToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usdcdusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USDCUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usdcdusdToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.usddfiToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
-                                    USDDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usddfiToken }}</div>
+                                    DUSDDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usddfiToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.tslausdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     TSLAUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tslausdToken }}</div>
@@ -4527,6 +4541,8 @@
                     [poolAllOut]="poolAllOut"
                     [poolUsdtOut]="poolUsdtOut"
                     [poolUsdcOut]="poolUsdcOut"
+                    [poolUsdUsdcOut]='poolUsdUsdcOut'
+                    [poolUsdUsdtOut]='poolUsdUsdtOut'
                     [poolUsdOut]="poolUsdOut"
                     [poolTslaOut]="poolTslaOut"
                     [poolAaplOut]='poolAaplOut'
@@ -4581,6 +4597,8 @@
                     [getAnteilLTCPoolAnGesamtLM]="getAnteilLTCPoolAnGesamtLM()"
                     [getAnteilUSDTPoolAnGesamtLM]="getAnteilUSDTPoolAnGesamtLM()"
                     [getAnteilUSDCPoolAnGesamtLM]="getAnteilUSDCPoolAnGesamtLM()"
+                    [getAnteilUSDCDusdPoolAnGesamtLM]='getAnteilUSDCDusdPoolAnGesamtLM()'
+                    [getAnteilUSDTDusdPoolAnGesamtLM]='getAnteilUSDTDusdPoolAnGesamtLM()'
                     [getAnteilDogePoolAnGesamtLM]="getAnteilDogePoolAnGesamtLM()"
                     [getAnteilBchPoolAnGesamtLM]="getAnteilBchPoolAnGesamtLM()"
                     [getAnteilUsdPoolAnGesamtLM]='getAnteilUsdPoolAnGesamtLM()'

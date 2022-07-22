@@ -771,14 +771,17 @@
           <td class='text-right text-sm p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.priceA '></app-price>
             <br>
-            <app-price [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            <app-price *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102'" [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            <app-price *ngIf="cryptoPool.id ==='101' || cryptoPool.id === '102'" [fiat]='fiat' [usdPrice]='getDUSDPrice()'></app-price>
           </td>
           <td class='text-right text-sm p-2'>
-            <span
+            <span *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102'"
               class='font-bold'><span>{{getArb(cryptoPool?.priceA, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %</span>
             <br>
-            <span
+            <span *ngIf="cryptoPool.id !== '101' && cryptoPool.id !== '102'"
               class='font-bold'><span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
+            <span *ngIf="cryptoPool.id === '101' || cryptoPool.id === '102'"
+                  class='font-bold'><span>{{getArb(getDUSDPrice(), cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>
             <span> {{cryptoPool?.feeA ? getRound2(cryptoPool?.feeA * 100) : 0}}  % </span>
@@ -797,7 +800,7 @@
             <br>
             <span class='text-xs'>{{cryptoPool?.reserveA | number: '1.2-2'}} {{cryptoPool?.tokenASymbol}}
               - {{cryptoPool?.reserveB | number: '1.2-2'}}
-              DFI</span>
+              {{cryptoPool?.tokenBSymbol}}</span>
           </td>
           <td class='text-right p-2'>
             <app-price [fiat]='fiat'

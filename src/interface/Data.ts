@@ -531,6 +531,8 @@ export class Wallet {
   dogedfi = 0;
   usdtdfi = 0;
   usdcdfi = 0;
+  usdtdusd = 0;
+  usdcdusd = 0;
   usddfi = 0;
 
   tslausd = 0;
@@ -604,6 +606,14 @@ export class Wallet {
   dfiInUsdtPool = 0;
   dfiInUsdtPoolKey = 'dfiInUsdtPoolKey';
 
+  // USDT-DUSD Pool
+  usdtInUsdtDusdPool = 0;
+  usdtInUsdtDusdPoolKey = 'usdtInUsdtDusdPoolKey';
+  usdtDusd = 0;
+  usdtDusdKey = 'usdtDusdKey';
+  dusdInUsdtDusdPool = 0;
+  dusdInUsdtDusdPoollKey = 'dusdInUsdtDusdPoollKey';
+
   // USDC Pool
   usdcInUsdcPool = 0;
   usdcInUsdcPoolKey = 'usdcInUsdcPoolKey';
@@ -611,6 +621,14 @@ export class Wallet {
   usdcKey = 'usdcKey';
   dfiInUsdcPool = 0;
   dfiInUsdcPoolKey = 'dfiInUsdcPoolKey';
+
+  // USDC-DUSD Pool
+  usdcInUsdcDusdPool = 0;
+  usdcInUsdcDusdPoolKey = 'usdcInUsdcDusdPoolKey';
+  usdcDusd = 0;
+  usdcDusdKey = 'usdcDusdKey';
+  dusdInUsdcDusdPool = 0;
+  dusdInUsdcDusdPoolKey = 'dusdInUsdcDusdPoolKey';
 
   // LTC Pool
   ltcInLtcPool = 0;

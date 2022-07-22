@@ -21,6 +21,12 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolUsdc: Pool;
 
   @Input()
+  poolUsdtDusd: Pool;
+
+  @Input()
+  poolUsdcDusd: Pool;
+
+  @Input()
   poolLtc: Pool;
 
   @Input()
@@ -160,6 +166,12 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockUsdc;
+
+  @Input()
+  dfiProBlockUsdtDusd;
+
+  @Input()
+  dfiProBlockUsdcDusd;
 
   @Input()
   dfiProBlockLtc;
@@ -318,9 +330,12 @@ export class LmTargetCalculatorComponent implements OnInit {
   aimReturnMonthPool = 0;
   targetReturnLMMonth = 0;
 
+  pool: Pool;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.pool = this.poolBtc;
   }
 
   onChangeLmCalculationTargetPool(newValue: string): void {
@@ -385,6 +400,15 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'USDT'){
       pool = this.poolUsdt;
       dfiPerBlock = this.dfiProBlockUsdt;
+    } else if (this.poolLmCalculationTargetReturn === 'USDC') {
+      pool = this.poolUsdc;
+      dfiPerBlock = this.dfiProBlockUsdc;
+    } else if (this.poolLmCalculationTargetReturn === 'USDT-DUSD'){
+      pool = this.poolUsdtDusd;
+      dfiPerBlock = this.dfiProBlockUsdtDusd;
+    } else if (this.poolLmCalculationTargetReturn === 'USDC-DUSD'){
+      pool = this.poolUsdcDusd;
+      dfiPerBlock = this.dfiProBlockUsdcDusd;
     } else if (this.poolLmCalculationTargetReturn === 'DUSD'){
       pool = this.poolUsd;
       dfiPerBlock = this.dfiProBlockUsd;
@@ -512,6 +536,9 @@ export class LmTargetCalculatorComponent implements OnInit {
       dfiPerBlock = this.dfiProBlockUsdc;
 
     }
+
+    this.pool = pool;
+
     return {pool, dfiPerBlock};
   }
 

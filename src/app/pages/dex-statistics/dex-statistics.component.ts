@@ -243,7 +243,13 @@ export class DexStatisticsComponent implements OnInit {
       case 'USDT-DFI': {
         return new StockLongName('Tether $', '');
       }
+      case 'USDT-DUSD': {
+        return new StockLongName('Tether $', '');
+      }
       case 'USDC-DFI': {
+        return new StockLongName('USD Coin', '');
+      }
+      case 'USDC-DUSD': {
         return new StockLongName('USD Coin', '');
       }
       case 'SPY-DUSD': {

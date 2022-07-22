@@ -397,6 +397,10 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.pools?.find(p => p.tokenASymbol === name);
   }
 
+  getPoolSymbol(name: string): Pool {
+    return this.pools?.find(p => p.symbol === name);
+  }
+
   getNextCollateralFromVaultUsd(vault: Vault): number {
 
     let dfiInVaults = 0;
@@ -524,11 +528,13 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdtValueUsd(): number {
-    return (this.wallet.usdtInUsdtPool + this.wallet.usdt + this.getCollateralCountVaults('USDT')) * this.getPool('USDT')?.priceA;
+    return (this.wallet?.usdtInUsdtPool + this.wallet?.usdtInUsdtDusdPool + this.wallet.usdt
+      + this.getCollateralCountVaults('USDT')) * this.getPool('USDT')?.priceA;
   }
 
   getUsdcValueUsd(): number {
-    return (this.wallet.usdcInUsdcPool + this.wallet.usdc + this.getCollateralCountVaults('USDC')) * this.getPool('USDC')?.priceA;
+    return (this.wallet?.usdcInUsdcPool + this.wallet?.usdcInUsdcDusdPool + this.wallet.usdc
+      + this.getCollateralCountVaults('USDC')) * this.getPool('USDC')?.priceA;
   }
 
   getLtcValueUsd(): number {
@@ -561,6 +567,7 @@ export class ValueComponent implements OnInit, OnChanges {
       || this.wallet?.usdInUraPool > 0 || this.wallet?.usdInCsPool > 0 || this.wallet?.usdInGsgPool > 0
       || this.wallet?.usdInPpltPool > 0
       || this.wallet?.usdInGovtPool > 0 || this.wallet?.usdInTanPool > 0 || this.wallet?.usdInXomPool > 0
+      || this.wallet?.usdtInUsdtDusdPool > 0 || this.wallet?.usdcInUsdcDusdPool > 0
       || this.getCollateralCountVaults('DUSD') > 0 ;
   }
 
@@ -575,7 +582,8 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.wallet?.usdInIntcPool + this.wallet?.usdInPyplPool + this.wallet?.usdInBrkbPool +  this.wallet?.usdInKoPool
       + this.wallet?.usdInPgPool + this.wallet?.usdInSapPool + this.wallet?.usdInUraPool + this.wallet?.usdInCsPool
       + this.wallet?.usdInGsgPool + this.wallet?.usdInPpltPool + this.wallet?.usdInGovtPool + this.wallet?.usdInTanPool
-      + this.wallet?.usdInXomPool  + this.getCollateralCountVaults('DUSD');
+      + this.wallet?.usdInXomPool + this.wallet?.usdtInUsdtDusdPool +  this.wallet?.usdcInUsdcDusdPool
+      + this.getCollateralCountVaults('DUSD');
   }
 
   getUsdValueUsd(): number {
@@ -783,11 +791,11 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getUsdtWalletValueUsd(): number {
-    return this.wallet.usdt * this.getPool('USDT')?.priceA;
+    return (this.wallet.usdt + this.wallet.usdtDusd) * this.getPool('USDT')?.priceA;
   }
 
   getUsdcWalletValueUsd(): number {
-    return this.wallet.usdc * this.getPool('USDC')?.priceA;
+    return (this.wallet.usdc + this.wallet.usdcDusd) * this.getPool('USDC')?.priceA;
   }
 
   getDogeWalletValueUsd(): number {
@@ -957,7 +965,8 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getLmUsd(): number {
     return this.getAnteilLMOfBtcPoolValue() + this.getAnteilLMOfEthPoolValue()
-      + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdcPoolValue()
+      + this.getAnteilLMOfLtcPoolValue() + this.getAnteilLMOfUsdtPoolValue() + this.getAnteilLMOfUsdtDusdPoolValue()
+      + this.getAnteilLMOfUsdcPoolValue() + this.getAnteilLMOfUsdcDusdPoolValue()
       + this.getAnteilLMOfDogePoolValue() + this.getAnteilLMOfBchPoolValue() + this.getAnteilLMOfUsdPoolValue()
       + this.getAnteilLMOfTslaPoolValue() + this.getAnteilLMOfSpyPoolValue() + this.getAnteilLMOfQqqPoolValue()
       + this.getAnteilLMOfPltrPoolValue() + this.getAnteilLMOfSlvPoolValue() + this.getAnteilLMOfAaplPoolValue()
@@ -1164,14 +1173,16 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.eth + this.wallet?.ethInEthPool  + this.getCollateralCountVaults('ETH'), this.getEthValueUsd()));
     }
 
-    if (this.wallet?.usdt > 0 || this.wallet?.usdtInUsdtPool > 0 || this.getCollateralCountVaults('USDT')) {
+    if (this.wallet?.usdt > 0 || this.wallet?.usdtInUsdtPool > 0  || this.wallet?.usdtInUsdtDusdPool > 0 || this.getCollateralCountVaults('USDT')) {
       this.holdingValues.push(new HoldingValue('USDT',
-        this.wallet?.usdt + this.wallet?.usdtInUsdtPool  + this.getCollateralCountVaults('USDT'), this.getUsdtValueUsd()));
+        this.wallet?.usdt + this.wallet?.usdtInUsdtPool + this.wallet?.usdtInUsdtDusdPool
+        + this.getCollateralCountVaults('USDT'), this.getUsdtValueUsd()));
     }
 
-    if (this.wallet?.usdc > 0 || this.wallet?.usdcInUsdcPool > 0 || this.getCollateralCountVaults('USDC')) {
+    if (this.wallet?.usdc > 0 || this.wallet?.usdcInUsdcPool > 0 || this.wallet?.usdcInUsdcDusdPool > 0 || this.getCollateralCountVaults('USDC')) {
       this.holdingValues.push(new HoldingValue('USDC',
-        this.wallet?.usdc + this.wallet?.usdcInUsdcPool  + this.getCollateralCountVaults('USDC'), this.getUsdcValueUsd()));
+        this.wallet?.usdc + this.wallet?.usdcInUsdcPool + this.wallet?.usdcInUsdcDusdPool
+        + this.getCollateralCountVaults('USDC'), this.getUsdcValueUsd()));
     }
 
     if (this.isUsdInPortfolio()) {
@@ -1679,9 +1690,19 @@ export class ValueComponent implements OnInit, OnChanges {
         this.wallet?.usdtdfi, this.wallet?.usdtdfi * this.getLpTokenValue(this.getPool('USDT'))));
     }
 
+    if (this.wallet?.usdtdusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('USDT-DUSD',
+        this.wallet?.usdtdusd, this.wallet?.usdtdusd * this.getLpTokenValue(this.getPoolSymbol('USDT-DUSD'))));
+    }
+
     if (this.wallet?.usdcdfi > 0) {
       this.lpTokensValues.push(new HoldingValue('USDC-DFI',
         this.wallet?.usdcdfi , this.wallet?.usdcdfi * this.getLpTokenValue(this.getPool('USDC'))));
+    }
+
+    if (this.wallet?.usdcdusd > 0) {
+      this.lpTokensValues.push(new HoldingValue('USDC-DUSD',
+        this.wallet?.usdcdusd , this.wallet?.usdcdusd * this.getLpTokenValue(this.getPoolSymbol('USDC-DUSD'))));
     }
 
     if (this.wallet?.usddfi) {
@@ -1933,8 +1954,16 @@ export class ValueComponent implements OnInit, OnChanges {
   getAnteilLMOfUsdtPoolValue(): number {
     return ((this.wallet.dfiInUsdtPool * this.getPool('BTC')?.priceB) + (this.wallet.usdtInUsdtPool * this.getPool('USDT')?.priceA));
   }
+  getAnteilLMOfUsdtDusdPoolValue(): number {
+    return ((this.wallet.usdtInUsdtDusdPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.usdtInUsdtPool * this.getPool('USDT')?.priceA));
+  }
   getAnteilLMOfUsdcPoolValue(): number {
     return ((this.wallet.dfiInUsdcPool * this.getPool('BTC')?.priceB) + (this.wallet.usdcInUsdcPool * this.getPool('USDC')?.priceA));
+  }
+  getAnteilLMOfUsdcDusdPoolValue(): number {
+    return ((this.wallet.usdcInUsdcDusdPool * this.getUsdPriceOfStockPools(this.getPool('DUSD')))
+      + (this.wallet.usdcInUsdcPool * this.getPool('USDC')?.priceA));
   }
   getAnteilLMOfDogePoolValue(): number {
     return ((this.wallet.dfiInDogePool * this.getPool('BTC')?.priceB) + (this.wallet.dogeInDogePool * this.getPool('DOGE')?.priceA));
