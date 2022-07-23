@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.3.1 - 23.7.2022';
+    this.log.comment = 'Forecast for new pools fixed';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.3.0 - 22.7.2022';
     this.log.comment = 'New usdc and usdt with dusd pools';
     this.logs.push(this.log);

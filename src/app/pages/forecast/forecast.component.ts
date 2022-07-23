@@ -59,10 +59,16 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolUsdc!: Pool;
 
   @Input()
+  poolUsdcDusd!: Pool;
+
+  @Input()
   poolBch!: Pool;
 
   @Input()
   poolUsdt!: Pool;
+
+  @Input()
+  poolUsdtDusd!: Pool;
 
   @Input()
   poolDoge!: Pool;
@@ -688,6 +694,8 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiEthPart = this.wallet?.dfiInEthPool / dfiInLm;
     const dfiUsdcPart = this.wallet?.dfiInUsdcPool / dfiInLm;
     const dfiUsdtPart = this.wallet?.dfiInUsdtPool / dfiInLm;
+    const dfiUsdcDusdPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdcDusdPool) / dfiInLm;
+    const dfiUsdtDusdPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdtDusdPool) / dfiInLm;
     const dfiDogePart = this.wallet?.dfiInDogePool / dfiInLm;
     const dfiBchPart = this.wallet?.dfiInBchPool / dfiInLm;
     const dfiLtcPart = this.wallet?.dfiInLtcPool / dfiInLm;
@@ -738,9 +746,11 @@ export class ForecastComponent implements OnInit, OnChanges {
       ((dfiBtcPart * 100 * this.poolBtc?.apr) +
         (dfiEthPart * 100 * this.poolEth?.apr) +
         (dfiUsdcPart * 100 * this.poolUsdc?.apr) +
+        (dfiUsdcDusdPart * 100 * this.poolUsdcDusd?.apr) +
         (dfiBchPart * 100 * this.poolBch?.apr) +
         (dfiDogePart * 100 * this.poolDoge?.apr) +
         (dfiUsdtPart * 100 * this.poolUsdt?.apr) +
+        (dfiUsdtDusdPart * 100 * this.poolUsdtDusd?.apr) +
         (dfiLtcPart * 100 * this.poolLtc?.apr) +
         (dfiUsdPart * 100 * this.poolUsd?.apr) +
         (dfiTslaPart * 100 * this.poolTsla?.apr) +
@@ -802,6 +812,7 @@ export class ForecastComponent implements OnInit, OnChanges {
   getDfiCountLM(): number {
     return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
       + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool + this.wallet?.dfiInUsdPool
+      + this.getDfiEqOfUsdPartOfPool(this.wallet.dusdInUsdcDusdPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdtDusdPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet.usdInTslaPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInQqqPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSpyPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPltrPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSlvPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAaplPool)
