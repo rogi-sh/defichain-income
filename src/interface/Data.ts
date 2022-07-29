@@ -1050,6 +1050,7 @@ export class Exchange {
   dfxBuy: string;
   dfxSell: string;
   dfxStaking: string;
+  huobiStatus: string;
 }
 
 export class UserHistoryItem {

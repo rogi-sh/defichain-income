@@ -465,55 +465,22 @@
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2 max-h-96 overflow-auto'>
       <div class='inline-lg-block rounded bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
         <h1 class='text-lg font-bold'>Status Exchanges</h1>
-        <h2 class='text-lg font-bold'>DFX</h2>
+        <h2 class='text-lg font-bold'>Huobi</h2>
         <div class='my-2 dark:text-gray-100 grid grid-cols-2 gap-2'>
           <div>
-            <p class='mr-2 mb-1'>Deposit:</p>
-
-            <p class='mr-2 mb-1'>Withdraw:</p>
-
-            <p class='mr-2'>Staking:</p>
-
+            <span class='mr-2'>Status:</span>
           </div>
           <div>
-            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'ONLINE'"
-               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+            <div *ngIf="exchange?.huobiStatus === 'ok'"
+                 class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Online
-              <br>
-            </p>
-
-            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'OFFLINE'"
-               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+            </div>
+            <div *ngIf="exchange?.huobiStatus != 'ok'"
+                 class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
               Offline
-              <br>
-            </p>
-            <br>
-            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'ONLINE'"
-               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
-              Online
-              <br>
-            </p>
-
-            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'OFFLINE'"
-               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
-              Offline
-              <br>
-            </p>
-            <br>
-            <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'ONLINE'"
-               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
-              Online
-              <br>
-            </p>
-            <br>
-            <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'OFFLINE'"
-               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
-              Offline
-              <br>
-            </p>
+            </div>
           </div>
         </div>
-
         <h2 class='text-lg font-bold'>Kucoin</h2>
         <div class='my-2 dark:text-gray-100 grid grid-cols-2 gap-2'>
           <div>
@@ -582,6 +549,54 @@
               class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
               {{exchange?.bittrexNotice}}
             </div>
+          </div>
+        </div>
+        <h2 class='text-lg font-bold'>DFX</h2>
+        <div class='my-2 dark:text-gray-100 grid grid-cols-2 gap-2'>
+          <div>
+            <p class='mr-2 mb-1'>Deposit:</p>
+
+            <p class='mr-2 mb-1'>Withdraw:</p>
+
+            <p class='mr-2'>Staking:</p>
+
+          </div>
+          <div>
+            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'ONLINE'"
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+              Online
+              <br>
+            </p>
+
+            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxBuy === 'OFFLINE'"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+              Offline
+              <br>
+            </p>
+            <br>
+            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'ONLINE'"
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+              Online
+              <br>
+            </p>
+
+            <p *ngIf="exchange && exchange?.dfxBuy && exchange?.dfxSell === 'OFFLINE'"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 mb-1 cursor-pointer text-center'>
+              Offline
+              <br>
+            </p>
+            <br>
+            <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'ONLINE'"
+               class='inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
+              Online
+              <br>
+            </p>
+            <br>
+            <p *ngIf="exchange && exchange?.dfxStaking && exchange?.dfxStaking === 'OFFLINE'"
+               class='inline-block rounded-full bg-red-600 hover:bg-gray-800 transition-all text-white text-sm px-8 py-1 cursor-pointer text-center'>
+              Offline
+              <br>
+            </p>
           </div>
         </div>
       </div>

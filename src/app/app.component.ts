@@ -2197,14 +2197,14 @@ export class AppComponent implements OnInit {
     this.dfiProBlockBch = this.poolBch.rewardPct * this.rewards?.rewards?.liquidity;
     this.dfiProBlockBch += this.getCommission(this.poolBch);
 
-    this.dfiProBlockUsdUsdc = 0.015 * this.dfiPorBlockStock;
+    this.dfiProBlockUsdUsdc = 0.03 * this.dfiPorBlockStock;
     this.dfiProBlockUsdUsdc += this.getCommission(this.poolUsdUsdc);
 
-    this.dfiProBlockUsdUsdt = 0.015 * this.dfiPorBlockStock;
+    this.dfiProBlockUsdUsdt = 0.03 * this.dfiPorBlockStock;
     this.dfiProBlockUsdUsdt += this.getCommission(this.poolUsdUsdt);
 
     // STOCKS
-    this.dfiProBlockUsd = 0.47 * this.dfiPorBlockStock;
+    this.dfiProBlockUsd = 0.44 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCommission(this.poolUsd);
 
     this.dfiProBlockTsla = 0.046 * this.dfiPorBlockStock;

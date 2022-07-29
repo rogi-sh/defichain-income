@@ -614,6 +614,7 @@ export const EXCHANGE = gql`
     dfxBuy
     dfxSell
     dfxStaking
+    huobiStatus
   }
 }
 `;
