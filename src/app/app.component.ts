@@ -2207,127 +2207,127 @@ export class AppComponent implements OnInit {
     this.dfiProBlockUsd = 0.44 * this.dfiPorBlockStock;
     this.dfiProBlockUsd += this.getCommission(this.poolUsd);
 
-    this.dfiProBlockTsla = 0.046 * this.dfiPorBlockStock;
+    this.dfiProBlockTsla = 0.0499 * this.dfiPorBlockStock;
     this.dfiProBlockTsla += this.getCommission(this.poolTsla);
 
-    this.dfiProBlockQqq = 0.0357 * this.dfiPorBlockStock;
+    this.dfiProBlockQqq = 0.035 * this.dfiPorBlockStock;
     this.dfiProBlockQqq += this.getCommission(this.poolQqq);
 
-    this.dfiProBlockSpy = 0.0608 * this.dfiPorBlockStock;
+    this.dfiProBlockSpy = 0.0545 * this.dfiPorBlockStock;
     this.dfiProBlockSpy += this.getCommission(this.poolSpy);
 
-    this.dfiProBlockAapl = 0.0256 * this.dfiPorBlockStock;
+    this.dfiProBlockAapl = 0.0241 * this.dfiPorBlockStock;
     this.dfiProBlockAapl += this.getCommission(this.poolAapl);
 
-    this.dfiProBlockPltr = 0.01 * this.dfiPorBlockStock;
+    this.dfiProBlockPltr = 0.0119 * this.dfiPorBlockStock;
     this.dfiProBlockPltr += this.getCommission(this.poolPltr);
 
-    this.dfiProBlockSlv = 0.0046 * this.dfiPorBlockStock;
+    this.dfiProBlockSlv = 0.0048 * this.dfiPorBlockStock;
     this.dfiProBlockSlv += this.getCommission(this.poolSlv);
 
-    this.dfiProBlockGld = 0.0041 * this.dfiPorBlockStock;
+    this.dfiProBlockGld = 0.004 * this.dfiPorBlockStock;
     this.dfiProBlockGld += this.getCommission(this.poolGld);
 
-    this.dfiProBlockGme = 0.0181 * this.dfiPorBlockStock;
+    this.dfiProBlockGme = 0.0145 * this.dfiPorBlockStock;
     this.dfiProBlockGme += this.getCommission(this.poolGme);
 
-    this.dfiProBlockGoogle = 0.0123 * this.dfiPorBlockStock;
+    this.dfiProBlockGoogle = 0.0118 * this.dfiPorBlockStock;
     this.dfiProBlockGoogle += this.getCommission(this.poolGoogl);
 
-    this.dfiProBlockArkk = 0.0119 * this.dfiPorBlockStock;
+    this.dfiProBlockArkk = 0.0105 * this.dfiPorBlockStock;
     this.dfiProBlockArkk += this.getCommission(this.poolArkk);
 
-    this.dfiProBlockBaba = 0.0149 * this.dfiPorBlockStock;
+    this.dfiProBlockBaba = 0.0126 * this.dfiPorBlockStock;
     this.dfiProBlockBaba += this.getCommission(this.poolBaba);
 
-    this.dfiProBlockVnq = 0.0044 * this.dfiPorBlockStock;
+    this.dfiProBlockVnq = 0.0035 * this.dfiPorBlockStock;
     this.dfiProBlockVnq += this.getCommission(this.poolVnq);
 
-    this.dfiProBlockUrth = 0.0033 * this.dfiPorBlockStock;
+    this.dfiProBlockUrth = 0.0023 * this.dfiPorBlockStock;
     this.dfiProBlockUrth += this.getCommission(this.poolUrth);
 
-    this.dfiProBlockTlt = 0.0062 * this.dfiPorBlockStock;
+    this.dfiProBlockTlt = 0.006 * this.dfiPorBlockStock;
     this.dfiProBlockTlt += this.getCommission(this.poolTlt);
 
     this.dfiProBlockPdbc = 0.004 * this.dfiPorBlockStock;
     this.dfiProBlockPdbc += this.getCommission(this.poolPdbc);
 
     // STOCKS 1.2.2022
-    this.dfiProBlockAmzn = 0.0226 * this.dfiPorBlockStock;
+    this.dfiProBlockAmzn = 0.0201 * this.dfiPorBlockStock;
     this.dfiProBlockAmzn += this.getCommission(this.poolAmzn);
 
-    this.dfiProBlockNvda = 0.0224 * this.dfiPorBlockStock;
+    this.dfiProBlockNvda = 0.0241 * this.dfiPorBlockStock;
     this.dfiProBlockNvda += this.getCommission(this.poolNvda);
 
-    this.dfiProBlockCoin = 0.0186 * this.dfiPorBlockStock;
+    this.dfiProBlockCoin = 0.0204 * this.dfiPorBlockStock;
     this.dfiProBlockCoin += this.getCommission(this.poolCoin);
 
-    this.dfiProBlockEem = 0.0065 * this.dfiPorBlockStock;
+    this.dfiProBlockEem = 0.0066 * this.dfiPorBlockStock;
     this.dfiProBlockEem += this.getCommission(this.poolEem);
 
     // STOCKS 3.3.2022
-    this.dfiProBlockMsft = 0.0173 * this.dfiPorBlockStock;
+    this.dfiProBlockMsft = 0.0164 * this.dfiPorBlockStock;
     this.dfiProBlockMsft += this.getCommission(this.poolMsft);
 
-    this.dfiProBlockNflx = 0.0135 * this.dfiPorBlockStock;
+    this.dfiProBlockNflx = 0.0113 * this.dfiPorBlockStock;
     this.dfiProBlockNflx += this.getCommission(this.poolNflx);
 
-    this.dfiProBlockVoo = 0.0066 * this.dfiPorBlockStock;
+    this.dfiProBlockVoo = 0.006 * this.dfiPorBlockStock;
     this.dfiProBlockVoo += this.getCommission(this.poolVoo);
 
-    this.dfiProBlockFb = 0.0159 * this.dfiPorBlockStock;
+    this.dfiProBlockFb = 0.0148 * this.dfiPorBlockStock;
     this.dfiProBlockFb += this.getCommission(this.poolFb);
 
     // STOCKS 30.3.2022
-    this.dfiProBlockDis = this.getRewardIsOn(this.poolDis) ? 0.0069 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockDis = this.getRewardIsOn(this.poolDis) ? 0.0072 * this.dfiPorBlockStock : 0;
     this.dfiProBlockDis += this.getCommission(this.poolDis);
 
-    this.dfiProBlockMchi = this.getRewardIsOn(this.poolMchi) ? 0.0056 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockMchi = this.getRewardIsOn(this.poolMchi) ? 0.0047 * this.dfiPorBlockStock : 0;
     this.dfiProBlockMchi += this.getCommission(this.poolMchi);
 
-    this.dfiProBlockMstr = this.getRewardIsOn(this.poolMstr) ? 0.0197 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockMstr = this.getRewardIsOn(this.poolMstr) ? 0.0171 * this.dfiPorBlockStock : 0;
     this.dfiProBlockMstr += this.getCommission(this.poolMstr);
 
-    this.dfiProBlockIntc = this.getRewardIsOn(this.poolIntc) ? 0.0069 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockIntc = this.getRewardIsOn(this.poolIntc) ? 0.0086 * this.dfiPorBlockStock : 0;
     this.dfiProBlockIntc += this.getCommission(this.poolIntc);
 
     // STOCKS 28.4.2022
-    this.dfiProBlockPypl = this.getRewardIsOn(this.poolPypl) ? 0.0105 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPypl = this.getRewardIsOn(this.poolPypl) ? 0.0116 * this.dfiPorBlockStock : 0;
     this.dfiProBlockPypl += this.getCommission(this.poolPypl);
 
-    this.dfiProBlockBrkb = this.getRewardIsOn(this.poolBrkb) ? 0.0055 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockBrkb = this.getRewardIsOn(this.poolBrkb) ? 0.0051 * this.dfiPorBlockStock : 0;
     this.dfiProBlockBrkb += this.getCommission(this.poolBrkb);
 
-    this.dfiProBlockKo = this.getRewardIsOn(this.poolKo) ? 0.0051 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockKo = this.getRewardIsOn(this.poolKo) ? 0.0042 * this.dfiPorBlockStock : 0;
     this.dfiProBlockKo += this.getCommission(this.poolKo);
 
-    this.dfiProBlockPg = this.getRewardIsOn(this.poolPg) ? 0.0051 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPg = this.getRewardIsOn(this.poolPg) ? 0.0049 * this.dfiPorBlockStock : 0;
     this.dfiProBlockPg += this.getCommission(this.poolPg);
 
     // STOCKS 28.5.2022
-    this.dfiProBlockSap = this.getRewardIsOn(this.poolSap) ? 0.0044 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockSap = this.getRewardIsOn(this.poolSap) ? 0.0042 * this.dfiPorBlockStock : 0;
     this.dfiProBlockSap += this.getCommission(this.poolSap);
 
-    this.dfiProBlockUra = this.getRewardIsOn(this.poolUra) ? 0.0078 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockUra = this.getRewardIsOn(this.poolUra) ? 0.007 * this.dfiPorBlockStock : 0;
     this.dfiProBlockUra += this.getCommission(this.poolUra);
 
-    this.dfiProBlockCs = this.getRewardIsOn(this.poolCs) ? 0.0068 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockCs = this.getRewardIsOn(this.poolCs) ? 0.0067 * this.dfiPorBlockStock : 0;
     this.dfiProBlockCs += this.getCommission(this.poolCs);
 
-    this.dfiProBlockGsg = this.getRewardIsOn(this.poolGsg) ? 0.0051 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockGsg = this.getRewardIsOn(this.poolGsg) ? 0.0043 * this.dfiPorBlockStock : 0;
     this.dfiProBlockGsg += this.getCommission(this.poolGsg);
 
     // STOCKS 28.6.2022
-    this.dfiProBlockGovt = this.getRewardIsOn(this.poolGovt) ? 0.0020 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockGovt = this.getRewardIsOn(this.poolGovt) ? 0.0023 * this.dfiPorBlockStock : 0;
     this.dfiProBlockGovt += this.getCommission(this.poolGovt);
 
-    this.dfiProBlockPplt = this.getRewardIsOn(this.poolPplt) ? 0.0064 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockPplt = this.getRewardIsOn(this.poolPplt) ? 0.0058 * this.dfiPorBlockStock : 0;
     this.dfiProBlockPplt += this.getCommission(this.poolPplt);
 
-    this.dfiProBlockXom = this.getRewardIsOn(this.poolXom) ? 0.01 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockXom = this.getRewardIsOn(this.poolXom) ? 0.0092 * this.dfiPorBlockStock : 0;
     this.dfiProBlockXom += this.getCommission(this.poolXom);
 
-    this.dfiProBlockTan = this.getRewardIsOn(this.poolTan) ? 0.007 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockTan = this.getRewardIsOn(this.poolTan) ? 0.0066 * this.dfiPorBlockStock : 0;
     this.dfiProBlockTan += this.getCommission(this.poolTan);
   }
 

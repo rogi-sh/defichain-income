@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.4.1 - 1.8.2022';
+    this.log.comment = 'Adjusted old pool rewards because of new pools.';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '9.4.0 - 28.7.2022';
     this.log.comment = 'Huobi status added, rewards in usdc- and usdt-dusd pools adjusted';
     this.logs.push(this.log);
