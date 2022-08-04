@@ -369,6 +369,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'TAN-DUSD': {
         return new StockLongName('Invesco Solar ETF', 'TAN');
       }
+      case 'JNJ-DUSD': {
+        return new StockLongName('Johnson & Johnson', 'JNJ');
+      }
+      case 'ADDYY-DUSD': {
+        return new StockLongName('Adidas AG', 'ADDYY');
+      }
+      case 'GS-DUSD': {
+        return new StockLongName('Goldman Sachs Group, Inc', 'GS');
+      }
+      case 'DAX-DUSD': {
+        return new StockLongName('Global X DAX Germany ETF', 'DAX');
+      }
       default: {
         return new StockLongName('', '');
       }

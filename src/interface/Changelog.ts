@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.5.0 - 5.8.2022';
+    this.log.comment = 'Adjusted stable coin pools rewards, added new pools jnj, addyy, gs and dax for dex and history view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.4.1 - 1.8.2022';
     this.log.comment = 'Adjusted old pool rewards because of new pools.';
     this.logs.push(this.log);

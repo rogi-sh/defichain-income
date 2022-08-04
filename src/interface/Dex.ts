@@ -311,6 +311,14 @@ export class PoolXomOut extends Outcome {}
 
 export class PoolTanOut extends Outcome {}
 
+export class PoolJnjOut extends Outcome {}
+
+export class PoolAddyyOut extends Outcome {}
+
+export class PoolGsOut extends Outcome {}
+
+export class PoolDaxOut extends Outcome {}
+
 export class OutcomeStaking extends Outcome {}
 
 export class PoolAllOut extends Outcome {}
