@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.5.2 - 12.8.2022';
+    this.log.comment = 'New Pools in total value';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.5.1 - 12.8.2022';
     this.log.comment = 'Added new pool to calculations, andjusting pool rewards for stable pools';
     this.logs.push(this.log);

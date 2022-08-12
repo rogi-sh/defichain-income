@@ -566,8 +566,6 @@ export class AppComponent implements OnInit {
     return pool;
   }
 
-
-
   updateDescription(description: string): void {
     this.translate.stream(description).subscribe((res: string) => {
       this.meta.updateTag({ name: 'description', content: res });
@@ -5132,7 +5130,8 @@ export class AppComponent implements OnInit {
       + this.getDisValueUsd() + this.getMchiValueUsd() + this.getMstrValueUsd() + this.getIntcValueUsd()
       + this.getPyplValueUsd() + this.getBrkbValueUsd() + this.getKoValueUsd() + this.getPgValueUsd()
       + this.getSapValueUsd() + this.getUraValueUsd() + this.getGsgValueUsd() + this.getCsValueUsd()
-      + this.getXomValueUsd() + this.getPpltValueUsd() + this.getTanValueUsd() + this.getGovtValueUsd();
+      + this.getXomValueUsd() + this.getPpltValueUsd() + this.getTanValueUsd() + this.getGovtValueUsd()
+      + this.getJnjValueUsd() + this.getAddyyValueUsd() + this.getGsValueUsd() + this.getDaxValueUsd();
 
     // Collateral
     const collateral = this.getVaultsValueUsd();
