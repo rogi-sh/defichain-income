@@ -289,6 +289,16 @@ export interface WalletDto {
   csusd: number;
   urausd: number;
 
+  tanusd: number;
+  xomusd: number;
+  govtusd: number;
+  ppltusd: number;
+
+  daxToken: number;
+  gsToken: number;
+  addyyToken: number;
+  jnjToken: number;
+
   // User Infos
   // BTC Pool
   btcInBtcPool: number;
@@ -504,6 +514,8 @@ export interface WalletDto {
   uraInUraPool: number;
   ura: number;
   usdInUraPool: number;
+
+
 }
 
 export class Newsletter {
@@ -580,6 +592,11 @@ export class Wallet {
   xomusd = 0;
   govtusd = 0;
   tanusd = 0;
+
+  jnjusd = 0;
+  gsusd = 0;
+  daxusd = 0;
+  addyyusd = 0;
 
   // User Infos
   // BTC Pool
@@ -973,6 +990,38 @@ export class Wallet {
   tanKey = 'tanKey';
   usdInTanPoolKey = 'usdInTanPoolKey';
   usdInTanPool = 0;
+
+  // JNJ Pool
+  jnjInJnjPool = 0;
+  jnjInJnjPoolKey = 'jnjInJnjPoolKey';
+  jnj = 0;
+  jnjKey = 'jnjKey';
+  usdInJnjPoolKey = 'usdInJnjPoolKey';
+  usdInJnjPool = 0;
+
+  // ADDYY Pool
+  addyyInAddyyPool = 0;
+  addyyInAddyyPoolKey = 'addyyInAddyyPoolKey';
+  addyy = 0;
+  addyyKey = 'addyyKey';
+  usdInAddyyPoolKey = 'usdInAddyyPoolKey';
+  usdInAddyyPool = 0;
+
+  // GS Pool
+  gsInGsPool = 0;
+  gsInGsPoolKey = 'gsInGsPoolKey';
+  gs = 0;
+  gsKey = 'gsKey';
+  usdInGsPoolKey = 'usdInGsPoolKey';
+  usdInGsPool = 0;
+
+  // DAX Pool
+  daxInDaxPool = 0;
+  daxInDaxPoolKey = 'daxInDaxPoolKey';
+  dax = 0;
+  daxKey = 'daxKey';
+  usdInDaxPoolKey = 'usdInDaxPoolKey';
+  usdInDaxPool = 0;
 
 }
 

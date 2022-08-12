@@ -145,6 +145,11 @@ export class AddressBalance {
   govtToken: number;
   xomToken: number;
 
+  daxToken: number;
+  gsToken: number;
+  addyyToken: number;
+  jnjToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -201,6 +206,11 @@ export class AddressBalance {
   govtusdToken: number;
   xomusdToken: number;
   tanusdToken: number;
+
+  jnjusdToken: number;
+  gsusdToken: number;
+  daxusdToken: number;
+  addyyusdToken: number;
 
 }
 

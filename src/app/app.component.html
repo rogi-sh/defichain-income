@@ -11,7 +11,6 @@
         {{getDUSDPrice()}} $ - Fee {{getDUSDFee()}} %
          / DFI
         <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price>
-        - <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
         /
         &Oslash; APR {{avgApr}} %
       </div>
@@ -87,8 +86,7 @@
           dUSD
           {{getDUSDPrice()}} $ - Fee {{getDUSDFee()}} %
            / DFI
-           <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price> -
-          <app-price [fiat]="fiat" [usdPrice]="priceDFICEX"></app-price>
+           <app-price [fiat]="fiat" [usdPrice]="poolBtc ? poolBtc?.priceB : 0"></app-price>
           /
           &Oslash; APR {{avgApr}} %
         </span>
@@ -570,6 +568,10 @@
                 [poolPpltOut]='poolPpltOut'
                 [poolTanOut]='poolTanOut'
                 [poolXomOut]='poolXomOut'
+                [poolAddyyOut]='poolAddyyOut'
+                [poolDaxOut]='poolDaxOut'
+                [poolGsOut]='poolGsOut'
+                [poolJnjOut]='poolJnjOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [dfiInDfxStaking]='dfiInDfxStaking'
@@ -628,6 +630,10 @@
                 [getAnteilPpltPoolAnGesamtLM]='getAnteilPpltPoolAnGesamtLM()'
                 [getAnteilTanPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
                 [getAnteilXomPoolAnGesamtLM]='getAnteilXomPoolAnGesamtLM()'
+                [getAnteilJnjPoolAnGesamtLM]='getAnteilJnjPoolAnGesamtLM()'
+                [getAnteilAddyyPoolAnGesamtLM]='getAnteilAddyyPoolAnGesamtLM()'
+                [getAnteilGsPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
+                [getAnteilDaxPoolAnGesamtLM]='getAnteilDaxPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -4355,6 +4361,18 @@
                                   <div *ngIf="getAddressBalance(a)?.xomToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     XOM: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.xomToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.jnjToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    JNJ: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.jnjToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.addyyToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ADDYY: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.addyyToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gsToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GS: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.daxToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DAX: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.daxToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -4502,6 +4520,27 @@
                                   <div *ngIf="getAddressBalance(a)?.xomusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     XOMUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.xomusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ppltusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    PPLTLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ppltusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.govtusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GOVTLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.govtusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.tanusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    TANUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.tanusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.jnjusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    JNJUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.jnjusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.addyyusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ADDYYLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.addyyusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.gsusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    GSUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.gsusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.daxusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    DAXUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.daxusdToken }}</div>
                                 </div>
                               </div>
 
@@ -4583,6 +4622,10 @@
                     [poolPpltOut]='poolPpltOut'
                     [poolTanOut]='poolTanOut'
                     [poolXomOut]='poolXomOut'
+                    [poolAddyyOut]='poolAddyyOut'
+                    [poolDaxOut]='poolDaxOut'
+                    [poolGsOut]='poolGsOut'
+                    [poolJnjOut]='poolJnjOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4641,6 +4684,10 @@
                     [getAnteilPpltPoolAnGesamtLM]='getAnteilPpltPoolAnGesamtLM()'
                     [getAnteilTanPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
                     [getAnteilXomPoolAnGesamtLM]='getAnteilXomPoolAnGesamtLM()'
+                    [getAnteilJnjPoolAnGesamtLM]='getAnteilJnjPoolAnGesamtLM()'
+                    [getAnteilAddyyPoolAnGesamtLM]='getAnteilAddyyPoolAnGesamtLM()'
+                    [getAnteilGsPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
+                    [getAnteilDaxPoolAnGesamtLM]='getAnteilDaxPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>

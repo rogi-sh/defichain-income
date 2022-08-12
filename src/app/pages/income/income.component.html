@@ -478,6 +478,31 @@
               </span>
               XOM
             </span>
+                <span class="text-xl dark:text-gray-100" *ngIf="wallet?.jnjInJnjPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilJnjPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              JNJ
+            </span>
+              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.addyyInAddyyPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilAddyyPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              ADDYY
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.gsInGsPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilGsPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              GS
+            </span>
+
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.daxInDaxPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilDaxPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              DAX
+            </span>
           </span>
         </div>
 
