@@ -2393,16 +2393,16 @@ export class AppComponent implements OnInit {
     this.dfiProBlockTan += this.getCommission(this.poolTan);
 
     // STOCKS 28.7.2022
-    this.dfiProBlockJnj = this.getRewardIsOn(this.poolJnj) ? 0.0023 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockJnj = this.getRewardIsOn(this.poolJnj) ? 0.0046 * this.dfiPorBlockStock : 0;
     this.dfiProBlockJnj += this.getCommission(this.poolJnj);
 
-    this.dfiProBlockGs = this.getRewardIsOn(this.poolGs) ? 0.0058 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockGs = this.getRewardIsOn(this.poolGs) ? 0.0057 * this.dfiPorBlockStock : 0;
     this.dfiProBlockGs += this.getCommission(this.poolGs);
 
-    this.dfiProBlockAddyy = this.getRewardIsOn(this.poolAddyy) ? 0.0092 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockAddyy = this.getRewardIsOn(this.poolAddyy) ? 0.0058 * this.dfiPorBlockStock : 0;
     this.dfiProBlockAddyy += this.getCommission(this.poolAddyy);
 
-    this.dfiProBlockDax = this.getRewardIsOn(this.poolDax) ? 0.0066 * this.dfiPorBlockStock : 0;
+    this.dfiProBlockDax = this.getRewardIsOn(this.poolDax) ? 0.0053 * this.dfiPorBlockStock : 0;
     this.dfiProBlockDax += this.getCommission(this.poolDax);
   }
 
@@ -7631,6 +7631,11 @@ export class AppComponent implements OnInit {
     const dfiXomPart = this.poolXomOut?.dfiPerYear / allIncome * 100;
     const dfiGovtPart = this.poolGovtOut?.dfiPerYear / allIncome * 100;
 
+    const dfiJnjPart = this.poolJnjOut?.dfiPerYear / allIncome * 100;
+    const dfiDaxPart = this.poolDaxOut?.dfiPerYear / allIncome * 100;
+    const dfiGsPart = this.poolGsOut?.dfiPerYear / allIncome * 100;
+    const dfiAddyyPart = this.poolAddyyOut?.dfiPerYear / allIncome * 100;
+
     const stakingPart = this.stakingOut?.dfiPerYear / allIncome * 100;
 
 
@@ -7690,6 +7695,11 @@ export class AppComponent implements OnInit {
     const govtApr = dfiGovtPart * this.poolGovt?.apr;
     const tanApr = dfiTanPart * this.poolTan?.apr;
 
+    const jnjApr = dfiJnjPart * this.poolJnj?.apr;
+    const daxApr = dfiDaxPart * this.poolDax?.apr;
+    const addyyApr = dfiAddyyPart * this.poolAddyy?.apr;
+    const gsApr = dfiGsPart * this.poolGs?.apr;
+
     const stakingApr = stakingPart * this.stakingApyMN * 0.85;
     const normalMnApr = rewardNormaleMnPart * this.stakingApyMN;
     const fiveFreezerMnApr = reward5MnPart * this.stakingApyMN * 1.5;
@@ -7705,6 +7715,7 @@ export class AppComponent implements OnInit {
       + pyplApr + brkbApr + koApr + pgApr
       + sapApr + gsgApr + csApr + uraApr
       + ppltApr + xomApr + tanApr + govtApr
+      + jnjApr + daxApr + addyyApr + gsApr
       + stakingApr + normalMnApr + fiveFreezerMnApr + tenFreezerMnApr) / 100;
 
     if (!average) {

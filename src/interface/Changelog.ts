@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.5.3 - 14.8.2022';
+    this.log.comment = 'Fix Avg Income and rewards new pools';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.5.2 - 12.8.2022';
     this.log.comment = 'New Pools in total value';
     this.logs.push(this.log);
