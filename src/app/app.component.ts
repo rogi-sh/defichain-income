@@ -2043,7 +2043,7 @@ export class AppComponent implements OnInit {
     this.poolUsdUsdc = this.setFromPoolPair('102');
     this.poolUsdUsdt = this.setFromPoolPair('101');
 
-    this.poolTsla = this.setFromPoolPair('18');
+    this.poolTsla = this.setFromPoolPair('114');
     this.poolQqq = this.setFromPoolPair('39');
     this.poolSpy = this.setFromPoolPair('38');
     this.poolPltr = this.setFromPoolPair('35');
