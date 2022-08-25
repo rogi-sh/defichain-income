@@ -1016,6 +1016,25 @@
                           ></label>
                         </div>
                       </div>
+                      <div class="flex flex-row gap-2">
+                        <div class="dark:text-gray-100">
+                          Freezer in total value calculation:
+                        </div>
+                        <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                          <input
+                            type="checkbox"
+                            id="freezerInValue"
+                            [(ngModel)]="freezerInTotolValue"
+                            (ngModelChange)="toggleFreezerInValue()"
+                            [ngClass]="{ 'isChecked': freezerInTotolValue }"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
+                          />
+                          <label
+                            for="freezerInValue"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                          ></label>
+                        </div>
+                      </div>
                     </div>
                     <br>
                     <div class="dark:text-gray-100">

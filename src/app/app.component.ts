@@ -529,6 +529,7 @@ export class AppComponent implements OnInit {
   cakeApyLoadAuto = true;
   cakeApyLoadAutoKey = 'cakeApyLoadAutoKey';
   timestamp = null;
+  freezerInTotolValue = false;
 
   oneTrackingAddress = null;
   authKeyOverUrl = null;
@@ -643,6 +644,7 @@ export class AppComponent implements OnInit {
       ) {
         this.isDarkModeOn = true;
       }
+
       this.toggleDarkMode();
     });
 
@@ -1051,6 +1053,9 @@ export class AppComponent implements OnInit {
     }
     if (localStorage.getItem(this.correlationDaysKey) !== null) {
       this.correlationDays = JSON.parse(localStorage.getItem(this.correlationDaysKey));
+    }
+    if (localStorage.getItem('freezerInValue') !== null) {
+      this.freezerInTotolValue = JSON.parse(localStorage.getItem('freezerInValue'));
     }
 
   }
@@ -5144,7 +5149,13 @@ export class AppComponent implements OnInit {
     // All Crypto and Stock values
     const allWithLoans = this.getAllValuesUsdPrice();
     const loans = this.getVaultsLoansValueUsd();
-    return allWithLoans - loans;
+    let freezerValue = 0;
+    // Freezer not couting
+    if (!this.freezerInTotolValue) {
+      freezerValue += this.adressesMasternodesFreezer5.length * 20000 * this.poolBtc?.priceB;
+      freezerValue += this.adressesMasternodesFreezer10.length * 20000 * this.poolBtc?.priceB;
+    }
+    return allWithLoans - loans - freezerValue;
   }
 
   getVaultsLoansValueUsd(): number {
@@ -7556,6 +7567,10 @@ export class AppComponent implements OnInit {
   onChangeCorrelationForCalc(value: number): void {
     this.correlationDays = +value;
     localStorage.setItem(this.correlationDaysKey, String(value));
+  }
+
+  toggleFreezerInValue(): void {
+    localStorage.setItem('freezerInValue', String(this.freezerInTotolValue));
   }
 
   getAPRAverage(): number {

@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.6.0 - 25.8.2022';
+    this.log.comment = 'Checkbox in settings whether freezer value is calculated in total value';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.5.5 - 20.8.2022';
     this.log.comment = 'New Rewards distribution in stable pools';
     this.logs.push(this.log);
