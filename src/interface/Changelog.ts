@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '9.6.2- 65.8.2022';
+    this.log.version = '9.6.3- 28.8.2022';
+    this.log.comment = 'Fix Dtoken dust';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '9.6.2- 25.8.2022';
     this.log.comment = 'Rebalance DFI Reaward for stable pools';
     this.logs.push(this.log);
 

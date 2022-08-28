@@ -2893,6 +2893,11 @@ export class AppComponent implements OnInit {
     }
 
     accounts.forEach(account => {
+
+      if (account.symbolKey !== 'BTC' && +account.amount < 0.0001) {
+        return;
+      }
+
       switch (account.symbolKey) {
         case 'DFI': {
           this.wallet.dfi += +account.amount;
