@@ -18,7 +18,7 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '9.6.2- 25.8.2022';
-    this.log.comment = 'Rebalance DFI Reaward for stable pools';
+    this.log.comment = 'Rebalance DFI Reward for stable pools';
     this.logs.push(this.log);
 
     this.log = new Log();
