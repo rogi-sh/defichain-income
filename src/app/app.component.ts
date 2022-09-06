@@ -5173,6 +5173,7 @@ export class AppComponent implements OnInit {
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
         loan += +this.getLoanFromVaultUsd(addressVault);
+        loan += addressVault.interestValue;
       });
     });
 

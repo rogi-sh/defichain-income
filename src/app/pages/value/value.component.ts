@@ -107,6 +107,7 @@ export class ValueComponent implements OnInit, OnChanges {
     this.vaultsOfAllAddresses.forEach(vault => {
       vault.data.forEach(addressVault => {
         loan += +this.getLoanFromVaultUsd(addressVault);
+        loan += addressVault.interestValue;
       });
     });
 
@@ -1030,7 +1031,7 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.getAnteilLMOfPpltPoolValue()
       + this.getAnteilLMOfGovtPoolValue() + this.getAnteilLMOfTanPoolValue() + this.getAnteilLMOfXomPoolValue()
       + this.getAnteilLMOfJnjPoolValue() + this.getAnteilLMOfAddyyPoolValue() + this.getAnteilLMOfGsPoolValue()
-      + this.getAnteilLMOfDaxPoolValue()
+      + this.getAnteilLMOfDaxPoolValue();
   }
 
   getAnteilCollaterallOfAllValue(): number {
