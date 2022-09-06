@@ -133,7 +133,7 @@ export class Vault {
   collateralRatio: string;
   collateralValue: string;
   loanValue: string;
-  interestValue: number;
+  interestValue: string;
   collateralAmounts: Array<CollateralAmount>;
   loanAmounts: Array<LoanAmount>;
   loanScheme: LoanSchema;

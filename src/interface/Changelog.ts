@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.6.6 - 6.9.2022';
+    this.log.comment = 'Fix type of interest value';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.6.5 - 6.9.2022';
     this.log.comment = 'Count interest value of vaults';
     this.logs.push(this.log);
