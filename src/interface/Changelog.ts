@@ -13,12 +13,12 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '9.6.5 - 6.9.2022';
-    this.log.comment = 'Fix Dtoken dust';
+    this.log.comment = 'Count interest value of vaults';
     this.logs.push(this.log);
 
     this.log = new Log();
     this.log.version = '9.6.4 - 2.9.2022';
-    this.log.comment = 'Fix Dtoken dust';
+    this.log.comment = 'Adjust stable pools rewards';
     this.logs.push(this.log);
 
     this.log = new Log();
