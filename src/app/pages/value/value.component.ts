@@ -522,6 +522,15 @@ export class ValueComponent implements OnInit, OnChanges {
 
   }
 
+  getInterestAmountOfvault(vault: Vault): number {
+    let interest = 0;
+    vault.interestAmounts.forEach( i => {
+      interest += +i.amount;
+    });
+
+    return interest;
+  }
+
   getShortOfId(id: string): string {
     const first = id.slice(0, 5);
     const last = id.slice(id.length - 5, id.length);

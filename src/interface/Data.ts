@@ -136,6 +136,7 @@ export class Vault {
   interestValue: string;
   collateralAmounts: Array<CollateralAmount>;
   loanAmounts: Array<LoanAmount>;
+  interestAmounts: Array<LoanAmount>;
   loanScheme: LoanSchema;
 }
 
