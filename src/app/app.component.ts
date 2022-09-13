@@ -66,7 +66,7 @@ import {CountdownComponent} from 'ngx-countdown';
 import {
   AddressVaults,
   ChartOptions6, HoldingValue,
-  Newsletter, PoolIncomeValue, PoolPairOcean, PoolPairsOcean,
+  Newsletter, PoolIncomeValue, PoolPairOcean, PoolPairsOcean, StockOracles,
   UserHistory,
   Vault,
   Wallet,
@@ -263,6 +263,8 @@ export class AppComponent implements OnInit {
   avgApr = 0;
 
   vaultsOfAllAddresses = new Array<AddressVaults>();
+
+  oraclePrices: StockOracles = null;
 
   correlationDays = 365;
   correlationDaysKey = 'correlationDaysKey';
@@ -710,6 +712,8 @@ export class AppComponent implements OnInit {
 
     this.loadStackingMasternode();
     this.loadHistoryUser();
+
+    this.loadOraclePrices();
 
     // only one adress over url
     if (this.oneTrackingAddress) {
@@ -1696,6 +1700,26 @@ export class AppComponent implements OnInit {
     }
   }
 
+  getInterest(key: string): number {
+
+    if ( !key || !this.oraclePrices || this.oraclePrices.data.length === 0) {
+      return 0;
+    }
+
+    return +this.oraclePrices.data.find(o => o.token.symbolKey === key)?.interest;
+
+  }
+
+  loadOraclePrices(): void {
+    this.dexService.getOraclePrices()
+      .subscribe(prices => {
+          this.oraclePrices = prices;
+        },
+        err => {
+          console.error('Fehler beim load oracle Prices: ' + JSON.stringify(err.message));
+        });
+  }
+
   loadDataFromServerAndLoadAllStuff(): void {
     if (this.loggedInAuthInput || this.loggedInAuth) {
       this.apollo.query({
@@ -1721,7 +1745,6 @@ export class AppComponent implements OnInit {
 
         } else {
           this.errorBackend = 'No users found';
-          this.logout();
           setInterval(() => {
             this.errorBackend = null;
           }, 5000);
@@ -7604,6 +7627,8 @@ export class AppComponent implements OnInit {
     const dfiDogePart = this.poolDogeOut?.dfiPerYear / allIncome * 100;
     const dfiBchPart = this.poolBchOut?.dfiPerYear / allIncome * 100;
     const dfiLtcPart = this.poolLtcOut?.dfiPerYear / allIncome * 100;
+    const dfiUsdcUsdPart = this.poolUsdUsdcOut?.dfiPerYear / allIncome * 100;
+    const dfiUsdtUsdPart = this.poolUsdUsdtOut?.dfiPerYear / allIncome * 100;
 
     const dfiUsdPart = this.poolUsdOut?.dfiPerYear / allIncome * 100;
     const dfiTslaPart = this.poolTslaOut?.dfiPerYear / allIncome * 100;
@@ -7668,6 +7693,8 @@ export class AppComponent implements OnInit {
     const dogeApr = dfiDogePart * this.poolDoge?.apr;
     const usdtApr = dfiUsdtPart * this.poolUsdt?.apr;
     const ltcApr = dfiLtcPart * this.poolLtc?.apr;
+    const usdtUsdApr = dfiUsdtUsdPart * this.poolUsdUsdt?.apr;
+    const usdcUsdApr = dfiUsdcUsdPart * this.poolUsdUsdc?.apr;
 
     const usdApr = dfiUsdPart * this.poolUsd?.apr;
     const tslaApr = dfiTslaPart * this.poolTsla?.apr;
@@ -7727,7 +7754,7 @@ export class AppComponent implements OnInit {
     const tenFreezerMnApr = reward10MnPart * this.stakingApyMN * 2;
 
     // compute average
-    const average = (btcApr + ethApr + usdcApr + bchApr + dogeApr + usdtApr
+    const average = (btcApr + ethApr + usdcApr + usdcUsdApr + bchApr + dogeApr + usdtApr + usdtUsdApr
       + ltcApr + usdApr + tslaApr + spyApr + qqqApr + pltrApr + slvApr
       + aaplApr + gldApr + gmeApr + googlApr + arkkApr + babaApr + vnqApr
       + urthApr + tltApr + pdbcApr + amznApr + nvdaApr + coinApr + eemApr
