@@ -21,6 +21,10 @@ export class Dex {
     return this.http.get<StockOracles>(environment.oraclePrices);
   }
 
+  public getCollateralTokens(): Observable<StockOracles>  {
+    return this.http.get<StockOracles>(environment.collateralTokens);
+  }
+
   public getPoolPairsOcean(): Observable<PoolPairsOcean>  {
     return this.http.get<PoolPairsOcean>(environment.poolpairsocean);
   }

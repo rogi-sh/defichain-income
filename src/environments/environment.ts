@@ -8,6 +8,7 @@ export const environment = {
   production: false,
   prices: ocean + '/v0/mainnet/prices?size=1000',
   oraclePrices: ocean + '/v0/mainnet/loans/tokens?size=1000',
+  collateralTokens: ocean + '/v0/mainnet/loans/collaterals?size=1000',
   poolpairsocean: ocean + '/v0/mainnet/poolpairs?size=1000',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/coins/apy',
@@ -20,7 +21,7 @@ export const environment = {
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
-  version: '9.7.0',
+  version: '9.8.0',
   graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

@@ -98,6 +98,7 @@ export class Burn {
 export class StockOracle {
   activePrice: OraclePriceActive;
   token: OrcalePrice;
+  factor: string;
   interest: string;
 }
 

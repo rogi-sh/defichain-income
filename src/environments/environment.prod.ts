@@ -4,6 +4,7 @@ export const environment = {
   production: true,
   prices: ocean + '/v0/mainnet/prices?size=1000',
   oraclePrices: ocean + '/v0/mainnet/loans/tokens?size=1000',
+  collateralTokens: ocean + '/v0/mainnet/loans/collaterals?size=1000',
   poolpairsocean: ocean + '/v0/mainnet/poolpairs?size=1000',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
   cake: 'https://api.cakedefi.com/coins/apy',

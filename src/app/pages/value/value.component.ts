@@ -5,12 +5,13 @@ import {
   ChartOptions,
   Data,
   HoldingValue,
-  LoanValue,
+  LoanValue, StockOracles,
   Vault,
   Wallet,
 } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';
 import { DataService } from '@services/data.service';
+import { Dex } from '@services/dex.service';
 
 @Component({
   selector: 'app-value',
@@ -67,6 +68,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
   oracleBlockBase = 1528800;
 
+  collTokens: StockOracles;
+  dusdFactor = 0;
+
   @Input()
   rewards: Stats;
 
@@ -76,10 +80,11 @@ export class ValueComponent implements OnInit, OnChanges {
   lpTokensValues = new Array<HoldingValue>();
   colleteralTokensValues = new Array<HoldingValue>();
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private dexService: Dex) {
   }
 
   ngOnInit(): void {
+    this.loadColTokens();
     this.createLoanTokens();
     this.createHoldingTokens();
     this.createWalletTokens();
@@ -87,6 +92,18 @@ export class ValueComponent implements OnInit, OnChanges {
     this.createLpTokens();
     this.buildDataForChart();
 
+  }
+
+  loadColTokens(): void {
+    this.dexService.getCollateralTokens()
+      .subscribe(tokens => {
+          this.collTokens = tokens;
+          this.dusdFactor = +this.collTokens?.data?.find(a => a.token.id === '15').factor;
+          this.createCollaterallTokens();
+        },
+        err => {
+          console.error('Fehler beim load col tokens: ' + JSON.stringify(err.message));
+        });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -380,7 +397,6 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdtInVaults = 0;
     let usdtActualPrice = 0;
     let dusdInVaults = 0;
-    const dusdActualPrice = 0.99;
 
     if (!vault) {
       return 0;
@@ -409,7 +425,7 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return dfiInVaults * dfiActualPrice + btcInVaults * btcActualPrice + usdcInVaults * usdcActualPrice
-      + usdtInVaults * usdtActualPrice + dusdInVaults * dusdActualPrice + ethInVaults * this.getPool('ETH')?.priceA;
+      + usdtInVaults * usdtActualPrice + dusdInVaults * this.dusdFactor + ethInVaults * this.getPool('ETH')?.priceA;
   }
 
   getPool(name: string): Pool {
@@ -433,7 +449,6 @@ export class ValueComponent implements OnInit, OnChanges {
     let usdtInVaults = 0;
     let usdtNextPrice = 0;
     let dusdInVaults = 0;
-    const dusdActualPrice = 0.99;
 
     if (!vault) {
       return 0;
@@ -462,7 +477,7 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + ethInVaults * ethNextPrice
-      + usdcInVaults * usdcNextPrice + usdtInVaults * usdtNextPrice + dusdInVaults * dusdActualPrice;
+      + usdcInVaults * usdcNextPrice + usdtInVaults * usdtNextPrice + dusdInVaults * this.dusdFactor;
   }
 
   getCollateralCountVaults(currency: string): number {
@@ -1777,7 +1792,7 @@ export class ValueComponent implements OnInit, OnChanges {
     }
     if (this.getCollateralCountVaults('DUSD') > 0) {
       this.colleteralTokensValues.push(new HoldingValue('DUSD',
-        this.getCollateralCountVaults('DUSD'), this.getCollateralCountVaults('DUSD') * 0.99));
+        this.getCollateralCountVaults('DUSD'), this.getCollateralCountVaults('DUSD') * this.dusdFactor));
     }
 
   }
