@@ -297,10 +297,15 @@ export interface WalletDto {
   govtusd: number;
   ppltusd: number;
 
-  daxToken: number;
-  gsToken: number;
-  addyyToken: number;
-  jnjToken: number;
+  daxusd: number;
+  gsusd: number;
+  addyyusd: number;
+  jnjusd: number;
+
+  wmtusd: number;
+  ulusd: number;
+  ungusd: number;
+  usousd: number;
 
   // User Infos
   // BTC Pool
@@ -518,6 +523,65 @@ export interface WalletDto {
   ura: number;
   usdInUraPool: number;
 
+  // PPLT Pool
+  ppltInPpltPool: number;
+  pplt: number;
+  usdInPpltPool: number;
+
+  // GOVT Pool
+  govtInGovtPool: number;
+  govt: number;
+  usdInGovtPool: number;
+
+  // TAN Pool
+  tanInTanPool: number;
+  tan: number;
+  usdInTanPool: number;
+
+  // XOM Pool
+  xomInXomPool: number;
+  xom: number;
+  usdInXomPool: number;
+
+  // JNJ Pool
+  jnjInJnjPool: number;
+  jnj: number;
+  usdInJnjPool: number;
+
+  // ADDYY Pool
+  addyyInAddyyPool: number;
+  addyy: number;
+  usdInAddyyPool: number;
+
+  // GS Pool
+  gsInGsPool: number;
+  gs: number;
+  usdInGsPool: number;
+
+  // DAX Pool
+  daxInDaxPool: number;
+  dax: number;
+  usdInDaxPool: number;
+
+  // WMT Pool
+  wmtInWmtPool: number;
+  wmt: number;
+  usdInWmtPool: number;
+
+  // UL Pool
+  ulInUlPool: number;
+  ul: number;
+  usdInUlPool: number;
+
+  // UNG Pool
+  ungInUngPool: number;
+  ung: number;
+  usdInUngPool: number;
+
+  // USO Pool
+  usoInUsoPool: number;
+  uso: number;
+  usdInUsoPool: number;
 
 }
 

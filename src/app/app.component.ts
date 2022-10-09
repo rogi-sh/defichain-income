@@ -1185,6 +1185,16 @@ export class AppComponent implements OnInit {
         tan : this.wallet.tan,
         xom  : this.wallet.xom,
 
+        jnj  : this.wallet.jnj,
+        addyy  : this.wallet.addyy,
+        gs : this.wallet.gs,
+        dax  : this.wallet.dax,
+
+        wmt  : this.wallet.wmt,
+        ul  : this.wallet.ul,
+        ung : this.wallet.ung,
+        uso  : this.wallet.uso,
+
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -1237,6 +1247,16 @@ export class AppComponent implements OnInit {
         govtusd  : this.wallet.govtusd,
         tanusd  : this.wallet.tanusd,
         xomusd  : this.wallet.xomusd,
+
+        jnjusd  : this.wallet.jnjusd,
+        addyyusd  : this.wallet.addyyusd,
+        gsusd  : this.wallet.gsusd,
+        daxusd  : this.wallet.daxusd,
+
+        wmtusd  : this.wallet.wmtusd,
+        ulusd  : this.wallet.ulusd,
+        ungusd  : this.wallet.ungusd,
+        usousd  : this.wallet.usousd,
 
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
@@ -1337,7 +1357,25 @@ export class AppComponent implements OnInit {
         tanInTanPool : this.wallet.tanInTanPool,
         usdInTanPool : this.wallet.usdInTanPool,
         xomInXomPool : this.wallet.xomInXomPool,
-        usdInXomPool : this.wallet.usdInXomPool
+        usdInXomPool : this.wallet.usdInXomPool,
+
+        jnjInJnjPool : this.wallet.jnjInJnjPool,
+        usdInJnjPool : this.wallet.usdInJnjPool,
+        gsInGsPool : this.wallet.gsInGsPool,
+        usdInGsPool : this.wallet.usdInGsPool,
+        daxInDaxPool : this.wallet.daxInDaxPool,
+        usdInDaxPool : this.wallet.usdInDaxPool,
+        addyyInAddyyPool : this.wallet.addyyInAddyyPool,
+        usdInAddyyPool : this.wallet.usdInAddyyPool,
+
+        wmtInWmtPool : this.wallet.wmtInWmtPool,
+        usdInWmtPool : this.wallet.usdInWmtPool,
+        ulInUlPool : this.wallet.ulInUlPool,
+        usdInUlPool : this.wallet.usdInUlPool,
+        ungInUngPool : this.wallet.ungInUngPool,
+        usdInUngPool : this.wallet.usdInUngPool,
+        usoInUsoPool : this.wallet.usoInUsoPool,
+        usdInUsoPool : this.wallet.usdInUsoPool
 
       },
     }).subscribe((result: any) => {
@@ -1454,6 +1492,16 @@ export class AppComponent implements OnInit {
         tan : this.wallet.tan,
         xom  : this.wallet.xom,
 
+        jnj  : this.wallet.jnj,
+        addyy  : this.wallet.addyy,
+        gs : this.wallet.gs,
+        dax  : this.wallet.dax,
+
+        wmt  : this.wallet.wmt,
+        ul  : this.wallet.ul,
+        ung : this.wallet.ung,
+        uso  : this.wallet.uso,
+
         btcdfi: this.wallet.btcdfi,
         ethdfi: this.wallet.ethdfi,
         ltcdfi: this.wallet.ltcdfi,
@@ -1507,6 +1555,16 @@ export class AppComponent implements OnInit {
         govtusd  : this.wallet.govtusd,
         tanusd  : this.wallet.tanusd,
         xomusd  : this.wallet.xomusd,
+
+        jnjusd  : this.wallet.jnjusd,
+        addyyusd  : this.wallet.addyyusd,
+        gsusd  : this.wallet.gsusd,
+        daxusd  : this.wallet.daxusd,
+
+        wmtusd  : this.wallet.wmtusd,
+        ulusd  : this.wallet.ulusd,
+        ungusd  : this.wallet.ungusd,
+        usousd  : this.wallet.usousd,
 
         btcInBtcPool: this.wallet.btcInBtcPool,
         dfiInBtcPool: this.wallet.dfiInBtcPool,
@@ -1607,7 +1665,25 @@ export class AppComponent implements OnInit {
         tanInTanPool : this.wallet.tanInTanPool,
         usdInTanPool : this.wallet.usdInTanPool,
         xomInXomPool : this.wallet.xomInXomPool,
-        usdInXomPool : this.wallet.usdInXomPool
+        usdInXomPool : this.wallet.usdInXomPool,
+
+        jnjInJnjPool : this.wallet.jnjInJnjPool,
+        usdInJnjPool : this.wallet.usdInJnjPool,
+        gsInGsPool : this.wallet.gsInGsPool,
+        usdInGsPool : this.wallet.usdInGsPool,
+        daxInDaxPool : this.wallet.daxInDaxPool,
+        usdInDaxPool : this.wallet.usdInDaxPool,
+        addyyInAddyyPool : this.wallet.addyyInAddyyPool,
+        usdInAddyyPool : this.wallet.usdInAddyyPool,
+
+        wmtInWmtPool : this.wallet.wmtInWmtPool,
+        usdInWmtPool : this.wallet.usdInWmtPool,
+        ulInUlPool : this.wallet.ulInUlPool,
+        usdInUlPool : this.wallet.usdInUlPool,
+        ungInUngPool : this.wallet.ungInUngPool,
+        usdInUngPool : this.wallet.usdInUngPool,
+        usoInUsoPool : this.wallet.usoInUsoPool,
+        usdInUsoPool : this.wallet.usdInUsoPool
 
       },
     }).subscribe((result: any) => {
@@ -7659,6 +7735,16 @@ export class AppComponent implements OnInit {
     walletFinal.govtusd = wallet.govtusd;
     walletFinal.ppltusd = wallet.ppltusd;
 
+    walletFinal.jnjusd = wallet.jnjusd;
+    walletFinal.addyyusd = wallet.addyyusd;
+    walletFinal.gsusd = wallet.gsusd;
+    walletFinal.daxusd = wallet.daxusd;
+
+    walletFinal.wmtusd = wallet.wmtusd;
+    walletFinal.ulusd = wallet.ulusd;
+    walletFinal.ungusd = wallet.ungusd;
+    walletFinal.usousd = wallet.usousd;
+
     walletFinal.btcInBtcPool = wallet.btcInBtcPool;
     walletFinal.dfiInBtcPool = wallet.dfiInBtcPool;
     walletFinal.ethInEthPool = wallet.ethInEthPool;
@@ -7751,6 +7837,33 @@ export class AppComponent implements OnInit {
     walletFinal.uraInUraPool = wallet.uraInUraPool;
     walletFinal.usdInUraPool = wallet.usdInUraPool;
 
+    walletFinal.ppltInPpltPool = wallet.ppltInPpltPool;
+    walletFinal.usdInPpltPool = wallet.usdInPpltPool;
+    walletFinal.govtInGovtPool = wallet.govtInGovtPool;
+    walletFinal.usdInGovtPool = wallet.usdInGovtPool;
+    walletFinal.xomInXomPool = wallet.xomInXomPool;
+    walletFinal.usdInXomPool = wallet.usdInXomPool;
+    walletFinal.tanInTanPool = wallet.tanInTanPool;
+    walletFinal.usdInTanPool = wallet.usdInTanPool;
+
+    walletFinal.jnjInJnjPool = wallet.jnjInJnjPool;
+    walletFinal.usdInJnjPool = wallet.usdInJnjPool;
+    walletFinal.gsInGsPool = wallet.gsInGsPool;
+    walletFinal.usdInGsPool = wallet.usdInGsPool;
+    walletFinal.addyyInAddyyPool = wallet.addyyInAddyyPool;
+    walletFinal.usdInAddyyPool = wallet.usdInAddyyPool;
+    walletFinal.daxInDaxPool = wallet.daxInDaxPool;
+    walletFinal.usdInDaxPool = wallet.usdInDaxPool;
+
+    walletFinal.wmtInWmtPool = wallet.wmtInWmtPool;
+    walletFinal.usdInWmtPool = wallet.usdInWmtPool;
+    walletFinal.ulInUlPool = wallet.ulInUlPool;
+    walletFinal.usdInUlPool = wallet.usdInUlPool;
+    walletFinal.ungInUngPool = wallet.ungInUngPool;
+    walletFinal.usdInUngPool = wallet.usdInUngPool;
+    walletFinal.usoInUsoPool = wallet.usoInUsoPool;
+    walletFinal.usdInUsoPool = wallet.usdInUsoPool;
+
     walletFinal.btc = wallet.btc;
     walletFinal.eth = wallet.eth;
     walletFinal.ltc = wallet.ltc;
@@ -7799,6 +7912,21 @@ export class AppComponent implements OnInit {
     walletFinal.gsg = wallet.gsg;
     walletFinal.cs = wallet.cs;
     walletFinal.ura = wallet.ura;
+
+    walletFinal.pplt = wallet.pplt;
+    walletFinal.govt = wallet.govt;
+    walletFinal.xom = wallet.xom;
+    walletFinal.tan = wallet.tan;
+
+    walletFinal.jnj = wallet.jnj;
+    walletFinal.addyy = wallet.addyy;
+    walletFinal.gs = wallet.gs;
+    walletFinal.dax = wallet.dax;
+
+    walletFinal.wmt = wallet.wmt;
+    walletFinal.ul = wallet.ul;
+    walletFinal.ung = wallet.ung;
+    walletFinal.uso = wallet.uso;
 
     return walletFinal;
   }

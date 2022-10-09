@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.9.1 - 9.10.2022';
+    this.log.comment = 'add new dTokens dWmt, dUl, dUng, dUso in backend interaction';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.9.0 - 9.10.2022';
     this.log.comment = 'add new dTokens dWmt, dUl, dUng, dUso and add dynamic dfi rewards ind DFI-DUSD pool';
     this.logs.push(this.log);
