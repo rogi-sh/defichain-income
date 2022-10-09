@@ -381,6 +381,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'DAX-DUSD': {
         return new StockLongName('Global X DAX Germany ETF', 'DAX');
       }
+      case 'WMT-DUSD': {
+        return new StockLongName('Walmart INC', 'WMT');
+      }
+      case 'UL-DUSD': {
+        return new StockLongName('Unilever plc', 'UL');
+      }
+      case 'UNG-DUSD': {
+        return new StockLongName('United States Natural Gas Fund, LP', 'UNG');
+      }
+      case 'USO-DUSD': {
+        return new StockLongName('United States Oil ETF', 'USO');
+      }
       default: {
         return new StockLongName('', '');
       }

@@ -156,6 +156,30 @@ export class LmTargetCalculatorComponent implements OnInit {
   poolXom!: Pool;
 
   @Input()
+  poolJnj!: Pool;
+
+  @Input()
+  poolAddyy!: Pool;
+
+  @Input()
+  poolGs!: Pool;
+
+  @Input()
+  poolDax!: Pool;
+
+  @Input()
+  poolWmt!: Pool;
+
+  @Input()
+  poolUl!: Pool;
+
+  @Input()
+  poolUng!: Pool;
+
+  @Input()
+  poolUso!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -301,6 +325,30 @@ export class LmTargetCalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockXom;
+
+  @Input()
+  dfiProBlockJnj;
+
+  @Input()
+  dfiProBlockAddyy;
+
+  @Input()
+  dfiProBlockGs;
+
+  @Input()
+  dfiProBlockDax;
+
+  @Input()
+  dfiProBlockWmt;
+
+  @Input()
+  dfiProBlockUl;
+
+  @Input()
+  dfiProBlockUng;
+
+  @Input()
+  dfiProBlockUso;
 
   @Input()
   blocktimeInS;
@@ -529,6 +577,30 @@ export class LmTargetCalculatorComponent implements OnInit {
     } else if (this.poolLmCalculationTargetReturn === 'XOM') {
       pool = this.poolXom;
       dfiPerBlock = this.dfiProBlockXom;
+    } else if (this.poolLmCalculationTargetReturn === 'JNJ') {
+      pool = this.poolJnj;
+      dfiPerBlock = this.dfiProBlockJnj;
+    } else if (this.poolLmCalculationTargetReturn === 'ADDYY') {
+      pool = this.poolAddyy;
+      dfiPerBlock = this.dfiProBlockAddyy;
+    } else if (this.poolLmCalculationTargetReturn === 'GS') {
+      pool = this.poolGs;
+      dfiPerBlock = this.dfiProBlockGs;
+    } else if (this.poolLmCalculationTargetReturn === 'DAX') {
+      pool = this.poolDax;
+      dfiPerBlock = this.dfiProBlockDax;
+    } else if (this.poolLmCalculationTargetReturn === 'WMT') {
+      pool = this.poolWmt;
+      dfiPerBlock = this.dfiProBlockWmt;
+    } else if (this.poolLmCalculationTargetReturn === 'UL') {
+      pool = this.poolUl;
+      dfiPerBlock = this.dfiProBlockUl;
+    } else if (this.poolLmCalculationTargetReturn === 'UNG') {
+      pool = this.poolUng;
+      dfiPerBlock = this.dfiProBlockUng;
+    } else if (this.poolLmCalculationTargetReturn === 'USO') {
+      pool = this.poolUso;
+      dfiPerBlock = this.dfiProBlockUso;
     }
 
     else {

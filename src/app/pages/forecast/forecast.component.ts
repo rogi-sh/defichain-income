@@ -197,6 +197,30 @@ export class ForecastComponent implements OnInit, OnChanges {
   poolXom!: Pool;
 
   @Input()
+  poolJnj!: Pool;
+
+  @Input()
+  poolAddyy!: Pool;
+
+  @Input()
+  poolGs!: Pool;
+
+  @Input()
+  poolDax!: Pool;
+
+  @Input()
+  poolWmt!: Pool;
+
+  @Input()
+  poolUl!: Pool;
+
+  @Input()
+  poolUng!: Pool;
+
+  @Input()
+  poolUso!: Pool;
+
+  @Input()
   blockHeight!: number;
 
   @Input()
@@ -741,6 +765,16 @@ export class ForecastComponent implements OnInit, OnChanges {
     const dfiXomPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTanPool) / dfiInLm;
     const dfiGovtPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInXomPool) / dfiInLm;
 
+    const dfiJnjPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInJnjPool) / dfiInLm;
+    const dfiAddyyPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAddyyPool) / dfiInLm;
+    const dfiGsPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsPool) / dfiInLm;
+    const dfiDaxPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDaxPool) / dfiInLm;
+
+    const dfiWmtPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInWmtPool) / dfiInLm;
+    const dfiUlPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUlPool) / dfiInLm;
+    const dfiUngPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUngPool) / dfiInLm;
+    const dfiUsoPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUsoPool) / dfiInLm;
+
     // Anteile berechnen je nachdem wie viel man in den Pools hat
     const average =
       ((dfiBtcPart * 100 * this.poolBtc?.apr) +
@@ -791,7 +825,15 @@ export class ForecastComponent implements OnInit, OnChanges {
         (dfiPpltPart * 100 * this.poolPplt?.apr) +
         (dfiGovtPart * 100 * this.poolGovt?.apr) +
         (dfiTanPart * 100 * this.poolTan?.apr) +
-        (dfiXomPart * 100 * this.poolXom?.apr)
+        (dfiXomPart * 100 * this.poolXom?.apr) +
+        (dfiJnjPart * 100 * this.poolJnj?.apr) +
+        (dfiAddyyPart * 100 * this.poolAddyy?.apr) +
+        (dfiGsPart * 100 * this.poolGs?.apr) +
+        (dfiDaxPart * 100 * this.poolDax?.apr) +
+        (dfiWmtPart * 100 * this.poolWmt?.apr) +
+        (dfiUlPart * 100 * this.poolUl?.apr) +
+        (dfiUngPart * 100 * this.poolUng?.apr) +
+        (dfiUsoPart * 100 * this.poolUso?.apr)
       ) / 100;
 
     return Math.round(average * 100) / 100;
@@ -832,7 +874,11 @@ export class ForecastComponent implements OnInit, OnChanges {
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSapPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUraPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCsPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsgPool)
       + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPpltPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGovtPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTanPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInXomPool);
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTanPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInXomPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInJnjPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAddyyPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDaxPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInWmtPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUlPool)
+      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUngPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUsoPool);
   }
 
   getUsdPriceOfDfiInDFIUSDPool(): number {

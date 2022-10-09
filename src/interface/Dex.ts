@@ -21,6 +21,7 @@ export class Pool {
   customRewards: string [];
   poolRewards: string [];
   rewardPct: number;
+  rewardLoanPct: number;
   pairLink: string;
   idTokenA: string;
   idTokenB: string;
@@ -150,6 +151,11 @@ export class AddressBalance {
   addyyToken: number;
   jnjToken: number;
 
+  wmtToken: number;
+  ulToken: number;
+  ungToken: number;
+  usoToken: number;
+
   btcdfiToken: number;
   ltcdfiToken: number;
   ethdfiToken: number;
@@ -211,6 +217,11 @@ export class AddressBalance {
   gsusdToken: number;
   daxusdToken: number;
   addyyusdToken: number;
+
+  wmtusdToken: number;
+  ulusdToken: number;
+  ungusdToken: number;
+  usousdToken: number;
 
 }
 
@@ -328,6 +339,14 @@ export class PoolAddyyOut extends Outcome {}
 export class PoolGsOut extends Outcome {}
 
 export class PoolDaxOut extends Outcome {}
+
+export class PoolWmtOut extends Outcome {}
+
+export class PoolUlOut extends Outcome {}
+
+export class PoolUngOut extends Outcome {}
+
+export class PoolUsoOut extends Outcome {}
 
 export class OutcomeStaking extends Outcome {}
 

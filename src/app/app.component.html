@@ -572,6 +572,10 @@
                 [poolDaxOut]='poolDaxOut'
                 [poolGsOut]='poolGsOut'
                 [poolJnjOut]='poolJnjOut'
+                [poolUlOut]='poolUlOut'
+                [poolUngOut]='poolUngOut'
+                [poolWmtOut]='poolWmtOut'
+                [poolUsoOut]='poolUsoOut'
                 [stakingOut]="stakingOut"
                 [dfiInStaking]="dfiInStaking"
                 [dfiInDfxStaking]='dfiInDfxStaking'
@@ -632,8 +636,12 @@
                 [getAnteilXomPoolAnGesamtLM]='getAnteilXomPoolAnGesamtLM()'
                 [getAnteilJnjPoolAnGesamtLM]='getAnteilJnjPoolAnGesamtLM()'
                 [getAnteilAddyyPoolAnGesamtLM]='getAnteilAddyyPoolAnGesamtLM()'
-                [getAnteilGsPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
+                [getAnteilGsPoolAnGesamtLM]='getAnteilGsPoolAnGesamtLM()'
                 [getAnteilDaxPoolAnGesamtLM]='getAnteilDaxPoolAnGesamtLM()'
+                [getAnteilWmtPoolAnGesamtLM]='getAnteilWmtPoolAnGesamtLM()'
+                [getAnteilUlPoolAnGesamtLM]='getAnteilUlPoolAnGesamtLM()'
+                [getAnteilUngPoolAnGesamtLM]='getAnteilUngPoolAnGesamtLM()'
+                [getAnteilUsoPoolAnGesamtLM]='getAnteilUsoPoolAnGesamtLM()'
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
               ></app-income>
@@ -753,6 +761,16 @@
                   [poolXom]='poolXom'
                   [poolTan]='poolTan'
                   [poolGovt]='poolGovt'
+                  [poolWmt]='poolWmt'
+                  [poolUso]='poolUso'
+                  [poolUng]='poolUng'
+                  [poolUl]='poolUl'
+                  [poolJnj]='poolJnj'
+                  [poolGs]='poolGs'
+                  [poolDax]='poolDax'
+                  [poolAddyy]='poolAddyy'
+                  [poolUsdcDusd]='poolUsdUsdc'
+                  [poolUsdtDusd]='poolUsdUsdt'
                   [wallet]="wallet"
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
@@ -862,6 +880,14 @@
                 [poolPplt]='poolPplt'
                 [poolTan]='poolTan'
                 [poolXom]='poolXom'
+                [poolAddyy]='poolAddyy'
+                [poolDax]='poolDax'
+                [poolGs]='poolGs'
+                [poolJnj]='poolJnj'
+                [poolUl]='poolUl'
+                [poolUng]='poolUng'
+                [poolUso]='poolUso'
+                [poolWmt]='poolWmt'
                 [blocktimeInS]="blocktimeInS"
                 [dfiProBlockBch]="dfiProBlockBch"
                 [dfiProBlockBtc]="dfiProBlockBtc"
@@ -912,6 +938,14 @@
                 [dfiProBlockGovt]='dfiProBlockGovt'
                 [dfiProBlockTan]='dfiProBlockTan'
                 [dfiProBlockXom]='dfiProBlockXom'
+                [dfiProBlockAddyy]='dfiProBlockAddyy'
+                [dfiProBlockDax]='dfiProBlockDax'
+                [dfiProBlockGs]='dfiProBlockGs'
+                [dfiProBlockJnj]='dfiProBlockJnj'
+                [dfiProBlockUl]='dfiProBlockUl'
+                [dfiProBlockUng]='dfiProBlockUng'
+                [dfiProBlockUso]='dfiProBlockUso'
+                [dfiProBlockWmt]='dfiProBlockWmt'
               ></app-calculator-page>
             </div>
             <div *ngSwitchCase="'info'">
@@ -4392,6 +4426,18 @@
                                   <div *ngIf="getAddressBalance(a)?.daxToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     DAX: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.daxToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.wmtToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    WMT: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.wmtToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ulToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    UL: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ulToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ungToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    UNG: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ungToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usoToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USO: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usoToken }}</div>
                                   <div *ngIf="getAddressBalance(a)?.btcdfiToken > 0"
                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     BTCDFI: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.btcdfiToken }} </div>
@@ -4560,6 +4606,18 @@
                                   <div *ngIf="getAddressBalance(a)?.daxusdToken > 0"
                                        class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
                                     DAXUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.daxusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.wmtusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    WMTUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.wmtusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ulusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    ULLUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ulusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.ungusdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    UNGUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.ungusdToken }}</div>
+                                  <div *ngIf="getAddressBalance(a)?.usousdToken > 0"
+                                       class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-sm px-2 py-1 cursor-pointer inline-block m-1 hide-content ng-star-inserted min-h-5">
+                                    USOUSD: {{ isIncognitoModeOn ? '****' : getAddressBalance(a)?.usousdToken }}</div>
                                 </div>
                               </div>
 
@@ -4645,6 +4703,10 @@
                     [poolDaxOut]='poolDaxOut'
                     [poolGsOut]='poolGsOut'
                     [poolJnjOut]='poolJnjOut'
+                    [poolUlOut]='poolUlOut'
+                    [poolUngOut]='poolUngOut'
+                    [poolWmtOut]='poolWmtOut'
+                    [poolUsoOut]='poolUsoOut'
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
                     [dfiInStaking]="dfiInStaking"
@@ -4707,6 +4769,10 @@
                     [getAnteilAddyyPoolAnGesamtLM]='getAnteilAddyyPoolAnGesamtLM()'
                     [getAnteilGsPoolAnGesamtLM]='getAnteilTanPoolAnGesamtLM()'
                     [getAnteilDaxPoolAnGesamtLM]='getAnteilDaxPoolAnGesamtLM()'
+                    [getAnteilWmtPoolAnGesamtLM]='getAnteilWmtPoolAnGesamtLM()'
+                    [getAnteilUlPoolAnGesamtLM]='getAnteilUlPoolAnGesamtLM()'
+                    [getAnteilUngPoolAnGesamtLM]='getAnteilUngPoolAnGesamtLM()'
+                    [getAnteilUsoPoolAnGesamtLM]='getAnteilUsoPoolAnGesamtLM()'
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                   ></app-income>

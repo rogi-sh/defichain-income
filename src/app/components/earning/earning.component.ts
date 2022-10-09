@@ -20,11 +20,9 @@ export class EarningComponent implements OnInit {
   @Input()
   isIncognitoModeOn: boolean;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   // get income of pool
   getOutcomeOfPoolPerMinUsd(out: Outcome): number {

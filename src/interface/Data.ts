@@ -43,6 +43,7 @@ export class PoolPairOcean {
   id: string;
   symbol: string;
   rewardPct: string;
+  rewardLoanPct: string;
   volume: PoolPairVolume;
   apr: PoolPairApr;
   totalLiquidity: Liquidity;
@@ -600,6 +601,11 @@ export class Wallet {
   daxusd = 0;
   addyyusd = 0;
 
+  wmtusd = 0;
+  ulusd = 0;
+  ungusd = 0;
+  usousd = 0;
+
   // User Infos
   // BTC Pool
   btcInBtcPool = 0;
@@ -1024,6 +1030,38 @@ export class Wallet {
   daxKey = 'daxKey';
   usdInDaxPoolKey = 'usdInDaxPoolKey';
   usdInDaxPool = 0;
+
+  // WMT Pool
+  wmtInWmtPool = 0;
+  wmtInWmtPoolKey = 'wmtInWmtPoolKey';
+  wmt = 0;
+  wmtKey = 'wmtKey';
+  usdInWmtPoolKey = 'usdInWmtPoolKey';
+  usdInWmtPool = 0;
+
+  // Ul Pool
+  ulInUlPool = 0;
+  ulInUlPoolKey = 'ulInUlPoolKey';
+  ul = 0;
+  ulKey = 'ulKey';
+  usdInUlPoolKey = 'usdInUlPoolKey';
+  usdInUlPool = 0;
+
+  // Ung Pool
+  ungInUngPool = 0;
+  ungInUngPoolKey = 'ungInUngPoolKey';
+  ung = 0;
+  ungKey = 'ungKey';
+  usdInUngPoolKey = 'usdInUngPoolKey';
+  usdInUngPool = 0;
+
+  // Uso Pool
+  usoInUsoPool = 0;
+  usoInUsoPoolKey = 'usoInUsoPoolKey';
+  uso = 0;
+  usoKey = 'ungKey';
+  usdInUsoPoolKey = 'usdInUsoPoolKey';
+  usdInUsoPool = 0;
 
 }
 

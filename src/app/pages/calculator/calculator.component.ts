@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pool } from '@interfaces/Dex';
+import { Outcome, Pool } from '@interfaces/Dex'
 import { MatomoTracker } from 'ngx-matomo-v9';
 
 @Component({
@@ -167,6 +167,30 @@ export class CalculatorComponent implements OnInit {
   poolXom!: Pool;
 
   @Input()
+  poolJnj!: Pool;
+
+  @Input()
+  poolAddyy!: Pool;
+
+  @Input()
+  poolGs!: Pool;
+
+  @Input()
+  poolDax!: Pool;
+
+  @Input()
+  poolWmt!: Pool;
+
+  @Input()
+  poolUl!: Pool;
+
+  @Input()
+  poolUng!: Pool;
+
+  @Input()
+  poolUso!: Pool;
+
+  @Input()
   dfiProBlockBtc;
 
   @Input()
@@ -312,6 +336,31 @@ export class CalculatorComponent implements OnInit {
 
   @Input()
   dfiProBlockXom;
+
+  @Input()
+  dfiProBlockJnj;
+
+  @Input()
+  dfiProBlockAddyy;
+
+  @Input()
+  dfiProBlockGs;
+
+  @Input()
+  dfiProBlockDax;
+
+  @Input()
+  dfiProBlockWmt;
+
+  @Input()
+  dfiProBlockUl;
+
+  @Input()
+  dfiProBlockUng;
+
+  @Input()
+  dfiProBlockUso;
+
 
   @Input()
   blocktimeInS;
