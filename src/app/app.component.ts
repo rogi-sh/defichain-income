@@ -4482,8 +4482,8 @@ export class AppComponent implements OnInit {
     if (poolName === 'USO' && pool) {
       if (this.autoLoadData) {
         this.anteilAmPoolUso = this.berechneAnteilAmPool(this.wallet.usousd, pool, outcome, dfiProBlock);
-        this.wallet.usoInUsoPool = this.anteilAmPoolUng * +pool.reserveA / 100;
-        this.wallet.usdInUsoPool = this.anteilAmPoolUng * +pool.reserveB / 100;
+        this.wallet.usoInUsoPool = this.anteilAmPoolUso * +pool.reserveA / 100;
+        this.wallet.usdInUsoPool = this.anteilAmPoolUso * +pool.reserveB / 100;
       } else {
         this.anteilAmPoolUso =
           this.berechneAnteilAmPoolManuel(this.wallet.usoInUsoPool, this.wallet.usdInUsoPool, pool, outcome, dfiProBlock);
