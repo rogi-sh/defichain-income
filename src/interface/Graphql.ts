@@ -14,7 +14,7 @@ export const REGISTER = gql`
     $amznusd: Float,  $nvdausd: Float,  $coinusd: Float, $eemusd: Float, $msftusd: Float,  $nflxusd: Float,  $fbusd: Float, $voousd: Float,
     $disusd: Float, $mchiusd: Float, $mstrusd: Float, $intcusd: Float,  $pyplusd: Float, $brkbusd: Float, $kousd: Float, $pgusd: Float,
     $sapusd: Float, $urausd: Float, $csusd: Float, $gsgusd: Float, $ppltusd: Float, $govtusd: Float, $tanusd: Float, $xomusd: Float,
-    $jnjusd: Float, $addyyusd: Float, $gsusd: Float, $daxusd: Float, $mwtusd: Float, $ulusd: Float, $ungusd: Float, $usousd: Float,
+    $jnjusd: Float, $addyyusd: Float, $gsusd: Float, $daxusd: Float, $wmtusd: Float, $ulusd: Float, $ungusd: Float, $usousd: Float,
     $btcInBtcPool: Float, $dfiInBtcPool: Float, $ethInEthPool: Float, $dfiInEthPool: Float,$usdtInUsdtPool: Float, $usdcInUsdcPool: Float, $usdInUsdPool: Float,
     $dfiInUsdtPool: Float, $dfiInUsdcPool: Float, $dfiInUsdPool: Float, $ltcInLtcPool: Float, $dfiInLtcPool: Float, $dogeInDogePool: Float, $dfiInDogePool: Float, $bchInBchPool: Float, $dfiInBchPool: Float,
     $tslaInTslaPool: Float, $usdInTslaPool: Float
