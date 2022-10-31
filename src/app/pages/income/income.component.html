@@ -496,12 +496,35 @@
               </span>
               GS
             </span>
-
              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.daxInDaxPool > 0">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilDaxPoolAnGesamtLM | number: "1.1-1"}} %
               </span>
               DAX
+            </span>
+                <span class="text-xl dark:text-gray-100" *ngIf="wallet?.wmtInWmtPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilWmtPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              WMT
+            </span>
+              <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ulInUlPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUlPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              UL
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.ungInUngPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUngPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              UNG
+            </span>
+             <span class="text-xl dark:text-gray-100" *ngIf="wallet?.usoInUsoPool > 0">
+              <span class="text-pink-500 font-semibold">
+                {{getAnteilUsoPoolAnGesamtLM | number: "1.1-1"}} %
+              </span>
+              USO
             </span>
           </span>
         </div>

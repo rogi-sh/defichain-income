@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.9.4 - 31.10.2022';
+    this.log.comment = 'fix new pools in income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.9.3 - 17.10.2022';
     this.log.comment = 'fix wmt in graphql query';
     this.logs.push(this.log);
