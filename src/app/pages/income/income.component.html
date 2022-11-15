@@ -97,10 +97,10 @@
       </div>
 
       <div class="rounded p-2 bg-gray-100 dark:bg-gray-600" *ngIf="selectedTab === 'Staking'">
-        <div *ngIf="dfiInStaking === 0 && dfiInDfxStaking === 0" class="dark:text-gray-100">
+        <div *ngIf="dfiInStaking === 0 && dfiInDfxStaking === 0 || dfiInLockStaking === 0" class="dark:text-gray-100">
           {{ "noStakingAvailable" | translate }}
         </div>
-        <div *ngIf="dfiInStaking > 0 || dfiInDfxStaking > 0">
+        <div *ngIf="dfiInStaking > 0 || dfiInDfxStaking > 0 || dfiInLockStaking > 0">
 
           <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
             {{ "balance" | translate }} DFI
@@ -113,13 +113,15 @@
             <span class="text-l dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
                 {{isIncognitoModeOn ? '****' : dfiInStaking | number: "1.2-2"}} Cake <br>
-                {{isIncognitoModeOn ? '****' : dfiInDfxStaking  | number: "1.2-2"}} DFX
+                {{isIncognitoModeOn ? '****' : dfiInDfxStaking  | number: "1.2-2"}} DFX<br>
+                {{isIncognitoModeOn ? '****' : dfiInLockStaking  | number: "1.2-2"}} Lock
               </span>
             </span>
             <span class="text-l dark:text-gray-100">
                <span class="text-pink-500 font-semibold">
                 {{stakingApy | number: "1.1-1"}} % Apy Cake <br>
-                 {{stakingDfxApy * 100 | number: "1.1-1"}} % Apy DFX
+                 {{stakingDfxApy * 100 | number: "1.1-1"}} % Apy DFX<br>
+                 {{stakingLockApy * 100| number: "1.1-1"}} % Apy Lock <br>
               </span>
             </span>
           </span>
@@ -149,6 +151,7 @@
               *****
             </span>
             </div>
+
             <div *ngIf="dfiInDfxStaking > 0">
               {{ "balance" | translate}} Dfx
             </div>
@@ -160,6 +163,19 @@
               *****
             </span>
             </div>
+
+            <div *ngIf="dfiInLockStaking > 0">
+              {{ "balance" | translate}} Lock
+            </div>
+            <div *ngIf="dfiInLockStaking > 0">
+              <span *ngIf="!isIncognitoModeOn" class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+              <app-price [fiat]="fiat" [usdPrice]="dfiInLockStaking * poolBtc?.priceB"></app-price>
+            </span>
+              <span *ngIf="isIncognitoModeOn && dfiInLockStaking > 0" class="rounded-full bg-gray-800 hover:bg-pink-500 text-white text-sm px-2 py-1 transition-all cursor-pointer">
+              *****
+            </span>
+            </div>
+
           </h3>
           <br>
           <div class="mt-2">

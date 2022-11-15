@@ -21,7 +21,9 @@ export const environment = {
   mamon_account: 'https://sync.defichain-masternode-monitor.com/v1/KEY/masternodes',
   mamon_account_node: 'https://api.defichain-masternode-monitor.com/v1/masternodes/info/',
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
-  version: '9.9.4',
+  lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
+  lockStats: 'https://api.lock.space/v1/analytics/staking',
+  version: '9.10.10',
   graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

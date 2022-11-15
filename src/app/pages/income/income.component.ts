@@ -210,10 +210,16 @@ export class IncomeComponent implements OnInit, OnChanges {
   dfiInDfxStaking!: number;
 
   @Input()
+  dfiInLockStaking!: number;
+
+  @Input()
   stakingApy!: number;
 
   @Input()
   stakingDfxApy!: number;
+
+  @Input()
+  stakingLockApy!: number;
 
   @Input()
   masternodesApr!: number;

@@ -1123,7 +1123,7 @@ export class Wallet {
   usoInUsoPool = 0;
   usoInUsoPoolKey = 'usoInUsoPoolKey';
   uso = 0;
-  usoKey = 'ungKey';
+  usoKey = 'usoKey';
   usdInUsoPoolKey = 'usdInUsoPoolKey';
   usdInUsoPool = 0;
 

@@ -7,6 +7,15 @@ export class Share {
   apy: number;
 }
 
+export class LockStaking {
+  staking: LockStakingPart [];
+}
+
+export class LockStats {
+  apr: number;
+  apy: number;
+}
+
 export class DfxStaking {
   staking: Staking;
 }
@@ -15,6 +24,11 @@ export class Staking {
   masternodes: number;
   yield: StakingNumbers;
 }
+
+export class LockStakingPart {
+  balance: number;
+}
+
 
 export class StakingNumbers {
   apr: number;

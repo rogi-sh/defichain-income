@@ -86,7 +86,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TokenAccount } from '@interfaces/Supernode';
 import { firstValueFrom } from 'rxjs';
 import { MamonAccountNode } from '@interfaces/Mamon';
-import { DfxStaking, OceanStats } from '@interfaces/Staking';
+import { DfxStaking, LockStats, OceanStats } from '@interfaces/Staking';
 import { Router, NavigationEnd } from '@angular/router';
 import { ChartComponent } from 'ng-apexcharts';
 import { IncomeComponent } from '@pages/income/income.component';
@@ -229,6 +229,7 @@ export class AppComponent implements OnInit {
   // Staking infos
   dfiInStaking = 0;
   dfiInDfxStaking = 0;
+  dfiInLockStaking = 0;
   dfiInStakingKey = 'dfiInStakingKey';
 
   stakingApyCake = 98;
@@ -242,7 +243,7 @@ export class AppComponent implements OnInit {
   stakingApyKey = 'stakingApyKey';
 
   stakingDfx: DfxStaking;
-
+  stakingLockStats: LockStats;
   dfiBurned = 0;
 
   adresses = new Array<string>();
@@ -732,6 +733,7 @@ export class AppComponent implements OnInit {
 
     this.loadStackingCake();
     this.loadStackingDfx();
+
 
     this.loadStackingMasternode();
     this.loadHistoryUser();
@@ -2916,6 +2918,7 @@ export class AppComponent implements OnInit {
              }
           });
 
+          this.loadStackingLock();
           this.loadDex();
           this.loadStackingMasternode();
 
@@ -2974,6 +2977,27 @@ export class AppComponent implements OnInit {
       });
   }
 
+  loadStackingLock(): void {
+
+    this.adresses.forEach(adress => {
+      this.stakingService
+        .getStakingLock(adress).subscribe(
+        lock => {
+          this.dfiInLockStaking += lock[0]?.balance;
+        },
+        err => {
+          console.error('Fehler beim get staking from lock: ' + JSON.stringify(err.message));
+        });
+    });
+    this.stakingService
+      .getStatsLock().subscribe(
+      lock => {
+        this.stakingLockStats = lock;
+      },
+      err => {
+        console.error('Fehler beim get staking stats from lock: ' + JSON.stringify(err.message));
+      });
+  }
 
   async loadDfxStaking(): Promise<void> {
     this.apollo.query({
@@ -4623,17 +4647,23 @@ export class AppComponent implements OnInit {
 
   berechneStakingOut(): void {
     this.stakingOut.dfiPerDay = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 365) - this.dfiInStaking)
-    + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 356);
+    + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 356)
+    + (this.dfiInLockStaking * this.stakingLockStats?.apr / 356);
     this.stakingOut.dfiPerHour = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 8760) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 8760);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 8760)
+      + (this.dfiInLockStaking * this.stakingLockStats?.apr / 8760);
     this.stakingOut.dfiPerMin = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 525600) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 525600);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 525600)
+      + (this.dfiInLockStaking * this.stakingLockStats?.apr / 525600);
     this.stakingOut.dfiPerWeek = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 52.1429) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 52.1429);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 52.1429)
+      + (this.dfiInLockStaking * this.stakingLockStats?.apr / 52.1429);
     this.stakingOut.dfiPerMonth = (this.dfiInStaking * Math.pow(1 + this.stakingApy / 100, 1 / 12) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 12);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr / 12)
+      + (this.dfiInLockStaking * this.stakingLockStats?.apr / 12);
     this.stakingOut.dfiPerYear = (this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr);
+      + (this.dfiInDfxStaking * this.stakingDfx?.staking.yield.apr)
+      + (this.dfiInLockStaking * this.stakingLockStats?.apr);
   }
 
   berechneAllOut(): void {
@@ -6017,7 +6047,7 @@ export class AppComponent implements OnInit {
   getDfiCount(): number {
     return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
       + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool  + this.wallet?.dfiInUsdPool
-      + this.wallet?.dfiInBchPool + this.dfiInStaking + this.dfiInDfxStaking + this.wallet?.dfiInMasternodes;
+      + this.wallet?.dfiInBchPool + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking + this.wallet?.dfiInMasternodes;
 
   }
 
@@ -8158,7 +8188,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiForAverageAPR(): number {
-    return this.getDfiCountInLM() * 2 + this.dfiInStaking + this.dfiInDfxStaking + this.getDfiCountMn();
+    return this.getDfiCountInLM() * 2 + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking + this.getDfiCountMn();
   }
 
   getDfiCountMn(): number {
