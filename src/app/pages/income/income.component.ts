@@ -629,7 +629,7 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getDfiCountStakingUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.poolBtc?.priceB;
   }
 
   getDfiCountMasternodesUsd(): number {

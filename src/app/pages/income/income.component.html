@@ -112,16 +112,16 @@
           >
             <span class="text-l dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
-                {{isIncognitoModeOn ? '****' : dfiInStaking | number: "1.2-2"}} Cake <br>
-                {{isIncognitoModeOn ? '****' : dfiInDfxStaking  | number: "1.2-2"}} DFX<br>
-                {{isIncognitoModeOn ? '****' : dfiInLockStaking  | number: "1.2-2"}} Lock
+                <span *ngIf="dfiInStaking > 0">{{isIncognitoModeOn ? '****' : dfiInStaking | number: "1.2-2"}} Cake <br></span>
+                <span *ngIf="dfiInDfxStaking > 0">{{isIncognitoModeOn ? '****' : dfiInDfxStaking  | number: "1.2-2"}} DFX<br></span>
+                <span *ngIf="dfiInLockStaking > 0">{{isIncognitoModeOn ? '****' : dfiInLockStaking  | number: "1.2-2"}} Lock</span>
               </span>
             </span>
             <span class="text-l dark:text-gray-100">
                <span class="text-pink-500 font-semibold">
-                {{stakingApy | number: "1.1-1"}} % Apy Cake <br>
-                 {{stakingDfxApy * 100 | number: "1.1-1"}} % Apy DFX<br>
-                 {{stakingLockApy * 100| number: "1.1-1"}} % Apy Lock <br>
+                 <span *ngIf="dfiInStaking > 0"> {{stakingApy | number: "1.1-1"}} % Apy Cake <br></span>
+                 <span *ngIf="dfiInDfxStaking > 0">{{stakingDfxApy * 100 | number: "1.1-1"}} % Apy DFX<br></span>
+                 <span *ngIf="dfiInLockStaking > 0">{{stakingLockApy * 100| number: "1.1-1"}} % Apy Lock <br></span>
               </span>
             </span>
           </span>

@@ -32,6 +32,9 @@ export class ValueComponent implements OnInit, OnChanges {
   dfiInDfxStaking!: number;
 
   @Input()
+  dfiInLockStaking!: number;
+
+  @Input()
   fiat!: string;
 
   @Input()
@@ -1065,7 +1068,7 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCount(): number {
     return this.wallet.dfi + this.wallet.dfiInEthPool + this.wallet.dfiInBtcPool + this.wallet.dfiInUsdtPool + this.wallet.dfiInUsdcPool
       + this.wallet.dfiInLtcPool + this.wallet.dfiInDogePool + this.wallet.dfiInBchPool + this.wallet.dfiInUsdPool
-      + this.dfiInStaking + this.dfiInDfxStaking + this.wallet.dfiInMasternodes + this.getCollateralCountVaults('DFI');
+      + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking + this.wallet.dfiInMasternodes + this.getCollateralCountVaults('DFI');
   }
 
   getAnteilStakingOfAllValue(): number {
@@ -1077,7 +1080,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getStakingValueUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking) * this.getPool('BTC')?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.getPool('BTC')?.priceB;
   }
 
   getAnteilLMOfAllValue(): number {

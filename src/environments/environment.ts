@@ -23,7 +23,7 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking',
-  version: '9.10.10',
+  version: '9.10.1',
   graphql: 'https://next.graphql.defichain-income.com/graphql',
   // Matomo
   // No tracking for local -> wrong id

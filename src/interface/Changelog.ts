@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '9.10.1 - 15.11.2022';
+    this.log.comment = 'Fix value view for lock stacking';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '9.10.0 - 15.11.2022';
     this.log.comment = 'Integration of Lock.space Staking provider';
     this.logs.push(this.log);
