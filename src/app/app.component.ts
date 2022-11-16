@@ -1714,6 +1714,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem(this.loggedInKey);
     this.wallet = new Wallet();
     this.dfiInStaking = 0;
+    this.dfiInLockStaking = 0;
     this.adresses = [];
     localStorage.removeItem(this.adressesKey);
     localStorage.removeItem(this.adressesMasternodesKey);
@@ -2978,7 +2979,7 @@ export class AppComponent implements OnInit {
   }
 
   loadStackingLock(): void {
-
+    this.dfiInLockStaking = 0;
     this.adresses.forEach(adress => {
       this.stakingService
         .getStakingLock(adress).subscribe(
