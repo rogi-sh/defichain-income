@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '@environments/environment';
-import { CakeStaking, DfxStaking, LockStaking, LockStats, OceanStats } from '@interfaces/Staking'
+import { CakeStaking, DfxStaking, LockStakingPart, LockStats, OceanStats } from '@interfaces/Staking';
 
 
 @Injectable({
@@ -21,8 +21,8 @@ export class StakingService {
     return this.http.get<DfxStaking>(environment.dfx);
   }
 
-  public getStakingLock(address: string): Observable<LockStaking> {
-    return this.http.get<LockStaking>(environment.lock + address);
+  public getStakingLock(address: string): Observable<LockStakingPart []> {
+    return this.http.get<LockStakingPart []>(environment.lock + address);
   }
 
   public getStatsLock(): Observable<LockStats> {

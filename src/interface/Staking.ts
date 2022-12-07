@@ -7,10 +7,6 @@ export class Share {
   apy: number;
 }
 
-export class LockStaking {
-  staking: LockStakingPart [];
-}
-
 export class LockStats {
   apr: number;
   apy: number;
@@ -27,6 +23,7 @@ export class Staking {
 
 export class LockStakingPart {
   balance: number;
+  asset: string;
 }
 
 

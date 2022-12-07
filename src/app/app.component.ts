@@ -2984,10 +2984,10 @@ export class AppComponent implements OnInit {
       this.stakingService
         .getStakingLock(adress).subscribe(
         lock => {
-          this.dfiInLockStaking += lock[0]?.balance;
+          const dfiInStaking = lock.find(l => l.asset === 'DFI');
+          this.dfiInLockStaking += dfiInStaking.balance;
         },
         err => {
-          console.error('Fehler beim get staking from lock: ' + JSON.stringify(err.message));
         });
     });
     this.stakingService
