@@ -10,6 +10,8 @@ export class Share {
 export class LockStats {
   apr: number;
   apy: number;
+  tvl: number;
+  operatorCount: number;
 }
 
 export class DfxStaking {

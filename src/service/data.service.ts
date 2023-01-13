@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
-import { AddressVaults, Currencies, USD } from '@interfaces/Data';
+import {Currencies, Income, USD } from '@interfaces/Data'
 import {Observable} from 'rxjs';
-import {TokenAccount} from '@interfaces/Supernode';
 import {MamonAccountNode} from '@interfaces/Mamon';
 
 @Injectable({
@@ -57,21 +56,6 @@ export class DataService {
     this.usd = promise.usd;
   }
 
-  public getAdressTokens(address: string): Observable<any>  {
-    const url = environment.account_tokens.replace('ADDRESS', address);
-    return this.http.get<any>(url);
-  }
-
-  public getAdressBalance(address: string): Observable<any>  {
-    const url = environment.account_balance.replace('ADDRESS', address);
-    return this.http.get<any>(url);
-  }
-
-  public getAddressVaults(address: string): Observable<AddressVaults>  {
-    const url = environment.address_vaults.replace('ADDRESS_VAULTS', address);
-    return this.http.get<AddressVaults>(url);
-  }
-
   public getMamonAccount(key: string): Observable<any>  {
     const url = environment.mamon_account.replace('KEY', key);
     return this.http.get<any>(url);
@@ -79,6 +63,13 @@ export class DataService {
 
   public getMamonAccountNode(key: string): Observable<MamonAccountNode> {
     return this.http.get<MamonAccountNode>(environment.mamon_account_node + key);
+  }
+
+  public getIncome(addresses: string []): Observable<Income> {
+    const body = {
+      addresses: addresses
+    }
+    return this.http.post<Income>(environment.income, body);
   }
 
   getPrice(fiat: string): number {
@@ -110,6 +101,32 @@ export class DataService {
       return this.getEthUsd();
     } else if (fiat === 'DFI') {
       return this.getDfiUsd();
+    }
+  }
+
+  getColor(pool: number): string {
+    if (pool === 5) {
+      return '#ff9900';
+    } else if (pool === 4) {
+      return '#3c3c3d';
+    } else if (pool === 10) {
+      return '#b8b8b8';
+    } else if (pool === 6) {
+      return '#26a17b';
+    } else if (pool === 101) {
+      return '#26a17b';
+    } else if (pool === 14) {
+      return '#2875C9';
+    } else if (pool === 102) {
+      return '#2875C9';
+    } else if (pool === 8) {
+      return '#cb9800';
+    } else if (pool === 12 ) {
+      return '#4CC947';
+    } else if (pool === 17) {
+     return '#6B8068';
+    } else {
+      return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
     }
   }
 }

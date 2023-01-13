@@ -1160,13 +1160,11 @@ export class PoolIncomeValue {
   anteil: number;
   pool: Pool;
   poolOut: Outcome;
-  blockReward: number;
 
-  constructor(anteil: number, pool: Pool, poolOut: Outcome, blockReward: number) {
+  constructor(anteil: number, pool: Pool, poolOut: Outcome) {
     this.anteil = anteil;
     this.pool = pool;
     this.poolOut = poolOut;
-    this.blockReward = blockReward;
   }
 }
 
@@ -1228,4 +1226,92 @@ export class PriceHistory {
 export class UserHistoryDelete {
   toDelete: boolean;
   historyItem: UserHistoryItem;
+}
+
+export class IncomeHoldings {
+  amount:  number;
+  usd:  number;
+  price:  number;
+  symbolKey: string
+  symbol: string
+  id:  number;
+  isLps: boolean;
+  isDat: boolean;
+  isLoanToken: boolean;
+}
+
+export class IncomePoolIncome {
+  name: string;
+  share: number;
+  id: number;
+  token_A_Amount: number;
+  token_B_Amount: number;
+  token_A_Id: number;
+  token_B_Id: number;
+  tokensAmount: number;
+  amountInUsd: number;
+  apr: number;
+  aprReward: number;
+  aprCommission: number;
+  usdIncomeYear: number;
+  dfiIncomeYear: number;
+}
+
+export class IncomeVault {
+  id: string;
+  state: string;
+  collateralValue: number;
+  interestUsdValue: number;
+  loanValue: number;
+  vaultRatio: number;
+  nextVaultRation: number;
+}
+
+export class Income {
+
+  totalValueLM: number;
+  totalValueCollateral: number;
+  totalValueWallet: number;
+  totalValueLoan: number;
+  totalValueInterest: number;
+  totalValue: number;
+  holdings: IncomeHoldings[];
+  poolIncome: IncomePoolIncome[];
+  rewards: {
+    year: {
+      usd: number;
+      dfi: number;
+    },
+    month: {
+      usd: number;
+      dfi: number;
+    },
+    week: {
+      usd: number;
+      dfi: number;
+    },
+    day: {
+      usd: number;
+      dfi: number;
+    },
+    hour: {
+      usd: number;
+      dfi: number;
+    },
+    min: {
+      usd: number;
+      dfi: number;
+    }
+  };
+  avgApr: number;
+  apyDaily: number;
+  apyWeekly: number;
+  aprAvgOfAllPools: number;
+  dfiPriceOracle: number;
+  dfiPriceDUSDPool: number;
+  dfiPriceBTCPool: number;
+  dUSD: number;
+  nextOraclePriceBlocks: number;
+  nextOraclePriceTimeInMin: number;
+  vaults: IncomeVault[];
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Outcome, Pool, PoolEemOut, PoolPair } from '@interfaces/Dex';
+import { Outcome, Pool, PoolPair } from '@interfaces/Dex';
 import { PoolPairsOcean } from '@interfaces/Data';
 
 @Component({
@@ -16,9 +16,6 @@ export class PoolIncomeComponent implements OnInit {
 
   @Input()
   pool: Pool;
-
-  @Input()
-  dfiProBlock: number;
 
   @Input()
   anteilAmPool: number;
