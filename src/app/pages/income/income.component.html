@@ -97,7 +97,7 @@
       </div>
 
       <div class="rounded p-2 bg-gray-100 dark:bg-gray-600" *ngIf="selectedTab === 'Staking'">
-        <div *ngIf="dfiInStaking === 0 && dfiInDfxStaking === 0 || dfiInLockStaking === 0" class="dark:text-gray-100">
+        <div *ngIf="dfiInStaking === 0 && dfiInDfxStaking === 0 && dfiInLockStaking === 0" class="dark:text-gray-100">
           {{ "noStakingAvailable" | translate }}
         </div>
         <div *ngIf="dfiInStaking > 0 || dfiInDfxStaking > 0 || dfiInLockStaking > 0">
@@ -239,7 +239,7 @@
 
       <div class="rounded p-2 bg-gray-100 dark:bg-gray-600" *ngIf="selectedTab === 'MN'">
         <div *ngIf="wallet?.dfiInMasternodes < 1">
-          {{ "noStakingAvailable" | translate }}
+          {{ "noMasternodeAvailable" | translate }}
         </div>
         <div *ngIf="wallet?.dfiInMasternodes > 0">
 

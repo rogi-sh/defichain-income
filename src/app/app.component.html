@@ -207,14 +207,14 @@
             <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
           </a>
 
-          <a
+          <!-- <a
             (click)="handlePage('forecast')"
             [ngClass]="{ 'text-pink-500': currentPage === 'forecast' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
           >
             <app-icon name="world"></app-icon>
             <div class="inline self-center ml-2 text-xl">{{ 'forecast.title' | translate }}</div>
-          </a>
+          </a>-->
 
           <a
             (click)="handlePage('history')"
@@ -362,14 +362,16 @@
             <app-icon name="income"></app-icon>
           </a>
 
-          <a
+          <!--<a
             (click)="handlePage('forecast')"
             [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 py-3 text-center cursor-pointer"
             title="{{ 'forecast.title' | translate }}"
           >
             <app-icon name="world"></app-icon>
-          </a>
+          </a>-->
+
+
 
           <a
             (click)="handlePage('history')"
@@ -549,8 +551,6 @@
                                  [poolOut]='l.poolOut'
                                  [poolBtc]='poolBtc'
                                  [anteilAmPool]='l.anteil'
-
-                                 [dfiProBlock]='l.blockReward'
                                  [fiat]='fiat'
                                  [isIncognitoModeOn]=isIncognitoModeOn
                 ></app-pool-income>
@@ -605,64 +605,8 @@
                   [lmOut]="lmOut"
                   [bs]="blocktimeInS"
                   [fiat]="fiat"
-                  [poolBtc]="poolBtc"
-                  [poolEth]="poolEth"
-                  [poolUsdc]="poolUsdc"
-                  [poolBch]="poolBch"
-                  [poolDoge]="poolDoge"
-                  [poolUsdt]="poolUsdt"
-                  [poolLtc]="poolLtc"
                   [poolUsd]='poolUsd'
-                  [poolTsla]='poolTsla'
-                  [poolAapl]='poolAapl'
-                  [poolArkk]='poolArkk'
-                  [poolBaba]='poolBaba'
-                  [poolGld]='poolGld'
-                  [poolGme]='poolGme'
-                  [poolGoogl]='poolGoogl'
-                  [poolPdbc]='poolPdbc'
-                  [poolPltr]='poolPltr'
-                  [poolQqq]='poolQqq'
-                  [poolSlv]='poolSlv'
-                  [poolSpy]='poolSpy'
-                  [poolTlt]='poolTlt'
-                  [poolUrth]='poolUrth'
-                  [poolVnq]='poolVnq'
-                  [poolEem]='poolEem'
-                  [poolCoin]='poolCoin'
-                  [poolNvda]='poolNvda'
-                  [poolAmzn]='poolAmzn'
-                  [poolMsft]='poolMsft'
-                  [poolNflx]='poolNflx'
-                  [poolFb]='poolFb'
-                  [poolVoo]='poolVoo'
-                  [poolIntc]='poolIntc'
-                  [poolMstr]='poolMstr'
-                  [poolMchi]='poolMchi'
-                  [poolDis]='poolDis'
-                  [poolBrkb]='poolBrkb'
-                  [poolPypl]='poolPypl'
-                  [poolKo]='poolKo'
-                  [poolPg]='poolPg'
-                  [poolSap]='poolSap'
-                  [poolUra]='poolUra'
-                  [poolCs]='poolCs'
-                  [poolGsg]='poolGsg'
-                  [poolPplt]='poolPplt'
-                  [poolXom]='poolXom'
-                  [poolTan]='poolTan'
-                  [poolGovt]='poolGovt'
-                  [poolWmt]='poolWmt'
-                  [poolUso]='poolUso'
-                  [poolUng]='poolUng'
-                  [poolUl]='poolUl'
-                  [poolJnj]='poolJnj'
-                  [poolGs]='poolGs'
-                  [poolDax]='poolDax'
-                  [poolAddyy]='poolAddyy'
-                  [poolUsdcDusd]='poolUsdUsdc'
-                  [poolUsdtDusd]='poolUsdUsdt'
-                  [wallet]="wallet"
+                  [poolBtc]='poolBtc'
                   [isIncognitoModeOn]="isIncognitoModeOn"
                   [blockHeight]="rewards?.blockHeight"
                   [apyCake]="stakingApy"
@@ -1371,7 +1315,7 @@
                     [fiat]="fiat"
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
-                    [dfiInStaking]="dfiInStaking"
+                    [dfiInStaking]="wallet.dfiInStaking"
                     [dfiInDfxStaking]='dfiInDfxStaking'
                     [dfiInLockStaking]='dfiInLockStaking'
                     [stakingLockApy]='stakingLockStats?.apy'

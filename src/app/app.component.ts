@@ -2071,32 +2071,9 @@ export class AppComponent implements OnInit {
       this.poolUsd?.totalLiquidityUsd / 2 / +this.poolUsd?.reserveB) * -1 ) / 100;
   }
 
-  getDfiCount(): number {
-    return this.wallet?.dfi + this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool
-      + this.wallet?.dfiInUsdcPool + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool  + this.wallet?.dfiInUsdPool
-      + this.wallet?.dfiInBchPool + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking + this.wallet?.dfiInMasternodes;
-
-  }
-
-  getDfiCountLM(): number {
-    return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
-      + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool + this.wallet?.dfiInUsdPool;
-  }
-
-  getDfiCountLMUsd(): number {
-    return this.getDfiCountLM() * this.poolBtc?.priceB;
-  }
-
-  getDfiCountStakingUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
-  }
 
   getLMUsd(): number {
     return this.income?.totalValueLM;
-  }
-
-  getAnteilStakingOfAllValue(): number {
-    return this.getStakingValueUsd() / this.getAllValuesUsdPrice() * 100;
   }
 
   getStakingValueUsd(): number {
@@ -2113,10 +2090,6 @@ export class AppComponent implements OnInit {
       }
     });
     return dfiAmountInLm;
-  }
-
-  getDfiValueUsd(): number {
-    return this.getDfiCount() * this.poolBtc?.priceB;
   }
 
   allAddresses(): string [] {
@@ -2657,8 +2630,6 @@ export class AppComponent implements OnInit {
     if (!this.wallet || !this.lmOut || !this.stakingOut || !this.poolMasternodeOut) {
       return 0;
     }
-
-    console.log("berechne avg")
 
     // calculate how much income all
     const allIncome = this.lmOut.dfiPerYear + this.stakingOut.dfiPerYear + this.poolMasternodeOut.dfiPerYear;
