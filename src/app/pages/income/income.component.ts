@@ -161,7 +161,7 @@ export class IncomeComponent implements OnInit, OnChanges {
       incomeColors.push('#ff00af');
     }
     this.income?.poolIncome.forEach(pool => {
-      incomeColors.push(this.dataService.getColor(pool.id));
+      incomeColors.push(this.dataService.getColorPool(+pool.id));
     })
 
     return incomeColors;

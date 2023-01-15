@@ -19,6 +19,7 @@ import { Outcome, Pool } from './Dex';
 export class Data {
   name: string;
   value: number;
+  id: number;
 }
 
 export class Blocks {
@@ -1234,7 +1235,7 @@ export class IncomeHoldings {
   price:  number;
   symbolKey: string
   symbol: string
-  id:  number;
+  id:  string;
   isLps: boolean;
   isDat: boolean;
   isLoanToken: boolean;
@@ -1243,7 +1244,7 @@ export class IncomeHoldings {
 export class IncomePoolIncome {
   name: string;
   share: number;
-  id: number;
+  id: string;
   token_A_Amount: number;
   token_B_Amount: number;
   token_A_Id: number;
@@ -1276,6 +1277,7 @@ export class Income {
   totalValueInterest: number;
   totalValue: number;
   holdings: IncomeHoldings[];
+  holdingsSplitted: IncomeHoldings[];
   poolIncome: IncomePoolIncome[];
   rewards: {
     year: {

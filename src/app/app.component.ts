@@ -385,7 +385,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 15 seconds */
       this.spinner.hide();
-    }, 15000);
+    }, 30000);
 
     this.updateDescription('meta-data.description');
 
@@ -1624,7 +1624,6 @@ export class AppComponent implements OnInit {
     this.dataService.setEthUsd(this.poolEth?.priceA);
     this.dataService.setDfiUsd(this.poolBtc?.priceB);
 
-    this.dataLoaded = true;
     this.avgApr = this.getAPRAverage();
     if (this.apiOnline) {
       this.update();
@@ -1727,6 +1726,7 @@ export class AppComponent implements OnInit {
           this.loadStackingLock();
           this.loadDex();
           this.loadStackingMasternode();
+          this.dataLoaded = true;
 
         },
         err => {

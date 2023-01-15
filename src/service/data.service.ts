@@ -104,7 +104,7 @@ export class DataService {
     }
   }
 
-  getColor(pool: number): string {
+  getColorPool(pool: number): string {
     if (pool === 5) {
       return '#ff9900';
     } else if (pool === 4) {
@@ -125,6 +125,30 @@ export class DataService {
       return '#4CC947';
     } else if (pool === 17) {
      return '#6B8068';
+    } else {
+      return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+    }
+  }
+
+  getColorToken(tokenId: number): string {
+    if (tokenId === 0) {
+      return '#ff00af';
+    } else if (tokenId === 2) {
+      return '#ff9900';
+    } else if (tokenId === 2) {
+      return '#3c3c3d';
+    } else if (tokenId === 9) {
+      return '#b8b8b8';
+    } else if (tokenId === 3) {
+      return '#26a17b';
+    } else if (tokenId === 13) {
+      return '#2875C9';
+    } else if (tokenId === 7) {
+      return '#cb9800';
+    } else if (tokenId === 11 ) {
+      return '#4CC947';
+    } else if (tokenId === 15) {
+      return '#6B8068';
     } else {
       return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
     }

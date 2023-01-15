@@ -107,9 +107,9 @@
             </div>
           </div>
 
-           <div *ngIf='wallet?.dfiInMasternodes - getFreezerDfiCount() > 0 ' class='text-xl relative'>
+           <div *ngIf='dfiInMasternodes - getFreezerDfiCount() > 0 ' class='text-xl relative'>
             <div class='text-pink-500 font-semibold inline-block overflow-hidden overflow-ellipsis pr-2'>
-              {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes - getFreezerDfiCount() | number: '1.2-2' }}
+              {{isIncognitoModeOn ? '****' : dfiInMasternodes - getFreezerDfiCount() | number: '1.2-2' }}
               <br />
               <div
                 class='text-xs text-gray-400'
@@ -298,13 +298,13 @@
     <h3 class='text-lg font-bold mb-2'>{{ 'holdings.wallet' | translate }} Wallet</h3>
     <div class='grid grid-flow-row grid-cols-2 auto-rows-max gap-2'>
       <div>
-        <div *ngIf='wallet?.dfi > 0'>DFI</div>
-        <div *ngIf='wallet?.dfi > 0'>
+        <div *ngIf='getDfiCountWallet() > 0'>DFI</div>
+        <div *ngIf='getDfiCountWallet() > 0'>
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
-            <div *ngIf='!isIncognitoModeOn'>{{wallet?.dfi | number: '1.3-3'}} ~
+            <div *ngIf='!isIncognitoModeOn'>{{getDfiCountWallet() | number: '1.3-3'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='wallet?.dfi * getPool("BTC")?.priceB'></app-price>
+                         [usdPrice]='getDfiCountWallet() * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
@@ -350,13 +350,13 @@
         </div>
       </div>
       <div>
-        <div *ngIf='wallet?.dfiInMasternodes > 0'>DFI in Masternodes</div>
-        <div *ngIf='wallet?.dfiInMasternodes > 0'>
+        <div *ngIf='dfiInMasternodes > 0'>DFI in Masternodes</div>
+        <div *ngIf='dfiInMasternodes > 0'>
           <div
             class='inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer text-center'>
-            <div *ngIf='!isIncognitoModeOn'>{{wallet?.dfiInMasternodes  | number: '1.1-1'}} ~
+            <div *ngIf='!isIncognitoModeOn'>{{dfiInMasternodes  | number: '1.1-1'}} ~
               <app-price *ngIf='!isIncognitoModeOn' [fiat]='fiat'
-                         [usdPrice]='wallet?.dfiInMasternodes * getPool("BTC")?.priceB'></app-price>
+                         [usdPrice]='dfiInMasternodes * getPool("BTC")?.priceB'></app-price>
             </div>
             <div *ngIf='isIncognitoModeOn'>****</div>
           </div>
