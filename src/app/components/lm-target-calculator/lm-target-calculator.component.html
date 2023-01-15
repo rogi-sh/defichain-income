@@ -10,68 +10,16 @@
           class="bg-gray-100 h-10 px-3 py-2 rounded-md w-40 mr-2 dark:bg-gray-700 dark:text-gray-100 mb-2"
           (change)="onChangeLmCalculationTargetPool($event.target.value)"
         >
-          <option selected>BTC</option>
-          <option>ETH</option>
-          <option>LTC</option>
-          <option>USDT</option>
-          <option>USDC</option>
-          <option>USDT-DUSD</option>
-          <option>USDC-DUSD</option>
-          <option>DUSD</option>
-          <option>DOGE</option>
-          <option>BCH</option>
-          <option>TSLA</option>
-          <option>SPY</option>
-          <option>QQQ</option>
-          <option>PLTR</option>
-          <option>SLV</option>
-          <option>AAPL</option>
-          <option>GLD</option>
-          <option>GME</option>
-          <option>GOOGL</option>
-          <option>ARKK</option>
-          <option>BABA</option>
-          <option>VNQ</option>
-          <option>URTH</option>
-          <option>TLT</option>
-          <option>PDBC</option>
-          <option>AMZN</option>
-          <option>NVDA</option>
-          <option>COIN</option>
-          <option>EEM</option>
-          <option>MSFT</option>
-          <option>NFLX</option>
-          <option>FB</option>
-          <option>VOO</option>
-          <option>DIS</option>
-          <option>MCHI</option>
-          <option>MSTR</option>
-          <option>INTC</option>
-          <option>PYPL</option>
-          <option>BRK.B</option>
-          <option>KO</option>
-          <option>PG</option>
-          <option>SAP</option>
-          <option>URA</option>
-          <option>CS</option>
-          <option>GSG</option>
-          <option>PPLT</option>
-          <option>GOVT</option>
-          <option>TAN</option>
-          <option>XOM</option>
-          <option>JNJ</option>
-          <option>ADDYY</option>
-          <option>GS</option>
-          <option>DAX</option>
-          <option>WMT</option>
-          <option>UL</option>
-          <option>UNG</option>
-          <option>USO</option>
+          <option *ngFor='let token of getToken()'
+                  [selected]="poolSelected === token"
+                  [value]="token">
+            {{token}}
+          </option>
         </select>
       </div>
 
       <p class="text-xs mt-1 text-gray-600 dark:text-gray-300">
-        {{ 'target-reward-sub-lm' | translate }} pool {{poolLmCalculationTargetReturn}} apr {{pool?.apr | number: '1.1-1'}} %
+        {{ 'target-reward-sub-lm' | translate }} pool {{poolSelected}} apr {{pool?.apr | number: '1.1-1'}} %
       </p>
 
       <div class="mt-5 grid grid-cols-2 grid-rows-4 gap-4">
