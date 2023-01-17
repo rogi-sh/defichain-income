@@ -526,11 +526,11 @@ export class ValueComponent implements OnInit, OnChanges {
   getFreezerDfiCount(): number {
     let dfi = 0;
     this.freezer5?.forEach(a => {
-      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+      dfi += 20000;
     });
 
     this.freezer10?.forEach(a => {
-      dfi += this.adressBalances.find(p => p.address === a)?.dfiCoins;
+      dfi += 20000;
     });
 
     return dfi;

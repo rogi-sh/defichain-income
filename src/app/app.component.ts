@@ -121,6 +121,7 @@ export class AppComponent implements OnInit {
   dfiInStaking = 0;
   dfiInDfxStaking = 0;
   dfiInLockStaking = 0;
+  dfiInMasternodes = 0;
   dfiInStakingKey = 'dfiInStakingKey';
 
   dfiPorBlockStock = 50;
@@ -379,12 +380,14 @@ export class AppComponent implements OnInit {
 
   async loadData(): Promise<void> {
 
-    await this.spinner.show();
+    if (this.allAddresses().length > 1) {
+      await this.spinner.show();
 
-    setTimeout(() => {
-      /** spinner ends after 15 seconds */
-      this.spinner.hide();
-    }, 30000);
+      setTimeout(() => {
+        /** spinner ends after 15 seconds */
+        this.spinner.hide();
+      }, 30000);
+    }
 
     this.updateDescription('meta-data.description');
 
@@ -1677,7 +1680,7 @@ export class AppComponent implements OnInit {
 
     this.poolIncomeList = new Array<PoolIncomeValue>();
 
-    this.income.poolIncome.forEach(poolIncome => {
+    this.income?.poolIncome?.forEach(poolIncome => {
 
       const poolOut = new Outcome()
 
@@ -1694,26 +1697,6 @@ export class AppComponent implements OnInit {
     });
 
   }
-
-  getCommission(pool: Pool): number {
-    let commission = 0;
-
-    if (pool === undefined || pool === null) {
-      return commission;
-    }
-    // commission computed on 24h volume and converted in dfi per block
-    const poolVolumen24 = this.poolPairsOcean?.data.find(p => p.id === pool.id)?.volume.h24;
-    const dfiPriceDex = this.poolBtc.priceB;
-    commission = poolVolumen24 * 0.002 / dfiPriceDex / 2880;
-
-    return commission;
-  }
-
-  getRewardIsOn(pool: Pool): boolean {
-    return this.poolPairsOcean?.data.find(p => p.id === pool.id)?.apr.reward > 0;
-
-  }
-
 
   loadAllAccounts(): void {
 
@@ -1814,6 +1797,7 @@ export class AppComponent implements OnInit {
 
   loadStackingMasternode(): void {
 
+     this.dfiInMasternodes = 0;
      this.masternodeCount5Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 260).count;
      this.masternodeCount10Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 520).count;
      this.masternodeCount0Freezer = this.oceanStats.data.masternodes.locked.find(p => p.weeks === 0).count;
@@ -1826,8 +1810,17 @@ export class AppComponent implements OnInit {
 
   }
 
-  getAddressBalance(address: string): AddressBalance {
-    return this.adressBalances.find(a => a.address === address);
+
+  getAddressMasternode(address: string): boolean {
+    return this.adressesMasternodes.includes(address);
+  }
+
+  getAddressMasternode5(address: string): boolean {
+    return this.adressesMasternodesFreezer5.includes(address);
+  }
+
+  getAddressMasternode10(address: string): boolean {
+    return this.adressesMasternodesFreezer10.includes(address);
   }
 
   onChangeDfiStaking(): void {
@@ -1844,11 +1837,6 @@ export class AppComponent implements OnInit {
   getPoolOcean(id: string): PoolPairOcean {
     return this.poolPairsOcean.data.find(x => x.id === id);
   }
-
-  private getDfiPerMin(dfiProBlock: number): number {
-    return dfiProBlock / this.blocktimeInS * 60;
-  }
-
 
   berechneStakingOut(): void {
 
@@ -1900,6 +1888,8 @@ export class AppComponent implements OnInit {
     reward += countNormal * 20000 * this.stakingApyMN / 100;
     reward += countFreezer5 * 20000 * this.stakingApyMN / 100 * 1.5;
     reward += countFreezer10 * 20000 * this.stakingApyMN / 100 * 2;
+
+    this.dfiInMasternodes = (countFreezer5 + countFreezer10 + countNormal) * 20000;
 
     return reward;
   }

@@ -25,7 +25,7 @@
 
     <div class="order-1 lg:order-2">
       <div class="grid grid-flow-col select-none mb-4"
-           [ngClass]="wallet?.dfiInMasternodes > 0 ? 'grid-cols-4 ':  'grid-cols-3'">
+           [ngClass]="dfiInMasternodes > 0 ? 'grid-cols-4 ':  'grid-cols-3'">
         <a
           (click)="handleTab('All')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2"
@@ -48,7 +48,7 @@
           <span class="sm:hidden">LM</span>
           <span class="hidden sm:block">Liquidity Mining</span>
         </a>
-        <a *ngIf="wallet?.dfiInMasternodes > 0"
+        <a *ngIf="dfiInMasternodes > 0"
           (click)="handleTab('MN')"
           class="flex items-center justify-center text-center cursor-pointer border-b-2 border-transparent uppercase pb-2 overflow-hidden overflow-ellipsis flow-root"
           [ngClass]="selectedTab === 'MN' ? 'text-pink-500 border-pink-500':  'dark:text-gray-100'"
@@ -79,7 +79,7 @@
               </span>
               LM
             </span>
-            <span *ngIf="wallet?.dfiInMasternodes" class="text-xl dark:text-gray-100">
+            <span *ngIf="dfiInMasternodes" class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
                 {{getAnteilMasternodeOfIncome() | number: "1.1-1"}} %
               </span>
@@ -238,10 +238,10 @@
       </div>
 
       <div class="rounded p-2 bg-gray-100 dark:bg-gray-600" *ngIf="selectedTab === 'MN'">
-        <div *ngIf="wallet?.dfiInMasternodes < 1">
+        <div *ngIf="dfiInMasternodes < 1">
           {{ "noMasternodeAvailable" | translate }}
         </div>
-        <div *ngIf="wallet?.dfiInMasternodes > 0">
+        <div *ngIf="dfiInMasternodes > 0">
 
           <h3 class="text-lg font-semibold mt-4 mb-1 dark:text-gray-100">
             {{ "balance" | translate }}
@@ -252,15 +252,9 @@
             class="grid grid-flow-row auto-rows-max grid-cols-3 lg:gap-2 gap-6 border-b pb-2">
             <span class="text-xl dark:text-gray-100">
               <span class="text-pink-500 font-semibold">
-                {{isIncognitoModeOn ? '****' : wallet?.dfiInMasternodes | number: "1.2-2"}}
+                {{isIncognitoModeOn ? '****' : dfiInMasternodes | number: "1.2-2"}}
               </span>
               Total
-            </span>
-             <span class="text-xl dark:text-gray-100">
-              <span class="text-pink-500 font-semibold">
-                {{isIncognitoModeOn ? '****' : getBalanceMasternode() | number: "1.2-2"}}
-              </span>
-              Balance
             </span>
             <span class="text-xl dark:text-gray-100">
                <span class="text-pink-500 font-semibold">

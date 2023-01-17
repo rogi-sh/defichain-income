@@ -46,6 +46,9 @@ export class IncomeComponent implements OnInit, OnChanges {
   dfiInLockStaking!: number;
 
   @Input()
+  dfiInMasternodes!: number;
+
+  @Input()
   stakingApy!: number;
 
   @Input()
@@ -65,9 +68,6 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   getLMUsd: number;
-
-  @Input()
-  wallet: Wallet;
 
   @Input()
   showOnlyGraph: boolean;
@@ -143,11 +143,11 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getDfiCountMasternodesUsd(): number {
-    return this.wallet.dfiInMasternodes * this.poolBtc?.priceB;
+    return this.dfiInMasternodes * this.poolBtc?.priceB;
   }
 
   getBalanceMasternode(): number {
-    return this.wallet.dfiInMasternodes - 20000 * this.masternodesCount;
+    return this.dfiInMasternodes - 20000 * this.masternodesCount;
   }
 
   getColorsIncome(): Array<string> {

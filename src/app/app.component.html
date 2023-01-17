@@ -465,7 +465,7 @@
                     [dfiInStaking]='dfiInStaking'
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [dfiInLockStaking]='dfiInLockStaking'
-                    [dfiInMasternodes]="wallet.dfiInMasternodes"
+                    [dfiInMasternodes]="dfiInMasternodes"
                     [adressBalances]="adressBalances"
                     [freezer5]="adressesMasternodesFreezer5"
                     [freezer10]="adressesMasternodesFreezer10"
@@ -531,7 +531,7 @@
                 [masternodesApr]="stakingApyMN"
                 [masternodesCount]="adressesMasternodes?.length"
                 [masternodeOut]="poolMasternodeOut"
-                [wallet]="wallet"
+                [dfiInMasternodes]="dfiInMasternodes"
                 [getDfiCountInLM]="getDfiCountInLM()"
                 [getLMUsd]="getLMUsd()"
                 [income]='income'
@@ -1264,15 +1264,15 @@
                               [ngClass]="{'bg-gray-200 dark:bg-gray-800': i % 2 === 1, 'bg-gray-100 dark:bg-gray-700': i % 2 === 0}"
                             >
                               <div class="mr-7 my-2 text-white flex flex-col">
-                                <div *ngIf="getAddressBalance(a)?.masternode"
+                                <div *ngIf="getAddressMasternode(a)"
                                     class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline-block rounded-full bg-green-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                     Masternode
                                 </div>
-                                <div *ngIf="getAddressBalance(a)?.freezed5"
+                                <div *ngIf="getAddressMasternode5(a)"
                                     class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                     Freezer 5 Years - 1,5X
                                 </div>
-                                <div *ngIf="getAddressBalance(a)?.freezed10"
+                                <div *ngIf="getAddressMasternode10(a)"
                                     class="my-1 font-bold w-fit-content max-w-full overflow-hidden overflow-ellipsis inline rounded-full bg-blue-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer">
                                     Freezer 10 Years - 2X
                                 </div>
@@ -1315,7 +1315,7 @@
                     [fiat]="fiat"
                     [stakingOut]="stakingOut"
                     [masternodeOut]="poolMasternodeOut"
-                    [dfiInStaking]="wallet.dfiInStaking"
+                    [dfiInStaking]="dfiInStaking"
                     [dfiInDfxStaking]='dfiInDfxStaking'
                     [dfiInLockStaking]='dfiInLockStaking'
                     [stakingLockApy]='stakingLockStats?.apy'
@@ -1323,7 +1323,7 @@
                     [stakingDfxApy]='stakingDfx?.staking?.yield?.apy'
                     [masternodesApr]="stakingApyMN"
                     [masternodesCount]="adressesMasternodes?.length"
-                    [wallet]="wallet"
+                    [dfiInMasternodes]="dfiInMasternodes"
                     [getDfiCountInLM]="getDfiCountInLM()"
                     [getLMUsd]="getLMUsd()"
                     [poolAllOut]='poolAllOut'
@@ -1340,7 +1340,7 @@
                     [dfiInStaking]="dfiInStaking"
                     [dfiInDfxStaking]= 'dfiInDfxStaking'
                     [dfiInLockStaking]='dfiInLockStaking'
-                    [dfiInMasternodes]="wallet.dfiInMasternodes"
+                    [dfiInMasternodes]="dfiInMasternodes"
                     [adressBalances]="adressBalances"
                     [freezer5]="adressesMasternodesFreezer5"
                     [freezer10]="adressesMasternodesFreezer10"
