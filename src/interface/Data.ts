@@ -124,22 +124,20 @@ export class Balance {
   balance: number;
 }
 
-export class AddressVaults {
-  data: Array<Vault>;
-}
-
 export class Vault {
-  vaultId: string;
-  ownerAddress: string;
+  id: string;
   state: string;
-  informativeRatio: string;
-  collateralRatio: string;
-  collateralValue: string;
-  loanValue: string;
-  interestValue: string;
-  collateralAmounts: Array<CollateralAmount>;
-  loanAmounts: Array<LoanAmount>;
-  interestAmounts: Array<LoanAmount>;
+  ownerAddress: string
+  vaultRatio: number;
+  nextVaultRation: number;
+  collateralValue: number;
+  nextCollateralValue: number;
+  nextLoanValue: number;
+  loanValue: number;
+  interestUsdValue: number;
+  collaterals: Array<CollateralAmount>;
+  loans: Array<LoanAmount>;
+  interests: Array<LoanAmount>;
   loanScheme: LoanSchema;
 }
 
@@ -1315,5 +1313,5 @@ export class Income {
   dUSD: number;
   nextOraclePriceBlocks: number;
   nextOraclePriceTimeInMin: number;
-  vaults: IncomeVault[];
+  vaults: Vault[];
 }

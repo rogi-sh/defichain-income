@@ -13,7 +13,6 @@ import {
 } from '@interfaces/Dex'
 import { CountdownComponent } from 'ngx-countdown'
 import {
-  AddressVaults,
   ChartOptions6,
   Income,
   Newsletter,
@@ -161,7 +160,7 @@ export class AppComponent implements OnInit {
   mamonKey: string;
   avgApr = 0;
 
-  vaultsOfAllAddresses = new Array<AddressVaults>();
+  vaultsOfAllAddresses = new Array<Vault>();
 
   oraclePrices: StockOracles = null;
   prices: Prices = null;
@@ -1722,6 +1721,7 @@ export class AppComponent implements OnInit {
     if (this.adresses && this.adresses.length > 0) {
       this.dataService.getIncome(this.adresses).subscribe(results => {
           this.income = results;
+          this.vaultsOfAllAddresses = results.vaults;
           this.setLMOut();
           this.loadStackingLock();
           this.loadDex();
@@ -1824,66 +1824,6 @@ export class AppComponent implements OnInit {
      this.berechneMNOut();
      this.berechneAllOut();
 
-  }
-
-  getAddressForIteration(i: number): string {
-    return this.adresses[i];
-  }
-
-  getMasternodeAddressForIteration(i: number): string {
-    return this.adressesMasternodes[i - this.adresses?.length * 2];
-  }
-
-  addTokenFromVaults(vaultsOfAddress: AddressVaults, address: string): void {
-
-    if (!this.getAddressBalance(address)) {
-      const aB = new AddressBalance();
-      aB.address = address;
-      aB.masternode = false;
-      aB.freezed5 = false;
-      aB.freezed10 = false;
-      this.adressBalances.push(aB);
-    }
-
-    vaultsOfAddress.data.forEach(vault => {
-      vault.collateralAmounts.forEach(col => {
-      switch (col.symbolKey) {
-        case 'DFI': {
-          this.wallet.dfi += +col.amount;
-          this.getAddressBalance(address).dfiTokens += +col.amount;
-          break;
-        }
-        case 'BTC': {
-          this.wallet.btc += +col.amount;
-          this.getAddressBalance(address).btcToken += +col.amount;
-          break;
-        }
-        case 'USDT': {
-          this.wallet.usdt += +col.amount;
-          this.getAddressBalance(address).usdtToken += +col.amount;
-          break;
-        }
-        case 'USDC': {
-          this.wallet.usdc += +col.amount;
-          this.getAddressBalance(address).usdcToken += +col.amount;
-          break;
-        }
-        case 'DUSD': {
-          this.wallet.usd += +col.amount;
-          this.getAddressBalance(address).usdToken += +col.amount;
-          break;
-        }
-        case 'ETH': {
-          this.wallet.eth += +col.amount;
-          this.getAddressBalance(address).ethToken += +col.amount;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-      });
-    });
   }
 
   getAddressBalance(address: string): AddressBalance {
@@ -2032,11 +1972,10 @@ export class AppComponent implements OnInit {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        loan += +this.getLoanFromVaultUsd(addressVault);
-        loan += +addressVault.interestValue;
-      });
-    });
+      loan += +this.getLoanFromVaultUsd(vault)
+      loan += +vault.interestUsdValue
+
+    })
 
     return loan;
   }
@@ -2046,7 +1985,7 @@ export class AppComponent implements OnInit {
     let usd = 0;
     let total = 0;
 
-    vault?.loanAmounts?.forEach(loan => {
+    vault?.loans?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
         usd = +loan.amount;
       } else {

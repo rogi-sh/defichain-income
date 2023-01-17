@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { AddressBalance, Pool, Stats } from '@interfaces/Dex';
 import {
-  AddressVaults,
   ChartOptions,
   Data,
   HoldingValue, Income,
@@ -58,7 +57,7 @@ export class ValueComponent implements OnInit, OnChanges {
   freezer10!: string [];
 
   @Input()
-  vaultsOfAllAddresses!: Array<AddressVaults>;
+  vaultsOfAllAddresses!: Array<Vault>;
 
   @Input()
   autoLoadData: boolean;
@@ -121,10 +120,10 @@ export class ValueComponent implements OnInit, OnChanges {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        loan += +this.getLoanFromVaultUsd(addressVault);
-        loan += +addressVault.interestValue;
-      });
+
+        loan += +this.getLoanFromVaultUsd(vault);
+        loan += +vault.interestUsdValue;
+
     });
 
     return loan;
@@ -139,9 +138,9 @@ export class ValueComponent implements OnInit, OnChanges {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        total += this.getCollateralFromVaultUsd(addressVault);
-      });
+
+        total += this.getCollateralFromVaultUsd(vault);
+
     });
 
     return total;
@@ -154,7 +153,7 @@ export class ValueComponent implements OnInit, OnChanges {
     let usd = 0;
     let total = 0;
 
-    vault?.loanAmounts?.forEach(loan => {
+    vault?.loans?.forEach(loan => {
       if ('DUSD' === loan.symbolKey) {
         usd = +loan.amount;
       } else {
@@ -179,10 +178,6 @@ export class ValueComponent implements OnInit, OnChanges {
     });
 
     return usd + total;
-  }
-
-  getRatioNext(vault: Vault): number {
-    return Math.round(this.getNextCollateralFromVaultUsd(vault) / this.getNextLoanFromVaultUsd(vault) * 100 * 100) / 100;
   }
 
   getBlockToNextOracle(): string {
@@ -213,7 +208,7 @@ export class ValueComponent implements OnInit, OnChanges {
       return 0;
     }
 
-    vault?.collateralAmounts?.forEach(vaultCollaterral => {
+    vault?.collaterals?.forEach(vaultCollaterral => {
       if ('DFI' === vaultCollaterral.symbolKey) {
         dfiInVaults += +vaultCollaterral.amount;
         dfiActualPrice = +vaultCollaterral.activePrice?.active?.amount;
@@ -243,49 +238,6 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.pools?.find(p => p.tokenASymbol === name);
   }
 
-  getNextCollateralFromVaultUsd(vault: Vault): number {
-
-    let dfiInVaults = 0;
-    let dfiNextPrice = 0;
-    let btcInVaults = 0;
-    let btcNextPrice = 0;
-    let ethInVaults = 0;
-    let ethNextPrice = 0;
-    let usdcInVaults = 0;
-    let usdcNextPrice = 0;
-    let usdtInVaults = 0;
-    let usdtNextPrice = 0;
-    let dusdInVaults = 0;
-
-    if (!vault) {
-      return 0;
-    }
-
-    vault?.collateralAmounts?.forEach(vaultCollaterral => {
-      if ('DFI' === vaultCollaterral.symbolKey) {
-        dfiInVaults += +vaultCollaterral.amount;
-        dfiNextPrice = +vaultCollaterral.activePrice?.next?.amount;
-      } else if ('BTC' === vaultCollaterral.symbolKey) {
-        btcInVaults += +vaultCollaterral.amount;
-        btcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
-      } else if ('ETH' === vaultCollaterral.symbolKey) {
-        ethInVaults += +vaultCollaterral.amount;
-        ethNextPrice = +vaultCollaterral.activePrice?.next?.amount;
-      } else if ('USDC' === vaultCollaterral.symbolKey) {
-        usdcInVaults += +vaultCollaterral.amount;
-        usdcNextPrice = +vaultCollaterral.activePrice?.next?.amount;
-      } else if ('USDT' === vaultCollaterral.symbolKey) {
-        usdtInVaults += +vaultCollaterral.amount;
-        usdtNextPrice = +vaultCollaterral.activePrice?.next?.amount;
-      } else if ('DUSD' === vaultCollaterral.symbolKey) {
-        dusdInVaults += +vaultCollaterral.amount;
-      }
-
-    });
-
-    return dfiInVaults * dfiNextPrice + btcInVaults * btcNextPrice + ethInVaults * ethNextPrice
-      + usdcInVaults * usdcNextPrice + usdtInVaults * usdtNextPrice + dusdInVaults * this.dusdFactor;
-  }
 
   getCollateralCountVaults(currency: string): number {
     let curInVaults = 0;
@@ -295,13 +247,13 @@ export class ValueComponent implements OnInit, OnChanges {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        addressVault?.collateralAmounts?.forEach(vaultCollaterral => {
-          if (currency === vaultCollaterral.symbolKey) {
-              curInVaults += +vaultCollaterral.amount;
-          }
-        });
-      });
+
+      vault?.collaterals?.forEach(vaultCollaterral => {
+        if (currency === vaultCollaterral.symbolKey) {
+          curInVaults += +vaultCollaterral.amount
+        }
+      })
+
     });
 
     return curInVaults;
@@ -315,14 +267,14 @@ export class ValueComponent implements OnInit, OnChanges {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        addressVault?.loanAmounts?.forEach(loan => {
-          if (currency === loan.symbolKey) {
-            loanInVaults += +loan.amount;
-          }
-        });
-      });
-    });
+
+      vault?.loans?.forEach(loan => {
+        if (currency === loan.symbolKey) {
+          loanInVaults += +loan.amount
+        }
+
+      })
+    })
 
     return loanInVaults;
   }
@@ -335,14 +287,12 @@ export class ValueComponent implements OnInit, OnChanges {
     }
 
     this.vaultsOfAllAddresses.forEach(vault => {
-      vault.data.forEach(addressVault => {
-        addressVault?.loanAmounts?.forEach(loan => {
-          if (tokens.findIndex(token => token === loan.symbolKey) === -1) {
-            tokens.push(loan.symbolKey);
-          }
-        });
-      });
-    });
+      vault?.loans?.forEach(loan => {
+        if (tokens.findIndex(token => token === loan.symbolKey) === -1) {
+          tokens.push(loan.symbolKey)
+        }
+      })
+    })
 
     return tokens;
   }
@@ -354,26 +304,18 @@ export class ValueComponent implements OnInit, OnChanges {
       return vaults;
     }
 
-    this.vaultsOfAllAddresses.forEach(va => {
-      vaults.push(...va.data);
-    });
+    this.vaultsOfAllAddresses.sort((a, b) => (+a.collateralValue > +b.collateralValue) ? -1 : ((+b.collateralValue > +a.collateralValue) ? 1 : 0));
 
-    vaults.sort((a, b) => (+a.collateralValue > +b.collateralValue) ? -1 : ((+b.collateralValue > +a.collateralValue) ? 1 : 0));
+    return this.vaultsOfAllAddresses;
 
-    return vaults;
-
-  }
-
-  getInterestAmountOfvault(vault: Vault): number {
-    let interest = 0;
-    vault.interestAmounts.forEach( i => {
-      interest += +i.amount;
-    });
-
-    return interest;
   }
 
   getShortOfId(id: string): string {
+
+    if (!id) {
+      return ""
+    }
+
     const first = id.slice(0, 5);
     const last = id.slice(id.length - 5, id.length);
 
