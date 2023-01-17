@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.0.0 - 15.1.2023';
+    this.log.comment = 'Full automatic computation of rewards and income based on server income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '9.10.3 - 7.12.2022';
     this.log.comment = 'Fix lock staking amount';
     this.logs.push(this.log);

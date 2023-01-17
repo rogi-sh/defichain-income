@@ -505,7 +505,6 @@ export class HistoryComponent implements OnInit {
       prices.push(h.price);
     });
 
-    console.log("Anzahl dex preise" + prices.length);
     return prices;
   }
 
@@ -526,13 +525,9 @@ export class HistoryComponent implements OnInit {
             && aDate.getUTCHours() === bDate.getUTCHours();
         }
       );
-      console.log("searched " + new Date(h.date));
-      console.log("Found " + new Date(oracle?.dateTime));
       const endPrice = oracle?.price !== undefined ? oracle?.price : prices[prices.length - 1];
       prices.push(Math.round(endPrice * 100) / 100);
     });
-
-    console.log("Anzahl oracles " + prices.length);
 
     return prices;
   }

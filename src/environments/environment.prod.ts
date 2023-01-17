@@ -1,4 +1,4 @@
-const ocean = 'https://ocean.defichain-income.com';
+const ocean = 'https://ocean.defichain.com';
 
 export const environment = {
   production: true,
@@ -19,10 +19,11 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking',
-  version: '9.10.3',
+  version: '10.0.0',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
   graphql: 'https://next.graphql.defichain-income.com/graphql',
+  income: 'https://next.graphql.defichain-income.com/income',
   // Matomo
   matomoId: 6,
   matomoUrl: 'https://analytics.topiet.de/'

@@ -393,6 +393,19 @@ export class DexStatisticsComponent implements OnInit {
       case 'USO-DUSD': {
         return new StockLongName('United States Oil ETF', 'USO');
       }
+      case 'XLE-DUSD': {
+        return new StockLongName('Energy Select Sector SPDR Fund', 'XLE');
+      }
+      case 'VBK-DUSD': {
+        return new StockLongName('Vanguard Small Cap Growth Index Fund', 'VBK');
+      }
+      case 'ARKX-DUSD': {
+        return new StockLongName('ARK Space Exploration & Innovation ETFP', 'ARKX');
+      }
+      case 'XLRE-DUSD': {
+        return new StockLongName('The Real Estate Select Sector SPDR Fund', 'XLRE');
+      }
+
       default: {
         return new StockLongName('', '');
       }

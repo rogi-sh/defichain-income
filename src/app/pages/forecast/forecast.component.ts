@@ -13,7 +13,7 @@ import {
   PoolAllOut,
 } from '@interfaces/Dex';
 import {ChartComponent} from 'ng-apexcharts';
-import {ChartOptions5, Series, Wallet} from '@interfaces/Data';
+import { ChartOptions5, Income, Series, Wallet } from '@interfaces/Data'
 
 @Component({
   selector: 'app-forecast',
@@ -50,190 +50,28 @@ export class ForecastComponent implements OnInit, OnChanges {
   fiat!: string;
 
   @Input()
-  poolBtc!: Pool;
-
-  @Input()
-  poolEth!: Pool;
-
-  @Input()
-  poolUsdc!: Pool;
-
-  @Input()
-  poolUsdcDusd!: Pool;
-
-  @Input()
-  poolBch!: Pool;
-
-  @Input()
-  poolUsdt!: Pool;
-
-  @Input()
-  poolUsdtDusd!: Pool;
-
-  @Input()
-  poolDoge!: Pool;
-
-  @Input()
-  poolLtc!: Pool;
-
-  @Input()
-  poolUsd!: Pool;
-
-  @Input()
-  poolTsla!: Pool;
-
-  @Input()
-  poolQqq!: Pool;
-
-  @Input()
-  poolSpy!: Pool;
-
-  @Input()
-  poolPltr!: Pool;
-
-  @Input()
-  poolSlv!: Pool;
-
-  @Input()
-  poolAapl!: Pool;
-
-  @Input()
-  poolGld!: Pool;
-
-  @Input()
-  poolGme!: Pool;
-
-  @Input()
-  poolGoogl!: Pool;
-
-  @Input()
-  poolArkk!: Pool;
-
-  @Input()
-  poolBaba!: Pool;
-
-  @Input()
-  poolVnq!: Pool;
-
-  @Input()
-  poolUrth!: Pool;
-
-  @Input()
-  poolTlt!: Pool;
-
-  @Input()
-  poolPdbc!: Pool;
-
-  @Input()
-  poolAmzn!: Pool;
-
-  @Input()
-  poolNvda!: Pool;
-
-  @Input()
-  poolCoin!: Pool;
-
-  @Input()
-  poolEem!: Pool;
-
-  @Input()
-  poolMsft!: Pool;
-
-  @Input()
-  poolNflx!: Pool;
-
-  @Input()
-  poolFb!: Pool;
-
-  @Input()
-  poolVoo!: Pool;
-
-  @Input()
-  poolDis!: Pool;
-
-  @Input()
-  poolMchi!: Pool;
-
-  @Input()
-  poolMstr!: Pool;
-
-  @Input()
-  poolIntc!: Pool;
-
-  @Input()
-  poolPypl!: Pool;
-
-  @Input()
-  poolBrkb!: Pool;
-
-  @Input()
-  poolKo!: Pool;
-
-  @Input()
-  poolPg!: Pool;
-
-  @Input()
-  poolSap!: Pool;
-
-  @Input()
-  poolUra!: Pool;
-
-  @Input()
-  poolCs!: Pool;
-
-  @Input()
-  poolGsg!: Pool;
-
-  @Input()
-  poolPplt!: Pool;
-
-  @Input()
-  poolGovt!: Pool;
-
-  @Input()
-  poolTan!: Pool;
-
-  @Input()
-  poolXom!: Pool;
-
-  @Input()
-  poolJnj!: Pool;
-
-  @Input()
-  poolAddyy!: Pool;
-
-  @Input()
-  poolGs!: Pool;
-
-  @Input()
-  poolDax!: Pool;
-
-  @Input()
-  poolWmt!: Pool;
-
-  @Input()
-  poolUl!: Pool;
-
-  @Input()
-  poolUng!: Pool;
-
-  @Input()
-  poolUso!: Pool;
-
-  @Input()
   blockHeight!: number;
 
   @Input()
   isIncognitoModeOn: boolean;
 
   @Input()
-  wallet!: Wallet;
+  income!: Income;
 
   @Input()
   apyCake!: number;
 
   @Input()
   aprMn!: number;
+
+  @Input()
+  stakingApyMN: number;
+
+  @Input()
+  poolUsd: Pool;
+
+  @Input()
+  poolBtc: Pool;
 
   @Input()
   adressesMasternodes!: Array<string>;
@@ -295,6 +133,48 @@ export class ForecastComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // this.computeMasternodesReduce();
+  }
+
+  getAPRAverage(): number {
+
+    if (!this.lmOut || !this.stakingOut || !this.poolMasternodeOut) {
+      return 0;
+    }
+
+    // calculate how much income all
+    const allIncome = this.lmOut.dfiPerYear + this.stakingOut.dfiPerYear + this.poolMasternodeOut.dfiPerYear;
+
+    // calculate how much income from all pools, staking and masternode
+    const countFreezer5 = this.adressesMasternodesFreezer5.length;
+    const countFreezer10 = this.adressesMasternodesFreezer10.length;
+    const countNormal = this.adressesMasternodes.length - countFreezer5 - countFreezer10;
+
+    const rewardNormaleMnPart = countNormal * 20000 * this.stakingApyMN / allIncome;
+    const reward5MnPart = countFreezer5 * 20000 * this.stakingApyMN * 1.5 / allIncome;
+    const reward10MnPart = countFreezer10 * 20000 * this.stakingApyMN * 2 / allIncome;
+
+    const stakingPart = this.stakingOut?.dfiPerYear / allIncome * 100;
+
+    let lmPart = 0;
+    this.income?.poolIncome.forEach(pool => {
+      const poolPart = pool.dfiIncomeYear / allIncome * 100;
+      const poolApr = poolPart * pool?.apr * 100;
+      lmPart += poolApr;
+    });
+
+    const stakingApr = stakingPart * this.stakingApyMN * 0.85;
+    const normalMnApr = rewardNormaleMnPart * this.stakingApyMN;
+    const fiveFreezerMnApr = reward5MnPart * this.stakingApyMN * 1.5;
+    const tenFreezerMnApr = reward10MnPart * this.stakingApyMN * 2;
+
+    // compute average
+    const average = (lmPart + stakingApr + normalMnApr + fiveFreezerMnApr + tenFreezerMnApr) / 100;
+
+    if (!average) {
+      return 0;
+    }
+
+    return Math.round(average * 100) / 100;
   }
 
   computeMasternodesReduce(): void {
@@ -587,7 +467,7 @@ export class ForecastComponent implements OnInit, OnChanges {
     const oldCyclesDFIReinvest = this.lastCycleReinvestedDfiLm;
     const newAndOld = newReinvestDFIActualCycle + oldCyclesDFIReinvest;
     this.lastCycleReinvestedDfiLm = newAndOld;
-    const dfiiInLm = this.getDfiCountLM() * 2 + newAndOld;
+    const dfiiInLm = this.getDfiCountInLM() * 2 + newAndOld;
 
     const reduction = this.getReduction(i);
     this.lmApy = Math.pow(1 + (this.average * reduction / 100 / this.reinvestPeriod), this.reinvestPeriod) - 1;
@@ -711,134 +591,6 @@ export class ForecastComponent implements OnInit, OnChanges {
     return localStorage.getItem('theme');
   }
 
-  getAPRAverage(): number {
-
-    const dfiInLm = this.getDfiCountLM();
-    const dfiBtcPart = this.wallet?.dfiInBtcPool / dfiInLm;
-    const dfiEthPart = this.wallet?.dfiInEthPool / dfiInLm;
-    const dfiUsdcPart = this.wallet?.dfiInUsdcPool / dfiInLm;
-    const dfiUsdtPart = this.wallet?.dfiInUsdtPool / dfiInLm;
-    const dfiUsdcDusdPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdcDusdPool) / dfiInLm;
-    const dfiUsdtDusdPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdtDusdPool) / dfiInLm;
-    const dfiDogePart = this.wallet?.dfiInDogePool / dfiInLm;
-    const dfiBchPart = this.wallet?.dfiInBchPool / dfiInLm;
-    const dfiLtcPart = this.wallet?.dfiInLtcPool / dfiInLm;
-    const dfiUsdPart = this.wallet?.dfiInUsdPool / dfiInLm;
-
-    const dfiTslaPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTslaPool) / dfiInLm;
-    const dfiQqqPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInQqqPool) / dfiInLm;
-    const dfiSpyPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSpyPool) / dfiInLm;
-    const dfiPltrPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPltrPool) / dfiInLm;
-    const dfiSlvPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSlvPool) / dfiInLm;
-    const dfiAaplPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAaplPool) / dfiInLm;
-    const dfiGldPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGldPool) / dfiInLm;
-    const dfiGmePart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGmePool) / dfiInLm;
-    const dfiGooglPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGooglPool) / dfiInLm;
-    const dfiArkkPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInArkkPool) / dfiInLm;
-    const dfiBabaPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBabaPool) / dfiInLm;
-    const dfiVnqPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVnqPool) / dfiInLm;
-    const dfiUrthPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUrthPool) / dfiInLm;
-    const dfiTltPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTltPool) / dfiInLm;
-    const dfiPdbcPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPdbcPool) / dfiInLm;
-    const dfiAmznPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAmznPool) / dfiInLm;
-    const dfiNvdaPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNvdaPool) / dfiInLm;
-    const dfiCoinPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCoinPool) / dfiInLm;
-    const dfiEemPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInEemPool) / dfiInLm;
-    const dfiMsftPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMsftPool) / dfiInLm;
-    const dfiNflxPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNflxPool) / dfiInLm;
-    const dfiFbPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInFbPool) / dfiInLm;
-    const dfiVooPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVooPool) / dfiInLm;
-    const dfiDisPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDisPool) / dfiInLm;
-    const dfiMchiPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMchiPool) / dfiInLm;
-    const dfiMstrPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMstrPool) / dfiInLm;
-    const dfiIntcPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInIntcPool) / dfiInLm;
-    const dfiPyplPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPyplPool) / dfiInLm;
-    const dfiBrkbPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBrkbPool) / dfiInLm;
-    const dfiKoPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInKoPool) / dfiInLm;
-    const dfiPgPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPgPool) / dfiInLm;
-    const dfiSapPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSapPool) / dfiInLm;
-    const dfiUraPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUraPool) / dfiInLm;
-    const dfiCsPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCsPool) / dfiInLm;
-    const dfiGsgPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsgPool) / dfiInLm;
-    const dfiPpltPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPpltPool) / dfiInLm;
-    const dfiTanPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGovtPool) / dfiInLm;
-    const dfiXomPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTanPool) / dfiInLm;
-    const dfiGovtPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInXomPool) / dfiInLm;
-
-    const dfiJnjPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInJnjPool) / dfiInLm;
-    const dfiAddyyPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAddyyPool) / dfiInLm;
-    const dfiGsPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsPool) / dfiInLm;
-    const dfiDaxPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDaxPool) / dfiInLm;
-
-    const dfiWmtPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInWmtPool) / dfiInLm;
-    const dfiUlPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUlPool) / dfiInLm;
-    const dfiUngPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUngPool) / dfiInLm;
-    const dfiUsoPart = this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUsoPool) / dfiInLm;
-
-    // Anteile berechnen je nachdem wie viel man in den Pools hat
-    const average =
-      ((dfiBtcPart * 100 * this.poolBtc?.apr) +
-        (dfiEthPart * 100 * this.poolEth?.apr) +
-        (dfiUsdcPart * 100 * this.poolUsdc?.apr) +
-        (dfiUsdcDusdPart * 100 * this.poolUsdcDusd?.apr) +
-        (dfiBchPart * 100 * this.poolBch?.apr) +
-        (dfiDogePart * 100 * this.poolDoge?.apr) +
-        (dfiUsdtPart * 100 * this.poolUsdt?.apr) +
-        (dfiUsdtDusdPart * 100 * this.poolUsdtDusd?.apr) +
-        (dfiLtcPart * 100 * this.poolLtc?.apr) +
-        (dfiUsdPart * 100 * this.poolUsd?.apr) +
-        (dfiTslaPart * 100 * this.poolTsla?.apr) +
-        (dfiQqqPart * 100 * this.poolQqq?.apr) +
-        (dfiSpyPart * 100 * this.poolSpy?.apr) +
-        (dfiPltrPart * 100 * this.poolPltr?.apr) +
-        (dfiSlvPart * 100 * this.poolSlv?.apr) +
-        (dfiAaplPart * 100 * this.poolAapl?.apr) +
-        (dfiGldPart * 100 * this.poolGld?.apr) +
-        (dfiGmePart * 100 * this.poolGme?.apr) +
-        (dfiGooglPart * 100 * this.poolGoogl?.apr) +
-        (dfiArkkPart * 100 * this.poolArkk?.apr) +
-        (dfiBabaPart * 100 * this.poolBaba?.apr) +
-        (dfiVnqPart * 100 * this.poolVnq?.apr) +
-        (dfiUrthPart * 100 * this.poolUrth?.apr) +
-        (dfiTltPart * 100 * this.poolTlt?.apr) +
-        (dfiPdbcPart * 100 * this.poolPdbc?.apr) +
-        (dfiAmznPart * 100 * this.poolAmzn?.apr) +
-        (dfiNvdaPart * 100 * this.poolNvda?.apr) +
-        (dfiCoinPart * 100 * this.poolCoin?.apr) +
-        (dfiEemPart * 100 * this.poolEem?.apr) +
-        (dfiMsftPart * 100 * this.poolMsft?.apr) +
-        (dfiNflxPart * 100 * this.poolNflx?.apr) +
-        (dfiFbPart * 100 * this.poolFb?.apr) +
-        (dfiVooPart * 100 * this.poolVoo?.apr) +
-        (dfiDisPart * 100 * this.poolDis?.apr) +
-        (dfiMchiPart * 100 * this.poolMchi?.apr) +
-        (dfiMstrPart * 100 * this.poolMstr?.apr) +
-        (dfiIntcPart * 100 * this.poolIntc?.apr) +
-        (dfiPyplPart * 100 * this.poolPypl?.apr) +
-        (dfiBrkbPart * 100 * this.poolBrkb?.apr) +
-        (dfiKoPart * 100 * this.poolKo?.apr) +
-        (dfiPgPart * 100 * this.poolPg?.apr) +
-        (dfiSapPart * 100 * this.poolSap?.apr) +
-        (dfiUraPart * 100 * this.poolUra?.apr) +
-        (dfiCsPart * 100 * this.poolCs?.apr) +
-        (dfiGsgPart * 100 * this.poolGsg?.apr) +
-        (dfiPpltPart * 100 * this.poolPplt?.apr) +
-        (dfiGovtPart * 100 * this.poolGovt?.apr) +
-        (dfiTanPart * 100 * this.poolTan?.apr) +
-        (dfiXomPart * 100 * this.poolXom?.apr) +
-        (dfiJnjPart * 100 * this.poolJnj?.apr) +
-        (dfiAddyyPart * 100 * this.poolAddyy?.apr) +
-        (dfiGsPart * 100 * this.poolGs?.apr) +
-        (dfiDaxPart * 100 * this.poolDax?.apr) +
-        (dfiWmtPart * 100 * this.poolWmt?.apr) +
-        (dfiUlPart * 100 * this.poolUl?.apr) +
-        (dfiUngPart * 100 * this.poolUng?.apr) +
-        (dfiUsoPart * 100 * this.poolUso?.apr)
-      ) / 100;
-
-    return Math.round(average * 100) / 100;
-  }
-
   getAprMnAverage(): number {
     const normalMns = this.adressesMasternodes?.length - (this.adressesMasternodesFreezer5?.length
       + this.adressesMasternodesFreezer10?.length);
@@ -851,35 +603,18 @@ export class ForecastComponent implements OnInit, OnChanges {
     return aprs / mns;
   }
 
-  getDfiCountLM(): number {
-    return this.wallet?.dfiInEthPool + this.wallet?.dfiInBtcPool + this.wallet?.dfiInUsdtPool + this.wallet?.dfiInUsdcPool
-      + this.wallet?.dfiInLtcPool + this.wallet?.dfiInDogePool + this.wallet?.dfiInBchPool + this.wallet?.dfiInUsdPool
-      + this.getDfiEqOfUsdPartOfPool(this.wallet.dusdInUsdcDusdPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.dusdInUsdtDusdPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet.usdInTslaPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInQqqPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSpyPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPltrPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSlvPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAaplPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGldPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGmePool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGooglPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInArkkPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBabaPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVnqPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUrthPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTltPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPdbcPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAmznPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNvdaPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCoinPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInEemPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMsftPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInNflxPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInFbPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInVooPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDisPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMchiPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInMstrPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInIntcPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPyplPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInBrkbPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInKoPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPgPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInSapPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUraPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInCsPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsgPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInPpltPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGovtPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInTanPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInXomPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInJnjPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInAddyyPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInGsPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInDaxPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInWmtPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUlPool)
-      + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUngPool) + this.getDfiEqOfUsdPartOfPool(this.wallet?.usdInUsoPool);
+  getDfiCountInLM(): number {
+    let dfiAmountInLm = 0;
+    this.income?.poolIncome.forEach(pool => {
+      if (pool.token_A_Id === 0) {
+        dfiAmountInLm += pool.token_A_Amount;
+      } else if (pool.token_B_Id === 0) {
+        dfiAmountInLm += pool.token_B_Amount;
+      }
+    });
+    return dfiAmountInLm;
   }
+
 
   getUsdPriceOfDfiInDFIUSDPool(): number {
     return this.poolUsd?.totalLiquidityUsd / 2 / +this.poolUsd?.reserveB;

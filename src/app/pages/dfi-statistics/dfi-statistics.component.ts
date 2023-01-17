@@ -39,7 +39,7 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
   }
 
   getToken(): Array<Pool> {
-    return this.stocksPools.filter(a => a.tokenASymbol !== 'DUSD');
+    return this.stocksPools.filter(a => a.tokenASymbol !== 'DUSD' && a.tokenASymbol !== 'csETH');
   }
 
   getPair(): string {
