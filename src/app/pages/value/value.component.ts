@@ -351,6 +351,14 @@ export class ValueComponent implements OnInit, OnChanges {
     return Math.round((num) * 100) / 100;
   }
 
+  getStakingValueUsd(): number {
+    return this.getStakingValue() * this.getPool('BTC')?.priceB;
+  }
+
+  getStakingValue(): number {
+    return this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking;
+  }
+
   getDfiCountWalletUsd(): number {
     return this.getDfiCountWallet() * this.getPool('BTC')?.priceB;
   }
@@ -376,12 +384,6 @@ export class ValueComponent implements OnInit, OnChanges {
       + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking
       + this.dfiInMasternodes + this.getCollateralCountVaults('DFI');
   }
-
-
-  getStakingValueUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.getPool('BTC')?.priceB;
-  }
-
 
   getDfiCountLMUsd(): number {
     return this.getDfiCountLM() * this.getPool('BTC')?.priceB;
