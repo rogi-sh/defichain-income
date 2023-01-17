@@ -776,7 +776,7 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
         dfiInDfxStaking: this.dfiInDfxStaking,
-        totalValue: this.getAllValuesUsdPriceWithputLoan(),
+        totalValue: this.getAllValuesUsdPriceWithoutLoan(),
         totalValueIncomeDfi: this.lmOut.dfiPerMonth,
         totalValueIncomeUsd: this.lmOut.dfiPerMonth * this.poolBtc?.priceB,
         dfi: this.wallet.dfi,
@@ -1084,7 +1084,7 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
         dfiInDfxStaking: this.dfiInDfxStaking,
-        totalValue: this.getAllValuesUsdPriceWithputLoan(),
+        totalValue: this.getAllValuesUsdPriceWithoutLoan(),
         totalValueIncomeDfi: this.poolAllOut.dfiPerMonth,
         totalValueIncomeUsd: this.poolAllOut.dfiPerMonth * this.poolBtc?.priceB,
         dfi: this.wallet.dfi,
@@ -1940,73 +1940,28 @@ export class AppComponent implements OnInit {
     return this.income?.totalValue;
   }
 
-  getAllValuesUsdPriceWithputLoan(): number {
+  getAllValuesUsdPriceWithoutLoan(): number {
 
     // All Crypto and Stock values
-    const allWithLoans = this.getAllValuesUsdPrice();
-    const loans = this.getVaultsLoansValueUsd();
+    const totalWithOutMasternodeAndStaking = this.income?.totalValue;
+    const masternodes = this.getDfiCountMn() * this.poolBtc?.priceB;
     let freezerValue = 0;
-    // Freezer not couting
+    // Freezer not counting
     if (!this.freezerInTotolValue) {
       freezerValue += this.adressesMasternodesFreezer5.length * 20000 * this.poolBtc?.priceB;
       freezerValue += this.adressesMasternodesFreezer10.length * 20000 * this.poolBtc?.priceB;
     }
-    return allWithLoans - loans - freezerValue;
+
+    const staking = this.getStakingValueUsd();
+    return totalWithOutMasternodeAndStaking + masternodes + staking - freezerValue;
   }
-
-  getVaultsLoansValueUsd(): number {
-    let loan = 0;
-
-    if (this.vaultsOfAllAddresses.length === 0) {
-      return 0;
-    }
-
-    this.vaultsOfAllAddresses.forEach(vault => {
-      loan += +this.getLoanFromVaultUsd(vault)
-      loan += +vault.interestUsdValue
-
-    })
-
-    return loan;
-  }
-
-  getLoanFromVaultUsd(vault: Vault): number {
-
-    let usd = 0;
-    let total = 0;
-
-    vault?.loans?.forEach(loan => {
-      if ('DUSD' === loan.symbolKey) {
-        usd = +loan.amount;
-      } else {
-        total = +loan.amount * +loan.activePrice.active.amount;
-      }
-    });
-
-    return usd + total;
-  }
-
-  getUsdPriceOfStockPools(pool: Pool): number {
-
-    if (pool && pool.id === '17') {
-      return this.getCorrectDusdPrice();
-    }
-
-    return pool ? pool?.totalLiquidityUsd / 2 / +pool?.reserveA : 0;
-  }
-
-  getCorrectDusdPrice(): number {
-    return (100 + this.getArb(this.priceDFICEX,
-      this.poolUsd?.totalLiquidityUsd / 2 / +this.poolUsd?.reserveB) * -1 ) / 100;
-  }
-
 
   getLMUsd(): number {
     return this.income?.totalValueLM;
   }
 
   getStakingValueUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking) * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.poolBtc?.priceB;
   }
 
   getDfiCountInLM(): number {
