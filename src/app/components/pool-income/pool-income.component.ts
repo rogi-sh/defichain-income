@@ -85,8 +85,8 @@ export class PoolIncomeComponent implements OnInit {
 
   getPoolPairFromShare(share: number, pool: Pool): PoolPair {
     const pair = new PoolPair();
-    pair.dfiOrUsdToken = +pool.reserveB * share / 100;
-    pair.poolPairToken = +pool.reserveA * share / 100;
+    pair.dfiOrUsdToken = +pool.reserveB * share;
+    pair.poolPairToken = +pool.reserveA * share;
 
     return pair;
   }
