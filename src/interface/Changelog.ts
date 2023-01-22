@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.0.3 - 22.1.2023';
+    this.log.comment = 'Fix share of pool income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.0.2 - 17.1.2023';
     this.log.comment = 'Fix share of pool tokens not correct';
     this.logs.push(this.log);

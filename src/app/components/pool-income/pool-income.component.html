@@ -11,7 +11,7 @@
   <h3>
     Pool {{ 'share' | translate }}
     <span class="rounded-full bg-green-500 hover:bg-green-600 transition-all text-white text-base px-4 py-1 cursor-pointer my-2 m-1">
-                      {{isIncognitoModeOn ? '****' : anteilAmPool| number: '1.4-4' }} %
+                      {{isIncognitoModeOn ? '****' : anteilAmPool * 100| number: '1.4-4' }} %
                     </span>
     <div
       class="rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-base px-4 py-1 cursor-pointer my-2 m-1 inline-block"
