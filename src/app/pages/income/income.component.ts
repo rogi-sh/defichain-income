@@ -40,9 +40,6 @@ export class IncomeComponent implements OnInit, OnChanges {
   dfiInStaking!: number;
 
   @Input()
-  dfiInDfxStaking!: number;
-
-  @Input()
   dfiInLockStaking!: number;
 
   @Input()
@@ -50,9 +47,6 @@ export class IncomeComponent implements OnInit, OnChanges {
 
   @Input()
   stakingApy!: number;
-
-  @Input()
-  stakingDfxApy!: number;
 
   @Input()
   stakingLockApy!: number;
@@ -139,7 +133,7 @@ export class IncomeComponent implements OnInit, OnChanges {
   }
 
   getDfiCountStakingUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.poolBtc?.priceB;
+    return (this.dfiInStaking  + this.dfiInLockStaking) * this.poolBtc?.priceB;
   }
 
   getDfiCountMasternodesUsd(): number {

@@ -14,10 +14,6 @@ export class LockStats {
   operatorCount: number;
 }
 
-export class DfxStaking {
-  staking: Staking;
-}
-
 export class Staking {
   masternodes: number;
   yield: StakingNumbers;

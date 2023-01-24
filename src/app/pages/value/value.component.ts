@@ -27,9 +27,6 @@ export class ValueComponent implements OnInit, OnChanges {
   dfiInStaking!: number;
 
   @Input()
-  dfiInDfxStaking!: number;
-
-  @Input()
   dfiInLockStaking!: number;
 
   @Input()
@@ -356,7 +353,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getStakingValue(): number {
-    return this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking;
+    return this.dfiInStaking + this.dfiInLockStaking;
   }
 
   getDfiCountWalletUsd(): number {
@@ -381,7 +378,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getDfiCount(): number {
     return this.income?.holdingsSplitted.find(h => h.id === "0")?.amount
-      + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking
+      + this.dfiInStaking + this.dfiInLockStaking
       + this.dfiInMasternodes + this.getCollateralCountVaults('DFI');
   }
 
@@ -543,7 +540,7 @@ export class ValueComponent implements OnInit, OnChanges {
   }
 
   getDfiCountStakingUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.getPool('BTC')?.priceB;
+    return (this.dfiInStaking + this.dfiInLockStaking) * this.getPool('BTC')?.priceB;
   }
 
   getPrice(tokenId: string, loanToken: boolean, pool: Pool): number {

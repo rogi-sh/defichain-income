@@ -4,7 +4,7 @@ import {Apollo} from 'apollo-angular';
 import { CORRELATION, EXCHANGE, INCOME_STATISTICS } from '@interfaces/Graphql';
 import {Octokit} from '@octokit/rest';
 import {Milestone, Release} from '@interfaces/Github';
-import { DfxStaking, LockedMasternodes, LockStats, OceanStats } from '@interfaces/Staking'
+import {LockStats, OceanStats } from '@interfaces/Staking'
 import { Dex } from '@services/dex.service';
 import { Blocks, Burn, ChartOptions6, Exchange, PoolPairOcean, PoolPairsOcean, StockOracles } from '@interfaces/Data';
 import { ChartComponent } from 'ng-apexcharts';

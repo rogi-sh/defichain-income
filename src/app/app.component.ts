@@ -37,7 +37,7 @@ import { Meta } from '@angular/platform-browser'
 import { NgxSpinnerService } from 'ngx-spinner'
 import { ToastrService } from 'ngx-toastr'
 import { MamonAccountNode } from '@interfaces/Mamon'
-import { DfxStaking, LockStats, OceanStats } from '@interfaces/Staking'
+import { LockStats, OceanStats } from '@interfaces/Staking'
 import { NavigationEnd, Router } from '@angular/router'
 import { ChartComponent } from 'ng-apexcharts'
 import { IncomeComponent } from '@pages/income/income.component'
@@ -119,10 +119,8 @@ export class AppComponent implements OnInit {
 
   // Staking infos
   dfiInStaking = 0;
-  dfiInDfxStaking = 0;
   dfiInLockStaking = 0;
   dfiInMasternodes = 0;
-  dfiInStakingKey = 'dfiInStakingKey';
 
   dfiPorBlockStock = 50;
   stakingApyCake = 98;
@@ -135,7 +133,6 @@ export class AppComponent implements OnInit {
   masternodeCount0Freezer = 0;
   stakingApyKey = 'stakingApyKey';
 
-  stakingDfx: DfxStaking;
   stakingLockStats: LockStats;
   dfiBurned = 0;
 
@@ -398,7 +395,6 @@ export class AppComponent implements OnInit {
     await this.computeMeta();
 
     this.loadStackingCake();
-    this.loadStackingDfx();
     this.loadStackingMasternode();
     this.loadHistoryUser();
     this.loadOraclePrices();
@@ -775,7 +771,6 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
-        dfiInDfxStaking: this.dfiInDfxStaking,
         totalValue: this.getAllValuesUsdPriceWithoutLoan(),
         totalValueIncomeDfi: this.lmOut.dfiPerMonth,
         totalValueIncomeUsd: this.lmOut.dfiPerMonth * this.poolBtc?.priceB,
@@ -1083,7 +1078,6 @@ export class AppComponent implements OnInit {
         adressesMasternodesFreezer5: this.adressesMasternodesFreezer5,
         adressesMasternodesFreezer10: this.adressesMasternodesFreezer10,
         dfiInStaking: this.dfiInStaking,
-        dfiInDfxStaking: this.dfiInDfxStaking,
         totalValue: this.getAllValuesUsdPriceWithoutLoan(),
         totalValueIncomeDfi: this.poolAllOut.dfiPerMonth,
         totalValueIncomeUsd: this.poolAllOut.dfiPerMonth * this.poolBtc?.priceB,
@@ -1444,7 +1438,6 @@ export class AppComponent implements OnInit {
   private parseWallet(result: any): void {
     this.walletDTO = result?.data?.userByKey.wallet;
     this.dfiInStaking = this.walletDTO.dfiInStaking;
-    this.dfiInDfxStaking = this.walletDTO.dfiInDfxStaking;
     if (!this.autoLoadData) {
       this.wallet = this.copyValues(this.walletDTO);
     }
@@ -1731,18 +1724,6 @@ export class AppComponent implements OnInit {
       });
   }
 
-  loadStackingDfx(): void {
-
-    this.stakingService
-      .getStakingDFX().subscribe(
-      dfx => {
-        this.stakingDfx = dfx;
-      },
-      err => {
-        console.error('Fehler beim get staking from dfx: ' + JSON.stringify(err.message));
-      });
-  }
-
   loadStackingLock(): void {
     this.dfiInLockStaking = 0;
     this.adresses.forEach(adress => {
@@ -1776,7 +1757,6 @@ export class AppComponent implements OnInit {
       }
     }).subscribe((result: any) => {
         this.wallet.dfiInDfxStaking = result?.data?.getDfxStakingAmounts;
-        this.dfiInDfxStaking = result?.data?.getDfxStakingAmounts;
         this.berechneStakingOut();
         this.berechneAllOut();
     }, (error) => {
@@ -1830,7 +1810,6 @@ export class AppComponent implements OnInit {
   berechneStakingOut(): void {
 
     this.stakingOut.dfiPerYear = (this.dfiInStaking * (1 + this.stakingApy / 100) - this.dfiInStaking)
-      + (this.dfiInDfxStaking * (!this.stakingDfx?.staking?.yield?.apr ? 0: this.stakingDfx?.staking.yield.apr))
       + (this.dfiInLockStaking * (!this.stakingLockStats?.apr ? 0 : this.stakingLockStats?.apr));
 
     this.stakingOut.dfiPerDay = this.stakingOut.dfiPerYear / 356;
@@ -1950,7 +1929,7 @@ export class AppComponent implements OnInit {
   }
 
   getStakingValueUsd(): number {
-    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.poolBtc?.priceB;
+    return (this.dfiInStaking + this.dfiInLockStaking) * this.poolBtc?.priceB;
   }
 
   getDfiCountInLM(): number {
@@ -2189,7 +2168,6 @@ export class AppComponent implements OnInit {
   clearWallet(): void {
     const newWallet = new Wallet();
     newWallet.dfiInStaking = this.dfiInStaking;
-    newWallet.dfiInDfxStaking = this.dfiInDfxStaking;
     this.wallet = newWallet;
   }
 
@@ -2541,7 +2519,7 @@ export class AppComponent implements OnInit {
   }
 
   getDfiForAverageAPR(): number {
-    return this.getDfiCountInLM() * 2 + this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking + this.getDfiCountMn();
+    return this.getDfiCountInLM() * 2 + this.dfiInStaking + this.dfiInLockStaking + this.getDfiCountMn();
   }
 
   getDfiCountMn(): number {
