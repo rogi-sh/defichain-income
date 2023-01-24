@@ -1536,17 +1536,6 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  saveToggleAutoLoad(): void {
-    localStorage.setItem(this.autoLoadDataKey, JSON.stringify(this.autoLoadData));
-    this.matomoTracker.trackEvent('Klick', 'Change Input Type', JSON.stringify(this.autoLoadData));
-    this.refresh();
-  }
-
-  saveToggleSettingsLoad(): void {
-    localStorage.setItem(this.showSettingsAreaKey, JSON.stringify(this.showSettingsArea));
-    this.matomoTracker.trackEvent('Klick', 'Change Show Settings', JSON.stringify(this.showSettingsArea));
-  }
-
   saveInputStaking(): void {
     localStorage.setItem(this.stakingApyKey, JSON.stringify(this.stakingApy));
     this.berechneStakingOut();

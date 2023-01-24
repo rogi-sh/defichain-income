@@ -899,65 +899,21 @@
 
 
                 <div class="w-full h-full pt-8 relative dark:text-gray-100">
-                  <div class="w-full mb-5">
-                    <h3 class="text-2xl mb-2 text-pink-500">
-                      {{ 'showInput1' | translate }}
-                    </h3>
-                    <div class="font-bold">
-                      {{ 'load1' | translate }}
-                    </div>
-                    <div class="text-sm mb-2">
-                      <span class="font-bold">ON</span> => {{ 'load2' | translate }}
-                      <br/>
-                      <span class="font-bold">OFF</span> => {{ 'load3' | translate }}
-                    </div>
-                    <div
-                      class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
-                    >
-                      <input
-                        type="checkbox"
-                        id="autoLoadData"
-                        [(ngModel)]="autoLoadData"
-                        (ngModelChange)="saveToggleAutoLoad()"
-                        [ngClass]="{ 'isChecked': autoLoadData }"
-                        class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer focus:outline-none"
-                      />
-                      <label
-                        for="autoLoadData"
-                        class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-                      ></label>
-                    </div>
-                    <label *ngIf="!autoLoadData" for="autoLoadData" class="text-xs">
-                      {{ 'load5' | translate }}
-                    </label>
-                    <label *ngIf="autoLoadData" for="autoLoadData" class="text-xs">
-                      {{ 'load4' | translate }}
-                    </label>
-                  </div>
-
                   <div class="py-3 h-full">
                     <div *ngIf="autoLoadData" class="flex flex-col lg:flex-row gap-4">
                       <div class="w-full lg:w-1/2 rounded p-2 dark:bg-gray-600 bg-gray-100">
                         <div class='grid grid-cols-3 gap-4'>
                           <div><h3 class='text-2xl mb-2 text-pink-500'>
-                            Staking
+                            Staking by
                           </h3>
                           </div>
                           <div>
                             <a href='https://cakedefi.com/?ref=754025' (click)='trackCakeRef()'>
                               <img alt='CakeDefi'
-                                   src='https://www.cakedefi.com/downloads/press-materials/cake/2line/logo-cakedefi-2line-lockup-rgb.png'>
+                                   src='assets/img/CakeDeFi_Logo_colored.png'>
                             </a>
                           </div>
-                          <div>
-                            <button
-                              class='bg-blueCake-[#5B10FF] hover:bg-blueCake-[#1E40AF] transform transition-all delay-150 rounded-md w-full h-14 text-white focus:outline-none uppercase'
-                              onclick="window.open('https://cakedefi.com/?ref=754025', '_blank');"
-                              (click)='trackCakeRef()'>
-                              Login / SignUp
-                            </button>
-                          </div>
-                        </div>
+                         </div>
                         <br>
                         <div class="flex gap-2">
                           <div class="dark:text-gray-100">

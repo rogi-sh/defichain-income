@@ -12,6 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.0.4 - 22.1.2023';
+    this.log.comment = 'Remove manual option in settings and fix value chart missing dfi from staking';
+    this.logs.push(this.log);
+
+
+    this.log = new Log();
     this.log.version = '10.0.3 - 22.1.2023';
     this.log.comment = 'Fix share of pool income';
     this.logs.push(this.log);

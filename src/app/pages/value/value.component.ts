@@ -542,6 +542,10 @@ export class ValueComponent implements OnInit, OnChanges {
     return this.getFreezerDfiCount() * this.getPool('BTC')?.priceB;
   }
 
+  getDfiCountStakingUsd(): number {
+    return (this.dfiInStaking + this.dfiInDfxStaking + this.dfiInLockStaking) * this.getPool('BTC')?.priceB;
+  }
+
   getPrice(tokenId: string, loanToken: boolean, pool: Pool): number {
     if (tokenId === "15") {
       return this.getDUSDPrice();
@@ -570,6 +574,11 @@ export class ValueComponent implements OnInit, OnChanges {
       data.name = holding.symbol;
       data.value = holding.usd + colValue;
       data.id = +holding.id;
+
+      // DFI from Staking and Masternodes
+      if (data.id === 0) {
+        data.value += this.getDfiCountStakingUsd();
+      }
 
       allValue += data.value;
       dataList.push(data);
