@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.0.6 - 24.1.2023';
+    this.log.comment = 'Replace DFX Staking by Lock';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.0.5 - 24.1.2023';
     this.log.comment = 'Fix headline cutted at both ends now scrollable';
     this.logs.push(this.log);

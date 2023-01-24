@@ -652,7 +652,7 @@
                                     [correlationDays]='correlationDays'
                                     [priceDFICEX]='priceDFICEX'
                                     [poolPairsOcean]='poolPairsOcean'
-                                    [stakingDfx]='stakingDfx'
+                                    [lockStaking]='stakingLockStats'
                                     (callDefiView)="callDefiView($event)">
                 </app-dex-statistics>
               </div>
@@ -1330,8 +1330,8 @@
                     [correlationDays]='correlationDays'
                     [priceDFICEX]='priceDFICEX'
                     [poolPairsOcean]='poolPairsOcean'
-                                      [stakingDfx]='stakingDfx'
-                                      (callDefiView)="callDefiView($event)"
+                    [lockStaking]='stakingLockStats'
+                    (callDefiView)="callDefiView($event)"
                   >
                   </app-dex-statistics>
                 </div>
