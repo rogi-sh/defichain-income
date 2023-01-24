@@ -12,10 +12,14 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '10.0.4 - 22.1.2023';
-    this.log.comment = 'Remove manual option in settings and fix value chart missing dfi from staking';
+    this.log.version = '10.0.5 - 24.1.2023';
+    this.log.comment = 'Fix headline cutted at both ends now scrollable';
     this.logs.push(this.log);
 
+    this.log = new Log();
+    this.log.version = '10.0.4 - 24.1.2023';
+    this.log.comment = 'Remove manual option in settings and fix value chart missing dfi from staking';
+    this.logs.push(this.log);
 
     this.log = new Log();
     this.log.version = '10.0.3 - 22.1.2023';

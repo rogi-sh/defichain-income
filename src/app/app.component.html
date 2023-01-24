@@ -4,8 +4,8 @@
   xmlns="http://www.w3.org/1999/html"
   [ngClass]="menu ? 'overflow-hidden' : ''"
 >
-  <div class="xl:hidden w-full bg-pink-500 text-white">
-    <div class="flex items-center justify-center whitespace-nowrap sitemessage">
+  <div class="xl:hidden w-full bg-pink-500 text-white overflow-auto">
+    <div class="flex items-center justify-center whitespace-nowrap sitemessage" >
       <div class="mr-4">
         dUSD
         {{getDUSDPrice()}} $ - Fee {{getDUSDFee()}} % - {{ 'value.interest' | translate}} {{getInterest('DUSD')}} %
@@ -22,6 +22,8 @@
       </div>
     </div>
   </div>
+
+
   <header class="h-auto py-1 px-2 sm:flex sm:h-24 sm:py-3 sm:justify-start relative">
     <a
       class="sm:hidden absolute left-2 flex cursor-pointer hover:text-pink-500 dark:text-gray-100"
