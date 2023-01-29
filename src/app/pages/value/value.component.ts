@@ -379,7 +379,7 @@ export class ValueComponent implements OnInit, OnChanges {
   getDfiCount(): number {
     return this.income?.holdingsSplitted.find(h => h.id === "0")?.amount
       + this.dfiInStaking + this.dfiInLockStaking
-      + this.dfiInMasternodes + this.getCollateralCountVaults('DFI');
+      + this.dfiInMasternodes;
   }
 
   getDfiCountLMUsd(): number {
