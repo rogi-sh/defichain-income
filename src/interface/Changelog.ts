@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '10.0.6 - 24.1.2023';
+    this.log.version = '10.1.1 - 29.1.2023';
+    this.log.comment = 'Fix collateral token not in holdings';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '10.1.0 - 24.1.2023';
     this.log.comment = 'Replace DFX Staking by Lock';
     this.logs.push(this.log);
 

@@ -736,12 +736,6 @@ export const HISTORY_ORACLE = gql`
 }
 `;
 
-export const DFX_STAKING = gql`
-  query ($addresses: [String]!) {
-  getDfxStakingAmounts(addresses: $addresses)
-}
-`;
-
 export const UPDATE_NEWSLETTER = gql`
   mutation ($key: String!, $email: String!, $payingAddress: String) {
   updateUserNewsletter(

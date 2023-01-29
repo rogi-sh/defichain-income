@@ -438,6 +438,9 @@ export class ValueComponent implements OnInit, OnChanges {
 
     this.holdingValues = new Array<HoldingValue>();
 
+    let listOfCollaterals = this.getListOfCollateralTokensInVaults();
+    const listOfTokenInSplitted = [];
+
     this.income.holdingsSplitted.forEach(holding => {
       const colAmount = this.getCollateralCountVaults(holding.symbol);
       const pool =  this.getPool(holding.symbol);
@@ -445,8 +448,40 @@ export class ValueComponent implements OnInit, OnChanges {
       const colValue = colAmount * price;
       this.holdingValues.push(new HoldingValue(holding.symbol,
         holding.amount + colAmount, holding.usd + colValue));
+
+      listOfTokenInSplitted.push(holding.symbol);
     });
 
+    // add tokens in colateral but not in splitted holdings
+    listOfCollaterals = listOfCollaterals.filter(col => !listOfTokenInSplitted.includes(col));
+    listOfCollaterals.forEach(col => {
+      const colAmount = this.getCollateralCountVaults(col);
+      const pool =  this.getPool(col);
+      const price = this.getPriceFromSymbol(col, pool);
+      const colValue = colAmount * price;
+      this.holdingValues.push(new HoldingValue(col, colAmount, colValue));
+    });
+
+
+  }
+
+  getListOfCollateralTokensInVaults(): string [] {
+
+    if (this.vaultsOfAllAddresses.length === 0 ) {
+      return [];
+    }
+
+    const colList = [];
+
+    this.vaultsOfAllAddresses.forEach(vault => {
+      vault?.collaterals?.forEach(vaultCollaterral => {
+        if (!colList.includes(vaultCollaterral.symbol)) {
+          colList.push(vaultCollaterral.symbol);
+        }
+      })
+    });
+
+    return colList;
   }
 
   /**
@@ -550,6 +585,16 @@ export class ValueComponent implements OnInit, OnChanges {
       return this.getDfiPrice();
     } else if (loanToken) {
       return this.getUsdPriceOfStockPools(pool)
+    } else {
+      return pool?.priceA;
+    }
+  }
+
+  getPriceFromSymbol(symbol: string, pool: Pool): number {
+    if (symbol === "DUSD") {
+      return this.getDUSDPrice();
+    } else if (symbol === "DFI") {
+      return this.getDfiPrice();
     } else {
       return pool?.priceA;
     }

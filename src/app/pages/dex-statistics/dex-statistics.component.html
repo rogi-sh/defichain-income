@@ -255,9 +255,9 @@
           <span
             class=' inline-block rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-4 py-1  mb-2 cursor-pointer'
           >
-          {{ lockStaking.apr * 100  | number: '1.1-1' }}
-            % APR  ~  {{ lockStaking.apy * 100 | number: '1.1-1' }}% APY <br>
-            {{ lockStaking.operatorCount }} MNs - {{ lockStaking.tvl | number: '1.1-1' }} TVL
+          {{ lockStaking?.apr * 100  | number: '1.1-1' }}
+            % APR  ~  {{ lockStaking?.apy * 100 | number: '1.1-1' }}% APY <br>
+            {{ lockStaking?.operatorCount }} MNs - {{ lockStaking?.tvl | number: '1.1-1' }} TVL
         </span>
           </div>
 
