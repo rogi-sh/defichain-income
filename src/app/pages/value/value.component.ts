@@ -1,4 +1,13 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  OnDestroy,
+  HostListener,
+} from '@angular/core';
 import { AddressBalance, Pool, Stats } from '@interfaces/Dex';
 import {
   ChartOptions,
@@ -11,11 +20,15 @@ import { ChartComponent } from 'ng-apexcharts';
 import { DataService } from '@services/data.service';
 import { Dex } from '@services/dex.service';
 
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+
 @Component({
   selector: 'app-value',
   templateUrl: './value.component.html',
 })
-export class ValueComponent implements OnInit, OnChanges {
+export class ValueComponent implements OnInit, OnChanges, OnDestroy {
+  private destroy$: Subject<any> = new Subject<any>();
 
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -95,6 +108,7 @@ export class ValueComponent implements OnInit, OnChanges {
 
   loadColTokens(): void {
     this.dexService.getCollateralTokens()
+      .pipe(takeUntil(this.destroy$))
       .subscribe(tokens => {
           this.collTokens = tokens;
           this.dusdFactor = +this.collTokens?.data?.find(a => a.token.id === '15').factor;
@@ -669,5 +683,11 @@ export class ValueComponent implements OnInit, OnChanges {
 
   getTheme(): string {
     return localStorage.getItem('theme');
+  }
+
+  @HostListener('unloaded')
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }
