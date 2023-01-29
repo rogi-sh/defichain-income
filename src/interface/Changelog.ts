@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.0 - 29.1.2023';
+    this.log.comment = 'Fix chart and values of tokens from vaults';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.1.1 - 29.1.2023';
     this.log.comment = 'Fix collateral token not in holdings';
     this.logs.push(this.log);
