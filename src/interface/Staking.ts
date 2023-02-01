@@ -22,6 +22,7 @@ export class Staking {
 export class LockStakingPart {
   balance: number;
   asset: string;
+  stakingStrategy: string;
 }
 
 

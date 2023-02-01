@@ -1229,13 +1229,13 @@ export class AppComponent implements OnInit {
       this.stakingService
         .getStakingLock(adress).subscribe(
         lock => {
-          const dfiInStaking = lock.find(l => l.asset === 'DFI');
+          const dfiInStaking = lock.find(l => l.asset === 'DFI' && l.stakingStrategy === "Masternode");
           this.dfiInLockStaking += dfiInStaking.balance;
           this.berechneStakingOut();
           this.berechneAllOut();
         },
         err => {
-          console.info("Address " + adress + " no lock staking.")
+          console.info("Address " + adress + " no dfi in lock staking.")
         });
     });
     this.stakingService
