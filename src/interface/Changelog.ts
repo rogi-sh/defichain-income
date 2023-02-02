@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.4 - 3.2.2023';
+    this.log.comment = 'Switch back to ocean of income';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.2.3 - 2.2.2023';
     this.log.comment = 'Fix DFX Link';
     this.logs.push(this.log);
