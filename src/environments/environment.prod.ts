@@ -1,4 +1,4 @@
-const ocean = 'https://ocean.defichain-income.com';
+const ocean = 'https://ocean.defichain.com';
 
 export const environment = {
   production: true,
