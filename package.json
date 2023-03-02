@@ -10,7 +10,7 @@
     "email": "cypto@shelkovenkov.de",
     "url": "https://www.defichain-income.com"
   },
-  "version": "10.2.5",
+  "version": "10.2.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
