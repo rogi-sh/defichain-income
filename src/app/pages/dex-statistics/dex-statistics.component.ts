@@ -405,6 +405,18 @@ export class DexStatisticsComponent implements OnInit {
       case 'XLRE-DUSD': {
         return new StockLongName('The Real Estate Select Sector SPDR Fund', 'XLRE');
       }
+      case 'SHEL-DUSD': {
+        return new StockLongName('Royal Dutch Shell PLC', 'SHEL');
+      }
+      case 'SH-DUSD': {
+        return new StockLongName('ProShares Short S&P500 ETF', 'SH');
+      }
+      case 'BITI-DUSD': {
+        return new StockLongName('ProShares Short Bitcoin Strategy ETF', 'BITI');
+      }
+      case 'NSRGY-DUSD': {
+        return new StockLongName('Nestle ADR', 'NSRGY');
+      }
 
       default: {
         return new StockLongName('', '');
