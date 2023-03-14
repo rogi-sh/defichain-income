@@ -786,15 +786,15 @@
           <td class='text-right text-sm p-2'>
             <app-price [fiat]='fiat' [usdPrice]='cryptoPool?.priceA '></app-price>
             <br>
-            <app-price *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102'" [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
+            <app-price *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102' && cryptoPool.id !== '217' && cryptoPool.id !== '218'" [fiat]='fiat' [usdPrice]='priceDFICEX'></app-price>
           </td>
           <td class='text-right text-sm p-2'>
-            <span *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102'"
+            <span *ngIf="cryptoPool.id !=='101' && cryptoPool.id !== '102' && cryptoPool.id !== '217' && cryptoPool.id !== '218'"
               class='font-bold'><span>{{getArb(cryptoPool?.priceA, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveA)}}</span> %</span>
             <br>
-            <span *ngIf="cryptoPool.id !== '101' && cryptoPool.id !== '102'"
+            <span *ngIf="cryptoPool.id !== '101' && cryptoPool.id !== '102' && cryptoPool.id !== '217' && cryptoPool.id !== '218'"
               class='font-bold'><span>{{getArb(priceDFICEX, cryptoPool?.totalLiquidityUsd / 2 / cryptoPool?.reserveB)}}</span> % </span>
-            <span *ngIf="cryptoPool.id === '101' || cryptoPool.id === '102'"
+            <span *ngIf="cryptoPool.id === '101' || cryptoPool.id === '102' && cryptoPool.id === '217' && cryptoPool.id === '218'"
                   class='font-bold'><span>{{getRound2((cryptoPool?.reserveA / cryptoPool?.reserveB - 1) * 100)}}</span> % </span>
           </td>
           <td class='text-right text-sm p-2'>

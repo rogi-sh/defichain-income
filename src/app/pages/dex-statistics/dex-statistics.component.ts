@@ -252,6 +252,12 @@ export class DexStatisticsComponent implements OnInit {
       case 'USDC-DUSD': {
         return new StockLongName('USD Coin', '');
       }
+      case 'EUROC-DFI': {
+        return new StockLongName('EURO Coin', '');
+      }
+      case 'EUROC-DUSD': {
+        return new StockLongName('EURO Coin', '');
+      }
       case 'SPY-DUSD': {
         return new StockLongName('SPDR S&P 500 Trust', 'SPY');
       }

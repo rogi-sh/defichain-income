@@ -1136,7 +1136,7 @@ export class AppComponent implements OnInit {
   private createStockArray(): void {
 
     this.poolPairsOcean.data.forEach(oceanPool => {
-      if (+oceanPool.id >= 17 && +oceanPool.id != 102 && +oceanPool.id != 101)
+      if (+oceanPool.id >= 17 && +oceanPool.id != 102 && +oceanPool.id != 101 && +oceanPool.id != 217 && +oceanPool.id != 218)
       this.stocksPools.push(this.setFromPoolPair(oceanPool.id));
     });
 
@@ -1145,7 +1145,7 @@ export class AppComponent implements OnInit {
   private createCryptoPoolsArray(): void {
 
     this.poolPairsOcean.data.forEach(oceanPool => {
-      if (+oceanPool.id < 17 || +oceanPool.id === 101 || +oceanPool.id === 102) {
+      if (+oceanPool.id < 17 || +oceanPool.id === 101 || +oceanPool.id === 102 || +oceanPool.id === 217 || +oceanPool.id === 218) {
         this.cryptoPools.push(this.setFromPoolPair(oceanPool.id))
       }
     })
