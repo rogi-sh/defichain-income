@@ -92,8 +92,6 @@ export class DexStatisticsComponent implements OnInit {
 
   octokit = new Octokit();
 
-  milestones = new Array<Milestone>();
-
   releasesNode = new Array<Release>();
 
   releasesApp = new Array<Release>();
@@ -138,7 +136,6 @@ export class DexStatisticsComponent implements OnInit {
     }
 
     this.loadCor();
-    this.loadMilestones();
     this.loadNodeRelease();
     this.loadAppRelease();
     this.loadWalletRelease();
@@ -150,18 +147,6 @@ export class DexStatisticsComponent implements OnInit {
 
     this.stocksPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
     this.cryptoPools.sort((a, b) => b.totalLiquidityUsd - a.totalLiquidityUsd);
-  }
-
-  loadMilestones(): void {
-    this.octokit.rest.issues.listMilestones({
-      owner: 'DeFiCh',
-      repo: 'ain',
-    })
-      .then(({data}) => {
-        // handle data
-        this.milestones = data as unknown as Milestone [];
-
-      });
   }
 
   loadNodeRelease(): void {

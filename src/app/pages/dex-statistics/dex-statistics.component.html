@@ -641,32 +641,6 @@
   <div *ngIf='statisticsOn' class='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4'>
     <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
       <div class='max-h-96 overflow-auto'>
-        <h1 class='text-lg font-bold'>Next Upgrades</h1>
-        <div *ngFor='let m of milestones'>
-          <div class='mb-1 w-full sm:mr-4'>
-            <span
-              class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>
-              {{ m.title }} -
-              <span>{{m.closed_issues / (m.closed_issues + m.open_issues) * 100 | number: '1.0-0' }} %</span>
-
-            </span>
-            <br>
-            <a class='text-pink-500 hover:underline'
-               target='_blank'
-               href='{{m?.html_url}}'>Github</a>
-            <br>
-            <span>{{m.closed_issues}} &#9989; - {{m.open_issues}} &#9203;</span>
-            <br>
-            <span class='text-sm'>{{ m.description}}</span>
-            <br>
-            <span class='text-sm'>{{ m.updated_at | date}} last update</span>
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-    <div class='rounded-lg bg-gray-100 dark:bg-gray-600 dark:text-white p-2'>
-      <div class='max-h-96 overflow-auto'>
         <h1 class='text-lg font-bold'>Node</h1>
         <span
           class='rounded-full bg-pink-500 hover:bg-gray-800 transition-all text-white text-sm px-2 py-1 cursor-pointer'>

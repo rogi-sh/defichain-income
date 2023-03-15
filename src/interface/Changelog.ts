@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.9 - 15.3.2023';
+    this.log.comment = 'remove next upgrades in dex view';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.2.8 - 14.3.2023';
     this.log.comment = 'add new euroc tokens to dex view in crypto pools';
     this.logs.push(this.log);
