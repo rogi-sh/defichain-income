@@ -1,4 +1,4 @@
-const ocean = 'https://ocean.defichain.com';
+const ocean = 'https://ocean.defichain-income.com';
 
 export const environment = {
   production: true,
@@ -19,7 +19,7 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking',
-  version: '10.2.9',
+  version: '10.2.10',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
   graphql: 'https://next-graphql.defichain-income.com/graphql',

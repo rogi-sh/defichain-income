@@ -73,9 +73,9 @@
     </div>
 
     <div class="flex items-center justify-center mt-2 md:mt-0">
-      <button title="Buy DFI" onClick =" window.open('https://dfx.swiss/app/dfi?code=001-107','_blank')" (click)="trackDFX()" class="bg-pink-500 rounded-md w-full p-2 sm:pl-5 sm:pr-12 text-white focus:outline-none relative">
+      <button title="Buy Crypto" onClick =" window.open('https://dfx.swiss/app?code=158-310','_blank')" (click)="trackDFX()" class="bg-pink-500 rounded-md w-full p-2 sm:pl-5 sm:pr-12 text-white focus:outline-none relative">
         <div>
-          Buy DFI
+          Buy Crypto
         </div>
         <app-icon class="pointer-events-none" name="cart" class="text-white w-8 h-8 inline-block absolute right-5 sm:right-2 top-1/2 transform -translate-y-1/2"></app-icon>
       </button>
@@ -209,14 +209,14 @@
             <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
           </a>
 
-          <!-- <a
+          <a
             (click)="handlePage('forecast')"
             [ngClass]="{ 'text-pink-500': currentPage === 'forecast' }"
             class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
           >
             <app-icon name="world"></app-icon>
             <div class="inline self-center ml-2 text-xl">{{ 'forecast.title' | translate }}</div>
-          </a>-->
+          </a>
 
           <a
             (click)="handlePage('history')"
@@ -364,14 +364,14 @@
             <app-icon name="income"></app-icon>
           </a>
 
-          <!--<a
+          <a
             (click)="handlePage('forecast')"
             [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
             class="hover:text-pink-400 py-3 text-center cursor-pointer"
             title="{{ 'forecast.title' | translate }}"
           >
             <app-icon name="world"></app-icon>
-          </a>-->
+          </a>
 
 
 
@@ -597,17 +597,14 @@
             <div *ngSwitchCase="'forecast'">
               <div class="contents w-full max-h-screen h-full overflow-visible">
                 <app-forecast
-                  *ngIf="wallet && poolBtc && poolAllOut"
                   [poolOut]="poolAllOut"
                   [stakingOut]="stakingOut"
                   [poolMasternodeOut]="poolMasternodeOut"
                   [lmOut]="lmOut"
-                  [bs]="blocktimeInS"
                   [fiat]="fiat"
                   [poolUsd]='poolUsd'
                   [poolBtc]='poolBtc'
                   [isIncognitoModeOn]="isIncognitoModeOn"
-                  [blockHeight]="rewards?.blockHeight"
                   [apyCake]="stakingApy"
                   [aprMn]="stakingApyMN"
                   [adressesMasternodes]="adressesMasternodes"
