@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
@@ -18,12 +18,23 @@
     ],
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@components/*": ["app/components/*"],
-      "@pages/*": ["app/pages/*"],
-      "@interfaces/*": ["interface/*"],
-      "@environments/*": ["environments/*"],
-      "@services/*": ["service/*"]
-    }
+      "@components/*": [
+        "app/components/*"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
+      "@interfaces/*": [
+        "interface/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ],
+      "@services/*": [
+        "service/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "debug": true,

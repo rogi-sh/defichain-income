@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.11 - 22.8.2023';
+    this.log.comment = 'new tokens in crypto pools area';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.2.10 - 23.7.2023';
     this.log.comment = 'dd correct dfx link for buy crypto';
     this.logs.push(this.log);

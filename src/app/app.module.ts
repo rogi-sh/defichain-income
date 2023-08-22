@@ -23,7 +23,6 @@ import { InfoComponent } from '@pages/info/info.component';
 import { PriceComponent } from '@components/price/price.component';
 import {DataService} from '@services/data.service';
 import {NgxSpinnerModule} from 'ngx-spinner';
-import { ForecastComponent } from '@pages/forecast/forecast.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@environments/environment';
@@ -47,7 +46,6 @@ const appRoutes: Routes = [
   { path: 'income', component: AppComponent },
   { path: 'dex', component: AppComponent },
   { path: 'chart', component: AppComponent },
-  { path: 'forecast', component: AppComponent },
   { path: 'history', component: AppComponent },
   { path: 'calculator', component: AppComponent },
   { path: 'newsletter', component: AppComponent },
@@ -74,7 +72,6 @@ const appRoutes: Routes = [
     InfoComponent,
     NewsletterComponent,
     PriceComponent,
-    ForecastComponent,
     HistoryComponent,
     PoolIncomeComponent,
     HistoryModalComponent,

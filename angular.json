@@ -32,9 +32,6 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
@@ -146,7 +143,6 @@
       }
     }
   },
-  "defaultProject": "defichain-income",
   "cli": {
     "analytics": false
   }
