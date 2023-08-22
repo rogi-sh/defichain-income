@@ -225,6 +225,15 @@ export class DexStatisticsComponent implements OnInit {
       case 'DOGE-DFI': {
         return new StockLongName('Doge', 'Doge');
       }
+      case 'SOL-DFI': {
+        return new StockLongName('Solana', 'Solana');
+      }
+      case 'DOT-DFI': {
+        return new StockLongName('Polkadot', 'Polkadot');
+      }
+      case 'MATIC-DFI': {
+        return new StockLongName('Polygon', 'Polygon');
+      }
       case 'USDT-DFI': {
         return new StockLongName('Tether $', '');
       }
