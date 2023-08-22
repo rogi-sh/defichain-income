@@ -208,16 +208,6 @@
             <app-icon name="income"></app-icon>
             <div class="inline self-center ml-2 text-xl">{{ 'income.word' | translate }}</div>
           </a>
-
-          <a
-            (click)="handlePage('forecast')"
-            [ngClass]="{ 'text-pink-500': currentPage === 'forecast' }"
-            class="hover:text-pink-400 py-3 text-center cursor-pointer flex"
-          >
-            <app-icon name="world"></app-icon>
-            <div class="inline self-center ml-2 text-xl">{{ 'forecast.title' | translate }}</div>
-          </a>
-
           <a
             (click)="handlePage('history')"
             [ngClass]="{ 'text-pink-500': currentPage === 'history' }"
@@ -363,18 +353,6 @@
           >
             <app-icon name="income"></app-icon>
           </a>
-
-          <a
-            (click)="handlePage('forecast')"
-            [ngClass]="currentPage === 'forecast' ? 'text-pink-500' : 'dark:text-gray-100'"
-            class="hover:text-pink-400 py-3 text-center cursor-pointer"
-            title="{{ 'forecast.title' | translate }}"
-          >
-            <app-icon name="world"></app-icon>
-          </a>
-
-
-
           <a
             (click)="handlePage('history')"
             [ngClass]="currentPage === 'history' ? 'text-pink-500' : 'dark:text-gray-100'"
@@ -594,27 +572,7 @@
               </div>
               <br>
             </div>
-            <div *ngSwitchCase="'forecast'">
-              <div class="contents w-full max-h-screen h-full overflow-visible">
-                <app-forecast
-                  [poolOut]="poolAllOut"
-                  [stakingOut]="stakingOut"
-                  [poolMasternodeOut]="poolMasternodeOut"
-                  [lmOut]="lmOut"
-                  [fiat]="fiat"
-                  [poolUsd]='poolUsd'
-                  [poolBtc]='poolBtc'
-                  [isIncognitoModeOn]="isIncognitoModeOn"
-                  [apyCake]="stakingApy"
-                  [aprMn]="stakingApyMN"
-                  [adressesMasternodes]="adressesMasternodes"
-                  [adressesMasternodesFreezer5]="adressesMasternodesFreezer5"
-                  [adressesMasternodesFreezer10]="adressesMasternodesFreezer10"
-                >
-                </app-forecast>
-              </div>
-            </div>
-            <div *ngSwitchCase="'history'">
+           <div *ngSwitchCase="'history'">
               <h1 class="text-3xl mb-4 text-pink-500">{{ 'history-app.title' | translate }}</h1>
               <h2 class='text-lg dark:text-gray-100'>{{ 'history-app.h2' | translate }}</h2>
               <br>

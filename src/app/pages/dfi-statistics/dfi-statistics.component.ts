@@ -90,6 +90,15 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
       case 'Doge': {
         return 'BINANCE:DOGEUSDT';
       }
+      case 'Solana': {
+        return 'BINANCE:SOLUSDT';
+      }
+      case 'Polygon': {
+        return 'BINANCE:MATICUSDT';
+      }
+      case 'Polkadot': {
+        return 'BINANCE:DOTUSDT';
+      }
       default:  {
         return this.coinpaprikaCurrency;
       }
