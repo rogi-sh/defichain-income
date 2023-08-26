@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
   public chartOptions2: Partial<ChartOptions6>;
 
   client = new WhaleApiClient({
-    url: 'https://ocean.defichain-income.com',
+    url: 'https://ocean.defichain.com',
     timeout: 60000,
     version: 'v0',
     network: 'mainnet'

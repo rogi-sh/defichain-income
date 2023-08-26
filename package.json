@@ -10,7 +10,7 @@
     "email": "cypto@shelkovenkov.de",
     "url": "https://www.defichain-income.com"
   },
-  "version": "10.2.13",
+  "version": "10.2.14",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -37,7 +37,9 @@
     "@apollo/client": "^3.8.1",
     "@defichain/jellyfish-address": "^3.37.0",
     "@defichain/whale-api-client": "^3.37.0",
+    "defichain": "^3.37.0",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
+    "@popperjs/core" :"^2.11.8",
     "@ngneat/tailwind": "^7.0.3",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",

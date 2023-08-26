@@ -13,6 +13,11 @@ export class Changelog {
 
     this.log = new Log();
     this.log.version = '10.2.13 - 23.8.2023';
+    this.log.comment = 'Move to official ocean';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '10.2.13 - 23.8.2023';
     this.log.comment = 'Fix OS Releases';
     this.logs.push(this.log);
 
