@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '10.2.13 - 23.8.2023';
+    this.log.version = '10.2.15 - 23.8.2023';
+    this.log.comment = 'New token sui in crypto pools area';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '10.2.14 - 23.8.2023';
     this.log.comment = 'Move to official ocean';
     this.logs.push(this.log);
 

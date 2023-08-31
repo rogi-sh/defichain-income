@@ -234,6 +234,9 @@ export class DexStatisticsComponent implements OnInit {
       case 'MATIC-DFI': {
         return new StockLongName('Polygon', 'Polygon');
       }
+      case 'SUI-DFI': {
+        return new StockLongName('Sui', 'Sui');
+      }
       case 'USDT-DFI': {
         return new StockLongName('Tether $', '');
       }

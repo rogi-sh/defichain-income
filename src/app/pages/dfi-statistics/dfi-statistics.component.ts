@@ -99,6 +99,9 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
       case 'Polkadot': {
         return 'BINANCE:DOTUSDT';
       }
+      case 'Sui': {
+        return 'BINANCE:SUIUSDT';
+      }
       default:  {
         return this.coinpaprikaCurrency;
       }
