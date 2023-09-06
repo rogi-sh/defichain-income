@@ -703,9 +703,6 @@ export const EXCHANGE = gql`
     kucoinStatusWithdraw
     kucoinStatusDepositErc20
     kucoinStatusWithdrawErc20
-    dfxBuy
-    dfxSell
-    dfxStaking
     huobiStatus
   }
 }

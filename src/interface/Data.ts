@@ -1197,9 +1197,6 @@ export class Exchange {
   kucoinStatusWithdraw: boolean;
   kucoinStatusDepositErc20: boolean;
   kucoinStatusWithdrawErc20: boolean;
-  dfxBuy: string;
-  dfxSell: string;
-  dfxStaking: string;
   huobiStatus: string;
 }
 
