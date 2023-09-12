@@ -11,7 +11,6 @@ export const environment = {
   collateralTokens: ocean + '/v0/mainnet/loans/collaterals?size=1000',
   poolpairsocean: ocean + '/v0/mainnet/poolpairs?size=1000',
   cur: 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json',
-  cake: 'https://api.cakedefi.com/coins/apy',
   dfx: 'https://api.dfx.swiss/v1/statistic',
   oceanstats: ocean + '/v0/mainnet/stats',
   blocks: ocean + '/v0/mainnet/blocks?size=2000',

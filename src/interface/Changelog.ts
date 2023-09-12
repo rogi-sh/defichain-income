@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.17 - 12.9.2023';
+    this.log.comment = 'Fix Bake Apy';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.2.16 - 23.8.2023';
     this.log.comment = 'Remove DFX exchange status';
     this.logs.push(this.log);

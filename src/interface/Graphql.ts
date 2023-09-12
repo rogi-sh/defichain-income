@@ -708,6 +708,17 @@ export const EXCHANGE = gql`
 }
 `;
 
+export const CAKEYIELD = gql`
+  query cakeYield {
+  cakeYield {
+    staking {
+      apy
+      id
+    }
+  }
+}
+`;
+
 
 export const HISTORY_USER = gql`
   query ($key: String) {

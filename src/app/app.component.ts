@@ -30,7 +30,7 @@ import { filter, firstValueFrom } from 'rxjs'
 import { TranslateService } from '@ngx-translate/core'
 import { MatomoInjector, MatomoTracker } from 'ngx-matomo-v9'
 import { Apollo } from 'apollo-angular'
-import { HISTORY_USER, LOGIN, REGISTER, UPDATE } from '@interfaces/Graphql'
+import { CAKEYIELD, EXCHANGE, HISTORY_USER, LOGIN, REGISTER, UPDATE } from '@interfaces/Graphql'
 import { DataService } from '@services/data.service'
 import { StakingService } from '@services/staking.service'
 import { Meta } from '@angular/platform-browser'
@@ -1212,10 +1212,10 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.stakingService
-      .getStaking().subscribe(
-      cake => {
-        this.stakingApyCake = +cake.staking.find(s => s.id === 'DFI').apy * 100;
+    this.apollo.query({
+      query: CAKEYIELD
+    }).subscribe((result: any) => {
+        this.stakingApyCake = +result.data.cakeYield.staking.find(s => s.id === 'DFI').apy * 100;
         this.stakingApy = Math.round(this.stakingApyCake * 100) / 100;
         this.berechneStakingOut();
         this.berechneAllOut();
