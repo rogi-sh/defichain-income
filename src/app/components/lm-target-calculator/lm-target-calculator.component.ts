@@ -114,7 +114,10 @@ export class LmTargetCalculatorComponent implements OnInit {
     return this.poolLmCalculationTargetReturn === 'BTC' || this.poolLmCalculationTargetReturn === 'ETH'
       || this.poolLmCalculationTargetReturn === 'LTC' || this.poolLmCalculationTargetReturn === 'DOGE'
       || this.poolLmCalculationTargetReturn === 'BCH' || this.poolLmCalculationTargetReturn === 'USDT'
-      || this.poolLmCalculationTargetReturn === 'USDC' || this.poolLmCalculationTargetReturn === 'DUSD';
+      || this.poolLmCalculationTargetReturn === 'USDC' || this.poolLmCalculationTargetReturn === 'DUSD'
+      || this.poolLmCalculationTargetReturn === 'SOL' || this.poolLmCalculationTargetReturn === 'DOT'
+      || this.poolLmCalculationTargetReturn === 'MATIC' || this.poolLmCalculationTargetReturn === 'SUI'
+      || this.poolSelected === 'EUROC-DFI' || this.poolSelected === 'XCHF-DFI';
   }
 
   private getDfiPerMin(pool: Pool): number {

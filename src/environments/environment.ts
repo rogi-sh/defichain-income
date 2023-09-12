@@ -22,7 +22,7 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking?asset=DFI&blockchain=DeFiChain&strategy=Masternode',
-  version: '10.2.17',
+  version: '10.2.18',
   graphql: 'https://next-graphql.defichain-income.com/graphql',
   income: 'https://next-graphql.defichain-income.com/income',
   // Matomo
