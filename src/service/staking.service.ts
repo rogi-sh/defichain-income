@@ -13,10 +13,6 @@ export class StakingService {
   constructor(private http: HttpClient) {
   }
 
-  public getStaking(): Observable<CakeStaking> {
-    return this.http.get<CakeStaking>(environment.cake);
-  }
-
   public getStakingLock(address: string): Observable<LockStakingPart []> {
     return this.http.get<LockStakingPart []>(environment.lock + address);
   }
