@@ -18,11 +18,11 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking',
-  version: '10.2.18',
+  version: '10.2.1899',
   bittrex: 'https://api.bittrex.com/v3/currencies/DFI',
   kucoin: 'https://api.kucoin.com/api/v1/currencies/DFI',
-  graphql: 'https://next-graphql.defichain-income.com/graphql',
-  income: 'https://next-graphql.defichain-income.com/income',
+  graphql: 'https://aws-backend.defichain-income.com/graphql',
+  income: 'https://aws-backend.defichain-income.com/income',
   // Matomo
   matomoId: 6,
   matomoUrl: 'https://analytics.topiet.de/'

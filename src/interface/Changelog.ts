@@ -12,6 +12,11 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
+    this.log.version = '10.2.19 - 20.9.2023';
+    this.log.comment = 'Move to AWS Backend';
+    this.logs.push(this.log);
+
+    this.log = new Log();
     this.log.version = '10.2.18 - 12.9.2023';
     this.log.comment = 'Fix New Crypto pools in LM Calculator';
     this.logs.push(this.log);
