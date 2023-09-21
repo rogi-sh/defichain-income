@@ -1,5 +1,5 @@
 const ocean = 'https://ocean.defichain.com';
-const server = "https://aws-backend.defichain-income.com/";
+const server = "https://aws-backend.defichain-income.com";
 
 export const environment = {
   production: true,
