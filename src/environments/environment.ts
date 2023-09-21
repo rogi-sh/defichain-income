@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 const ocean = 'https://ocean.defichain.com';
+const server = "https://aws-backend.defichain-income.com";
 
 export const environment = {
   production: false,
@@ -22,9 +23,10 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking?asset=DFI&blockchain=DeFiChain&strategy=Masternode',
-  version: '10.2.19',
-  graphql: 'https://aws-backend.defichain-income.com/graphql',
-  income: 'https://aws-backend.defichain-income.com/income',
+  version: '10.2.20',
+  graphql: server + '/graphql',
+  income: server + '/income',
+  versionBackend: server + '/version',
   // Matomo
   // No tracking for local -> wrong id
   matomoId: 25,

@@ -1263,6 +1263,10 @@ export class IncomeVault {
   nextVaultRation: number;
 }
 
+export class ServerVersion {
+  version: string
+}
+
 export class Income {
 
   totalValueLM: number;

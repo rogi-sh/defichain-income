@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '@environments/environment';
-import {Currencies, Income, USD } from '@interfaces/Data'
+import { Currencies, Income, ServerVersion, USD } from '@interfaces/Data'
 import {Observable} from 'rxjs';
 import {MamonAccountNode} from '@interfaces/Mamon';
 
@@ -70,6 +70,10 @@ export class DataService {
       addresses: addresses
     }
     return this.http.post<Income>(environment.income, body);
+  }
+
+  public getServerVersion(): Observable<ServerVersion> {
+    return this.http.get<ServerVersion>(environment.versionBackend);
   }
 
   getPrice(fiat: string): number {
