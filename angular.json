@@ -29,7 +29,8 @@
               "src/assets",
               "src/manifest.json",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/_redirects"
             ],
             "styles": [
               "node_modules/ngx-spinner/animations/pacman.css",
