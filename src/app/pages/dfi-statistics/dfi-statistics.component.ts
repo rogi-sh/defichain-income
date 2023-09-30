@@ -102,6 +102,9 @@ export class DfiStatisticsComponent implements OnInit, AfterViewInit {
       case 'Sui': {
         return 'BINANCE:SUIUSDT';
       }
+      case 'CryptoFranc': {
+        return 'XCHFUSDT';
+      }
       default:  {
         return this.coinpaprikaCurrency;
       }

@@ -23,7 +23,7 @@ export const environment = {
   burninfo: 'https://api.mydefichain.com/v1/getburninfo/',
   lock: 'https://api.lock.space/v1/staking/balance?userAddress=',
   lockStats: 'https://api.lock.space/v1/analytics/staking?asset=DFI&blockchain=DeFiChain&strategy=Masternode',
-  version: '10.2.21',
+  version: '10.2.22',
   graphql: server + '/graphql',
   income: server + '/income',
   versionBackend: server + '/version',

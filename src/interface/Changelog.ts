@@ -12,7 +12,12 @@ export class Changelog {
     this.logs = new Array<Log>();
 
     this.log = new Log();
-    this.log.version = '10.2.201- 27.9.2023';
+    this.log.version = '10.2.22- 27.9.2023';
+    this.log.comment = 'Add xchf to correct place in dex';
+    this.logs.push(this.log);
+
+    this.log = new Log();
+    this.log.version = '10.2.21- 27.9.2023';
     this.log.comment = 'Fix Tauri';
     this.logs.push(this.log);
 

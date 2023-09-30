@@ -237,6 +237,12 @@ export class DexStatisticsComponent implements OnInit {
       case 'SUI-DFI': {
         return new StockLongName('Sui', 'Sui');
       }
+      case 'XCHF-DFI': {
+        return new StockLongName('CryptoFranc', 'CryptoFranc');
+      }
+      case 'XCHF-DUSD': {
+        return new StockLongName('CryptoFranc', 'CryptoFranc');
+      }
       case 'USDT-DFI': {
         return new StockLongName('Tether $', '');
       }

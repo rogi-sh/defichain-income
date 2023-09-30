@@ -1134,7 +1134,7 @@ export class AppComponent implements OnInit {
 
     this.poolPairsOcean.data.forEach(oceanPool => {
       if (+oceanPool.id >= 17 && +oceanPool.id != 102 && +oceanPool.id != 101 && +oceanPool.id != 217 && +oceanPool.id != 218
-        && +oceanPool.id != 231 && +oceanPool.id != 230 && +oceanPool.id != 229 && +oceanPool.id != 233)
+        && +oceanPool.id != 231 && +oceanPool.id != 230 && +oceanPool.id != 229 && +oceanPool.id != 233 && +oceanPool.id != 235 && +oceanPool.id != 236)
       this.stocksPools.push(this.setFromPoolPair(oceanPool.id));
     });
 
@@ -1144,7 +1144,7 @@ export class AppComponent implements OnInit {
 
     this.poolPairsOcean.data.forEach(oceanPool => {
       if (+oceanPool.id < 17 || +oceanPool.id === 101 || +oceanPool.id === 102 || +oceanPool.id === 217 || +oceanPool.id === 218
-      || +oceanPool.id === 231 || +oceanPool.id === 230 || +oceanPool.id === 229 || +oceanPool.id === 233 ) {
+      || +oceanPool.id === 231 || +oceanPool.id === 230 || +oceanPool.id === 229 || +oceanPool.id === 233 || +oceanPool.id === 235 || +oceanPool.id === 236) {
         this.cryptoPools.push(this.setFromPoolPair(oceanPool.id))
       }
     })
