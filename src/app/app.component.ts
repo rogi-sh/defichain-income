@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild, OnDestroy, HostListener } from '@angular/core';
 import { Dex } from '@services/dex.service'
 import { Location } from '@angular/common'
 import {
@@ -226,6 +226,9 @@ export class AppComponent implements OnInit {
   isIncomeChartOn = true;
   isIncomeChartOnKey = 'isIncomeChartOnKey';
 
+  static timeoutIDs = [];
+  static intervalIDs = [];
+
   private setFromPoolPair(id: string): Pool {
 
     const pool = new Pool();
@@ -380,10 +383,10 @@ export class AppComponent implements OnInit {
     if (this.allAddresses().length > 1) {
       await this.spinner.show();
 
-      setTimeout(() => {
+      AppComponent.timeoutIDs.push(setTimeout(() => {
         /** spinner ends after 15 seconds */
         this.spinner.hide();
-      }, 30000);
+      }, 30000));
     }
 
     this.updateDescription('meta-data.description');
@@ -782,16 +785,16 @@ export class AppComponent implements OnInit {
         this.loggedIn = true;
         localStorage.setItem(this.loggedInKey, this.loggedInAuth);
         this.successBackend = 'OK';
-        setInterval(() => {
+        AppComponent.intervalIDs.push(setInterval(() => {
           this.successBackend = null;
-        }, 3000);
+        }, 3000));
       }
     }, (error) => {
       console.log('there was an error sending mutation register', error);
       this.errorBackend = error.message;
-      setInterval(() => {
+      AppComponent.intervalIDs.push(setInterval(() => {
         this.errorBackend = null;
-      }, 3000);
+      }, 3000));
     });
 
   }
@@ -839,16 +842,16 @@ export class AppComponent implements OnInit {
     }).subscribe((result: any) => {
       if (result?.data?.updateUser) {
         this.successBackend = 'User updated';
-        setInterval(() => {
+        AppComponent.intervalIDs.push(setInterval(() => {
           this.successBackend = null;
-        }, 5000);
+        }, 5000));
       }
     }, (error) => {
       console.log('there was an error sending mutation update', error);
       this.errorBackend = error.message;
-      setInterval(() => {
+      AppComponent.intervalIDs.push(setInterval(() => {
         this.errorBackend = null;
-      }, 5000);
+      }, 5000));
     });
 
     localStorage.removeItem(this.adressesKey);
@@ -887,9 +890,9 @@ export class AppComponent implements OnInit {
     }
 
     this.successBackend = 'Data Loaded!';
-    setInterval(() => {
+    AppComponent.intervalIDs.push(setInterval(() => {
       this.successBackend = null;
-    }, 5000);
+    }, 5000));
 
   }
 
@@ -908,22 +911,22 @@ export class AppComponent implements OnInit {
           this.newsletter = result?.data?.userByKey.newsletter;
 
           this.successBackend = 'Data Loaded!';
-          setInterval(() => {
+          AppComponent.intervalIDs.push(setInterval(() => {
             this.successBackend = null;
-          }, 5000);
+          }, 5000));
 
         } else {
           this.errorBackend = 'No users found';
           this.logout();
-          setInterval(() => {
+          AppComponent.intervalIDs.push(setInterval(() => {
             this.errorBackend = null;
-          }, 5000);
+          }, 5000));
         }
       }, (error) => {
         this.errorBackend = error.message;
-        setInterval(() => {
+        AppComponent.intervalIDs.push(setInterval(() => {
           this.errorBackend = null;
-        }, 5000);
+        }, 5000));
       });
     }
 
@@ -999,21 +1002,21 @@ export class AppComponent implements OnInit {
           this.newsletter = result?.data?.userByKey.newsletter;
 
           this.successBackend = 'Data Loaded!';
-          setInterval(() => {
+          AppComponent.intervalIDs.push(setInterval(() => {
             this.successBackend = null;
-          }, 5000);
+          }, 5000));
 
         } else {
           this.errorBackend = 'No users found';
-          setInterval(() => {
+          AppComponent.intervalIDs.push(setInterval(() => {
             this.errorBackend = null;
-          }, 5000);
+          }, 5000));
         }
       }, (error) => {
         this.errorBackend = error.message;
-        setInterval(() => {
+        AppComponent.intervalIDs.push(setInterval(() => {
           this.errorBackend = null;
-        }, 5000);
+        }, 5000));
       });
     }
   }
@@ -1437,9 +1440,9 @@ export class AppComponent implements OnInit {
     this.clearWallet();
     this.loadAddressesAndDexData();
 
-    setTimeout(() => {
+    AppComponent.timeoutIDs.push(setTimeout(() => {
       this.update();
-    }, 10000);
+    }, 10000));
 
   }
 
@@ -1476,10 +1479,10 @@ export class AppComponent implements OnInit {
       this.mamonKey = '';
 
 
-      setTimeout(() => {
+      AppComponent.timeoutIDs.push(setTimeout(() => {
         /** dialog ends after 5 seconds */
         this.showDialogAddressesAdded = false;
-      }, 5000);
+      }, 5000));
     }
 
   }
@@ -1495,26 +1498,26 @@ export class AppComponent implements OnInit {
 
     if (!this.adress) {
       this.showDialogAddressesNotAdded = true;
-      setTimeout(() => {
+      AppComponent.timeoutIDs.push(setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.showDialogAddressesNotAdded = false;
-      }, 5000);
+      }, 5000));
       return;
     }
 
     if (this.masternodeFreezer5 && this.masternodeFreezer10) {
       this.showDialogAddressesNotAdded = true;
-      setTimeout(() => {
+      AppComponent.timeoutIDs.push(setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.showDialogAddressesNotAdded = false;
-      }, 5000);
+      }, 5000));
       return;
     } else if ((this.masternodeFreezer5 && !this.masternodeAdress) || (this.masternodeFreezer10 && !this.masternodeAdress)) {
       this.showDialogAddressesNotAdded = true;
-      setTimeout(() => {
+      AppComponent.timeoutIDs.push(setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.showDialogAddressesNotAdded = false;
-      }, 5000);
+      }, 5000));
       return;
     }
 
@@ -1601,11 +1604,11 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    setTimeout(() => {
+    AppComponent.timeoutIDs.push(setTimeout(() => {
       /** spinner ends after 10 seconds and update */
       this.showDialogAddressesAdded = false;
       this.update();
-    }, 10000);
+    }, 10000));
 
     this.adress = '';
     this.masternodeAdress = false;
@@ -1641,10 +1644,10 @@ export class AppComponent implements OnInit {
       this.loadAddressesAndDexData();
     }
 
-    setTimeout(() => {
+    AppComponent.timeoutIDs.push(setTimeout(() => {
       /** after 5 seconds update */
       this.update();
-    }, 5000);
+    }, 5000));
 
   }
 
@@ -2023,5 +2026,11 @@ export class AppComponent implements OnInit {
     this.toastr.success(this.translate.instant('copy'), '', {
       closeButton: true,
     });
+  }
+
+  @HostListener('unloaded')
+  public ngOnDestroy(): void {
+    AppComponent.timeoutIDs.forEach(timeOutID => clearTimeout(timeOutID));
+    AppComponent.intervalIDs.forEach(intervalID => clearInterval(intervalID));
   }
 }
